@@ -41,7 +41,7 @@ module.exports = function (System) {
 
 				streams.map(function (e) {
 					e = e.afterSave(req.user);
-				});
+				}); 
 
 				json.good({
 					records: streams,
@@ -64,6 +64,64 @@ module.exports = function (System) {
 				return json.good({
 					record: stream
 				}, res);
+			} else {
+				return json.bad({message: 'Sorry, that stream could not be found'}, res);
+			}
+		});
+	};
+
+	obj.subscribe = function (req, res) {
+		Stream.findOne({_id: req.params.streamId})
+		.populate('creator')
+		.exec(function (err, stream) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (stream) {
+				if (stream.subscribers.indexOf(req.user._id) !== -1) {
+					return json.bad({message: 'Sorry, you are already subscribed to this stream'}, res);
+				}
+
+				stream.subscribers.push(req.user._id);
+				stream.save(function (err, item) {
+					stream = stream.afterSave(req.user);
+
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: stream
+					}, res);
+				});
+			} else {
+				return json.bad({message: 'Sorry, that stream could not be found'}, res);
+			}
+		});
+	};
+
+	obj.unsubscribe = function (req, res) {
+		Stream.findOne({_id: req.params.streamId})
+		.populate('creator')
+		.exec(function (err, stream) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (stream) {
+				if (stream.subscribers.indexOf(req.user._id) !== -1) {
+					stream.subscribers.splice(stream.subscribers.indexOf(req.user._id), 1);
+					stream.save(function (err, item) {
+						stream = stream.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: stream
+						}, res);
+					});
+				} else {
+					return json.bad({message: 'You currently are not subscribed to that stream'}, res);
+				}
 			} else {
 				return json.bad({message: 'Sorry, that stream could not be found'}, res);
 			}

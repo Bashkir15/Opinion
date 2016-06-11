@@ -25,5 +25,19 @@ module.exports = function (System) {
 		authorized: false
 	});
 
+	routes.push({
+		method: 'post',
+		path: '/:streamId/subscribe',
+		handler: streams.subscribe,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'post',
+		path: '/:streamId/unsubscribe',
+		handler: streams.unsubscribe,
+		authorized: true
+	});
+
 	return routes;
 };

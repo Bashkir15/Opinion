@@ -33,11 +33,10 @@ var justGetUser = function (req, res, next) {
 		bearerToken = bearer[1];
 		req.token = bearerToken;
 
-		User.findOne({token: req.token}, function (err, user) {
-			if (err) {
+		User.findOne({token: req.token}).exec(function (err, user) {
+			if (user) {
 				req.user = user;
 			}
-
 			next();
 		});
 	}
@@ -56,7 +55,7 @@ module.exports = function (System) {
 	plugin.register.attributes = {
 		name: 'Authentication Helper',
 		key: 'auth',
-		version: '1.0.0'
+		version: '1.1.0'
 	};
 
 	return plugin;

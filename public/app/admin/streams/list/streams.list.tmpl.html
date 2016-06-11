@@ -1,3 +1,11 @@
 <div class='streams-list-container'>
-	<p>
-</p>
+	<div>
+		<md-list>
+			<md-list-item ng-repeat='item in vm.streams'>
+				<p>{{item.name}}</p>
+				<p>{{item.description}}</p>
+				<p>{{item.creator.name}}</p>
+			</md-list-item>
+		</md-list>
+	</div>
+</div>
