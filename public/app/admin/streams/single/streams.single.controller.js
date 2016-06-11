@@ -9,12 +9,41 @@
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		vm.stream = [];
+		vm.feed = [];
 		vm.getStream = getStream;
+		vm.updateFeed = updateFeed;
 		vm.openAddPost = openAddPost;
+		vm.feedPage = 0;
+		vm.lastUpdated = 0;
+		vm.feedFilter = '';
 
 		function getStream () {
 			var streamData = appStreams.single.get({streamId: streamId}, function() {
 				vm.stream = [streamData.res.record];
+			});
+		}
+
+		function updateFeed (options) {
+			options = options || {};
+
+			var threadData = appThreads.list.get({
+				streamId: streamId,
+				page: vm.feedPage,
+				timestamp: vm.lastUpdated,
+				filter: vm.feedFilter
+			}, function() {
+				if (vm.feedFilter) {
+					vm.feed = [];
+				}
+
+				if (!options.append) {
+					vm.feed = threadData.res.records.concat(vm.feed);
+				} else {
+					vm.feed = vm.feed.concat(threadData.res.records);
+				}
+
+				vm.noMorePages = !threadData.res.noMorePages;
+				vm.lastUpdated = Date.now();
 			});
 		}
 
@@ -66,5 +95,6 @@
 		}
 
 		getStream();
+		updateFeed();
 	}
 }());

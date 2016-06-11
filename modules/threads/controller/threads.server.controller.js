@@ -7,11 +7,11 @@ module.exports = function (System) {
 	var obj = {};
 
 	obj.create = function (req, res) {
-		var post = new Post(req.body);
-		post.creator = req.user._id;
-		post.stream = req.body.stream;
-		post.save(function (err) {
-			post = post.afterSave(req.user);
+		var thread = new Thread(req.body);
+		thread.creator = req.user._id;
+		thread.stream = req.body.stream;
+		thread.save(function (err) {
+			thread = thread.afterSave(req.user);
 
 			if (req.body.stream) {
 				Stream.findOne({_id: req.body.stream})
@@ -19,7 +19,7 @@ module.exports = function (System) {
 					if (err) {
 						return json.bad(err, res);
 					} else if (stream) {
-						stream.threads.push(post);
+						stream.threads.push(thread);
 						stream.save(function (err) {
 							if (err) {
 								return json.bad(err, res);
@@ -35,7 +35,7 @@ module.exports = function (System) {
 				return json.bad(err, res);
 			}
 
-			json.good(post, res);
+			json.good(thread, res);
 		});
 	};
 
@@ -74,7 +74,7 @@ module.exports = function (System) {
 					});
 
 					json.good({
-						records: posts,
+						records: threads,
 						morePages: morePages
 					}, res);
 				}

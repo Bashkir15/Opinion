@@ -14,7 +14,7 @@
 	<div class='stream-single-toolbar'>
 		<div class='single-toolbar-left'>
 			<div>
-				<button aria-label='add post to stream button'>
+				<button aria-label='add post to stream button' ng-click="vm.openAddPost()">
 					<span>Add Post</span>
 				</button>
 			</div>
@@ -31,6 +31,35 @@
 
 	<div class='stream-single-body'>
 		<md-content>
+			<md-list class='md-2-line'>
+				<md-list-item ng-repeat='item in vm.feed'>
+					<div>
+						<div class='item-left'>
+							<div>
+								<div></div>
+								<p>{{item.creator.name}}</p>
+							</div>
+						</div>
+
+						<div class='item-right'>
+							<div>
+								<p>{{item.title}}</p>
+								<p>{{item.content}}</p>
+							</div>
+						</div>
+					</div>
+
+					<div class='item-toolbar'>
+						<div class='item-toolbar-left'>
+							<div>
+								<button>
+									<span>{{item.score}}</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</md-list-item>
+			</md-list>
 		</md-content>
 
 		<div class='stream-single-sidebar'>
