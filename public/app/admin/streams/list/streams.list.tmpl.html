@@ -1,22 +1,74 @@
 <div class='streams-list-container'>
-	<div>
-		<md-list>
-			<md-list-item ng-repeat='item in vm.streams'>
-				<div ng-click="vm.goToStream(item)"<
-					<p>{{item.name}}</p>
-					<p>{{item.description}}</p>
-					<p>{{item.creator.name}}</p>
-					<p>{{item.subscribers.length}} Subscriber<span ng-if="item.subscribers.length > 1 || item.subscribers.length === 0">s</span></p>
+	<div class='streams-list-header'>
+		<div></div>
 
-					<button ng-if="item.subscribed" ng-click="vm.unsubscribe(item)">
-						<span>Unsubscribe</span>
-					</button>
+		<div class='streams-list-header-overlay'>
+			<div></div>
+		</div>
+	</div>
 
-					<button ng-if="!item.subscribed" ng-click="vm.subscribe(item)">
-						<span>Subscribe</span>
-					</button>
-				</div>
-			</md-list-item>
-		</md-list>
+	<div class='streams-list-toolbar'>
+		<div class='toolbar-left'>
+			<div>
+				<button aria-label='create stream button'>
+					<span>Create Stream</span>
+				</button>
+			</div>
+		</div>
+
+		<div class='toolbar-right'>
+			<div>
+				<button>
+					<span>Search</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div class='streams-list-body'>
+		<div>
+			<md-list>
+				<md-list-item ng-repeat='item in vm.streams'>
+					<div>
+						<div class='streams-item-left'>
+							<div>
+								<div ng-class="{'subscribed': item.subscribed}"></div>
+								<button ng-if="item.subscribed" ng-click="vm.unsubscribe(item)" aria-label='unsubscribe from stream' class='stream-subscribed'>
+									<span>Unsubscribe</span>
+								</button>
+
+								<button ng-if="!item.subscribed" ng-click="vm.subscribe(item)" aria-label='unsubscribe from stream' class='stream-unsubscribed'>
+									<span>Subscribe</span>
+								</button>
+							</div>
+						</div>
+
+						<div class='streams-item-right'>
+							<p>{{item.name}}</p>
+
+							<p>{{item.description}}</p>
+						</div>
+					</div>
+
+					<div class='streams-item-toolbar'>
+						<div class='item-toolbar-left'>
+							<button>
+								<span>{{item.subscribers.length}} Subscriber<span ng-if="item.subscribers.length > 1 || item.subscribers.length === 0">s</span></span>
+							</button>
+
+							<button>
+								<span>{{item.threads.length}} Thread<span ng-if="item.threads.length > 1 || item.threads.length === 0">s</span></span>
+							</button>
+						</div>
+
+						<div class='item-toolbar-right'>
+							<button>
+								<span>{{item.created | date:'short'}}</span>
+							</button>
+						</div>
+					</div>
+				</md-list-item>
+			</md-list>
+		</div>
 	</div>
 </div>

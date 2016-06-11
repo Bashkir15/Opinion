@@ -1,0 +1,183 @@
+.streams-list-container
+	.streams-list-header
+		height: 120px
+		width: 100%
+		position: relative
+		border-bottom: 1px solid rgba(0,0,0,0.35)
+
+		.streams-list-header-overlay
+			position: absolute
+			top: 0
+			left: 0
+			height: 120px
+			width: 100%
+			display: flex
+			justify-content: center
+
+			> div
+				margin-top: 15px
+				height: 40px
+				width: 40px
+				border-radius: 50%
+				border: 1px solid rgba(0,0,0,0.35)
+
+	.streams-list-toolbar
+		display: flex
+		align-items: stretch
+		position: relative
+		text-align: center
+		z-index: 20
+		height: 50px
+		border-bottom: 1px solid rgba(0,0,0,0.35)
+
+		.toolbar-left
+			display: flex
+			flex: 1
+			align-items: stretch
+			justify-content: flex-start
+
+			> div
+				display: flex
+				justify-content: center
+				align-items: center
+
+				button
+					span
+						@include open
+
+		.toolbar-right
+			display: flex
+			flex: 1
+			align-items: stretch
+			justify-content: flex-end
+
+			> div
+				display: flex
+				justify-content: center
+				align-items: center
+
+				button
+					span
+						@include open
+
+	.streams-list-body
+		> div
+			padding-top: 15px
+
+			md-list
+				md-list-item
+					width: 70%
+					margin: 0 auto
+					margin-bottom: 10px
+					border: 1px solid rgba(0,0,0,0.35)
+					display: flex
+					flex-direction: column
+					padding: 0
+
+
+					> div
+						width: 100%
+						&:nth-of-type(1)
+							display: flex
+							align-items: stretch
+							position: relative
+							//text-align: center
+							z-index: 20
+
+							.streams-item-left
+								display: flex
+								flex: 1
+								align-items: stretch
+								justify-content: flex-start
+								padding: 0 10px
+
+								> div
+									display: flex
+									flex-direction: column
+									align-items: center
+									justify-content: center
+
+									> div
+										height: 45px
+										width: 45px
+										border-radius: 50%
+										border: 1px solid rgba(0,0,0,0.35)
+										margin-bottom: 6px
+										margin-top: 6px
+
+										&.subscribed
+											border: 1px solid $accent-green
+
+									button
+										height: 25px
+										width: 130px
+										border: 1px solid rgba(0,0,0,0.35)
+										text-align: center
+										margin-bottom: 10px
+										transition: all .4s ease
+
+										span
+											@include open
+											margin-bottom: 2px
+											transition: all .4s ease
+
+										&.stream-subscribed
+											border: 1px solid $accent-red
+
+											&:hover
+												background: $accent-red
+
+												span
+													color: #fff
+
+										&.stream-unsubscribed
+											border: 1px solid $accent-green
+
+											&:hover
+												background: $accent-green
+
+												span
+													color: #fff
+
+
+
+							.streams-item-right
+								display: flex
+								flex: 7
+								align-items: stretch
+								flex-direction: column
+
+								p
+									text-align: left
+									@include open
+
+					.streams-item-toolbar
+						display: flex
+						align-items: stretch
+						position: relative
+						text-align: center
+						z-index: 20
+						border-top: 1px solid rgba(0,0,0,0.35)
+
+						.item-toolbar-left
+							display: flex
+							flex: 1
+							align-items: stretch
+							justify-content: flex-start
+
+							button
+								span
+									@include open
+
+						.item-toolbar-right
+							display: flex
+							flex: 1
+							align-items: stretch
+							justify-content: flex-end
+
+							button
+								span
+									@include open
+									color: rgba(0,0,0,0.3)
+
+					

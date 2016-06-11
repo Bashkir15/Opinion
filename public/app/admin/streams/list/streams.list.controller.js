@@ -29,19 +29,21 @@
 		}
 
 		function subscribe (item) {
+			item.subscribed = true;
 			var stream = appStreams.single.get({streamId: item._id}, function() {
 				stream.$subscribe({streamId: item._id}, function() {
 					angular.extend(item, stream.res.record);
-					item.subscribed = true;
+					
 				});
 			});
 		}
 
 		function unsubscribe (item) {
+			item.subscribed = false;
 			var stream = appStreams.single.get({streamId: item._id}, function() {
 				stream.$unsubscribe({streamId: item._id}, function() {
 					angular.extend(item, stream.res.record);
-					item.subscribed = false;
+					
 				});
 			});
 		}

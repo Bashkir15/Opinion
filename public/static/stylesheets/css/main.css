@@ -317,6 +317,148 @@ p {
               box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
               transition: all .4s ease; }
 
+.streams-list-container .streams-list-header {
+  height: 120px;
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35); }
+  .streams-list-container .streams-list-header .streams-list-header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 120px;
+    width: 100%;
+    display: flex;
+    justify-content: center; }
+    .streams-list-container .streams-list-header .streams-list-header-overlay > div {
+      margin-top: 15px;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.35); }
+
+.streams-list-container .streams-list-toolbar {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  text-align: center;
+  z-index: 20;
+  height: 50px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35); }
+  .streams-list-container .streams-list-toolbar .toolbar-left {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    justify-content: flex-start; }
+    .streams-list-container .streams-list-toolbar .toolbar-left > div {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .streams-list-container .streams-list-toolbar .toolbar-left > div button span {
+        font-family: 'Open Sans', sans-serif; }
+  .streams-list-container .streams-list-toolbar .toolbar-right {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    justify-content: flex-end; }
+    .streams-list-container .streams-list-toolbar .toolbar-right > div {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .streams-list-container .streams-list-toolbar .toolbar-right > div button span {
+        font-family: 'Open Sans', sans-serif; }
+
+.streams-list-container .streams-list-body > div {
+  padding-top: 15px; }
+  .streams-list-container .streams-list-body > div md-list md-list-item {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    padding: 0; }
+    .streams-list-container .streams-list-body > div md-list md-list-item > div {
+      width: 100%; }
+      .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) {
+        display: flex;
+        align-items: stretch;
+        position: relative;
+        z-index: 20; }
+        .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left {
+          display: flex;
+          flex: 1;
+          align-items: stretch;
+          justify-content: flex-start;
+          padding: 0 10px; }
+          .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; }
+            .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div > div {
+              height: 45px;
+              width: 45px;
+              border-radius: 50%;
+              border: 1px solid rgba(0, 0, 0, 0.35);
+              margin-bottom: 6px;
+              margin-top: 6px; }
+              .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div > div.subscribed {
+                border: 1px solid #74b97d; }
+            .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div button {
+              height: 25px;
+              width: 130px;
+              border: 1px solid rgba(0, 0, 0, 0.35);
+              text-align: center;
+              margin-bottom: 10px;
+              transition: all .4s ease; }
+              .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div button span {
+                font-family: 'Open Sans', sans-serif;
+                margin-bottom: 2px;
+                transition: all .4s ease; }
+              .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div button.stream-subscribed {
+                border: 1px solid #ba4445; }
+                .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div button.stream-subscribed:hover {
+                  background: #ba4445; }
+                  .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div button.stream-subscribed:hover span {
+                    color: #fff; }
+              .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div button.stream-unsubscribed {
+                border: 1px solid #74b97d; }
+                .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div button.stream-unsubscribed:hover {
+                  background: #74b97d; }
+                  .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-left > div button.stream-unsubscribed:hover span {
+                    color: #fff; }
+        .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-right {
+          display: flex;
+          flex: 7;
+          align-items: stretch;
+          flex-direction: column; }
+          .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-right p {
+            text-align: left;
+            font-family: 'Open Sans', sans-serif; }
+    .streams-list-container .streams-list-body > div md-list md-list-item .streams-item-toolbar {
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      text-align: center;
+      z-index: 20;
+      border-top: 1px solid rgba(0, 0, 0, 0.35); }
+      .streams-list-container .streams-list-body > div md-list md-list-item .streams-item-toolbar .item-toolbar-left {
+        display: flex;
+        flex: 1;
+        align-items: stretch;
+        justify-content: flex-start; }
+        .streams-list-container .streams-list-body > div md-list md-list-item .streams-item-toolbar .item-toolbar-left button span {
+          font-family: 'Open Sans', sans-serif; }
+      .streams-list-container .streams-list-body > div md-list md-list-item .streams-item-toolbar .item-toolbar-right {
+        display: flex;
+        flex: 1;
+        align-items: stretch;
+        justify-content: flex-end; }
+        .streams-list-container .streams-list-body > div md-list md-list-item .streams-item-toolbar .item-toolbar-right button span {
+          font-family: 'Open Sans', sans-serif;
+          color: rgba(0, 0, 0, 0.3); }
+
 .nav {
   display: flex;
   align-items: stretch;
