@@ -16,10 +16,14 @@ app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
 	next();
 });
+app.use(express.static(__dirname + '/../public'));
 
 var modulePath = __dirname + '/../modules';
 
 function startServer() {
+	app.use(function (req, res) {
+		res.redirect('/index.html');
+	});
 	var server = app.listen(Config.server.port, function() {
 		var host = Config.server.host;
 		var port = Config.server.port;
