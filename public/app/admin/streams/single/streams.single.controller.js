@@ -5,7 +5,7 @@
 	.controller('StreamsSingleController', StreamsSingleController);
 
 	/* @ngInject */
-	function StreamsSingleController ($state, $stateParams, $scope, $mdDialog, appAuth, appToast, appStreams, appThreads) {
+	function StreamsSingleController ($state, $stateParams, $scope, $mdDialog, $location, appAuth, appToast, appStreams, appThreads) {
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		vm.stream = [];
@@ -13,6 +13,7 @@
 		vm.getStream = getStream;
 		vm.updateFeed = updateFeed;
 		vm.openAddPost = openAddPost;
+		vm.goToThread = goToThread;
 		vm.feedPage = 0;
 		vm.lastUpdated = 0;
 		vm.feedFilter = '';
@@ -92,6 +93,10 @@
 			}).finally(function() {
 				vm.updateFeed({reload: true});
 			})
+		}
+
+		function goToThread (item) {
+			$location.url('streams/' + streamId + '/' + item._id);
 		}
 
 		getStream();

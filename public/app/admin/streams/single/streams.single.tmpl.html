@@ -33,7 +33,7 @@
 		<md-content>
 			<md-list class='md-2-line'>
 				<md-list-item ng-repeat='item in vm.feed'>
-					<div>
+					<div ng-click="vm.goToThread(item)">
 						<div class='item-left'>
 							<div>
 								<div></div>

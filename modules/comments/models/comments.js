@@ -5,20 +5,15 @@ var escapeProperty = function (value) {
 	return _.escape(value);
 };
 
-var ThreadSchema = new mongoose.Schema({
+var CommentSchema = new mongoose.Schema({
 	created: {
 		type: Date,
 		default: Date.now
 	},
 
-	title: {
-		type: String,
-		required: true,
-		get: escapeProperty
-	},
-
 	content: {
 		type: String,
+		required: true,
 		get: escapeProperty
 	},
 
@@ -28,9 +23,9 @@ var ThreadSchema = new mongoose.Schema({
 		required: true
 	},
 
-	stream: {
+	thread: {
 		type: mongoose.Schema.ObjectId,
-		ref: 'Stream',
+		ref: 'Thread',
 		required: true
 	},
 
@@ -65,18 +60,13 @@ var ThreadSchema = new mongoose.Schema({
 	saved: {
 		type: Boolean,
 		default: false
-	},
-
-	comments: [{
-		type: mongoose.Schema.ObjectId,
-		ref: 'Comment',
-		required: false
-	}]
+	}
 });
 
-ThreadSchema.methods = {
-	toJSON: function() {
+CommentSchema.methods = {
+	toJSON: function () {
 		var obj = this.toObject();
+
 		if (obj.creator) {
 			delete obj.creator.password;
 			delete obj.creator.token;
@@ -93,11 +83,11 @@ ThreadSchema.methods = {
 
 	afterSave: function (user) {
 		var obj = this;
-		obj.upvoted = obj.upvotes.indexOf(user._id) != -1;
-		obj.downvoted = obj.downvotes.indexOf(user._id) != -1;
-		obj.saved = obj.saves.indexOf(user._id) != -1;
+		obj.upvoted = obj.upvotes.indexOf(user._id) !== -1;
+		obj.downvoted = obj.downvotes.indexOf(user._id) !== -1;
+		obj.saved = obj.saves.indexOf(user._id) !== -1; 
 		return obj;
 	}
 };
 
-mongoose.model('Thread', ThreadSchema);
+mongoose.model('Comment', CommentSchema);

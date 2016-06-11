@@ -1,17 +1,17 @@
 <div class='thread-container'>
-	<div class='thread-content-container' ng-repeat='thread in vm.thread'>
+	<div class='thread-content-container' ng-repeat='obj in vm.thread'>
 		<div>
 			<div class='thread-content-left'>
 				<div>
 					<div></div>
-					<p>{{item.creator.name}}</p>
+					<p>{{obj.creator.name}}</p>
 				</div>
 			</div>
 
 			<div class='thread-content-right'>
 				<div>
-					<p>{{item.title}}</p>
-					<p>{{item.content}}</p>
+					<p>{{thread.title}}</p>
+					<p>{{thread.content}}</p>
 				</div>
 			</div>
 		</div>
@@ -27,7 +27,7 @@
 
 			<div class='toolbar-right'>
 				<div>
-					<span>{{item.created | date:'short'}}</span>
+					<span>{{thread.created | date:'short'}}</span>
 				</div>
 			</div>
 		</div>
