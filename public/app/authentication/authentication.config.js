@@ -11,14 +11,14 @@
 			templateUrl: '/app/authentication/authentication.tmpl.html'
 		});
 
-		$stateProvider.state('signup', {
+		$stateProvider.state('authentication.signup', {
 			url: '/signup',
 			templateUrl: '/app/authentication/signup/signup.tmpl.html',
 			controller: 'SignupController',
 			controllerAs: 'vm'
 		});
 
-		$stateProvider.state('login', {
+		$stateProvider.state('authentication.login', {
 			url: '/login',
 			templateUrl: '/app/authentication/login/login.tmpl.html',
 			controller: 'LoginController',

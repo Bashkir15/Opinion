@@ -27,7 +27,7 @@
 				var user = new appUsers.single({
 					name: vm.user.name,
 					username: vm.user.username,
-					email: vm.user.username,
+					email: vm.user.email,
 					password: vm.user.password
 				});
 

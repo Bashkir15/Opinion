@@ -26,56 +26,58 @@ module.exports = function (System) {
 		User.findOne({email: req.body.email}, function (err, user) {
 			if (err) {
 				return json.bad(err, res);
-			}
+			} else if (user) {
+				if (user.isLocked) {
+					return user.incorrectLoginAttempts(function (err) {
+						if (err) {
+							return json.bad(err, res);
+						}
 
-			if (user.isLocked) {
-				return user.incorrectLoginAttempts(function (err) {
+						return json.bad({message: 'You have logged in incorrectly too many times. For security reasons your account was locked for two hours.'}, res);
+					});
+				}
+
+				user.comparePassword(req.body.password, function (err, isMatch) {
 					if (err) {
 						return json.bad(err, res);
 					}
 
-					return json.bad({message: 'You have logged in incorrectly too many times. For security measures your account has disabled for 2 hours'}, res);
-				});
-			}
+					if (isMatch) {
+						if (!user.loginAttempts && !user.lockUntil) {
+							return json.good({
+								record: user,
+								token: user.token
+							}, res);
+						}
 
-			user.comparePassword(req.body.password, function (err, isMatch) {
-				if (err) {
-					return json.bad(err, res);
-				}
+						var updates = {
+							$set: { loginAttempts: 0},
+							$unset: {lockUntil: 1}
+						};
 
-				if (isMatch) {
-					if (!user.loginAttempts && !user.lockUntil) {
-						return json.good({
-							record: user,
-							token: user.token
-						}, res);
+						user.update(updates, function (err) {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							json.good({
+								record: user,
+								token: user.token
+							}, res);
+						});
+					} else {
+						user.incorrectLoginAttempts(function (err) {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							return json.bad({message: 'Either your email or password were incorrect. This was ' + user.loginAttempts + ' of 5 attempts'}, res);
+						});
 					}
-
-					var updates = {
-						$set: { loginAttempts: 0 },
-						$unset: { lockUntil: 1 }
-					};
-
-					user.update(updates, function (err) {
-						if (err) {
-							return json.bad(err, res);
-						}
-
-						json.good({
-							record: user,
-							token: user.token
-						}, res);
-					});
-				} else {
-					user.incorrectLoginAttempts(function (err) {
-						if (err) {
-							return json.bad(err, res);
-						}
-
-						return json.bad({message: 'Either your email or password were incorrect. This was ' + user.loginAttempts + ' of 5 attempts'}, res);
-					});
-				}
-			});
+				});
+			} else {
+				return json.bad({message: 'Either your email or password were incorrect'}, res);
+			}
 		});
 	};
 

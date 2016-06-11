@@ -5,7 +5,36 @@
 		<link rel='stylesheet' href='/vendor/angular-material/angular-material.css'>
 	</head>
 
-	<body>
+	<body ng-controller="AppController as vm">
+		<nav class='nav'>
+			<div class='nav-left'>
+				<div class='nav-item'>
+					<button>
+						<span>Home</span>
+					</button>
+				</div>
+			</div>
+
+			<div class='nav-center'>
+				<div class='nav-item'>
+					<h3>Opinionated</h3>
+				</div>
+			</div>
+
+			<div class='nav-right'>
+				<div clas='nav-item'>
+					<button ui-sref='authentication.signup'>
+						<span>Signup</span>
+					</button>
+				</div>
+
+				<div class='nav-item'>
+					<button ui-sref='authentication.login'>
+						<span>Login</span>
+					</button>
+				</div>
+			</div>
+		</nav>
 		<div ui-view></div>
 
 		<script src='/vendor/angular/angular.js'></script>
@@ -20,8 +49,21 @@
 		<script src='/app/utilities/utilities.setter.js'></script>
 		<script src='/app/utilities/factories/utilities.toast.factory.js'></script>
 		<script src='/app/utilities/factories/utilities.storage.factory.js'></script>
+		<script src='/app/utilities/factories/utilities.interceptor.factory.js'></script>
+
+		<!-- Authentication -->
+		<script src='/app/authentication/authentication.setter.js'></script>
+		<script src='/app/authentication/authentication.config.js'></script>
+		<script src='/app/authentication/signup/signup.controller.js'></script>
+		<script src='/app/authentication/login/login.controller.js'></script>
+
+		<!-- Admin -->
+		<script src='/app/admin/admin.setter.js'></script>
+		<script src='/app/admin/factories/admin.users.factory.js'></script>
 
 
 		<script src='/app/app.js'></script>
+		<script src='/app/app.config.js'></script>
+		<script src='/app/app.controller.js'></script>
 	</body>
 </html>
