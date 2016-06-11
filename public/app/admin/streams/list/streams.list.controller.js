@@ -9,6 +9,8 @@
 		var vm = this;
 		vm.streams = [];
 		vm.getStreams = getStreams;
+		vm.subscribe = subscribe;
+		vm.unsubscribe = unsubscribe;
 		vm.streamPage = 0;
 
 		function getStreams (options) {
@@ -22,6 +24,24 @@
 				} else {
 					vm.streams = vm.streams.concat(streamData.res.records);
 				}
+			});
+		}
+
+		function subscribe (item) {
+			var stream = appStreams.single.get({streamId: item._id}, function() {
+				stream.$subscribe({streamId: item._id}, function() {
+					angular.extend(item, stream.res.record);
+					item.subscribed = true;
+				});
+			});
+		}
+
+		function unsubscribe (item) {
+			var stream = appStreams.single.get({streamId: item._id}, function() {
+				stream.$unsubscribe({streamId: item._id}, function() {
+					angular.extend(item, stream.res.record);
+					item.subscribed = false;
+				});
 			});
 		}
 
