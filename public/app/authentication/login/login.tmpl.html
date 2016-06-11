@@ -1,0 +1,50 @@
+<div class='login-page-container'>
+	<div>
+		<md-card>
+			<div class='login-form-header'>
+				<div>
+					<h3>Welcome Back!</h3>
+				</div>
+			</div>
+
+			<div>
+				<form name='vm.loginForm' ng-submit="vm.login(vm.loginForm.$valid)" novaliate>
+					<div class='auth-form-wrapper'>
+						<label>Email</label>
+						<input type='email' name='email' ng-model='vm.user.email'>
+					</div>
+
+					<div class='auth-form-wrapper'>
+						<label>Password</label>
+						<input type='password' name='password' ng-model='vm.user.password'>
+					</div>
+
+					<div class='login-form-forgot'>
+						<p ng-click="vm.openResetPassword()">Forgot Password?</p>
+					</div>
+
+					<div class='login-form-submit'>
+						<button type='submit' aria-label='login form submit button'>
+							<span>Login</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</md-card>
+
+
+		<div class='login-page-other'>
+			<p>Don't have an account yet? <a ui-sref='authentication.signup'>Sign up here</a></p>
+
+			<div class='login-page-social'>
+				<div>
+					<div>
+						<button aria-label='google-login'>
+							<i class='icon-google3'></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
