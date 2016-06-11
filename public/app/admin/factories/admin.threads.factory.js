@@ -9,7 +9,8 @@
 		return {
 			single: $resource('threads/:threadId/:action', {
 				threadId: '@_id'
-			})
+			}),
+			list: $resource('threads/:streamId')
 		};
 	}
 }());

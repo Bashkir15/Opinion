@@ -13,6 +13,24 @@ module.exports = function (System) {
 		post.save(function (err) {
 			post = post.afterSave(req.user);
 
+			if (req.body.stream) {
+				Stream.findOne({_id: req.body.stream})
+				.exec(function (err, stream) {
+					if (err) {
+						return json.bad(err, res);
+					} else if (stream) {
+						stream.threads.push(post);
+						stream.save(function (err) {
+							if (err) {
+								return json.bad(err, res);
+							}
+						});
+					} else {
+						return json.bad({message: 'Sorry, that stream could not be found'}, res);
+					}
+				});
+			}
+
 			if (err) {
 				return json.bad(err, res);
 			}

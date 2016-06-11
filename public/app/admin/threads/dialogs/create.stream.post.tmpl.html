@@ -1,0 +1,33 @@
+<md-dialog class='create-stream-post-container'>
+	<md-dialog-content>
+		<div class='create-stream-post-header'>
+			<div>
+				<h3>Create a post</h3>
+			</div>
+
+			<div>
+				<span ng-click="close()">x</span>
+			</div>
+		</div>
+
+		<div class='create-stream-post-body'>
+			<form name='addPostForm' ng-submit='create(addPostForm.$valid)' novalidate>
+				<div class='post-form-wrapper'>
+					<label>Title</label>
+					<input type='text' ng-model='title' required>
+				</div>
+
+				<div class='post-form-wrapper'>
+					<label>Content</label>
+					<textarea name='content' ng-model='content' rows='4' cols='40' required></textarea>
+				</div>
+
+				<div class='post-form-submit'>
+					<button type='submit' aria-label='submit add post form'>
+						<span>Create</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</md-dialog-content>
+</md-dialog>

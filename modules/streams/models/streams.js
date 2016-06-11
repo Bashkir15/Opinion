@@ -39,7 +39,13 @@ var StreamSchema = new mongoose.Schema({
 	subscribed: {
 		type: Boolean,
 		default: false
-	}
+	},
+
+	threads: [{
+		type: mongoose.Schema.ObjectId,
+		ref: 'Thread',
+		required: false
+	}]
 });
 
 StreamSchema.methods = {
