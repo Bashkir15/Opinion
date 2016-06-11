@@ -435,7 +435,8 @@ p {
           flex-direction: column; }
           .streams-list-container .streams-list-body > div md-list md-list-item > div:nth-of-type(1) .streams-item-right p {
             text-align: left;
-            font-family: 'Open Sans', sans-serif; }
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 0; }
     .streams-list-container .streams-list-body > div md-list md-list-item .streams-item-toolbar {
       display: flex;
       align-items: stretch;
@@ -458,6 +459,57 @@ p {
         .streams-list-container .streams-list-body > div md-list md-list-item .streams-item-toolbar .item-toolbar-right button span {
           font-family: 'Open Sans', sans-serif;
           color: rgba(0, 0, 0, 0.3); }
+
+.stream-single-container .stream-single-header {
+  height: 100px;
+  width: 100%;
+  position: relative; }
+  .stream-single-container .stream-single-header .stream-single-header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px; }
+    .stream-single-container .stream-single-header .stream-single-header-overlay > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column; }
+      .stream-single-container .stream-single-header .stream-single-header-overlay > div > div {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.35); }
+        .stream-single-container .stream-single-header .stream-single-header-overlay > div > div p {
+          font-family: 'Lato', sans-serif; }
+
+.stream-single-container .stream-single-toolbar {
+  display: flex;
+  align-items: stretch;
+  position: relative; }
+  .stream-single-container .stream-single-toolbar .single-toolbar-left {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    justify-content: flex-start; }
+    .stream-single-container .stream-single-toolbar .single-toolbar-left > div {
+      display: flex;
+      jusity-content: center;
+      align-items: center; }
+      .stream-single-container .stream-single-toolbar .single-toolbar-left > div button span {
+        font-family: 'Open Sans', sans-serif; }
+  .stream-single-container .stream-single-toolbar .single-toolbar-right {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    justify-content: flex-end; }
+    .stream-single-container .stream-single-toolbar .single-toolbar-right > div {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
 
 .nav {
   display: flex;

@@ -1,0 +1,61 @@
+.stream-single-container
+	.stream-single-header
+		height: 100px
+		width: 100%
+		position: relative
+
+		.stream-single-header-overlay
+			position: absolute
+			top: 0
+			left: 0
+			height: 100px
+			width: 100%
+			display: flex
+			justify-content: center
+			padding-top: 30px
+
+			> div
+				display: flex
+				align-items: center
+				justify-content: center
+				flex-direction: column
+
+				> div
+					width: 40px
+					height: 40px
+					border-radius: 50%
+					border: 1px solid rgba(0,0,0,0.35)
+
+					p
+						@include lato
+
+	.stream-single-toolbar
+		display: flex
+		align-items: stretch
+		position: relative
+
+		.single-toolbar-left
+			display: flex
+			flex: 1
+			align-items: stretch
+			justify-content: flex-start
+
+			> div
+				display: flex
+				jusity-content: center
+				align-items: center
+
+				button
+					span
+						@include open
+
+		.single-toolbar-right
+			display: flex
+			flex: 1
+			align-items: stretch
+			justify-content: flex-end
+
+			> div
+				display: flex
+				justify-content: center
+				align-items: center

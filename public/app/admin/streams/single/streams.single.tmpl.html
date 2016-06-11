@@ -3,12 +3,37 @@
 		<div></div>
 
 		<div class='stream-single-header-overlay'>
-			<div></div>
-			<p>{{stream.name}}</p>
-			<p>{{stream.subscribers.length}} Subscriber<span ng-if='stream.subscribers.length > 1 || stream.subscribers.length === 0'>s</span></p>
+			<div>
+				<div></div>
+				<p>{{stream.name}}</p>
+				<p>{{stream.subscribers.length}} Subscriber<span ng-if='stream.subscribers.length > 1 || stream.subscribers.length === 0'>s</span></p>
+			</div>
+		</div>
+	</div>
+
+	<div class='stream-single-toolbar'>
+		<div class='single-toolbar-left'>
+			<div>
+				<button aria-label='add post to stream button'>
+					<span>Add Post</span>
+				</button>
+			</div>
+		</div>
+
+		<div class='single-toolbar-right'>
+			<div>
+				<button>
+					<span>Search</span>
+				</button>
+			</div>
 		</div>
 	</div>
 
 	<div class='stream-single-body'>
+		<md-content>
+		</md-content>
+
+		<div class='stream-single-sidebar'>
+		</div>
 	</div>
 </div>
