@@ -1,0 +1,50 @@
+<div class='signup-page-container'>
+	<div>
+		<md-card>
+			<div class='signup-form-header'>
+				<div>
+					<h3>Welcome to <span>Opinionated</span></h3>
+				</div>
+			</div>
+
+			<md-content>
+				<form name='vm.signupForm' ng-submit='vm.create(vm.signupForm.$valid)' novalidate>
+					<div class='auth-form-wrapper'>
+						<label>Name</label>
+						<input type='text' name='name' ng-model='vm.user.name' required>
+					</div>
+
+					<div class='auth-form-wrapper'>
+						<label>Username</label>
+						<input type='text' name='username' ng-model='vm.user.username' required>
+					</div>
+
+					<div class='auth-form-wrapper'>
+						<label>Email</label>
+						<input type='email' name='email' ng-model='vm.user.email' required>
+					</div>
+
+					<div class='auth-form-wrapper'>
+						<label>Password</label>
+						<input type='password' name='password' ng-model='vm.user.password' required>
+					</div>
+
+					<div class='auth-form-wrapper'>
+						<label>Confirm Password</label>
+						<input type='password' name='confirm' ng-model='vm.user.confirm' required>
+					</div>
+
+					<div class='register-form-submit'>
+						<button type='submit' aria-label='submit signup form button'>
+							<span>Sign up!</span>
+						</button>
+					</div>
+				</form>
+			</md-content>
+		</md-card>
+
+		<div class='signup-form-login'>
+			<p>Already have an account? <a ui-sref='authentication.login'>Login in here</a></p>
+		</div>
+	</div>
+</div>
