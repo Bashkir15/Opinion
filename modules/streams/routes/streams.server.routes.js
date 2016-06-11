@@ -11,5 +11,19 @@ module.exports = function (System) {
 		authorized: true
 	});
 
+	routes.push({
+		method: 'get',
+		path: '/',
+		handler: streams.list,
+		authorized: false
+	});
+
+	routes.push({
+		method: 'get',
+		path: '/:streamId',
+		handler: streams.single,
+		authorized: false
+	});
+
 	return routes;
 };
