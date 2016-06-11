@@ -1,0 +1,14 @@
+<div class='stream-single-container'>
+	<div class='stream-single-header' ng-repeat='stream in vm.stream'>
+		<div></div>
+
+		<div class='stream-single-header-overlay'>
+			<div></div>
+			<p>{{stream.name}}</p>
+			<p>{{stream.subscribers.length}} Subscriber<span ng-if='stream.subscribers.length > 1 || stream.subscribers.length === 0'>s</span></p>
+		</div>
+	</div>
+
+	<div class='stream-single-body'>
+	</div>
+</div>

@@ -5,12 +5,13 @@
 	.controller('StreamsListController', StreamsListController);
 
 	/* @ngInject */
-	function StreamsListController ($state, $scope, appStreams) {
+	function StreamsListController ($state, $scope, $location, appStreams) {
 		var vm = this;
 		vm.streams = [];
 		vm.getStreams = getStreams;
 		vm.subscribe = subscribe;
 		vm.unsubscribe = unsubscribe;
+		vm.goToStream = goToStream;
 		vm.streamPage = 0;
 
 		function getStreams (options) {
@@ -43,6 +44,10 @@
 					item.subscribed = false;
 				});
 			});
+		}
+
+		function goToStream (item) {
+			$location.url('streams/' + item._id);
 		}
 
 		getStreams();

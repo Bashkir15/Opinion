@@ -19,5 +19,12 @@
 			controller: 'StreamsListController',
 			controllerAs: 'vm'
 		});
+
+		$stateProvider.state('streamsSingle', {
+			url: '/streams/:streamId',
+			templateUrl: '/app/admin/streams/single/streams.single.tmpl.html',
+			controller: 'StreamsSingleController',
+			controllerAs: 'vm'
+		});
 	}
 }());

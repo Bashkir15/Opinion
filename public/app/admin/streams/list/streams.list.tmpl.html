@@ -2,18 +2,20 @@
 	<div>
 		<md-list>
 			<md-list-item ng-repeat='item in vm.streams'>
-				<p>{{item.name}}</p>
-				<p>{{item.description}}</p>
-				<p>{{item.creator.name}}</p>
-				<p>{{item.subscribers.length}} Subscriber<span ng-if="item.subscribers.length > 1 || item.subscribers.length === 0">s</span></p>
+				<div ng-click="vm.goToStream(item)"<
+					<p>{{item.name}}</p>
+					<p>{{item.description}}</p>
+					<p>{{item.creator.name}}</p>
+					<p>{{item.subscribers.length}} Subscriber<span ng-if="item.subscribers.length > 1 || item.subscribers.length === 0">s</span></p>
 
-				<button ng-if="item.subscribed" ng-click="vm.unsubscribe(item)">
-					<span>Unsubscribe</span>
-				</button>
+					<button ng-if="item.subscribed" ng-click="vm.unsubscribe(item)">
+						<span>Unsubscribe</span>
+					</button>
 
-				<button ng-if="!item.subscribed" ng-click="vm.subscribe(item)">
-					<span>Subscribe</span>
-				</button>
+					<button ng-if="!item.subscribed" ng-click="vm.subscribe(item)">
+						<span>Subscribe</span>
+					</button>
+				</div>
 			</md-list-item>
 		</md-list>
 	</div>
