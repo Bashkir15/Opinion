@@ -1,0 +1,31 @@
+<div class='create-stream-page'>
+	<div>
+		<md-card>
+			<div class='create-stream-header'>
+				<div>
+					<h3>Create a stream!</h3>
+				</div>
+			</div>
+
+			<div class='create-stream-body'>
+				<form name='vm.createStreamForm' ng-submit='vm.create(vm.createStreamForm.$valid)' novalidate>
+					<div class='stream-form-wrapper'>
+						<label>Name</label>
+						<input type='text' name='name' ng-model='vm.stream.name' required>
+					</div>
+
+					<div class='stream-form-wrapper'>
+						<label>Description</label>
+						<textarea name='description' ng-model='vm.stream.description' rows='4' cols='40' required></textarea>
+					</div>
+
+					<div class='stream-form-submit'>
+						<button type='submit' aria-label='submit create stream form'>
+							<span>Create</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</md-card>
+	</div>
+</div>
