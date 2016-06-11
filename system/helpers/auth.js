@@ -1,5 +1,5 @@
 var ensureAuthorized = function (req, res, next) {
-	var mongoose = require('monoose');
+	var mongoose = require('mongoose');
 	var User = mongoose.model('User');
 	var bearerToken;
 	var bearerHeader = req.headers["authorization"];

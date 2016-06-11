@@ -5,7 +5,7 @@
 	.factory('appStreams', appStreams);
 
 	/* @ngInject */
-	function appStream ($resource) {
+	function appStreams ($resource) {
 		return {
 			single: $resource('streams/:streamId/:action', {
 				streamId: '@_id'

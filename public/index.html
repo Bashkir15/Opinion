@@ -33,8 +33,50 @@
 						<span>Login</span>
 					</button>
 				</div>
+
+				<div class='nav-item'>
+					<button ng-click="vm.openUserMenu()">
+						<span>Menu</span>
+					</button>
+				</div>
 			</div>
 		</nav>
+
+		<md-sidenav md-component-id='left' class='user-sidenav-left'>
+			<div class='user-sidenav-header'>
+				<div>
+					<div></div>
+					<p>{{vm.user.name}}</p>
+					<p>{{vm.user.email}}</p>
+				</div>
+
+				<div class='user-sidenav-header-toolbar'>
+				</div>
+			</div>
+
+			<div class='user-sidenav-body'>
+				<div>
+					<md-list class='md-2-line'>
+						<md-list-item ui-sref='profile.overview'>
+							<p>Profile</p>
+							<button class='md-secondary'>
+							</button>
+						</md-list-item>
+
+						<md-list-item ui-sref='messages.overview'>
+							<p>Messages</p>
+							<button class='md-secondary'>
+							</button>
+						</md-list-item>
+
+						<md-list-item ui-sref='streamsCreate'>
+							<p>Create Stream</p>
+						</md-list-item>
+					</md-list>
+				</div>
+			</div>
+		</md-sidenav>
+							
 		<div ui-view></div>
 
 		<script src='/vendor/angular/angular.js'></script>
@@ -65,6 +107,8 @@
 
 			<!-- Streams -->
 			<script src='/app/admin/streams/streams.config.js'></script>
+			<script src='/app/admin/streams/create/streams.create.controller.js'></script>
+			<script src='/app/admin/streams/list/streams.list.controller.js'></script>
 
 
 		<script src='/app/app.js'></script>

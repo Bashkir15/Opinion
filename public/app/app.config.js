@@ -6,6 +6,6 @@
 
 	/* @ngInject */
 	function appConfig ($stateProvider, $urlRouterProvider, $httpProvider) {
-		$httpProvider.interceptors.push('tokenHttpProvider');
+		$httpProvider.interceptors.push('tokenHttpInterceptor');
 	}
 }());
