@@ -1,0 +1,74 @@
+.nav
+	display: flex
+	align-items: stretch
+	position: relative
+	z-index: 40
+	text-align: center
+	box-shadow: 0 4px 8px rgba(0,0,0,0.4)
+	background: $darkest-blue
+
+.nav-left
+	display: flex
+	flex: 1
+	align-items: stretch
+	justify-content: flex-start
+	overflow: hidden
+	white-space: nowrap
+
+	> div
+		button
+			span
+				color: #dfe1df
+				@include open
+				transition: all .4s ease
+
+				&:hover
+					color: $accent-blue
+
+.nav-center
+	display: flex
+	align-items: center
+	justify-content: center
+
+	> div
+		h3
+			@include open;
+			color: $accent-blue
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+
+.nav-right
+	display: flex
+	flex: 1
+	align-items: stretch
+	justify-content: flex-end
+
+	> div
+		button
+			height: 35px
+			width: 100px
+			border-radius: 2px
+			color: #dfe1df
+			transition: all .4s ease
+
+			span
+				@include open
+
+			&:nth-of-type(1)
+				border: 1px solid $accent-blue
+
+				&:hover
+					background: darken($accent-blue, 10%)
+
+			&:nth-of-type(2)
+				border: 1px solid $accent-green
+
+				&:hover
+					background: darken($accent-green, 10%)
+
+
+
+.nav-item
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 10px

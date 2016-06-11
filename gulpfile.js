@@ -4,7 +4,7 @@ var plumber = require('gulp-plumber');
 
 var config = {
 	dev: {
-		css: './public/static/stylesheets/css/main.css',
+		css: './public/static/stylesheets/css',
 		mainSass: './public/static/stylesheets/sass/main.sass',
 		sass1: './public/static/stylesheets/sass/**/*.sass',
 		sass2: './public/static/stylesheets/sass/**/**/*.sass',
