@@ -25,19 +25,19 @@
 
 			<div class='nav-right'>
 				<div clas='nav-item'>
-					<button ui-sref='authentication.signup'>
+					<button ui-sref='authentication.signup' ng-if="!vm.isLoggedIn">
 						<span>Signup</span>
 					</button>
 				</div>
 
 				<div class='nav-item'>
-					<button ui-sref='authentication.login'>
+					<button ui-sref='authentication.login' ng-if="!vm.isLoggedIn">
 						<span>Login</span>
 					</button>
 				</div>
 
 				<div class='nav-item'>
-					<button ng-click="vm.openUserMenu()">
+					<button ng-click="vm.openUserMenu()" ng-if="vm.isLoggedIn">
 						<span>Menu</span>
 					</button>
 				</div>
@@ -60,19 +60,32 @@
 				<div>
 					<md-list class='md-2-line'>
 						<md-list-item ui-sref='profile.overview'>
+							<i class='icon-user'></i>
 							<p>Profile</p>
 							<button class='md-secondary'>
 							</button>
 						</md-list-item>
 
 						<md-list-item ui-sref='messages.overview'>
+							<i class='icon-bubble'></i>
 							<p>Messages</p>
 							<button class='md-secondary'>
 							</button>
 						</md-list-item>
 
+						<md-list-item ui-sref='profile.overview'>
+							<i class='icon-book'></i>
+							<p>Manage Streams</p>
+						</md-list-item>
+
 						<md-list-item ui-sref='streamsCreate'>
+							<i class='icon-file-text'></i>
 							<p>Create Stream</p>
+						</md-list-item>
+
+						<md-list-item ui-sref='profile.overview'>
+							<i class='icon-pencil'></i>
+							<p>Create Post</p>
 						</md-list-item>
 					</md-list>
 				</div>
