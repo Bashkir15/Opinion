@@ -18,5 +18,10 @@
     "lodash": "^4.13.1",
     "mongoose": "^4.4.20",
     "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.1"
   }
 }
