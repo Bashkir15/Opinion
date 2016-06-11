@@ -25,7 +25,7 @@
 			</div>
 
 			<div class='nav-right'>
-				<div clas='nav-item'>
+				<div class='nav-item'>
 					<button ui-sref='authentication.signup' ng-if="!vm.isLoggedIn">
 						<span>Signup</span>
 					</button>
@@ -88,12 +88,17 @@
 							<i class='icon-pencil'></i>
 							<p>Create Post</p>
 						</md-list-item>
+
+						<md-list-item ng-click="vm.logout()">
+							<i class='icon-enter'></i>
+							<p>Logout</p>
+						</md-list-item>
 					</md-list>
 				</div>
 			</div>
 		</md-sidenav>
 							
-		<div ui-view></div>
+		<div ui-view class='full-height'></div>
 
 		<script src='/vendor/angular/angular.js'></script>
 		<script src='/vendor/angular-aria/angular-aria.js'></script>

@@ -1,3 +1,5 @@
+@import "./authentication/authentication"
+
 .nav
 	display: flex
 	align-items: stretch
@@ -53,13 +55,15 @@
 			span
 				@include open
 
-			&:nth-of-type(1)
+		&:nth-of-type(1)
+			button
 				border: 1px solid $accent-blue
 
 				&:hover
 					background: darken($accent-blue, 10%)
 
-			&:nth-of-type(2)
+		&:nth-of-type(2)
+			button
 				border: 1px solid $accent-green
 
 				&:hover
@@ -72,3 +76,60 @@
 	align-items: center
 	justify-content: center
 	padding: 10px
+
+.user-sidenav-left
+	overflow: hidden
+
+	.user-sidenav-header
+		display: flex
+		align-items: stretch
+		position: relative
+		background: $darkest-green
+		flex-direction: column
+		box-shadow: 0 4px 8px rgba(0,0,0,0.35)
+		z-index: 20
+
+		> div
+			&:nth-of-type(1)
+				display: flex
+				padding-top: 20px
+				flex-direction: column
+				align-items: center
+				justify-content: center
+
+				div
+					height: 40px
+					width: 40px
+					border: 1px solid #dfe1df
+					border-radius: 50%
+					margin-bottom: 6px
+
+					p
+						color: #dfe1df
+						@include lato
+
+	.user-sidenav-body
+		background: $grey
+		height: 100%
+
+		> div
+			md-list
+				md-list-item
+					padding-right: 0
+					background: $grey
+					transition: all .4s ease
+
+					a
+						margin: 0
+
+						i
+							padding-right: 20px
+							color: #839da1
+
+						p
+							@include open
+							color: #dfe1df
+
+					button
+						i
+							color: #839da1
