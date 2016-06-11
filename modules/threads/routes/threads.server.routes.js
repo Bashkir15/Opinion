@@ -13,6 +13,13 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'get',
+		path: '/:threadId',
+		handler: threads.single,
+		authorized: false
+	});
+
+	routes.push({
+		method: 'get',
 		path: '/:streamId',
 		handler: threads.list,
 		authorized: false

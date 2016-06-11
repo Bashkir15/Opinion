@@ -1,0 +1,35 @@
+<div class='thread-container'>
+	<div class='thread-content-container' ng-repeat='thread in vm.thread'>
+		<div>
+			<div class='thread-content-left'>
+				<div>
+					<div></div>
+					<p>{{item.creator.name}}</p>
+				</div>
+			</div>
+
+			<div class='thread-content-right'>
+				<div>
+					<p>{{item.title}}</p>
+					<p>{{item.content}}</p>
+				</div>
+			</div>
+		</div>
+
+		<div class='thread-content-toolbar'>
+			<div class='toolbar-left'>
+				<div>
+					<button>
+						<span>Add Comment</span>
+					</button>
+				</div>
+			</div>
+
+			<div class='toolbar-right'>
+				<div>
+					<span>{{item.created | date:'short'}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

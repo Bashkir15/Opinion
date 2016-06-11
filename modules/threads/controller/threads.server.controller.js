@@ -84,5 +84,24 @@ module.exports = function (System) {
 		return getPosts();
 	};
 
+	obj.single = function (req, res) {
+		Thread.findOne({_id: req.params.threadId})
+		.populate('creator')
+		.populate('stream')
+		.exec(function (err, thread) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (thread) {
+				thread = thread.afterSave(req.user);
+
+				return json.good({
+					record: thread
+				}, res);
+			} else {
+				return json.bad({message: 'Sorry, that thread could not be found'}, res);
+			}
+		});
+	};
+
 	return obj;
 };
