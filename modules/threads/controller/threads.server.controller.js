@@ -94,9 +94,95 @@ module.exports = function (System) {
 			} else if (thread) {
 				thread = thread.afterSave(req.user);
 
-				return json.good({
+				 json.good({
 					record: thread
 				}, res);
+			} else {
+				return json.bad({message: 'Sorry, that thread could not be found'}, res);
+			}
+		});
+	};
+
+	obj.upvote = function (req, res) {
+		Thread.findOne({_id: req.params.threadId})
+		.populate('creator')
+		.exec(function (err, thread) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (thread) {
+				if (thread.upvotes.indexOf(req.user._id) !== -1) {
+					return json.bad({message: 'Sorry, you have already upvoted that thread'}, res);
+				} else if (thread.downvotes.indexOf(req.user._id) !== -1) {
+					thread.downvotes.splice(thread.downvotes.indexOf(req.user._id), 1);
+					thread.upvotes.push(req.user._id);
+					thread.save(function (err, item) {
+						thread = thread.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					thread.upvotes.push(req.user._id);
+					thread.save(function (err, item) {
+						thread = thread.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			} else {
+				return json.bad({message: 'Sorry, that thread could not be found'}, res);
+			}
+		});
+	};
+
+	obj.downvote = function (req, res) {
+		Thread.findOne({_id: req.params.threadId})
+		.populate('creator')
+		.exec(function (err, thread) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (thread) {
+				if (thread.downvotes.indexOf(req.user._id) !== -1) {
+					return json.bad({message: 'Sorry, you have already downvoted that thread'}, res);
+				} else if (thread.upvotes.indexOf(req.user._id) !== -1) {
+					thread.upvotes.splice(thread.upvotes.indexOf(req.user._id), 1);
+					thread.downvotes.push(req.user._id);
+					thread.save(function (err, item) {
+						thread = thread.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					thread.downvotes.push(req.user._id);
+					thread.save(function (err, item) {
+						thread = thread.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
 			} else {
 				return json.bad({message: 'Sorry, that thread could not be found'}, res);
 			}

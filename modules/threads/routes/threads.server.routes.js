@@ -25,5 +25,19 @@ module.exports = function (System) {
 		authorized: false
 	});
 
+	routes.push({
+		method: 'post',
+		path: '/:threadId/upvote',
+		handler: threads.upvote,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'post',
+		path: '/:threadId/downvote',
+		handler: threads.downvote,
+		authorized: true
+	});
+
 	return routes;
 };
