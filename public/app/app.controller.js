@@ -9,7 +9,6 @@
 		var vm = this;
 		vm.openUserMenu = openUserMenu;
 		vm.updateLoginStatus = updateLoginStatus;
-		vm.logout = logout;
 
 		function openUserMenu() {
 			$mdSidenav('left').toggle();
@@ -20,18 +19,16 @@
 			vm.user = appAuth.getUser();
 		}
 
-		function logout() {
-			appStorage.remove('user');
-			appStorage.remove('opinion-token');
-			$scope.$broadcast('loggedOut');
-		}
-
 		$rootScope.$on('loggedIn', function() {
 			updateLoginStatus();
 		});
 
-		$scope.$on('loggedOut', function() {
+		$rootScope.$on('loggedOut', function() {
 			updateLoginStatus();
+		});
+
+		$rootScope.$on('$stateChangeSuccess', function() {
+			$mdSidenav('left').close();
 		});
 
 		updateLoginStatus();

@@ -32,7 +32,7 @@
 					if (response.success) {
 						reset();
 						postLogin(response.res.record, response.res.token);
-						appToast('yay!');
+						appToast('Welcome to opinionated, ' + response.res.record.name);
 					} else {
 						appToast(response.res.message);
 					}
@@ -47,6 +47,7 @@
 			appStorage.set('user', serializedUser);
 			appStorage.set('opinion-token', token);
 			$rootScope.$broadcast('loggedIn');
+			$state.go('home');
 		}
 	}
 }());
