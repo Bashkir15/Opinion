@@ -18,6 +18,16 @@
 				downvote: {
 					method: 'POST',
 					params: {action: 'downvote'}
+				},
+
+				doSave: {
+					method: 'POST',
+					params: {action: 'save'}
+				},
+
+				doUnsave: {
+					method: 'POST',
+					params: {action: 'unsave'}
 				}
 			}),
 			list: $resource('comments/thread/:threadId')

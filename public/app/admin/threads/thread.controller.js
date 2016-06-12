@@ -17,6 +17,8 @@
 		vm.downvote = downvote;
 		vm.commentUpvote = commentUpvote;
 		vm.commentDownvote = commentDownvote;
+		vm.commentSave = commentSave;
+		vm.commentUnsave = commentUnsave;
 		vm.commentPage = 0;
 		vm.commentFilter = '';
 		vm.lastUpdated = 0;
@@ -79,6 +81,22 @@
 		function commentDownvote (item) {
 			var comment = appComments.single.get({commentId: item._id}, function() {
 				comment.$downvote({commentId: item._id}, function() {
+					angular.extend(item, comment.res.record);
+				});
+			});
+		}
+
+		function commentSave (item) {
+			var comment = appComments.single.get({commentId: item._id}, function() {
+				comment.$doSave({commentId: item._id}, function() {
+					angular.extend(item, comment.res.record);
+				});
+			});
+		}
+
+		function commentUnsave (item) {
+			var comment = appComments.single.get({commentId: item._id}, function() {
+				comment.$doUnsave({commentId: item._id}, function() {
 					angular.extend(item, comment.res.record);
 				});
 			});

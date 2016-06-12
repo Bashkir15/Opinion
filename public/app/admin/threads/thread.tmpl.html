@@ -69,7 +69,12 @@
 
 						<div class='thread-comment-toolbar'>
 							<div layout='row' layout-align='none center'>
-								<button>
+								<button ng-if="!item.saved" ng-click="vm.commentSave(item)">
+									<i class='icon-favorite_border'></i>
+									<span>{{item.saves.length}} Save<span ng-if="item.saves.length > 1 || item.saves.length === 0">s</span></span>
+								</button>
+
+								<button ng-if="item.saved" ng-click="vm.commentUnsave(item)">
 									<i class='icon-favorite_border'></i>
 									<span>{{item.saves.length}} Save<span ng-if="item.saves.length > 1 || item.saves.length === 0">s</span></span>
 								</button>
