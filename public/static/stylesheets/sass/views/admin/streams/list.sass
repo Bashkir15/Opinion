@@ -29,7 +29,7 @@
 		z-index: 20
 		height: 50px
 		//background: darken($darkest-green, 10%)
-		background: #467a9a
+		background: $blue
 		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.45)
 
 		.toolbar-left
@@ -54,7 +54,7 @@
 						color: #dfe1df
 
 				&:hover
-					background: darken(#467a9a, 10%)
+					background: darken($blue, 10%)
 
 					button
 						span
@@ -96,7 +96,7 @@
 					left: 0
 					width: 30px
 					height: 35px
-					background: darken(#467a9a, 10%)
+					background: darken($blue, 10%)
 
 					i
 						position: absolute
@@ -120,7 +120,7 @@
 					width: 70%
 					margin: 0 auto
 					margin-bottom: 10px
-					border: 1px solid rgba(0,0,0,0.35)
+					box-shadow: 0 4px 8px rgba(0,0,0,0.35)
 					padding: 0
 					background: #212a33
 
@@ -145,7 +145,7 @@
 									transition: all .4s ease
 
 									span
-										@includ open
+										@include open
 										color: #dfe1df
 										transition: all .4s ease
 
