@@ -179,5 +179,64 @@ module.exports = function (System) {
 		});
 	};
 
+
+	obj.save = function (req, res) {
+		Comment.findOne({_id: req.params.commentId})
+		.populate('creator')
+		.exec(function (err, comment) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (comment) {
+				if (comment.saves.indexOf(req.user._id) !== -1) {
+					return json.bad({message: 'Sorry, you have already saved that comment'}, res);
+				}
+
+				comment.saves.push(req.user._id);
+				comment.save(function (err, item) {
+					comment = comment.afterSave(req.user);
+
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: item
+					}, res);
+				});
+			} else {
+				return json.bad({message: 'Sorry, that comment could not be found'}, res);
+			}
+		});
+	};
+
+	obj.unsave = function (req, res) {
+		Comment.findOne({_id: req.params.commentId})
+		.populate('creator')
+		.exec(function (err, comment) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (comment) {
+				if (comment.saves.indexOf(req.user._id) !== -1) {
+					comment.saves.splice(comment.saves.indexOf(req.user._id), 1);
+					comment.save(function (err, item) {
+						comment = comment.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					return json.bad({message: 'Sorry, you do not have that comment saved'}, res);
+				}
+			} else {
+				return json.bad({message: 'Sorry, that comment could not be found'}, res);
+			}
+		});
+	};
+
 	return obj;
 };

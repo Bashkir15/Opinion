@@ -39,5 +39,19 @@ module.exports = function (System) {
 		authorized: true
 	});
 
+	routes.push({
+		method: 'post',
+		path: '/:commentId/save',
+		handler: comments.save,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'post',
+		path: '/:commentId/unsave',
+		handler: comments.unsave,
+		authorized: true
+	});
+
 	return routes;
 };
