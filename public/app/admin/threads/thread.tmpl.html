@@ -18,9 +18,9 @@
 				</div>
 
 				<div layout='column' flex='10' layout-align='center center' class='thread-content-score'>
-					<i class='icon-expand_less' ng-class="{'upvoted': thread.upvoted}"></i>
+					<i class='icon-expand_less' ng-class="{'upvoted': thread.upvoted}" ng-click="vm.upvote(thread)"></i>
 					<span ng-class="{'positve': thread.score >= 1, 'negative': thread.score <= -1}">{{thread.score}}</span>
-					<i class='icon-expand_more' ng-class="{'downvoted': thread.downvoted}"></i>
+					<i class='icon-expand_more' ng-class="{'downvoted': thread.downvoted}" ng-click="vm.downvote(thread)"></i>
 				</div>
 			</div>
 
@@ -47,8 +47,8 @@
 
 	<div class='thread-comments' layout='column'>
 		<md-content>
-			<md-list class='md-2-line'>
-				<md-list-item ng-repeat='item in vm.comments'>
+			<md-list>
+				<md-list-item ng-repeat='item in vm.comments' class='md-2-line'>
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center'>

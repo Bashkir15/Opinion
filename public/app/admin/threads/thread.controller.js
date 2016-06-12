@@ -13,6 +13,8 @@
 		vm.comments = [];
 		vm.getThread = getThread;
 		vm.getComments = getComments;
+		vm.upvote = upvote;
+		vm.downvote = downvote;
 		vm.commentPage = 0;
 		vm.commentFilter = '';
 		vm.lastUpdated = 0;
@@ -48,6 +50,22 @@
 			});
 		}
 
+		function upvote (thread) {
+			var item = appThreads.single.get({theadId: thread._id}, function() {
+				item.$upvote({threadId: thread._id}, function() {
+					angular.extend(thread, item.res.record);
+				});
+			});
+		}
+
+		function downvote (thread) {
+			var item = appThreads.single.get({threadId: thread._id}, function() {
+				item.$downvote({threadId: thread._id}, function() {
+					angular.extend(thread, item.res.record);
+				});
+			});
+		}
+
 		function openAddComment() {
 			$mdDialog.show({
 				controller: [
@@ -70,6 +88,7 @@
 								comment.$save(function (response) {
 									if (response.success) {
 										appToast('yay!');
+										vm.getComments();
 										$mdDialog.hide();
 									} else {
 										appToast(response.res.message);
@@ -87,7 +106,7 @@
 				],
 				templateUrl: '/app/admin/comments/dialogs/create.comment.dialog.tmpl.html'
 			}).finally(function() {
-
+				vm.getComments({reload: true});
 			});
 		}
 
