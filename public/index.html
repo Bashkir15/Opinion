@@ -16,6 +16,23 @@
 						<span>Home</span>
 					</button>
 				</div>
+
+				<div class='nav-item'>
+					<md-menu>
+						<button ng-click="$mdOpenMenu()" aria-label='open streams list'>
+							<span>Streams
+							</span>
+						</button>
+
+						<md-menu-content>
+							<md-menu-item ng-repeat='item in vm.homeStreams'>
+								<button>
+									<span>{{item.name}}</span>
+								</button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+				</div>
 			</div>
 
 			<div class='nav-center'>

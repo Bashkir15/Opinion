@@ -617,12 +617,15 @@ p {
         padding-left: 10px; }
         .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text .stream-single-item-toolbar button i {
           color: #dfe1df;
-          font-size: 16px; }
+          font-size: 16px;
+          transition: all .4s ease; }
         .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text .stream-single-item-toolbar button span {
           font-family: 'Open Sans', sans-serif;
           color: #dfe1df; }
         .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text .stream-single-item-toolbar button:nth-of-type(3) span {
           color: #9a9a9a; }
+        .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text .stream-single-item-toolbar button.saved i {
+          color: #ba4445; }
   .stream-single-container .stream-single-body .stream-single-sidebar {
     margin-top: 23px;
     margin-left: 10px;

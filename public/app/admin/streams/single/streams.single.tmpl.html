@@ -53,7 +53,7 @@
 								<span>{{item.saves.length}} Save<span ng-if="item.saves.length > 1 || item.saves.length === 0">s</span></span>
 							</button>
 
-							<button ng-if="item.saved" ng-click="vm.unsave(item)">
+							<button ng-if="item.saved" ng-click="vm.unsave(item)" class='saved'>
 								<i class='icon-favorite_border'></i>
 								<span>{{item.saves.length}} Save<span ng-if="item.saves.length > 1 || item.saves.length === 0">s</span></span>
 							</button>
