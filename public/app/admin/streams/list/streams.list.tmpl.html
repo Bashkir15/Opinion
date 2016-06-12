@@ -1,4 +1,4 @@
-<div class='streams-list-container'>
+<div class='streams-list-container full-height'>
 	<div class='streams-list-header'>
 		<div></div>
 
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 
-	<div class='streams-list-body'>
+	<div class='streams-list-body full-height'>
 		<div>
 			<md-list>
 				<md-list-item ng-repeat='item in vm.streams'>
@@ -44,7 +44,7 @@
 						</div>
 
 						<div class='streams-item-right' ng-click="vm.goToStream(item)">
-							<p>{{item.name}}</p>
+							<h4>{{item.name}}</h4>
 
 							<p>{{item.description}}</p>
 						</div>
@@ -53,10 +53,12 @@
 					<div class='streams-item-toolbar'>
 						<div class='item-toolbar-left'>
 							<button>
+								<i class='icon-favorite_border'></i>
 								<span>{{item.subscribers.length}} Subscriber<span ng-if="item.subscribers.length > 1 || item.subscribers.length === 0">s</span></span>
 							</button>
 
 							<button>
+								<i class='icon-mail_outline'></i>
 								<span>{{item.threads.length}} Thread<span ng-if="item.threads.length > 1 || item.threads.length === 0">s</span></span>
 							</button>
 						</div>

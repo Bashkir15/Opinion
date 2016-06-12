@@ -9,12 +9,12 @@
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		var threadId = $stateParams.threadId;
-		vm.thread = [];
+		vm.threads = [];
 		vm.getThread = getThread;
 
 		function getThread() {
 			var threadData = appThreads.single.get({threadId: threadId}, function() {
-				vm.thread = [threadData.res.record];
+				vm.threads = [threadData.res.record];
 			});
 		}
 

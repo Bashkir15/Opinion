@@ -44,8 +44,144 @@
 				</div>
 			</div>
 		</nav>
+		<md-sidenav md-component-id='left' class='user-menu-left md-whiteframe-z2' layout='column'>
+			<md-toolbar class='md-tall'>
+				<span flex></span>
+				<div layout='column' class='md-toolbar-tools-bottom' layout-align='none center'>
+					<div></div>
+					<span></span>
+					<div>{{vm.user.name}}</div>
+					<div>{{vm.user.email}}</div>
+				</div>
+			</md-toolbar>
 
-		<md-sidenav md-component-id='left' class='user-sidenav-left'>
+			<md-list class='user-menu-body' flex>
+				<md-list-item md-ink-ripple  ui-sref='profile.overview'>
+					<i class='icon-user'></i>
+
+					<div class='inset'>
+						Profile
+					</div>
+
+					<button class='md-secondary' ng-click="vm.showProfile = !vm.showProfile" aria-label='expand profile button'>
+						<i class='icon-expand_more' ng-class="{'open': vm.showProfile}"></i>
+					</button>
+				</md-list-item>
+
+				<ul class='user-menu-nested-list' ng-show="vm.showProfile">
+					<div>
+						<li>
+							<button class='md-ink-ripple'>
+								<span>Overview</span>
+							</button>
+						</li>
+					</div>
+
+						<li>
+							<button class='md-ink-ripple'>
+								<span>Threads</span>
+							</button>
+						</li>
+
+						<li>
+							<button class='md-ink-ripple'>
+								<span>Comments</span>
+							</button>
+						</li>
+
+						<li>
+							<button class='md-ink-ripple'>
+								<span>Saved</span>
+							</button>
+						</li>
+
+						<li>
+							<button class='md-ink-ripple'>
+								<span>Activitiy</span>
+							</button>
+						</li>
+					</ul>
+
+				<md-list-item md-ink-ripple ui-sref='messages.overview'>
+					<i class='icon-bubble'></i>
+
+					<div class='inset'>
+						Messages
+					</div>
+
+					<button class='md-secondary' ng-click="vm.showMessages = !vm.showMessages" aria-label='expand messages button'>
+						<i class='icon-expand_more' ng-class="{'open': vm.showMessages}"></i>
+					</button>
+				</md-list-item>
+
+				<ul class='user-menu-nested-list' ng-show="vm.showMessages">
+					<li>
+						<button class='md-ink-ripple'>
+							<span>Overview</span>
+						</button>
+					</li>
+
+					<li>
+						<button class='md-ink-ripple'>
+							<span>Inbox</span>
+						</button>
+					</li>
+
+					<li>
+						<button class='md-ink-ripple'>
+							<span>Sent</span>
+						</button>
+					</li>
+
+					<li>
+						<button class='md-ink-ripple'>
+							<span>Trash</span>
+						</button>
+					</li>
+				</ul>
+
+				<md-list-item md-ink-ripple ui-sref='profile.overview'>
+					<i class='icon-book'></i>
+
+					<div class='inset'>
+						Manage Streams
+					</div>
+				</md-list-item>
+
+				<md-list-item md-ink-ripple ui-sref='streamsCreate'>
+					<i class='icon-file-text'></i>
+
+					<div class='inset'>
+						Create Stream
+					</div>
+				</md-list-item>
+
+				<md-list-item md-ink-ripple ui-sref='profile.overview'>
+					<i class='icon-pencil'></i>
+
+					<div class='inset'>
+						Add Post
+					</div>
+				</md-list-item>
+
+				<md-list-item md-ink-ripple ui-sref='profile.overview'>
+					<i class='icon-cog'></i>
+
+					<div class='inset'>
+						Settings
+					</div>
+				</md-list-item>
+
+				<md-list-item md-ink-ripple ui-sref='authentication.logout'>
+					<i class='icon-enter'></i>
+
+					<div class='inset'>
+						Logout
+					</div>
+				</md-list-item>
+			</md-list>
+		</md-sidenav>
+		<!-- <md-sidenav md-component-id='left' class='user-sidenav-left'>
 			<div class='user-sidenav-header'>
 				<div>
 					<div></div>
@@ -96,7 +232,7 @@
 					</md-list>
 				</div>
 			</div>
-		</md-sidenav>
+		</md-sidenav> -->
 							
 		<div ui-view class='full-height'></div>
 

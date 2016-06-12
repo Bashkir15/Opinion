@@ -29,12 +29,14 @@
 		z-index: 20
 		height: 50px
 		border-bottom: 1px solid rgba(0,0,0,0.35)
+		background: darken($darkest-green, 10%)
 
 		.toolbar-left
 			display: flex
 			flex: 1
 			align-items: stretch
 			justify-content: flex-start
+			padding-left: 10px
 
 			> div
 				display: flex
@@ -44,6 +46,10 @@
 				button
 					span
 						@include open
+						transition: all .4s ease
+				&:hover
+					span
+						color: #fff
 
 		.toolbar-right
 			display: flex
@@ -61,6 +67,8 @@
 						@include open
 
 	.streams-list-body
+		//background: darken($darkest-green, 10%)
+		background: $grey
 		> div
 			padding-top: 15px
 
@@ -73,6 +81,7 @@
 					display: flex
 					flex-direction: column
 					padding: 0
+					background: $darkest-blue
 
 
 					> div
@@ -119,6 +128,7 @@
 										span
 											@include open
 											margin-bottom: 2px
+											color: #dfe1df
 											transition: all .4s ease
 
 										&.stream-subscribed
@@ -147,10 +157,15 @@
 								align-items: stretch
 								flex-direction: column
 
+								h4
+									text-align: left
+									@include mont
+									color: #dfe1df
+
 								p
 									text-align: left
 									@include open
-									margin-bottom: 0
+									color: #9a9a9a
 
 									
 
@@ -171,6 +186,9 @@
 							button
 								span
 									@include open
+									color: #dfe1df
+								i
+									color: #dfe1df
 
 						.item-toolbar-right
 							display: flex
@@ -181,6 +199,6 @@
 							button
 								span
 									@include open
-									color: rgba(0,0,0,0.3)
+									color: #9a9a9a
 
 					
