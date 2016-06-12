@@ -44,5 +44,46 @@
 			</div>
 		</div>
 	</div>
+
+	<div class='thread-comments' layout='column'>
+		<md-content>
+			<md-list class='md-2-line'>
+				<md-list-item ng-repeat='item in vm.comments'>
+					<div class='md-list-item-text'>
+						<div layout='row'>
+							<div layout='column' flex='15' layout-align='center center'>
+								<div></div>
+								<p>{{item.creator.name}}</p>
+							</div>
+
+							<div layout='column' flex>
+								<p>{{item.content}}</p>
+							</div>
+
+							<div layout='column' flex='10' layout-align='center center'>
+								<i class='icon-expand_less'></i>
+								<span>{{item.score}}</span>
+								<i class='icon-expand_more'></i>
+							</div>
+						</div>
+
+						<div class='thread-comment-toolbar'>
+							<div layout='row' layout-align='none center'>
+								<button>
+									<i class='icon-favorite_border'></i>
+									<span>{{item.saves.length}} Save<span ng-if="item.saves.length > 1 || item.saves.length === 0">s</span></span>
+								</button>
+							</div>
+
+							<span flex></span>
+							<button>
+								<span>{{item.created | date:'short'}}</span>
+							</button>
+						</div>
+					</div>
+				</md-list-item>
+			</md-list>
+		</md-content>
+	</div>
 </div>
 				

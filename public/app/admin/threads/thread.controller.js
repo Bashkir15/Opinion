@@ -10,12 +10,41 @@
 		var streamId = $stateParams.streamId;
 		var threadId = $stateParams.threadId;
 		vm.threads = [];
+		vm.comments = [];
 		vm.getThread = getThread;
+		vm.getComments = getComments;
+		vm.commentPage = 0;
+		vm.commentFilter = '';
+		vm.lastUpdated = 0;
 		vm.openAddComment = openAddComment;
 
 		function getThread() {
 			var threadData = appThreads.single.get({threadId: threadId}, function() {
 				vm.threads = [threadData.res.record];
+			});
+		}
+
+		function getComments (options) {
+			options = options || {};
+
+			var commentsData = appComments.list.get({
+				threadId: threadId,
+				page: vm.commentPage,
+				filter: vm.commentFilter,
+				timestamp: vm.lastUpdated
+			}, function() {
+				if (vm.commentFilter) {
+					vm.comments = [];
+				}
+
+				if (!options.append) {
+					vm.comments = commentsData.res.records.concat(vm.comments);
+				} else {
+					vm.comments = vm.comments.concat(commentsData.res.records);
+				}
+
+				vm.noMoreComments = !commentsData.res.morePages;
+				vm.lastUpdated = 0;
 			});
 		}
 
@@ -63,5 +92,6 @@
 		}
 
 		getThread();
+		getComments();
 	}
 }());
