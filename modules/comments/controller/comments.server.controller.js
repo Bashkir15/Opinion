@@ -35,7 +35,7 @@ module.exports = function (System) {
 		
 
 		var getComments = function() {
-			
+
 			var criteria = {thread: req.params.threadId};
 			if (req.query && req.query.timestamp) {
 				criteria.created = {$gte: req.query.timestamp};
@@ -73,6 +73,110 @@ module.exports = function (System) {
 		};
 
 		return getComments();
+	};
+
+	obj.single = function (req, res) {
+		Comment.findOne({_id: req.params.commentId})
+		.populate('creator')
+		.populate('thread')
+		.exec(function (err, comment) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (comment) {
+				comment = comment.afterSave;
+
+				return json.good({
+					record: comment
+				}, res);
+			} else {
+				return json.bad({message: 'Sorry, that comment could not be found'}, res);
+			}
+		});
+	};
+
+	obj.upvote = function (req, res) {
+		Comment.findOne({_id: req.params.commentId})
+		.populate('creator')
+		.exec(function (err, comment) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (comment) {
+				if (comment.upvotes.indexOf(req.user._id) !== -1) {
+					return json.bad({message: 'Sorry, you have already upvoted that comment'}, res);
+				} else if (comment.downvotes.indexOf(req.user._id) !== -1) {
+					comment.downvotes.splice(comment.downvotes.indexOf(req.user._id), 1);
+					comment.upvotes.push(req.user._id);
+					comment.save(function (err, item) {
+						comment = comment.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					comment.upvotes.push(req.user._id);
+					comment.save(function (err, item) {
+						comment = comment.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			} else {
+				return json.bad({message: 'Sorry, that comment could not be found'}, res);
+			}
+ 		});
+	};
+
+	obj.downvote = function (req, res) {
+		Comment.findOne({_id: req.params.commentId})
+		.populate('creator')
+		.exec(function (err, comment) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (comment) {
+				if (comment.downvotes.indexOf(req.user._id) !== -1) {
+					return json.bad({message: 'Sorry, you have already downvoted that comment'}, res);
+				} else if (comment.upvotes.indexOf(req.user._id) !== -1) {
+					comment.upvotes.splice(comment.upvotes.indexOf(req.user._id), 1);
+					comment.downvotes.push(req.user._id);
+					comment.save(function (err, item) {
+						comment = comment.afterSave(req.user);
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					comment.downvotes.push(req.user._id);
+					comment.save(function (err, item) {
+						comment = comment.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			} else {
+				return json.bad({message: 'Sorry, that comment could not be found'}, res);
+			}
+		});
 	};
 
 	return obj;

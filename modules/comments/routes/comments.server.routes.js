@@ -18,5 +18,26 @@ module.exports = function (System) {
 		authorized: false
 	});
 
+	routes.push({
+		method: 'get',
+		path: '/:commentId',
+		handler: comments.single,
+		authorized: false
+	});
+
+	routes.push({
+		method: 'post',
+		path: '/:commentId/upvote',
+		handler: comments.upvote,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'post',
+		path: '/:commentId/downvote',
+		handler: comments.downvote,
+		authorized: true
+	});
+
 	return routes;
 };
