@@ -15,6 +15,8 @@
 		vm.getComments = getComments;
 		vm.upvote = upvote;
 		vm.downvote = downvote;
+		vm.commentUpvote = commentUpvote;
+		vm.commentDownvote = commentDownvote;
 		vm.commentPage = 0;
 		vm.commentFilter = '';
 		vm.lastUpdated = 0;
@@ -62,6 +64,22 @@
 			var item = appThreads.single.get({threadId: thread._id}, function() {
 				item.$downvote({threadId: thread._id}, function() {
 					angular.extend(thread, item.res.record);
+				});
+			});
+		}
+
+		function commentUpvote (item) {
+			var comment = appComments.single.get({commentId: item._id}, function() {
+				comment.$upvote({commentId: item._id}, function() {
+					angular.extend(item, comment.res.record);
+				});
+			});
+		}
+
+		function commentDownvote (item) {
+			var comment = appComments.single.get({commentId: item._id}, function() {
+				comment.$downvote({commentId: item._id}, function() {
+					angular.extend(item, comment.res.record);
 				});
 			});
 		}

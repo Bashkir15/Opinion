@@ -61,9 +61,9 @@
 							</div>
 
 							<div layout='column' flex='10' layout-align='center center'>
-								<i class='icon-expand_less'></i>
+								<i class='icon-expand_less' ng-click="vm.commentUpvote(item)"></i>
 								<span>{{item.score}}</span>
-								<i class='icon-expand_more'></i>
+								<i class='icon-expand_more' ng-click="vm.commentDownvote(item)"></i>
 							</div>
 						</div>
 
