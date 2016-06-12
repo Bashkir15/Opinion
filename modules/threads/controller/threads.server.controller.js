@@ -84,6 +84,46 @@ module.exports = function (System) {
 		return getPosts();
 	};
 
+	obj.home = function (req, res) 
+		var criteria = {};
+
+		if (req.query && req.query.timestamp) {
+			criteria.created = {$gte: req.query.timestamp};
+		}
+
+		if (req.query && req.query.filter) {
+			delete criteria.created;
+			criteria.title = new RegExp(req.query.filter, 'i');
+		}
+
+		Thread.find(criteria, null)
+		.populate('creator')
+		.populate('stream')
+		.populate('comments')
+		.skip(parseInt(req.query.page) * System.config.settings.perPage)
+		.limit(System.config.settings.perPage + 1)
+		.exec(function (err, threads) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				var morePages = System.config.settings.perPage < threads.length;
+
+				if (morePages) {
+					threads.pop();
+				}
+
+				threads.map(function (e) {
+					e = e.afterSave(req.user);
+				});
+
+				json.good({
+					records: threads,
+					morePages: morePages
+				}, res);
+			}
+		});
+	};
+
 	obj.single = function (req, res) {
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
