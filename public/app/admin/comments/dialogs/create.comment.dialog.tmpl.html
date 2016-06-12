@@ -1,0 +1,24 @@
+<md-dialog>
+	<md-dialog-content>
+		<div class='add-comment-header' layout='row' layout-align='none center'>
+			<h3>Add Comment</h3>
+			<span flex></span>
+			<span ng-click="close()">x</span>
+		</div>
+
+		<div class='add-comment-body'>
+			<form name='addCommentForm' ng-submit='create(addCommentForm.$valid)' novalidate>
+				<div class='add-comment-wrapper'>
+					<label>Content</label>
+					<textarea name='content' ng-model='content' required rows='4' cols='40'></textarea>
+				</div>
+
+				<div class='add-comment-submit'>
+					<button type='submit' aria-label='submit add comment form'>
+						<span>Create</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</md-dialog-content>
+</md-dialog>
