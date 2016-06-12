@@ -36,9 +36,9 @@
 							</div>
 
 							<div layout='column' flex='10' layout-align='center center' class='stream-single-score-container'>
-								<i class='icon-expand_less'></i>
+								<i class='icon-expand_less' ng-click="vm.upvote(item)"></i>
 								<p>{{item.score}}</p>
-								<i class='icon-expand_more'></i>
+								<i class='icon-expand_more' ng-click="vm.downvote(item)"></i>
 							</div>
 						</div>
 

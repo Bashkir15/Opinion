@@ -14,6 +14,8 @@
 		vm.updateFeed = updateFeed;
 		vm.openAddPost = openAddPost;
 		vm.goToThread = goToThread;
+		vm.upvote = upvote;
+		vm.downvote = downvote;
 		vm.feedPage = 0;
 		vm.lastUpdated = 0;
 		vm.feedFilter = '';
@@ -97,6 +99,22 @@
 
 		function goToThread (item) {
 			$location.url('streams/' + streamId + '/' + item._id);
+		}
+
+		function upvote (item) {
+			var thread = appThreads.single.get({threadId: item._id}, function() {
+				thread.$upvote({threadId: item._id}, function() {
+					angular.extend(item, thread.res.record);
+				});
+			});
+		}
+
+		function downvote (item) {
+			var thread = appThreads.single.get({threadId: item._id}, function() {
+				thread.$downvote({threadId: item._id}, function() {
+					angular.extend(item, thread.res.record);
+				});
+			});
 		}
 
 		getStream();
