@@ -72,6 +72,27 @@
 										@include lato
 										color: #9a9a9a
 
+							.stream-single-score-container
+								i
+									color: #dfe1df
+									transition: all .4s ease
+
+									&.upvoted
+										color: $accent-green
+
+									&.downvoted
+										color: $accent-red
+
+								p
+									@include lato
+									color: #dfe1df
+
+									&.positive
+										color: $accent-green
+
+									&.negative
+										color: $accent-red
+
 						.stream-single-item-toolbar
 							height: 35px
 							border-top: 1px solid #c19f66

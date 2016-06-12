@@ -597,6 +597,20 @@ p {
       .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text > div > div:nth-of-type(2) p {
         font-family: 'Lato', sans-serif;
         color: #9a9a9a; }
+      .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text > div .stream-single-score-container i {
+        color: #dfe1df;
+        transition: all .4s ease; }
+        .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text > div .stream-single-score-container i.upvoted {
+          color: #74b97d; }
+        .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text > div .stream-single-score-container i.downvoted {
+          color: #ba4445; }
+      .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text > div .stream-single-score-container p {
+        font-family: 'Lato', sans-serif;
+        color: #dfe1df; }
+        .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text > div .stream-single-score-container p.positive {
+          color: #74b97d; }
+        .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text > div .stream-single-score-container p.negative {
+          color: #ba4445; }
       .stream-single-container .stream-single-body md-content md-list md-list-item .md-list-item-text .stream-single-item-toolbar {
         height: 35px;
         border-top: 1px solid #c19f66;

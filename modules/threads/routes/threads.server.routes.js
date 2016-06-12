@@ -39,5 +39,19 @@ module.exports = function (System) {
 		authorized: true
 	});
 
+	routes.push({
+		method: 'post',
+		path: '/:threadId/save',
+		handler: threads.save,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'post',
+		path: '/:threadId/unsave',
+		handler: threads.unsave,
+		authorized: true
+	});
+
 	return routes;
 };
