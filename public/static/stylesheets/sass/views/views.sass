@@ -126,9 +126,16 @@
 						transform: rotate(-180deg)
 
 		.user-menu-nested-list
+			list-style-type: none
+			max-height: 1300px
+			transition-property: max-height
+			overflow: hidden
+			position: relative
+			z-index: 1
+			transition: all .4s ease
 
 			li
-				padding-left: 46px
+				padding-left: 0
 				transition: all .4s ease
 
 				button
@@ -140,6 +147,13 @@
 
 				&:hover
 					background: darken($grey, 5%)
+
+			&.ng-hide
+				max-height: 0
+
+			&:not(.ng-hide)
+				li
+					padding-left: 46px
 
 
 

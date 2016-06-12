@@ -619,16 +619,28 @@ p {
     display: inline-block; }
     .user-menu-left .user-menu-body md-list-item button i.open {
       transform: rotate(-180deg); }
-  .user-menu-left .user-menu-body .user-menu-nested-list li {
-    padding-left: 46px;
+  .user-menu-left .user-menu-body .user-menu-nested-list {
+    list-style-type: none;
+    max-height: 1300px;
+    transition-property: max-height;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
     transition: all .4s ease; }
-    .user-menu-left .user-menu-body .user-menu-nested-list li button {
-      height: 50px; }
-      .user-menu-left .user-menu-body .user-menu-nested-list li button span {
-        font-family: 'Lato', sans-serif;
-        color: #dfe1df; }
-    .user-menu-left .user-menu-body .user-menu-nested-list li:hover {
-      background: #45646b; }
+    .user-menu-left .user-menu-body .user-menu-nested-list li {
+      padding-left: 0;
+      transition: all .4s ease; }
+      .user-menu-left .user-menu-body .user-menu-nested-list li button {
+        height: 50px; }
+        .user-menu-left .user-menu-body .user-menu-nested-list li button span {
+          font-family: 'Lato', sans-serif;
+          color: #dfe1df; }
+      .user-menu-left .user-menu-body .user-menu-nested-list li:hover {
+        background: #45646b; }
+    .user-menu-left .user-menu-body .user-menu-nested-list.ng-hide {
+      max-height: 0; }
+    .user-menu-left .user-menu-body .user-menu-nested-list:not(.ng-hide) li {
+      padding-left: 46px; }
 
 .user-sidenav-left {
   overflow: hidden; }
