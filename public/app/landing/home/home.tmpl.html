@@ -1,1 +1,10 @@
 <div>Home</div>
+<div>
+	<div ng-repeat='thread in vm.threads'>
+		<div>
+			<p>{{thread.title}}</p>
+			<p>{{thread.creator.name}}</p>
+			<p>{{thread.content}}</p>
+		</div>
+	</div>
+</div>

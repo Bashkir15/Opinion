@@ -84,7 +84,7 @@ module.exports = function (System) {
 		return getPosts();
 	};
 
-	obj.home = function (req, res) 
+	obj.home = function (req, res) {
 		var criteria = {};
 
 		if (req.query && req.query.timestamp) {
