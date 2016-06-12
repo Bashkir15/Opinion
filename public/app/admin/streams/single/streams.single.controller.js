@@ -16,6 +16,8 @@
 		vm.goToThread = goToThread;
 		vm.upvote = upvote;
 		vm.downvote = downvote;
+		vm.save = save;
+		vm.unsave = unsave;
 		vm.feedPage = 0;
 		vm.lastUpdated = 0;
 		vm.feedFilter = '';
@@ -112,6 +114,22 @@
 		function downvote (item) {
 			var thread = appThreads.single.get({threadId: item._id}, function() {
 				thread.$downvote({threadId: item._id}, function() {
+					angular.extend(item, thread.res.record);
+				});
+			});
+		}
+
+		function save (item) {
+			var thread = appThreads.single.get({threadId: item._id}, function() {
+				thread.$doSave({threadId: item._id}, function() {
+					angular.extend(item, thread.res.record);
+				});
+			});
+		}
+
+		function unsave (item) {
+			var thread = appThreads.single.get({threadId: item._id}, function() {
+				thread.$doUnsave({threadId: item._id}, function() {
 					angular.extend(item, thread.res.record);
 				});
 			});
