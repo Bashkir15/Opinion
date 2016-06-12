@@ -15,6 +15,8 @@
 		vm.getComments = getComments;
 		vm.upvote = upvote;
 		vm.downvote = downvote;
+		vm.save = save;
+		vm.unsave = unsave;
 		vm.commentUpvote = commentUpvote;
 		vm.commentDownvote = commentDownvote;
 		vm.commentSave = commentSave;
@@ -65,6 +67,22 @@
 		function downvote (thread) {
 			var item = appThreads.single.get({threadId: thread._id}, function() {
 				item.$downvote({threadId: thread._id}, function() {
+					angular.extend(thread, item.res.record);
+				});
+			});
+		}
+
+		function save (thread) {
+			var item = appThreads.single.get({threadId: thread._id}, function() {
+				item.$doSave({threadId: thread._id}, function() {
+					angular.extend(thread, item.res.record);
+				});
+			});
+		}
+
+		function unsave (thread) {
+			var item = appThreads.single.get({threadId: thread._id}, function() {
+				item.$doUnsave({threadId: thread._id}, function() {
 					angular.extend(thread, item.res.record);
 				});
 			});

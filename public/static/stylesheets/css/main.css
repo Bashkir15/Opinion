@@ -675,6 +675,21 @@ p {
   font-family: 'Open Sans', sans-serif;
   color: rgba(0, 0, 0, 0.45); }
 
+.thread-content-score i {
+  transition: all .4s ease; }
+  .thread-content-score i.upvoted {
+    color: #74b97d; }
+  .thread-content-score i.downvoted {
+    color: #ba4445; }
+
+.thread-content-score span {
+  font-family: 'Open Sans', sans-serif;
+  transition: all .4s ease; }
+  .thread-content-score span.positive {
+    color: #74b97d; }
+  .thread-content-score span.negative {
+    color: #ba4445; }
+
 .thread-content-toolbar {
   padding: 0 10px;
   background: #467a9a; }
@@ -682,8 +697,73 @@ p {
     height: 40px; }
     .thread-content-toolbar > div button i {
       color: #dfe1df; }
+      .thread-content-toolbar > div button i.saved {
+        color: #ba4445; }
     .thread-content-toolbar > div button span {
       color: #dfe1df; }
+
+.thread-comments {
+  padding-top: 10px;
+  background: #2c3642; }
+  .thread-comments md-content {
+    background: #2c3642; }
+    .thread-comments md-content md-list md-list-item {
+      margin-left: 10px;
+      margin-bottom: 10px;
+      width: 85%;
+      background: #212a33; }
+
+.thread-comments-user > div {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #dfe1df;
+  border-radius: 50%;
+  margin: 6px 0; }
+
+.thread-comments-user p {
+  font-family: 'Open Sans', sans-serif;
+  color: #dfe1df !important;
+  padding-bottom: 6px; }
+
+.thread-comments-content {
+  padding-top: 10px; }
+  .thread-comments-content p {
+    font-family: 'Lato', sans-serif;
+    color: #dfe1df !important; }
+
+.thread-comments-score i {
+  color: #dfe1df;
+  transition: all .4s ease; }
+  .thread-comments-score i.upvoted {
+    color: #74b97d; }
+  .thread-comments-score i.downvoted {
+    color: #ba4445; }
+
+.thread-comments-score span {
+  color: #dfe1df;
+  transition: all .4s ease; }
+  .thread-comments-score span.positive {
+    color: #74b97d; }
+  .thread-comments-score span.negative {
+    color: #ba4445; }
+
+.thread-comments-toolbar {
+  height: 35px;
+  border-top: 1px solid #c19f66;
+  padding-left: 10px;
+  padding-top: 5px; }
+  .thread-comments-toolbar button i {
+    color: #dfe1df;
+    font-size: 16px;
+    transition: all .4s ease; }
+    .thread-comments-toolbar button i.saved {
+      color: #ba4445; }
+  .thread-comments-toolbar button span {
+    font-family: 'Open Sans', sans-serif;
+    color: #dfe1df; }
+  .thread-comments-toolbar button:nth-of-type(2) span {
+    font-family: 'Lato', sans-serif;
+    color: #9a9a9a; }
 
 .nav {
   display: flex;

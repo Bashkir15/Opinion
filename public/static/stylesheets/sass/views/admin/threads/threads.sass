@@ -31,6 +31,26 @@
 		@include open
 		color: rgba(0,0,0,0.45)
 
+.thread-content-score
+		i
+			transition: all .4s ease
+
+			&.upvoted
+				color: $accent-green
+
+			&.downvoted
+				color: $accent-red
+
+		span
+			@include open
+			transition: all .4s ease
+
+			&.positive
+				color: $accent-green
+
+			&.negative
+				color: $accent-red
+
 .thread-content-toolbar
 	padding: 0 10px
 	background: $blue
@@ -42,5 +62,89 @@
 			i
 				color: #dfe1df
 
+				&.saved
+					color: $accent-red
+
 			span
 				color: #dfe1df
+
+.thread-comments
+	padding-top: 10px
+	background: darken(#364351, 5%)
+
+	md-content
+		background: darken(#364351, 5%)
+
+		md-list
+			md-list-item
+				margin-left: 10px
+				margin-bottom: 10px
+				width: 85%
+				background: #212a33
+
+.thread-comments-user
+
+	> div
+		height: 40px
+		width: 40px
+		border: 1px solid #dfe1df
+		border-radius: 50%
+		margin: 6px 0
+
+	p
+		@include open
+		color: #dfe1df !important
+		padding-bottom: 6px
+
+.thread-comments-content
+	padding-top: 10px
+
+	p
+		@include lato
+		color: #dfe1df !important
+
+.thread-comments-score
+	i
+		color: #dfe1df
+		transition: all .4s ease
+
+		&.upvoted
+			color: $accent-green
+
+		&.downvoted
+			color: $accent-red
+
+	span
+		color: #dfe1df
+		transition: all .4s ease
+
+		&.positive
+			color: $accent-green
+
+		&.negative
+			color: $accent-red
+
+.thread-comments-toolbar
+	height: 35px
+	border-top: 1px solid #c19f66
+	padding-left: 10px
+	padding-top: 5px
+
+	button
+		i
+			color: #dfe1df
+			font-size: 16px
+			transition: all .4s ease
+
+			&.saved
+				color: $accent-red
+
+		span
+			@include open
+			color: #dfe1df
+
+
+		&:nth-of-type(2)
+			span
+				@include lato
+				color: #9a9a9a
