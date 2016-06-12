@@ -10,7 +10,7 @@
 	<div class='streams-list-toolbar'>
 		<div class='toolbar-left'>
 			<div>
-				<button aria-label='create stream button'>
+				<button aria-label='create stream button' ui-sref='streamsCreate'>
 					<span>Create Stream</span>
 				</button>
 			</div>
@@ -18,26 +18,67 @@
 
 		<div class='toolbar-right'>
 			<div>
-				<button>
-					<span>Search</span>
-				</button>
+				<label>Search</label>
+				<input type='search'>
+					<div>
+						<i class='icon-search'></i>
+					</div>
 			</div>
 		</div>
 	</div>
 
-	<div class='streams-list-body full-height'>
-		<div>
+	<div class='streams-list-body'>
+		<md-content layout='column' class='full-height'>
 			<md-list>
-				<md-list-item ng-repeat='item in vm.streams'>
-					<div>
-						<div class='streams-item-left'>
-							<div>
-								<div ng-class="{'subscribed': item.subscribed}"></div>
+				<md-list-item class='md-2-line' ng-repeat='item in vm.streams'>
+					<div class='md-list-item-text'>
+						<div layout='row'>
+							<div layout='column' flex='15' layout-align='center center'>
+								<div class='md-avatar' ng-class="{'subscribed': item.subscribed}"></div>
 								<button ng-if="item.subscribed" ng-click="vm.unsubscribe(item)" aria-label='unsubscribe from stream' class='stream-subscribed'>
 									<span>Unsubscribe</span>
 								</button>
 
-								<button ng-if="!item.subscribed" ng-click="vm.subscribe(item)" aria-label='unsubscribe from stream' class='stream-unsubscribed'>
+								<button ng-if="!item.subscribed" ng-click="vm.subscribe(item)" aria-label='subscribe to stream' class='stream-unsubscribed'>
+									<span>Subscribe</span>
+								</button>
+							</div>
+
+							<div layout='column' flex>
+								<h4>{{item.name}}</h4>
+								<p>{{item.description}}</p>
+							</div>
+						</div>
+
+						<div layout='row' class='streams-list-item-toolbar' align-items='center none'>
+
+							<button>
+								<i class='icon-favorite_border'></i>
+								<span>{{item.subscribers.length}} Subscriber</span>
+							</button>
+
+							<button>
+								<i class='icon-mail_outline'></i>
+								<span>{{item.threads.length}} Thread</span>
+							</button>
+
+							<div>
+								{{item.created | date:'short'}}
+							</div>
+						</div>
+					</div>
+				</md-list-item>
+
+				<!-- <md-list-item ng-repeat='item in vm.streams'>
+					<div>
+						<div class='streams-item-left'>
+							<div>
+								<div ng-class="{'subscribed': item.subscribed}"></div>
+								<button ng-show="item.subscribed" ng-click="vm.unsubscribe(item)" aria-label='unsubscribe from stream' class='stream-subscribed'>
+									<span>Unsubscribe</span>
+								</button>
+
+								<button ng-show="!item.subscribed" ng-click="vm.subscribe(item)" aria-label='unsubscribe from stream' class='stream-unsubscribed'>
 									<span>Subscribe</span>
 								</button>
 							</div>
@@ -69,7 +110,7 @@
 							</button>
 						</div>
 					</div>
-				</md-list-item>
+				</md-list-item> -->
 			</md-list>
 		</div>
 	</div>
