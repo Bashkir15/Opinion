@@ -77,6 +77,19 @@
 	justify-content: center
 	padding: 10px
 
+	md-menu
+		button
+			> div
+				span
+					@include open
+					color: #dfe1df
+					padding-right: 5px
+					transition: all .4s ease
+
+				i
+					color: $accent-blue
+					transition: all .4s ease
+
 .user-menu-left
 	md-toolbar
 		background: $darkest-green !important

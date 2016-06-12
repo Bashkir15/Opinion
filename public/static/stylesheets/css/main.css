@@ -93,7 +93,6 @@ h6 {
 
 p {
   line-height: 1.5;
-  margin: 0 0 1em;
   word-break: break-all;
   word-break: break-word;
   -webkit-hyphens: auto;
@@ -648,6 +647,45 @@ p {
       font-family: 'Open Sans', sans-serif;
       color: #467a9a; }
 
+.thread-title {
+  padding-left: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  background: #365e77;
+  height: 40px; }
+  .thread-title p {
+    font-family: 'Open Sans', sans-serif;
+    color: #dfe1df; }
+  .thread-title span {
+    font-family: 'Lato', sans-serif;
+    color: #dfe1df;
+    padding-right: 10px; }
+
+.thread-body-content {
+  padding: 20px 0; }
+
+.thread-content-user > div {
+  height: 40px;
+  width: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50%; }
+
+.thread-content-user p {
+  font-family: 'Lato', sans-serif; }
+
+.thread-content-content p {
+  font-family: 'Open Sans', sans-serif;
+  color: rgba(0, 0, 0, 0.45); }
+
+.thread-content-toolbar {
+  padding: 0 10px;
+  background: #467a9a; }
+  .thread-content-toolbar > div {
+    height: 40px; }
+    .thread-content-toolbar > div button i {
+      color: #dfe1df; }
+    .thread-content-toolbar > div button span {
+      color: #dfe1df; }
+
 .nav {
   display: flex;
   align-items: stretch;
@@ -707,6 +745,14 @@ p {
   align-items: center;
   justify-content: center;
   padding: 10px; }
+  .nav-item md-menu button > div span {
+    font-family: 'Open Sans', sans-serif;
+    color: #dfe1df;
+    padding-right: 5px;
+    transition: all .4s ease; }
+  .nav-item md-menu button > div i {
+    color: #50ade3;
+    transition: all .4s ease; }
 
 .user-menu-left md-toolbar {
   background: #398a85 !important; }

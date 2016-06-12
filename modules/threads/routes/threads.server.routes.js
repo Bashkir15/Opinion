@@ -13,7 +13,7 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'get',
-		path: '/:streamId',
+		path: '/stream/:streamId',
 		handler: threads.list,
 		authorized: false
 	});

@@ -1,35 +1,48 @@
 <div class='thread-container'>
-	<div class='thread-content-container' ng-repeat='thread in vm.threads'>
-		<div>
-			<div class='thread-content-left'>
-				<div>
+	<div ng-repeat='thread in vm.threads'>
+		<div class='thread-content' layout='column'>
+			<div class='thread-title' layout='row' layout-align='none center'>
+				<p>{{thread.title}}</p>
+				<span flex></span>
+				<span>{{thread.created | date:'short'}}</span>
+			</div>
+
+			<div layout='row' class='thread-body-content'>
+				<div layout='column' flex='15' layout-align='center center' class='thread-content-user'>
 					<div></div>
 					<p>{{thread.creator.name}}</p>
 				</div>
-			</div>
 
-			<div class='thread-content-right'>
-				<div>
-					<p>{{thread.title}}</p>
+				<div layout='column' flex class='thread-content-content'>
 					<p>{{thread.content}}</p>
 				</div>
-			</div>
-		</div>
 
-		<div class='thread-content-toolbar'>
-			<div class='toolbar-left'>
-				<div>
-					<button>
-						<span>Add Comment</span>
-					</button>
+				<div layout='column' flex='10' layout-align='center center' class='thread-content-score'>
+					<i class='icon-expand_less' ng-class="{'upvoted': thread.upvoted}"></i>
+					<span ng-class="{'positve': thread.score >= 1, 'negative': thread.score <= -1}">{{thread.score}}</span>
+					<i class='icon-expand_more' ng-class="{'downvoted': thread.downvoted}"></i>
 				</div>
 			</div>
 
-			<div class='toolbar-right'>
-				<div>
-					<span>{{thread.created | date:'short'}}</span>
+			<div class='thread-content-toolbar'>
+				<div layout='row' layout-align='none center'>
+					<button>
+						<i class='icon-bubble'></i>
+						<span>{{thread.comments.length}} Comment<span ng-if="thread.comments.length > 1 || thread.comments.length === 0">s</span></span>
+					</button>
+
+					<button>
+						<i class='icon-favorite_border'></i>
+						<span>{{thread.saves.length}} Save<span ng-if="thread.saves.length > 1 || thread.saves.length === 0">s</span></span>
+					</button>
+
+					<span flex></span>
+					<button>
+						<span>Search</span>
+					</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+				

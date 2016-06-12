@@ -30,7 +30,7 @@
 					params: {action: 'unsave'}
 				}
 			}),
-			list: $resource('threads/:streamId')
+			list: $resource('threads/stream/:streamId')
 		};
 	}
 }());

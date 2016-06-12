@@ -5,11 +5,12 @@
 	.controller('AppController', AppController);
 
 	/* @ngInject */
-	function AppController ($state, $scope, $rootScope, $mdSidenav, appAuth, appStorage, appStreams) {
+	function AppController ($state, $scope, $rootScope, $location, $mdSidenav, appAuth, appStorage, appStreams) {
 		var vm = this;
 		vm.openUserMenu = openUserMenu;
 		vm.updateLoginStatus = updateLoginStatus;
 		vm.getHomeStreams = getHomeStreams;
+		vm.goToStream = goToStream;
 		vm.homeStreams = [];
 
 		function openUserMenu() {
@@ -31,6 +32,10 @@
 					vm.homeStreams = homeStreamsData.res.records;
 				});
 			}
+		}
+
+		function goToStream (item) {
+			$location.url('streams/' + item._id);
 		}
 
 		$rootScope.$on('loggedIn', function() {

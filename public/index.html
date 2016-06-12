@@ -20,13 +20,15 @@
 				<div class='nav-item'>
 					<md-menu>
 						<button ng-click="$mdOpenMenu()" aria-label='open streams list'>
-							<span>Streams
-							</span>
+							<div layout='row' layout-align='none center'>
+								<span>Streams</span>
+								<i class='icon-expand_more'></i>
+							</div>
 						</button>
 
 						<md-menu-content>
 							<md-menu-item ng-repeat='item in vm.homeStreams'>
-								<button>
+								<button ng-click="vm.goToStream(item)">
 									<span>{{item.name}}</span>
 								</button>
 							</md-menu-item>
