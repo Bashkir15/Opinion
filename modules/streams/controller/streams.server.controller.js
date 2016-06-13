@@ -150,15 +150,20 @@ module.exports = function (System) {
 			if (err) {
 				return json.bad(err, res);
 			} else if (stream) {
-				console.log(stream);
-
-				stream.remove(function (err) {
-					if (err) {
-						return json.bad(err, res);
-					}
-
-					json.good({}, res);
+				var inArray = stream.moderators.some(function (moderator) {
+					return moderator.equals(req.user._id);
 				});
+
+				if (req.user.roles.indexOf('admin') !== -1 || inArray) {
+
+					stream.remove(function (err) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({}, res);
+					});
+				}
 			} else {
 				return json.bad({message: 's'}, res);
 			}
