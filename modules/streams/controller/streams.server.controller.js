@@ -52,18 +52,34 @@ module.exports = function (System) {
 		});
 	};
 
-	obj.single = function (req, res) {
+	obj.single = function (req, res, next) {
+		var User = mongoose.model('User');
 		Stream.findOne({_id: req.params.streamId})
 		.populate('creator')
 		.populate('subscribers')
+		.populate('moderators')
 		.exec(function (err, stream) {
 			if (err) {
 				return json.bad(err, res);
 			} else if (stream) {
 				stream = stream.afterSave(req.user);
 
+				if (req.user) {
+					var isInArray = stream.moderators.some(function (moderator) {
+						return moderator.equals(req.user._id);
+					});
+
+					if (isInArray) {
+						var isMod = true;
+					} else {
+						var isMod = false;
+					}
+				}
+
 				return json.good({
-					record: stream
+					record: stream,
+					moderators: stream.moderators,
+					isMod: isMod
 				}, res);
 			} else {
 				return json.bad({message: 'Sorry, that stream could not be found'}, res);

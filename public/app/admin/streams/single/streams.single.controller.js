@@ -9,6 +9,7 @@
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		vm.stream = [];
+		vm.moderators = [];
 		vm.feed = [];
 		vm.getStream = getStream;
 		vm.updateFeed = updateFeed;
@@ -25,6 +26,9 @@
 		function getStream () {
 			var streamData = appStreams.single.get({streamId: streamId}, function() {
 				vm.stream = [streamData.res.record];
+				vm.moderators = streamData.res.moderators;
+				vm.isMod = streamData.res.isMod;
+				alert(vm.isMod);
 			});
 		}
 

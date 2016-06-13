@@ -6,6 +6,7 @@
 				<span></span>
 				<p>{{stream.name}}</p>
 				<p>{{stream.description}}</p>
+				<p>{{stream.moderators.length}}</p>
 			</div>
 		</md-toolbar>
 
@@ -15,7 +16,7 @@
 					<span>Add Post</span>
 				</button>
 
-				<button ng-if="stream.creator.roles.indexOf('admin') !== -1">
+				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod">
 					<span>Delete Stream</span>
 				</button>
 
