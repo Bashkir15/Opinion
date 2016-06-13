@@ -45,6 +45,12 @@ var StreamSchema = new mongoose.Schema({
 		type: mongoose.Schema.ObjectId,
 		ref: 'Thread',
 		required: false
+	}],
+
+	moderators: [{
+		type: mongoose.Schema.ObjectId,
+		ref: 'User',
+		requried: true
 	}]
 });
 

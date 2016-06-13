@@ -1,24 +1,32 @@
 <div class='stream-single-container' layout='column'>
-	<md-toolbar class='stream-single-header' ng-repeat='stream in vm.stream'>
-		<div layout='column' layout-align='center center' flex>
-			<div></div>
-			<span></span>
-			<p>{{stream.name}}</p>
-			<p>{{stream.description}}</p>
-		</div>
-	</md-toolbar>
+	<div ng-repeat='stream in vm.stream'>
+		<md-toolbar class='stream-single-header'>
+			<div layout='column' layout-align='center center' flex>
+				<div></div>
+				<span></span>
+				<p>{{stream.name}}</p>
+				<p>{{stream.description}}</p>
+			</div>
+		</md-toolbar>
 
-	<md-toolbar class='stream-single-toolbar'>
-		<div class='md-toolbar-tools' layout='row'>
-			<button aria-label='open create post dialog' ng-click="vm.openAddPost()">
-				<span>Add Post</span>
-			</button>
-			<span flex></span>
-			<button aria-label='search'>
-				<span>Search</span>
-			</button>
-		</div>
-	</md-toolbar>
+		<md-toolbar class='stream-single-toolbar'>
+			<div class='md-toolbar-tools' layout='row'>
+				<button aria-label='open create post dialog' ng-click="vm.openAddPost()">
+					<span>Add Post</span>
+				</button>
+
+				<button ng-if="stream.creator.roles.indexOf('admin') !== -1">
+					<span>Delete Stream</span>
+				</button>
+
+				<span flex></span>
+				<button aria-label='search'>
+					<span>Search</span>
+				</button>
+			</div>
+		</md-toolbar>
+	</div>
+
 
 	<div class='stream-single-body' layout='row'>
 		<md-content>

@@ -9,6 +9,7 @@ module.exports = function (System) {
 		var stream = new Stream(req.body);
 		stream.creator = req.user._id;
 		stream.subscribers.push(req.user._id);
+		stream.moderators.push(req.user._id);
 		stream.save(function (err) {
 			if (err) {
 				return json.bad(err, res);
