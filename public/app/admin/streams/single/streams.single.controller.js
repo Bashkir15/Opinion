@@ -21,6 +21,10 @@
 		vm.downvote = downvote;
 		vm.save = save;
 		vm.unsave = unsave;
+		vm.orderByScore = orderByScore;
+		vm.orderByDate = orderByDate;
+		vm.orderBySaves = orderBySaves;
+		vm.orderByReplies = orderByReplies;
 		vm.feedPage = 0;
 		vm.lastUpdated = 0;
 		vm.feedFilter = '';
@@ -173,6 +177,38 @@
 					angular.extend(item, thread.res.record);
 				});
 			});
+		}
+
+		function orderByScore() {
+			if (vm.rowFilter == '-score') {
+				vm.rowFilter = 'score';
+			} else {
+				vm.rowFilter = '-score';
+			}
+		}
+
+		function orderByDate() {
+			if (vm.rowFilter == 'created') {
+				vm.rowFilter = '-created';
+			} else {
+				vm.rowFilter = 'created';
+			}
+		}
+
+		function orderBySaves() {
+			if (vm.rowFilter == '-saves.length') {
+				vm.rowFilter = 'saves.length';
+			} else {
+				vm.rowFilter = '-saves.length';
+			}
+		}
+
+		function orderByReplies() {
+			if (vm.rowFilter == '-comments.length') {
+				vm.rowFilter = 'comments.length';
+			} else {
+				vm.rowFilter = '-comments.length';
+			}
 		}
 
 		getStream();

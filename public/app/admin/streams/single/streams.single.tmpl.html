@@ -6,7 +6,6 @@
 				<span></span>
 				<p>{{stream.name}}</p>
 				<p>{{stream.description}}</p>
-				<p>{{stream.moderators.length}}</p>
 			</div>
 		</md-toolbar>
 
@@ -15,6 +14,37 @@
 				<button aria-label='open create post dialog' ng-click="vm.openAddPost()">
 					<span>Add Post</span>
 				</button>
+
+				<button class='stream-single-order-threads' ng-click="vm.showOrder = !vm.showOrder" ng-class="{'open': vm.showOrder}">
+					<span>Order Threads</span>
+					<i class='icon-expand_more'></i>
+				</button>
+
+				<ul ng-show="vm.showOrder" class='stream-single-order-threads-dropdown'>
+					<li>
+						<button ng-click="vm.orderByScore()">
+							<span>By Score</span>
+						</button>
+					</li>
+
+					<li>
+						<button ng-click="vm.orderByDate()">
+							<span>By Date</span>
+						</button>
+					</li>
+
+					<li>
+						<button ng-click="vm.orderBySaves()">
+							<span>By Saves</span>
+						</button>
+					</li>
+
+					<li>
+						<button ng-click="vm.orderByReplies()">
+							<span>By Replies</span>
+						</button>
+					</li>
+				</ul>
 
 				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod" ng-click="vm.openDeleteStream()">
 					<span>Delete Stream</span>
@@ -36,7 +66,7 @@
 	<div class='stream-single-body' layout='row'>
 		<md-content>
 			<md-list>
-				<md-list-item class='md-2-line' ng-repeat='item in vm.feed'>
+				<md-list-item class='md-2-line' ng-repeat='item in vm.feed | orderBy: vm.rowFilter'>
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center'>
