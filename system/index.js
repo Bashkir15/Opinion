@@ -16,13 +16,25 @@ app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
 	next();
 });
-app.use(express.static(__dirname + '/../public'));
+app.use(express.static(__dirname + '/../public', options));
 
 var modulePath = __dirname + '/../modules';
+var options = {
+	dotfiles: 'ignore',
+	etag: false,
+	index: false,
+	maxAge: '1d',
+	redirect: false,
+	setHeaders: function (res, path, stat) {
+		res.set('x-timestamp', Date.now())
+	}
+};
 
 function startServer() {
-	app.use(function (req, res) {
-		res.redirect('/index.html');
+	app.use(function (req, res, next) {
+		var output = fs.readFileSync(__dirname + '/../public/index.html');
+		res.type('html').send(output);
+		next();
 	});
 	var server = app.listen(Config.server.port, function() {
 		var host = Config.server.host;

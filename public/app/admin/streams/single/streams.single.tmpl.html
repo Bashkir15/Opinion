@@ -16,7 +16,7 @@
 					<span>Add Post</span>
 				</button>
 
-				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod">
+				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod" ng-click="vm.openDeleteStream()">
 					<span>Delete Stream</span>
 				</button>
 

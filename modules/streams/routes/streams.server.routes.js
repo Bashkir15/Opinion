@@ -39,5 +39,12 @@ module.exports = function (System) {
 		authorized: true
 	});
 
+	routes.push({
+		method: 'delete',
+		path: '/:streamId/remove',
+		handler: streams.remove,
+		authorized: true
+	});
+
 	return routes;
 };

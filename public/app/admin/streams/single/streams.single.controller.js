@@ -14,6 +14,7 @@
 		vm.getStream = getStream;
 		vm.updateFeed = updateFeed;
 		vm.openAddPost = openAddPost;
+		vm.openDeleteStream = openDeleteStream;
 		vm.goToThread = goToThread;
 		vm.upvote = upvote;
 		vm.downvote = downvote;
@@ -28,7 +29,6 @@
 				vm.stream = [streamData.res.record];
 				vm.moderators = streamData.res.moderators;
 				vm.isMod = streamData.res.isMod;
-				alert(vm.isMod);
 			});
 		}
 
@@ -101,6 +101,37 @@
 			}).finally(function() {
 				vm.updateFeed({reload: true});
 			})
+		}
+
+		function openDeleteStream() {
+			$mdDialog.show({
+				controller: [
+					'$scope',
+					'$mdDialog',
+					function ($scope, $mdDialog) {
+						$scope.close = function() {
+							$mdDialog.hide();
+						}
+
+						
+
+						$scope.confirm = function() {
+							var toDelete = appStreams.single.get({streamId: streamId}, function() {
+								toDelete.$destroy({streamId: streamId}, function(response) {
+									if (response.success) {
+										appToast('You have just deleted a stream');
+										$mdDialog.hide();
+										$state.go('home');
+									}
+								});
+							});
+						};
+					}
+				],
+				templateUrl: '/app/admin/streams/dialogs/delete.stream.dialog.tmpl.html',
+			}).finally(function() {
+				vm.updateFeed({reload: true});
+			});
 		}
 
 		function goToThread (item) {

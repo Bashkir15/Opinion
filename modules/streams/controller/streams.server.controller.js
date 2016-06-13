@@ -146,31 +146,21 @@ module.exports = function (System) {
 	};
 
 	obj.remove = function (req, res) {
-		Stream.findOne({_id: req.params.streamId})
-		.populate('creator')
-		.populate('threads')
-		.exec(function (err, stream) {
+		Stream.findOne({_id: req.params.streamId}, function (err, stream) {
 			if (err) {
 				return json.bad(err, res);
 			} else if (stream) {
+				console.log(stream);
 
-				var isInArray = stream.moderators.some(function (mod) {
-					return mod.equals(req.user._id);
+				stream.remove(function (err) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({}, res);
 				});
-
-				if (isInArray || req.user.roles.indexOf('admin') !== -1) {
-					stream.remove(function (err) {
-						if (err) {
-							return json.bad(err, res);
-						} else {
-							json.good({}, res);
-						}
-					});
-				} else {
-					res.sendStatus(403);
-				}
 			} else {
-				return json.bad({message: 'Sorry, that stream could not be found'}, res);
+				return json.bad({message: 's'}, res);
 			}
 		});
 	};
