@@ -23,6 +23,11 @@
 				destroy: {
 					method: 'DELETE',
 					params: {action: 'remove'}
+				},
+
+				modify: {
+					method: 'POST',
+					params: {action: 'modify'}
 				}
 			})
 		};

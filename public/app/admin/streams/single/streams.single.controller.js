@@ -15,6 +15,7 @@
 		vm.updateFeed = updateFeed;
 		vm.openAddPost = openAddPost;
 		vm.openDeleteStream = openDeleteStream;
+		vm.editStream = editStream;
 		vm.goToThread = goToThread;
 		vm.upvote = upvote;
 		vm.downvote = downvote;
@@ -132,6 +133,10 @@
 			}).finally(function() {
 				vm.updateFeed({reload: true});
 			});
+		}
+
+		function editStream() {
+			$location.url('streams/edit/' + streamId);
 		}
 
 		function goToThread (item) {

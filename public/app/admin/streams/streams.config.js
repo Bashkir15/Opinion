@@ -27,11 +27,19 @@
 			controllerAs: 'vm'
 		});
 
+		$stateProvider.state('streamsEdit', {
+			url: '/streams/edit/:streamId',
+			templateUrl: '/app/admin/streams/edit/streams.edit.tmpl.html',
+			controller: 'StreamsEditController',
+			controllerAs: 'vm'
+		});
+		
 		$stateProvider.state('streamsThread', {
 			url: '/streams/:streamId/:threadId',
 			templateUrl: '/app/admin/threads/thread.tmpl.html',
 			controller: 'ThreadController',
 			controllerAs: 'vm'
 		});
+
 	}
 }());
