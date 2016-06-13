@@ -1,0 +1,94 @@
+.home-page-header
+	background: darken($blue, 10%)
+	> div
+		padding: 20px 0
+
+		> div
+			height: 40px
+			width: 40px
+			border: 1px solid #dfe1df
+			border-radius: 50%
+			margin-bottom: 10px
+
+		p
+			@include open
+			color: #dfe1df
+
+.home-page-toolbar
+	background: $blue !important
+	height: 40px
+	min-height: 40px
+
+	button
+		span
+			@include lato
+			color: #dfe1df
+
+.home-page-body
+	background: darken(#364351, 5%)
+	min-height: 729px
+
+	md-content
+		background: darken(#364351, 5%)
+		padding-top: 20px
+
+		md-list
+			md-list-item
+				width: 90%
+				margin: 0 auto
+				background: #212a33
+
+
+.home-threads-user
+	padding: 10px 0
+
+	> img
+		height: 50px
+		width: 50px
+		border: 1px solid $accent-blue
+		border-radius: 50%
+		margin-bottom: 8px
+
+	p
+		@include lato
+		color: #dfe1df !important
+
+.home-threads-content
+	padding: 10px 0
+
+	p
+		@include open
+		color: #dfe1df !important
+
+		&:nth-of-type(2)
+			@include lato
+			color: #9a9a9a
+
+.home-threads-score
+	padding: 10px 0
+
+	span
+		@include open
+		color: #9a9a9a
+
+	i
+		color: #dfe1df
+
+
+.home-threads-toolbar
+	padding: 5px 10px
+	border-top: 1px solid #c19f66
+	height: 35px
+
+	button
+		span
+			@include open
+			color: #dfe1df
+
+		i
+			color: #9a9a9a
+
+.home-threads-created
+	@include lato
+	color: #9a9a9a !important
+

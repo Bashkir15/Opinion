@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Thread = mongoose.model('Thread');
+var async = require('async');
 
 module.exports = function (System) {
 	var json = System.plugins.JSON;
@@ -122,6 +123,66 @@ module.exports = function (System) {
 				}, res);
 			}
 		});
+	};
+
+	obj.subscribedHome = function (req, res) {
+		Stream.find({subscribers: req.user._id})
+		.populate('creator')
+		.exec(function (err, streams) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				var streamArray = [];
+				streams.forEach(function (stream) {
+					streamArray.push(stream);
+				});
+				var threadArray = [];
+				streamArray.forEach(function (stream) {
+					Thread.find({stream: stream._id})
+					.populate('creator')
+					.exec(function (err, threads) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						threads.forEach(function (thread) {
+							threadArray.push(thread);
+							console.log(threadArray);
+							return json.good({
+								records: threadArray
+							}, res);
+						});
+						
+					});
+				});
+			}
+		});
+		/*Stream.find({subscribers: req.user._id})
+		.populate('creator')
+		.exec(function (err, streams) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				return streams.forEach(function (stream) {
+					Thread.find({stream: stream._id})
+					.populate('creator')
+					.populate('comments')
+					.exec(function (err, threads) {
+						if (err) {
+							return json.bad(err, res);
+						} else {
+							threads.map(function (e) {
+								e = e.afterSave(req.user);
+							});
+
+							return json.good({
+								records: threads
+							}, res);
+						}
+					});
+				});
+			}
+		}); */
 	};
 
 	obj.single = function (req, res) {

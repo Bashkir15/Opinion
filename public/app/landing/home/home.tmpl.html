@@ -1,10 +1,97 @@
-<div>Home</div>
-<div>
-	<div ng-repeat='thread in vm.threads'>
-		<div>
-			<p>{{thread.title}}</p>
-			<p>{{thread.creator.name}}</p>
-			<p>{{thread.content}}</p>
+<div class='home-page-container' layout='column' flex>
+
+	<div class='home-page-header'>
+		<div layout='column' layout-align='center center' flex>
+			<div></div>
+			<p>Welcome to Opinionated</p>
 		</div>
 	</div>
+
+	<md-toolbar class='home-page-toolbar'>
+		<div class='md-toolbar-tools' layout='row' layout-align='center none'>
+			<md-menu>
+				<button aria-label='order home page threads' ng-click="$mdOpenMenu()">
+					<span>Order Threads</span>
+				</button>
+
+				<md-menu-content>
+					<md-menu-item>
+						<button>
+							<span>By Score</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button>
+							<span>By Date</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button>
+							<span>By Replies</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button>
+							<span>By Saves</span>
+						</button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+
+			<span flex></span>
+
+			<button>
+				<span>Search</span>
+			</button>
+		</div>
+	</md-toolbar>
+
+	<md-content class='home-page-body'>
+		<md-content>
+			<md-list>
+				<md-list-item class='md-2-line' ng-repeat='thread in vm.threads'>
+					<div class='md-list-item-text'>
+						<div layout='row'>
+							<div layout='column' flex='15' layout-align='center center' class='home-threads-user'>
+								<img src='../static/images/me.jpg'>
+								<p>{{thread.creator.name}}</p>
+							</div>
+
+							<div layout='column' flex class='home-threads-content'>
+								<p>{{thread.title}}</p>
+								<p>{{thread.stream.name}}</p>
+							</div>
+
+							<div layout='column' flex='10' layout-align='center center' class='home-threads-score'>
+								<i class='icon-expand_less'></i>
+								<span>{{thread.score}}</span>
+								<i class='icon-expand_more'></i>
+							</div>
+						</div>
+
+						<div layout='row' layout-align='center none' class='home-threads-toolbar'>
+							<button>
+								<i class='icon-bubble'></i>
+								<span>{{thread.comments.length}} Comment<span ng-if="thread.comments.length > 1 || thread.comments.length === 0">s</span></span>
+							</button>
+
+							<button>
+								<i class='icon-favorite_border'></i>
+								<span>{{thread.saves.length}} Save<span ng-if="thread.saves.length > 1 || thread.saves.length === 0">s</span></span>
+							</button>
+
+							<span flex></span>
+
+							<button>
+								<span class='home-threads-created'>{{thread.created | date:'short'}}</span>
+							</button>
+						</div>
+					</div>
+				</md-list-item>
+			</md-list>
+		</md-content>
+	</md-content>
 </div>

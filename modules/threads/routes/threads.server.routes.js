@@ -20,6 +20,13 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'get',
+		path: '/subscribedHome',
+		handler: threads.subscribedHome,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'get',
 		path: '/stream/:streamId',
 		handler: threads.list,
 		authorized: false

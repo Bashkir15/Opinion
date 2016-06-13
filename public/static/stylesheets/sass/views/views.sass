@@ -1,5 +1,7 @@
 @import "./authentication/authentication"
 @import "./admin/admin"
+@import "./landing/landing"
+
 .nav
 	display: flex
 	align-items: stretch
@@ -90,18 +92,38 @@
 					color: $accent-blue
 					transition: all .4s ease
 
+.nav-user-menu
+	height: 35px
+	width: 35px
+	border: 1px solid $blue
+	border-radius: 50%
+
+	img
+		height: 35px
+		width: 35px
+		border-radius: 50%
+		transition: all .4s ease
+
+		&:hover
+			background: rgba(0,0,0,0.5)
+
+	&:hover
+		background: rgba(0,0,0,0.5)
+
 .user-menu-left
 	md-toolbar
 		background: $darkest-green !important
 
 		> div
+
+			img
+				height: 40px
+				width: 40px
+				border: 1px solid #dfe1df
+				border-radius: 50%
+				margin-bottom: 6px
+				
 			> div
-				&:nth-of-type(1)
-					height: 40px
-					width: 40px
-					border: 1px solid #dfe1df
-					border-radius: 50%
-					margin-bottom: 6px
 
 				&:nth-of-type(2)
 					@include open

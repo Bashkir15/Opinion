@@ -31,7 +31,8 @@
 				}
 			}),
 			list: $resource('threads/stream/:streamId'),
-			home: $resource('threads/home')
+			home: $resource('threads/home'),
+			subscribedHome: $resource('threads/subscribedHome')
 		};
 	}
 }());

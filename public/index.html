@@ -57,9 +57,9 @@
 				</div>
 
 				<div class='nav-item'>
-					<button ng-click="vm.openUserMenu()" ng-if="vm.isLoggedIn">
-						<span>Menu</span>
-					</button>
+					<div ng-click="vm.openUserMenu()" ng-if="vm.isLoggedIn" class='nav-user-menu'>
+						<img src='../static/images/me.jpg'>
+					</div>
 				</div>
 			</div>
 		</nav>
@@ -67,7 +67,7 @@
 			<md-toolbar class='md-tall'>
 				<span flex></span>
 				<div layout='column' class='md-toolbar-tools-bottom' layout-align='none center'>
-					<div></div>
+					<img src='../static/images/me.jpg'>
 					<span></span>
 					<div>{{vm.user.name}}</div>
 					<div>{{vm.user.email}}</div>
