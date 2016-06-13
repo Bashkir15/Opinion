@@ -21,8 +21,71 @@
 
 	button
 		span
-			@include lato
+			@include open
 			color: #dfe1df
+
+.home-page-order-threads
+	position: relative
+	transition: all .4s ease
+	width: 180px
+
+	i
+		transition: all .4s ease
+		color: #dfe1df
+		display: inline-block
+		position: absolute
+		right: 0
+		top: 11px
+
+	&:hover, &:active
+		background: darken($blue, 10%)
+
+	&.open
+		background: darken($blue, 10%)
+
+		i
+			transform: rotate(-180deg)
+
+
+.home-page-order-threads-dropdown
+	position: absolute
+	top: 40px
+	left: 16px
+	transition: all .4s ease
+	height: 0
+	width: 180px
+	background: #fff
+	text-align: center
+
+	&:not(.ng-hide)
+		height: 160px
+
+		li
+			height: 40px
+			border-bottom: 1px solid rgba(0,0,0,0.3)
+			transition: all .4s ease
+
+			&:last-child
+				border-bottom: none
+
+			button
+				height: 40px
+
+				span
+					opacity: 1
+					color: rgba(0,0,0,0.3)
+					@include open
+					font-weight: 100
+
+			&:hover
+				background: rgba(0,0,0,0.35)
+
+	li
+		button
+			span
+				opacity: 0
+				transition: all 1.4s ease
+
 
 .home-page-body
 	background: darken(#364351, 5%)
@@ -48,6 +111,12 @@
 		border: 1px solid $accent-blue
 		border-radius: 50%
 		margin-bottom: 8px
+		display: inline-block
+		transition: all .4s ease
+
+		&:hover
+			transform: scale(1.1, 1.1)
+
 
 	p
 		@include lato
@@ -81,6 +150,10 @@
 	height: 35px
 
 	button
+		height: 25px
+		padding: 0
+		padding-right: 8px
+
 		span
 			@include open
 			color: #dfe1df

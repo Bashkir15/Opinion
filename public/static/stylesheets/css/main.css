@@ -784,8 +784,56 @@ p {
   height: 40px;
   min-height: 40px; }
   .home-page-toolbar button span {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     color: #dfe1df; }
+
+.home-page-order-threads {
+  position: relative;
+  transition: all .4s ease;
+  width: 180px; }
+  .home-page-order-threads i {
+    transition: all .4s ease;
+    color: #dfe1df;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 11px; }
+  .home-page-order-threads:hover, .home-page-order-threads:active {
+    background: #365e77; }
+  .home-page-order-threads.open {
+    background: #365e77; }
+    .home-page-order-threads.open i {
+      transform: rotate(-180deg); }
+
+.home-page-order-threads-dropdown {
+  position: absolute;
+  top: 40px;
+  left: 16px;
+  transition: all .4s ease;
+  height: 0;
+  width: 180px;
+  background: #fff;
+  text-align: center; }
+  .home-page-order-threads-dropdown:not(.ng-hide) {
+    height: 160px; }
+    .home-page-order-threads-dropdown:not(.ng-hide) li {
+      height: 40px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      transition: all .4s ease; }
+      .home-page-order-threads-dropdown:not(.ng-hide) li:last-child {
+        border-bottom: none; }
+      .home-page-order-threads-dropdown:not(.ng-hide) li button {
+        height: 40px; }
+        .home-page-order-threads-dropdown:not(.ng-hide) li button span {
+          opacity: 1;
+          color: rgba(0, 0, 0, 0.3);
+          font-family: 'Open Sans', sans-serif;
+          font-weight: 100; }
+      .home-page-order-threads-dropdown:not(.ng-hide) li:hover {
+        background: rgba(0, 0, 0, 0.35); }
+  .home-page-order-threads-dropdown li button span {
+    opacity: 0;
+    transition: all 1.4s ease; }
 
 .home-page-body {
   background: #2c3642;
@@ -805,7 +853,11 @@ p {
     width: 50px;
     border: 1px solid #50ade3;
     border-radius: 50%;
-    margin-bottom: 8px; }
+    margin-bottom: 8px;
+    display: inline-block;
+    transition: all .4s ease; }
+    .home-threads-user > img:hover {
+      transform: scale(1.1, 1.1); }
   .home-threads-user p {
     font-family: 'Lato', sans-serif;
     color: #dfe1df !important; }
@@ -831,11 +883,15 @@ p {
   padding: 5px 10px;
   border-top: 1px solid #c19f66;
   height: 35px; }
-  .home-threads-toolbar button span {
-    font-family: 'Open Sans', sans-serif;
-    color: #dfe1df; }
-  .home-threads-toolbar button i {
-    color: #9a9a9a; }
+  .home-threads-toolbar button {
+    height: 25px;
+    padding: 0;
+    padding-right: 8px; }
+    .home-threads-toolbar button span {
+      font-family: 'Open Sans', sans-serif;
+      color: #dfe1df; }
+    .home-threads-toolbar button i {
+      color: #9a9a9a; }
 
 .home-threads-created {
   font-family: 'Lato', sans-serif;
@@ -913,16 +969,15 @@ p {
   height: 35px;
   width: 35px;
   border: 1px solid #467a9a;
-  border-radius: 50%; }
+  border-radius: 50%;
+  display: inline-block;
+  transition: all .4s ease; }
   .nav-user-menu img {
     height: 35px;
     width: 35px;
-    border-radius: 50%;
-    transition: all .4s ease; }
-    .nav-user-menu img:hover {
-      background: rgba(0, 0, 0, 0.5); }
+    border-radius: 50%; }
   .nav-user-menu:hover {
-    background: rgba(0, 0, 0, 0.5); }
+    transform: scale(1.2, 1.2); }
 
 .user-menu-left md-toolbar {
   background: #398a85 !important; }

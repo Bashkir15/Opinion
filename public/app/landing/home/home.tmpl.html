@@ -9,7 +9,7 @@
 
 	<md-toolbar class='home-page-toolbar'>
 		<div class='md-toolbar-tools' layout='row' layout-align='center none'>
-			<md-menu>
+			<!-- <md-menu>
 				<button aria-label='order home page threads' ng-click="$mdOpenMenu()">
 					<span>Order Threads</span>
 				</button>
@@ -39,7 +39,38 @@
 						</button>
 					</md-menu-item>
 				</md-menu-content>
-			</md-menu>
+			</md-menu> -->
+
+			<button class='home-page-order-threads' ng-click="vm.showOrder = !vm.showOrder" ng-class="{'open': vm.showOrder}">
+				<span>Order threads</span>
+				<i class='icon-expand_more'></i>
+			</button>
+
+			<ul ng-show="vm.showOrder" class='home-page-order-threads-dropdown'>
+				<li>
+					<button>
+						<span>By Score</span>
+					</button>
+				</li>
+
+				<li>
+					<button>
+						<span>By Date</span>
+					</button>
+				</li>
+
+				<li>
+					<button>
+						<span>By Replies</span>
+					</button>
+				</li>
+
+				<li>
+					<button>
+						<span>By Saves</span>
+					</button>
+				</li>
+			</ul>
 
 			<span flex></span>
 

@@ -97,18 +97,16 @@
 	width: 35px
 	border: 1px solid $blue
 	border-radius: 50%
+	display: inline-block
+	transition: all .4s ease
 
 	img
 		height: 35px
 		width: 35px
 		border-radius: 50%
-		transition: all .4s ease
-
-		&:hover
-			background: rgba(0,0,0,0.5)
 
 	&:hover
-		background: rgba(0,0,0,0.5)
+		transform: scale(1.2, 1.2)
 
 .user-menu-left
 	md-toolbar
@@ -122,7 +120,7 @@
 				border: 1px solid #dfe1df
 				border-radius: 50%
 				margin-bottom: 6px
-				
+
 			> div
 
 				&:nth-of-type(2)
