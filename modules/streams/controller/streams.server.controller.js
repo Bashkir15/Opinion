@@ -170,5 +170,38 @@ module.exports = function (System) {
 		});
 	};
 
+	obj.modify = function (req, res) {
+		Stream.findOne({_id: req.params.streamId})
+		.populate('creator')
+		.exec(function (err, stream) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (stream) {
+
+				var inArray = stream.moderators.some(function (moderator) {
+					return moderator.equals(req.user._id);
+				});
+
+				if (req.user.roles.indexOf('admin') !== -1 || inArray) {
+					stream.name = req.body.name;
+					stream.description = req.body.description;
+					stream.save(function (err, item) {
+						stream = stream.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			} else {
+				return json.bad({message: 'Sorry, that stream could not be found'}, res);
+			}
+		});
+	};
+
 	return obj;
 };

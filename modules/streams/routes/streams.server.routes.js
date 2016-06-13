@@ -46,5 +46,12 @@ module.exports = function (System) {
 		authorized: true
 	});
 
+	routes.push({
+		method: 'post',
+		path: '/:streamId/modify',
+		handler: streams.modify,
+		authorized: true
+	});
+
 	return routes;
 };
