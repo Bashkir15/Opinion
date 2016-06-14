@@ -75,7 +75,7 @@
 			</md-toolbar>
 
 			<md-list class='user-menu-body' flex>
-				<md-list-item md-ink-ripple  ui-sref='profile.overview'>
+				<md-list-item md-ink-ripple  ui-sref='profile.overview({userId: vm.user._id})'>
 					<i class='icon-user'></i>
 
 					<div class='inset'>
@@ -293,6 +293,12 @@
 
 			<!-- Threads -->
 			<script src='/app/admin/threads/thread.controller.js'></script>
+
+			<!-- Profile -->
+			<script src='/app/admin/profile/profile.config.js'></script>
+			<script src='/app/admin/profile/profile.controller.js'></script>
+			<script src='/app/admin/profile/overview/profile.overview.controller.js'></script>
+			<script src='/app/admin/profile/threads/profile.threads.controller.js'></script>
 
 		<!-- Landing -->
 		<script src='/app/landing/landing.setter.js'></script>

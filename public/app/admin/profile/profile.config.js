@@ -20,5 +20,12 @@
 			controller: 'ProfileOverviewController',
 			controllerAs: 'vm'
 		});
+
+		$stateProvider.state('profile.threads', {
+			url: '/threads',
+			templateUrl: '/app/admin/profile/threads/threads.tmpl.html',
+			controller: 'ProfileThreadsController',
+			controllerAs: 'vm'
+		});
 	}
 }());

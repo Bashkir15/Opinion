@@ -1,0 +1,55 @@
+<div class='profile-container' ng-repeat='profile in vm.profile'>
+	<div layout='column' class='profile-header'>
+		<div layout='column' layout-align='center center'>
+			<div></div>
+			<p>{{profile.name}}</p>
+			<p>{{profile.email}}</p>
+		</div>
+
+		<div layout='row' layout-align='start center'>
+			<button>
+				<span>Follow</span>
+			</button>
+
+			<button>
+				<span>Message</span>
+			</button>
+		</div>
+	</div>
+
+	<md-tabs class='profile-tabs' md-dynamic-height md-stretch-tabs='always' md-swipe-content='true'>
+		<md-tab ui-sref='profile.overview'>
+			<md-tab-label layout='column'>
+				<span>Overview</span>
+			</md-tab-label>
+		</md-tab>
+
+		<md-tab ui-sref='profile.threads'>
+			<md-tab-label layout='column'>
+				<span>Threads</span>
+			</md-tab-label>
+		</md-tab>
+
+		<md-tab>
+			<md-tab-label layout='column'>
+				<span>Comments</span>
+			</md-tab-label>
+		</md-tab>
+
+		<md-tab>
+			<md-tab-label layout='column'>
+				<span>Saved</span>
+			</md-tab-label>
+		</md-tab>
+
+		<md-tab>
+			<md-tab-label layout='column'>
+				<span>Activity</span>
+			</md-tab-label>
+		</md-tab>
+	</md-tabs>
+
+	<div class='profile-content'>
+		<div ui-view></div>
+	</div>
+</div>
