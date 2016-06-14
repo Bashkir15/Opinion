@@ -65,13 +65,13 @@
 
 
 	<div class='stream-single-body' layout='row'>
-		<md-content>
+		<div>
 			<md-list>
 				<md-list-item class='md-2-line' ng-repeat='item in vm.feed | orderBy: vm.rowFilter'>
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center'>
-								<div></div>
+								<img src='../static/images/me.jpg'>
 								<p>{{item.creator.name}}</p>
 							</div>
 
@@ -111,31 +111,7 @@
 					</div>
 				</md-list-item>
 			</md-list>
-		</md-content>
-
-		<div class='stream-single-sidebar' flex>
-			<md-toolbar class='stream-single-sidebar-header' ng-repeat='stream in vm.stream'>
-				<div layout='column' layout-align='center center'>
-					<p>{{stream.subscribers.length}} Subscriber<span ng-if="stream.subscribers.length > 1 || stream.subscribers.length === 0">s</span></p>
-					<p>{{stream.threads.length}} Thread<span ng-if="stream.threads.length > 1 || stream.threads.length === 0">s</span></p>
-					<p>Users online</p>
-
-					<button ng-if="!item.subscribed">
-						<span>Subscribe</span>
-					</button>
-
-					<button ng-if="item.subscribed">
-						<span>Unsubscribe</span>
-					</button>
-				</div>
-			</md-toolbar>
-
-			<div class='stream-single-sidebar-body'>
-				<h3>Rules</h3>
-			</div>
 		</div>
-
-
 	</div>
 
 

@@ -1,7 +1,8 @@
 .stream-single-container
+	background-image: -webkit-linear-gradient(bottom, darken(#364351, 5%) 0%, darken(#364351, 10%) 100%)
 	.stream-single-header
 		height: 150px
-		background: darken($blue, 10%)
+		background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
 
 		> div
 			
@@ -22,26 +23,31 @@
 					@include lato
 
 	.stream-single-toolbar
-		border: 1px solid rgba(0,0,0,0.35)
-		background: $blue !important
+		background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, $blue 100%)
 		height: 40px
 		min-height: 40px
 
 		> div
 
 			button
+				height: 40px
+				border-right: 1px solid rgba(0,0,0,0.12)
+				padding-right: 10px
 				span
 					@include open
 					color: #dfe1df
+					text-shadow: 1px 1px rgba(0,0,0,0.35)
 
 	.stream-single-body
-		background: darken(#364351, 5%)
-		height: 485px
-		overflow-y: auto
+		background-image: -webkit-linear-gradient(bottom, darken(#364351, 10%) 0%, darken(#364351, 5%) 100%)
+		//background: #364351
+		min-height: 500px
+		position: relative
+		z-index: 50
 
-		md-content
+		> div 
 			padding-top: 15px
-			background: darken(#364351, 5%)
+			//background: darken(#364351, 5%)
 			overflow-y: auto
 			width: 70%
 
@@ -56,12 +62,17 @@
 						> div
 							//padding-bottom: 10px
 							> div
-								> div
+								img
 									height: 40px
 									width: 40px
 									border: 1px solid #dfe1df
 									border-radius: 50%
 									margin: 6px 0
+									display: inline-block
+									transition: all .4s ease
+
+									&:hover
+										transform: scale(1.1, 1.1)
 
 								p
 									@include lato
@@ -112,6 +123,8 @@
 								&:nth-of-type(3)
 									span
 										color: #9a9a9a
+										@include lato
+										font-weight: 100
 
 								&.saved 
 									i
@@ -119,10 +132,12 @@
 								
 
 		.stream-single-sidebar
-			margin-top: 23px
+			padding-top: 23px
 			margin-left: 10px
 			margin-bottom: 10px
 			box-shadow: 0 4px 8px rgba(0,0,0,0.35)
+			//background: darken(#364351, 5%) !important
+			//background-image: none !important
 
 			.stream-single-sidebar-header
 				background: #212a33 !important
@@ -148,6 +163,69 @@
 					@include open
 					color: $blue
 
+.stream-single-order-threads
+	position: relative
+	transition: all .4s ease
+	width: 190px
+
+	i
+		transition: all .4s ease
+		color: #dfe1df
+		display: inline-block
+		position: absolute
+		right: 5px
+		top: 11px
+
+	&:hover, &:active
+		background: darken($blue, 10%)
+
+	&.open
+		background: darken($blue, 10%)
+
+		i
+			transform: rotate(-180deg)
+
+.stream-single-order-threads-dropdown
+	position: absolute
+	top: 40px
+	left: 115px
+	transition: all .4s ease
+	height: 0
+	width: 190px
+	background: #dfe1df
+	text-align: center
+
+	&:not(.ng-hide)
+		height: 160px
+
+		li
+			height: 40px
+			border-bottom: 1px solid rgba(0,0,0,0.3)
+			transition: all .4s ease
+
+			&:last-child
+				border-bottom: none
+
+			button
+				height: 40px
+				border-right: none
+
+				span
+					opacity: 1
+					color: rgba(0,0,0,0.3)
+					@include lato
+					transition: all .4s ease
+
+			&:hover
+				background: rgba(0,0,0,0.45)
+
+	li
+		button
+			border-right: none !important
+
+			span
+				opacity: 0
+				transition: all 2s ease
 
 
 	
