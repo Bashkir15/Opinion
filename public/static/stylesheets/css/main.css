@@ -549,9 +549,9 @@ p {
   .stream-single-container .stream-single-header {
     height: 150px;
     background-image: -webkit-linear-gradient(bottom, #365e77 0%, #264254 100%); }
-    .stream-single-container .stream-single-header > div > div {
-      height: 40px;
-      width: 40px;
+    .stream-single-container .stream-single-header > div > img {
+      height: 55px;
+      width: 55px;
       border: 1px solid #fff;
       border-radius: 50%;
       margin-bottom: 8px; }
@@ -690,7 +690,7 @@ p {
 .stream-single-order-threads-dropdown {
   position: absolute;
   top: 40px;
-  left: 115px;
+  left: 130px;
   transition: all .4s ease;
   height: 0;
   width: 190px;
@@ -706,15 +706,17 @@ p {
         border-bottom: none; }
       .stream-single-order-threads-dropdown:not(.ng-hide) li button {
         height: 40px;
-        border-right: none; }
+        width: 190px;
+        border-right: none;
+        transition: all .4s ease; }
         .stream-single-order-threads-dropdown:not(.ng-hide) li button span {
           opacity: 1;
           color: rgba(0, 0, 0, 0.3);
           font-family: 'Lato', sans-serif;
           transition: all .4s ease;
           text-shadow: none; }
-      .stream-single-order-threads-dropdown:not(.ng-hide) li:hover {
-        background: rgba(0, 0, 0, 0.45); }
+        .stream-single-order-threads-dropdown:not(.ng-hide) li button:hover {
+          background: rgba(0, 0, 0, 0.35); }
   .stream-single-order-threads-dropdown li button {
     border-right: none !important; }
     .stream-single-order-threads-dropdown li button span {
@@ -767,6 +769,9 @@ p {
   .stream-single-search.has-focus input {
     width: 215px; }
 
+.stream-single-title {
+  padding-top: 6px; }
+
 .create-stream-post-header {
   height: 60px;
   background-image: -webkit-linear-gradient(bottom, #50ade3 0%, #467a9a 100%);
@@ -803,6 +808,7 @@ p {
     font-family: 'Open Sans', sans-serif;
     opacity: 1;
     color: rgba(0, 0, 0, 0.35);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.12);
     transition: all .4s ease; }
   .post-form-wrapper input {
     position: relative;
@@ -845,7 +851,8 @@ p {
     transition: all .4s ease; }
     .create-stream-post-actions button span {
       font-family: 'Open Sans', sans-serif;
-      color: #dfe1df; }
+      color: #dfe1df;
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.12); }
     .create-stream-post-actions button:nth-of-type(1) {
       background: #74b97d; }
       .create-stream-post-actions button:nth-of-type(1):hover {

@@ -90,14 +90,14 @@
 				<ul class='user-menu-nested-list' ng-show="vm.showProfile">
 					<div>
 						<li>
-							<button class='md-ink-ripple'>
+							<button class='md-ink-ripple' ui-sref='profile.overview({userId: vm.user._id})'>
 								<span>Overview</span>
 							</button>
 						</li>
 					</div>
 
 						<li>
-							<button class='md-ink-ripple'>
+							<button class='md-ink-ripple' ui-sref='profile.threads({userId: vm.user._id})'>
 								<span>Threads</span>
 							</button>
 						</li>

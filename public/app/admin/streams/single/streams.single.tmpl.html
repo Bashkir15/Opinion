@@ -2,7 +2,7 @@
 	<div ng-repeat='stream in vm.stream'>
 		<md-toolbar class='stream-single-header'>
 			<div layout='column' layout-align='center center' flex>
-				<div></div>
+				<img src='../static/images/cat-image.jpeg'>
 				<span></span>
 				<p>{{stream.name}}</p>
 				<p>{{stream.description}}</p>
@@ -79,7 +79,7 @@
 								<p>{{item.creator.name}}</p>
 							</div>
 
-							<div layout='column' flex ng-click="vm.goToThread(item)">
+							<div layout='column' flex ng-click="vm.goToThread(item)" class='stream-single-title'>
 								<p>{{item.title}}</p>
 							</div>
 

@@ -117,7 +117,8 @@
 						};
 					}
 				],
-				templateUrl: '/app/admin/threads/dialogs/create.stream.post.tmpl.html'
+				templateUrl: '/app/admin/threads/dialogs/create.stream.post.tmpl.html',
+				clickOutsideToClose: true,
 			}).finally(function() {
 				vm.updateFeed({reload: true});
 			})
