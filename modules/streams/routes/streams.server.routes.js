@@ -53,5 +53,12 @@ module.exports = function (System) {
 		authorized: true
 	});
 
+	routes.push({
+		method: 'post',
+		path: '/:streamId/upload',
+		handler: streams.image,
+		authorized: true
+	});
+
 	return routes;
 };

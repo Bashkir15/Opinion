@@ -51,7 +51,11 @@ var StreamSchema = new mongoose.Schema({
 		type: mongoose.Schema.ObjectId,
 		ref: 'User',
 		requried: true
-	}]
+	}],
+
+	image: {
+		type: String
+	}
 });
 
 StreamSchema.pre('remove', function (next) {

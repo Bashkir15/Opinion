@@ -5,11 +5,13 @@ var mongoose = require('mongoose');
 var Config = require('./config/' + (process.env.NODE_ENV || 'development'));
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var multipart = require('connect-multiparty');
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
+app.use(multipart());
 app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');

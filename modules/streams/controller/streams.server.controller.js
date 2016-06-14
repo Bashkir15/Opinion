@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Stream = mongoose.model('Stream');
+var path = require('path');
+var fs = require('fs');
 
 module.exports = function (System) {
 	var json = System.plugins.JSON;
@@ -197,6 +199,42 @@ module.exports = function (System) {
 						}, res);
 					});
 				}
+			} else {
+				return json.bad({message: 'Sorry, that stream could not be found'}, res);
+			}
+		});
+	};
+
+	obj.image = function (req, res) {
+		var streamId = req.params.streamId;
+		var file = req.files.file;
+		var uploadDate = Date.now();
+		var tempPath = file.path;
+		var targetPath = path.join(__dirname, "../../../public/static/uploads/streams/images/" + streamId + uploadDate + file.name)
+		var savePath = '/uploads/streams/images/' + streamId + uploadDate + file.name;
+
+		Stream.findOne({_id: req.params.streamId})
+		.populate('creator')
+		.exec(function (err, stream) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (stream) {
+				fs.rename(tempPath, targetPath, function (err) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					stream.image = savePath;
+					stream.save(function (err, u) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							image: u.image
+						}, res);
+					});
+				});
 			} else {
 				return json.bad({message: 'Sorry, that stream could not be found'}, res);
 			}

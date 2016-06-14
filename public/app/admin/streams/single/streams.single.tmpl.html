@@ -55,6 +55,10 @@
 					<span>Edit Stream</span>
 				</button>
 
+				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod">
+					<span>Upload Image</span>
+				</button>
+
 				<span flex></span>
 				<div class='stream-single-search-icon' ng-class="{'is-searching': vm.search.hasFocus}">
 					<i class='icon-search'></i>
