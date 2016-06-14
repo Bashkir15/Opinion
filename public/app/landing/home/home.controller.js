@@ -19,7 +19,7 @@
 			if (appAuth.isLoggedIn()) {
 				var homeThreadData = appThreads.subscribedHome.get({}, function() {
 					if (!options.append) {
-						vm.threads = homeThreadData.res.records.concat(vm.threads);
+						vm.threads = homeThreadData.res.records;
 					} else {
 						vm.threads = vm.threads.concat(homeThreadData.res.records);
 					}

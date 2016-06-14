@@ -81,5 +81,21 @@ module.exports = function (System) {
 		});
 	};
 
+	obj.single = function (req, res) {
+		User.findOne({_id: req.params.userId})
+		.populate('following')
+		.exec(function (err, user) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (user) {
+				return json.good({
+					record: user
+				}, res);
+			} else {
+				return json.bad({message: 'Sorry, that user could not be found'}, res);
+			}
+		});
+	};
+
 	return obj;
 };

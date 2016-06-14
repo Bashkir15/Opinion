@@ -981,7 +981,8 @@ p {
     transform: scale(1.2, 1.2); }
 
 .user-menu-left md-toolbar {
-  background: #398a85 !important; }
+  background: #398a85 !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.35); }
   .user-menu-left md-toolbar > div img {
     height: 40px;
     width: 40px;
@@ -1034,46 +1035,3 @@ p {
       max-height: 0; }
     .user-menu-left .user-menu-body .user-menu-nested-list:not(.ng-hide) li {
       padding-left: 46px; }
-
-.user-sidenav-left {
-  overflow: hidden; }
-  .user-sidenav-left .user-sidenav-header {
-    display: flex;
-    align-items: stretch;
-    position: relative;
-    background: #398a85;
-    flex-direction: column;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
-    z-index: 20; }
-    .user-sidenav-left .user-sidenav-header > div:nth-of-type(1) {
-      display: flex;
-      padding-top: 20px;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center; }
-      .user-sidenav-left .user-sidenav-header > div:nth-of-type(1) div {
-        height: 40px;
-        width: 40px;
-        border: 1px solid #dfe1df;
-        border-radius: 50%;
-        margin-bottom: 6px; }
-        .user-sidenav-left .user-sidenav-header > div:nth-of-type(1) div p {
-          color: #dfe1df;
-          font-family: 'Lato', sans-serif; }
-  .user-sidenav-left .user-sidenav-body {
-    background: #4f737a;
-    height: 100%; }
-    .user-sidenav-left .user-sidenav-body > div md-list md-list-item {
-      padding-right: 0;
-      background: #4f737a;
-      transition: all .4s ease; }
-      .user-sidenav-left .user-sidenav-body > div md-list md-list-item a {
-        margin: 0; }
-        .user-sidenav-left .user-sidenav-body > div md-list md-list-item a i {
-          padding-right: 20px;
-          color: #839da1; }
-        .user-sidenav-left .user-sidenav-body > div md-list md-list-item a p {
-          font-family: 'Open Sans', sans-serif;
-          color: #dfe1df; }
-      .user-sidenav-left .user-sidenav-body > div md-list md-list-item button i {
-        color: #839da1; }

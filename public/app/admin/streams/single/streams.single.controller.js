@@ -5,7 +5,7 @@
 	.controller('StreamsSingleController', StreamsSingleController);
 
 	/* @ngInject */
-	function StreamsSingleController ($state, $stateParams, $scope, $mdDialog, $location, appAuth, appToast, appStreams, appThreads) {
+	function StreamsSingleController ($state, $stateParams, $scope, $mdDialog, $location, $timeout, appAuth, appToast, appStreams, appThreads) {
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		vm.stream = [];
@@ -60,6 +60,21 @@
 				vm.lastUpdated = Date.now();
 			});
 		}
+
+		$scope.$watch('vm.feedFilter', function (oldValue, newValue) {
+			if (oldValue !== newValue) {
+				vm.feed = [];
+			}
+
+			if (!newValue) {
+				vm.lastUpdated = 0;
+				vm.updateFeed();
+			} else {
+				vm.updateFeed();
+			}
+
+			vm.feedFilterEnabled = vm.feedFilter !== '';
+		});
 
 		function openAddPost() {
 			$mdDialog.show({

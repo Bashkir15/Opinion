@@ -52,7 +52,7 @@ module.exports = function (System) {
 
 			if (req.query && req.query.filter) {
 				delete criteria.created;
-				criteria.content = new RegExp(req.query.filter, 'i');
+				criteria.title = new RegExp(req.query.filter, 'i');
 			}
 
 			Thread.find(criteria, null)
@@ -147,13 +147,13 @@ module.exports = function (System) {
 
 						threads.forEach(function (thread) {
 							threadArray.push(thread);
-							console.log(threadArray);
-							return json.good({
-								records: threadArray
-							}, res);
 						});
-						
-					});
+					}).then(function() {
+						console.log(threadArray);
+						return json.good({
+							records: threadArray
+						}, res);
+					});									
 				});
 			}
 		});

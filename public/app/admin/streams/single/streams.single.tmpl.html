@@ -55,9 +55,10 @@
 				</button>
 
 				<span flex></span>
-				<button aria-label='search'>
-					<span>Search</span>
-				</button>
+				<div class='stream-single-search'>
+					<label for="singleStreamSearch">Search</label>
+					<input type='text' name='search' id='singleStreamSearch' ng-model='vm.feedFilter'>
+				</div>
 			</div>
 		</md-toolbar>
 	</div>

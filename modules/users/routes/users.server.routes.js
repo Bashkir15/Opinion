@@ -18,5 +18,12 @@ module.exports = function (System) {
 		authorized: false
 	});
 
+	routes.push({
+		method: 'get',
+		path: '/:userId',
+		handler: users.single,
+		authorized: false
+	});
+
 	return routes;
 };
