@@ -28,22 +28,39 @@
 		min-height: 40px
 
 		> div
+			padding-left: 0
 
 			button
 				height: 40px
 				border-right: 1px solid rgba(0,0,0,0.12)
 				padding-right: 10px
+				transition: all .4s ease
+
+				&:nth-of-type(1)
+					padding-left: 10px
+					position: relative
+
+					span
+						padding-right: 5px
+
+					i
+						font-size: 16px
+						color: #dfe1df
+
 				span
 					@include open
 					color: #dfe1df
 					text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+				&:hover, &:focus
+					background: darken($blue, 10%)
+
 
 	.stream-single-body
 		background-image: -webkit-linear-gradient(bottom, darken(#364351, 10%) 0%, darken(#364351, 5%) 100%)
 		//background: #364351
 		min-height: 500px
 		position: relative
-		z-index: 50
 
 		> div 
 			padding-top: 15px
@@ -87,6 +104,7 @@
 								i
 									color: #dfe1df
 									transition: all .4s ease
+									outline: none
 
 									&.upvoted
 										color: $accent-green
@@ -215,6 +233,7 @@
 					color: rgba(0,0,0,0.3)
 					@include lato
 					transition: all .4s ease
+					text-shadow: none
 
 			&:hover
 				background: rgba(0,0,0,0.45)
@@ -227,5 +246,58 @@
 				opacity: 0
 				transition: all 2s ease
 
+.stream-single-search-icon
+	height: 38px
+	width: 40px
+	margin-top: 2px
+	background: darken($blue, 10%)
+	position: relative
+	transition: all .4s ease
 
-	
+	i
+		font-size: 16px
+		position: absolute
+		top: 12px
+		left: 12px
+		opacity: 1
+		transition: all .4s ease
+
+	&.is-searching
+		width: 5px
+
+		i
+			opacity: 0
+
+.stream-single-search
+	position: relative
+	height: 38px
+	margin-top: 2px
+
+	label
+		@include open
+		font-weight: 400
+		display: inline-block
+		position: absolute
+		left: 5px
+		top: 5px
+		color: rgba(0,0,0,0.12)
+		transition: all .4s ease
+		opacity: 1
+
+
+	input
+		height: 38px
+		width: 180px
+		background: #dfe1df
+		padding-left: 5px
+		@include lato
+		color: rgba(0,0,0,0.35)
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			width: 215px
+

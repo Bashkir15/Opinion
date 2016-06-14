@@ -1,13 +1,15 @@
-<md-dialog class='create-stream-post-container'>
+<md-dialog class='create-stream-post-container' layout='column' flex='60'>
 	<md-dialog-content>
-		<div class='create-stream-post-header'>
-			<div>
+		<div class='create-stream-post-header' layout='row' layout-align='center none'>
+			<button>
 				<h3>Create a post</h3>
-			</div>
+			</button>
 
-			<div>
-				<span ng-click="close()">x</span>
-			</div>
+
+			<span flex></span>
+			<button>
+				<span ng-click="close()" aria-label='close dialog'>x</span>
+			</button>
 		</div>
 
 		<div class='create-stream-post-body'>
@@ -21,13 +23,17 @@
 					<label>Content</label>
 					<textarea name='content' ng-model='content' rows='4' cols='40' required></textarea>
 				</div>
-
-				<div class='post-form-submit'>
-					<button type='submit' aria-label='submit add post form'>
-						<span>Create</span>
-					</button>
-				</div>
 			</form>
 		</div>
 	</md-dialog-content>
+
+	<md-dialog-actions class='create-stream-post-actions' layout='row' layout-align='end center'>
+		<button ng-click="create(addPostForm.$valid)" aria-label='submit form to create new post'>
+			<span>Create</span>
+		</button>
+
+		<button ng-click='close()' aria-label='close dialog button'>
+			<span>Nevermind</span>
+		</button>
+	</md-dialog-actions>
 </md-dialog>

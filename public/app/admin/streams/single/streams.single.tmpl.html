@@ -13,6 +13,7 @@
 			<div class='md-toolbar-tools' layout='row'>
 				<button aria-label='open create post dialog' ng-click="vm.openAddPost()">
 					<span>Add Post</span>
+					<i class='icon-pencil'></i>
 				</button>
 
 				<button class='stream-single-order-threads' ng-click="vm.showOrder = !vm.showOrder" ng-class="{'open': vm.showOrder}">
@@ -55,9 +56,12 @@
 				</button>
 
 				<span flex></span>
-				<div class='stream-single-search'>
+				<div class='stream-single-search-icon' ng-class="{'is-searching': vm.search.hasFocus}">
+					<i class='icon-search'></i>
+				</div>
+				<div class='stream-single-search' ng-class="{'has-focus': vm.search.hasFocus}">
 					<label for="singleStreamSearch">Search</label>
-					<input type='text' name='search' id='singleStreamSearch' ng-model='vm.feedFilter'>
+					<input type='text' name='search' id='singleStreamSearch' ng-model='vm.feedFilter' ng-focus="vm.search.hasFocus=true" ng-blur="vm.search.hasFocus=false">
 				</div>
 			</div>
 		</md-toolbar>
@@ -105,7 +109,7 @@
 							<span flex></span>
 
 							<button>
-								<span>{{item.created | date:'short'}}</span>
+								<span>{{item.created | amCalendar}}</span>
 							</button>
 						</div>
 					</div>

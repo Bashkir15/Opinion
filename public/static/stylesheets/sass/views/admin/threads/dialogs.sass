@@ -1,0 +1,85 @@
+.create-stream-post-header
+	border-bottom: 1px solid rgba(0,0,0,0.12)
+	height: 40px
+	background: $blue
+
+	button
+		height: 40px
+		padding: 0 8px
+
+		h3
+			@include lato
+			color: #dfe1df
+
+		span
+			@include lato
+			color: #dfe1df
+			display: inline-block
+			transition: all .4s ease
+
+			&:hover
+				transform: scale(1.2, 1.2)
+
+
+.create-stream-post-body
+	padding-top: 35px
+	background: transparent
+
+
+.post-form-wrapper
+	width: 90%
+	margin: 0 auto
+	position: relative
+	margin-bottom: 30px
+
+	label
+		display: inline-block
+		position: absolute
+		top: 0
+		left: 6px
+		@include open
+		color: rgba(0,0,0,0.35)
+		transition: all .4s ease
+
+	input
+		position: relative
+		padding-left: 6px
+		@include lato
+		color: rgba(0,0,0,0.35)
+		border-bottom: 1px solid rgba(0,0,0,0.12)
+		width: 100%
+
+	textarea
+		position: relative
+		padding-left: 6px
+		@include lato
+		color: rgba(0,0,0,0.35)
+		border-bottom: 1px solid rgba(0,0,0,0.12)
+		width: 100%
+
+.create-stream-post-actions
+	padding: 10px 10px 10px 0
+	background: $darkest-blue
+
+	button
+		height: 40px
+		width: 120px
+		border-radius: 2px
+		margin-right: 5px
+		transition: all .4s ease
+
+		span
+			@include open
+			color: #dfe1df
+
+		&:nth-of-type(1)
+			background: $accent-green
+
+			&:hover
+				background: darken($accent-green, 10%)
+
+		&:nth-of-type(2)
+			background: $accent-red
+
+			&:hover
+				background: darken($accent-red, 10%)

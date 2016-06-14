@@ -565,19 +565,31 @@ p {
     background-image: -webkit-linear-gradient(bottom, #365e77 0%, #467a9a 100%);
     height: 40px;
     min-height: 40px; }
-    .stream-single-container .stream-single-toolbar > div button {
-      height: 40px;
-      border-right: 1px solid rgba(0, 0, 0, 0.12);
-      padding-right: 10px; }
-      .stream-single-container .stream-single-toolbar > div button span {
-        font-family: 'Open Sans', sans-serif;
-        color: #dfe1df;
-        text-shadow: 1px 1px rgba(0, 0, 0, 0.35); }
+    .stream-single-container .stream-single-toolbar > div {
+      padding-left: 0; }
+      .stream-single-container .stream-single-toolbar > div button {
+        height: 40px;
+        border-right: 1px solid rgba(0, 0, 0, 0.12);
+        padding-right: 10px;
+        transition: all .4s ease; }
+        .stream-single-container .stream-single-toolbar > div button:nth-of-type(1) {
+          padding-left: 10px;
+          position: relative; }
+          .stream-single-container .stream-single-toolbar > div button:nth-of-type(1) span {
+            padding-right: 5px; }
+          .stream-single-container .stream-single-toolbar > div button:nth-of-type(1) i {
+            font-size: 16px;
+            color: #dfe1df; }
+        .stream-single-container .stream-single-toolbar > div button span {
+          font-family: 'Open Sans', sans-serif;
+          color: #dfe1df;
+          text-shadow: 1px 1px rgba(0, 0, 0, 0.35); }
+        .stream-single-container .stream-single-toolbar > div button:hover, .stream-single-container .stream-single-toolbar > div button:focus {
+          background: #365e77; }
   .stream-single-container .stream-single-body {
     background-image: -webkit-linear-gradient(bottom, #222a32 0%, #2c3642 100%);
     min-height: 500px;
-    position: relative;
-    z-index: 50; }
+    position: relative; }
     .stream-single-container .stream-single-body > div {
       padding-top: 15px;
       overflow-y: auto;
@@ -605,7 +617,8 @@ p {
           color: #9a9a9a; }
         .stream-single-container .stream-single-body > div md-list md-list-item .md-list-item-text > div .stream-single-score-container i {
           color: #dfe1df;
-          transition: all .4s ease; }
+          transition: all .4s ease;
+          outline: none; }
           .stream-single-container .stream-single-body > div md-list md-list-item .md-list-item-text > div .stream-single-score-container i.upvoted {
             color: #74b97d; }
           .stream-single-container .stream-single-body > div md-list md-list-item .md-list-item-text > div .stream-single-score-container i.downvoted {
@@ -698,7 +711,8 @@ p {
           opacity: 1;
           color: rgba(0, 0, 0, 0.3);
           font-family: 'Lato', sans-serif;
-          transition: all .4s ease; }
+          transition: all .4s ease;
+          text-shadow: none; }
       .stream-single-order-threads-dropdown:not(.ng-hide) li:hover {
         background: rgba(0, 0, 0, 0.45); }
   .stream-single-order-threads-dropdown li button {
@@ -706,6 +720,123 @@ p {
     .stream-single-order-threads-dropdown li button span {
       opacity: 0;
       transition: all 2s ease; }
+
+.stream-single-search-icon {
+  height: 38px;
+  width: 40px;
+  margin-top: 2px;
+  background: #365e77;
+  position: relative;
+  transition: all .4s ease; }
+  .stream-single-search-icon i {
+    font-size: 16px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    opacity: 1;
+    transition: all .4s ease; }
+  .stream-single-search-icon.is-searching {
+    width: 5px; }
+    .stream-single-search-icon.is-searching i {
+      opacity: 0; }
+
+.stream-single-search {
+  position: relative;
+  height: 38px;
+  margin-top: 2px; }
+  .stream-single-search label {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    color: rgba(0, 0, 0, 0.12);
+    transition: all .4s ease;
+    opacity: 1; }
+  .stream-single-search input {
+    height: 38px;
+    width: 180px;
+    background: #dfe1df;
+    padding-left: 5px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35);
+    transition: all .4s ease; }
+  .stream-single-search.has-focus label {
+    opacity: 0; }
+  .stream-single-search.has-focus input {
+    width: 215px; }
+
+.create-stream-post-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  height: 40px;
+  background: #467a9a; }
+  .create-stream-post-header button {
+    height: 40px;
+    padding: 0 8px; }
+    .create-stream-post-header button h3 {
+      font-family: 'Lato', sans-serif;
+      color: #dfe1df; }
+    .create-stream-post-header button span {
+      font-family: 'Lato', sans-serif;
+      color: #dfe1df;
+      display: inline-block;
+      transition: all .4s ease; }
+      .create-stream-post-header button span:hover {
+        transform: scale(1.2, 1.2); }
+
+.create-stream-post-body {
+  padding-top: 35px;
+  background: transparent; }
+
+.post-form-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 30px; }
+  .post-form-wrapper label {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 6px;
+    font-family: 'Open Sans', sans-serif;
+    color: rgba(0, 0, 0, 0.35);
+    transition: all .4s ease; }
+  .post-form-wrapper input {
+    position: relative;
+    padding-left: 6px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    width: 100%; }
+  .post-form-wrapper textarea {
+    position: relative;
+    padding-left: 6px;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    width: 100%; }
+
+.create-stream-post-actions {
+  padding: 10px 10px 10px 0;
+  background: #1f2933; }
+  .create-stream-post-actions button {
+    height: 40px;
+    width: 120px;
+    border-radius: 2px;
+    margin-right: 5px;
+    transition: all .4s ease; }
+    .create-stream-post-actions button span {
+      font-family: 'Open Sans', sans-serif;
+      color: #dfe1df; }
+    .create-stream-post-actions button:nth-of-type(1) {
+      background: #74b97d; }
+      .create-stream-post-actions button:nth-of-type(1):hover {
+        background: #54a65e; }
+    .create-stream-post-actions button:nth-of-type(2) {
+      background: #ba4445; }
+      .create-stream-post-actions button:nth-of-type(2):hover {
+        background: #953637; }
 
 .thread-title {
   padding-left: 10px;
