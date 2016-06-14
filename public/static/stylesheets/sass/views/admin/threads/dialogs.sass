@@ -1,10 +1,11 @@
 .create-stream-post-header
-	border-bottom: 1px solid rgba(0,0,0,0.12)
-	height: 40px
-	background: $blue
+	//border-bottom: 1px solid rgba(0,0,0,0.12)
+	height: 60px
+	background-image: -webkit-linear-gradient(bottom, $accent-blue 0%, $blue 100%)
+	box-shadow: 0 2px 4px rgba(0,0,0,0.25)
 
 	button
-		height: 40px
+		height: 60px
 		padding: 0 8px
 
 		h3
@@ -16,21 +17,22 @@
 			color: #dfe1df
 			display: inline-block
 			transition: all .4s ease
+			outline: none
+			font-size: 18px
 
 			&:hover
-				transform: scale(1.2, 1.2)
+				transform: scale(1.4, 1.4)
 
 
 .create-stream-post-body
-	padding-top: 35px
-	background: transparent
+	padding: 50px 0
 
 
 .post-form-wrapper
 	width: 90%
 	margin: 0 auto
 	position: relative
-	margin-bottom: 30px
+	margin-bottom: 42px
 
 	label
 		display: inline-block
@@ -38,6 +40,7 @@
 		top: 0
 		left: 6px
 		@include open
+		opacity: 1
 		color: rgba(0,0,0,0.35)
 		transition: all .4s ease
 
@@ -47,7 +50,7 @@
 		@include lato
 		color: rgba(0,0,0,0.35)
 		border-bottom: 1px solid rgba(0,0,0,0.12)
-		width: 100%
+		width: 99%
 
 	textarea
 		position: relative
@@ -57,9 +60,30 @@
 		border-bottom: 1px solid rgba(0,0,0,0.12)
 		width: 100%
 
+	&::after
+		position: absolute
+		bottom: 0
+		left: 50%
+		width: 0
+		height: 1px
+		content: ''
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		&::after
+			left: 0
+			bottom: 1px
+			width: 100%
+			background: $accent-blue
+
+
+
 .create-stream-post-actions
 	padding: 10px 10px 10px 0
-	background: $darkest-blue
+	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
 
 	button
 		height: 40px
