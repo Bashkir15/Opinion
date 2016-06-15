@@ -52,7 +52,7 @@
 				}
 
 				vm.noMoreComments = !commentsData.res.morePages;
-				vm.lastUpdated = 0;
+				vm.lastUpdated = Date.now();
 			});
 		}
 

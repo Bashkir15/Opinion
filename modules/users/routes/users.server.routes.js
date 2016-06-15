@@ -28,7 +28,7 @@ module.exports = function (System) {
 	routes.push({
 		method: 'post',
 		path: '/:userId/imageUpload',
-		handler: users.image,
+		handler: users.imageUpload,
 		authorized: true
 	});
 

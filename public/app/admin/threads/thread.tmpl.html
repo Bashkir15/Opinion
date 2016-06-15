@@ -4,12 +4,13 @@
 			<div class='thread-title' layout='row' layout-align='none center'>
 				<p>{{thread.title}}</p>
 				<span flex></span>
-				<span>{{thread.created | date:'short'}}</span>
+				<button ui-sref='streamsSingle({streamId: thread.stream._id})' class='thread-content-stream'> In {{thread.stream.name}}</button>
+				<span>{{thread.created | amCalendar}}</span>
 			</div>
 
 			<div layout='row' class='thread-body-content'>
-				<div layout='column' flex='15' layout-align='center center' class='thread-content-user'>
-					<div></div>
+				<div layout='column' flex='15' layout-align='none center' class='thread-content-user'>
+					<img src='../static/images/me.jpg' ui-sref="profile.overview({userId: thread.creator._id})">
 					<p>{{thread.creator.name}}</p>
 				</div>
 
@@ -57,7 +58,7 @@
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center' class='thread-comments-user'>
-								<div></div>
+								<img src='../static/images/me.jpg'>
 								<p>{{item.creator.name}}</p>
 							</div>
 
@@ -87,7 +88,7 @@
 								<span flex></span>
 
 								<button>
-									<span>{{item.created | date:'short'}}</span>
+									<span>{{item.created | amCalendar}}</span>
 								</button>
 							</div>
 						</div>

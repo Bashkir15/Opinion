@@ -2,9 +2,11 @@
 
 .thread-title
 	padding-left: 10px
-	border-bottom: 1px solid rgba(0,0,0,0.5)
-	background: darken($blue, 10%)
+	box-shadow: 0 2px 4px rgba(0,0,0,0.35)
+	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
 	height: 40px
+	position: relative
+	z-index: 50
 
 	p
 		@include open
@@ -15,27 +17,46 @@
 		color: #dfe1df
 		padding-right: 10px
 
+.thread-content-stream
+	transition: all .4s ease
+	color: #dfe1df
+
+	&:hover
+		color: #fff
 .thread-body-content
 	padding: 20px 0
+	min-height: 120px
 
 .thread-content-user
-	> div
+	padding-top: 10px
+	> img
 		height: 40px
 		width: 40px
 		border: 1px solid rgba(0,0,0,0.5)
 		border-radius: 50%
+		display: inline-block
+		transition: all .4s ease
+
+		&:hover
+			transform: scale(1.2, 1.2)
 
 	p
 		@include lato
 
 .thread-content-content
+	border: 1px solid rgba(0,0,0,0.12)
+	border-radius: 5px
+	padding: 6px 0 0 10px
+
 	p
 		@include open
 		color: rgba(0,0,0,0.45)
+		word-wrap: break-word
 
 .thread-content-score
 		i
 			transition: all .4s ease
+			outline: none
 
 			&.upvoted
 				color: $accent-green
@@ -54,8 +75,9 @@
 				color: $accent-red
 
 .thread-content-toolbar
+	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, $blue 100%)
 	padding: 0 10px
-	background: $blue
+	
 
 	> div
 		height: 40px
@@ -73,6 +95,7 @@
 .thread-comments
 	padding-top: 10px
 	background: darken(#364351, 5%)
+	min-height: 490px
 
 	md-content
 		background: darken(#364351, 5%)
@@ -81,17 +104,24 @@
 			md-list-item
 				margin-left: 10px
 				margin-bottom: 10px
+				padding: 0
 				width: 85%
 				background: #212a33
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
 
 .thread-comments-user
 
-	> div
+	> img
 		height: 40px
 		width: 40px
 		border: 1px solid #dfe1df
 		border-radius: 50%
 		margin: 6px 0
+		display: inline-block
+		transition: all .4s ease
+
+		&:hover
+			transform: scale(1.1, 1.1)
 
 	p
 		@include open
@@ -131,6 +161,7 @@
 	border-top: 1px solid #c19f66
 	padding-left: 10px
 	padding-top: 5px
+	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
 
 	button
 		i

@@ -207,6 +207,7 @@ module.exports = function (System) {
 	obj.upvote = function (req, res) {
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
+		.populate('stream')
 		.exec(function (err, thread) {
 			if (err) {
 				return json.bad(err, res);
@@ -250,6 +251,7 @@ module.exports = function (System) {
 	obj.downvote = function (req, res) {
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
+		.populate('stream')
 		.exec(function (err, thread) {
 			if (err) {
 				return json.bad(err, res);
@@ -293,6 +295,7 @@ module.exports = function (System) {
 	obj.save = function (req, res) {
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
+		.populate('stream')
 		.exec(function (err, thread) {
 			if (err) {
 				return json.bad(err, res);
@@ -322,6 +325,7 @@ module.exports = function (System) {
 	obj.unsave = function (req, res) {
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
+		.populate('stream')
 		.exec(function (err, thread) {
 			if (err) {
 				return json.bad(err, res);

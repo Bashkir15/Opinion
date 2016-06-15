@@ -1,16 +1,16 @@
-.create-stream-post-header
-	//border-bottom: 1px solid rgba(0,0,0,0.12)
-	height: 60px
+.add-comment-header
+	height: 50px
 	background-image: -webkit-linear-gradient(bottom, $accent-blue 0%, $blue 100%)
 	box-shadow: 0 2px 4px rgba(0,0,0,0.25)
 
-	button
-		height: 60px
-		padding: 0 8px
+	h3
+		@include open
+		color: #dfe1df
+		padding-left: 8px
 
-		h3
-			@include lato
-			color: #dfe1df
+	button
+		height: 50px
+		padding: 0 8px
 
 		span
 			@include lato
@@ -21,43 +21,32 @@
 			font-size: 18px
 
 			&:hover
-				transform: scale(1.4, 1.4)
+				transform: scale(1.2, 1.2)
 
-
-.create-stream-post-body
+.add-comment-body
 	padding: 50px 0
 
-
-.post-form-wrapper
+.add-comment-wrapper
 	width: 90%
 	margin: 0 auto
 	position: relative
-	margin-bottom: 42px
 
 	label
 		display: inline-block
 		position: absolute
 		top: 0
 		left: 6px
-		@include open
 		opacity: 1
+		@include open
 		color: rgba(0,0,0,0.35)
 		text-shadow: 1px 1px rgba(0,0,0,0.12)
 		transition: all .4s ease
-
-	input
-		position: relative
-		padding-left: 6px
-		@include lato
-		color: rgba(0,0,0,0.35)
-		border-bottom: 1px solid rgba(0,0,0,0.12)
-		width: 99%
 
 	textarea
 		position: relative
 		padding-left: 6px
 		@include lato
-		color: rgba(0,0,0,0.35)
+		color: rgba(0,0,0,0.4)
 		border-bottom: 1px solid rgba(0,0,0,0.12)
 		width: 100%
 
@@ -65,24 +54,30 @@
 		position: absolute
 		bottom: 0
 		left: 50%
+		content: ''
 		width: 0
 		height: 1px
-		content: ''
 		transition: all .4s ease
 
 	&.has-focus
 		label
 			opacity: 0
+			top: -20px
 
-		&::after
+
+		&:after
 			left: 0
 			bottom: 1px
 			width: 100%
 			background: $accent-blue
 
+	&.has-success
+		label
+			opacity: 0
+			top: -20px
 
 
-.create-stream-post-actions
+.add-comment-actions
 	padding: 10px 10px 10px 0
 	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
 
@@ -109,5 +104,3 @@
 
 			&:hover
 				background: darken($accent-red, 10%)
-
-

@@ -126,29 +126,38 @@ module.exports = function (System) {
 		});
 	};
 
-	obj.image = function (req, res) {
-		var user = req.user;
+	obj.imageUpload = function (req, res) {
+		var userId = req.params.userId;
 		var file = req.files.file;
 		var uploadDate = Date.now();
 		var tempPath = file.path;
-		var targetPath = path.join(__dirname, "../../../public/static/uploads/users/images/" + req.user._id + uploadDate + file.name);
-		var savePath = '../static/uploads/users/images/' + req.user._id + uploadDate + file.name;
+		var targetPath = path.join(__dirname, "../../../public/static/uploads/users/images/" + userId + uploadDate + file.name);
+		var savePath = '../static/uploads/users/images/' + userId + uploadDate + file.name;
 
-		fs.rename(tempPath, targetPath, function (err) {
+		User.findOne({_id: req.params.userId})
+		.exec(function (err, user) {
 			if (err) {
 				return json.bad(err, res);
+			} else if (user) {
+				fs.rename(tempPath, targetPath, function (err) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					user.image = savePath
+					user.save(function (err, u) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							image: u.image
+						}, res);
+					});
+				});
+			} else {
+				return json.bad({message: 'Sorry, that user could not be found'}, res);
 			}
-
-			user.pictures.push(savePath);
-			user.save(function (err, u) {
-				if (err) {
-					return json.bad(err, res);
-				}
-
-				json.good({
-					user: user
-				}, res);
-			});
 		});
 	};
 

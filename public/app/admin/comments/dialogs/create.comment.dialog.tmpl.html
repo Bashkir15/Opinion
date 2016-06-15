@@ -1,9 +1,12 @@
-<md-dialog>
+<md-dialog layout='column' flex='50'>
 	<md-dialog-content>
 		<div class='add-comment-header' layout='row' layout-align='none center'>
 			<h3>Add Comment</h3>
 			<span flex></span>
-			<span ng-click="close()">x</span>
+
+			<button>
+				<span ng-click="close()">x</span>
+			</button>
 		</div>
 
 		<div class='add-comment-body'>
@@ -12,13 +15,17 @@
 					<label>Content</label>
 					<textarea name='content' ng-model='content' required rows='4' cols='40'></textarea>
 				</div>
-
-				<div class='add-comment-submit'>
-					<button type='submit' aria-label='submit add comment form'>
-						<span>Create</span>
-					</button>
-				</div>
 			</form>
 		</div>
 	</md-dialog-content>
+
+	<md-dialog-actions class='add-comment-actions' layout='row' layout-align='end center'>
+		<button ng-click="create(addCommentForm.$valid)" novalidate aria-label='submit create comment form'>
+			<span>Create</span>
+		</button>
+
+		<button ng-click="close()" aria-label='close add comment dialog'>
+			<span>Nevermind</span>
+		</button>
+	</md-dialog-actions>
 </md-dialog>

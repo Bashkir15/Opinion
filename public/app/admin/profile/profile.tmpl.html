@@ -1,7 +1,7 @@
 <div class='profile-container' ng-repeat='profile in vm.profile'>
 	<div layout='column' class='profile-header'>
 		<div layout='column' layout-align='center center'>
-			<div></div>
+			<img src='{{user.pictures[0]}}'>
 			<p>{{profile.name}}</p>
 			<p>{{profile.email}}</p>
 		</div>
@@ -13,6 +13,10 @@
 
 			<button>
 				<span>Message</span>
+			</button>
+
+			<button ngf-select="vm.uploadUserImage(file)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/*">
+				<span>Upload Image</span>
 			</button>
 		</div>
 	</div>
