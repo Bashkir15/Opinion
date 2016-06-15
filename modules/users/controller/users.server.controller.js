@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var jwt = require('jsonwebtoken');
+var path = require('path');
+var fs = require('fs');
 
 module.exports = function (System) {
 	var json = System.plugins.JSON;
@@ -121,6 +123,32 @@ module.exports = function (System) {
 			} else {
 				return json.bad({message: 'Sorry, that user could not be found'}, res);
 			}
+		});
+	};
+
+	obj.image = function (req, res) {
+		var user = req.user;
+		var file = req.files.file;
+		var uploadDate = Date.now();
+		var tempPath = file.path;
+		var targetPath = path.join(__dirname, "../../../public/static/uploads/users/images/" + req.user._id + uploadDate + file.name);
+		var savePath = '../static/uploads/users/images/' + req.user._id + uploadDate + file.name;
+
+		fs.rename(tempPath, targetPath, function (err) {
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			user.pictures.push(savePath);
+			user.save(function (err, u) {
+				if (err) {
+					return json.bad(err, res);
+				}
+
+				json.good({
+					user: user
+				}, res);
+			});
 		});
 	};
 

@@ -132,13 +132,8 @@
 					file: file
 				}).progress(function (evt) {
 					vm.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-					$mdToast.show({
-						position: 'top right',
-						template: "<div><md-progress-linear md-mode='determinate' ng-value='vm.progressPercentage'></md-progress-linear></div>",
-						autoWrap: true
-					});
 				}).success(function (data, status, headers, config) {
-					angular.extend(stream, data.res.image);
+					vm.getStream({reload: true});
 				});
 			}
 		}

@@ -25,5 +25,12 @@ module.exports = function (System) {
 		authorized: false
 	});
 
+	routes.push({
+		method: 'post',
+		path: '/:userId/imageUpload',
+		handler: users.image,
+		authorized: true
+	});
+
 	return routes;
 };
