@@ -1,5 +1,5 @@
 .home-page-header
-	background: darken($blue, 10%)
+	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
 	> div
 		padding: 20px 0
 
@@ -15,7 +15,8 @@
 			color: #dfe1df
 
 .home-page-toolbar
-	background: $blue !important
+	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
+	//box-shadow: 0 4px 16px 0 rgba(0,0,0,0.35)
 	height: 40px
 	min-height: 40px
 
@@ -99,7 +100,8 @@
 		md-list
 			md-list-item
 				width: 90%
-				margin: 0 auto
+				margin: 0 auto 15px auto
+				padding: 0
 				background: #212a33
 
 
@@ -111,6 +113,7 @@
 		width: 50px
 		border: 1px solid $accent-blue
 		border-radius: 50%
+		box-shadow: 0 4px 4px rgba(0,0,0,0.35)
 		margin-bottom: 8px
 		display: inline-block
 		transition: all .4s ease
@@ -149,6 +152,7 @@
 	padding: 5px 10px
 	border-top: 1px solid #c19f66
 	height: 35px
+	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
 
 	button
 		height: 25px

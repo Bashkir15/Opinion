@@ -1,7 +1,7 @@
 <div class='stream-single-container' layout='column'>
 	<div ng-repeat='stream in vm.stream'>
 		<md-toolbar class='stream-single-header'>
-			<div layout='column' layout-align='center center' flex>
+			<div layout='column' layout-align='none center' flex>
 				<img src="{{stream.image}}" ng-if="stream.image">
 				<img src="../static/images/cat-image.jpeg" ng-if="!stream.image">
 				<span></span>
@@ -48,17 +48,31 @@
 					</li>
 				</ul>
 
-				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod" ng-click="vm.openDeleteStream()">
-					<span>Delete Stream</span>
+				<button class='stream-single-mod-options' ng-click="vm.showModOptions = !vm.showModOptions" ng-class="{'open': vm.showModOptions}" ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod">
+					<span>Mod Options</span>
+					<i class='icon-expand_more'></i>
 				</button>
 
-				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod" ng-click="vm.editStream()">
-					<span>Edit Stream</span>
-				</button>
+				<ul ng-show="vm.showModOptions" class='stream-single-mod-options-dropdown'>
+					<li>
+						<button ng-click="vm.openDeleteStream()">
+							<span>Delete Stream</span>
+						</button>
+					</li>
 
-				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod" ngf-select="vm.addStreamImage(file, stream)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/*">
-					<span>Upload Image</span>
-				</button>
+					<li>
+						<button ng-click="vm.editStream()">
+							<span>Edit Stream</span>
+						</button>
+					</li>
+
+					<li>
+						<button ngf-select="vm.addStreamImage(file, stream)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/*">
+							<span>Upload Image</span>
+						</button>
+					</li>
+				</ul>
+
 
 				<span flex></span>
 				<div class='stream-single-search-icon' ng-class="{'is-searching': vm.search.hasFocus}">
@@ -86,6 +100,9 @@
 
 							<div layout='column' flex ng-click="vm.goToThread(item)" class='stream-single-title'>
 								<p>{{item.title}}</p>
+								<div class='stream-single-title-overlay'>
+									<p>{{item.content}}</p>
+								</div>
 							</div>
 
 							<div layout='column' flex='10' layout-align='center center' class='stream-single-score-container'>

@@ -547,18 +547,21 @@ p {
 .stream-single-container {
   background-image: -webkit-linear-gradient(bottom, #2c3642 0%, #222a32 100%); }
   .stream-single-container .stream-single-header {
-    height: 150px;
+    height: 180px;
     background-image: -webkit-linear-gradient(bottom, #365e77 0%, #264254 100%); }
     .stream-single-container .stream-single-header > div > img {
       height: 55px;
       width: 55px;
       border: 1px solid #fff;
       border-radius: 50%;
-      margin-bottom: 8px; }
+      margin-bottom: 8px;
+      margin-top: 15px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4); }
     .stream-single-container .stream-single-header > div p {
       margin: 0; }
       .stream-single-container .stream-single-header > div p:nth-of-type(1) {
-        font-family: 'Montserrat', sans-serif; }
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 8px; }
       .stream-single-container .stream-single-header > div p:nth-of-type(2) {
         font-family: 'Lato', sans-serif; }
   .stream-single-container .stream-single-toolbar {
@@ -576,14 +579,16 @@ p {
           padding-left: 10px;
           position: relative; }
           .stream-single-container .stream-single-toolbar > div button:nth-of-type(1) span {
-            padding-right: 5px; }
+            padding-right: 5px;
+            font-size: 14px; }
           .stream-single-container .stream-single-toolbar > div button:nth-of-type(1) i {
             font-size: 16px;
             color: #dfe1df; }
         .stream-single-container .stream-single-toolbar > div button span {
           font-family: 'Open Sans', sans-serif;
           color: #dfe1df;
-          text-shadow: 1px 1px rgba(0, 0, 0, 0.35); }
+          text-shadow: 1px 1px rgba(0, 0, 0, 0.35);
+          font-size: 14px; }
         .stream-single-container .stream-single-toolbar > div button:hover, .stream-single-container .stream-single-toolbar > div button:focus {
           background: #365e77; }
   .stream-single-container .stream-single-body {
@@ -613,12 +618,11 @@ p {
           font-family: 'Lato', sans-serif;
           color: #dfe1df; }
         .stream-single-container .stream-single-body > div md-list md-list-item .md-list-item-text > div > div:nth-of-type(2) {
-          transition: all .4s ease; }
+          transition: all .4s ease;
+          display: inline-block; }
           .stream-single-container .stream-single-body > div md-list md-list-item .md-list-item-text > div > div:nth-of-type(2) p {
             font-family: 'Lato', sans-serif;
             color: #9a9a9a; }
-          .stream-single-container .stream-single-body > div md-list md-list-item .md-list-item-text > div > div:nth-of-type(2):hover {
-            background: #354452; }
         .stream-single-container .stream-single-body > div md-list md-list-item .md-list-item-text > div .stream-single-score-container i {
           color: #dfe1df;
           transition: all .4s ease;
@@ -673,10 +677,62 @@ p {
         font-family: 'Open Sans', sans-serif;
         color: #467a9a; }
 
+.stream-single-mod-options {
+  position: relative;
+  transition: all .4s ease;
+  width: 160px; }
+  .stream-single-mod-options i {
+    transition: all .4s ease;
+    color: #dfe1df;
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    top: 11px; }
+  .stream-single-mod-options.open i {
+    transform: rotate(-180deg); }
+
+.stream-single-mod-options-dropdown {
+  position: absolute;
+  top: 40px;
+  left: 265px;
+  transition: all .4s ease;
+  height: 0;
+  width: 160px;
+  background: #dfe1df;
+  text-align: center; }
+  .stream-single-mod-options-dropdown:not(.ng-hide) {
+    height: 150px; }
+    .stream-single-mod-options-dropdown:not(.ng-hide) li {
+      height: 50px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      transition: all .4s ease; }
+      .stream-single-mod-options-dropdown:not(.ng-hide) li:last-child {
+        border-bottom: none; }
+      .stream-single-mod-options-dropdown:not(.ng-hide) li button {
+        height: 50px;
+        width: 160px;
+        border-right: none;
+        transition: all .4s ease; }
+        .stream-single-mod-options-dropdown:not(.ng-hide) li button span {
+          opacity: 1;
+          color: rgba(0, 0, 0, 0.3);
+          font-family: 'Lato', sans-serif;
+          transition: all .4s ease;
+          text-shadow: none; }
+      .stream-single-mod-options-dropdown:not(.ng-hide) li:hover {
+        background: #365e77; }
+        .stream-single-mod-options-dropdown:not(.ng-hide) li:hover span {
+          color: #fff; }
+  .stream-single-mod-options-dropdown li button {
+    border-right: none !important; }
+    .stream-single-mod-options-dropdown li button span {
+      opacity: 0;
+      transition: all .4s ease; }
+
 .stream-single-order-threads {
   position: relative;
   transition: all .4s ease;
-  width: 190px; }
+  width: 160px; }
   .stream-single-order-threads i {
     transition: all .4s ease;
     color: #dfe1df;
@@ -694,23 +750,23 @@ p {
 .stream-single-order-threads-dropdown {
   position: absolute;
   top: 40px;
-  left: 130px;
+  left: 105px;
   transition: all .4s ease;
   height: 0;
-  width: 190px;
+  width: 160px;
   background: #dfe1df;
   text-align: center; }
   .stream-single-order-threads-dropdown:not(.ng-hide) {
-    height: 160px; }
+    height: 200px; }
     .stream-single-order-threads-dropdown:not(.ng-hide) li {
-      height: 40px;
+      height: 50px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.3);
       transition: all .4s ease; }
       .stream-single-order-threads-dropdown:not(.ng-hide) li:last-child {
         border-bottom: none; }
       .stream-single-order-threads-dropdown:not(.ng-hide) li button {
-        height: 40px;
-        width: 190px;
+        height: 50px;
+        width: 160px;
         border-right: none;
         transition: all .4s ease; }
         .stream-single-order-threads-dropdown:not(.ng-hide) li button span {
@@ -756,10 +812,11 @@ p {
     display: inline-block;
     position: absolute;
     left: 5px;
-    top: 5px;
+    top: 7px;
     color: rgba(0, 0, 0, 0.12);
     transition: all .4s ease;
-    opacity: 1; }
+    opacity: 1;
+    font-size: 16px; }
   .stream-single-search input {
     height: 38px;
     width: 180px;
@@ -774,7 +831,30 @@ p {
     width: 215px; }
 
 .stream-single-title {
-  padding-top: 6px; }
+  padding-top: 6px;
+  cursor: pointer;
+  position: relative; }
+  .stream-single-title > p {
+    opacity: 1;
+    transition: all .4s ease-out; }
+  .stream-single-title:hover .stream-single-title-overlay {
+    opacity: 1;
+    height: 70px; }
+
+.stream-single-title-overlay {
+  background-color: #1f2933;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: all .4s ease;
+  width: 100%;
+  height: 0; }
+  .stream-single-title-overlay p {
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+    padding-left: 10px;
+    padding-top: 8px; }
 
 .create-stream-page {
   background-image: -webkit-linear-gradient(bottom, #222a32 0%, #2c3642 100%);
@@ -1215,7 +1295,7 @@ p {
       color: #50ade3; }
 
 .home-page-header {
-  background: #365e77; }
+  background-image: -webkit-linear-gradient(bottom, #365e77 0%, #264254 100%); }
   .home-page-header > div {
     padding: 20px 0; }
     .home-page-header > div > div {
@@ -1229,7 +1309,7 @@ p {
       color: #dfe1df; }
 
 .home-page-toolbar {
-  background: #467a9a !important;
+  background-image: -webkit-linear-gradient(bottom, #0c1013 0%, #1f2933 100%);
   height: 40px;
   min-height: 40px; }
   .home-page-toolbar button span {
@@ -1293,7 +1373,8 @@ p {
     padding-top: 20px; }
     .home-page-body md-content md-list md-list-item {
       width: 90%;
-      margin: 0 auto;
+      margin: 0 auto 15px auto;
+      padding: 0;
       background: #212a33; }
 
 .home-threads-user {
@@ -1303,6 +1384,7 @@ p {
     width: 50px;
     border: 1px solid #50ade3;
     border-radius: 50%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.35);
     margin-bottom: 8px;
     display: inline-block;
     transition: all .4s ease; }
@@ -1332,7 +1414,8 @@ p {
 .home-threads-toolbar {
   padding: 5px 10px;
   border-top: 1px solid #c19f66;
-  height: 35px; }
+  height: 35px;
+  background-image: -webkit-linear-gradient(bottom, #0c1013 0%, #1f2933 100%); }
   .home-threads-toolbar button {
     height: 25px;
     padding: 0;

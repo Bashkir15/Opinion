@@ -1,23 +1,26 @@
 .stream-single-container
 	background-image: -webkit-linear-gradient(bottom, darken(#364351, 5%) 0%, darken(#364351, 10%) 100%)
 	.stream-single-header
-		height: 150px
+		height: 180px
 		background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
 
 		> div
-			
+		
 			> img
 				height: 55px
 				width: 55px
 				border: 1px solid #fff
 				border-radius: 50%
 				margin-bottom: 8px
+				margin-top: 15px
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4)
 
 			p
 				margin: 0
 
 				&:nth-of-type(1)
 					@include mont
+					margin-bottom: 8px
 
 				&:nth-of-type(2)
 					@include lato
@@ -42,6 +45,7 @@
 
 					span
 						padding-right: 5px
+						font-size: 14px
 
 					i
 						font-size: 16px
@@ -51,6 +55,7 @@
 					@include open
 					color: #dfe1df
 					text-shadow: 1px 1px rgba(0,0,0,0.35)
+					font-size: 14px
 
 				&:hover, &:focus
 					background: darken($blue, 10%)
@@ -97,13 +102,13 @@
 
 								&:nth-of-type(2)
 									transition: all .4s ease
+									display: inline-block
 
 									p
 										@include lato
 										color: #9a9a9a
 
-									&:hover
-										background: lighten(#212a33, 10%)
+										
 
 							.stream-single-score-container
 								i
@@ -186,10 +191,77 @@
 					@include open
 					color: $blue
 
+.stream-single-mod-options
+	position: relative
+	transition: all .4s ease
+	width: 160px
+
+	i
+		transition: all .4s ease
+		color: #dfe1df
+		display: inline-block
+		position: absolute
+		right: 5px
+		top: 11px
+
+
+	&.open
+
+		i
+			transform: rotate(-180deg)
+
+.stream-single-mod-options-dropdown
+	position: absolute
+	top: 40px
+	left: 265px
+	transition: all .4s ease
+	height: 0
+	width: 160px
+	background: #dfe1df
+	text-align: center
+
+	&:not(.ng-hide)
+		height: 150px
+
+		li 
+			height: 50px
+			border-bottom: 1px solid rgba(0,0,0,0.3)
+			transition: all .4s ease
+
+			&:last-child
+				border-bottom: none
+
+			button
+				height: 50px
+				width: 160px
+				border-right: none
+				transition: all .4s ease
+
+				span
+					opacity: 1
+					color: rgba(0,0,0,0.3)
+					@include lato
+					transition: all .4s ease
+					text-shadow: none
+
+			&:hover
+				background: darken($blue, 10%)
+
+				span
+					color: #fff
+
+	li
+		button
+			border-right: none !important
+
+			span
+				opacity: 0
+				transition: all .4s ease
+
 .stream-single-order-threads
 	position: relative
 	transition: all .4s ease
-	width: 190px
+	width: 160px
 
 	i
 		transition: all .4s ease
@@ -211,18 +283,18 @@
 .stream-single-order-threads-dropdown
 	position: absolute
 	top: 40px
-	left: 130px
+	left: 105px
 	transition: all .4s ease
 	height: 0
-	width: 190px
+	width: 160px
 	background: #dfe1df
 	text-align: center
 
 	&:not(.ng-hide)
-		height: 160px
+		height: 200px
 
 		li
-			height: 40px
+			height: 50px
 			border-bottom: 1px solid rgba(0,0,0,0.3)
 			transition: all .4s ease
 
@@ -230,8 +302,8 @@
 				border-bottom: none
 
 			button
-				height: 40px
-				width: 190px
+				height: 50px
+				width: 160px
 				border-right: none
 				transition: all .4s ease
 
@@ -287,10 +359,11 @@
 		display: inline-block
 		position: absolute
 		left: 5px
-		top: 5px
+		top: 7px
 		color: rgba(0,0,0,0.12)
 		transition: all .4s ease
 		opacity: 1
+		font-size: 16px
 
 
 	input
@@ -311,4 +384,31 @@
 
 .stream-single-title
 	padding-top: 6px
+	cursor: pointer
+	position: relative
+
+	> p
+		opacity: 1
+		transition: all .4s ease-out
+
+	&:hover
+		.stream-single-title-overlay
+			opacity: 1
+			height: 70px
+
+.stream-single-title-overlay
+	background-color: $darkest-blue
+	position: absolute
+	top: 0
+	left: 0
+	opacity: 0
+	transition: all .4s ease
+	width: 100%
+	height: 0
+
+	p
+		@include lato
+		color: #fff
+		padding-left: 10px
+		padding-top: 8px
 

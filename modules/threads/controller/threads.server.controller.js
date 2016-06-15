@@ -127,7 +127,6 @@ module.exports = function (System) {
 
 	obj.subscribedHome = function (req, res) {
 		Stream.find({subscribers: req.user._id})
-		.populate('creator')
 		.exec(function (err, streams) {
 			if (err) {
 				return json.bad(err, res);
@@ -140,6 +139,7 @@ module.exports = function (System) {
 				streamArray.forEach(function (stream) {
 					Thread.find({stream: stream._id})
 					.populate('creator')
+					.populate('stream')
 					.exec(function (err, threads) {
 						if (err) {
 							return json.bad(err, res);

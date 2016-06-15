@@ -117,7 +117,9 @@
 							<span flex></span>
 
 							<button>
-								<span class='home-threads-created'>{{thread.created | date:'short'}}</span>
+								<span class='home-threads-stream'>In {{thread.stream.name}}</span>
+							<button>
+								<span class='home-threads-created'>{{thread.created | amCalendar}}</span>
 							</button>
 						</div>
 					</div>
