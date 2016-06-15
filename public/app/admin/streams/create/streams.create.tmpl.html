@@ -1,25 +1,25 @@
-<div class='create-stream-page'>
-	<div>
-		<md-card>
-			<div class='create-stream-header'>
-				<div>
-					<h3>Create a stream!</h3>
-				</div>
+<div class='create-stream-page' layout='row' layout-align='center none'>
+	<div flex='55'>
+		<md-card class='create-stream-card' layout='column'>
+			<div class='create-stream-header' layout='row' layout-align='center center'>
+				<h3>Create A Stream Of Your Own</h3>
 			</div>
 
 			<div class='create-stream-body'>
 				<form name='vm.createStreamForm' ng-submit='vm.create(vm.createStreamForm.$valid)' novalidate>
-					<div class='stream-form-wrapper'>
+					<div class='stream-form-wrapper' ng-class="{'has-focus': vm.createStreamForm.name.hasFocus,
+					'has-success': vm.createStreamForm.name.$valid}">
 						<label>Name</label>
-						<input type='text' name='name' ng-model='vm.stream.name' required>
+						<input type='text' name='name' ng-model='vm.stream.name' required ng-focus='vm.createStreamForm.name.hasFocus=true' ng-blur="vm.createStreamForm.name.hasFocus=false">
 					</div>
 
-					<div class='stream-form-wrapper'>
+					<div class='stream-form-wrapper' ng-class="{'has-focus': vm.createStreamForm.description.hasFocus,
+					'has-success': vm.createStreamForm.description.$valid}">
 						<label>Description</label>
-						<textarea name='description' ng-model='vm.stream.description' rows='4' cols='40' required></textarea>
+						<textarea name='description' ng-model='vm.stream.description' rows='4' cols='40' required ng-focus="vm.createStreamForm.description.hasFocus=true" ng-blur="vm.createStreamForm.description.hasFocus=false"></textarea>
 					</div>
 
-					<div class='stream-form-submit'>
+					<div class='stream-form-submit' layout='column' layout-align='center center'>
 						<button type='submit' aria-label='submit create stream form'>
 							<span>Create</span>
 						</button>

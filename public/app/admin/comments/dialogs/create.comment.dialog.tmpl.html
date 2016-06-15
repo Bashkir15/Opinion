@@ -11,9 +11,10 @@
 
 		<div class='add-comment-body'>
 			<form name='addCommentForm' ng-submit='create(addCommentForm.$valid)' novalidate>
-				<div class='add-comment-wrapper'>
+				<div class='add-comment-wrapper' ng-class="{'has-focus': addCommentForm.content.hasFocus,
+				'has-success': addCommentForm.content.$valid}">
 					<label>Content</label>
-					<textarea name='content' ng-model='content' required rows='4' cols='40'></textarea>
+					<textarea name='content' ng-model='content' required rows='4' cols='40' ng-focus='addCommentForm.content.hasFocus=true' ng-blur="addCommentForm.content.hasFocus=false"></textarea>
 				</div>
 			</form>
 		</div>

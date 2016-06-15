@@ -1,0 +1,40 @@
+.profile-header
+	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
+
+.profile-user-info
+	padding-top: 35px
+
+	> img
+		height: 45px
+		width: 45px
+		border: 1px solid #fff
+		border-radius: 50%
+
+	p
+		@include open
+		color: #dfe1df
+
+.profile-header-toolbar
+	padding: 30px 0 20px 10px
+
+	button
+		span
+			@include lato
+			color: #dfe1df
+
+.profile-tabs
+	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
+	color: #dfe1df
+
+	md-ink-bar
+		color: $accent-blue
+		background-color: $accent-blue
+
+	md-tabs-wrapper
+		md-tabs-canvas
+			md-pagination-wrapper
+				md-tab-item
+					color: #dfe1df
+
+					&.md-active
+						color: $accent-blue

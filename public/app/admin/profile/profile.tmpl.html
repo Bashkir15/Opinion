@@ -1,12 +1,12 @@
 <div class='profile-container' ng-repeat='profile in vm.profile'>
 	<div layout='column' class='profile-header'>
-		<div layout='column' layout-align='center center'>
-			<img src='{{user.pictures[0]}}'>
+		<div layout='column' layout-align='center center' class='profile-user-info'>
+			<img src='../static/images/me.jpg'>
 			<p>{{profile.name}}</p>
 			<p>{{profile.email}}</p>
 		</div>
 
-		<div layout='row' layout-align='start center'>
+		<div layout='row' layout-align='start center' class='profile-header-toolbar'>
 			<button>
 				<span>Follow</span>
 			</button>

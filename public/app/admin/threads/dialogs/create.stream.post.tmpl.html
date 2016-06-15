@@ -14,12 +14,14 @@
 
 		<div class='create-stream-post-body'>
 			<form name='addPostForm' ng-submit='create(addPostForm.$valid)' novalidate>
-				<div class='post-form-wrapper' ng-class="{'has-focus': addPostForm.title.hasFocus}">
+				<div class='post-form-wrapper' ng-class="{'has-focus': addPostForm.title.hasFocus,
+				'has-success': addPostForm.title.$valid}">
 					<label>Title</label>
 					<input type='text' ng-model='title' required name='title' ng-focus="addPostForm.title.hasFocus=true" ng-blur="addPostForm.title.hasFocus=false">
 				</div>
 
-				<div class='post-form-wrapper' ng-class="{'has-focus': addPostForm.content.hasFocus}">
+				<div class='post-form-wrapper' ng-class="{'has-focus': addPostForm.content.hasFocus,
+				'has-success': addPostForm.content.$valid}">
 					<label>Content</label>
 					<textarea name='content' ng-model='content' rows='4' cols='40' required ng-focus="addPostForm.content.hasFocus=true" ng-blur="addPostForm.content.hasFocus=false"></textarea>
 				</div>

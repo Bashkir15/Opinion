@@ -61,17 +61,37 @@
 				vm.lastUpdated = Date.now();
 			});
 		}
-
-		$scope.$watch('vm.feedFilter', function (oldValue, newValue) {
+		var feedFilterTimeout;
+		/*$scope.$watch('vm.feedFilter', function (oldValue, newValue) {
 			if (oldValue !== newValue) {
+				vm.feed = [];
+			}
+
+			$timeout.cancel(feedFilterTimeout);
+			feedFilterTimeout = $timeout(function() {
+				if (!newValue) {
+					if (vm.feedFilterEnabled) {
+						vm.lastUpdated = 0;
+						vm.updateFeed();
+					}
+				} else {
+					vm.updateFeed();
+				}
+
+				vm.feedFilterEnabled = vm.feedFilter !== '';
+			}, 500);
+		}); */
+
+		$scope.$watch('vm.feedFilter', function (newValue, oldValue) {
+			if (newValue !== oldValue) {
 				vm.feed = [];
 			}
 
 			if (!newValue) {
 				vm.lastUpdated = 0;
-				vm.updateFeed();
+				vm.updateFeed;
 			} else {
-				vm.updateFeed();
+				vm.updateFeed;
 			}
 
 			vm.feedFilterEnabled = vm.feedFilter !== '';

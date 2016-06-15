@@ -96,9 +96,14 @@
 									color: #dfe1df
 
 								&:nth-of-type(2)
+									transition: all .4s ease
+
 									p
 										@include lato
 										color: #9a9a9a
+
+									&:hover
+										background: lighten(#212a33, 10%)
 
 							.stream-single-score-container
 								i
