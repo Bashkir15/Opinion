@@ -211,7 +211,7 @@ module.exports = function (System) {
 		var uploadDate = Date.now();
 		var tempPath = file.path;
 		var targetPath = path.join(__dirname, "../../../public/static/uploads/streams/images/" + streamId + uploadDate + file.name)
-		var savePath = '/uploads/streams/images/' + streamId + uploadDate + file.name;
+		var savePath = '../static/uploads/streams/images/' + streamId + uploadDate + file.name;
 
 		Stream.findOne({_id: req.params.streamId})
 		.populate('creator')

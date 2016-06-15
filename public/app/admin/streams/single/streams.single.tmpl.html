@@ -2,7 +2,8 @@
 	<div ng-repeat='stream in vm.stream'>
 		<md-toolbar class='stream-single-header'>
 			<div layout='column' layout-align='center center' flex>
-				<img src='../static/images/cat-image.jpeg'>
+				<img src="{{stream.image}}" ng-if="stream.image">
+				<img src="../static/images/cat-image.jpeg" ng-if="!stream.image">
 				<span></span>
 				<p>{{stream.name}}</p>
 				<p>{{stream.description}}</p>
@@ -55,7 +56,7 @@
 					<span>Edit Stream</span>
 				</button>
 
-				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod">
+				<button ng-if="stream.creator.roles.indexOf('admin') !== -1 || vm.isMod" ngf-select="vm.addStreamImage(file, stream)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/*">
 					<span>Upload Image</span>
 				</button>
 

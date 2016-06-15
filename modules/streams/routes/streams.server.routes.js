@@ -55,7 +55,7 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'post',
-		path: '/:streamId/upload',
+		path: '/:streamId/imageUpload',
 		handler: streams.image,
 		authorized: true
 	});

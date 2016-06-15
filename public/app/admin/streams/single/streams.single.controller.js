@@ -5,7 +5,7 @@
 	.controller('StreamsSingleController', StreamsSingleController);
 
 	/* @ngInject */
-	function StreamsSingleController ($state, $stateParams, $scope, $mdDialog, $location, $timeout, appAuth, appToast, appStreams, appThreads) {
+	function StreamsSingleController ($state, $stateParams, $scope, $mdDialog, $location, $timeout, $mdToast, appAuth, appToast, appStreams, appThreads, Upload) {
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		vm.stream = [];
@@ -15,6 +15,7 @@
 		vm.updateFeed = updateFeed;
 		vm.openAddPost = openAddPost;
 		vm.openDeleteStream = openDeleteStream;
+		vm.addStreamImage = addStreamImage;
 		vm.editStream = editStream;
 		vm.goToThread = goToThread;
 		vm.upvote = upvote;
@@ -123,6 +124,30 @@
 				vm.updateFeed({reload: true});
 			})
 		}
+
+		function addStreamImage (file, stream) {
+			if (file) {
+				Upload.upload({
+					url: '/streams/' + streamId + '/imageUpload',
+					file: file
+				}).progress(function (evt) {
+					vm.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+					$mdToast.show({
+						position: 'top right',
+						template: "<div><md-progress-linear md-mode='determinate' ng-value='vm.progressPercentage'></md-progress-linear></div>",
+						autoWrap: true
+					});
+				}).success(function (data, status, headers, config) {
+					angular.extend(stream, data.res.image);
+				});
+			}
+		}
+
+		$scope.$watch(function() {
+			return $scope.file
+		}, function() {
+			vm.addStreamImage($scope.file);
+		});
 
 		function openDeleteStream() {
 			$mdDialog.show({
