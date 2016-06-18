@@ -32,7 +32,8 @@
 			}),
 			list: $resource('threads/stream/:streamId'),
 			home: $resource('threads/home'),
-			subscribedHome: $resource('threads/subscribedHome')
+			subscribedHome: $resource('threads/subscribedHome'),
+			timeline: $resource('threads/timeline/:userId')
 		};
 	}
 }());

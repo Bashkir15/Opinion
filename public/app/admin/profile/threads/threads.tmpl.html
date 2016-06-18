@@ -1,1 +1,6 @@
-<p>Threads</p>
+<div>
+	<div ng-repeat='thread in vm.timeline'>
+		<p>{{thread.title}}</p>
+		<p>{{thread.creator.name}}</p>
+	</div>
+</div>
