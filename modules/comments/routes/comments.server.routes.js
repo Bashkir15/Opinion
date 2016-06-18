@@ -27,6 +27,13 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'get',
+		path: '/saved/:userId',
+		handler: comments.savedComments,
+		authorized: false
+	});
+
+	routes.push({
+		method: 'get',
 		path: '/:commentId',
 		handler: comments.single,
 		authorized: false

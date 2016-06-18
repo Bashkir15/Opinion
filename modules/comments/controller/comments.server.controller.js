@@ -120,6 +120,51 @@ module.exports = function (System) {
 		return getComments();
 	};
 
+	obj.savedComments = function (req, res) {
+		var userId = req.params.userId || req.user._id;
+
+		var getComments = function() {
+			var criteria = {saved: userId};
+
+			if (req.query && req.query.timestamp) {
+				criteria.created = {$gte: req.query.timestamp};
+			}
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+				criteria.content = new RegExp(req.query.filter, 'i');
+			}
+
+			Comment.find(criteria, null)
+			.populate('thread')
+			.populate('creator')
+			.skip(parseInt(req.query.page) * System.config.settings.perPage)
+			.limit(System.config.settings.perPage + 1)
+			.exec(function (err, comments) {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					var morePages = System.config.settings.perPage < comments.length;
+
+					if (morePages) {
+						comments.pop();
+					}
+
+					comments.map(function (e) {
+						e = e.afterSave(req.user);
+					});
+
+					json.good({
+						records: comments,
+						morePages: morePages
+					}, res);
+				}
+			});
+		};
+
+		return getComments();
+	};
+
 	obj.single = function (req, res) {
 		Comment.findOne({_id: req.params.commentId})
 		.populate('creator')
