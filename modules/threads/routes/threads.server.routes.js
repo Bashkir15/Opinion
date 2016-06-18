@@ -34,6 +34,13 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'get',
+		path: '/saved/:userId',
+		handler: threads.savedThreads,
+		authorized: false
+	});
+
+	routes.push({
+		method: 'get',
 		path: '/stream/:streamId',
 		handler: threads.list,
 		authorized: false
