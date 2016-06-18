@@ -250,7 +250,7 @@ module.exports = function (System) {
 			.populate('creator')
 			.populate('comments')
 			.populate('stream')
-			.skip(parseInt(req.query.page) * System.config.setings.perPage)
+			.skip(parseInt(req.query.page) * System.config.settings.perPage)
 			.limit(System.config.settings.perPage + 1)
 			.exec(function (err, threads) {
 				if (err) {

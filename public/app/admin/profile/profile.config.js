@@ -34,5 +34,12 @@
 			controller: 'ProfileCommentsController',
 			controllerAs: 'vm'
 		});
+
+		$stateProvider.state('profile.saved', {
+			url: '/saved',
+			templateUrl: '/app/admin/profile/saved/saved.tmpl.html',
+			controller: 'ProfileSavedController',
+			controllerAs: 'vm'
+		});
 	}
 }());
