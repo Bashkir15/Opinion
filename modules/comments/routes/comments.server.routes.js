@@ -20,6 +20,13 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'get',
+		path: '/timeline/:userId',
+		handler: comments.timeline,
+		authorized: false
+	});
+
+	routes.push({
+		method: 'get',
 		path: '/:commentId',
 		handler: comments.single,
 		authorized: false
