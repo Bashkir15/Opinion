@@ -87,13 +87,13 @@
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center' class='home-threads-user'>
-								<img src='../static/images/me.jpg'>
+								<img src='../static/images/me.jpg' ui-sref='profile.overview({userId: thread.creator._id})'>
 								<p>{{thread.creator.name}}</p>
 							</div>
 
-							<div layout='column' flex class='home-threads-content'>
+							<div layout='column' flex class='home-threads-content' ui-sref='streamsThread({streamId: thread.stream._id, threadId: thread._id})'>
 								<p>{{thread.title}}</p>
-								<p>{{thread.stream.name}}</p>
+								
 							</div>
 
 							<div layout='column' flex='10' layout-align='center center' class='home-threads-score'>
@@ -116,8 +116,9 @@
 
 							<span flex></span>
 
-							<button>
+							<button ui-sref='streamsSingle({streamId: thread.stream._id})'>
 								<span class='home-threads-stream'>In {{thread.stream.name}}</span>
+							</button>
 							<button>
 								<span class='home-threads-created'>{{thread.created | amCalendar}}</span>
 							</button>
