@@ -27,6 +27,13 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'get',
+		path: '/timeline/:userId',
+		handler: threads.timeline,
+		authorized: false
+	});
+
+	routes.push({
+		method: 'get',
 		path: '/stream/:streamId',
 		handler: threads.list,
 		authorized: false
