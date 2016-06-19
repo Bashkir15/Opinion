@@ -60,9 +60,11 @@ module.exports = function (System) {
 						comments.pop();
 					}
 
-					comments.map(function (e) {
-						e = e.afterSave(req.user);
-					});
+					if (req.user) {
+						comments.map(function (e) {
+							e = e.afterSave(req.user);
+						});
+					}
 
 					json.good({
 						records: comments,
@@ -105,9 +107,11 @@ module.exports = function (System) {
 						comments.pop();
 					}
 
-					comments.map(function (e) {
-						e = e.afterSave(req.user);
-					});
+					if (req.user) {
+						comments.map(function (e) {
+							e = e.afterSave(req.user);
+						});
+					}
 
 					json.good({
 						records: comments,
@@ -150,9 +154,11 @@ module.exports = function (System) {
 						comments.pop();
 					}
 
-					comments.map(function (e) {
-						e = e.afterSave(req.user);
-					});
+					if (req.user) {
+						comments.map(function (e) {
+							e = e.afterSave(req.user);
+						});
+					}
 
 					json.good({
 						records: comments,
@@ -173,7 +179,9 @@ module.exports = function (System) {
 			if (err) {
 				return json.bad(err, res);
 			} else if (comment) {
-				comment = comment.afterSave;
+				if (req.user) {
+					comment = comment.afterSave;
+				}
 
 				return json.good({
 					record: comment

@@ -291,7 +291,9 @@ module.exports = function (System) {
 			if (err) {
 				return json.bad(err, res);
 			} else if (thread) {
-				thread = thread.afterSave(req.user);
+				if (req.user) {
+					thread = thread.afterSave(req.user);
+				}
 
 				 json.good({
 					record: thread

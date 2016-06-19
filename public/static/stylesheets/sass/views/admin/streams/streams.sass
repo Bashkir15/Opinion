@@ -1,3 +1,10 @@
+.streams-view-container
+	&.ng-enter
+		@include slideInUp()
+
+	&.ng-leave
+		@include slideOutDown()
+
 @import "list"
 @import "single"
 @import "create"
