@@ -42,9 +42,11 @@ module.exports = function (System) {
 					streams.pop();
 				}
 
-				streams.map(function (e) {
-					e = e.afterSave(req.user);
-				}); 
+				if (req.user) {
+					streams.map(function (e) {
+						e = e.afterSave(req.user);
+					}); 
+				}
 
 				json.good({
 					records: streams,
@@ -64,9 +66,10 @@ module.exports = function (System) {
 			if (err) {
 				return json.bad(err, res);
 			} else if (stream) {
-				stream = stream.afterSave(req.user);
 
 				if (req.user) {
+					stream = stream.afterSave(req.user);
+					
 					var isInArray = stream.moderators.some(function (moderator) {
 						return moderator.equals(req.user._id);
 					});
