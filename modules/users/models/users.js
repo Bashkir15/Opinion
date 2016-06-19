@@ -83,6 +83,16 @@ var UserSchema = new mongoose.Schema({
 		required: false
 	},
 
+	threadScore: {
+		type: Number,
+		default: 0
+	},
+
+	commentScore: {
+		type: Number,
+		default: 0
+	},
+
 	roles: {
 		type: Array,
 		default: ['authenticated']
@@ -188,6 +198,26 @@ UserSchema.methods = {
 		}
 
 		return this.update(updates, callback);
+ 	},
+
+ 	addThreadScore: function (callback) {
+ 		this.threadScore += 1;
+ 		this.save(callback);
+ 	},
+
+ 	removeThreadScore: function (callback) {
+ 		this.threadScore -= 1;
+ 		this.save(callback);
+ 	},
+
+ 	addCommentScore: function (callback) {
+ 		this.commentScore += 1;
+ 		this.save(callback);
+ 	},
+
+ 	removeCommentScore: function (callback) {
+ 		this.commentScore -= 1;
+ 		this.save(callback);
  	},
 
  	toJSON: function() {
