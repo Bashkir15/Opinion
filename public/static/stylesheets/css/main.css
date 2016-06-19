@@ -404,7 +404,8 @@ p {
             position: relative;
             border-bottom: 1px solid rgba(0, 0, 0, 0.12);
             transition: all .4s ease;
-            font-family: 'Open Sans', sans-serif; }
+            font-family: 'Lato', sans-serif;
+            color: rgba(0, 0, 0, 0.45); }
           .login-page-container > div > md-card > div form .auth-form-wrapper label {
             display: inline-block;
             position: absolute;
@@ -415,6 +416,24 @@ p {
             color: rgba(0, 0, 0, 0.35);
             font-family: 'Lato', sans-serif;
             transition: all .4s ease; }
+          .login-page-container > div > md-card > div form .auth-form-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            transition: all .4s ease; }
+          .login-page-container > div > md-card > div form .auth-form-wrapper.has-focus label {
+            opacity: 0; }
+          .login-page-container > div > md-card > div form .auth-form-wrapper.has-focus::after {
+            left: 0;
+            width: 100%;
+            background: #50ade3; }
+          .login-page-container > div > md-card > div form .auth-form-wrapper.has-success label {
+            opacity: 0; }
+          .login-page-container > div > md-card > div form .auth-form-wrapper:not(.is-empty) label {
+            opacity: 0; }
         .login-page-container > div > md-card > div form .login-form-forgot {
           display: flex;
           flex-direction: row;

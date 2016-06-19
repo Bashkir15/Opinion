@@ -9,14 +9,20 @@
 
 			<div>
 				<form name='vm.loginForm' ng-submit="vm.login(vm.loginForm.$valid)" novaliate>
-					<div class='auth-form-wrapper'>
+					<div class='auth-form-wrapper' ng-class="{'has-focus': vm.loginForm.email.hasFocus,
+					'has-success': vm.loginForm.email.$valid,
+					'has-error': vm.loginForm.email.$error,
+					'is-empty': !vm.loginForm.email.$viewValue}">
 						<label>Email</label>
-						<input type='email' name='email' ng-model='vm.user.email'>
+						<input type='email' name='email' ng-model='vm.user.email' ng-focus='vm.loginForm.email.hasFocus=true' ng-blur='vm.loginForm.email.hasFocus=false' required>
 					</div>
 
-					<div class='auth-form-wrapper'>
+					<div class='auth-form-wrapper' ng-class="{'has-focus': vm.loginForm.password.hasFocus,
+					'has-success': vm.loginForm.password.$valid,
+					'has-error': vm.loginForm.password.$error,
+					'is-empty': !vm.loginForm.password.$viewValue}">
 						<label>Password</label>
-						<input type='password' name='password' ng-model='vm.user.password'>
+						<input type='password' name='password' ng-model='vm.user.password' ng-focus="vm.loginForm.password.hasFocus=true" ng-blur="vm.loginForm.password.hasFocus=false" required>
 					</div>
 
 					<div class='login-form-forgot'>

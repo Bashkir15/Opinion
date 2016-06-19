@@ -43,7 +43,8 @@
 							position: relative
 							border-bottom: 1px solid rgba(0,0,0,0.12)
 							transition: all .4s ease
-							@include open
+							@include lato
+							color: rgba(0,0,0,0.45)
 
 						label
 							display: inline-block
@@ -55,6 +56,33 @@
 							color: rgba(0,0,0,0.35)
 							@include lato
 							transition: all .4s ease
+
+						&::after
+							content: ''
+							position: absolute
+							bottom: 0
+							left: 50%
+							width: 0
+							height: 1px
+							transition: all .4s ease
+
+						&.has-focus
+							label
+								opacity: 0
+
+							&::after
+								left: 0
+								width: 100%
+								background: $accent-blue
+
+						&.has-success
+							label
+								opacity: 0
+
+						&:not(.is-empty)
+							label
+								opacity: 0
+
 
 					.login-form-forgot
 						display: flex
