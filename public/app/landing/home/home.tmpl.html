@@ -100,9 +100,9 @@
 							</div>
 
 							<div layout='column' flex='10' layout-align='center center' class='home-threads-score'>
-								<i class='icon-expand_less' ng-click="vm.upvote(thread)"></i>
-								<span>{{thread.score}}</span>
-								<i class='icon-expand_more' ng-click="vm.downvote(thread)"></i>
+								<i class='icon-expand_less' ng-click="vm.upvote(thread)" ng-class="{'upvoted': thread.upvoted}"></i>
+								<span ng-class="{'positive': thread.score >= 1, 'negative': thread.score <= -1}">{{thread.score}}</span>
+								<i class='icon-expand_more' ng-click="vm.downvote(thread)" ng-class="{'downvoted': thread.downvoted}"></i>
 							</div>
 						</div>
 
@@ -112,7 +112,7 @@
 								<span>{{thread.comments.length}} Comment<span ng-if="thread.comments.length > 1 || thread.comments.length === 0">s</span></span>
 							</button>
 
-							<button ng-if="thread.saved" ng-click="vm.unsave(thread)">
+							<button ng-if="thread.saved" ng-click="vm.unsave(thread)" class='saved'>
 								<i class='icon-favorite_border'></i>
 								<span>{{thread.saves.length}} Save<span ng-if="thread.saves.length > 1 || thread.saves.length === 0">s</span></span>
 							</button>
@@ -124,7 +124,7 @@
 
 							<span flex></span>
 
-							<button ui-sref='streamsSingle({streamId: thread.stream._id})'>
+							<button ui-sref='streams.streamsSingle({streamId: thread.stream._id})'>
 								<span class='home-threads-stream'>In {{thread.stream.name}}</span>
 							</button>
 							<button>

@@ -140,10 +140,10 @@
 	&:hover
 		.home-threads-content-overlay
 			opacity: 1
-			height: 70px
+			height: 100px
 
 .home-threads-content-overlay
-	background-color: $darkest-blue
+	background-image: -webkit-linear-gradient(bottom, $darkest-blue 0%, darken($darkest-blue, 10%) 100%)
 	position: absolute
 	top: 0
 	left: 0
@@ -165,9 +165,28 @@
 	span
 		@include open
 		color: #9a9a9a
+		transition: all .4s ease
+
+		&.positive
+			color: $accent-green
+
+		&.negative
+			color: $accent-red
 
 	i
 		color: #dfe1df
+		transition: all .4s ease
+		outline: none
+		display: inline-block
+
+		&.upvoted
+			color: $accent-green
+
+		&.downvoted
+			color: $accent-red
+
+		&:hover
+			transform: scale(1.5,1.5)
 
 
 .home-threads-toolbar
