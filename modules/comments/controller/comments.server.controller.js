@@ -124,7 +124,7 @@ module.exports = function (System) {
 		var userId = req.params.userId || req.user._id;
 
 		var getComments = function() {
-			var criteria = {saved: userId};
+			var criteria = {saves: userId};
 
 			if (req.query && req.query.timestamp) {
 				criteria.created = {$gte: req.query.timestamp};

@@ -3,4 +3,11 @@
 		<p>{{thread.title}}</p>
 		<p>{{thread.creator.name}}</p>
 	</div>
+
+	<p>Break</p>
+
+	<div ng-repeat='item in vm.comments'>
+		<p>{{item.content}}</p>
+		<p>{{comment.creator.name}}</p>
+	</div>
 </div>
