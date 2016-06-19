@@ -297,6 +297,7 @@ module.exports = function (System) {
 	};
 
 	obj.upvote = function (req, res) {
+		var User = mongoose.model('User');
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
 		.populate('stream')
@@ -309,8 +310,10 @@ module.exports = function (System) {
 				} else if (thread.downvotes.indexOf(req.user._id) !== -1) {
 					thread.downvotes.splice(thread.downvotes.indexOf(req.user._id), 1);
 					thread.upvotes.push(req.user._id);
+					thread.creator.addThreadScore();
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
+
 
 						if (err) {
 							return json.bad(err, res);
@@ -322,8 +325,10 @@ module.exports = function (System) {
 					});
 				} else {
 					thread.upvotes.push(req.user._id);
+					thread.creator.addThreadScore();
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
+
 
 						if (err) {
 							return json.bad(err, res);
@@ -341,6 +346,7 @@ module.exports = function (System) {
 	};
 
 	obj.downvote = function (req, res) {
+		var User = mongoose.model('User');
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
 		.populate('stream')
@@ -356,6 +362,20 @@ module.exports = function (System) {
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
 
+						User.findOne({_id: thread.creator})
+						.exec(function (err, user) {
+							if (err) {
+								return json.bad(err, res);
+							} else {
+								user.removeThreadScore();
+								user.save(function (err) {
+									if (err) {
+										return json.bad(err, res);
+									}
+								});
+							}
+						});
+
 						if (err) {
 							return json.bad(err, res);
 						}
@@ -368,6 +388,20 @@ module.exports = function (System) {
 					thread.downvotes.push(req.user._id);
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
+
+						User.findOne({_id: thread.creator})
+						.exec(function (err, user) {
+							if (err) {
+								return json.bad(err, res);
+							} else {
+								user.removeThreadScore();
+								user.save(function (err) {
+									if (err) {
+										return json.bad(err, res);
+									}
+								});
+							}
+						});
 
 						if (err) {
 							return json.bad(err, res);

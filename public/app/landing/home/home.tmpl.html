@@ -93,13 +93,16 @@
 
 							<div layout='column' flex class='home-threads-content' ui-sref='streamsThread({streamId: thread.stream._id, threadId: thread._id})'>
 								<p>{{thread.title}}</p>
+								<div class='home-threads-content-overlay'>
+									<p>{{thread.content}}</p>
+								</div>
 								
 							</div>
 
 							<div layout='column' flex='10' layout-align='center center' class='home-threads-score'>
-								<i class='icon-expand_less'></i>
+								<i class='icon-expand_less' ng-click="vm.upvote(thread)"></i>
 								<span>{{thread.score}}</span>
-								<i class='icon-expand_more'></i>
+								<i class='icon-expand_more' ng-click="vm.downvote(thread)"></i>
 							</div>
 						</div>
 
@@ -109,7 +112,12 @@
 								<span>{{thread.comments.length}} Comment<span ng-if="thread.comments.length > 1 || thread.comments.length === 0">s</span></span>
 							</button>
 
-							<button>
+							<button ng-if="thread.saved" ng-click="vm.unsave(thread)">
+								<i class='icon-favorite_border'></i>
+								<span>{{thread.saves.length}} Save<span ng-if="thread.saves.length > 1 || thread.saves.length === 0">s</span></span>
+							</button>
+
+							<button ng-if="!thread.saved" ng-click="vm.save(thread)">
 								<i class='icon-favorite_border'></i>
 								<span>{{thread.saves.length}} Save<span ng-if="thread.saves.length > 1 || thread.saves.length === 0">s</span></span>
 							</button>

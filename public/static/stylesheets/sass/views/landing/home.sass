@@ -128,14 +128,36 @@
 
 .home-threads-content
 	padding: 10px 0
+	cursor: pointer
+	position: relative
 
 	p
 		@include open
 		color: #dfe1df !important
+		opacity: 1
+		transition: all .4s ease
 
-		&:nth-of-type(2)
-			@include lato
-			color: #9a9a9a
+	&:hover
+		.home-threads-content-overlay
+			opacity: 1
+			height: 70px
+
+.home-threads-content-overlay
+	background-color: $darkest-blue
+	position: absolute
+	top: 0
+	left: 0
+	bottom: 0
+	right: 0
+	opacity: 0
+	transition: all .4s ease
+	height: 0
+
+	p
+		@include lato
+		color: #fff
+		padding-left: 10px
+		padding-top: 8px
 
 .home-threads-score
 	padding: 10px 0

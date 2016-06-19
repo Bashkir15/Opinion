@@ -200,14 +200,14 @@ UserSchema.methods = {
 		return this.update(updates, callback);
  	},
 
- 	addThreadScore: function (callback) {
+ 	addThreadScore: function () {
  		this.threadScore += 1;
- 		this.save(callback);
+ 		this.save();
  	},
 
- 	removeThreadScore: function (callback) {
+ 	removeThreadScore: function () {
  		this.threadScore -= 1;
- 		this.save(callback);
+ 		this.save();
  	},
 
  	addCommentScore: function (callback) {
