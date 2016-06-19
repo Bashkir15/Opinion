@@ -4,7 +4,7 @@
 			<div class='thread-title' layout='row' layout-align='none center'>
 				<p>{{thread.title}}</p>
 				<span flex></span>
-				<button ui-sref='streamsSingle({streamId: thread.stream._id})' class='thread-content-stream'> In {{thread.stream.name}}</button>
+				<button ui-sref='streams.streamsSingle({streamId: thread.stream._id})' class='thread-content-stream'> In {{thread.stream.name}}</button>
 				<span>{{thread.created | amCalendar}}</span>
 			</div>
 
