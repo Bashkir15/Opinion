@@ -1,0 +1,114 @@
+.password-reset-header
+	height: 70px
+	padding: 10px
+	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25)
+
+	h3
+		@include lato
+		color: #dfe1df
+
+	span
+		@include open
+		color: #dfe1df
+		display: inline-block
+		outline: none
+		transition: all .4s ease
+
+		&:hover
+			transform: scale(1.5,1.5)
+
+.password-reset-body
+	padding: 35px 18px 10px 18px
+
+	p
+		@include lato
+		color: rgba(0,0,0,0.4)
+
+.password-reset-form
+	padding: 40px 0
+	width: 90%
+	margin: 0 auto
+
+.password-reset-wrapper
+	position: relative
+	width: 100%
+	margin-bottom: 42px
+
+	label
+		position: absolute
+		top: 0
+		left: 6px
+		display: inline-block
+		color: rgba(0,0,0,0.35)
+		opacity: 1
+		@include lato
+		transition: all .4s ease
+
+	input
+		position: relative
+		width: 100%
+		border-bottom: 1px solid rgba(0,0,0,0.35)
+		@include lato
+		color: rgba(0,0,0,0.5)
+		transition: all .4s ease
+
+	&::after
+		content: ''
+		position: absolute
+		bottom: 1px
+		left: 50%
+		width: 0
+		height: 1px
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		&::after
+			left: 0
+			width: 100%
+			background: $accent-blue
+
+	&.has-success
+		label
+			opacity: 0
+
+	&:not(.is-empty)
+		label
+			opacity: 0
+
+.password-reset-actions
+	padding: 10px
+	height: 60px
+	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
+
+	button
+		height: 40px
+		width: 145px
+		margin-right: 12px
+		transition: all .4s ease
+
+		span
+			@include open
+			color: #dfe1df
+			transition: all .4s ease
+
+		&:nth-of-type(1)
+			border: 1px solid $accent-green
+
+			&:hover
+				background: $accent-green
+
+				span
+					color: #fff
+
+		&:nth-of-type(2)
+			border: 1px solid $accent-red
+
+			&:hover
+				background: $accent-red
+
+				span
+					color: #fff
