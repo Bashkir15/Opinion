@@ -126,6 +126,62 @@ module.exports = function (System) {
 		});
 	};
 
+	obj.follow = function (req, res) {
+		var currentUser = req.user;
+		var toFollow = req.params.userId;
+		var already = req.user.following.indexOf(toFollow) !== -1;
+
+		if (already) {
+			return json.bad({message: 'Sorry, you are already following that user'}, res);
+		}
+
+		User.findOne({_id: toFollow})
+		.exec(function (err, user) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				currentUser.following.push(user._id);
+				currentUser.save(function (err, item) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: item
+					}, res);
+				});
+			}
+		});
+	};
+
+	obj.unfollow = function (req, res) {
+		var currentUser = req.user;
+		var toUnfollow = req.params.userId;
+		var already = req.user.following.indexOf(toUnfollow) == -1;
+
+		if (already) {
+			return json.bad({message: 'Sorry, you are not following that user'}, res);
+		}
+
+		User.findOne({_id: toUnfollow})
+		.exec(function (err, user) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				currentUser.following.splice(currentUser.following.indexOf(user._id), 1);
+				currentUser.save(function (err, item) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: item
+					}, res);
+				});
+			}
+		});
+	};
+
 	obj.imageUpload = function (req, res) {
 		var userId = req.params.userId;
 		var file = req.files.file;

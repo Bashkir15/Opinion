@@ -27,6 +27,20 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'post',
+		path: '/:userId/follow',
+		handler: users.follow,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'post',
+		path: '/:userId/unfollow',
+		handler: users.unfollow,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'post',
 		path: '/:userId/imageUpload',
 		handler: users.imageUpload,
 		authorized: true
