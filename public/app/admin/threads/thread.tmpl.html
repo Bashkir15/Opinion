@@ -43,9 +43,10 @@
 					</button>
 
 					<span flex></span>
-					<button>
-						<span>Search</span>
-					</button>
+					<div class='thread-comments-search' ng-class="{'has-focus': vm.search.hasFocus}">
+						<label for='threadCommentsSearch'>Search</label>
+						<input name='search' ng-model='vm.commentsFilter' ng-focus="vm.search.hasFocus=true" ng-blur="vm.search.hasFocus=false">
+					</div>
 				</div>
 			</div>
 		</div>

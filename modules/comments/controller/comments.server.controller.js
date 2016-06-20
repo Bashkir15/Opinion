@@ -43,7 +43,7 @@ module.exports = function (System) {
 
 			if (req.query && req.query.filter) {
 				delete criteria.created;
-				criteria.content = new RegExp(req.query.fiter, 'i');
+				criteria.content = new RegExp(req.query.filter, 'i');
 			}
 
 			Comment.find(criteria, null)

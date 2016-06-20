@@ -5,7 +5,7 @@
 	.controller('ThreadController', ThreadController);
 
 	/* @ngInject */
-	function ThreadController ($scope, $state, $stateParams, $mdDialog, appAuth, appThreads, appToast, appComments) {
+	function ThreadController ($scope, $state, $stateParams, $mdDialog, $timeout, appAuth, appThreads, appToast, appComments) {
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		var threadId = $stateParams.threadId;
@@ -22,7 +22,7 @@
 		vm.commentSave = commentSave;
 		vm.commentUnsave = commentUnsave;
 		vm.commentPage = 0;
-		vm.commentFilter = '';
+		vm.commentsFilter = '';
 		vm.lastUpdated = 0;
 		vm.openAddComment = openAddComment;
 
@@ -38,10 +38,10 @@
 			var commentsData = appComments.list.get({
 				threadId: threadId,
 				page: vm.commentPage,
-				filter: vm.commentFilter,
+				filter: vm.commentsFilter,
 				timestamp: vm.lastUpdated
 			}, function() {
-				if (vm.commentFilter) {
+				if (vm.commentsFilter) {
 					vm.comments = [];
 				}
 
@@ -55,6 +55,26 @@
 				vm.lastUpdated = Date.now();
 			});
 		}
+		var commentsFilterTimeout;
+		$scope.$watch('vm.commentsFilter', function (newValue, oldValue) {
+			if (!newValue !== oldValue) {
+				vm.comments = [];
+			}
+
+			$timeout.cancel(commentsFilterTimeout);
+			commentsFilterTimeout = $timeout(function() {
+				if (!newValue) {
+					if (vm.commentsFilterEnabled) {
+						vm.lastUpdated = 0;
+						vm.getComments();
+					}
+				} else {
+					vm.getComments();
+				}
+
+				vm.commentsFilterEnabled = vm.commentsFilter !== '';
+			}, 500);
+		});
 
 		function upvote (thread) {
 			var item = appThreads.single.get({theadId: thread._id}, function() {
