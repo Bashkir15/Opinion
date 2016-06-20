@@ -34,7 +34,7 @@
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center'>
-								<div class='md-avatar' ng-class="{'subscribed': item.subscribed}"></div>
+								<img src="{{item.image}}" ng-class="{'subscribed': item.subscribed}" class='stream-image'>
 								<button ng-if="item.subscribed" ng-click="vm.unsubscribe(item)" aria-label='unsubscribe from stream' class='stream-subscribed'>
 									<span>Unsubscribe</span>
 								</button>

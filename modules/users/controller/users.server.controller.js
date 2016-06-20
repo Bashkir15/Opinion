@@ -117,9 +117,23 @@ module.exports = function (System) {
 			if (err) {
 				return json.bad(err, res);
 			} else if (user) {
-				 json.good({
-					record: user
-				}, res);
+				 /*
+				  * Now we get the followers of the User
+				  */
+
+				return User.find({following: user._id}, function (err, followers) {
+				 	if (err) {
+				  		return json.bad(err, res);
+				  	}
+
+				  	return json.good({
+				  		record: user,
+				  		followers: followers,
+				  		following: user.following,
+				  		alreadyFollowing: req.user.following.indexOf(user._id) != -1
+				  	}, res);
+				});
+
 			} else {
 				return json.bad({message: 'Sorry, that user could not be found'}, res);
 			}
@@ -128,20 +142,19 @@ module.exports = function (System) {
 
 	obj.follow = function (req, res) {
 		var currentUser = req.user;
-		var toFollow = req.params.userId;
-		var already = req.user.following.indexOf(toFollow) !== -1;
 
-		if (already) {
-			return json.bad({message: 'Sorry, you are already following that user'}, res);
-		}
-
-		User.findOne({_id: toFollow})
+		User.findOne({_id: req.params.userId})
+		.populate('following')
 		.exec(function (err, user) {
-			if (err) {
+			/*if (err) {
 				return json.bad(err, res);
-			} else {
-				currentUser.following.push(user._id);
-				currentUser.save(function (err, item) {
+			} else if (user) {
+				/*if (currentUser.following.indexOf(user._id) !== -1) {
+					return json.bad({message: 'Sorry, you are already following that user'}, res);
+				} */
+
+				req.user.following.push(user);
+				req.user.save(function (err, item) {
 					if (err) {
 						return json.bad(err, res);
 					}
@@ -150,7 +163,7 @@ module.exports = function (System) {
 						record: item
 					}, res);
 				});
-			}
+			//}
 		});
 	};
 

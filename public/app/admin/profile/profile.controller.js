@@ -5,7 +5,7 @@
 	.controller('ProfileController', ProfileController);
 
 	/* @ngInject */
-	function ProfileController ($scope, $state, $stateParams, appAuth, appUsers, Upload) {
+	function ProfileController ($scope, $state, $stateParams, $http, appAuth, appUsers, Upload) {
 		var vm = this;
 		var userId = $stateParams.userId;
 		vm.profile = [];
@@ -21,16 +21,16 @@
 			});
 		}
 
-		function follow (profile) {
-			var obj = appUsers.single.get({userId: userId}, function() {
-				obj.$follow({userId: userId}, function() {
+		function follow () {
+			var user = appUsers.single.get({userId: userId}, function() {
+				user.$follow({userId: userId}, function() {
 					vm.getProfile();
 				});
 			});
 		}
 
 		function unfollow (profile) {
-			var user = appUsers.single.get({userId: userId}, function() {
+			var user = new appUsers.single.get({userId: userId}, function() {
 				user.$unfollow({userId: userId}, function() {
 					vm.getProfile();
 				});
@@ -56,6 +56,6 @@
 			vm.uploadUserImage($scope.file);
 		});
 
-		getProfile();
-	}
+		getProfile(); 
+	} 
 }());
