@@ -202,10 +202,12 @@ module.exports = function (System) {
 						threads.forEach(function (thread) {
 							threadArray.push(thread);
 						});
+
+						return threadArray;
 					}).then(function() {
 						console.log(threadArray);
 						return json.good({
-							records: threadArray
+							record: threadArray
 						}, res);
 					});									
 				});
@@ -308,7 +310,7 @@ module.exports = function (System) {
 		});
 	};
 
-	obj.upvote = function (req, res) {
+	obj.upvote = function (req, res, next) {
 		var User = mongoose.model('User');
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
@@ -325,15 +327,18 @@ module.exports = function (System) {
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
 
-						User.findOne({_id: thread.creator._id}, function (err, user) {
+						User.findOne({_id: thread.creator._id}, function (err, user, cb) {
 							if (err) {
 								return json.bad(err, res);
 							} else {
-								user.threadScore += 1;
-								user.save(function (err) {
+								user.addThreadScore(cb);
+								user.save(function (err, item) {
+									
 									if (err) {
 										return handleError(err, res);
 									}
+
+									return next(item);
 								});
 							}
 						});
@@ -353,17 +358,19 @@ module.exports = function (System) {
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
 
-						User.findOne({_id: thread.creator}, function (err, user, cb) {
+						User.findOne({_id: thread.creator._id}, function (err, user, cb) {
 							if (err) {
-								console.log(err);
 								return json.bad(err, res);
 							} else {
 							
 								user.threadScore += 1;
-								user.save(function (err) {
+								user.save(function (err, item) {
+
 									if (err) {
 										return handleError(err, res);
 									}
+
+									return next(item);
 								});
 							}
 						});

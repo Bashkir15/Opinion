@@ -121,7 +121,7 @@
 								thread.$save(function (response) {
 									if (response.success) {
 										$scope.reset();
-										appToast('yay!');
+										appToast('You have just posted a thread called ' + response.res.record.title);
 										vm.updateFeed();
 										$mdDialog.hide();
 									} else {

@@ -70,13 +70,13 @@
 		> div 
 			padding-top: 15px
 			//background: darken(#364351, 5%)
-			overflow-y: auto
-			width: 70%
+			width: 100%
 
 			md-list
 				md-list-item
 					margin-left: 10px
 					margin-bottom: 10px
+					width: 75%
 					padding: 0
 					background: #212a33
 
@@ -381,4 +381,27 @@
 		color: #fff
 		padding-left: 10px
 		padding-top: 8px
+
+.stream-single-no-threads
+	width: 100%
+	margin-top: 35px
+
+	p
+		@include mont
+		color: #9a9a9a
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		span
+			@include open
+			font-weight: 600
+			cursor: pointer
+			color: #bababa
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			transition: all .4s ease
+
+			&:hover
+				color: #fff
+
+
 

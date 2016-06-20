@@ -58,7 +58,7 @@
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center' class='thread-comments-user'>
-								<img src='../static/images/me.jpg'>
+								<img src='../static/images/me.jpg' ui-sref="profile.overview({userId: item.creator._id})">
 								<p>{{item.creator.name}}</p>
 							</div>
 
@@ -96,6 +96,11 @@
 				</md-list-item>
 			</md-list>
 		</md-content>
+
+		<div class='thread-no-comments' layout='row' layout-align='center none' ng-if="!vm.comments.length">
+			<p>There aren't any comments here yet. How about you add to the discussion and <span ng-click="vm.openAddComment()">add one?</span></p>
+		</div>
 	</div>
+
 </div>
 				

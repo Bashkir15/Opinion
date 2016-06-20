@@ -17,7 +17,9 @@ module.exports = function (System) {
 				return json.bad(err, res);
 			}
 
-			json.good(stream, res);
+			json.good({
+				record: stream
+			}, res);
 		});
 	};
 

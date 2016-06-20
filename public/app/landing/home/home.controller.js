@@ -23,12 +23,13 @@
 			if (appAuth.isLoggedIn()) {
 				var homeThreadData = appThreads.subscribedHome.get({}, function() {
 					if (!options.append) {
-						vm.threads = homeThreadData.res.records;
+						vm.threads = homeThreadData.res.record;
 					} else {
 						vm.threads = vm.threads.concat(homeThreadData.res.records);
 					}
 
 					vm.lastUpdated = Date.now()
+					console.log(vm.threads);
 				});
 			} else {
 				var homeThreadData = appThreads.home.get({

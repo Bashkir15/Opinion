@@ -192,7 +192,7 @@ module.exports = function (System) {
 		});
 	};
 
-	obj.upvote = function (req, res) {
+	obj.upvote = function (req, res, cb) {
 		Comment.findOne({_id: req.params.commentId})
 		.populate('creator')
 		.exec(function (err, comment) {
@@ -204,6 +204,7 @@ module.exports = function (System) {
 				} else if (comment.downvotes.indexOf(req.user._id) !== -1) {
 					comment.downvotes.splice(comment.downvotes.indexOf(req.user._id), 1);
 					comment.upvotes.push(req.user._id);
+					comment.creator.addCommentScore(cb);
 					comment.save(function (err, item) {
 						comment = comment.afterSave(req.user);
 
@@ -217,6 +218,7 @@ module.exports = function (System) {
 					});
 				} else {
 					comment.upvotes.push(req.user._id);
+					comment.creator.addCommentScore(cb);
 					comment.save(function (err, item) {
 						comment = comment.afterSave(req.user);
 

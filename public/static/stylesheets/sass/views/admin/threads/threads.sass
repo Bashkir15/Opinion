@@ -1,5 +1,11 @@
 @import "dialogs"
+@import "create"
 
+.thread-container
+	background: darken(#364351, 5%)
+
+.thread-content
+	background: #dfe1df
 .thread-title
 	padding-left: 10px
 	box-shadow: 0 2px 4px rgba(0,0,0,0.35)
@@ -36,6 +42,7 @@
 		border-radius: 50%
 		display: inline-block
 		transition: all .4s ease
+		cursor: pointer
 
 		&:hover
 			transform: scale(1.2, 1.2)
@@ -119,6 +126,7 @@
 		margin: 6px 0
 		display: inline-block
 		transition: all .4s ease
+		cursor: pointer
 
 		&:hover
 			transform: scale(1.1, 1.1)
@@ -181,3 +189,23 @@
 			span
 				@include lato
 				color: #9a9a9a
+
+.thread-no-comments
+	padding-top: 35px
+
+	p
+		@include mont
+		color: #9a9a9a
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		span
+			@include open
+			font-weight: 600
+			color: #bababa
+			cursor: pointer
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			transition: all .4s ease
+
+			&:hover
+				color: #fff

@@ -5,7 +5,7 @@
 	.controller('StreamsCreateController', StreamsCreateController);
 
 	/* @ngInject */
-	function StreamsCreateController ($state, $scope, appStorage, appToast, appStreams) {
+	function StreamsCreateController ($state, $scope, $location, appStorage, appToast, appStreams) {
 		var vm = this;
 		vm.reset = reset;
 		vm.create = create;
@@ -30,8 +30,8 @@
 				stream.$save(function (response) {
 					if (response.success) {
 						reset();
-						$state.go('streamsList');
-						appToast('yay!');
+						$location.url('streams/' + response.res.record._id);
+						appToast('You have just created a new stream named: ' + response.res.record.name + '. Please take a moment to finalize things');
 					} else {
 						appToast(response.res.message);
 					}

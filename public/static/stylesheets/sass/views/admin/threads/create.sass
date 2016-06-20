@@ -1,0 +1,122 @@
+.create-thread-container 
+	background-image: -webkit-linear-gradient(bottom, darken(#364351, 10%) 0%, darken(#364351, 5%) 100%)
+	min-height: 666px
+
+	> div
+		padding-top: 40px
+
+.create-thread-card
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
+.create-thread-header
+	height: 60px
+	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
+	box-shadow: 0 4px 4px 0 rgba(0,0,0,0.45)
+
+	h3
+		@include open
+		color: #dfe1df
+		text-shadow: 1px 1px rgba(0,0,0,0.65)
+
+.create-thread-body
+	padding-top: 55px
+
+.thread-form-wrapper
+	position: relative
+	width: 90%
+	margin: 0 auto 55px auto
+
+	label
+		position: absolute
+		top: 0
+		left: 6px
+		@include lato
+		color: rgba(0,0,0,0.35)
+		display: inline-block
+		opacity: 1
+		transition: all .4s ease
+
+	input
+		position: relative
+		width: 98%
+		padding-left: 6px
+		@include lato
+		color: rgba(0,0,0,0.45)
+		border-bottom: 1px solid rgba(0,0,0,0.12)
+		transition: all .4s ease
+
+	textarea
+		position: relative
+		width: 98%
+		padding-left: 6px
+		@include lato
+		color: rgba(0,0,0,0.45)
+		border: 1px solid rgba(0,0,0,0.12)
+		transition: all .4s ease
+
+	&::after
+		content: ''
+		position: absolute
+		bottom: 1px
+		left: 50%
+		width: 0
+		height: 1px
+		transition: all .4s ease
+
+	md-input-container
+		width: 100%
+		padding: 0
+
+	&.has-focus
+		label
+			opacity: 0
+
+		&:nth-of-type(1)
+			&::after
+				left: 0
+				width: 99%
+				background: $accent-blue
+
+		textarea
+			border: 1px solid $accent-blue
+
+	&.has-success
+
+		&:nth-of-type(1)
+			label
+				opacity: 0
+
+			&::after
+				left: 0
+				width: 99%
+				background: $accent-green
+
+	&:not(.is-empty)
+		label
+			opacity: 0
+
+		&:not(.has-focus)
+			textarea
+				border: 1px solid $accent-green
+
+.create-thread-form-submit
+	height: 65px
+	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
+
+	button
+		height: 40px
+		width: 120px
+		border: 1px solid $accent-green
+		border-radius: 4px
+		transition: all .4s ease
+
+		span
+			@include open
+			font-weight: 600
+			color: $accent-green
+			transition: all .4s ease
+
+		&:hover
+			background: $accent-green
+
+			span
+				color: #fff

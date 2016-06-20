@@ -141,7 +141,7 @@
 
 								comment.$save(function (response) {
 									if (response.success) {
-										appToast('yay!');
+										appToast('You just commented on this thread!');
 										vm.getComments();
 										$mdDialog.hide();
 									} else {
@@ -149,7 +149,7 @@
 									}
 								});
 							} else {
-								appToast('uh oh');
+								appToast('Hmm... looks like something is missing');
 							}
 						};
 

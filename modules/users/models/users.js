@@ -91,7 +91,8 @@ var UserSchema = new mongoose.Schema({
 	},
 
 	threadScore: {
-		type: Number
+		type: Number,
+		default: 0
 	},
 
 	commentScore: {
