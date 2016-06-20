@@ -1,0 +1,34 @@
+// Users Search //
+
+.users-search-header
+	height: 60px
+	padding: 0 10px
+
+	h3
+		@include lato
+		color: rgba(0,0,0,0.35)
+
+	span
+		@include lato
+		color: rgba(0,0,0,0.35)
+		display: inline-block
+		transition: all .4s ease
+
+		&:hover
+			transform: scale(1.5,1.5)
+
+.users-search-body
+	padding-top: 25px
+	width: 80%
+	margin: 0 auto
+
+
+.users-search-autocomplete
+	md-autocomplete-wrap
+		md-input-container
+			&.md-input-focused
+				label
+					color: $accent-blue
+
+				input
+					border-color: $accent-blue !important

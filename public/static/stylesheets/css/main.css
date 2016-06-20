@@ -1761,6 +1761,31 @@ p {
   .overview-friends-footer:hover span {
     color: #50ade3; }
 
+.users-search-header {
+  height: 60px;
+  padding: 0 10px; }
+  .users-search-header h3 {
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35); }
+  .users-search-header span {
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35);
+    display: inline-block;
+    transition: all .4s ease; }
+    .users-search-header span:hover {
+      transform: scale(1.5, 1.5); }
+
+.users-search-body {
+  padding-top: 25px;
+  width: 80%;
+  margin: 0 auto; }
+
+.users-search-autocomplete md-autocomplete-wrap md-input-container.md-input-focused label {
+  color: #50ade3; }
+
+.users-search-autocomplete md-autocomplete-wrap md-input-container.md-input-focused input {
+  border-color: #50ade3 !important; }
+
 .home-page-header {
   background-image: -webkit-linear-gradient(bottom, #365e77 0%, #264254 100%); }
   .home-page-header > div {
@@ -2068,3 +2093,10 @@ p {
       max-height: 0; }
     .user-menu-left .user-menu-body .user-menu-nested-list:not(.ng-hide) li {
       padding-left: 46px; }
+
+.user-menu-user-search i {
+  padding-right: 10px; }
+
+.user-menu-user-search .inset {
+  color: #dfe1df;
+  font-family: 'Open Sans', sans-serif; }

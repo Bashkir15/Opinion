@@ -13,7 +13,8 @@
 				md-item-text="item.name"
 				md-item-value="item._id"
 				md-floating-label='search'
-				md-selected-item-change="goToUser(item)">
+				md-selected-item-change="goToUser(item)"
+				class='users-search-autocomplete'>
 				<span md-highlight-text='search'>{{item.name}} /@{{item.username}}</span>
 			</md-autocomplete>
 		</div>
