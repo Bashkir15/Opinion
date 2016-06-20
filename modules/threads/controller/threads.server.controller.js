@@ -325,15 +325,14 @@ module.exports = function (System) {
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
 
-						User.findOne({_id: thread.creator._id}, function (err, user, cb) {
+						User.findOne({_id: thread.creator._id}, function (err, user) {
 							if (err) {
 								return json.bad(err, res);
 							} else {
 								user.threadScore += 1;
 								user.save(function (err) {
 									if (err) {
-										console.log(err);
-										return json.bad(err, res);
+										return handleError(err, res);
 									}
 								});
 							}
@@ -359,12 +358,11 @@ module.exports = function (System) {
 								console.log(err);
 								return json.bad(err, res);
 							} else {
-								console.log(user);
+							
 								user.threadScore += 1;
 								user.save(function (err) {
 									if (err) {
-										console.log(err);
-										return json.bad(err, res);
+										return handleError(err, res);
 									}
 								});
 							}
@@ -403,7 +401,7 @@ module.exports = function (System) {
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
 
-						User.findOne({_id: thread.creator})
+						User.findOne({_id: thread.creator._id})
 						.exec(function (err, user) {
 							if (err) {
 								return json.bad(err, res);
@@ -411,7 +409,7 @@ module.exports = function (System) {
 								user.removeThreadScore();
 								user.save(function (err) {
 									if (err) {
-										return json.bad(err, res);
+										return handleError(err, res);
 									}
 								});
 							}
@@ -430,7 +428,7 @@ module.exports = function (System) {
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
 
-						User.findOne({_id: thread.creator})
+						User.findOne({_id: thread.creator._id})
 						.exec(function (err, user) {
 							if (err) {
 								return json.bad(err, res);
@@ -438,7 +436,7 @@ module.exports = function (System) {
 								user.removeThreadScore();
 								user.save(function (err) {
 									if (err) {
-										return json.bad(err, res);
+										return handleError(err, res);
 									}
 								});
 							}

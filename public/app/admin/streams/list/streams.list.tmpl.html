@@ -1,4 +1,4 @@
-<div class='streams-list-container full-height'>
+<div class='streams-list-container'>
 	<div class='streams-list-header'>
 		<div></div>
 
@@ -77,7 +77,7 @@
 								<button ng-show="item.subscribed" ng-click="vm.unsubscribe(item)" aria-label='unsubscribe from stream' class='stream-subscribed'>
 									<span>Unsubscribe</span>
 								</button>
-
+e
 								<button ng-show="!item.subscribed" ng-click="vm.subscribe(item)" aria-label='unsubscribe from stream' class='stream-unsubscribed'>
 									<span>Subscribe</span>
 								</button>
@@ -112,6 +112,10 @@
 					</div>
 				</md-list-item> -->
 			</md-list>
+		</md-content>
+
+		<div class='streams-list-no-streams' layout='row' layout-align='center center' ng-if="!vm.streams.length">
+			<p>It looks like there aren't any Streams yet. Why don't you go <a ui-sref='streamsCreate'> make one?</a></p>
 		</div>
 	</div>
 </div>

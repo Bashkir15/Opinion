@@ -39,9 +39,8 @@
 
 				thread.$save(function (response) {
 					if (response.success) {
-						reset();
-						$location.url('streams/' + vm.thread.stream + response.res.record._id);
-						appToast('You have just posted a thread called ' + response.res.record.title + ' in the stream: ' + vm.thread.stream.name);
+						$location.url('streams/' + vm.thread.stream + '/' + response.res.record._id);
+						appToast('You have just posted a thread called ' + response.res.record.title);
 					} else {
 						appToast(response.res.message);
 					}

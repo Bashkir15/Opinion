@@ -135,5 +135,9 @@
 				</md-list-item>
 			</md-list>
 		</md-content>
+
+		<div class='home-page-no-threads' layout='row' layout-align='center center' ng-if="!vm.threads.length">
+			<p>There are no threads here yet. Why don't you go <a ui-sref='streamsCreate'>make one?</a></p>
+		</div>
 	</md-content>
 </div>

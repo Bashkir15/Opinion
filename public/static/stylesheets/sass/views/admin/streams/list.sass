@@ -108,11 +108,12 @@
 	.streams-list-body
 		
 		background: darken(#364351, 5%)
+		min-height: 500px
+
 			
 		md-content
 			padding-top: 15px
 			background: darken(#364351, 5%)
-			height: 504px
 			overflow-y: auto
 
 			md-list
@@ -278,5 +279,25 @@
 								span
 									@include open
 									color: #9a9a9a */
+
+.streams-list-no-streams
+	padding-top: 35px
+
+	p
+		@include mont
+		color: #9a9a9a
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		a
+			text-decoration: none
+			color: #bababa
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			transition: all .4s ease
+
+			&:hover
+				color: #fff
 
 					
