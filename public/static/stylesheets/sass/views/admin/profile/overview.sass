@@ -1,0 +1,127 @@
+.overview-container
+	padding-top: 20px
+	padding-left: 50px
+	padding-right: 40px
+
+
+.overview-general
+	margin-bottom: 20px
+
+.overview-header
+	height: 40px
+
+	h3
+		@include lato
+		color: rgba(0,0,0,0.35)
+
+.overview-content
+	padding: 10px
+
+	h4
+		@include open
+		color: rgba(0,0,0,0.4)
+
+	p
+		@include lato
+		color: rgba(0,0,0,0.35)
+
+.overview-extra-header
+	height: 40px
+
+	h3
+		@include lato
+		color: rgba(0,0,0,0.35)
+
+.overview-extra-content
+	h4
+		@include open
+		color: rgba(0,0,0,0.4)
+		padding-left: 10px
+
+	p
+		@include lato
+		color: rgba(0,0,0,0.35)
+		padding: 8px 12px 15px 12px
+
+.overview-score
+	div
+		border-right: 1px solid rgba(0,0,0,0.45)
+
+	p
+		@include lato
+		color: rgba(0,0,0,0.35)
+
+	span
+		@include lato
+		color: rgba(0,0,0,0.35)
+
+		i
+			color: rgba(0,0,0,0.35)
+			padding-right: 4px
+
+.overview-friends-header
+	height: 40px
+	padding: 0 10px
+	border-bottom: 1px solid rgba(0,0,0,0.4)
+
+	p
+		@include lato
+		color: rgba(0,0,0,0.35)
+
+	button
+		span
+			@include lato
+			color: rgba(0,0,0,0.35)
+
+.overview-friends-body
+	padding-bottom: 10px
+
+.overview-friends-friend
+	> div
+		height: 110px
+		border-bottom: 1px solid rgba(0,0,0,0.4)
+		transition: all .4s ease
+
+		&:nth-of-type(2n - 1)
+			border-right: 1px solid rgba(0,0,0,0.4)
+
+		&:hover
+			background: $accent-blue
+
+			img
+				transform: scale(1.1,1.1)
+				border: 1px solid rgba(255, 255, 255, 1)
+
+			p
+				color: #fff
+
+
+		img
+			height: 40px
+			width: 40px
+			display: inline-block
+			border-radius: 50%
+			transition: all .4s ease
+
+		
+		p
+			@include lato
+			color: rgba(0,0,0,0.4)
+			transition: all .4s ease
+
+.overview-friends-footer
+	height: 40px
+	border-top: 1px solid rgba(0,0,0,0.4)
+	padding-right: 8px
+
+	button
+		span
+			@include lato
+			color: rgba(0,0,0,0.4)
+			transition: all .4s ease
+
+	&:hover
+		span
+			color: $accent-blue
+
+

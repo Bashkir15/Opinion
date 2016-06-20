@@ -268,9 +268,11 @@ module.exports = function (System) {
 						threads.pop();
 					}
 
-					threads.map(function (e) {
-						e = e.afterSave(req.user);
-					});
+					if (req.user) {
+						threads.map(function (e) {
+							e = e.afterSave(req.user);
+						});
+					}
 
 					json.good({
 						records: threads,
