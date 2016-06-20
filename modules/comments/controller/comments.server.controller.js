@@ -78,10 +78,10 @@ module.exports = function (System) {
 	};
 
 	obj.timeline = function (req, res) {
-		var userId = req.params.userId || req.user._id;
+		var userId = req.params.userId
 
 		var getComments = function() {
-			var criteria = {created: userId};
+			var criteria = {creator: userId};
 
 			if (req.query && req.query.timestamp) {
 				criteria.created = {$gte: req.query.timestamp};
