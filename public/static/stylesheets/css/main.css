@@ -330,6 +330,44 @@ p {
             transition: all .4s ease;
             color: rgba(0, 0, 0, 0.35);
             font-family: 'Lato', sans-serif; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            transition: all .4s ease; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.has-focus label {
+            opacity: 0; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.has-focus::after {
+            left: 0;
+            width: 100%;
+            background: #50ade3; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.has-success label {
+            opacity: 0; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.has-success::after {
+            left: 0;
+            width: 100%;
+            background: #74b97d; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.has-success:not(.has-focus)::after {
+            background: #74b97d; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.has-error label {
+            opacity: 0; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.has-error::after {
+            left: 0;
+            width: 100%;
+            background: #ba4445; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.is-empty label {
+            opacity: 1; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.is-empty::after {
+            width: 0; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.is-empty.has-focus label {
+            opacity: 0; }
+          .signup-page-container > div md-card md-content form .auth-form-wrapper.is-empty.has-focus::after {
+            left: 0;
+            width: 100%;
+            background: #50ade3; }
         .signup-page-container > div md-card md-content form .register-form-submit {
           display: flex;
           flex-direction: column;

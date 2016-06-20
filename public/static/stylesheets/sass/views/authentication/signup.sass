@@ -56,6 +56,62 @@
 							color: rgba(0,0,0,0.35)
 							@include lato
 
+						&::after
+							content: ''
+							position: absolute
+							bottom: 0
+							left: 50%
+							width: 0
+							height: 1px
+							transition: all .4s ease
+
+						&.has-focus
+							label
+								opacity: 0
+
+							&::after
+								left: 0
+								width: 100%
+								background: $accent-blue
+
+						&.has-success
+							label
+								opacity: 0
+
+							&::after
+								left: 0
+								width: 100%
+								background: $accent-green
+
+							&:not(.has-focus)
+								&::after
+									background: $accent-green
+
+						&.has-error
+							label
+								opacity: 0
+
+							&::after
+								left: 0
+								width: 100%
+								background: $accent-red
+
+						&.is-empty
+							label
+								opacity: 1
+
+							&::after
+								width: 0
+
+							&.has-focus
+								label
+									opacity: 0
+
+								&::after
+									left: 0
+									width: 100%
+									background: $accent-blue
+
 					.register-form-submit
 						display: flex
 						flex-direction: column
