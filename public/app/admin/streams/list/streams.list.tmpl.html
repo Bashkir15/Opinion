@@ -1,121 +1,103 @@
-<div class='streams-list-container'>
-	<div class='streams-list-header'>
-		<div></div>
-
-		<div class='streams-list-header-overlay'>
-			<div></div>
+<div class='streams-list-container' layout='column'>
+	<div>
+		<div class='streams-list-header'>
+			<div layout='column' layout-align='none center'>
+				<div></div>
+				<p>Opinionated is home to {{vm.streams.length}} different Streams with a multitude of topics, if you can't find one that suits your interests, create your own!</p>
+			</div>
 		</div>
-	</div>
 
-	<div class='streams-list-toolbar'>
-		<div class='toolbar-left'>
-			<div>
+		<md-toolbar class='streams-list-toolbar'>
+			<div layout='row' layout-align='none center' class='md-toolbar-tools'>
 				<button aria-label='create stream button' ui-sref='streamsCreate'>
 					<span>Create Stream</span>
 				</button>
+
+				<button aria-label='order streams button' class='streams-list-order-streams' ng-click="vm.showOrder = !vm.showOrder" ng-class="{'open: vm.showOrder}">	
+					<span>Order Streams</span>
+					<i class='icon-expand_more'></i>
+				</button>
+
+				<ul ng-show="vm.showOrder" class='streams-list-order-streams-dropdown'>
+					<li>
+						<button ng-click="vm.orderByThreads()">
+							<span>By Threads</span>
+						</button>
+					</li>
+
+					<li>
+						<button ng-click="vm.orderBySubscribers()">
+							<span>By Subscribers</span>
+						</button>
+					</li>
+
+					<li>
+						<button ng-click="vm.orderByDate()">
+							<span>By Date</span>
+						</button>
+					</li>
+				</ul>
+
+				<span flex></span>
+
+				<div class='streams-list-search' ng-class="{'has-focus': vm.search.hasFocus}">
+					<label for='streamsListSearch'>Search</label>
+					<input name='search' ng-model='vm.streamsFilter' id='streamsListSearch' ng-focus="vm.search.hasFocus=true" ng-blur="vm.search.hasFocus=false">
+				</div>
 			</div>
 		</div>
 
-		<div class='toolbar-right'>
+		<div class='streams-list-body' layout='column'>
 			<div>
-				<label>Search</label>
-				<input type='search'>
-					<div>
-						<i class='icon-search'></i>
-					</div>
+				<md-list>
+					<md-list-item class='md-2-line' ng-repeat='item in vm.streams | orderBy: vm.rowFilter'>
+						<div class='md-list-item-text'>
+							<div layout='row'>
+								<div layout='column' flex='15' layout-align='center center' class='streams-list-image'>
+									<img ng-if="item.image" src="{{item.image}}" ng-class="{'subscribed': item.subscribed}">
+									<img ng-if="!item.image" src="../static/images/cat-image.jpeg" ng-class="{'subscribed': item.subscribed}">
+
+									<button ng-if="item.subscribed" ng-click="vm.unsubscribe(item)" aria-label='unsubscribe from stream' class='stream-subscribed'>
+										<span>Unsubscribe</span>
+									</button>
+
+									<button ng-if="!item.subscribed" ng-click="vm.subscribe(item)" aria-label='subscribe to stream' class='stream-unsubscribed'>
+										<span>Subscribe</span>
+									</button> 
+								</div>
+
+								<div layout='column' flex ui-sref='streams.streamsSingle({streamId: item._id})' class='streams-list-description'>
+									<h4>{{item.name}}</h4>
+									<p>{{item.description}}</p>
+								</div>
+							</div>
+
+							<div layout='row' class='streams-list-item-toolbar' layout-align='none center'>
+								<button>
+									<i class='icon-favorite_border'></i>
+									<span>{{item.subscribers.length}} Subscriber<span ng-if="item.subscribers.length > 1 || item.subscribers.length == 0">s</span></span>
+								</button>
+
+								<button>
+									<i class='icon-mail_outline'></i>
+									<span>{{item.threads.length}} Thread<span ng-if="item.threads.length > 1 || item.threads.length == 0">s</span></span>
+								</button>
+
+								<span flex></span>
+
+								<button>
+									<span>{{item.created | amCalendar}}</span>
+								</button>
+							</div>
+						</div>
+					</md-list-item>
+				</md-list>
 			</div>
-		</div>
-	</div>
 
-	<div class='streams-list-body'>
-		<md-content layout='column'>
-			<md-list>
-				<md-list-item class='md-2-line' ng-repeat='item in vm.streams'>
-					<div class='md-list-item-text'>
-						<div layout='row'>
-							<div layout='column' flex='15' layout-align='center center'>
-								<img src="{{item.image}}" ng-class="{'subscribed': item.subscribed}" class='stream-image'>
-								<button ng-if="item.subscribed" ng-click="vm.unsubscribe(item)" aria-label='unsubscribe from stream' class='stream-subscribed'>
-									<span>Unsubscribe</span>
-								</button>
-
-								<button ng-if="!item.subscribed" ng-click="vm.subscribe(item)" aria-label='subscribe to stream' class='stream-unsubscribed'>
-									<span>Subscribe</span>
-								</button>
-							</div>
-
-							<div layout='column' flex ng-click="vm.goToStream(item)">
-								<h4>{{item.name}}</h4>
-								<p>{{item.description}}</p>
-							</div>
-						</div>
-
-						<div layout='row' class='streams-list-item-toolbar' align-items='center none'>
-
-							<button>
-								<i class='icon-favorite_border'></i>
-								<span>{{item.subscribers.length}} Subscriber<span ng-if="item.subscribers.length > 1 || item.subscribers.length == 0">s</span></span>
-							</button>
-
-							<button>
-								<i class='icon-mail_outline'></i>
-								<span>{{item.threads.length}} Thread<span ng-if="item.threads.length > 1 || item.threads.length == 0">s</span></span>
-							</button>
-
-							<div>
-								{{item.created | date:'short'}}
-							</div>
-						</div>
-					</div>
-				</md-list-item>
-
-				<!-- <md-list-item ng-repeat='item in vm.streams'>
-					<div>
-						<div class='streams-item-left'>
-							<div>
-								<div ng-class="{'subscribed': item.subscribed}"></div>
-								<button ng-show="item.subscribed" ng-click="vm.unsubscribe(item)" aria-label='unsubscribe from stream' class='stream-subscribed'>
-									<span>Unsubscribe</span>
-								</button>
-e
-								<button ng-show="!item.subscribed" ng-click="vm.subscribe(item)" aria-label='unsubscribe from stream' class='stream-unsubscribed'>
-									<span>Subscribe</span>
-								</button>
-							</div>
-						</div>
-
-						<div class='streams-item-right' ng-click="vm.goToStream(item)">
-							<h4>{{item.name}}</h4>
-
-							<p>{{item.description}}</p>
-						</div>
-					</div>
-
-					<div class='streams-item-toolbar'>
-						<div class='item-toolbar-left'>
-							<button>
-								<i class='icon-favorite_border'></i>
-								<span>{{item.subscribers.length}} Subscriber<span ng-if="item.subscribers.length > 1 || item.subscribers.length === 0">s</span></span>
-							</button>
-
-							<button>
-								<i class='icon-mail_outline'></i>
-								<span>{{item.threads.length}} Thread<span ng-if="item.threads.length > 1 || item.threads.length === 0">s</span></span>
-							</button>
-						</div>
-
-						<div class='item-toolbar-right'>
-							<button>
-								<span>{{item.created | date:'short'}}</span>
-							</button>
-						</div>
-					</div>
-				</md-list-item> -->
-			</md-list>
-		</md-content>
-
-		<div class='streams-list-no-streams' layout='row' layout-align='center center' ng-if="!vm.streams.length">
-			<p>It looks like there aren't any Streams yet. Why don't you go <a ui-sref='streamsCreate'> make one?</a></p>
+			<div class='streams-list-no-streams' layout='row' layout-align='center center' ng-if="!vm.streams.length">
+				<p>It looks like there aren't any Stream yet. Why don't you go <a ui-sref='streamsCreate'> make one?</a></p>
+			</div>
 		</div>
 	</div>
 </div>
+
