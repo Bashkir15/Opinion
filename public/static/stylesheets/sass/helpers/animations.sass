@@ -71,23 +71,24 @@ $visibilityDefault: hidden
 @include keyframes(slideInUp) 
 	0% 
 		opacity: 0
-		@include transform(translateY(2000px))
+		
 	
 
 	100% 
 		opacity: 1
-		@include transform(translateY(0))
+		
 	
 
 
 @include keyframes(slideOutDown) 
 	0% 
-		@include transform(translateY(0))
+		
+		opacity: 1
 	
 
 	100% 
 		opacity: 0
-		@include transform(translateY(2000px))
+		
 
 @mixin slideInUp($count: $countDefault, $duration: $durationDefault, $delay: $delayDefault, $function: $functionDefault, $fill: $fillDefault, $visibility: $visibilityDefault) 
 	@include animation-name(slideInUp)
