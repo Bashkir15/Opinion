@@ -28,7 +28,7 @@
 		vm.orderByReplies = orderByReplies;
 		vm.feedPage = 0;
 		vm.lastUpdated = 0;
-		vm.feedFilter = '';
+		vm.feedsFilter = '';
 
 		function getStream () {
 			var streamData = appStreams.single.get({streamId: streamId}, function() {
@@ -45,9 +45,9 @@
 				streamId: streamId,
 				page: vm.feedPage,
 				timestamp: vm.lastUpdated,
-				filter: vm.feedFilter
+				filter: vm.feedsFilter
 			}, function() {
-				if (vm.feedFilter) {
+				if (vm.feedsFilter) {
 					vm.feed = [];
 				}
 
@@ -61,16 +61,16 @@
 				vm.lastUpdated = Date.now();
 			});
 		}
-		var feedFilterTimeout;
-		/*$scope.$watch('vm.feedFilter', function (oldValue, newValue) {
-			if (oldValue !== newValue) {
+		var feedsFilterTimeout;
+		$scope.$watch('vm.feedsFilter', function (newValue, oldValue) {
+			if (!newValue !== oldValue) {
 				vm.feed = [];
 			}
 
-			$timeout.cancel(feedFilterTimeout);
-			feedFilterTimeout = $timeout(function() {
+			$timeout.cancel(feedsFilterTimeout);
+			feedsFilterTimeout = $timeout(function() {
 				if (!newValue) {
-					if (vm.feedFilterEnabled) {
+					if (vm.feedsFilterEnabled) {
 						vm.lastUpdated = 0;
 						vm.updateFeed();
 					}
@@ -78,24 +78,11 @@
 					vm.updateFeed();
 				}
 
-				vm.feedFilterEnabled = vm.feedFilter !== '';
+				vm.feedsFilterEnabled = vm.feedsFilter !== '';
 			}, 500);
-		}); */
+		}); 
 
-		$scope.$watch('vm.feedFilter', function (newValue, oldValue) {
-			if (newValue !== oldValue) {
-				vm.feed = [];
-			}
-
-			if (!newValue) {
-				vm.lastUpdated = 0;
-				vm.updateFeed;
-			} else {
-				vm.updateFeed;
-			}
-
-			vm.feedFilterEnabled = vm.feedFilter !== '';
-		});
+		
 
 		function openAddPost() {
 			$mdDialog.show({

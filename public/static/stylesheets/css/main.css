@@ -2020,7 +2020,7 @@ p {
     display: inline-block;
     position: absolute;
     right: 0;
-    top: 11px; }
+    top: 7px; }
   .home-page-order-threads:hover, .home-page-order-threads:active {
     background: #365e77; }
   .home-page-order-threads.open {
@@ -2131,7 +2131,8 @@ p {
     color: #dfe1df;
     transition: all .4s ease;
     outline: none;
-    display: inline-block; }
+    display: inline-block;
+    cursor: pointer; }
     .home-threads-score i.upvoted {
       color: #74b97d; }
     .home-threads-score i.downvoted {

@@ -8,7 +8,7 @@
 	</div>
 
 	<md-toolbar class='home-page-toolbar'>
-		<div class='md-toolbar-tools' layout='row' layout-align='center none'>
+		<div class='md-toolbar-tools' layout='row' layout-align='none center'>
 			<!-- <md-menu>
 				<button aria-label='order home page threads' ng-click="$mdOpenMenu()">
 					<span>Order Threads</span>
@@ -48,42 +48,36 @@
 
 			<ul ng-show="vm.showOrder" class='home-page-order-threads-dropdown'>
 				<li>
-					<button>
+					<button ng-click="vm.orderByScore()">
 						<span>By Score</span>
 					</button>
 				</li>
 
 				<li>
-					<button>
+					<button ng-click="vm.orderByDate()">
 						<span>By Date</span>
 					</button>
 				</li>
 
 				<li>
-					<button>
+					<button ng-click="vm.orderByComments()">
 						<span>By Replies</span>
 					</button>
 				</li>
 
 				<li>
-					<button>
+					<button ng-click="vm.orderBySaves()">
 						<span>By Saves</span>
 					</button>
 				</li>
 			</ul>
-
-			<span flex></span>
-
-			<button>
-				<span>Search</span>
-			</button>
 		</div>
 	</md-toolbar>
 
 	<md-content class='home-page-body'>
 		<md-content>
 			<md-list>
-				<md-list-item class='md-2-line' ng-repeat='thread in vm.threads'>
+				<md-list-item class='md-2-line' ng-repeat='thread in vm.threads | orderBy: vm.rowFilter'>
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center' class='home-threads-user'>

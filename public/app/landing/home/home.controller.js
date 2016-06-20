@@ -5,13 +5,16 @@
 	.controller('HomeController', HomeController);
 
 	/* @ngInject */
-	function HomeController ($state, $scope, $rootScope, appAuth, appUsers, appStreams, appThreads, appToast) {
+	function HomeController ($state, $scope, $rootScope, $timeout, appAuth, appUsers, appStreams, appThreads, appToast) {
 		var vm = this;
 		vm.threads = [];
 		vm.getHomeThreads = getHomeThreads;
 		vm.homePage = 0;
-		vm.homeFilter = '';
 		vm.lastUpdated = 0;
+		vm.orderByDate = orderByDate;
+		vm.orderByScore = orderByScore;
+		vm.orderBySaves = orderBySaves;
+		vm.orderByComments = orderByComments;
 		vm.upvote = upvote;
 		vm.downvote = downvote;
 		vm.save = save;
@@ -34,12 +37,8 @@
 			} else {
 				var homeThreadData = appThreads.home.get({
 					page: vm.homePage,
-					filter: vm.homeFilter,
 					timestamp:vm.lastUpdated
 				}, function() {
-					if (vm.homeFilter) {
-						vm.threads = [];
-					}
 
 					if (!options.append) {
 						vm.threads = homeThreadData.res.records.concat(vm.threads);
@@ -52,6 +51,38 @@
 				});
 			} 
 		}
+
+		function orderByDate() {
+			if (vm.rowFilter == 'created') {
+				vm.rowFilter = '-created';
+			} else {
+				vm.rowFilter = 'created';
+			}
+		}
+
+		function orderByScore() {
+			if (vm.rowFilter == '-score') {
+				vm.rowFilter = 'score';
+			} else {
+				vm.rowFilter = '-score';
+			}
+		}
+
+		function orderBySaves() {
+			if (vm.rowFilter == '-saves.length') {
+				vm.rowFilter = 'saves.length';
+			} else {
+				vm.rowFilter = '-saves.length';
+			}
+ 		}
+
+ 		function orderByComments() {
+ 			if (vm.rowFilter == '-comments.length') {
+ 				vm.rowFilter = 'comments.length';
+ 			} else {
+ 				vm.rowFilter = '-comments.length';
+ 			}
+ 		}
 
 		function downvote (thread) {
 			var obj = appThreads.single.get({threadId: thread._id}, function() {
