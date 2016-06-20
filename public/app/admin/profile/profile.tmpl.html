@@ -15,6 +15,10 @@
 				<span>Message</span>
 			</button>
 
+			<button aria-label='update profile button' ng-if="vm.selfProfile" ng-click="vm.openUpdateProfile()">
+				<span>Update Profile</span>
+			</button>
+
 			<button ngf-select="vm.uploadUserImage(file)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/*">
 				<span>Upload Image</span>
 			</button>

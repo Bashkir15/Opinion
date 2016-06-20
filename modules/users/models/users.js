@@ -52,8 +52,9 @@ var UserSchema = new mongoose.Schema({
 	},
 
 	phone: {
-		type: Number,
-		required: false
+		type: String,
+		required: false,
+		get: escapeProperty
 	},
 
 	birthday: {

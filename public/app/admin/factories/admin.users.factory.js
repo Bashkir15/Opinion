@@ -18,6 +18,11 @@
 				unfollow: {
 					method: 'POST',
 					params: {action: 'unfollow'}
+				},
+
+				profile: {
+					method: 'POST',
+					params: {action: 'updateProfile'}
 				}
 			}),
 			auth: $resource('users/authenticate')
