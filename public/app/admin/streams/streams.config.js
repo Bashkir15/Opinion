@@ -18,7 +18,7 @@
 			controllerAs: 'vm'
 		});
 
-		$stateProvider.state('streasm.streamsList', {
+		$stateProvider.state('streams.streamsList', {
 			url: '/streams/list',
 			templateUrl: '/app/admin/streams/list/streams.list.tmpl.html',
 			controller: 'StreamsListController',

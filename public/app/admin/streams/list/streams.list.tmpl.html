@@ -54,12 +54,12 @@
 
 							<button>
 								<i class='icon-favorite_border'></i>
-								<span>{{item.subscribers.length}} Subscriber</span>
+								<span>{{item.subscribers.length}} Subscriber<span ng-if="item.subscribers.length > 1 || item.subscribers.length == 0">s</span></span>
 							</button>
 
 							<button>
 								<i class='icon-mail_outline'></i>
-								<span>{{item.threads.length}} Thread</span>
+								<span>{{item.threads.length}} Thread<span ng-if="item.threads.length > 1 || item.threads.length == 0">s</span></span>
 							</button>
 
 							<div>

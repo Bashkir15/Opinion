@@ -117,7 +117,7 @@ module.exports = function (System) {
 			if (err) {
 				return json.bad(err, res);
 			} else if (user) {
-				return json.good({
+				 json.good({
 					record: user
 				}, res);
 			} else {

@@ -9,6 +9,16 @@
 		return {
 			single: $resource('users/:userId/:action', {
 				userId: '@_id'
+			}, {
+				follow: {
+					method: 'POST',
+					params: {action: 'follow'}
+				},
+
+				unfollow: {
+					method: 'POST',
+					params: {action: 'unfollow'}
+				}
 			}),
 			auth: $resource('users/authenticate')
 		};
