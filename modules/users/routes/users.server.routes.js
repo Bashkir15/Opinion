@@ -46,5 +46,12 @@ module.exports = function (System) {
 		authorized: true
 	});
 
+	routes.push({
+		method: 'post',
+		path: '/:userId/updateProfile',
+		handler: users.updateProfile,
+		authorized: true
+	});
+
 	return routes;
 };

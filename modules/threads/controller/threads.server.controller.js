@@ -320,9 +320,22 @@ module.exports = function (System) {
 				} else if (thread.downvotes.indexOf(req.user._id) !== -1) {
 					thread.downvotes.splice(thread.downvotes.indexOf(req.user._id), 1);
 					thread.upvotes.push(req.user._id);
-					thread.creator.addThreadScore();
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
+
+						User.findOne({_id: thread.creator._id}, function (err, user, cb) {
+							if (err) {
+								return json.bad(err, res);
+							} else {
+								user.threadScore += 1;
+								user.save(function (err) {
+									if (err) {
+										console.log(err);
+										return json.bad(err, res);
+									}
+								});
+							}
+						});
 
 
 						if (err) {
@@ -335,9 +348,25 @@ module.exports = function (System) {
 					});
 				} else {
 					thread.upvotes.push(req.user._id);
-					thread.creator.addThreadScore();
+					thread.creator.addThreadScore(thread);
 					thread.save(function (err, item) {
 						thread = thread.afterSave(req.user);
+
+						User.findOne({_id: thread.creator}, function (err, user, cb) {
+							if (err) {
+								console.log(err);
+								return json.bad(err, res);
+							} else {
+								console.log(user);
+								user.threadScore += 1;
+								user.save(function (err) {
+									if (err) {
+										console.log(err);
+										return json.bad(err, res);
+									}
+								});
+							}
+						});
 
 
 						if (err) {
@@ -352,7 +381,7 @@ module.exports = function (System) {
 			} else {
 				return json.bad({message: 'Sorry, that thread could not be found'}, res);
 			}
-		});
+		}); 
 	};
 
 	obj.downvote = function (req, res) {

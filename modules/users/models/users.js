@@ -68,6 +68,12 @@ var UserSchema = new mongoose.Schema({
 		get: escapeProperty
 	},
 
+	interests: {
+		type: String,
+		required: false,
+		get: escapeProperty
+	},
+
 	pictures: {
 		type: Array,
 		required: false
@@ -84,8 +90,7 @@ var UserSchema = new mongoose.Schema({
 	},
 
 	threadScore: {
-		type: Number,
-		default: 0
+		type: Number
 	},
 
 	commentScore: {
@@ -200,14 +205,14 @@ UserSchema.methods = {
 		return this.update(updates, callback);
  	},
 
- 	addThreadScore: function () {
+ 	addThreadScore: function (cb) {
  		this.threadScore += 1;
- 		this.save();
+ 		this.save(cb);
  	},
 
- 	removeThreadScore: function () {
+ 	removeThreadScore: function (cb) {
  		this.threadScore -= 1;
- 		this.save();
+ 		this.save(cb);
  	},
 
  	addCommentScore: function (callback) {
