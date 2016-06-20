@@ -27,7 +27,7 @@ module.exports = function (System) {
 
 	routes.push({
 		method: 'post',
-		path: '/:userId/follow',
+		path: '/follow',
 		handler: users.follow,
 		authorized: true
 	});
@@ -51,6 +51,13 @@ module.exports = function (System) {
 		path: '/:userId/updateProfile',
 		handler: users.updateProfile,
 		authorized: true
+	});
+
+	routes.push({
+		method: 'get',
+		path: '/search/:keyword',
+		handler: users.search,
+		authorized: false
 	});
 
 	return routes;

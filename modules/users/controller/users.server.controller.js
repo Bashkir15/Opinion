@@ -141,29 +141,32 @@ module.exports = function (System) {
 	};
 
 	obj.follow = function (req, res) {
-		var currentUser = req.user;
-
-		User.findOne({_id: req.params.userId})
+		User.findOne({_id: req.body.userId})
 		.populate('following')
 		.exec(function (err, user) {
-			/*if (err) {
-				return json.bad(err, res);
-			} else if (user) {
-				/*if (currentUser.following.indexOf(user._id) !== -1) {
-					return json.bad({message: 'Sorry, you are already following that user'}, res);
-				} */
+			if (req.user.following.indexOf(user._id) !== -1) {
+				return json.bad({message: 'Sorry, you are already following that user'}, res);
+			} else {
+				User.findOne({_id: req.user._id}, function (err, second) {
+					
 
-				req.user.following.push(user);
-				req.user.save(function (err, item) {
 					if (err) {
+						console.log(err);
 						return json.bad(err, res);
 					}
 
-					json.good({
-						record: item
-					}, res);
+					second.following.push(user._id);
+					second.save(function (err, item) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
 				});
-			//}
+			}
 		});
 	};
 
@@ -252,6 +255,28 @@ module.exports = function (System) {
 					}, res);
 				});
 			}
+		});
+	};
+
+	obj.search = function (req, res) {
+		var keyword = req.params.keyword;
+		var criteria = {
+			$or: [
+				{name: new RegExp(keyword, 'ig')},
+				{username: new RegExp(keyword, 'ig')}
+			]
+		};
+
+		criteria._id = {$ne: req.user._id};
+
+		User.find(criteria, null, {sort: {name: 1}}).exec(function (err, items) {
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			json.good({
+				items: items
+			}, res);
 		});
 	};
 

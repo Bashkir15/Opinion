@@ -22,11 +22,18 @@
 			});
 		}
 
-		function follow () {
-			var user = appUsers.single.get({userId: userId}, function() {
-				user.$follow({userId: userId}, function() {
-					vm.getProfile();
-				});
+		function follow (profile) {
+			var user = new appUsers.follow({
+				userId: profile._id,
+			});
+
+			user.$save(function (response) {
+				if (response.success) {
+					appToast('user has been followed');
+					vm.getProfile({reload: true});
+				} else {
+					appToast(response.res.message);
+				}
 			});
 		}
 
