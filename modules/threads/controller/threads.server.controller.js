@@ -36,7 +36,9 @@ module.exports = function (System) {
 				return json.bad(err, res);
 			}
 
-			json.good(thread, res);
+			json.good({
+				record: thread
+			}, res);
 		});
 	};
 

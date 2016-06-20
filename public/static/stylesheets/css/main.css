@@ -2073,7 +2073,8 @@ p {
   border: 1px solid #467a9a;
   border-radius: 50%;
   display: inline-block;
-  transition: all .4s ease; }
+  transition: all .4s ease;
+  outline: none; }
   .nav-user-menu img {
     height: 35px;
     width: 35px;
