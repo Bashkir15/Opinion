@@ -5,12 +5,13 @@
 	.controller('AppController', AppController);
 
 	/* @ngInject */
-	function AppController ($state, $scope, $rootScope, $location, $mdSidenav, appAuth, appStorage, appStreams) {
+	function AppController ($state, $scope, $rootScope, $location, $mdSidenav, $mdDialog, appAuth, appStorage, appStreams, appUsersSearch) {
 		var vm = this;
 		vm.openUserMenu = openUserMenu;
 		vm.updateLoginStatus = updateLoginStatus;
 		vm.getHomeStreams = getHomeStreams;
 		vm.goToStream = goToStream;
+		vm.openUserSearch = openUserSearch;
 		vm.homeStreams = [];
 
 		function openUserMenu() {
@@ -36,6 +37,40 @@
 
 		function goToStream (item) {
 			$location.url('streams/' + item._id);
+		}
+
+		function openUserSearch() {
+			$mdDialog.show({
+				controller: [
+					'$scope',
+					'$mdDialog',
+					function ($scope, $mdDialog) {
+						$scope.search = '';
+
+						$scope.doSearch = function (val) {
+							return appUsersSearch(val).then(function (response) {
+								return response.res.items;
+							});
+						};
+
+						$scope.goToUser = function (item) {
+							$location.url(item._id + '/profile/overview');
+							$mdDialog.hide();
+						};
+
+						$scope.clearSearch = function() {
+							$scope.search = '';
+						};
+
+						$scope.close = function() {
+							$mdDialog.hide();
+						};
+					}
+				],
+				templateUrl: '/app/admin/profile/dialogs/users.search.dialog.tmpl.html'
+			}).finally(function() {
+
+			});
 		}
 
 		$rootScope.$on('loggedIn', function() {

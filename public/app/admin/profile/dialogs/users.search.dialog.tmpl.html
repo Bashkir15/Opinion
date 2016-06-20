@@ -1,0 +1,21 @@
+<md-dialog flex='60'>
+	<md-dialog-content layout='column'>
+		<div class='users-search-header' layout='row' layout-align='none center'>
+			<h3>Find Users</h3>
+			<span flex></span>
+			<span ng-click="close()">x</span>
+		</div>
+
+		<div class='users-search-body'>
+			<md-autocomplete
+				md-search-text="search"
+				md-items="item in doSearch(search)"
+				md-item-text="item.name"
+				md-item-value="item._id"
+				md-floating-label='search'
+				md-selected-item-change="goToUser(item)">
+				<span md-highlight-text='search'>{{item.name}} /@{{item.username}}</span>
+			</md-autocomplete>
+		</div>
+	</md-dialog-content>
+</md-dialog>

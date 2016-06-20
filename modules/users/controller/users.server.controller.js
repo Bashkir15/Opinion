@@ -260,16 +260,22 @@ module.exports = function (System) {
 
 	obj.search = function (req, res) {
 		var keyword = req.params.keyword;
-		var criteria = {
-			$or: [
-				{name: new RegExp(keyword, 'ig')},
-				{username: new RegExp(keyword, 'ig')}
-			]
-		};
+		var criteria = {};
+
+		if (req.query.onlyUsernames) {
+			criteria = {username: new RegExp(keyword, 'ig')};
+		} else {
+			criteria = {
+				$or: [
+					{ name: new RegExp(keyword, 'ig')},
+					{ username: new RegExp(keyword, 'ig')}
+				]
+			};
+		}
 
 		criteria._id = {$ne: req.user._id};
 
-		User.find(criteria, null, {sort: {name: 1}}).exec(function (err, items) {
+		User.find(criteria, null).exec(function (err, items) {
 			if (err) {
 				return json.bad(err, res);
 			}
