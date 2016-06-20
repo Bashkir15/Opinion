@@ -1630,6 +1630,32 @@ p {
     .profile-tabs md-tabs-wrapper md-tabs-canvas md-pagination-wrapper md-tab-item.md-active {
       color: #50ade3; }
 
+.profile-view-container.ng-enter {
+  -webkit-animation-name: slideInUp;
+  -moz-animation-name: slideInUp;
+  -ms-animation-name: slideInUp;
+  -o-animation-name: slideInUp;
+  animation-name: slideInUp;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  backface-visibility: hidden; }
+
+.profile-view-container.ng-leave {
+  -webkit-animation-name: slideOutDown;
+  -moz-animation-name: slideOutDown;
+  -ms-animation-name: slideOutDown;
+  -o-animation-name: slideOutDown;
+  animation-name: slideOutDown;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  backface-visibility: hidden; }
+
 .home-page-header {
   background-image: -webkit-linear-gradient(bottom, #365e77 0%, #264254 100%); }
   .home-page-header > div {

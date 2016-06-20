@@ -38,3 +38,10 @@
 
 					&.md-active
 						color: $accent-blue
+
+.profile-view-container
+	&.ng-enter
+		@include slideInUp()
+
+	&.ng-leave
+		@include slideOutDown()
