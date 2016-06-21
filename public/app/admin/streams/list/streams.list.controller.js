@@ -11,6 +11,9 @@
 		vm.getStreams = getStreams;
 		vm.subscribe = subscribe;
 		vm.unsubscribe = unsubscribe;
+		vm.orderByThreads = orderByThreads;
+		vm.orderBySubscribers = orderBySubscribers;
+		vm.orderByDate = orderByDate;
 		vm.streamPage = 0;
 		vm.streamsFilter = ''
 		vm.lastUpdated = 0;
@@ -78,6 +81,30 @@
 					
 				});
 			});
+		}
+
+		function orderByThreads() {
+			if (vm.rowFilter == '-threads.length') {
+				vm.rowFilter = 'threads.length';
+			} else {
+				vm.rowFilter = '-threads.length';
+			}
+		}
+
+		function orderBySubscribers() {
+			if (vm.rowFilter == '-subscribers.length') {
+				vm.rowFilter = 'subscribers.length';
+			} else {
+				vm.rowFilter = '-subscribers.length';
+			}
+		}
+
+		function orderByDate() {
+			if (vm.rowFilter == '-created') {
+				vm.rowFilter = 'created';
+			} else {
+				vm.rowFilter = '-created';
+			}
 		}
 
 
