@@ -39,10 +39,14 @@
 				</ul>
 
 				<span flex></span>
-
-				<div class='streams-list-search' ng-class="{'has-focus': vm.search.hasFocus}">
-					<label for='streamsListSearch'>Search</label>
-					<input name='search' ng-model='vm.streamsFilter' id='streamsListSearch' ng-focus="vm.search.hasFocus=true" ng-blur="vm.search.hasFocus=false">
+				<div class='streams-list-search-container' layout='row' layout-align='none center'>
+					<div class='streams-list-search-icon' ng-class="{'is-searching': vm.search.hasFocus}">
+						<i class='icon-search'></i>
+					</div>
+					<div class='streams-list-search' ng-class="{'has-focus': vm.search.hasFocus}">
+						<label for='streamsListSearch'>Search</label>
+						<input name='search' ng-model='vm.streamsFilter' id='streamsListSearch' ng-focus="vm.search.hasFocus=true" ng-blur="vm.search.hasFocus=false">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -97,8 +101,12 @@
 				</md-list>
 			</div>
 
-			<div class='streams-list-no-streams' layout='row' layout-align='center center' ng-if="!vm.streams.length">
+			<div class='streams-list-no-streams' layout='row' layout-align='center center' ng-if="!vm.streams.length && !vm.streamsFilter">
 				<p>It looks like there aren't any Stream yet. Why don't you go <a ui-sref='streamsCreate'> make one?</a></p>
+			</div>
+
+			<div class='streams-list-searching-text' layout='row' layout-align='center center' ng-if="!vm.streams.length && vm.streamsFilter">
+				<p>Parsing the streams now <span>. . .</span></p>
 			</div>
 		</div>
 	</div>

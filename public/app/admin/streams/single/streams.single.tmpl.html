@@ -75,13 +75,13 @@
 
 
 				<span flex></span>
-				<div class='stream-single-search-icon' ng-class="{'is-searching': vm.search.hasFocus}">
-					<i class='icon-search'></i>
-				</div>
-				<div class='stream-single-search' ng-class="{'has-focus': vm.search.hasFocus}">
-					<label for="singleStreamSearch">Search</label>
-					<input name='search' id='singleStreamSearch' ng-model='vm.feedsFilter' ng-focus="vm.search.hasFocus=true" ng-blur="vm.search.hasFocus=false">
-				</div>
+					<div class='stream-single-search-icon' ng-class="{'is-searching': vm.search.hasFocus}" layout='column' layout-align='center center'>
+						<i class='icon-search'></i>
+					</div>
+					<div class='stream-single-search' ng-class="{'has-focus': vm.search.hasFocus}">
+						<label for="singleStreamSearch">Search</label>
+						<input name='search' id='singleStreamSearch' ng-model='vm.feedsFilter' ng-focus="vm.search.hasFocus=true" ng-blur="vm.search.hasFocus=false">
+					</div>
 			</div>
 		</md-toolbar>
 	</div>

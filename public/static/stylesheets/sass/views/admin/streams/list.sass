@@ -1,6 +1,7 @@
 .streams-list-header
 	height: 180px
 	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
+	padding-top: 20px
 
 	> div
 		> div
@@ -8,7 +9,7 @@
 			width: 40px
 			border: 1px solid #dfe1df
 			border-radius: 50%
-			margin-bottom: 8px
+			margin-bottom: 18px
 			margin-top: 15px
 			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
 
@@ -19,14 +20,15 @@
 .streams-list-toolbar
 		//background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, $blue 100%)
 		background: $darkest-green !important
-		height: 40px
-		min-height: 40px
+		height: 55px
+		min-height: 55px
 
 		.md-toolbar-tools
 			padding: 0
+			padding-right: 15px
 
 			button
-				height: 40px
+				height: 55px
 				width: 150px
 				transition: all .4s ease
 				border-right: 1px solid darken($darkest-green, 10%)
@@ -47,7 +49,7 @@
 	i
 		position: absolute
 		right: 3px
-		top: 12px
+		top: 19px
 		color: #839da1
 		display: inline-block
 		transition: all .4s ease
@@ -58,7 +60,7 @@
 
 .streams-list-order-streams-dropdown
 	position: absolute
-	top: 40px
+	top: 55px
 	left: 150px
 	height: 0
 	width: 150px
@@ -92,10 +94,68 @@
 	li
 		button
 			border-right: none !important
-			
+
 			span
 				opacity: 0
 				transition: all .4s ease
+.streams-list-search-icon
+	height: 40px
+	width: 40px
+	background: darken($darkest-green, 10%)
+	position: relative
+	transition: all .4s ease
+
+	i
+		font-size: 16px
+		opacity: 1
+		position: absolute
+		top: 13px
+		left: 13px
+		transition: all .4s ease
+
+	&.is-searching
+		width: 5px
+
+		i
+			opacity: 0
+
+.streams-list-search-container
+	width: 220px
+	overflow-x: hidden
+
+.streams-list-search
+	position: relative
+	height: 40px
+
+	label
+		@include lato
+		font-weight: 300
+		display: inline-block
+		position: absolute
+		top: 7px
+		left: 7px
+		opacity: 1
+		font-size: 16px
+		color: #dfe1df
+		transition: all .4s ease
+
+	input
+		height: 40px
+		width: 180px
+		background: $grey
+		padding-left: 5px
+		@include lato
+		color: #dfe1df
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			width: 215px
+			transition: all .4s ease
+
 
 .streams-list-body
 	background-image: -webkit-linear-gradient(bottom, darken(#364351, 10%) 0%, darken(#364351, 5%) 100%)
@@ -223,5 +283,20 @@
 
 			&:hover
 				color: #fff
+
+.streams-list-searching-text
+	padding-top: 35px
+
+	p
+		@inlude mont
+		color: #dfe1df
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		span
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			color: #c19f66
 
 					
