@@ -14,7 +14,6 @@
 			<div class='md-toolbar-tools' layout='row'>
 				<button aria-label='open create post dialog' ng-click="vm.openAddPost()">
 					<span>Add Post</span>
-					<i class='icon-pencil'></i>
 				</button>
 
 				<button class='stream-single-order-threads' ng-click="vm.showOrder = !vm.showOrder" ng-class="{'open': vm.showOrder}">
@@ -139,8 +138,12 @@
 			</md-list>
 		</div>
 
-		<div class='stream-single-no-threads' layout='row' layout-align='center none' ng-if="!vm.feed.length">
+		<div class='stream-single-no-threads' layout='row' layout-align='center none' ng-if="!vm.feed.length && !vm.feedsFilter">
 			<p>There don't seem to be any threads yet. Why don't you get things started and <span ng-click="vm.openAddPost()"> make one?</span></p>
+		</div>
+
+		<div class='stream-single-searching-text' layout='row' layout-align='center none' ng-if="!vm.feed.length && vm.feedsFilter">
+			<p>Unravelling the threads now <span>. . .</span></p>
 		</div>
 	</div>
 
