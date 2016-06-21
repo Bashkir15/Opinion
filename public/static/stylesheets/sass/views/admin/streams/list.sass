@@ -1,284 +1,208 @@
-.streams-list-container
-	.streams-list-header
-		height: 120px
-		width: 100%
-		position: relative
-		border-bottom: 1px solid rgba(0,0,0,0.35)
+.streams-list-header
+	height: 180px
+	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
 
-		.streams-list-header-overlay
-			position: absolute
-			top: 0
-			left: 0
-			height: 120px
-			width: 100%
-			display: flex
-			justify-content: center
+	> div
+		> div
+			height: 40px
+			width: 40px
+			border: 1px solid #dfe1df
+			border-radius: 50%
+			margin-bottom: 8px
+			margin-top: 15px
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
 
-			> div
-				margin-top: 15px
+		p
+			@include lato
+			color: #dfe1df
+
+.streams-list-toolbar
+		//background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, $blue 100%)
+		background: $darkest-green !important
+		height: 40px
+		min-height: 40px
+
+		.md-toolbar-tools
+			padding: 0
+
+			button
 				height: 40px
-				width: 40px
-				border-radius: 50%
-				border: 1px solid rgba(0,0,0,0.35)
-
-	.streams-list-toolbar
-		display: flex
-		align-items: stretch
-		position: relative
-		text-align: center
-		z-index: 20
-		height: 50px
-		//background: darken($darkest-green, 10%)
-		background: $blue
-		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.45)
-
-		.toolbar-left
-			display: flex
-			flex: 1
-			align-items: stretch
-			justify-content: flex-start
-
-			> div
-				display: flex
-				justify-content: center
-				align-items: center
-				padding-left: 10px
-				border-right: 1px solid rgba(0,0,0,0.12)
+				width: 150px
 				transition: all .4s ease
-				padding-right: 10px
-
-				button
-					span
-						@include open
-						transition: all .4s ease
-						color: #dfe1df
+				border-right: 1px solid darken($darkest-green, 10%)
+				position: relative
 
 				&:hover
-					background: darken($blue, 10%)
+					background: darken($darkest-green, 10%)
 
-					button
-						span
-							color: #fff
-		.toolbar-right
-			display: flex
-			flex: 1
-			align-items: stretch
-			justify-content: flex-end
+				span
+					@include lato
+					color: #dfe1df
+					font-size: 16px
 
-			> div
-				display: flex
-				justify-content: center
-				align-items: center
-				position: relative
-				padding-right: 15px
-				width: 250px
+.streams-list-order-streams
+	position: relative
+	transition: all .4s ease
 
-				label
-					display: inline-block
-					position: absolute
-					top: 12px
-					left: 35px
-					@include open
-					color: rgba(0,0,0,0.35)
-					z-index: 20
+	i
+		position: absolute
+		right: 3px
+		top: 12px
+		color: #839da1
+		display: inline-block
+		transition: all .4s ease
 
-				input
-					position: relative
-					background: #dfe1df
-					width: 100%
-					height: 35px
-					padding: 0
-					box-shadow: 0 4px 8px rgba(0,0,0,0.25)
+	&.open
+		i
+			transform: rotate(-180deg)
 
-				> div
-					position: absolute
-					top: 8px
-					left: 0
-					width: 30px
-					height: 35px
-					background: darken($blue, 10%)
+.streams-list-order-streams-dropdown
+	position: absolute
+	top: 40px
+	left: 150px
+	height: 0
+	width: 150px
+	background: $grey
+	text-align: center
+	transition: all .4s ease
 
-					i
-						position: absolute
-						top: 10px
-						left: 8px
-						color: #dfe1df
+	&:not(.ng-hide)
+		height: 150px
 
+		li
+			height: 50px
+			border-bottom: 1px solid rgba(0,0,0,0.12)
+			transition: all .4s ease
 
-	.streams-list-body
-		
-		background: darken(#364351, 5%)
-		min-height: 500px
+			&:last-child
+				border-bottom: none
 
+			button
+				height: 50px
+				width: 150px
+				border-right: none
+				transition: all .4s ease
+
+				span
+					opacity: 1
+					color: #dfe1df
+					@include lato
+					transition: all .4s ease
+
+	li
+		button
+			border-right: none !important
 			
-		md-content
-			padding-top: 15px
-			background: darken(#364351, 5%)
-			overflow-y: auto
+			span
+				opacity: 0
+				transition: all .4s ease
 
-			md-list
-				md-list-item
-					width: 70%
-					margin: 0 auto
-					margin-bottom: 10px
-					box-shadow: 0 4px 8px rgba(0,0,0,0.35)
-					padding: 0
-					background: #212a33
+.streams-list-body
+	background-image: -webkit-linear-gradient(bottom, darken(#364351, 10%) 0%, darken(#364351, 5%) 100%)
+	min-height: 500px
 
-					.md-list-item-text
-						> div
-							height: 100px
+	> div
+		padding-top: 15px
+		width: 100%
 
-							> div
-								.stream-image
-									border: 1px solid rgba(0,0,0,0.3)
-									margin: 0
-									margin-top: 6px
-									margin-bottom: 10px
-									height: 40px
-									width: 40px
-									border-radius: 50%
+		md-list
+			md-list-item
+				margin-left: 10px
+				margin-bottom: 10px
+				width: 75%
+				padding: 0
+				background: #212a33
 
-									&.subscribed
-										border: 1px solid $accent-green
+.streams-list-image
+	padding: 10px 0
 
-								button
-									border: 1px solid rgba(0,0,0,0.35)
-									text-align: center
-									margin-bottom: 10px
-									transition: all .4s ease
+	img
+		height: 40px
+		width: 40px
+		border: 1px solid #fff
+		border-radius: 50%
+		margin: 6px 0 10px 0
+		display: inline-block
+		cursor: pointer
+		transition: all .4s ease
 
-									span
-										@include open
-										color: #dfe1df
-										transition: all .4s ease
+		&.subscribed
+			border: 1px solid $darkest-green
 
-									&.stream-subscribed
-										border: 1px solid $accent-red
+		&:hover
+			transform: scale(1.2,1.2)
 
-										&:hover
-											background: $accent-red
+	button
+		height: 25px
+		width: 100px
+		border-radius: 3px
 
-											span
-												color: #fff
+		&.stream-subscribed
+			border: 1px solid $accent-red
 
-									&.stream-unsubscribed
-										border: 1px solid $accent-green
+			&:hover
+				background: $accent-red
 
-										&:hover
-											background: $accent-green
+		&.stream-unsubscribed
+			border: 1px solid $darkest-green
 
-											span
-												color: #fff
+			&:hover
+				background: $darkest-green
 
-									&.ng-animate
-										display: none
-
-								&:nth-of-type(2)
-									transition: all .4s ease
-
-									h4
-										@include mont
-										color: #dfe1df
-										padding-left: 15px
-
-
-									p
-										@include open
-										color: #9a9a9a
-										padding-left: 15px
-										padding-top: 8px
-
-									&:hover
-										background: lighten(#212a33, 10%)
-
-						.streams-list-item-toolbar
-							height: 35px
-							border-top: 1px solid #c19f66
-							position: relative
-
-							button
-								border-right: 1px solid rgba(0,0,0,0.12)
-								transition: all .4s ease
-
-								i
-									color: #dfe1df
-
-								span
-									color: #dfe1df
-									@include open
-
-								&:hover
-									background: #c19f66
-
-							> div
-								display: flex
-								align-items: center
-								position: absolute
-								right: 5px
-								top: 4px
-								@include lato
-								color: #9a9a9a
+		&.ng-enter
+			@include slideInUp()
 
 
 
-			/*
-
-						
-
-									
-
+		span
+			@include lato
+			color: #fff
+			text-shadow: 1px 1px rgba(0,0,0,0.5)
 
 
-							.streams-item-right
-								display: flex
-								flex: 7
-								align-items: stretch
-								flex-direction: column
 
-								h4
-									text-align: left
-									@include mont
-									color: #dfe1df
+.streams-list-description
+	padding-top: 10px
+	cursor: pointer
 
-								p
-									text-align: left
-									@include open
-									color: #9a9a9a
+	> div
+		height: 30px
 
-									
+		h4
+			@include mont
+			color: #dfe1df !important
+			text-shadow: 2px 2px rgba(0,0,0,0.55)
 
-					.streams-item-toolbar
-						display: flex
-						align-items: stretch
-						position: relative
-						text-align: center
-						z-index: 20
-						border-top: 1px solid rgba(0,0,0,0.35)
+		> div
+			width: 80px
+			border-bottom: 1px solid #dfe1df
 
-						.item-toolbar-left
-							display: flex
-							flex: 1
-							align-items: stretch
-							justify-content: flex-start
+	p
+		@include lato
+		color: #dfe1df !important
+		text-shadow: 1px 1px rgba(0,0,0,0.6)
 
-							button
-								span
-									@include open
-									color: #dfe1df
-								i
-									color: #dfe1df
+.streams-list-item-toolbar
+	height: 35px
+	border-top: 1px solid #c19f66
+	padding: 0 10px
 
-						.item-toolbar-right
-							display: flex
-							flex: 1
-							align-items: stretch
-							justify-content: flex-end
+	button
+		i
+			color: #dfe1df
+			transition: all .4s ease
 
-							button
-								span
-									@include open
-									color: #9a9a9a */
+
+		span
+			@include open
+			color: #dfe1df
+			text-shadow: 1px 1px rgba(0,0,0,0.5)
+
+		&:nth-of-type(3)
+			span
+				color: #9a9a9a
+				@include lato
+				font-weight: 100
 
 .streams-list-no-streams
 	padding-top: 35px

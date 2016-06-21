@@ -30,6 +30,15 @@ module.exports = function (System) {
 			criteria.subscribers = req.user._id;
 		}
 
+		if (req.query && req.query.timestamp) {
+			criteria.created = {$gte: req.query.timestamp};
+		}
+
+		if (req.query && req.query.filter) {
+			delete criteria.created;
+			criteria.name = new RegExp(req.query.filter, 'i');
+		}
+
 		Stream.find(criteria, null)
 		.populate('creator')
 		.skip(parseInt(req.query.page) * System.config.settings.perPage)

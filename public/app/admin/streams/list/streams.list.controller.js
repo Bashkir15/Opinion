@@ -11,22 +11,54 @@
 		vm.getStreams = getStreams;
 		vm.subscribe = subscribe;
 		vm.unsubscribe = unsubscribe;
-		vm.goToStream = goToStream;
 		vm.streamPage = 0;
+		vm.streamsFilter = ''
+		vm.lastUpdated = 0;
 
 		function getStreams (options) {
 			options = options || {};
 
 			var streamData = appStreams.single.get({
-				page: vm.streamPage
+				page: vm.streamPage,
+				filter: vm.streamsFilter,
+				timestamp: vm.lastUpdated
 			}, function() {
+
+				if (vm.streamsFilter) {
+					vm.streams = [];
+				}
+
 				if (!options.append) {
 					vm.streams = streamData.res.records.concat(vm.streams);
 				} else {
 					vm.streams = vm.streams.concat(streamData.res.records);
 				}
+
+				vm.noMoreStreams = !streamData.res.morePages;
+				vm.lastUpdated = Date.now();
 			});
 		}
+
+		var streamsFilterTimeout;
+		$scope.$watch('vm.streamsFilter', function (newValue, oldValue) {
+			if (!newValue !== oldValue) {
+				vm.streams = [];
+			}
+
+			$timeout.cancel(streamsFilterTimeout);
+			streamsFilterTimeout = $timeout(function() {
+				if (!newValue) {
+					if (vm.streamsFilterEnabled) {
+						vm.lastUpdated = 0;
+						vm.getStreams();
+					}
+				} else {
+					vm.getStreams();
+				}
+
+				vm.streamsFilterEnabled = vm.streamsFilter !== '';
+			}, 500);
+		});
 
 		function subscribe (item) {
 			
@@ -48,9 +80,6 @@
 			});
 		}
 
-		function goToStream (item) {
-			$location.url('streams/' + item._id);
-		}
 
 		getStreams();
 	}

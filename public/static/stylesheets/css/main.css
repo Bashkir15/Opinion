@@ -577,237 +577,175 @@ p {
   animation-fill-mode: both;
   backface-visibility: hidden; }
 
-.streams-list-container .streams-list-header {
-  height: 120px;
-  width: 100%;
-  position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.35); }
-  .streams-list-container .streams-list-header .streams-list-header-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 120px;
-    width: 100%;
-    display: flex;
-    justify-content: center; }
-    .streams-list-container .streams-list-header .streams-list-header-overlay > div {
-      margin-top: 15px;
+.streams-list-header {
+  height: 180px;
+  background-image: -webkit-linear-gradient(bottom, #365e77 0%, #264254 100%); }
+  .streams-list-header > div > div {
+    height: 40px;
+    width: 40px;
+    border: 1px solid #dfe1df;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.35); }
+  .streams-list-header > div p {
+    font-family: 'Lato', sans-serif;
+    color: #dfe1df; }
+
+.streams-list-toolbar {
+  background: #398a85 !important;
+  height: 40px;
+  min-height: 40px; }
+  .streams-list-toolbar .md-toolbar-tools {
+    padding: 0; }
+    .streams-list-toolbar .md-toolbar-tools button {
       height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 0, 0, 0.35); }
-
-.streams-list-container .streams-list-toolbar {
-  display: flex;
-  align-items: stretch;
-  position: relative;
-  text-align: center;
-  z-index: 20;
-  height: 50px;
-  background: #467a9a;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.45); }
-  .streams-list-container .streams-list-toolbar .toolbar-left {
-    display: flex;
-    flex: 1;
-    align-items: stretch;
-    justify-content: flex-start; }
-    .streams-list-container .streams-list-toolbar .toolbar-left > div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-left: 10px;
-      border-right: 1px solid rgba(0, 0, 0, 0.12);
+      width: 150px;
       transition: all .4s ease;
-      padding-right: 10px; }
-      .streams-list-container .streams-list-toolbar .toolbar-left > div button span {
-        font-family: 'Open Sans', sans-serif;
-        transition: all .4s ease;
-        color: #dfe1df; }
-      .streams-list-container .streams-list-toolbar .toolbar-left > div:hover {
-        background: #365e77; }
-        .streams-list-container .streams-list-toolbar .toolbar-left > div:hover button span {
-          color: #fff; }
-  .streams-list-container .streams-list-toolbar .toolbar-right {
-    display: flex;
-    flex: 1;
-    align-items: stretch;
-    justify-content: flex-end; }
-    .streams-list-container .streams-list-toolbar .toolbar-right > div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      padding-right: 15px;
-      width: 250px; }
-      .streams-list-container .streams-list-toolbar .toolbar-right > div label {
-        display: inline-block;
-        position: absolute;
-        top: 12px;
-        left: 35px;
-        font-family: 'Open Sans', sans-serif;
-        color: rgba(0, 0, 0, 0.35);
-        z-index: 20; }
-      .streams-list-container .streams-list-toolbar .toolbar-right > div input {
-        position: relative;
-        background: #dfe1df;
-        width: 100%;
-        height: 35px;
-        padding: 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); }
-      .streams-list-container .streams-list-toolbar .toolbar-right > div > div {
-        position: absolute;
-        top: 8px;
-        left: 0;
-        width: 30px;
-        height: 35px;
-        background: #365e77; }
-        .streams-list-container .streams-list-toolbar .toolbar-right > div > div i {
-          position: absolute;
-          top: 10px;
-          left: 8px;
-          color: #dfe1df; }
+      border-right: 1px solid #2a6662;
+      position: relative; }
+      .streams-list-toolbar .md-toolbar-tools button:hover {
+        background: #2a6662; }
+      .streams-list-toolbar .md-toolbar-tools button span {
+        font-family: 'Lato', sans-serif;
+        color: #dfe1df;
+        font-size: 16px; }
 
-.streams-list-container .streams-list-body {
-  background: #2c3642;
+.streams-list-order-streams {
+  position: relative;
+  transition: all .4s ease; }
+  .streams-list-order-streams i {
+    position: absolute;
+    right: 3px;
+    top: 12px;
+    color: #839da1;
+    display: inline-block;
+    transition: all .4s ease; }
+  .streams-list-order-streams.open i {
+    transform: rotate(-180deg); }
+
+.streams-list-order-streams-dropdown {
+  position: absolute;
+  top: 40px;
+  left: 150px;
+  height: 0;
+  width: 150px;
+  background: #4f737a;
+  text-align: center;
+  transition: all .4s ease; }
+  .streams-list-order-streams-dropdown:not(.ng-hide) {
+    height: 150px; }
+    .streams-list-order-streams-dropdown:not(.ng-hide) li {
+      height: 50px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      transition: all .4s ease; }
+      .streams-list-order-streams-dropdown:not(.ng-hide) li:last-child {
+        border-bottom: none; }
+      .streams-list-order-streams-dropdown:not(.ng-hide) li button {
+        height: 50px;
+        width: 150px;
+        border-right: none;
+        transition: all .4s ease; }
+        .streams-list-order-streams-dropdown:not(.ng-hide) li button span {
+          opacity: 1;
+          color: #dfe1df;
+          font-family: 'Lato', sans-serif;
+          transition: all .4s ease; }
+  .streams-list-order-streams-dropdown li button {
+    border-right: none !important; }
+    .streams-list-order-streams-dropdown li button span {
+      opacity: 0;
+      transition: all .4s ease; }
+
+.streams-list-body {
+  background-image: -webkit-linear-gradient(bottom, #222a32 0%, #2c3642 100%);
   min-height: 500px; }
-  .streams-list-container .streams-list-body md-content {
+  .streams-list-body > div {
     padding-top: 15px;
-    background: #2c3642;
-    overflow-y: auto;
-    /*
-
-
-
-
-
-
-
-							.streams-item-right
-								display: flex
-								flex: 7
-								align-items: stretch
-								flex-direction: column
-
-								h4
-									text-align: left
-									@include mont
-									color: #dfe1df
-
-								p
-									text-align: left
-									@include open
-									color: #9a9a9a
-
-
-
-					.streams-item-toolbar
-						display: flex
-						align-items: stretch
-						position: relative
-						text-align: center
-						z-index: 20
-						border-top: 1px solid rgba(0,0,0,0.35)
-
-						.item-toolbar-left
-							display: flex
-							flex: 1
-							align-items: stretch
-							justify-content: flex-start
-
-							button
-								span
-									@include open
-									color: #dfe1df
-								i
-									color: #dfe1df
-
-						.item-toolbar-right
-							display: flex
-							flex: 1
-							align-items: stretch
-							justify-content: flex-end
-
-							button
-								span
-									@include open
-									color: #9a9a9a */ }
-    .streams-list-container .streams-list-body md-content md-list md-list-item {
-      width: 70%;
-      margin: 0 auto;
+    width: 100%; }
+    .streams-list-body > div md-list md-list-item {
+      margin-left: 10px;
       margin-bottom: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+      width: 75%;
       padding: 0;
       background: #212a33; }
-      .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div {
-        height: 100px; }
-        .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div .stream-image {
-          border: 1px solid rgba(0, 0, 0, 0.3);
-          margin: 0;
-          margin-top: 6px;
-          margin-bottom: 10px;
-          height: 40px;
-          width: 40px;
-          border-radius: 50%; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div .stream-image.subscribed {
-            border: 1px solid #74b97d; }
-        .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div button {
-          border: 1px solid rgba(0, 0, 0, 0.35);
-          text-align: center;
-          margin-bottom: 10px;
-          transition: all .4s ease; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div button span {
-            font-family: 'Open Sans', sans-serif;
-            color: #dfe1df;
-            transition: all .4s ease; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div button.stream-subscribed {
-            border: 1px solid #ba4445; }
-            .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div button.stream-subscribed:hover {
-              background: #ba4445; }
-              .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div button.stream-subscribed:hover span {
-                color: #fff; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div button.stream-unsubscribed {
-            border: 1px solid #74b97d; }
-            .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div button.stream-unsubscribed:hover {
-              background: #74b97d; }
-              .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div button.stream-unsubscribed:hover span {
-                color: #fff; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div button.ng-animate {
-            display: none; }
-        .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div:nth-of-type(2) {
-          transition: all .4s ease; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div:nth-of-type(2) h4 {
-            font-family: 'Montserrat', sans-serif;
-            color: #dfe1df;
-            padding-left: 15px; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div:nth-of-type(2) p {
-            font-family: 'Open Sans', sans-serif;
-            color: #9a9a9a;
-            padding-left: 15px;
-            padding-top: 8px; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text > div > div:nth-of-type(2):hover {
-            background: #354452; }
-      .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text .streams-list-item-toolbar {
-        height: 35px;
-        border-top: 1px solid #c19f66;
-        position: relative; }
-        .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text .streams-list-item-toolbar button {
-          border-right: 1px solid rgba(0, 0, 0, 0.12);
-          transition: all .4s ease; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text .streams-list-item-toolbar button i {
-            color: #dfe1df; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text .streams-list-item-toolbar button span {
-            color: #dfe1df;
-            font-family: 'Open Sans', sans-serif; }
-          .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text .streams-list-item-toolbar button:hover {
-            background: #c19f66; }
-        .streams-list-container .streams-list-body md-content md-list md-list-item .md-list-item-text .streams-list-item-toolbar > div {
-          display: flex;
-          align-items: center;
-          position: absolute;
-          right: 5px;
-          top: 4px;
-          font-family: 'Lato', sans-serif;
-          color: #9a9a9a; }
+
+.streams-list-image {
+  padding: 10px 0; }
+  .streams-list-image img {
+    height: 40px;
+    width: 40px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    margin: 6px 0 10px 0;
+    display: inline-block;
+    cursor: pointer;
+    transition: all .4s ease; }
+    .streams-list-image img.subscribed {
+      border: 1px solid #398a85; }
+    .streams-list-image img:hover {
+      transform: scale(1.2, 1.2); }
+  .streams-list-image button {
+    height: 25px;
+    width: 100px;
+    border-radius: 3px; }
+    .streams-list-image button.stream-subscribed {
+      border: 1px solid #ba4445; }
+      .streams-list-image button.stream-subscribed:hover {
+        background: #ba4445; }
+    .streams-list-image button.stream-unsubscribed {
+      border: 1px solid #398a85; }
+      .streams-list-image button.stream-unsubscribed:hover {
+        background: #398a85; }
+    .streams-list-image button.ng-enter {
+      -webkit-animation-name: slideInUp;
+      -moz-animation-name: slideInUp;
+      -ms-animation-name: slideInUp;
+      -o-animation-name: slideInUp;
+      animation-name: slideInUp;
+      animation-iteration-count: 1;
+      animation-duration: 1s;
+      animation-delay: 0s;
+      animation-timing-function: ease;
+      animation-fill-mode: both;
+      backface-visibility: hidden; }
+    .streams-list-image button span {
+      font-family: 'Lato', sans-serif;
+      color: #fff;
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.5); }
+
+.streams-list-description {
+  padding-top: 10px;
+  cursor: pointer; }
+  .streams-list-description > div {
+    height: 30px; }
+    .streams-list-description > div h4 {
+      font-family: 'Montserrat', sans-serif;
+      color: #dfe1df !important;
+      text-shadow: 2px 2px rgba(0, 0, 0, 0.55); }
+    .streams-list-description > div > div {
+      width: 80px;
+      border-bottom: 1px solid #dfe1df; }
+  .streams-list-description p {
+    font-family: 'Lato', sans-serif;
+    color: #dfe1df !important;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.6); }
+
+.streams-list-item-toolbar {
+  height: 35px;
+  border-top: 1px solid #c19f66;
+  padding: 0 10px; }
+  .streams-list-item-toolbar button i {
+    color: #dfe1df;
+    transition: all .4s ease; }
+  .streams-list-item-toolbar button span {
+    font-family: 'Open Sans', sans-serif;
+    color: #dfe1df;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5); }
+  .streams-list-item-toolbar button:nth-of-type(3) span {
+    color: #9a9a9a;
+    font-family: 'Lato', sans-serif;
+    font-weight: 100; }
 
 .streams-list-no-streams {
   padding-top: 35px; }
