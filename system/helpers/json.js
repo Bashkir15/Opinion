@@ -1,11 +1,11 @@
-var good = function (obj, res) {
+const good = function (obj, res) {
 	res.send({
 		success: 1,
 		res: obj
 	});
 };
 
-var bad = function (err, res) {
+const bad = function (err, res) {
 	var obj = {
 		success: 0,
 		res: err
@@ -33,6 +33,7 @@ module.exports = function (System) {
 			};
 		}
 	};
+
 
 	plugin.register.attributes = {
 		name: 'JSON Helper',

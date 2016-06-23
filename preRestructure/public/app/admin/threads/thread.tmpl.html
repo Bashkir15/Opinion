@@ -1,0 +1,108 @@
+<div class='thread-container'>
+	<div ng-repeat='thread in vm.threads'>
+		<div class='thread-content' layout='column'>
+			<div class='thread-title' layout='row' layout-align='none center'>
+				<p>{{thread.title}}</p>
+				<span flex></span>
+				<button ui-sref='streams.streamsSingle({streamId: thread.stream._id})' class='thread-content-stream'> In {{thread.stream.name}}</button>
+				<span>{{thread.created | amCalendar}}</span>
+			</div>
+
+			<div layout='row' class='thread-body-content'>
+				<div layout='column' flex='15' layout-align='none center' class='thread-content-user'>
+					<img src='../static/images/me.jpg' ui-sref="profile.overview({userId: thread.creator._id})">
+					<p>{{thread.creator.name}}</p>
+				</div>
+
+					<div layout='column' flex class='thread-content-content'>
+						<p>{{thread.content}}</p>
+					</div>
+
+
+				<div layout='column' flex='10' layout-align='center center' class='thread-content-score'>
+					<i class='icon-expand_less' ng-class="{'upvoted': thread.upvoted}" ng-click="vm.upvote(thread)"></i>
+					<span ng-class="{'positive': thread.score >= 1, 'negative': thread.score <= -1}">{{thread.score}}</span>
+					<i class='icon-expand_more' ng-class="{'downvoted': thread.downvoted}" ng-click="vm.downvote(thread)"></i>
+				</div>
+			</div>
+
+			<md-toolbar class='thread-content-toolbar'>
+				<div layout='row' layout-align='none center' class='md-toolbar-tools'>
+					<button ng-click="vm.openAddComment()">
+						<span>Add Comment</span>
+					</button>
+
+					<button ng-if="!thread.saved" ng-click="vm.save(thread)">
+						<span>Save</span>
+					</button>
+
+					<button ng-if="thread.saved" ng-click="vm.unsave(thread)">
+						<span>Unsave</span>
+					</button>
+
+					<span flex></span>
+					<div class='thread-comments-search-icon' ng-class="{'is-searching': vm.search.hasFocus}">
+						<i class='icon-search'></i>
+					</div>
+					<div class='thread-comments-search' ng-class="{'has-focus': vm.search.hasFocus}">
+						<label for='threadCommentsSearch'>Search</label>
+						<input name='search' ng-model='vm.commentsFilter' ng-focus="vm.search.hasFocus=true" ng-blur="vm.search.hasFocus=false">
+					</div>
+				</div>
+			</md-toolbar>
+		</div>
+	</div>
+
+	<div class='thread-comments' layout='column'>
+		<md-content>
+			<md-list>
+				<md-list-item ng-repeat='item in vm.comments' class='md-2-line'>
+					<div class='md-list-item-text'>
+						<div layout='row'>
+							<div layout='column' flex='15' layout-align='center center' class='thread-comments-user'>
+								<img src='../static/images/me.jpg' ui-sref="profile.overview({userId: item.creator._id})">
+								<p>{{item.creator.name}}</p>
+							</div>
+
+							<div layout='column' flex class='thread-comments-content'>
+								<p>{{item.content}}</p>
+							</div>
+
+							<div layout='column' flex='10' layout-align='center center' class='thread-comments-score'>
+								<i class='icon-expand_less' ng-click="vm.commentUpvote(item)" ng-class="{'upvoted': item.upvoted}"></i>
+								<span ng-class="{'positive': item.score >= 1, 'negative': item.score <= -1}">{{item.score}}</span>
+								<i class='icon-expand_more' ng-click="vm.commentDownvote(item)" ng-class="{'downvoted': item.downvoted}"></i>
+							</div>
+						</div>
+
+						<div class='thread-comments-toolbar'>
+							<div layout='row' layout-align='none center'>
+								<button ng-if="!item.saved" ng-click="vm.commentSave(item)">
+									<i class='icon-favorite_border'></i>
+									<span>{{item.saves.length}} Save<span ng-if="item.saves.length > 1 || item.saves.length === 0">s</span></span>
+								</button>
+
+								<button ng-if="item.saved" ng-click="vm.commentUnsave(item)">
+									<i class='icon-favorite_border saved'></i>
+									<span>{{item.saves.length}} Save<span ng-if="item.saves.length > 1 || item.saves.length === 0">s</span></span>
+								</button>
+
+								<span flex></span>
+
+								<button>
+									<span>{{item.created | amCalendar}}</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</md-list-item>
+			</md-list>
+		</md-content>
+
+		<div class='thread-no-comments' layout='row' layout-align='center none' ng-if="!vm.comments.length">
+			<p>There aren't any comments here yet. How about you add to the discussion and <span ng-click="vm.openAddComment()">add one?</span></p>
+		</div>
+	</div>
+
+</div>
+				

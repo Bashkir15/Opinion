@@ -1,12 +1,12 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/lastopinion',
+	db: 'mongodb://localhost/lastingopinion',
 	server: {
 		host: 'localhost:',
-		port: 8000
+		port: 3000
 	},
-	secret: 'adkfjyh2kra09seo;iflkh2tg',
+	secret: 'asuhawbeoisjhkdjnmbwmanbsdsd',
 	settings: {
 		perPage: 15
 	}

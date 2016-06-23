@@ -1,3 +1,2 @@
-var System = require('./system');
-
-System.boot();
+require('babel-register');
+require('./server.babel');

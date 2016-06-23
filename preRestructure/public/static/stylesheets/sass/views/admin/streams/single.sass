@@ -1,0 +1,399 @@
+.stream-single-container
+	background-image: -webkit-linear-gradient(bottom, darken(#364351, 5%) 0%, darken(#364351, 10%) 100%)
+	.stream-single-header
+		height: 180px
+		background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
+
+		> div
+		
+			> img
+				height: 55px
+				width: 55px
+				border: 1px solid #fff
+				border-radius: 50%
+				margin-bottom: 8px
+				margin-top: 15px
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4)
+
+			p
+				margin: 0
+
+				&:nth-of-type(1)
+					@include mont
+					margin-bottom: 8px
+
+				&:nth-of-type(2)
+					@include lato
+
+	.stream-single-toolbar
+		background: $darkest-green !important
+		height: 55px
+		min-height: 55px
+
+		> div
+			padding-left: 0
+
+			button
+				height: 55px
+				width: 150px
+				border-right: 1px solid darken($darkest-green, 10%)
+				padding-right: 10px
+				transition: all .4s ease
+
+				&:hover
+					background: darken($darkest-green, 10%)
+
+				span
+					@include open
+					color: #dfe1df
+					text-shadow: 1px 1px rgba(0,0,0,0.35)
+					font-size: 14px
+
+
+	.stream-single-body
+		background-image: -webkit-linear-gradient(bottom, darken(#364351, 10%) 0%, darken(#364351, 5%) 100%)
+		//background: #364351
+		min-height: 500px
+		position: relative
+
+		> div 
+			padding-top: 15px
+			//background: darken(#364351, 5%)
+			width: 100%
+
+			md-list
+				md-list-item
+					margin-left: 10px
+					margin-bottom: 10px
+					width: 75%
+					padding: 0
+					background: #212a33
+
+					.md-list-item-text
+						> div
+							//padding-bottom: 10px
+							> div
+								img
+									height: 40px
+									width: 40px
+									border: 1px solid #dfe1df
+									border-radius: 50%
+									margin: 6px 0
+									display: inline-block
+									transition: all .4s ease
+
+									&:hover
+										transform: scale(1.1, 1.1)
+
+								p
+									@include lato
+									color: #dfe1df
+
+								&:nth-of-type(2)
+									transition: all .4s ease
+									display: inline-block
+
+									p
+										@include lato
+										color: #9a9a9a
+
+										
+
+							.stream-single-score-container
+								i
+									color: #dfe1df
+									transition: all .4s ease
+									outline: none
+
+									&.upvoted
+										color: $accent-green
+
+									&.downvoted
+										color: $accent-red
+
+								p
+									@include lato
+									color: #dfe1df
+
+									&.positive
+										color: $accent-green
+
+									&.negative
+										color: $accent-red
+
+						.stream-single-item-toolbar
+							height: 35px
+							border-top: 1px solid #c19f66
+							padding-left: 10px
+
+							button
+								i
+									color: #dfe1df
+									font-size: 16px
+									transition: all .4s ease
+
+								span
+									@include open
+									color: #dfe1df
+
+
+								&:nth-of-type(3)
+									span
+										color: #9a9a9a
+										@include lato
+										font-weight: 100
+
+								&.saved 
+									i
+										color: $accent-red
+								
+
+
+
+.stream-single-mod-options
+	position: relative
+	transition: all .4s ease
+	width: 150px
+
+	i
+		transition: all .4s ease
+		color: #dfe1df
+		display: inline-block
+		position: absolute
+		right: 5px
+		top: 19px
+
+
+	&.open
+
+		i
+			transform: rotate(-180deg)
+
+.stream-single-mod-options-dropdown
+	position: absolute
+	top: 55px
+	left: 300px
+	transition: all .4s ease
+	height: 0
+	width: 150px
+	background: $grey
+	text-align: center
+
+	&:not(.ng-hide)
+		height: 150px
+
+		li 
+			height: 50px
+			border-bottom: 1px solid rgba(0,0,0,0.3)
+			transition: all .4s ease
+
+			&:last-child
+				border-bottom: none
+
+			button
+				height: 50px
+				width: 150px
+				border-right: none
+				transition: all .4s ease
+
+				span
+					opacity: 1
+					color: #dfe1df
+					@include lato
+					transition: all .4s ease
+					text-shadow: none
+
+	li
+		button
+			border-right: none !important
+
+			span
+				opacity: 0
+				transition: all .4s ease
+
+.stream-single-order-threads
+	position: relative
+	transition: all .4s ease
+	width: 150px
+
+	i
+		transition: all .4s ease
+		color: #dfe1df
+		display: inline-block
+		position: absolute
+		right: 5px
+		top: 19px
+
+	&.open
+	
+
+		i
+			transform: rotate(-180deg)
+
+.stream-single-order-threads-dropdown
+	position: absolute
+	top: 55px
+	left: 150px
+	transition: all .4s ease
+	height: 0
+	width: 150px
+	background: $grey
+	text-align: center
+
+	&:not(.ng-hide)
+		height: 200px
+
+		li
+			height: 50px
+			border-bottom: 1px solid rgba(0,0,0,0.3)
+			transition: all .4s ease
+
+			&:last-child
+				border-bottom: none
+
+			button
+				height: 50px
+				width: 150px
+				border-right: none
+				transition: all .4s ease
+
+				span
+					opacity: 1
+					color: #dfe1df
+					@include lato
+					transition: all .4s ease
+					text-shadow: none
+
+
+	li
+		button
+			border-right: none !important
+
+			span
+				opacity: 0
+				transition: all 2s ease
+
+.stream-single-search-icon
+	height: 38px
+	width: 40px
+	margin-top: 2px
+	background: darken($darkest-green, 10%)
+	position: relative
+	transition: all .4s ease
+
+	i
+		font-size: 16px
+		position: absolute
+		top: 12px
+		left: 12px
+		opacity: 1
+		transition: all .4s ease
+
+	&.is-searching
+		width: 5px
+
+		i
+			opacity: 0
+
+.stream-single-search
+	position: relative
+	height: 38px
+	margin-top: 2px
+
+	label
+		@include open
+		font-weight: 400
+		display: inline-block
+		position: absolute
+		left: 5px
+		top: 7px
+		color: #dfe1df
+		transition: all .4s ease
+		opacity: 1
+		font-size: 16px
+
+
+	input
+		height: 38px
+		width: 180px
+		background: $grey
+		padding-left: 5px
+		@include lato
+		color: #dfe1df
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			width: 215px
+
+.stream-single-title
+	padding-top: 6px
+	cursor: pointer
+	position: relative
+
+	> p
+		opacity: 1
+		transition: all .4s ease-out
+
+	&:hover
+		.stream-single-title-overlay
+			opacity: 1
+			height: 70px
+
+.stream-single-title-overlay
+	background-color: $darkest-blue
+	position: absolute
+	top: 0
+	left: 0
+	opacity: 0
+	transition: all .4s ease
+	width: 100%
+	height: 0
+
+	p
+		@include lato
+		color: #fff
+		padding-left: 10px
+		padding-top: 8px
+
+.stream-single-no-threads
+	width: 100%
+	margin-top: 35px
+
+	p
+		@include mont
+		color: #9a9a9a
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		span
+			@include open
+			font-weight: 600
+			cursor: pointer
+			color: #bababa
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			transition: all .4s ease
+
+			&:hover
+				color: #fff
+
+.streams-single-searching-text
+	padding-top: 35px
+
+	p
+		@inlude mont
+		color: #dfe1df
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		span
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			color: #c19f66
+
+
+

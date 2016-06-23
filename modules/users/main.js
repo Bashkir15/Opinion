@@ -1,4 +1,4 @@
-var routes = require('./routes/users.server.routes');
+import routes from './routes/users.server.routes';
 
 module.exports = function (System) {
 	var moduleName = 'users';

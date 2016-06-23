@@ -1,0 +1,285 @@
+@import "dialogs"
+@import "create"
+
+.thread-container
+	background: darken(#364351, 5%)
+
+.thread-content
+	background: #dfe1df
+.thread-title
+	padding-left: 10px
+	box-shadow: 0 2px 4px rgba(0,0,0,0.35)
+	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
+	height: 40px
+	position: relative
+	z-index: 50
+
+	p
+		@include open
+		color: #dfe1df
+
+	span
+		@include lato
+		color: #dfe1df
+		padding-right: 10px
+
+.thread-content-stream
+	transition: all .4s ease
+	color: #dfe1df
+
+	&:hover
+		color: #fff
+.thread-body-content
+	padding: 20px 0
+	min-height: 120px
+
+.thread-content-user
+	padding-top: 10px
+	> img
+		height: 40px
+		width: 40px
+		border: 1px solid rgba(0,0,0,0.5)
+		border-radius: 50%
+		display: inline-block
+		transition: all .4s ease
+		cursor: pointer
+
+		&:hover
+			transform: scale(1.2, 1.2)
+
+	p
+		@include lato
+
+.thread-content-content
+	border: 1px solid rgba(0,0,0,0.12)
+	border-radius: 5px
+	padding: 12px 0 0 10px
+
+	p
+		@include open
+		color: rgba(0,0,0,0.45)
+		word-wrap: break-word
+
+.thread-content-score
+		i
+			transition: all .4s ease
+			outline: none
+
+			&.upvoted
+				color: $accent-green
+
+			&.downvoted
+				color: $accent-red
+
+		span
+			@include open
+			transition: all .4s ease
+
+			&.positive
+				color: $accent-green
+
+			&.negative
+				color: $accent-red
+
+.thread-content-toolbar
+	//background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, $blue 100%)
+	background: $darkest-green !important
+	height: 55px
+	min-height: 55px
+	
+
+	> div
+		padding-left: 0
+
+		button
+			height: 55px
+			width: 150px
+			border-right: 1px solid darken($darkest-green, 10%)
+			
+
+			&:hover
+				background: darken($darkest-green, 10%)
+
+			&.ng-enter
+				@include slideInUp()
+
+			&:nth-of-type(1)
+				transition: all .4s ease
+			i
+				color: #dfe1df
+
+				&.saved
+					color: $accent-red
+
+			span
+				color: #dfe1df
+				@include open
+				text-shadow: 1px 1px rgba(0,0,0,0.35)
+				font-size: 14px
+
+.thread-comments-search-icon
+	height: 38px
+	width: 40px
+	margin-top: 2px
+	background: darken($darkest-green, 10%)
+	position: relative
+	transition: all .4s ease
+
+	i
+		font-size: 16px
+		position: absolute
+		top: 12px
+		left: 12px
+		opacity: 1
+		transition: all .4s ease
+
+	&.is-searching
+		width: 5px
+
+		i
+			opacity: 0
+
+.thread-comments-search
+	position: relative
+	height: 38px
+	margin-top: 2px
+
+	label
+		@include open
+		font-weight: 400
+		display: inline-block
+		position: absolute
+		left: 5px
+		top: 7px
+		color: #dfe1df
+		transition: all .4s ease
+		opacity: 1
+		font-size: 16px
+
+
+	input
+		height: 38px
+		width: 180px
+		background: $grey
+		padding-left: 5px
+		@include lato
+		color: #dfe1df
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			width: 215px
+
+.thread-comments
+	padding-top: 10px
+	background: darken(#364351, 5%)
+	min-height: 490px
+
+	md-content
+		background: darken(#364351, 5%)
+
+		md-list
+			md-list-item
+				margin-left: 10px
+				margin-bottom: 10px
+				padding: 0
+				width: 85%
+				background: #212a33
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
+
+.thread-comments-user
+
+	> img
+		height: 40px
+		width: 40px
+		border: 1px solid #dfe1df
+		border-radius: 50%
+		margin: 6px 0
+		display: inline-block
+		transition: all .4s ease
+		cursor: pointer
+
+		&:hover
+			transform: scale(1.1, 1.1)
+
+	p
+		@include open
+		color: #dfe1df !important
+		padding-bottom: 6px
+
+.thread-comments-content
+	padding-top: 10px
+
+	p
+		@include lato
+		color: #dfe1df !important
+
+.thread-comments-score
+	i
+		color: #dfe1df
+		transition: all .4s ease
+
+		&.upvoted
+			color: $accent-green
+
+		&.downvoted
+			color: $accent-red
+
+	span
+		color: #dfe1df
+		transition: all .4s ease
+
+		&.positive
+			color: $accent-green
+
+		&.negative
+			color: $accent-red
+
+.thread-comments-toolbar
+	height: 35px
+	border-top: 1px solid #c19f66
+	padding-left: 10px
+	padding-top: 5px
+	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
+
+	button
+		i
+			color: #dfe1df
+			font-size: 16px
+			transition: all .4s ease
+
+			&.saved
+				color: $accent-red
+
+		span
+			@include open
+			color: #dfe1df
+
+
+		&:nth-of-type(2)
+			span
+				@include lato
+				color: #9a9a9a
+
+.thread-no-comments
+	padding-top: 35px
+
+	p
+		@include mont
+		color: #9a9a9a
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		span
+			@include open
+			font-weight: 600
+			color: #bababa
+			cursor: pointer
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			transition: all .4s ease
+
+			&:hover
+				color: #fff

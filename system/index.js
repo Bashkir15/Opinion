@@ -1,14 +1,26 @@
-var express = require('express');
-var app = express();
-var fs = require('fs');
-var mongoose = require('mongoose');
-var Config = require('./config/' + (process.env.NODE_ENV || 'development'));
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var multipart = require('connect-multiparty');
+import express from 'express';
+import fs from 'fs';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import multipart from 'connect-multiparty';
 
+const Config = require('./config/' + (process.env.NODE_ENV || 'development'));
+const modulePath = __dirname + '/../modules';
+const options = {
+	dotfiles: 'ignore',
+	etag: false,
+	index: false,
+	maxAge: '1d',
+	redirect: false,
+	setHeaders: function (res, path, stat) {
+		res.set('x-timestamp', Date.now());
+	}
+};
 
-app.use(bodyParser.json({limit: '50mb'}));
+const app = express();
+
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(morgan('dev'));
 app.use(multipart());
@@ -18,42 +30,32 @@ app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
 	next();
 });
-app.use(express.static(__dirname + '/../public', options));
 app.disable('etag');
+app.use(express.static(__dirname + "/../public", options));
 
-var modulePath = __dirname + '/../modules';
-var options = {
-	dotfiles: 'ignore',
-	etag: false,
-	index: false,
-	maxAge: '1d',
-	redirect: false,
-	setHeaders: function (res, path, stat) {
-		res.set('x-timestamp', Date.now())
-	}
-};
 
 function startServer() {
 	app.use(function (req, res, next) {
-		var output = fs.readFileSync(__dirname + '/../public/index.html');
+		const output = fs.readFileSync(__dirname + "/../public/index.html");
 		res.type('html').send(output);
 		next();
 	});
-	var server = app.listen(Config.server.port, function() {
-		var host = Config.server.host;
-		var port = Config.server.port;
+
+	const server = app.listen(Config.server.port, function() {
+		const host = Config.server.host;
+		const port = Config.server.port;
 
 		console.log('The application is up and running at ' + host + port + ' and the environment is currently set to ' + (process.env.NODE_ENV || 'development'));
 	});
 }
 
 var dbConnect = function() {
-	var db = mongoose.connect(Config.db);
+	const db = mongoose.connect(Config.db);
 	return db;
 };
 
 var loadPlugins = function (startingPath, System) {
-	var helpersPath = startingPath + '/helpers';
+	const helpersPath = startingPath + '/helpers';
 
 	if (!fs.existsSync(helpersPath)) {
 		return false;
@@ -63,7 +65,7 @@ var loadPlugins = function (startingPath, System) {
 	files.forEach(function (file) {
 		var plugin = require(helpersPath + '/' + file)(System);
 		System.plugins[plugin.register.attributes.key] = plugin.register();
-		console.log('Plugin loaded: ' + file);
+		console.log('Plugin Loaded: ' + file);
 	});
 
 	System.auth = System.plugins.auth;
@@ -72,7 +74,7 @@ var loadPlugins = function (startingPath, System) {
 };
 
 var loadDBModels = function (startingPath) {
-	var modelsPath = startingPath + '/models';
+	const modelsPath = startingPath + '/models';
 
 	if (!fs.existsSync(modelsPath)) {
 		return false;
@@ -81,27 +83,34 @@ var loadDBModels = function (startingPath) {
 	var files = fs.readdirSync(modelsPath);
 	files.forEach(function (file) {
 		require(modelsPath + '/' + file);
-		console.log('Model loaded: ' + file);
+		console.log('Model Loaded: ' + file);
 	});
 
 	return true;
 };
 
 var loadModules = function (System, callback) {
-	fs.readdir(modulePath, function (err, list) {
-		list.forEach(function (folder) {
-			var folderPath = modulePath + '/' + folder;
-			loadDBModels(folderPath);
 
-			var moduleFile = folderPath + '/main.js';
+	var list = fs.readdirSync(modulePath);
+	var requires = [];
 
-			if (fs.existsSync(moduleFile)) {
-				require(moduleFile)(System);
-			}
-		});
-		callback();
+	list.forEach(function (folder) {
+		var folderPath = modulePath + '/' + folder;
+		loadDBModels(folderPath);
+
+		var moduleFile = folderPath + '/main.js';
+		if (fs.existsSync(moduleFile)) {
+			requires.push(require(moduleFile));
+		} 
 	});
+
+	requires.map(function (module) {
+		module(System);
+	});
+
+	callback();
 };
+
 
 module.exports = {
 	plugins: {},
@@ -113,7 +122,7 @@ module.exports = {
 
 		loadPlugins(__dirname, this);
 
-		loadModules(this, function() {
+		loadModules(this, () => {
 			startServer();
 		});
 	},
@@ -126,10 +135,10 @@ module.exports = {
 		moduleName = moduleName || 'unidentified';
 
 		routes.forEach(function (route) {
-			var moduleRouter = express.Router();
+			const moduleRouter = express.Router();
 
 			if (!route.authorized) {
-				moduleRouter[route.method](route.path, $this.auth.justGetUser, route.handler);
+				moduleRouter[route.method](route.path, route.handler);
 			} else {
 				moduleRouter[route.method](route.path, $this.auth.ensureAuthorized, route.handler);
 			}
