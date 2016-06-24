@@ -1,0 +1,60 @@
+<div class='profile-container'>
+	<div layout='column' class='profile-header'>
+		<div layout='column' layout-align='center center' class='profile-user-info'>
+			<img src='../static/images/me.jpg'>
+			<p>{{profile.name}}</p>
+			<p>{{profile.email}}</p>
+			<p>{{profile.created}}</p>
+		</div>
+
+		<div layout='row' layout-align='start center' class='profile-header-toolbar'>
+			<button aria-label='follow user button' ng-click="follow()" ng-if="!selfProfile">
+				<span>Follow</span>
+			</button>
+
+			<button>
+				<span>Message</span>
+			</button>
+
+			<button aria-label='update profile button' ng-if="vm.selfProfile" ng-click="vm.openUpdateProfile()">
+				<span>Update Profile</span>
+			</button>
+
+			<button>
+				<span>Upload Image</span>
+			</button>
+		</div>
+	</div>
+
+	<md-tabs class='profile-tabs' md-dynamic-height md-stretch-tabs='always' md-swipe-content='true'>
+		<md-tab ui-sref='profile.overview'>
+			<md-tab-label layout='column'>
+				<span>Overview</span>
+			</md-tab-label>
+		</md-tab>
+
+		<md-tab ui-sref='profile.threads'>
+			<md-tab-label layout='column'>
+				<span>Threads</span>
+			</md-tab-label>
+		</md-tab>
+
+		<md-tab ui-sref='profile.comments'>
+			<md-tab-label layout='column'>
+				<span>Comments</span>
+			</md-tab-label>
+		</md-tab>
+
+		<md-tab ui-sref='profile.saved'>
+			<md-tab-label layout='column'>
+				<span>Saved</span>
+			</md-tab-label>
+		</md-tab>
+
+		<md-tab>
+			<md-tab-label layout='column'>
+				<span>Activity</span>
+			</md-tab-label>
+		</md-tab>
+	</md-tabs>
+</div>

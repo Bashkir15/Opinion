@@ -23,11 +23,32 @@ const ensureAuthorized = function (req, res, next) {
 	}
 };
 
+const justGetUser = function (req, res, next) {
+	var User = mongoose.model('User');
+	var bearerToken;
+	var bearerHeader = req.headers["authorization"];
+
+	if (typeof bearerHeader !== 'undefined') {
+		var bearer = bearerHeader.split(" ");
+		bearerToken = bearer[1];
+		req.token = bearerToken;
+
+		User.findOne({token: req.token}, function (err, user) {
+			if (user) {
+				req.user = user;
+			}
+
+			next();
+		});
+	}
+};
+
 module.exports = function (System) {
 	var plugin = {
 		register: function() {
 			return {
-				ensureAuthorized: ensureAuthorized
+				ensureAuthorized: ensureAuthorized,
+				justGetUser: justGetUser
 			};
 		}
 	};

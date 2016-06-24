@@ -11,5 +11,33 @@ module.exports = function (System) {
 		authorized: false
 	});
 
+	routes.push({
+		method: 'post',
+		path: '/authenticate',
+		handler: users.authenticate,
+		authorized: false
+	});
+
+	routes.push({
+		method: 'post',
+		path: '/:userId/follow',
+		handler: users.follow,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'get',
+		path: '/:userId',
+		handler: users.single,
+		authorized: true
+	});
+
+	routes.push({
+		method: 'get',
+		path: '/search/:keyword',
+		handler: users.search,
+		authorized: false
+	});
+
 	return routes;
 };
