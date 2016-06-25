@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app='opinionated'>
+	<head>
+		<meta charset='utf-8'>
+		<link rel='stylesheet' href='/vendor/angular-material/angular-material.css'>
+		<link rel='stylesheet' href='/static/stylesheets/css/main.css'>
+
+	</head>
+
+	<body ng-controller="AppController as vm">
+		<nav class='nav'>
+			<div class='nav-left'>
+				<div class='nav-item'>
+					<button ui-sref='landing.home'>
+						<span>Home</span>
+					</button>
+				</div>
+
+				<div class='nav-item'>
+					<button>
+						<span>Streams</span>
+					</button>
+				</div>
+			</div>
+
+			<div class='nav-center'>
+				<div class='nav-item'>
+					<h3>Opinionated</h3>
+				</div>
+			</div>
+
+			<div class='nav-right'>
+				<div class='nav-item'>
+					<button ui-sref='authentication.signup' aria-label='go to signup page button'>
+						<span>Signup</span>
+					</button>
+				</div>
+
+				<div class='nav-item'>
+					<button ui-sref='authentication.login' aria-label='go to login page button'>
+						<span>Login</span>
+					</button>
+				</div>
+
+				<div class='nav-item'>
+					<button ng-click="vm.openUsersSearch()">
+						<span>Users</span>
+					</button>
+				</div>
+			</div>
+		</nav>
+		<div ui-view></div>
+
+		<script src='/vendor/angular/angular.js'></script>
+		<script src='/vendor/angular-messages/angular-messages.js'></script>
+		<script src='/vendor/angular-aria/angular-aria.js'></script>
+		<script src='/vendor/angular-animate/angular-animate.js'></script>
+		<script src='/vendor/angular-material/angular-material.js'></script>
+		<script src='/vendor/angular-ui-router/release/angular-ui-router.js'></script>
+		<script src='/vendor/angular-resource/angular-resource.js'></script>
+
+		<!-- Utilities -->
+		<script src='/app/utilities/utilities.setter.js'></script>
+		<script src='/app/utilities/factories/utilities.storage.factory.js'></script>
+		<script src='/app/utilities/factories/utilities.auth.factory.js'></script>
+		<script src='/app/utilities/factories/utilities.interceptor.factory.js'></script>
+
+
+		<!-- Admin -->
+		<script src='/app/admin/admin.setter.js'></script>
+		<script src='/app/admin/factories/admin.users.factory.js'></script>
+
+			<!-- Profile -->
+			<script src='/app/admin/profile/profile.config.js'></script>
+			<script src='/app/admin/profile/profile.controller.js'></script>
+
+		<!-- Authentication -->
+		<script src='/app/authentication/authentication.setter.js'></script>
+		<script src='/app/authentication/authentication.config.js'></script>
+		<script src='/app/authentication/signup/signup.controller.js'></script>
+		<script src='/app/authentication/login/login.controller.js'></script>
+
+
+		<script src='/app/app.js'></script>
+		<script src='/app/app.config.js'></script>
+		<script src='/app/app.controller.js'></script>
+	</body>
+</html>

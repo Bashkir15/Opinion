@@ -5,7 +5,7 @@
 	.controller('LoginController', LoginController);
 
 	/* @ngInject */
-	function LoginController ($state, $scope, $rootScope, $location, appUsers, appStorage) {
+	function LoginController ($scope, $rootScope, $location, appStorage, appUsers) {
 		var vm = this;
 		vm.reset = reset;
 		vm.login = login;
@@ -23,7 +23,7 @@
 
 		function login (isValid) {
 			if (isValid) {
-				var auth = new appUsers.authenticate({
+				var auth = new appUsers.auth({
 					email: vm.user.email,
 					password: vm.user.password
 				});
@@ -32,13 +32,12 @@
 					if (response.success) {
 						reset();
 						postLogin(response.res.record, response.res.token);
-						alert('yay');
 					} else {
 						alert(response.res.message);
 					}
 				});
 			} else {
-				alert('hmm');
+				alert('poop');
 			}
 		}
 
@@ -49,5 +48,5 @@
 			$rootScope.$broadcast('loggedIn');
 			$location.url('profile/' + user._id);
 		}
-	} 
+	}
 }());

@@ -5,25 +5,28 @@
 	.controller('ProfileController', ProfileController);
 
 	/* @ngInject */
-	function ProfileController ($state, $stateParams, $scope, appAuth, appUsers) {
+	function ProfileController ($scope, $state, $stateParams, $location, appAuth, appUsers) {
+		var vm = this;
 		var userId = $stateParams.userId;
-		$scope.selfProfile = (userId === appAuth.getUser()._id);
-		$scope.getProfile = function() {
-			appUsers.single.get({userId: userId}).$promise.then(function (response) {
-				response.res.profile = response.res.record;
-				angular.extend($scope, response.res);
-			});
-		};
+		vm.selfProfile = (userId === appAuth.getUser()._id);
+		vm.profile = [];
+		vm.getProfile = getProfile;
+		vm.follow = follow;
 
-		$scope.follow = function() {
-			$scope.alreadyFollowing = '';
+		function getProfile() {
+			var profileData = appUsers.single.get({userId: userId}, function() {
+				vm.profile = [profileData.res.record];
+			});
+		}
+
+		function follow() {
 			var user = appUsers.single.get({userId: userId}, function() {
 				user.$follow({userId: userId}, function() {
-					$scope.getProfile();
+					getProfile();
 				});
 			});
-		};
+		}
 
-		$scope.getProfile();
+		getProfile();
 	}
 }());

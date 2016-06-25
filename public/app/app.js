@@ -2,9 +2,10 @@
 	'use strict';
 
 	angular.module('opinionated', [
+		'ui.router',
+		'ngResource',
+		'ngMaterial',
 		'opinionated.utilities',
-		'opinionated.authentication',
 		'opinionated.admin',
-		'opinionated.landing',
-		'ngMaterial']);
+		'opinionated.authentication'])
 }());

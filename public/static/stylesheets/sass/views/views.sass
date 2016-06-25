@@ -5,7 +5,7 @@
 	z-index: 40
 	text-align: center
 	box-shadow: 0 4px 8px rgba(0,0,0,0.4)
-	background: $darkest-blue
+	//background: $darkest-blue
 
 .nav-left
 	display: flex
@@ -31,3 +31,20 @@
 	align-items: center
 	justify-content: center
 	padding: 10px
+
+.nav-user-menu
+	height: 35px
+	width: 35px
+	border: 1px solid $blue
+	border-radius: 50%
+	display: inline-block
+	transition: all .4s ease
+	outline: none
+
+	img
+		height: 35px
+		width: 35px
+		border-radius: 50%
+
+	&:hover
+		transform: scale(1.2, 1.2)

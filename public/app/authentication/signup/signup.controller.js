@@ -5,7 +5,7 @@
 	.controller('SignupController', SignupController);
 
 	/* @ngInject */
-	function SignupController ($state, $scope, appUsers) {
+	function SignupController ($state, $scope, appStorage, appUsers) {
 		var vm = this;
 		vm.reset = reset;
 		vm.create = create;
@@ -34,9 +34,9 @@
 				user.$save(function (response) {
 					if (response.success) {
 						reset();
-						alert('yay');
+						$state.go('authentication.login');
 					} else {
-						alert(response.res.message);
+						alert(reponse.res.message);
 					}
 				});
 			} else {

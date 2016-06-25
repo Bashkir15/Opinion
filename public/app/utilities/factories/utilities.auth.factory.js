@@ -8,8 +8,8 @@
 	function appAuth (appStorage) {
 		var service = {
 			getUser: getUser,
-			isLoggedIn: isLoggedIn,
-			getToken: getToken
+			getToken: getToken,
+			isLoggedIn: isLoggedIn
 		};
 
 		return service;
@@ -24,11 +24,11 @@
 			}
 		}
 
-		function isLoggedIn() {
+		function getToken() {
 			return appStorage.get('opinion-token');
 		}
 
-		function getToken() {
+		function isLoggedIn() {
 			return appStorage.get('opinion-token');
 		}
 	}

@@ -5,22 +5,11 @@
 	.controller('AppController', AppController);
 
 	/* @ngInject */
-	function AppController ($scope, $rootScope, $state, $location, $mdSidenav, $mdDialog, appAuth, appStorage, appUsersSearch) {
+	function AppController ($scope, $rootScope, $location, $mdDialog, $mdSidenav, appUsersSearch, appAuth) {
 		var vm = this;
-		vm.openUserMenu = openUserMenu;
-		vm.updateLoginStatus = updateLoginStatus;
-		vm.openUserSearch = openUserSearch;
+		vm.openUsersSearch = openUsersSearch;
 
-		function openUserMenu() {
-			$mdSidenav('left').toggle();
-		}
-
-		function updateLoginStatus() {
-			vm.isLoggedIn = appAuth.isLoggedIn();
-			vm.user = appAuth.getUser();
-		}
-
-		function openUserSearch() {
+		function openUsersSearch() {
 			$mdDialog.show({
 				controller: [
 					'$scope',
@@ -53,19 +42,5 @@
 
 			});
 		}
-
-		$rootScope.$on('loggedIn', function() {
-			updateLoginStatus();
-		});
-
-		$rootScope.$on('loggedOut', function() {
-			updateLoginStatus();
-		});
-
-		$rootScope.$on('$stateChangeSuccess', function() {
-			$mdSidenav('left').close();
-		});
-
-		updateLoginStatus();
 	}
 }());

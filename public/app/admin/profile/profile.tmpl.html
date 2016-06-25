@@ -1,14 +1,13 @@
-<div class='profile-container'>
+<div class='profile-container' ng-repeat='profile in vm.profile'>
 	<div layout='column' class='profile-header'>
 		<div layout='column' layout-align='center center' class='profile-user-info'>
 			<img src='../static/images/me.jpg'>
 			<p>{{profile.name}}</p>
 			<p>{{profile.email}}</p>
-			<p>{{profile.created}}</p>
 		</div>
 
 		<div layout='row' layout-align='start center' class='profile-header-toolbar'>
-			<button aria-label='follow user button' ng-click="follow()" ng-if="!selfProfile">
+			<button aria-label='follow user button' ng-if="!vm.selfProfile" ng-click="vm.follow()">
 				<span>Follow</span>
 			</button>
 
@@ -20,7 +19,7 @@
 				<span>Update Profile</span>
 			</button>
 
-			<button>
+			<button ngf-select="vm.uploadUserImage(file)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/*">
 				<span>Upload Image</span>
 			</button>
 		</div>

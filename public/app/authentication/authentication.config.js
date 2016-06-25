@@ -2,13 +2,13 @@
 	'use strict';
 
 	angular.module('opinionated.authentication')
-	.config(authenticationConfig);
+	.config(authConfig);
 
 	/* @ngInject */
-	function authenticationConfig ($stateProvider, $urlRouterProvider) {
+	function authConfig ($stateProvider) {
 		$stateProvider.state('authentication', {
-			abstract: true,
-			templateUrl: '/app/authentication/authentication.tmpl.html'
+			templateUrl: '/app/authentication/authentication.tmpl.html',
+			abstract: true
 		});
 
 		$stateProvider.state('authentication.signup', {
@@ -23,12 +23,6 @@
 			templateUrl: '/app/authentication/login/login.tmpl.html',
 			controller: 'LoginController',
 			controllerAs: 'vm'
-		});
-
-		$stateProvider.state('authentication.logout', {
-			url: '/logout',
-			templateUrl: '/app/landing/home/home.tmpl.html',
-			controller: 'LogoutController'
 		});
 	}
 }());

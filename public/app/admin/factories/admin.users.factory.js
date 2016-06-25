@@ -16,7 +16,8 @@
 					params: {action: 'follow'}
 				}
 			}),
-			authenticate: $resource('users/authenticate')
+
+			auth: $resource('users/authenticate')
 		};
 	}
 
