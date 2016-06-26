@@ -351,6 +351,20 @@ module.exports = function() {
 						return json.bad(err, res);
 					}
 
+					Thread.findOne({_id: comment.thread})
+					.exec(function (err, thread) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						thread.comments.splice(thread.comments.indexOf(comment._id), 1);
+						thread.save(function (err) {
+							if (err) {
+								return json.bad(err, res);
+							}
+						});
+					});
+
 					json.good({}, res);
 				});
 			}
