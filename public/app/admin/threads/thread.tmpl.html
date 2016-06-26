@@ -5,7 +5,7 @@
 				<p>{{thread.title}}</p>
 				<span flex></span>
 				<button ui-sref='streams.streamsSingle({streamId: thread.stream._id})' class='thread-content-stream'> In {{thread.stream.name}}</button>
-				<span>{{thread.created | amCalendar}}</span>
+				<span>{{thread.created}}</span>
 			</div>
 
 			<div layout='row' class='thread-body-content'>
@@ -87,10 +87,14 @@
 									<span>{{item.saves.length}} Save<span ng-if="item.saves.length > 1 || item.saves.length === 0">s</span></span>
 								</button>
 
+								<button ng-if="vm.currentUserId == item.creator._id || vm.isMod" ui-sref='streams.commentEdit({threadId: item.thread._id, commentId: item._id})' aria-label='open-edit-comment'>
+									<span>Edit Comment</span>
+								</button>
+
 								<span flex></span>
 
 								<button>
-									<span>{{item.created | amCalendar}}</span>
+									<span>{{item.created}}</span>
 								</button>
 							</div>
 						</div>

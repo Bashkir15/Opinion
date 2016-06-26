@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import json from '../helpers/json';
+import path from 'path';
+import fs from 'fs';
 var Stream = mongoose.model('Stream');
 var config = require('../config/env/' + (process.env.NODE_ENV || 'development'));
 
@@ -54,7 +56,9 @@ module.exports = function() {
 				}
 
 				if (req.user) {
-					streams.map((e) => e = e.afterSave(req.user));
+					streams.map(function (e) {
+						e = e.afterSave(req.user);
+					});
 				}
 
 				json.good({
@@ -149,6 +153,98 @@ module.exports = function() {
 				} else {
 					return json.bad({message: 'Sorry, you are not subscribed to that stream'}, res);
 				}
+			}
+		});
+	};
+
+	obj.image = function (req, res) {
+		var streamId = req.params.streamId;
+		var file = req.files.file;
+		var uploadDate = Date.now();
+		var tempPath = file.path;
+		var targetPath = path.join(__dirname, "../../public/static/uploads/streams/images/" + streamId + uploadDate + file.name)
+		var savePath = '../static/uploads/streams/images/' + streamId + uploadDate + file.name;
+
+		Stream.findOne({_id: req.params.streamId})
+		.populate('creator')
+		.exec(function (err, stream) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (stream) {
+				fs.rename(tempPath, targetPath, function (err) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					stream.image = savePath;
+					stream.save(function (err, u) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							image: u.image
+						}, res);
+					});
+				});
+			} else {
+				return json.bad({message: 'Sorry, that stream could not be found'}, res);
+			}
+		});
+	};
+
+	obj.remove = function (req, res) {
+		Stream.findOne({_id: req.params.streamId}, function (err, stream) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				var inArray = stream.moderators.some(function (moderator) {
+					return moderator.equals(req.user._id);
+				});
+
+				if (req.user.roles.indexOf('admin') !== -1 || inArray) {
+
+					stream.remove(function (err) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({}, res);
+					});
+				}
+			} 
+		});
+	};
+
+	obj.modify = function (req, res) {
+		Stream.findOne({_id: req.params.streamId})
+		.populate('creator')
+		.exec(function (err, stream) {
+			if (err) {
+				return json.bad(err, res);
+			} else if (stream) {
+
+				var inArray = stream.moderators.some(function (moderator) {
+					return moderator.equals(req.user._id);
+				});
+
+				if (req.user.roles.indexOf('admin') !== -1 || inArray) {
+					stream.name = req.body.name;
+					stream.description = req.body.description;
+					stream.save(function (err, item) {
+						stream = stream.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			} else {
+				return json.bad({message: 'Sorry, that stream could not be found'}, res);
 			}
 		});
 	};

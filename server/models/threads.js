@@ -66,7 +66,13 @@ var ThreadSchema = new mongoose.Schema({
 	saved: {
 		type: Boolean,
 		default: false
-	}
+	},
+
+	comments: [{
+		type: mongoose.Schema.ObjectId,
+		required: false,
+		ref: 'Comment'
+	}]
 });
 
 ThreadSchema.methods = {
@@ -78,7 +84,7 @@ ThreadSchema.methods = {
 		}
 
 		if (obj.upvotoes || obj.downvotes) {
-			obj.score = 1 + obj.upvotes.length - obj.downvotes.length;
+			obj.score = obj.upvotes.length - obj.downvotes.length;
 		} else {
 			obj.score = 0;
 		}

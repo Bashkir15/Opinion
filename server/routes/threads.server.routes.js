@@ -5,6 +5,10 @@ var threads = require('../controllers/threads.server.controller')();
 
 router.post('/', auth.ensureAuthorized, threads.create);
 router.get('/:threadId', auth.justGetUser, threads.single);
+router.post('/:threadId/upvote', auth.ensureAuthorized, threads.upvote);
+router.post('/:threadId/downvote', auth.ensureAuthorized, threads.downvote);
+router.post('/:threadId/save', auth.ensureAuthorized, threads.save);
+router.post('/:threadId/unsave', auth.ensureAuthorized, threads.unsave);
 router.get('/stream/:streamId', auth.justGetUser, threads.list);
 
 module.exports = router;

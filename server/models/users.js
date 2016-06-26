@@ -42,6 +42,16 @@ var UserSchema = new mongoose.Schema({
 	profileViews: {
 		type: Number,
 		default: 0
+	},
+
+	threadScore: {
+		type: Number,
+		default: 0
+	},
+
+	commentScore: {
+		type: Number,
+		default: 0
 	}
 });
 

@@ -88,16 +88,16 @@
 
 	<div class='stream-single-body' layout='column'>
 		<div>
-			<md-list>
-				<md-list-item class='md-2-line' ng-repeat='item in vm.feed'>
+			<md-list class='stream-single-list'>
+				<md-list-item class='md-2-line' ng-repeat='item in vm.feed | orderBy: vm.rowFilter'>
 					<div class='md-list-item-text'>
 						<div layout='row'>
-							<div layout='column' flex='15' layout-align='center center'>
+							<div layout='column' flex='15' layout-align='center center' class='stream-single-user'>
 								<img src='../static/images/me.jpg'>
 								<p>{{item.creator.name}}</p>
 							</div>
 
-							<div layout='column' flex ui-sref='streams.streamsThread({streamId: item.stream._id, threadId: item._id})' class='stream-single-title'>
+							<div layout='column' flex ui-sref='streams.thread({streamId: item.stream._id, threadId: item._id})' class='stream-single-title'>
 								<p>{{item.title}}</p>
 								<div class='stream-single-title-overlay'>
 									<p>{{item.content}}</p>

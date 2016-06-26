@@ -59,6 +59,20 @@ var StreamSchema = new mongoose.Schema({
 	}
 });
 
+StreamSchema.pre('remove', function (next) {
+	this.model('Thread').find({stream: this._id}, function (err, docs) {
+		if (err) {
+			return next(err);
+		}
+
+		for (var doc in docs) {
+			docs[doc].remove();
+		}
+	});
+
+	next();
+});
+
 StreamSchema.methods = {
 	toJSON: function() {
 		var obj = this.toObject();

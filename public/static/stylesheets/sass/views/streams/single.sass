@@ -229,6 +229,38 @@
 		input
 			width: 215px
 
+.stream-single-body
+	> div
+		padding-top: 15px
+
+.stream-single-list
+	md-list-item
+		margin-left: 10px
+		margin-bottom: 10px
+		width: 75%
+		padding: 0
+		background: #212a33
+
+.stream-single-user
+	img
+		height: 40px
+		width: 40px
+		border: 1px solid #dfe1df
+		border-radius: 50%
+		margin: 6px 0
+		display: inline-block
+		transition: all .4s ease
+
+	&:hover
+		transform: scale(1.1, 1.1)
+
+	p
+		@include lato
+		color: #dfe1df
+
+
+
+
 .stream-single-title
 	padding-top: 6px
 	cursor: pointer
@@ -237,6 +269,7 @@
 	> p
 		opacity: 1
 		transition: all .4s ease-out
+		color: #dfe1df !important
 
 	&:hover
 		.stream-single-title-overlay
@@ -255,9 +288,58 @@
 
 	p
 		@include lato
-		color: #fff
+		color: #fff !important
 		padding-left: 10px
 		padding-top: 8px
+
+.stream-single-score-container
+	i
+		color: #dfe1df
+		transition: all .4s ease
+		outline: none
+
+		&.upvoted
+			color: $accent-green
+
+		&.downvoted
+			color: $accent-red
+
+	p
+		@include lato
+		color: #dfe1df !important
+
+		&.positive
+			color: $accent-green
+
+		&.negative
+			color: $accent-red
+
+.stream-single-item-toolbar
+	height: 35px
+	border-top: 1px solid #c19f66
+	padding-left: 10px
+
+	button
+		i
+			color: #dfe1df
+			font-size: 16px
+			transition: all .4s ease
+
+		span
+			@include open
+			color: #dfe1df
+
+
+		&:nth-of-type(3)
+			span
+				color: #9a9a9a
+				@include lato
+				font-weight: 100
+
+		&.saved 
+			i
+				color: $accent-red
+										
 
 .stream-single-no-threads
 	width: 100%

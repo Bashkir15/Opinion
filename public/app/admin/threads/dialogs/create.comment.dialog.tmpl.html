@@ -1,0 +1,32 @@
+<md-dialog layout='column' flex='50' class='create-dialog-container'>
+	<md-dialog-content>
+		<div class='create-dialog-header' layout='row' layout-align='none center'>
+			<h3>Add Comment</h3>
+			<span flex></span>
+
+			<button>
+				<span ng-click="close()">x</span>
+			</button>
+		</div>
+
+		<div class='create-dialog-body'>
+			<form name='addCommentForm' ng-submit='create(addCommentForm.$valid)' novalidate>
+				<div class='dialog-form-wrapper' ng-class="{'has-focus': addCommentForm.content.hasFocus,
+				'has-success': addCommentForm.content.$valid}">
+					<label>Content</label>
+					<textarea name='content' ng-model='content' required rows='4' cols='40' ng-focus='addCommentForm.content.hasFocus=true' ng-blur="addCommentForm.content.hasFocus=false"></textarea>
+				</div>
+			</form>
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions class='create-dialog-actions' layout='row' layout-align='end center'>
+		<button ng-click="create(addCommentForm.$valid)" novalidate aria-label='submit create comment form'>
+			<span>Create</span>
+		</button>
+
+		<button ng-click="close()" aria-label='close add comment dialog'>
+			<span>Nevermind</span>
+		</button>
+	</md-dialog-actions>
+</md-dialog>

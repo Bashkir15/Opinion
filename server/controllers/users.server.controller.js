@@ -5,6 +5,7 @@ var json = require('../helpers/json');
 var User = mongoose.model('User');
 
 
+
 module.exports = function() {
 	var obj = {};
 

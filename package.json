@@ -19,10 +19,12 @@
     "connect-multiparty": "^2.0.0",
     "express": "^4.13.4",
     "fs": "0.0.2",
+    "http": "0.0.0",
     "jsonwebtoken": "^7.0.0",
     "lodash": "^4.13.1",
     "mongoose": "^4.4.20",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "socket.io": "^1.4.8"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

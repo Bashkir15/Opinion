@@ -1,0 +1,32 @@
+<md-dialog layout='column' flex='50' class='edit-dialog-container'>
+	<md-dialog-content>
+		<div class='edit-dialog-header' layout='row' layout-align='none center'>
+			<h3>Edit Your Comment</h3>
+			<span flex></span>
+
+			<button aria-label='close edit comment dialog' ng-click="close()">
+				<span>x</span>
+			</button>
+		</div>
+
+		<div class='edit-dialog-body'>
+			<form name='editCommentForm' novalidate>
+				<div class='dialog-form-wrapper'>
+					<label>Content</label>
+					<textarea type='text' name='content' ng-model='comment.content' required rows='4' cols='40'></textarea>
+				</div>
+			</form>
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions class='edit-dialog-actions' layout='row' layout-align='end center'>
+		<button ng-click="edit(editCommentForm.$valid)" aria-label='submit edit comment form button'>
+			<span>Edit</span>
+		</button>
+
+		<button ng-click="close()" aria-label='close edit comment dialog'>
+			<span>Nevermind</span>
+		</button>
+	</md-dialog-actions>
+</md-dialog>
+

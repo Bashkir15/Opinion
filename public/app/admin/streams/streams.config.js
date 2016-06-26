@@ -33,10 +33,24 @@
 			controllerAs: 'vm'
 		});
 
+		$stateProvider.state('streams.edit', {
+			url: '/streams/:streamId/edit',
+			templateUrl: '/app/admin/streams/edit/streams.edit.tmpl.html',
+			controller: 'StreamsEditController',
+			controllerAs: 'vm'
+		});
+
 		$stateProvider.state('streams.thread', {
 			url: '/streams/:streamId/:threadId',
 			templateUrl: '/app/admin/threads/thread.tmpl.html',
 			controller: 'ThreadController',
+			controllerAs: 'vm'
+		});
+
+		$stateProvider.state('streams.commentEdit', {
+			url: '/streams/:threadId/:commentId/edit',
+			templateUrl: '/app/admin/comments/edit/edit.comment.tmpl.html',
+			controller: 'EditCommentController',
 			controllerAs: 'vm'
 		});
 	}

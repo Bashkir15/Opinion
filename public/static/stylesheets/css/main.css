@@ -717,13 +717,40 @@ p {
   .stream-single-search.has-focus input {
     width: 215px; }
 
+.stream-single-body > div {
+  padding-top: 15px; }
+
+.stream-single-list md-list-item {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  width: 75%;
+  padding: 0;
+  background: #212a33; }
+
+.stream-single-user img {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #dfe1df;
+  border-radius: 50%;
+  margin: 6px 0;
+  display: inline-block;
+  transition: all .4s ease; }
+
+.stream-single-user:hover {
+  transform: scale(1.1, 1.1); }
+
+.stream-single-user p {
+  font-family: 'Lato', sans-serif;
+  color: #dfe1df; }
+
 .stream-single-title {
   padding-top: 6px;
   cursor: pointer;
   position: relative; }
   .stream-single-title > p {
     opacity: 1;
-    transition: all .4s ease-out; }
+    transition: all .4s ease-out;
+    color: #dfe1df !important; }
   .stream-single-title:hover .stream-single-title-overlay {
     opacity: 1;
     height: 70px; }
@@ -739,9 +766,44 @@ p {
   height: 0; }
   .stream-single-title-overlay p {
     font-family: 'Lato', sans-serif;
-    color: #fff;
+    color: #fff !important;
     padding-left: 10px;
     padding-top: 8px; }
+
+.stream-single-score-container i {
+  color: #dfe1df;
+  transition: all .4s ease;
+  outline: none; }
+  .stream-single-score-container i.upvoted {
+    color: #74b97d; }
+  .stream-single-score-container i.downvoted {
+    color: #ba4445; }
+
+.stream-single-score-container p {
+  font-family: 'Lato', sans-serif;
+  color: #dfe1df !important; }
+  .stream-single-score-container p.positive {
+    color: #74b97d; }
+  .stream-single-score-container p.negative {
+    color: #ba4445; }
+
+.stream-single-item-toolbar {
+  height: 35px;
+  border-top: 1px solid #c19f66;
+  padding-left: 10px; }
+  .stream-single-item-toolbar button i {
+    color: #dfe1df;
+    font-size: 16px;
+    transition: all .4s ease; }
+  .stream-single-item-toolbar button span {
+    font-family: 'Open Sans', sans-serif;
+    color: #dfe1df; }
+  .stream-single-item-toolbar button:nth-of-type(3) span {
+    color: #9a9a9a;
+    font-family: 'Lato', sans-serif;
+    font-weight: 100; }
+  .stream-single-item-toolbar button.saved i {
+    color: #ba4445; }
 
 .stream-single-no-threads {
   width: 100%;
@@ -772,3 +834,234 @@ p {
       font-weight: 600;
       text-shadow: 1px 1px rgba(0, 0, 0, 0.45);
       color: #c19f66; }
+
+.thread-container {
+  background: #2c3642; }
+
+.thread-content {
+  background: #dfe1df; }
+
+.thread-title {
+  padding-left: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  background-image: -webkit-linear-gradient(bottom, #365e77 0%, #264254 100%);
+  height: 40px;
+  position: relative;
+  z-index: 50; }
+  .thread-title p {
+    font-family: 'Open Sans', sans-serif;
+    color: #dfe1df; }
+  .thread-title span {
+    font-family: 'Lato', sans-serif;
+    color: #dfe1df;
+    padding-right: 10px; }
+
+.thread-content-stream {
+  transition: all .4s ease;
+  color: #dfe1df; }
+  .thread-content-stream:hover {
+    color: #fff; }
+
+.thread-body-content {
+  padding: 20px 0;
+  min-height: 120px; }
+
+.thread-content-user {
+  padding-top: 10px; }
+  .thread-content-user > img {
+    height: 40px;
+    width: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: inline-block;
+    transition: all .4s ease;
+    cursor: pointer; }
+    .thread-content-user > img:hover {
+      transform: scale(1.2, 1.2); }
+  .thread-content-user p {
+    font-family: 'Lato', sans-serif; }
+
+.thread-content-content {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  padding: 12px 0 0 10px; }
+  .thread-content-content p {
+    font-family: 'Open Sans', sans-serif;
+    color: rgba(0, 0, 0, 0.45);
+    word-wrap: break-word; }
+
+.thread-content-score i {
+  transition: all .4s ease;
+  outline: none; }
+  .thread-content-score i.upvoted {
+    color: #74b97d; }
+  .thread-content-score i.downvoted {
+    color: #ba4445; }
+
+.thread-content-score span {
+  font-family: 'Open Sans', sans-serif;
+  transition: all .4s ease; }
+  .thread-content-score span.positive {
+    color: #74b97d; }
+  .thread-content-score span.negative {
+    color: #ba4445; }
+
+.thread-content-toolbar {
+  background: #2a6662 !important;
+  height: 55px;
+  min-height: 55px; }
+  .thread-content-toolbar > div {
+    padding-left: 0; }
+    .thread-content-toolbar > div button {
+      height: 55px;
+      width: 150px;
+      border-right: 1px solid #1b4240; }
+      .thread-content-toolbar > div button:hover {
+        background: #1b4240; }
+      .thread-content-toolbar > div button:nth-of-type(1) {
+        transition: all .4s ease; }
+      .thread-content-toolbar > div button i {
+        color: #dfe1df; }
+        .thread-content-toolbar > div button i.saved {
+          color: #ba4445; }
+      .thread-content-toolbar > div button span {
+        color: #dfe1df;
+        font-family: 'Open Sans', sans-serif;
+        text-shadow: 1px 1px rgba(0, 0, 0, 0.35);
+        font-size: 14px; }
+
+.thread-comments-search-icon {
+  height: 38px;
+  width: 40px;
+  margin-top: 2px;
+  background: #1b4240;
+  position: relative;
+  transition: all .4s ease; }
+  .thread-comments-search-icon i {
+    font-size: 16px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    opacity: 1;
+    transition: all .4s ease; }
+  .thread-comments-search-icon.is-searching {
+    width: 5px; }
+    .thread-comments-search-icon.is-searching i {
+      opacity: 0; }
+
+.thread-comments-search {
+  position: relative;
+  height: 38px;
+  margin-top: 2px; }
+  .thread-comments-search label {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    top: 7px;
+    color: #dfe1df;
+    transition: all .4s ease;
+    opacity: 1;
+    font-size: 16px; }
+  .thread-comments-search input {
+    height: 38px;
+    width: 180px;
+    background: #4f737a;
+    padding-left: 5px;
+    font-family: 'Lato', sans-serif;
+    color: #dfe1df;
+    transition: all .4s ease; }
+  .thread-comments-search.has-focus label {
+    opacity: 0; }
+  .thread-comments-search.has-focus input {
+    width: 215px; }
+
+.thread-comments {
+  padding-top: 10px;
+  background: #2c3642;
+  min-height: 490px; }
+  .thread-comments md-content {
+    background: #2c3642; }
+    .thread-comments md-content md-list md-list-item {
+      margin-left: 10px;
+      margin-bottom: 10px;
+      padding: 0;
+      width: 85%;
+      background: #212a33;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.35); }
+
+.thread-comments-user > img {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #dfe1df;
+  border-radius: 50%;
+  margin: 6px 0;
+  display: inline-block;
+  transition: all .4s ease;
+  cursor: pointer; }
+  .thread-comments-user > img:hover {
+    transform: scale(1.1, 1.1); }
+
+.thread-comments-user p {
+  font-family: 'Open Sans', sans-serif;
+  color: #dfe1df !important;
+  padding-bottom: 6px; }
+
+.thread-comments-content {
+  padding-top: 10px; }
+  .thread-comments-content p {
+    font-family: 'Lato', sans-serif;
+    color: #dfe1df !important; }
+
+.thread-comments-score i {
+  color: #dfe1df;
+  transition: all .4s ease; }
+  .thread-comments-score i.upvoted {
+    color: #74b97d; }
+  .thread-comments-score i.downvoted {
+    color: #ba4445; }
+
+.thread-comments-score span {
+  color: #dfe1df;
+  transition: all .4s ease; }
+  .thread-comments-score span.positive {
+    color: #74b97d; }
+  .thread-comments-score span.negative {
+    color: #ba4445; }
+
+.thread-comments-toolbar {
+  height: 35px;
+  border-top: 1px solid #c19f66;
+  padding-left: 10px;
+  padding-top: 5px;
+  background-image: -webkit-linear-gradient(bottom, #0c1013 0%, #1f2933 100%); }
+  .thread-comments-toolbar button i {
+    color: #dfe1df;
+    font-size: 16px;
+    transition: all .4s ease; }
+    .thread-comments-toolbar button i.saved {
+      color: #ba4445; }
+  .thread-comments-toolbar button span {
+    font-family: 'Open Sans', sans-serif;
+    color: #dfe1df; }
+  .thread-comments-toolbar button:nth-of-type(2) span {
+    font-family: 'Lato', sans-serif;
+    color: #9a9a9a; }
+
+.thread-no-comments {
+  padding-top: 35px; }
+  .thread-no-comments p {
+    font-family: 'Montserrat', sans-serif;
+    color: #9a9a9a;
+    font-size: 18px;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.35); }
+    .thread-no-comments p span {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      color: #bababa;
+      cursor: pointer;
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.45);
+      transition: all .4s ease; }
+      .thread-no-comments p span:hover {
+        color: #fff; }

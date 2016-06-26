@@ -5,13 +5,23 @@
 	.controller('StreamsSingleController', StreamsSingleController);
 
 	/* @ngInject */
-	function StreamsSingleController ($state, $stateParams, $mdDialog, $location, appAuth, appStreams, appThreads) {
+	function StreamsSingleController ($scope, $state, $stateParams, $mdDialog, $location, $timeout, appAuth, appStreams, appThreads, Upload) {
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		vm.stream = [];
 		vm.feed = [];
 		vm.getStream = getStream;
 		vm.updateFeed = updateFeed;
+		vm.addStreamImage = addStreamImage;
+		vm.editStream = editStream;
+		vm.openDeleteStream = openDeleteStream;
+		vm.upvote = upvote;
+		vm.downvote = downvote;
+		vm.openAddPost = openAddPost
+		vm.orderByScore = orderByScore;
+		vm.orderByDate = orderByDate;
+		vm.orderBySaves = orderBySaves;
+		vm.orderByReplies = orderByReplies;
 		vm.feedPage = 0;
 		vm.lastUpdated = 0;
 		vm.feedsFilter = '';
@@ -46,6 +56,175 @@
 				vm.noMorePages = !threadData.res.noMorePages;
 				vm.lastUpdated = Date.now();
 			});
+		}
+
+		var feedsFilterTimeout;
+		$scope.$watch('vm.feedsFilter', function (newValue, oldValue) {
+			if (!newValue !== oldValue) {
+				vm.feed = [];
+			}
+
+			$timeout.cancel(feedsFilterTimeout);
+			feedsFilterTimeout = $timeout(function() {
+				if (!newValue) {
+					if (vm.feedsFilterEnabled) {
+						vm.lastUpdated = 0;
+						vm.updateFeed();
+					}
+				} else {
+					vm.updateFeed();
+				}
+
+				vm.feedsFilterEnabled = vm.feedsFilter !== '';
+			}, 500);
+		}); 
+
+
+		function addStreamImage (file, stream) {
+			if (file) {
+				Upload.upload({
+					url: '/streams/' + streamId + '/imageUpload',
+					file: file
+				}).progress(function (evt) {
+					vm.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+				}).success(function (data, status, headers, config) {
+					vm.getStream({reload: true});
+				});
+			}
+		}
+
+		function editStream() {
+			$location.url('streams/' + streamId + '/edit');
+		}
+
+		function openDeleteStream() {
+			$mdDialog.show({
+				controller: [
+					'$scope',
+					'$mdDialog',
+					function ($scope, $mdDialog) {
+						$scope.close = function() {
+							$mdDialog.hide();
+						}
+
+						
+
+						$scope.confirm = function() {
+							var toDelete = appStreams.single.get({streamId: streamId}, function() {
+								toDelete.$destroy({streamId: streamId}, function(response) {
+									if (response.success) {
+										appToast('You have just deleted a stream');
+										$mdDialog.hide();
+										$state.go('home');
+									}
+								});
+							});
+						};
+					}
+				],
+				templateUrl: '/app/admin/streams/dialogs/delete.stream.dialog.tmpl.html',
+			}).finally(function() {
+				vm.updateFeed({reload: true});
+			});
+		}
+
+		$scope.$watch(function() {
+			return $scope.file
+		}, function() {
+			vm.addStreamImage($scope.file);
+		});
+
+		function upvote (item) {
+			var thread = appThreads.single.get({threadId: item._id}, function() {
+				thread.$upvote({threadId: item._id}, function() {
+					angular.extend(item, thread.res.record);
+				});
+			});
+		}
+
+		function downvote (item) {
+			var thread = appThreads.single.get({threadId: item._id}, function() {
+				thread.$downvote({threadId: item._id}, function() {
+					angular.extend(item, thread.res.record);
+				});
+			});
+		}
+
+		function openAddPost() {
+			$mdDialog.show({
+				controller: [
+					'$scope',
+					'$mdDialog',
+					function ($scope, $mdDialog) {
+						$scope.close = function() {
+							$mdDialog.hide();
+						};
+
+						$scope.reset = function() {
+							$scope.addPostForm.$setUntouched();
+							$scope.addPostForm.$setPristine();
+							$scope.title = $scope.content = '';
+						};
+
+						$scope.create = function (isValid) {
+							if (isValid) {
+								var thread = new appThreads.single({
+									title: $scope.title,
+									content: $scope.content,
+									stream: streamId
+								});
+
+								thread.$save(function (response) {
+									if (response.success) {
+										$scope.reset();
+										$mdDialog.hide();
+										updateFeed();
+									} else {
+										alert(response.res.message);
+									}
+								});
+							} else {
+								alert('poop');
+							}
+						};
+					}
+				],
+				templateUrl: '/app/admin/threads/dialogs/threads.create.dialog.tmpl.html'
+			}).finally(function() {
+				updateFeed();
+			});
+		}
+
+		function orderByScore() {
+			if (vm.rowFilter == '-score') {
+				vm.rowFilter = 'score';
+			} else {
+				vm.rowFilter = '-score';
+			}
+		}
+
+		function orderByDate() {
+			if (vm.rowFilter == 'created') {
+				vm.rowFilter = '-created';
+			} else {
+				vm.rowFilter = 'created';
+			}
+		}
+
+		function orderBySaves() {
+			if (vm.rowFilter == '-saves.length') {
+				vm.rowFilter = 'saves.length';
+			} else {
+				vm.rowFilter = '-saves.length';
+			}
+		}
+
+		function orderByReplies() {
+			if (vm.rowFilter == '-comments.length') {
+				vm.rowFilter = 'comments.length';
+			} else {
+				vm.rowFilter = '-comments.length';
+			}
 		}
 
 		getStream();

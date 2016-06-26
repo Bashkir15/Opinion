@@ -165,7 +165,7 @@ module.exports = function (System) {
 		Stream.findOne({_id: req.params.streamId}, function (err, stream) {
 			if (err) {
 				return json.bad(err, res);
-			} else if (stream) {
+			} else {
 				var inArray = stream.moderators.some(function (moderator) {
 					return moderator.equals(req.user._id);
 				});
@@ -180,9 +180,7 @@ module.exports = function (System) {
 						json.good({}, res);
 					});
 				}
-			} else {
-				return json.bad({message: 's'}, res);
-			}
+			} 
 		});
 	};
 

@@ -18,6 +18,16 @@
 				unsubscribe: {
 					method: 'POST',
 					params: {action: 'unsubscribe'}
+				},
+
+				modify: {
+					method: 'POST',
+					params: {action: 'modify'}
+				},
+
+				destroy: {
+					method: 'DELETE',
+					params: {action: 'remove'}
 				}
 			})
 		};

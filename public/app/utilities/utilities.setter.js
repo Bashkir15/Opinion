@@ -7,5 +7,6 @@
 		'ngMessages',
 		'ngAria',
 		'ngAnimate',
-		'ngMaterial'])
+		'ngMaterial',
+		'ngFileUpload'])
 }());
