@@ -1,0 +1,29 @@
+<md-dialog layout='column' flex='50' class='delete-dialog-container'>
+	<md-dialog-content>
+		<div layout='row' layout-align='none center' class='delete-dialog-header'>
+			<h3>Delete a comment</h3>
+			<span flex></span>
+			<button aria-label='close delete comment dialog' ng-click="close()">
+				<span>x</span>
+			</button>
+		</div>
+
+		<div layout='column' class='delete-dialog-body'>
+			<p>Are you really sure you want to delete this comment?</p>
+			<p>It has {{comment.upvotes.length}} Upvotes</p>
+			<p>And {{comment.saves.length}} Saves</p>
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions class='delete-dialog-actions'>
+		<div layout='row' layout-align='end center'>
+			<button ng-click="confirm(comment)" aria-label='confirm delete comment'>
+				<span>Delete</span>
+			</button>
+
+			<button ng-click="close()" aria-label='close delete comment dialog'>
+				<span>Nevermind</span>
+			</button>
+		</div>
+	</md-dialog-actions>
+</md-dialog>

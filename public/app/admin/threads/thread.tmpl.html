@@ -91,6 +91,10 @@
 									<span>Edit Comment</span>
 								</button>
 
+								<button ng-if="vm.currentUserId == item.creator._id || vm.isMod" ng-click="vm.openDeleteComment(item)" aria-label='open delete comment'>
+									<span>Delete Comment</span>
+								</button>
+
 								<span flex></span>
 
 								<button>

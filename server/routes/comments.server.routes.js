@@ -11,5 +11,6 @@ router.post('/:commentId/downvote', auth.ensureAuthorized, comments.downvote);
 router.post('/:commentId/save', auth.ensureAuthorized, comments.save);
 router.post('/:commentId/unsave', auth.ensureAuthorized, comments.unsave);
 router.post('/:commentId/modify', auth.ensureAuthorized, comments.modify);
+router.delete('/:commentId/remove', auth.ensureAuthorized, comments.remove);
 
 module.exports = router;

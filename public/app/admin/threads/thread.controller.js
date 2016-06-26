@@ -19,6 +19,7 @@
 		vm.unsave = unsave;
 		vm.getComments = getComments;
 		vm.openAddComment = openAddComment;
+		vm.openDeleteComment = openDeleteComment;
 		vm.commentUpvote = commentUpvote;
 		vm.commentDownvote = commentDownvote;
 		vm.commentSave = commentSave;
@@ -87,6 +88,43 @@
 
 				vm.noMoreComments = !commentsData.res.morePages;
 				vm.lastUpdated = Date.now();
+			});
+		}
+
+		function openDeleteComment (item) {
+			$mdDialog.show({
+				controller: [
+					'$scope',
+					'$mdDialog',
+					function ($scope, $mdDialog) {
+						$scope.close = function() {
+							$mdDialog.hide();
+						};
+
+						$scope.getComment = function() {
+							appComments.single.get({commentId: item._id}).$promise.then(function (response) {
+								response.res.comment = response.res.record;
+								angular.extend($scope, response.res);
+							});
+						};
+						$scope.confirm = function(comment) {
+							var comment = appComments.single.get({commentId: item._id}, function() {
+								comment.$destroy({commentId: item._id}, function(response) {
+									if (response.success) {
+										$mdDialog.hide();
+									} else {
+										alert(response.res.message);
+									}
+								});
+							});
+						};
+
+						$scope.getComment();
+					}
+				],
+				templateUrl: '/app/admin/comments/dialogs/delete.comment.dialog.tmpl.html'
+			}).finally(function() {
+				$state.reload();
 			});
 		}
 

@@ -320,7 +320,6 @@ module.exports = function() {
 	};
 
 	obj.modify = function (req, res) {
-		var info = {};
 
 		Comment.findOne({_id: req.params.commentId})
 		.exec(function (err, comment) {
@@ -336,6 +335,23 @@ module.exports = function() {
 					json.good({
 						record: item
 					}, res);
+				});
+			}
+		});
+	};
+
+	obj.remove = function (req, res) {
+		Comment.findOne({_id: req.params.commentId})
+		.exec(function (err, comment) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				comment.remove(function (err) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({}, res);
 				});
 			}
 		});
