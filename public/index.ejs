@@ -3,6 +3,8 @@
 	<head>
 		<meta charset='utf-8'>
 		<link rel='stylesheet' href='/vendor/angular-material/angular-material.css'>
+		<link rel='stylesheet' href='/vendor/icomoon/style.css'>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat|Open+Sans:400,600|Lato:100,300' rel='stylesheet' type='text/css'>
 		<link rel='stylesheet' href='/static/stylesheets/css/main.css'>
 
 	</head>
@@ -11,14 +13,15 @@
 		<nav class='nav'>
 			<div class='nav-left'>
 				<div class='nav-item'>
-					<button ui-sref='landing.home'>
+					<button ui-sref='landing.home' class='nav-link'>
 						<span>Home</span>
 					</button>
 				</div>
 
 				<div class='nav-item'>
-					<button>
+					<button class='nav-dropdown'>
 						<span>Streams</span>
+						<i class='icon-expand_more'></i>
 					</button>
 				</div>
 			</div>
@@ -31,25 +34,164 @@
 
 			<div class='nav-right'>
 				<div class='nav-item'>
-					<button ui-sref='authentication.signup' aria-label='go to signup page button'>
+					<button ui-sref='authentication.signup' aria-label='go to signup page button' ng-if='!vm.isLoggedIn' class='nav-button'>
 						<span>Signup</span>
 					</button>
 				</div>
 
 				<div class='nav-item'>
-					<button ui-sref='authentication.login' aria-label='go to login page button'>
+					<button ui-sref='authentication.login' aria-label='go to login page button' ng-if="!vm.isLoggedIn" class='nav-button'>
 						<span>Login</span>
 					</button>
 				</div>
 
 				<div class='nav-item'>
-					<button ng-click="vm.openUsersSearch()">
-						<span>Users</span>
-					</button>
+					<div ng-click="vm.openUserMenu()" ng-if="vm.isLoggedIn" class='nav-user-menu'>
+						<img src='../static/images/me.jpg'>
+					</div>
 				</div>
 			</div>
 		</nav>
-		<div ui-view></div>
+
+		<md-sidenav md-component-id='left' class='user-menu-left md-whiteframe-z2' layout='column'>
+			<md-toolbar class='md-tall'>
+				<span flex></span>
+				<div layout='column' class='md-toolbar-tools-bottom' layout-align='none center'>
+					<img src='../static/images/me.jpg'>
+					<span></span>
+					<div>{{vm.user.name}}</div>
+					<div>{{vm.user.email}}</div>
+				</div>
+			</md-toolbar>
+
+			<md-list class='user-menu-body' flex>
+				<md-list-item md-ink-ripple  ui-sref='profile.overview({userId: vm.user._id})'>
+					<i class='icon-user'></i>
+
+					<div class='inset'>
+						Profile
+					</div>
+
+					<button class='md-secondary' ng-click="vm.showProfile = !vm.showProfile" aria-label='expand profile button'>
+						<i class='icon-expand_more' ng-class="{'open': vm.showProfile}"></i>
+					</button>
+				</md-list-item>
+
+				<ul class='user-menu-nested-list' ng-show="vm.showProfile">
+					<div>
+						<li>
+							<button class='md-ink-ripple' ui-sref='profile.overview({userId: vm.user._id})'>
+								<span>Overview</span>
+							</button>
+						</li>
+					</div>
+
+						<li>
+							<button class='md-ink-ripple' ui-sref='profile.threads({userId: vm.user._id})'>
+								<span>Threads</span>
+							</button>
+						</li>
+
+						<li>
+							<button class='md-ink-ripple'>
+								<span>Comments</span>
+							</button>
+						</li>
+
+						<li>
+							<button class='md-ink-ripple'>
+								<span>Saved</span>
+							</button>
+						</li>
+
+						<li>
+							<button class='md-ink-ripple'>
+								<span>Activitiy</span>
+							</button>
+						</li>
+					</ul>
+
+				<md-list-item md-ink-ripple ui-sref='messages.overview'>
+					<i class='icon-bubble'></i>
+
+					<div class='inset'>
+						Messages
+					</div>
+
+					<button class='md-secondary' ng-click="vm.showMessages = !vm.showMessages" aria-label='expand messages button'>
+						<i class='icon-expand_more' ng-class="{'open': vm.showMessages}"></i>
+					</button>
+				</md-list-item>
+
+				<ul class='user-menu-nested-list' ng-show="vm.showMessages">
+					<li>
+						<button class='md-ink-ripple'>
+							<span>Overview</span>
+						</button>
+					</li>
+
+					<li>
+						<button class='md-ink-ripple'>
+							<span>Inbox</span>
+						</button>
+					</li>
+
+					<li>
+						<button class='md-ink-ripple'>
+							<span>Sent</span>
+						</button>
+					</li>
+
+					<li>
+						<button class='md-ink-ripple'>
+							<span>Trash</span>
+						</button>
+					</li>
+				</ul>
+
+				<md-list-item md-ink-ripple ui-sref='streams.list'>
+					<i class='icon-book'></i>
+
+					<div class='inset'>
+						Manage Streams
+					</div>
+				</md-list-item>
+
+				<md-list-item md-ink-ripple ui-sref='streams.create'>
+					<i class='icon-file-text'></i>
+
+					<div class='inset'>
+						Create Stream
+					</div>
+				</md-list-item>
+
+				<md-list-item md-ink-ripple ui-sref='landing.create'>
+					<i class='icon-pencil'></i>
+
+					<div class='inset'>
+						Add Post
+					</div>
+				</md-list-item>
+
+				<md-list-item md-ink-ripple ng-click="vm.openUserSearch()" class='user-menu-user-search'>
+					<i class='icon-search'></i>
+
+					<div class='inset'>
+						Find Users
+					</div>
+				</md-list-item>
+
+				<md-list-item md-ink-ripple ui-sref='authentication.logout'>
+					<i class='icon-enter'></i>
+
+					<div class='inset'>
+						Logout
+					</div>
+				</md-list-item>
+			</md-list>
+		</md-sidenav>
+
+		<div ui-view class='main-view'></div>
 
 		<script src='/vendor/angular/angular.js'></script>
 		<script src='/vendor/angular-messages/angular-messages.js'></script>
@@ -69,16 +211,30 @@
 		<!-- Admin -->
 		<script src='/app/admin/admin.setter.js'></script>
 		<script src='/app/admin/factories/admin.users.factory.js'></script>
+		<script src='/app/admin/factories/admin.streams.factory.js'></script>
+		<script src='/app/admin/factories/admin.threads.factory.js'></script>
 
 			<!-- Profile -->
 			<script src='/app/admin/profile/profile.config.js'></script>
 			<script src='/app/admin/profile/profile.controller.js'></script>
+
+			<!-- Streams -->
+			<script src='/app/admin/streams/streams.config.js'></script>
+			<script src='/app/admin/streams/create/streams.create.controller.js'></script>
+			<script src='/app/admin/streams/list/streams.list.controller.js'></script>
+			<script src='/app/admin/streams/single/streams.single.controller.js'></script>
 
 		<!-- Authentication -->
 		<script src='/app/authentication/authentication.setter.js'></script>
 		<script src='/app/authentication/authentication.config.js'></script>
 		<script src='/app/authentication/signup/signup.controller.js'></script>
 		<script src='/app/authentication/login/login.controller.js'></script>
+
+		<!-- Landing -->
+		<script src='/app/landing/landing.setter.js'></script>
+		<script src='/app/landing/landing.config.js'></script>
+		<script src='/app/landing/home/home.controller.js'></script>
+		<script src='/app/landing/create-post/landing.post.controller.js'></script>
 
 
 		<script src='/app/app.js'></script>

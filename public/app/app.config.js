@@ -6,6 +6,8 @@
 
 	/* @ngInject */
 	function appConfig ($stateProvider, $urlRouterProvider, $httpProvider) {
+		$urlRouterProvider.when('', '/home');
+		$urlRouterProvider.when('/', '/home');
 		$httpProvider.interceptors.push('tokenHttpInterceptor');
 	}
 }());

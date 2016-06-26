@@ -7,5 +7,6 @@
 		'ngMaterial',
 		'opinionated.utilities',
 		'opinionated.admin',
-		'opinionated.authentication'])
+		'opinionated.authentication',
+		'opinionated.landing'])
 }());

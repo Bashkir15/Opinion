@@ -4,5 +4,8 @@ module.exports = {
 		host: 'localhost:',
 		port: 8000
 	},
-	secret: 'erskjfsdfyiukjasd'
+	secret: 'erskjfsdfyiukjasd',
+	settings: {
+		perPage: 15
+	}
 };

@@ -1,0 +1,98 @@
+.create-stream-card
+	margin-top: 75px
+	border-radius: 5px
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
+
+.create-stream-header
+	height: 70px
+
+	h3
+		@include lato
+
+.create-stream-body
+	padding-top: 10px
+	width: 80%
+	margin: 0 auto
+
+.stream-form-wrapper
+	position: relative
+	width: 100%
+	margin-bottom: 42px
+
+	label
+		position: absolute
+		top: 2px
+		left: 6px
+		display: inline-block
+		@include lato
+		color: rgba(0,0,0,0.35)
+		opacity: 1
+		transition: all .4s ease
+
+	input
+		position: relative
+		width: 100%
+		background: rgba(0,0,0,0.1)
+		@include lato
+		height: 30px
+		border-radius: 4px
+		padding-left: 6px
+		color: rgba(0,0,0,0.4)
+		box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
+		transition: all .4s ease
+
+
+	textarea
+		position: relative
+		width: 99%
+		background: rgba(0,0,0,0.1)
+		@include lato
+		padding-top: 3px
+		padding-left: 6px
+		color: rgba(0,0,0,0.4)
+		border-radius: 4px
+		box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			background: #d2d9dd
+
+		textarea
+			background: #d2d9dd
+
+	&.has-success
+		label
+			opacity: 0
+
+		input
+			background: #d2d9dd
+
+		textarea
+			background: #d2d9dd
+
+.stream-form-submit
+	height: 70px
+
+	button
+		height: 45px
+		width: 120px
+		border: 1px solid $darkest-green
+		transition: all .4s ease
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.45)
+
+		span
+			@include lato
+			color: rgba(0,0,0,0.4)
+			transition: all .4s ease
+
+		&:hover
+			background: $darkest-green
+
+			span
+				color: #fff
+
+

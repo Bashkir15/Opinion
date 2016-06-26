@@ -5,7 +5,8 @@
 	z-index: 40
 	text-align: center
 	box-shadow: 0 4px 8px rgba(0,0,0,0.4)
-	//background: $darkest-blue
+	border-bottom: 1px solid $accent-orange
+	background: $darkest-blue
 
 .nav-left
 	display: flex
@@ -32,6 +33,30 @@
 	justify-content: center
 	padding: 10px
 
+	h3
+		@include lato
+		color: $darkest-green
+		font-weight: 300
+		font-size: 24px
+		text-shadow: 1px 1px rgba(0,0,0,0.6)
+
+.nav-link
+	span
+		@include lato
+		color: #dfe1df
+
+.nav-dropdown
+	position: relative
+
+	span
+		@include lato
+		color: #dfe1df
+
+	i
+		color: #dfe1df
+		position: absolute
+		top: 6px
+
 .nav-user-menu
 	height: 35px
 	width: 35px
@@ -48,3 +73,107 @@
 
 	&:hover
 		transform: scale(1.2, 1.2)
+
+.user-menu-left
+	md-toolbar
+		//background: darken($darkest-green, 5%) !important
+		background: $darkest-blue !important
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
+		padding-bottom: 10px
+
+		> div
+
+			img
+				height: 40px
+				width: 40px
+				border: 1px solid #dfe1df
+				border-radius: 50%
+				margin-bottom: 6px
+
+			> div
+
+				&:nth-of-type(1)
+					@include mont
+					text-shadow: 1px 1px rgba(0,0,0,0.5)
+
+				&:nth-of-type(2)
+					@include lato
+					color: $accent-orange
+					text-shadow: 1px 1px rgba(0,0,0,0.6)
+
+	.user-menu-body
+		//background: darken($darkest-green, 5%)
+		background: darken($grey, 15%)
+		height: 100%
+		overflow-y: auto
+
+		md-list-item
+			a
+				margin: 0
+
+				> div
+					i
+						color: #839da1
+						padding-right: 10px
+
+					.inset
+						color: #dfe1df
+						@include open
+
+			button
+				i
+					color: #839da1
+					transition: all .4s ease
+					display: inline-block
+
+					&.open
+						
+						transform: rotate(-180deg)
+
+		.user-menu-nested-list
+			list-style-type: none
+			max-height: 1300px
+			transition-property: max-height
+			overflow: hidden
+			position: relative
+			z-index: 1
+			transition: all .4s ease
+
+			li
+				padding-left: 0
+				transition: all .4s ease
+
+				button
+					height: 50px
+
+					span
+						@include lato
+						color: #dfe1df
+
+				&:hover
+					background: darken($grey, 5%)
+
+			&.ng-hide
+				max-height: 0
+
+			&:not(.ng-hide)
+				li
+					padding-left: 46px
+
+.user-menu-user-search
+	i
+		padding-right: 10px
+
+	.inset
+		color: #dfe1df
+		@include open
+
+
+.main-view
+	min-height: 671px
+	//background-image: -webkit-linear-gradient(bottom, darken(#364351, 5%) 0%, darken(#364351, 10%) 100%)
+	background: darken($grey, 15%)
+
+
+@import "landing/landing"
+@import "streams/streams"

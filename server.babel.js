@@ -2,6 +2,8 @@
 
 import mongoose from 'mongoose';
 import users from './server/models/users';
+import streams from './server/models/streams';
+import threads from './server/models/threads';
 var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
 
 var db = mongoose.connect(config.db, ()=> {

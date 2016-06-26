@@ -1,0 +1,257 @@
+.streams-list-header
+	padding: 25px 0
+
+
+	> div
+		> div
+			height: 40px
+			width: 40px
+			border: 1px solid #fff
+			border-radius: 50%
+			margin-bottom: 14px
+
+		p
+			@include lato
+			color: #dfe1df
+
+.streams-list-toolbar
+	background: darken($darkest-green, 10%) !important
+	height: 55px !important
+	min-height: 55px !important
+
+	> div
+		padding: 0
+		padding-right: 15px
+
+.streams-list-create-button
+	height: 55px
+	width: 150px
+	border-right: 1px solid darken($darkest-green, 15%)
+	transition: all .4s ease
+
+	span
+		@include lato
+		color: #dfe1df
+
+	&:hover
+		background: darken($darkest-green, 15%)
+
+.streams-list-order-streams
+	height: 55px
+	width: 180px
+	border-right: 1px solid darken($darkest-green, 15%)
+	position: relative
+	transition: all .4s ease
+
+	span
+		@include lato
+		color: #dfe1df
+
+	i
+		color: #dfe1df
+		position: absolute
+		top: 19px
+
+	&:hover
+		background: darken($darkest-green, 15%)
+
+.streams-list-search-icon
+	height: 40px
+	width: 40px
+	background: darken($darkest-green, 15%)
+	position: relative
+	transition: all .4s ease
+
+	i
+		font-size: 16px
+		opacity: 1
+		position: absolute
+		top: 13px
+		left: 13px
+		transition: all .4s ease
+
+	&.is-searching
+		width: 5px
+
+		i
+			opacity: 0
+
+.streams-list-search-container
+	width: 220px
+
+.streams-list-search
+	position: relative
+	height: 40px
+
+	label
+		@include lato
+		font-weight: 300
+		display: inline-block
+		position: absolute
+		top: 7px
+		left: 7px
+		opacity: 1
+		font-size: 16px
+		color: #dfe1df
+		transition: all .4s ease
+
+	input
+		height: 40px
+		width: 180px
+		background: $grey
+		padding-left: 5px
+		@include lato
+		color: #dfe1df
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			width: 215px
+			transition: all .4s ease
+
+.streams-list-body
+	background-image: -webkit-linear-gradient(bottom, darken(#364351, 10%) 0%, darken(#364351, 5%) 100%)
+	min-height: 528px
+
+	> div
+		padding-top: 15px
+		width: 100%
+
+		md-list
+			md-list-item
+				margin-left: 10px
+				margin-bottom: 10px
+				width: 75%
+				padding: 0
+				background: #212a33
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
+
+.streams-list-image
+	padding: 10px 0
+
+	img
+		height: 40px
+		width: 40px
+		border: 1px solid #fff
+		border-radius: 50%
+		margin: 6px 0 10px 0
+		display: inline-block
+		cursor: pointer
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4)
+		transition: all .4s ease
+
+		&.subscribed
+			border: 1px solid darken($darkest-green, 10%)
+
+		&:hover
+			transform: scale(1.2,1.2)
+
+	button
+		height: 25px
+		width: 100px
+		border-radius: 3px
+
+		&.stream-subscribed
+			border: 1px solid $accent-red
+
+			&:hover
+				background: $accent-red
+
+		&.stream-unsubscribed
+			border: 1px solid darken($darkest-green, 10%)
+
+			&:hover
+				background: darken($darkest-green, 10%)
+
+		&.ng-enter
+		//	@include slideInUp()
+
+
+
+		span
+			@include lato
+			color: #fff
+			text-shadow: 1px 1px rgba(0,0,0,0.5)
+
+
+
+.streams-list-description
+	padding-top: 10px
+	cursor: pointer
+
+	> div
+		height: 30px
+
+		h4
+			@include mont
+			color: #dfe1df !important
+			text-shadow: 2px 2px rgba(0,0,0,0.55)
+
+		> div
+			width: 80px
+			border-bottom: 1px solid #dfe1df
+
+	p
+		@include lato
+		color: #dfe1df !important
+		text-shadow: 1px 1px rgba(0,0,0,0.6)
+
+.streams-list-item-toolbar
+	height: 35px
+	border-top: 1px solid #c19f66
+	padding: 0 10px
+
+	button
+		i
+			color: #dfe1df
+			transition: all .4s ease
+
+
+		span
+			@include open
+			color: #dfe1df
+			text-shadow: 1px 1px rgba(0,0,0,0.5)
+
+		&:nth-of-type(3)
+			span
+				color: #9a9a9a
+				@include lato
+				font-weight: 100
+
+.streams-list-no-streams
+	padding-top: 35px
+
+	p
+		@include mont
+		color: #9a9a9a
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		a
+			text-decoration: none
+			color: #bababa
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			transition: all .4s ease
+
+			&:hover
+				color: #fff
+
+.streams-list-searching-text
+	padding-top: 35px
+
+	p
+		@inlude mont
+		color: #dfe1df
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		span
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			color: #c19f66

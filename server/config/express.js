@@ -5,6 +5,8 @@ import morgan from 'morgan';
 import path from 'path';
 import indexRoutes from '../routes/index.server.routes';
 import usersRoutes from '../routes/users.server.routes';
+import streamsRoutes from '../routes/streams.server.routes';
+import threadsRoutes from '../routes/threads.server.routes';
 
 module.exports = function (db) {
 	var app = express();
@@ -19,6 +21,8 @@ module.exports = function (db) {
 
 	app.use('/', indexRoutes);
 	app.use('/users', usersRoutes);
+	app.use('/streams', streamsRoutes);
+	app.use('/threads', threadsRoutes);
 
 	return app;
 };
