@@ -75,6 +75,12 @@ var ThreadSchema = new mongoose.Schema({
 	}]
 });
 
+ThreadSchema.pre('remove', function (next) {
+	this.model('Comment').remove({thread: this._id}, next)
+
+	this.model('Stream').update({threads: this._id}, {$pull: {threads: {$in: [this._id]}}}, next);
+});
+
 ThreadSchema.methods = {
 	toJSON: function() {
 		var obj = this.toObject();

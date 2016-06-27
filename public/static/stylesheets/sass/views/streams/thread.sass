@@ -113,6 +113,128 @@
 				text-shadow: 1px 1px rgba(0,0,0,0.35)
 				font-size: 14px
 
+.thread-mod-options
+	position: relative
+	transition: all .4s ease
+	width: 150px
+
+	i
+		transition: all .4s ease
+		color: #dfe1df
+		display: inline-block
+		position: absolute
+		right: 5px
+		top: 19px
+
+
+	&.open
+
+		i
+			transform: rotate(-180deg)
+
+.thread-mod-options-dropdown
+	position: absolute
+	top: 55px
+	left: 470px
+	transition: all .4s ease
+	height: 0
+	width: 150px
+	background: $grey
+	text-align: center
+
+	&:not(.ng-hide)
+		height: 100px
+
+		li 
+			height: 50px
+			border-bottom: 1px solid rgba(0,0,0,0.3)
+			transition: all .4s ease
+
+			&:last-child
+				border-bottom: none
+
+			button
+				height: 50px
+				width: 150px
+				border-right: none
+				transition: all .4s ease
+
+				span
+					opacity: 1
+					color: #dfe1df
+					@include lato
+					transition: all .4s ease
+					text-shadow: none
+
+	li
+		button
+			border-right: none !important
+
+			span
+				opacity: 0
+				transition: all .4s ease
+
+.thread-order-comments
+	position: relative
+	transition: all .4s ease
+	width: 170px !important
+
+	i
+		transition: all .4s ease
+		color: #dfe1df
+		display: inline-block
+		position: absolute
+		right: 5px
+		top: 19px
+
+	&.open
+	
+
+		i
+			transform: rotate(-180deg)
+
+.thread-order-comments-dropdown
+	position: absolute
+	top: 55px
+	left: 300px
+	transition: all .4s ease
+	height: 0
+	width: 170px
+	background: $grey
+	text-align: center
+
+	&:not(.ng-hide)
+		height: 150px
+
+		li
+			height: 50px
+			border-bottom: 1px solid rgba(0,0,0,0.3)
+			transition: all .4s ease
+
+			&:last-child
+				border-bottom: none
+
+			button
+				height: 50px
+				width: 150px
+				border-right: none
+				transition: all .4s ease
+
+				span
+					opacity: 1
+					color: #dfe1df
+					@include lato
+					transition: all .4s ease
+					text-shadow: none
+
+
+	li
+		button
+			border-right: none !important
+
+			span
+				opacity: 0
+				transition: all .4s ease
 .thread-comments-search-icon
 	height: 38px
 	width: 40px
@@ -279,4 +401,19 @@
 
 			&:hover
 				color: #fff
+
+.thread-searching-text
+	padding-top: 35px
+
+	p
+		@inlude mont
+		color: #dfe1df
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+		span
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			color: $accent-orange
 

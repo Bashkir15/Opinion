@@ -5,7 +5,7 @@
 	.controller('ThreadController', ThreadController);
 
 	/* @ngInject */
-	function ThreadController ($scope, $state, $stateParams, $mdDialog, $timeout, appAuth, appThreads, appComments) {
+	function ThreadController ($scope, $state, $stateParams, $mdDialog, $location, $timeout, appAuth, appThreads, appComments) {
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		var threadId = $stateParams.threadId;
@@ -13,6 +13,7 @@
 		vm.threads = [];
 		vm.comments = [];
 		vm.getThread = getThread;
+		vm.openDeleteThread = openDeleteThread;
 		vm.upvote = upvote;
 		vm.downvote = downvote;
 		vm.save = save;
@@ -31,7 +32,7 @@
 		function getThread() {
 			var threadData = appThreads.single.get({threadId: threadId}, function() {
 				vm.threads = [threadData.res.record];
-				vm.isMod = threadData.res.mods.mod;
+				vm.isMod = threadData.res.mods;
 			});
 		}
 
@@ -88,6 +89,45 @@
 
 				vm.noMoreComments = !commentsData.res.morePages;
 				vm.lastUpdated = Date.now();
+			});
+		}
+
+		function openDeleteThread () {
+			$mdDialog.show({
+				controller: [
+					'$scope',
+					'$mdDialog',
+					function ($scope, $mdDialog) {
+						$scope.close = function() {
+							$mdDialog.hide();
+						};
+
+						$scope.getThread = function() {
+							appThreads.single.get({threadId: threadId}).$promise.then(function (response) {
+								response.res.thread = response.res.record;
+								angular.extend($scope, response.res);
+							});
+						};
+
+						$scope.confirm = function() {
+							var thread = appThreads.single.get({threadId: threadId}, function() {
+								thread.$destroy({threadId: threadId}, function (response) {
+									if (response.success) {
+										$mdDialog.hide();
+										$location.url('streams/' + streamId);
+									} else {
+										alert(response.res.message);
+									}
+								});
+							});
+						};
+
+						$scope.getThread();
+					}
+				],
+				templateUrl: '/app/admin/threads/dialogs/delete.thread.dialog.tmpl.html'
+			}).finally(function() {
+
 			});
 		}
 

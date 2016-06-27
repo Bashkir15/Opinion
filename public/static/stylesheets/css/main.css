@@ -823,13 +823,13 @@ p {
       .stream-single-no-threads p span:hover {
         color: #fff; }
 
-.streams-single-searching-text {
+.stream-single-searching-text {
   padding-top: 35px; }
-  .streams-single-searching-text p {
+  .stream-single-searching-text p {
     @inlude mont {}    color: #dfe1df;
     font-size: 18px;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.35); }
-    .streams-single-searching-text p span {
+    .stream-single-searching-text p span {
       font-family: 'Open Sans', sans-serif;
       font-weight: 600;
       text-shadow: 1px 1px rgba(0, 0, 0, 0.45);
@@ -929,6 +929,102 @@ p {
         font-family: 'Open Sans', sans-serif;
         text-shadow: 1px 1px rgba(0, 0, 0, 0.35);
         font-size: 14px; }
+
+.thread-mod-options {
+  position: relative;
+  transition: all .4s ease;
+  width: 150px; }
+  .thread-mod-options i {
+    transition: all .4s ease;
+    color: #dfe1df;
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    top: 19px; }
+  .thread-mod-options.open i {
+    transform: rotate(-180deg); }
+
+.thread-mod-options-dropdown {
+  position: absolute;
+  top: 55px;
+  left: 470px;
+  transition: all .4s ease;
+  height: 0;
+  width: 150px;
+  background: #4f737a;
+  text-align: center; }
+  .thread-mod-options-dropdown:not(.ng-hide) {
+    height: 100px; }
+    .thread-mod-options-dropdown:not(.ng-hide) li {
+      height: 50px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      transition: all .4s ease; }
+      .thread-mod-options-dropdown:not(.ng-hide) li:last-child {
+        border-bottom: none; }
+      .thread-mod-options-dropdown:not(.ng-hide) li button {
+        height: 50px;
+        width: 150px;
+        border-right: none;
+        transition: all .4s ease; }
+        .thread-mod-options-dropdown:not(.ng-hide) li button span {
+          opacity: 1;
+          color: #dfe1df;
+          font-family: 'Lato', sans-serif;
+          transition: all .4s ease;
+          text-shadow: none; }
+  .thread-mod-options-dropdown li button {
+    border-right: none !important; }
+    .thread-mod-options-dropdown li button span {
+      opacity: 0;
+      transition: all .4s ease; }
+
+.thread-order-comments {
+  position: relative;
+  transition: all .4s ease;
+  width: 170px !important; }
+  .thread-order-comments i {
+    transition: all .4s ease;
+    color: #dfe1df;
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    top: 19px; }
+  .thread-order-comments.open i {
+    transform: rotate(-180deg); }
+
+.thread-order-comments-dropdown {
+  position: absolute;
+  top: 55px;
+  left: 300px;
+  transition: all .4s ease;
+  height: 0;
+  width: 170px;
+  background: #4f737a;
+  text-align: center; }
+  .thread-order-comments-dropdown:not(.ng-hide) {
+    height: 150px; }
+    .thread-order-comments-dropdown:not(.ng-hide) li {
+      height: 50px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      transition: all .4s ease; }
+      .thread-order-comments-dropdown:not(.ng-hide) li:last-child {
+        border-bottom: none; }
+      .thread-order-comments-dropdown:not(.ng-hide) li button {
+        height: 50px;
+        width: 150px;
+        border-right: none;
+        transition: all .4s ease; }
+        .thread-order-comments-dropdown:not(.ng-hide) li button span {
+          opacity: 1;
+          color: #dfe1df;
+          font-family: 'Lato', sans-serif;
+          transition: all .4s ease;
+          text-shadow: none; }
+  .thread-order-comments-dropdown li button {
+    border-right: none !important; }
+    .thread-order-comments-dropdown li button span {
+      opacity: 0;
+      transition: all .4s ease; }
 
 .thread-comments-search-icon {
   height: 38px;
@@ -1065,3 +1161,15 @@ p {
       transition: all .4s ease; }
       .thread-no-comments p span:hover {
         color: #fff; }
+
+.thread-searching-text {
+  padding-top: 35px; }
+  .thread-searching-text p {
+    @inlude mont {}    color: #dfe1df;
+    font-size: 18px;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.35); }
+    .thread-searching-text p span {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.45);
+      color: #c19f66; }

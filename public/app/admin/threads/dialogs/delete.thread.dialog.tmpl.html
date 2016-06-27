@@ -1,0 +1,30 @@
+<md-dialog layout='column' flex='50' class='delete-dialog-container'>
+	<md-dialog-content>
+		<div layout='row' layout-align='none center' class='delete-dialog-header'>
+			<h3>Delete a Thread</h3>
+			<span flex></span>
+			<button aria-label='close delete thread dialog' ng-click="close()">
+				<span>x</span>
+			</button>
+		</div>
+
+		<div layout='column' class='delete-dialog-body'>
+			<p>Are you really sure you want to delete this Thread?</p>
+			<p>It has {{thread.upvotes.length}} Upvotes,</p>
+			<p>{{thread.saves.length}} Saves,</p>
+			<p>And {{thread.comments.length}} Replies</p>
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions class='delete-dialog-actions'>
+		<div layout='row' layout-align='end center'>
+			<button ng-click="confirm(thread)" aria-label='confirm delete thread'>
+				<span>Delete</span>
+			</button>
+
+			<button ng-click="close()" aria-label='close delete thread dialog'>
+				<span>Nevermind</span>
+			</button>
+		</div>
+	</md-dialog-actions>
+</md-dialog>

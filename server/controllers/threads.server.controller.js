@@ -341,5 +341,43 @@ module.exports = function() {
 		});
 	};
 
+	obj.modify = function (req, res) {
+		Thread.findOne({_id: req.params.threadId})
+		.exec(function (err, thread) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				thread.title = req.body.title;
+				thread.content = req.body.content;
+				thread.save(function (err, item) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: item
+					}, res);
+				});
+			}
+		});
+	};
+
+	obj.remove = function (req, res) {
+		Thread.findOne({_id: req.params.threadId})
+		.exec(function (err, thread) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				thread.remove(function (err) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({}, res);
+				});
+			}
+		});
+	};
+
 	return obj;
 };

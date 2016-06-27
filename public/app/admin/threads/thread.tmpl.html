@@ -28,17 +28,61 @@
 
 			<md-toolbar class='thread-content-toolbar'>
 				<div layout='row' layout-align='none center' class='md-toolbar-tools'>
-					<button ng-click="vm.openAddComment()">
+					<button ng-click="vm.openAddComment()" aria-label='open add comment form'>
 						<span>Add Comment</span>
 					</button>
 
-					<button ng-if="!thread.saved" ng-click="vm.save(thread)">
+					<button ng-if="!thread.saved" ng-click="vm.save(thread)" aria-label='save thread'>
 						<span>Save</span>
 					</button>
 
-					<button ng-if="thread.saved" ng-click="vm.unsave(thread)">
+					<button ng-if="thread.saved" ng-click="vm.unsave(thread)" aria-label='unsave thread'>
 						<span>Unsave</span>
 					</button>
+
+					<button class='thread-order-comments' ng-click="vm.showOrder = !vm.showOrder" ng-class="{'open': vm.showOrder}" aria-label='open the order comments menu'>
+						<span>Order Comments</span>
+						<i class='icon-expand_more'></i>
+					</button>
+
+					<ul ng-show="vm.showOrder" class='thread-order-comments-dropdown'>
+						<li>
+							<button ng-click="vm.orderByScore()">
+								<span>By Score</span>
+							</button>
+						</li>
+
+						<li>
+							<button ng-click="vm.orderBySaves()">
+								<span>By Saves</span>
+							</button>
+						</li>
+
+						<li>
+							<button ng-click="vm.orderByDate()">
+								<span>By Date</span>
+							</button>
+						</li>
+					</ul>
+
+					<button class='thread-mod-options' ng-click="vm.showMod = !vm.showMod" ng-class="{'open': vm.showMod}" aria-label='open the mod options for the thread' ng-if="vm.currentUserId == thread.creator._id || vm.isMod">
+						<span>Mod Options</span>
+						<i class='icon-expand_more'></i>
+					</button>
+
+					<ul ng-show="vm.showMod" class='thread-mod-options-dropdown'>
+						<li>
+							<button ui-sref='streams.threadEdit({threadId: thread._id})'>
+								<span>Edit Thread</span>
+							</button>
+						</li>
+
+						<li>
+							<button ng-click="vm.openDeleteThread()">
+								<span>Delete Thread</span>
+							</button>
+						</li>
+					</ul>
 
 					<span flex></span>
 					<div class='thread-comments-search-icon' ng-class="{'is-searching': vm.search.hasFocus}">
@@ -56,7 +100,7 @@
 	<div class='thread-comments' layout='column'>
 		<md-content>
 			<md-list>
-				<md-list-item ng-repeat='item in vm.comments' class='md-2-line'>
+				<md-list-item ng-repeat='item in vm.comments | orderBy: vm.rowFilter' class='md-2-line'>
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center' class='thread-comments-user'>
@@ -107,8 +151,12 @@
 			</md-list>
 		</md-content>
 
-		<div class='thread-no-comments' layout='row' layout-align='center none' ng-if="!vm.comments.length">
+		<div class='thread-no-comments' layout='row' layout-align='center none' ng-if="!vm.comments.length && !vm.commentsFilter">
 			<p>There aren't any comments here yet. How about you add to the discussion and <span ng-click="vm.openAddComment()">add one?</span></p>
+		</div>
+
+		<div class='thread-searching-text' layout='row' layout-align='center none' ng-if="!vm.comments.length && vm.commentsFilter">
+			<p>Compounding the comments <span>. . .</span></p>
 		</div>
 	</div>
 

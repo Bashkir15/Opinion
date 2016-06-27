@@ -47,6 +47,13 @@
 			controllerAs: 'vm'
 		});
 
+		$stateProvider.state('streams.threadEdit', {
+			url: '/streams/thread/:threadId/edit',
+			templateUrl: '/app/admin/threads/edit/thread.edit.tmpl.html',
+			controller: 'ThreadEditController',
+			controllerAs: 'vm'
+		});
+
 		$stateProvider.state('streams.commentEdit', {
 			url: '/streams/:threadId/:commentId/edit',
 			templateUrl: '/app/admin/comments/edit/edit.comment.tmpl.html',

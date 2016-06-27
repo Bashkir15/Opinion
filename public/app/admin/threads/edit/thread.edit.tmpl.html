@@ -1,0 +1,25 @@
+<div class='edit-form-container' layout='column' layout-align='none center'>
+	<div class='stream-edit-header' layout='row' layout-align='center none'>
+		<h3>Edit Your Stream</h3>
+	</div>
+
+	<div class='edit-form-body'>
+		<form name='vm.editThreadForm' ng-submit='vm.edit(vm.editThreadForm.$valid)' novalidate>
+			<div class='edit-form-wrapper'>
+				<label>Name</label>
+				<input type='text' name='name' ng-model='vm.thread.title' required>
+			</div>
+
+			<div class='edit-form-wrapper'>
+				<label>Description</label>
+				<textarea type='text' name='description' ng-model='vm.thread.content' required rows='4' cols='40'></textarea>
+			</div>
+
+			<div class='edit-form-submit'>
+				<button type='submit' aria-label='submit edit stream form'>
+					<span>Submit</span>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
