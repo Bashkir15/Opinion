@@ -56,6 +56,30 @@ var UserSchema = new mongoose.Schema({
 
 	picture: {
 		type: String
+	},
+
+	gender: {
+		type: String
+	},
+
+	phone: {
+		type: String
+	},
+
+	occupation: {
+		type: String
+	},
+
+	birthday: {
+		type: String
+	},
+
+	interests: {
+		type: String
+	},
+
+	bio: {
+		type: String
 	}
 });
 

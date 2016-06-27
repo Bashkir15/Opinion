@@ -160,5 +160,31 @@ module.exports = function() {
 		});
 	};
 
+	obj.updateProfile = function (req, res) {
+		User.findOne({_id: req.params.userId})
+		.exec(function (err, user) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				user.gender = req.body.gender;
+				user.birthday = req.body.birthday;
+				user.phone = req.body.phone;
+				user.occupation = req.body.occupation;
+				user.interests = req.body.interests;
+				user.bio = req.body.bio;
+
+				user.save(function (err, item) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: item
+					}, res);
+				});
+			}
+		});
+	};
+
 	return obj;
 };

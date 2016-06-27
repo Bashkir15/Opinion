@@ -5,7 +5,7 @@
 	.controller('ProfileController', ProfileController);
 
 	/* @ngInject */
-	function ProfileController ($scope, $state, $stateParams, $location, appAuth, appUsers, Upload) {
+	function ProfileController ($scope, $state, $stateParams, $location, $mdDialog, appAuth, appUsers, Upload) {
 		var vm = this;
 		var userId = $stateParams.userId;
 		vm.stateName = $state.current.name;
@@ -14,6 +14,7 @@
 		vm.getProfile = getProfile;
 		vm.follow = follow;
 		vm.uploadImage = uploadImage;
+		vm.openUpdateProfile = openUpdateProfile;
 
 		function getProfile() {
 			var profileData = appUsers.single.get({userId: userId}, function() {
@@ -47,6 +48,53 @@
 		}, function() {
 			vm.uploadImage($scope.file);
 		});
+
+		function openUpdateProfile() {
+			$mdDialog.show({
+				controller: [
+					'$scope',
+					'$mdDialog',
+					function ($scope, $mdDialog) {
+						$scope.reset = function() {
+							$scope.updateProfileForm.$setUntouched();
+							$scope.updateProfileForm.$setPristine();
+							$scope.gender = $scope.occupation = $scope.phone = $scope.birthday = $scope.interests = $scope.bio = '';
+						};
+
+						$scope.close = function() {
+							$mdDialog.hide();
+						};
+
+						$scope.update = function () {
+							var user = appUsers.single.get({userId: userId}, function() {
+								user.gender = $scope.gender;
+								user.occupation = $scope.occupation;
+								user.phone = $scope.phone;
+								user.birthday = $scope.birthday;
+								user.interests = $scope.interests;
+								user.bio = $scope.bio;
+
+								user.$updateProfile({userId: userId}, function (response) {
+									if (response.success) {
+										$scope.reset();
+										vm.getProfile({reload: true});
+										$mdDialog.hide();
+										appToast('You have successfully updated your profile' + response.res.record.name);
+									} else {
+										appToast(response.res.message);
+									}
+								});
+							});
+							
+						};
+					}
+				],
+				templateUrl: '/app/admin/profile/dialogs/update.profile.dialog.tmpl.html'
+			}).finally(function() {
+				vm.getProfile({reload: true});
+			});
+		}
+
 
 		getProfile();
 	}

@@ -14,6 +14,16 @@
 				follow: {
 					method: 'POST',
 					params: {action: 'follow'}
+				},
+
+				unfollow: {
+					method: 'POST',
+					params: {action: 'unfollow'}
+				},
+
+				updateProfile: {
+					method: 'POST',
+					params: {action: 'updateProfile'}
 				}
 			}),
 

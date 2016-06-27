@@ -1,0 +1,61 @@
+<md-dialog flex='70'>
+	<md-dialog-content layout='column' class='update-profile-dialog'>
+		<div class='update-profile-header' layout='row' layout-align='none center'>
+			<h3>Update Profile</h3>
+			<span flex></span>
+			<span ng-click="close()">x</span>
+		</div>
+
+		<div class='update-profile-body' layout='column'>
+			<form name='updateProfileForm' novalidate class='update-profile-form'>
+				<div class='update-profile-line-1'>
+					<div class='update-profile-wrapper'>
+						<label>Gender</label>
+						<input type='text' name='gender' ng-model='gender'>
+					</div>
+
+					<div class='update-profile-wrapper'>
+						<label>Occupation</label>
+						<input type='text' name='occupation' ng-model='occupation'>
+					</div>
+				</div>
+
+				<div class='update-profile-line-2'>
+					<div class='update-profile-wrapper'>
+						<label>Phone</label>
+						<input type='text' name='phone' ng-model='phone'>
+					</div>
+
+					<div class='update-profile-wrapper'>
+						<label>Birthday</label>
+						<input type='text' name='birthday' ng-model='birthday'>
+					</div>
+				</div>
+
+				<div class='update-profile-line-3'>
+					<div class='update-profile-wrapper'>
+						<label>Interests</label>
+						<textarea type='text' name='interests' ng-model='interests' rows='4' cols='40'></textarea>
+					</div>
+				</div>
+
+				<div class='update-profile-line-4'>
+					<div class='update-profile-wrapper'>
+						<label>Bio</label>
+						<textarea type='text' name='bio' ng-model='bio' rows='4' cols='40'></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions class='update-profile-actions' layout='row' layout-align='end center'>
+		<button aria-label='submit update profile form' ng-click="update()">
+			<span>Update</span>
+		</button>
+
+		<button aria-label='close update profile form' ng-click="close()">
+			<span>Nevermind</span>
+		</button>
+	</md-dialog-actions>
+</md-dialog>

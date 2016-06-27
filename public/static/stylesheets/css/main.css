@@ -99,6 +99,66 @@ p {
   -ms-hyphens: auto;
   hyphens: auto; }
 
+@-webkit-keyframes slideInUp {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-moz-keyframes slideInUp {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-ms-keyframes slideInUp {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-o-keyframes slideInUp {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes slideOutDown {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@-moz-keyframes slideOutDown {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@-ms-keyframes slideOutDown {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@-o-keyframes slideOutDown {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes slideOutDown {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 .nav {
   display: flex;
   align-items: stretch;
@@ -245,6 +305,32 @@ p {
   background: rgba(0, 0, 0, 0.3);
   height: 45px;
   width: 160px; }
+
+.streams-view-container.ng-enter {
+  -webkit-animation-name: slideInUp;
+  -moz-animation-name: slideInUp;
+  -ms-animation-name: slideInUp;
+  -o-animation-name: slideInUp;
+  animation-name: slideInUp;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  backface-visibility: hidden; }
+
+.streams-view-container.ng-leave {
+  -webkit-animation-name: slideOutDown;
+  -moz-animation-name: slideOutDown;
+  -ms-animation-name: slideOutDown;
+  -o-animation-name: slideOutDown;
+  animation-name: slideOutDown;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  backface-visibility: hidden; }
 
 .create-stream-card {
   margin-top: 75px;
@@ -464,6 +550,18 @@ p {
       border: 1px solid #2a6662; }
       .streams-list-image button.stream-unsubscribed:hover {
         background: #2a6662; }
+    .streams-list-image button.ng-enter {
+      -webkit-animation-name: slideInUp;
+      -moz-animation-name: slideInUp;
+      -ms-animation-name: slideInUp;
+      -o-animation-name: slideInUp;
+      animation-name: slideInUp;
+      animation-iteration-count: 1;
+      animation-duration: 1s;
+      animation-delay: 0s;
+      animation-timing-function: ease;
+      animation-fill-mode: both;
+      backface-visibility: hidden; }
     .streams-list-image button span {
       font-family: 'Lato', sans-serif;
       color: #fff;
@@ -1203,6 +1301,32 @@ p {
     color: #dfe1df; }
     .profile-tabs md-tabs-wrapper md-tabs-canvas md-pagination-wrapper md-tab-item.md-active {
       color: #50ade3; }
+
+.profile-view-container.ng-enter {
+  -webkit-animation-name: slideInUp;
+  -moz-animation-name: slideInUp;
+  -ms-animation-name: slideInUp;
+  -o-animation-name: slideInUp;
+  animation-name: slideInUp;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  backface-visibility: hidden; }
+
+.profile-view-container.ng-leave {
+  -webkit-animation-name: slideOutDown;
+  -moz-animation-name: slideOutDown;
+  -ms-animation-name: slideOutDown;
+  -o-animation-name: slideOutDown;
+  animation-name: slideOutDown;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-delay: 0s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  backface-visibility: hidden; }
 
 .overview-container {
   padding-top: 20px;
