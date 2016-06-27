@@ -735,13 +735,12 @@ p {
   margin: 6px 0;
   display: inline-block;
   transition: all .4s ease; }
-
-.stream-single-user:hover {
-  transform: scale(1.1, 1.1); }
+  .stream-single-user img:hover {
+    transform: scale(1.1, 1.1); }
 
 .stream-single-user p {
   font-family: 'Lato', sans-serif;
-  color: #dfe1df; }
+  color: #dfe1df !important; }
 
 .stream-single-title {
   padding-top: 6px;
@@ -1173,3 +1172,136 @@ p {
       font-weight: 600;
       text-shadow: 1px 1px rgba(0, 0, 0, 0.45);
       color: #c19f66; }
+
+.profile-header {
+  background-image: -webkit-linear-gradient(bottom, #365e77 0%, #264254 100%); }
+
+.profile-user-info {
+  padding-top: 35px; }
+  .profile-user-info > img {
+    height: 45px;
+    width: 45px;
+    border: 1px solid #fff;
+    border-radius: 50%; }
+  .profile-user-info p {
+    font-family: 'Open Sans', sans-serif;
+    color: #dfe1df; }
+
+.profile-header-toolbar {
+  padding: 30px 0 20px 10px; }
+  .profile-header-toolbar button span {
+    font-family: 'Lato', sans-serif;
+    color: #dfe1df; }
+
+.profile-tabs {
+  background-image: -webkit-linear-gradient(bottom, #0c1013 0%, #1f2933 100%);
+  color: #dfe1df; }
+  .profile-tabs md-ink-bar {
+    color: #50ade3;
+    background-color: #50ade3; }
+  .profile-tabs md-tabs-wrapper md-tabs-canvas md-pagination-wrapper md-tab-item {
+    color: #dfe1df; }
+    .profile-tabs md-tabs-wrapper md-tabs-canvas md-pagination-wrapper md-tab-item.md-active {
+      color: #50ade3; }
+
+.overview-container {
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 40px; }
+
+.overview-general {
+  margin-bottom: 20px; }
+
+.overview-header {
+  height: 40px; }
+  .overview-header h3 {
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35); }
+
+.overview-content {
+  padding: 10px; }
+  .overview-content h4 {
+    font-family: 'Open Sans', sans-serif;
+    color: rgba(0, 0, 0, 0.4); }
+  .overview-content p {
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35); }
+
+.overview-extra-header {
+  height: 40px; }
+  .overview-extra-header h3 {
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35); }
+
+.overview-extra-content h4 {
+  font-family: 'Open Sans', sans-serif;
+  color: rgba(0, 0, 0, 0.4);
+  padding-left: 10px; }
+
+.overview-extra-content p {
+  font-family: 'Lato', sans-serif;
+  color: rgba(0, 0, 0, 0.35);
+  padding: 8px 12px 15px 12px; }
+
+.overview-score div {
+  border-right: 1px solid rgba(0, 0, 0, 0.45); }
+
+.overview-score p {
+  font-family: 'Lato', sans-serif;
+  color: rgba(0, 0, 0, 0.35); }
+
+.overview-score span {
+  font-family: 'Lato', sans-serif;
+  color: rgba(0, 0, 0, 0.35); }
+  .overview-score span i {
+    color: rgba(0, 0, 0, 0.35);
+    padding-right: 4px; }
+
+.overview-friends-header {
+  height: 40px;
+  padding: 0 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4); }
+  .overview-friends-header p {
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35); }
+  .overview-friends-header button span {
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.35); }
+
+.overview-friends-body {
+  padding-bottom: 10px; }
+
+.overview-friends-friend > div {
+  height: 110px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  transition: all .4s ease; }
+  .overview-friends-friend > div:nth-of-type(2n - 1) {
+    border-right: 1px solid rgba(0, 0, 0, 0.4); }
+  .overview-friends-friend > div:hover {
+    background: #50ade3; }
+    .overview-friends-friend > div:hover img {
+      transform: scale(1.1, 1.1);
+      border: 1px solid white; }
+    .overview-friends-friend > div:hover p {
+      color: #fff; }
+  .overview-friends-friend > div img {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    border-radius: 50%;
+    transition: all .4s ease; }
+  .overview-friends-friend > div p {
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.4);
+    transition: all .4s ease; }
+
+.overview-friends-footer {
+  height: 40px;
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  padding-right: 8px; }
+  .overview-friends-footer button span {
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 0, 0, 0.4);
+    transition: all .4s ease; }
+  .overview-friends-footer:hover span {
+    color: #50ade3; }

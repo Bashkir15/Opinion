@@ -3,6 +3,8 @@ var jwt = require('jsonwebtoken');
 var config = require('../config/env/' + (process.env.NODE_ENV || 'development'));
 var json = require('../helpers/json');
 var User = mongoose.model('User');
+import path from 'path';
+import fs from 'fs';
 
 
 
@@ -122,6 +124,39 @@ module.exports = function() {
 			json.good({
 				items: items
 			}, res);
+		});
+	};
+
+	obj.image = function (req, res) {
+		var userId = req.params.userId;
+		var file = req.files.file;
+		var uploadDate = Date.now();
+		var tempPath = file.path;
+		var targetPath = path.join(__dirname, "../../public/static/uploads/users/pictures/" + userId + uploadDate + file.name)
+		var savePath = '../static/uploads/users/pictures/' + userId + uploadDate + file.name;
+
+		User.findOne({_id: req.params.userId})
+		.exec(function (err, user) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				fs.rename(tempPath, targetPath, function (err) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					user.picture = savePath;
+					user.save(function (err, u) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							picture: u.picture
+						}, res);
+					});
+				});
+			}
 		});
 	};
 

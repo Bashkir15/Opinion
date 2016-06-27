@@ -47,7 +47,7 @@
 
 				<div class='nav-item'>
 					<div ng-click="vm.openUserMenu()" ng-if="vm.isLoggedIn" class='nav-user-menu'>
-						<img src='../static/images/me.jpg'>
+						<img src='{{vm.user.picture}}'>
 					</div>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 			<md-toolbar class='md-tall'>
 				<span flex></span>
 				<div layout='column' class='md-toolbar-tools-bottom' layout-align='none center'>
-					<img src='../static/images/me.jpg'>
+					<img src='{{vm.user.picture}}'>
 					<span></span>
 					<div>{{vm.user.name}}</div>
 					<div>{{vm.user.email}}</div>
@@ -220,6 +220,8 @@
 			<!-- Profile -->
 			<script src='/app/admin/profile/profile.config.js'></script>
 			<script src='/app/admin/profile/profile.controller.js'></script>
+			<script src='/app/admin/profile/overview/profile.overview.controller.js'></script>
+			<script src='/app/admin/profile/threads/profile.threads.controller.js'></script>
 
 			<!-- Streams -->
 			<script src='/app/admin/streams/streams.config.js'></script>

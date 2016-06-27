@@ -48,7 +48,7 @@
 		function uploadUserImage (file) {
 			if (file) {
 				Upload.upload({
-					url: '/users/' + userId + '/imageUpload',
+					url: '/users/uploadPicture/' + userId,
 					file: file
 				}).progress(function (evt) {
 					vm.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);

@@ -52,6 +52,10 @@ var UserSchema = new mongoose.Schema({
 	commentScore: {
 		type: Number,
 		default: 0
+	},
+
+	picture: {
+		type: String
 	}
 });
 

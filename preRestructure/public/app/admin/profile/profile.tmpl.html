@@ -1,7 +1,8 @@
 <div class='profile-container' ng-repeat='profile in vm.profile'>
 	<div layout='column' class='profile-header'>
 		<div layout='column' layout-align='center center' class='profile-user-info'>
-			<img src='../static/images/me.jpg'>
+			<img src='../static/images/me.jpg' ng-if="!profile.pictures">
+			<img ng-if='profile.pictures' src="profile.pictures[0]">
 			<p>{{profile.name}}</p>
 			<p>{{profile.email}}</p>
 		</div>
@@ -19,7 +20,7 @@
 				<span>Update Profile</span>
 			</button>
 
-			<button ngf-select="vm.uploadUserImage(file)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/*">
+			<button ngf-select="vm.uploadImage(file)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/*">
 				<span>Upload Image</span>
 			</button>
 		</div>

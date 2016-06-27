@@ -10,7 +10,7 @@
 
 			<div layout='row' class='thread-body-content'>
 				<div layout='column' flex='15' layout-align='none center' class='thread-content-user'>
-					<img src='../static/images/me.jpg' ui-sref="profile.overview({userId: thread.creator._id})">
+					<img src='{{thread.creator.picture}}' ui-sref="profile.overview({userId: thread.creator._id})">
 					<p>{{thread.creator.name}}</p>
 				</div>
 

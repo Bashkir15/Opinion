@@ -7,6 +7,7 @@ router.post('/', users.create);
 router.post('/authenticate', users.authenticate);
 router.get('/:userId', users.single);
 router.post('/:userId/follow', auth.ensureAuthorized, users.follow);
+router.post('/uploadPicture/:userId', auth.ensureAuthorized, users.image);
 router.get('/search/:keyword', auth.justGetUser, users.search);
 
 module.exports = router;
