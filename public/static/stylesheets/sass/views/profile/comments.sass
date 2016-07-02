@@ -1,0 +1,121 @@
+.profile-comments-body
+	md-list-item
+		width: 80%
+		margin: 5px auto
+		padding: 0
+		background: #212a33
+
+.profile-comments-user
+	img
+		height: 40px
+		width: 40px
+		border: 1px solid #dfe1df
+		border-radius: 50%
+		margin: 6px 0
+		display: inline-block
+		transition: all .4s ease
+
+		&:hover
+			transform: scale(1.2,1.2)
+
+	p
+		@include lato
+		color: #dfe1df !important
+
+.profile-comments-content
+	padding-top: 8px
+	padding-left: 10px
+
+	p
+		color: #dfe1df !important
+
+
+.profile-comments-score-container
+	i
+		color: #dfe1df
+		outline: none
+		transition: all .4s ease
+		display: inline-block
+
+		&.upvoted
+			color: $accent-green
+
+		&.downvoted
+			color: $accent-red
+
+		&:hover
+			transform: scale(1.5, 1.5)
+
+	span
+		@include lato
+		color: #dfe1df
+		transition: all .4s ease
+
+		&.positive
+			color: $accent-green
+
+		&.negative
+			color: $accent-red
+
+.profile-comments-comment-toolbar
+	height: 35px
+	border-top: 1px solid #c19f66
+	padding: 0 10px
+
+	button
+		i
+			color: #dfe1df
+			transition: all .4s ease
+
+		span
+			@include open
+			color: #dfe1df
+
+.profile-comments-no-comments
+	padding-top: 35px
+
+	p
+		@include open
+		color: #9a9a9a
+		font-weight: 600
+		text-shadow: 1px 1px rgba(0,0,0,0.45)
+		text-align: center
+
+.profile-no-more-comments
+	padding-top: 25px
+
+	p
+		@include mont
+		color: #9a9a9a
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+.profile-comments-load-more
+	height: 60px
+	padding-right: 140px
+
+	button
+		height: 40px
+		width: 140px
+		border-radius: 4px
+		border: 1px solid #9a9a9a
+		position: relative
+		transition: all .4s ease
+
+		span
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.35)
+			transition: all .4s ease
+			color: #9a9a9a
+
+		i
+			position: absolute
+			top: 12px
+			right: 5px
+			color: #fff
+
+		&:hover
+			background: $accent-blue
+
+			span
+				color: #fff

@@ -5,11 +5,11 @@
 				<div class='md-list-item-text'>
 					<div layout='row'>
 						<div layout='column' flex='15' layout-align='center center' class='profile-threads-user'>
-							<img src='../static/images/me.jpg'>
+							<img src='{{thread.creator.picture}}'>
 							<p>{{thread.creator.name}}</p>
 						</div>
 
-						<div layout='column' flex ui-sref="streams.streamsThread({streamId: thread.stream._id, threadId: thread._id})" class='profile-threads-title'>
+						<div layout='column' flex ui-sref="streams.thread({streamId: thread.stream._id, threadId: thread._id})" class='profile-threads-title'>
 							<p>{{thread.title}}</p>
 							<div class='profile-threads-title-overlay'>
 								<p>{{thread.content}}</p>
@@ -37,11 +37,26 @@
 						<span flex></span>
 
 						<button>
-							<span>{{thread.created | amCalendar}}</span>
+							<span>{{thread.created}}</span>
 						</button>
 					</div>
 				</div>
 			</md-list-item>
 		</md-list>
+
+		<div class='profile-threads-no-threads' ng-if="!vm.timeline.length" layout='row' layout-align='center center'>
+			<p>{{profile.name}} has not created any threads</p>
+		</div>
+
+		<div class='profile-threads-load-more' ng-if="!vm.noMoreThreads" layout='row' layout-align='end center'>
+			<button aria-label='load more threads' ng-click="vm.loadMore()">
+				<span>Load More</span>
+				<i class='icon-expand_more'></i>
+			</button>
+		</div>
+
+		<div class='profile-no-more-threads' ng-if="vm.noMoreThreads && vm.timelinePage >= 1" layout='row' layout-align='center center'>
+			<p>There are no more threads to load</p>
+		</div>
 	</div>
 </div>

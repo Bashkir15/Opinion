@@ -16,6 +16,9 @@
 	overflow: hidden
 	white-space: nowrap
 
+	> div
+		width: 55px
+
 .nav-center
 	display: flex
 	align-items: center
@@ -44,18 +47,105 @@
 	span
 		@include lato
 		color: #dfe1df
+		transition: all .4s ease
 
-.nav-dropdown
-	position: relative
+		&:hover
+			color: $accent-blue
+
+.nav-button-signup
+	height: 35px
+	width: 100px
+	border-radius: 2px
+	border: 1px solid $accent-blue
+	transition: all .4s ease
 
 	span
 		@include lato
 		color: #dfe1df
 
+	&:hover
+		background: $accent-blue
+
+.nav-button-login
+	height: 35px
+	width: 100px
+	border-radius: 2px
+	border: 1px solid $accent-green
+	transition: all .4s ease
+
+	span
+		@include lato
+		color: #dfe1df
+
+	&:hover
+		background: $accent-green
+
+
+.nav-dropdown
+	position: relative
+	transition: all .4s ease
+
+	span
+		@include lato
+		color: #dfe1df
+		transition: all .4s ease
+
 	i
 		color: #dfe1df
 		position: absolute
+		display: inline-block
+		transition: all .4s ease
 		top: 6px
+
+	&.open
+		i
+			transform: rotate(-180deg)
+
+	&:hover
+		span
+			color: $accent-blue
+
+.nav-dropdown-menu
+	position: absolute
+	left: 75px
+	top: 56px
+	height: 0
+	transition: all .4s ease
+	min-width: 85px
+	background: $darkest-blue
+	text-align: center
+
+	&:not(.ng-hide)
+		min-height: 50px
+
+		li
+			height: 50px
+			border-bottom: 1px solid rgba(0,0,0,0.3)
+			transition: all .4s ease
+
+			&:last-child
+				border-bottom: none
+
+			button
+				height: 50px
+				transition: all .4s ease
+
+				span
+					opacity: 1
+					color: #dfe1df
+					@include lato
+					transition: all .4s ease
+
+			&:hover
+				background: lighten($darkest-blue, 10%)
+
+	li
+		button
+			span
+				opacity: 0
+				@include lato
+
+
 
 .nav-user-menu
 	height: 35px
@@ -176,5 +266,6 @@
 
 
 @import "landing/landing"
+@import "authentication/authentication"
 @import "streams/streams"
 @import "profile/profile"

@@ -1,0 +1,272 @@
+
+.profile-saved-threads
+	width: 45%
+	margin: 0 2.5%
+	margin-top: 30px
+	padding-bottom: 30px
+	
+	> div
+		border: 1px solid rgba(0,0,0,0.35)
+
+		> md-list
+			padding: 0
+
+			> md-list-item
+				padding: 0
+				padding-top: 10px
+				border-bottom: 1px solid rgba(0,0,0,0.35)
+
+				.md-list-item-text
+					width: 100%
+
+.profile-saved-threads-header
+	height: 70px
+	padding: 0 10px
+	border-bottom: 1px solid rgba(0,0,0,0.35)
+
+	h4
+		@include lato
+		color: #9a9a9a
+
+
+.profile-saved-threads-search-icon
+	margin-top: 3px
+	height: 30px
+	width: 30px
+	position: relative
+	transition: all .4s ease
+	background: $accent-blue
+
+	i
+		font-size: 16px
+		position: absolute
+		top: 9px
+		left: 9px
+		opacity: 1
+		transition: all .4s ease
+		color: #dfe1df
+
+	&.is-searching
+		width: 5px
+		transition: all .4s ease
+
+		i
+			opacity: 0
+			transition: all .4s ease
+
+.profile-saved-threads-search
+	position: relative
+	height: 30px
+	margin-top: 3px
+
+	label
+		@include open
+		font-weight: 400
+		font-size: 16px
+		display: inline-block
+		position: absolute
+		left: 5px
+		top: 5px
+		color: #dfe1df
+		transition: all .4s ease
+		opacity: 1
+
+	input
+		height: 30px
+		width: 150px
+		padding: 0 0 0 5px
+		background: $darkest-blue
+		@include lato
+		color: #dfe1df
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			width: 175px
+			transition: all .4s ease
+
+.profile-saved-title
+	cursor: pointer
+
+	&:hover
+		.profile-saved-title-overlay
+			height: 84px
+
+.profile-saved-no-threads
+	padding-top: 35px
+
+	p
+		@include open
+		color: #9a9a9a
+		font-weight: 600
+		text-shadow: 1px 1px rgba(0,0,0,0.45)
+		text-align: center
+
+
+.profile-saved-comments
+	width: 45%
+	margin: 0 2.5%
+	margin-top: 30px
+	padding-bottom: 30px
+
+	> div
+		border: 1px solid rgba(0,0,0,0.45)
+
+		> md-list
+			padding: 0
+
+			> md-list-item
+				padding: 0
+				padding-top: 10px
+				border-bottom: 1px solid rgba(0,0,0,0.35)
+
+				.md-list-item-text
+					width: 100%
+
+.profile-saved-comments-header
+	height: 70px
+	padding: 0 10px
+	border-bottom: 1px solid rgba(0,0,0,0.35)
+
+	h4
+		@include lato
+		color: #9a9a9a
+
+
+.profile-saved-comments-search-icon
+	margin-top: 3px
+	height: 30px
+	width: 30px
+	position: relative
+	transition: all .4s ease
+	background: $accent-blue
+
+	i
+		font-size: 16px
+		position: absolute
+		top: 9px
+		left: 9px
+		opacity: 1
+		transition: all .4s ease
+		color: #dfe1df
+
+	&.is-searching
+		width: 5px
+		transition: all .4s ease
+
+		i
+			opacity: 0
+			transition: all .4s ease
+
+.profile-saved-comments-search
+	position: relative
+	height: 30px
+	margin-top: 3px
+
+	label
+		@include open
+		font-weight: 400
+		font-size: 16px
+		display: inline-block
+		position: absolute
+		left: 5px
+		top: 5px
+		color: #dfe1df
+		transition: all .4s ease
+		opacity: 1
+
+	input
+		height: 30px
+		width: 150px
+		padding: 0 0 0 5px
+		background: $darkest-blue
+		@include lato
+		color: #dfe1df
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			width: 175px
+			transition: all .4s ease
+
+
+.profile-saved-no-comments
+	padding-top: 35px
+
+	p
+		@include open
+		color: #9a9a9a
+		font-weight: 600
+		text-shadow: 1px 1px rgba(0,0,0,0.45)
+		text-align: center
+
+.profile-saved-user
+	margin-bottom: 10px
+
+.profile-saved-toolbar
+	height: 40px
+
+	button
+		height: 40px
+
+.profile-saved-search-text
+	padding-top: 35px
+
+	p
+		text-align: center
+		@include mont
+		color: #dfe1df
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.45)
+
+		span
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			color: $accent-orange
+
+.profile-load-more-saved-items
+	height: 60px
+	padding-right: 25px
+
+	button
+		height: 40px
+		width: 140px
+		border-radius: 4px
+		border: 1px solid #9a9a9a
+		position: relative
+		transition: all .4s ease
+
+		span
+			@include open
+			color: #9a9a9a
+			transition: all .4s ease
+
+		i
+			position: absolute
+			top: 12px
+			right: 5px
+			color: #fff
+			transition: all .4s ease
+
+		&:hover
+			background: $accent-blue
+
+			span
+				color: #fff
+
+.profile-no-more-saved-items
+	height: 30px
+
+	p
+		@include open
+		font-weight: 600
+		text-shadow: 1px 1px rgba(0,0,0,0.45)
+		color: #9a9a9a
+

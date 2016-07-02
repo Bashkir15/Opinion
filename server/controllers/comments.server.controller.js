@@ -100,6 +100,98 @@ module.exports = function() {
 		return getComments();
 	};
 
+	obj.timeline = function (req, res) {
+		var userId = req.params.userId
+
+		var getComments = function() {
+			var criteria = {creator: userId};
+
+			if (req.query && req.query.timestamp) {
+				criteria.created = {$gte: req.query.timestamp};
+			}
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+				criteria.content = new RegExp(req.query.filter, 'i');
+			}
+
+			Comment.find(criteria, null)
+			.populate('thread')
+			.populate('creator')
+			.skip(parseInt(req.query.page) * config.settings.perPage)
+			.limit(config.settings.perPage + 1)
+			.exec(function (err, comments) {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					var morePages = config.settings.perPage < comments.length;
+
+					if (morePages) {
+						comments.pop();
+					}
+
+					if (req.user) {
+						comments.map(function (e) {
+							e = e.afterSave(req.user);
+						});
+					}
+
+					json.good({
+						records: comments,
+						morePages: morePages
+					}, res);
+				}
+			});
+		};
+
+		return getComments();
+	};
+
+	obj.savedComments = function (req, res) {
+		var userId = req.params.userId;
+
+		var getComments = function() {
+			var criteria = {saves: userId};
+
+			if (req.query && req.query.timestamp) {
+				criteria.created = {$gte: req.query.timestamp};
+			}
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+				criteria.content = new RegExp(req.query.filter, 'i');
+			}
+
+			Comment.find(criteria, null)
+			.populate('creator')
+			.populate('threads')
+			.skip(parseInt(req.query.page) * config.settings.perPage)
+			.limit(config.settings.perPage + 1)
+			.exec(function (err, comments) {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					var morePages = config.settings.perPage < comments.length;
+
+					if (morePages) {
+						comments.pop();
+					}
+
+					if (req.user) {
+						comments.map(e => e.afterSave(req.user));
+					}
+
+					json.good({
+						records: comments,
+						morePages: morePages
+					}, res);
+				}
+			});
+		};
+
+		return getComments();
+	};
+
 	obj.single = function (req, res) {
 		Comment.findOne({_id: req.params.commentId})
 		.populate('creator')

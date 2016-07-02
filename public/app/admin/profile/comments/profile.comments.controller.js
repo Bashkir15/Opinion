@@ -2,10 +2,10 @@
 	'use strict';
 
 	angular.module('opinionated.admin')
-	.controller('ProfileThreadsController', ProfileThreadsController);
+	.controller('ProfileCommentsController', ProfileCommentsController);
 
 	/* @ngInject */
-	function ProfileThreadsController ($scope, $state, $stateParams, appThreads) {
+	function ProfileCommentsController ($state, $stateParams, $scope, $timeout, appUsers, appComments) {
 		var vm = this;
 		vm.stateName = $state.current.name;
 		var userId = $stateParams.userId;
@@ -14,11 +14,12 @@
 		vm.loadMore = loadMore;
 		vm.lastUpdated = 0;
 		vm.timelinePage = 0;
+		vm.timelineFilter = '';
 
-		function getTimeline(options) {
+		function getTimeline (options) {
 			options = options || {};
 
-			var timelineData = appThreads.timeline.get({
+			var timelineData = appComments.timeline.get({
 				userId: userId,
 				timestamp: vm.lastUpdated,
 				page: vm.timelinePage
@@ -30,7 +31,7 @@
 				}
 
 				vm.lastUpdated = Date.now();
-				vm.noMoreThreads = !timelineData.res.morePages;
+				vm.noMoreComments = !timelineData.res.morePages;
 			});
 		}
 

@@ -41,7 +41,9 @@
 				}
 			}),
 
-			list: $resource('comments/thread/:threadId')
+			list: $resource('comments/thread/:threadId'),
+			timeline: $resource('comments/timeline/:userId'),
+			saved: $resource('comments/saved/:userId')
 		};
 	}
 }());

@@ -104,7 +104,7 @@
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center' class='thread-comments-user'>
-								<img src='../static/images/me.jpg' ui-sref="profile.overview({userId: item.creator._id})">
+								<img src='{{item.creator.picture}}' ui-sref="profile.overview({userId: item.creator._id})">
 								<p>{{item.creator.name}}</p>
 							</div>
 

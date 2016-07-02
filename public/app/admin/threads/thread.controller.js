@@ -9,7 +9,8 @@
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		var threadId = $stateParams.threadId;
-		vm.currentUserId = appAuth.getUser()._id;
+		vm.getCurrentUser = getCurrentUser();
+		vm.currentUserId = '';
 		vm.threads = [];
 		vm.comments = [];
 		vm.getThread = getThread;
@@ -29,10 +30,18 @@
 		vm.lastUpdated = 0;
 		vm.commentsFilter = '';
 
+		function getCurrentUser() {
+			if (appAuth.isLoggedIn()) {
+				vm.currentUserId = appAuth.getUser()._id;
+			} else {
+				vm.currentUserId = '';
+			}
+		}
+
 		function getThread() {
 			var threadData = appThreads.single.get({threadId: threadId}, function() {
 				vm.threads = [threadData.res.record];
-				vm.isMod = threadData.res.mods;
+				vm.isMod = threadData.res.mods.mod;
 			});
 		}
 
@@ -265,6 +274,7 @@
 			});
 		}
 
+		getCurrentUser();
 		getThread();
 		getComments();
 	}

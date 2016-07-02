@@ -5,6 +5,8 @@ var router = express.Router();
 
 router.post('/', auth.ensureAuthorized, comments.create);
 router.get('/thread/:threadId', auth.justGetUser, comments.list);
+router.get('/timeline/:userId', auth.justGetUser, comments.timeline);
+router.get('/saved/:userId', auth.justGetUser, comments.savedComments);
 router.get('/:commentId', auth.justGetUser, comments.single);
 router.post('/:commentId/upvote', auth.ensureAuthorized, comments.upvote);
 router.post('/:commentId/downvote', auth.ensureAuthorized, comments.downvote);

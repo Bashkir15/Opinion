@@ -27,5 +27,19 @@
 			controller: 'ProfileThreadsController',
 			controllerAs: 'vm'
 		});
+
+		$stateProvider.state('profile.comments', {
+			url: '/comments',
+			templateUrl: '/app/admin/profile/comments/comments.tmpl.html',
+			controller: 'ProfileCommentsController',
+			controllerAs: 'vm'
+		});
+
+		$stateProvider.state('profile.saved', {
+			url: "/saved",
+			templateUrl: '/app/admin/profile/saved/saved.tmpl.html',
+			controller: 'ProfileSavedController',
+			controllerAs: 'vm'
+		});
 	}
 }());

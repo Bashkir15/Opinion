@@ -1,0 +1,111 @@
+
+.authentication-page-wrapper
+	background-image: -webkit-linear-gradient(bottom, #1F2933 0%, #2D3A47 100%)
+	min-height: 680px
+.authentication-view-container
+	&.ng-enter
+		@include slideInUp()
+
+	&.ng-leave
+		@include slideOutDown()
+
+.auth-form-wrapper
+	position: relative
+	width: 75%
+	margin: 0 auto 42px auto
+
+	label
+		position: absolute
+		top: 2px
+		left: 6px
+		display: inline-block
+		@include lato
+		color: rgba(0,0,0,0.35)
+		opacity: 1
+		transition: all .4s ease
+
+	input
+		position: relative
+		display: inline-block
+		width: 100%
+		background: rgba(0,0,0,0.1)
+		height: 30px
+		padding-left: 6px
+		border-radius: 4px
+		color: rgba(0,0,0,0.4)
+		box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			background: #d2d9dd
+
+	&.has-success
+		label
+			opacity: 0
+
+	&.has-error
+		label
+			opacity: 0
+
+.auth-form-success-check
+	position: absolute
+	top: 9px
+	right: 5px
+	margin-left: 5px
+	color: $accent-green
+
+	&.ng-enter
+		@include slideInUp()
+
+.auth-form-error-icon
+	position: absolute
+	top: 9px
+	right: 5px
+	margin-left: 5px
+	color: $accent-red
+
+	&.ng-enter
+		@include slideInUp()
+
+.auth-form-error-container
+	> div
+		padding-left: 10px
+
+		span
+			@include lato
+			color: $accent-red
+
+	&.ng-enter
+		@include slideInUp()
+
+.auth-form-submit
+	height: 75px
+
+	button
+		height: 40px
+		width: 220px
+		border-radius: 4px
+		border: 1px solid $accent-green
+		transition: all .4s ease
+
+		span
+			@include lato
+			color: rgba(0,0,0,0.45)
+			transition: all .4s ease
+
+		&:hover
+			background: $accent-green
+
+			span
+				color: #fff
+
+
+
+
+
+@import "signup"
+@import "login"

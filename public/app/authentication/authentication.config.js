@@ -24,5 +24,11 @@
 			controller: 'LoginController',
 			controllerAs: 'vm'
 		});
+
+		$stateProvider.state('authentication.logout', {
+			url: '/logout',
+			templateUrl: '/app/landing/home/home.tmpl.html',
+			controller: 'LogoutController'
+		});
 	}
 }());

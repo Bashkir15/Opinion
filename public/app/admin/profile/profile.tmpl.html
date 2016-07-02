@@ -39,27 +39,22 @@
 			</md-tab-label>
 		</md-tab>
 
-		<md-tab ui-sref='profile.comments' md-active="$state.is('profile.comments')">
+		<md-tab ui-sref='profile.comments' md-active="vm.stateName=='profile.comments'">
 			<md-tab-label layout='column'>
 				<span>Comments</span>
 			</md-tab-label>
 		</md-tab>
 
-		<md-tab ui-sref='profile.saved' md-active="$state.is('profile.saved')">
+		<md-tab ui-sref='profile.saved' md-active="vm.stateName=='profile.saved'">
 			<md-tab-label layout='column'>
 				<span>Saved</span>
 			</md-tab-label>
 		</md-tab>
-
-		<md-tab>
-			<md-tab-label layout='column'>
-				<span>Activity</span>
-			</md-tab-label>
-		</md-tab>
 	</md-tabs>
 
-
-	<div id='animation-wrapper'>
-		<div ui-view class='profile-view-container'></div>
+	<div class='profile-tab-container' layout='column'>
+		<div id='animation-wrapper' flex>
+			<div ui-view class='profile-view-container' layout='column'></div>
+		</div>
 	</div>
 </div>

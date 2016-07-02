@@ -6,6 +6,6 @@ module.exports = {
 	},
 	secret: 'erskjfsdfyiukjasd',
 	settings: {
-		perPage: 15
+		perPage: 2
 	}
 };

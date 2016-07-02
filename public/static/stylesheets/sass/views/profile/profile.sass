@@ -39,7 +39,12 @@
 					&.md-active
 						color: $accent-blue
 
+.profile-tab-container
+	background-image: -webkit-linear-gradient(bottom, #1F2933 0%, #2D3A47 100%)
+	min-height: 450px
+
 .profile-view-container
+
 	&.ng-enter
 		@include slideInUp($delay: .5s)
 
@@ -47,3 +52,6 @@
 		@include slideOutDown()
 
 @import "overview"
+@import "threads"
+@import "comments"
+@import "saved"

@@ -1,11 +1,9 @@
 .overview-container
-	padding-top: 20px
-	padding-left: 50px
-	padding-right: 40px
-
+	padding: 20px 40px 40px 50px
 
 .overview-general
 	margin-bottom: 20px
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
 
 .overview-header
 	height: 40px
@@ -24,6 +22,9 @@
 	p
 		@include lato
 		color: rgba(0,0,0,0.35)
+
+.overview-extra
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
 
 .overview-extra-header
 	height: 40px
@@ -44,8 +45,10 @@
 		padding: 8px 12px 15px 12px
 
 .overview-score
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
+
 	div
-		border-right: 1px solid rgba(0,0,0,0.45)
+		border-right: 1px solid rgba(0,0,0,0.12)
 
 	p
 		@include lato
@@ -59,10 +62,13 @@
 			color: rgba(0,0,0,0.35)
 			padding-right: 4px
 
+.overview-friends
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
+
 .overview-friends-header
 	height: 40px
 	padding: 0 10px
-	border-bottom: 1px solid rgba(0,0,0,0.4)
+	border-bottom: 1px solid rgba(0,0,0,0.12)
 
 	p
 		@include lato
@@ -77,13 +83,13 @@
 	padding-bottom: 10px
 
 .overview-friends-friend
-	> div
+	.profile-friends-repeat
 		height: 110px
-		border-bottom: 1px solid rgba(0,0,0,0.4)
+		border-bottom: 1px solid rgba(0,0,0,0.12)
 		transition: all .4s ease
 
 		&:nth-of-type(2n - 1)
-			border-right: 1px solid rgba(0,0,0,0.4)
+			border-right: 1px solid rgba(0,0,0,0.12)
 
 		&:hover
 			background: $accent-blue
@@ -109,9 +115,19 @@
 			color: rgba(0,0,0,0.4)
 			transition: all .4s ease
 
+.profile-no-friends
+	width: 100%
+	padding: 15px 8px 5px 8px
+
+	p
+		text-align: center
+		@include open
+		font-size: 16px
+		color: rgba(0,0,0,0.35)
+
 .overview-friends-footer
 	height: 40px
-	border-top: 1px solid rgba(0,0,0,0.4)
+	border-top: 1px solid rgba(0,0,0,0.12)
 	padding-right: 8px
 
 	button

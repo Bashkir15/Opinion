@@ -19,11 +19,19 @@
 				</div>
 
 				<div class='nav-item'>
-					<button class='nav-dropdown'>
+					<button class='nav-dropdown' ng-click="vm.showStreams = !vm.showStreams" ng-class="{'open': vm.showStreams}">
 						<span>Streams</span>
 						<i class='icon-expand_more'></i>
 					</button>
 				</div>
+
+				<ul class='nav-dropdown-menu' ng-show="vm.showStreams">
+					<li ng-repeat='stream in vm.homeStreams'>
+						<button ui-sref='streams.single({streamId: stream._id})'>
+							<span>{{stream.name}}</span>
+						</button>
+					</li>
+				</ul>
 			</div>
 
 			<div class='nav-center'>
@@ -34,13 +42,13 @@
 
 			<div class='nav-right'>
 				<div class='nav-item'>
-					<button ui-sref='authentication.signup' aria-label='go to signup page button' ng-if='!vm.isLoggedIn' class='nav-button'>
+					<button ui-sref='authentication.signup' aria-label='go to signup page button' ng-if='!vm.isLoggedIn' class='nav-button-signup'>
 						<span>Signup</span>
 					</button>
 				</div>
 
 				<div class='nav-item'>
-					<button ui-sref='authentication.login' aria-label='go to login page button' ng-if="!vm.isLoggedIn" class='nav-button'>
+					<button ui-sref='authentication.login' aria-label='go to login page button' ng-if="!vm.isLoggedIn" class='nav-button-login'>
 						<span>Login</span>
 					</button>
 				</div>
@@ -93,20 +101,14 @@
 						</li>
 
 						<li>
-							<button class='md-ink-ripple'>
+							<button class='md-ink-ripple' ui-sref='profile.comments({userId: vm.user._id})'>
 								<span>Comments</span>
 							</button>
 						</li>
 
 						<li>
-							<button class='md-ink-ripple'>
+							<button class='md-ink-ripple' ui-sref='profile.saved({userId: vm.user._id})'>
 								<span>Saved</span>
-							</button>
-						</li>
-
-						<li>
-							<button class='md-ink-ripple'>
-								<span>Activitiy</span>
 							</button>
 						</li>
 					</ul>
@@ -206,8 +208,13 @@
 		<!-- Utilities -->
 		<script src='/app/utilities/utilities.setter.js'></script>
 		<script src='/app/utilities/factories/utilities.storage.factory.js'></script>
-		<script src='/app/utilities/factories/utilities.auth.factory.js'></script>
-		<script src='/app/utilities/factories/utilities.interceptor.factory.js'></script>
+
+			<!-- Factories -->
+			<script src='/app/utilities/factories/utilities.auth.factory.js'></script>
+			<script src='/app/utilities/factories/utilities.interceptor.factory.js'></script>
+
+			<!-- Directives -->
+			<script src='/app/utilities/directives/password-match/password.match.directive.js'></script>
 
 
 		<!-- Admin -->
@@ -222,6 +229,8 @@
 			<script src='/app/admin/profile/profile.controller.js'></script>
 			<script src='/app/admin/profile/overview/profile.overview.controller.js'></script>
 			<script src='/app/admin/profile/threads/profile.threads.controller.js'></script>
+			<script src='/app/admin/profile/comments/profile.comments.controller.js'></script>
+			<script src='/app/admin/profile/saved/profile.saved.controller.js'></script>
 
 			<!-- Streams -->
 			<script src='/app/admin/streams/streams.config.js'></script>
@@ -242,6 +251,7 @@
 		<script src='/app/authentication/authentication.config.js'></script>
 		<script src='/app/authentication/signup/signup.controller.js'></script>
 		<script src='/app/authentication/login/login.controller.js'></script>
+		<script src='/app/authentication/logout/logout.controller.js'></script>
 
 		<!-- Landing -->
 		<script src='/app/landing/landing.setter.js'></script>

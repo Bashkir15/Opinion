@@ -41,7 +41,10 @@
 				}
 			}),
 
-			list: $resource('threads/stream/:streamId')
+			list: $resource('threads/stream/:streamId'),
+			timeline: $resource('threads/timeline/:userId'),
+			saved: $resource('threads/saved/:userId'),
+			home: $resource('threads/home')
 		};
 	}
 }());

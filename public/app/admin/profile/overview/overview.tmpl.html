@@ -89,10 +89,14 @@
 
 			<div class='overview-friends-body' layout='column'>
 				<div class='overview-friends-friend' layout='row' layout-wrap>
-					<div layout='column' layout-align='center center' flex='50' ng-repeat='following in profile.following' ui-sref="profile.overview({userId: following._id})">
-						<img src='../static/images/me.jpg'>
+					<div layout='column' layout-align='center center' flex='50' ng-repeat='following in profile.following' ui-sref="profile.overview({userId: following._id})" class='profile-friends-repeat'>
+						<img src='{{following.picture}}'>
 						<p>{{following.name}}</p>
 						<p>{{following.username}}</p>
+					</div>
+
+					<div ng-if="!profile.following.length" class='profile-no-friends'>
+						<p>{{profile.name}} is not currently following anyone</p>
 					</div>
 				</div>
 			</div>

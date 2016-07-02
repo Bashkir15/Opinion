@@ -103,8 +103,145 @@ module.exports = function() {
 		return getPosts();
 	};
 
+	obj.home = function (req, res) {
+		var criteria = {};
+
+		if (req.query && req.query.timestamp) {
+			criteria.created = {$gte: req.query.timestamp};
+		}
+
+		if (req.query && req.query.filter) {
+			delete criteria.created;
+			criteria.title = new RegExp(req.query.filter, 'i');
+		}
+
+		Thread.find(criteria, null)
+		.populate('creator')
+		.populate('stream')
+		.populate('comments')
+		.skip(parseInt(req.query.page) * config.settings.perPage)
+		.limit(config.settings.perPage + 1)
+		.exec(function (err, threads) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				var morePages = config.settings.perPage < threads.length;
+
+				if (morePages) {
+					threads.pop();
+				}
+
+				if (req.user) {
+					threads.map(function (e) {
+						e = e.afterSave(req.user);
+					});
+				}
+
+				json.good({
+					records: threads,
+					morePages: morePages
+				}, res);
+			}
+		});
+	};
+
+	obj.timeline = function (req, res) {
+		var userId = req.params.userId || req.user._id;
+
+		var getThreads = function() {
+			var criteria = { creator: userId};
+
+			if (req.query && req.query.timestamp) {
+				criteria.created = { $gte: req.query.timestamp};
+			}
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+				criteria.title = new RegExp(req.query.filter, 'i');
+			}
+
+			Thread.find(criteria, null)
+			.populate('creator')
+			.populate('stream')
+			.populate('comments')
+			.skip(parseInt(req.query.page) * config.settings.perPage)
+			.limit(config.settings.perPage + 1)
+			.exec(function (err, threads) {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					var morePages = config.settings.perPage < threads.length;
+
+					if (morePages) {
+						threads.pop();
+					}
+
+					if (req.user) {
+						threads.map(function (e) {
+							e = e.afterSave(req.user);
+						});
+					}
+
+					json.good({
+						records: threads,
+						morePages: morePages
+					}, res);
+				}
+			});
+		};
+
+		return getThreads();
+	};
+
+	obj.savedThreads = function (req, res) {
+		var userId = req.params.userId;
+
+		var getThreads = function() {
+			var criteria = {saves: userId};
+
+			if (req.query && req.query.timestamp) {
+				criteria.created = {$gte: req.query.timestamp};
+			}
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+				criteria.title = new RegExp(req.query.filter);
+			}
+
+			Thread.find(criteria, null)
+			.populate('creator')
+			.populate('stream')
+			.populate('comments')
+			.skip(parseInt(req.query.page) * config.settings.perPage)
+			.limit(config.settings.perPage + 1)
+			.exec(function (err, threads) {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					var morePages = config.settings.perPage < threads.length;
+
+					if (morePages) {
+						threads.pop();
+					}
+
+					if (req.user) {
+						threads.map(function (e) {
+							e = e.afterSave(req.user);
+						});
+					}
+
+					json.good({
+						records: threads,
+						morePages: morePages
+					}, res);
+				}
+			});
+		};
+
+		return getThreads();
+	};
+
 	obj.single = function (req, res) {
-		var mods = {};
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
 		.populate('stream')
@@ -113,6 +250,7 @@ module.exports = function() {
 				return json.bad(err, res);
 			} else if (thread) {
 				if (req.user) {
+					var isMod;
 					thread = thread.afterSave(req.user);
 
 					Stream.findOne({_id: thread.stream})
@@ -126,17 +264,23 @@ module.exports = function() {
 						});
 
 						if (isInArray) {
-							mods.mod = true;
+							isMod = true;
 						} else {
-							mods.mod = false;
+							isMod = false;
 						}
 					});
 				}
 
-				json.good({
-					record: thread,
-					mods: mods
-				}, res);
+				if (isMod = true) {
+					return json.good({
+						record: thread,
+						isMod: isMod
+					}, res);
+				} else {
+					json.good({
+						record: thread
+					}, res);
+				}
 			} else {
 				return json.bad({message: 'Sorry, that thread could not be found'}, res);
 			}

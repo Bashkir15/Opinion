@@ -5,11 +5,13 @@
 	.controller('AppController', AppController);
 
 	/* @ngInject */
-	function AppController ($scope, $rootScope, $location, $mdDialog, $mdSidenav, appUsersSearch, appAuth) {
+	function AppController ($scope, $rootScope, $location, $mdDialog, $mdSidenav, appUsersSearch, appAuth, appStreams) {
 		var vm = this;
 		vm.openUserMenu = openUserMenu;
 		vm.openUsersSearch = openUsersSearch;
 		vm.updateLoginStatus = updateLoginStatus;
+		vm.getHomeStreams = getHomeStreams;
+		vm.homeStreams = [];
 
 		function openUserMenu() {
 			$mdSidenav('left').toggle();
@@ -19,6 +21,19 @@
 			vm.isLoggedIn = appAuth.isLoggedIn();
 			vm.user = appAuth.getUser();
 		}
+
+		function getHomeStreams() {
+			if (vm.isLoggedIn) {
+				var homeStreamsData = appStreams.single.get({subscribed: true}, function() {
+					vm.homeStreams = homeStreamsData.res.records;
+				});
+			} else {
+				var homeStreamsData = appStreams.single.get({}, function() {
+					vm.homeStreams = homeStreamsData.res.records;
+				});
+			}
+		}
+			
 
 		function openUsersSearch() {
 			$mdDialog.show({
@@ -67,5 +82,6 @@
 		});
 
 		updateLoginStatus();
+		getHomeStreams();
 	}
 }());

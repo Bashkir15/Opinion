@@ -93,7 +93,7 @@
 					<div class='md-list-item-text'>
 						<div layout='row'>
 							<div layout='column' flex='15' layout-align='center center' class='stream-single-user'>
-								<img src='{{item.creator.picture}}'>
+								<img src='{{item.creator.picture}}' ui-sref="profile.overview({userId: item.creator._id})">
 								<p>{{item.creator.name}}</p>
 							</div>
 

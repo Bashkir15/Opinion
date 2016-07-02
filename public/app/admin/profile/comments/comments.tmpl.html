@@ -1,0 +1,55 @@
+<div class='profile-comments-container'>
+	<div class='profile-comments-body' layout='column'>
+		<md-list>
+			<md-list-item class='md-2-line' ng-repeat='comment in vm.timeline'>
+				<div class='md-list-item-text'>
+					<div layout='row'>
+						<div layout='column' flex='15' layout-align='center center' class='profile-comments-user'>
+							<img src='{{comment.creator.picture}}'>
+							<p>{{comment.creator.name}}</p>
+						</div>
+
+						<div layout='column' flex ui-sref="streams.streamsThread({streamId: thread.stream._id, threadId: thread._id})" class='profile-comments-content'>
+							<p>{{comment.content}}</p>
+						</div>
+
+						<div layout='column' flex='10' layout-align='center center' class='profile-comments-score-container'>
+							<i class='icon-expand_less' ng-class="{'upvoted': comment.upvoted}"></i>
+							<span ng-class="{'positive': comment.score >= 1, 'negative': comment.score <= -1}">{{comment.score}}</span>
+							<i class='icon-expand_more' ng-class="{'downvoted': comment.downvoted}"></i>
+						</div>
+					</div>
+
+					<div layout='row' layout-align='none center' class='profile-comments-comment-toolbar'>
+
+						<button>
+							<i class='icon-favorite_border'></i>
+							<span>{{comment.saves.length}} Save<span ng-if="comment.saves.length > 1 || comment.saves.length == 0">s</span></span>
+						</button>
+
+						<span flex></span>
+
+						<button>
+							<span>{{comment.created}}</span>
+						</button>
+					</div>
+				</div>
+			</md-list-item>
+		</md-list>
+
+		<div class='profile-comments-no-comments' ng-if="!vm.timeline.length">
+			<p>{{profile.name}} has not created any comments</p>
+		</div>
+
+		<div class='profile-comments-load-more' ng-if='!vm.noMoreComments' layout='row' layout-align='end center'>
+			<button aria-label='load more comments' ng-click="vm.loadMore()">
+				<span>Load More</span>
+				<i class='icon-expand_more'></i>
+			</button>
+		</div>
+
+		<div class='profile-no-more-comments' ng-if="vm.noMoreComments && vm.timelinePage >= 1" layout='row' layout-align='center center'>
+			<p>There are no more comments to load</p>
+		</div>
+	</div>
+</div>

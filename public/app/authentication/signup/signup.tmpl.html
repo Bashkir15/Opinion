@@ -1,13 +1,11 @@
-<div class='signup-page-container'>
+<div class='signup-page-container'> 
 	<div>
-		<md-card>
-			<div class='signup-form-header'>
-				<div>
-					<h3>Welcome to <span>Opinionated</span></h3>
-				</div>
+		<md-card class='signup-page-card'>
+			<div class='signup-form-header' layout='row' layout-align='center center'>
+				<h3>Welcome to <span>Opinionated</span></h3>
 			</div>
 
-			<md-content>
+			<md-content class='signup-form-container'>
 				<form name='vm.signupForm' ng-submit='vm.create(vm.signupForm.$valid)' novalidate>
 					<div class='auth-form-wrapper' ng-class="{'has-focus': vm.signupForm.name.hasFocus,
 					'has-success': vm.signupForm.name.$valid,
@@ -15,6 +13,13 @@
 					'is-empty': !vm.signupForm.name.$viewValue}">
 						<label>Name</label>
 						<input type='text' name='name' ng-model='vm.user.name' required ng-focus='vm.signupForm.name.hasFocus=true' ng-blur="vm.signupForm.name.hasFocus=false">
+						<i class='icon-checkmark auth-form-success-check' ng-if="vm.signupForm.name.$valid"></i>
+						<i class='icon-fire auth-form-error-icon' ng-if="vm.signupForm.name.$error && vm.signupForm.name.$touched && !vm.signupForm.name.$valid"></i>
+						<div ng-messages='vm.signupForm.name.$error' ng-if="vm.signupForm.name.$touched" class='auth-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, your name is required</span>
+							</div>
+						</div>
 					</div>
 
 					<div class='auth-form-wrapper' ng-class="{'has-focus': vm.signupForm.username.hasFocus,
@@ -23,6 +28,13 @@
 					'is-empty': !vm.signupForm.username.$viewValue}">
 						<label>Username</label>
 						<input type='text' name='username' ng-model='vm.user.username' required ng-focus='vm.signupForm.username.hasFocus=true' ng-blur='vm.signupForm.username.hasFocus=false'>
+						<i class='icon-checkmark auth-form-success-check' ng-if="vm.signupForm.username.$valid"></i>
+						<i class='icon-fire auth-form-error-icon' ng-if="vm.signupForm.username.$error && vm.signupForm.username.$touched && !vm.signupForm.username.$valid"></i>
+						<div ng-messages='vm.signupForm.username.$error' ng-if="vm.signupForm.username.$touched" class='auth-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, a username is required</span>
+							</div>
+						</div>
 					</div>
 
 					<div class='auth-form-wrapper' ng-class="{'has-focus': vm.signupForm.email.hasFocus,
@@ -31,6 +43,13 @@
 					'is-empty': !vm.signupForm.email.$viewValue}">
 						<label>Email</label>
 						<input type='email' name='email' ng-model='vm.user.email' required ng-focus='vm.signupForm.email.hasFocus=true' ng-blur="vm.signupForm.email.hasFocus=false">
+						<i class='icon-checkmark auth-form-success-check' ng-if="vm.signupForm.email.$valid"></i>
+						<i class='icon-fire auth-form-error-icon' ng-if="vm.signupForm.email.$error && vm.signupForm.email.$touched && !vm.signupForm.email.$valid"></i>
+						<div ng-messages='vm.signupForm.email.$error' ng-if="vm.signupForm.email.$touched" class='auth-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, an email is required</span>
+							</div>
+						</div>
 					</div>
 
 					<div class='auth-form-wrapper' ng-class="{'has-focus': vm.signupForm.password.hasFocus,
@@ -39,6 +58,13 @@
 					'is-empty': !vm.signupForm.password.$viewValue}">
 						<label>Password</label>
 						<input type='password' name='password' ng-model='vm.user.password' required ng-focus="vm.signupForm.password.hasFocus=true" ng-blur="vm.signupForm.password.hasFocus=false">
+						<i class='icon-checkmark auth-form-success-check' ng-if="vm.signupForm.password.$valid"></i>
+						<i class='icon-fire auth-form-error-icon' ng-if="vm.signupForm.password.$error && vm.signupForm.password.$touched && !vm.signupForm.password.$valid"></i>
+						<div ng-messages='vm.signupForm.password.$error' ng-if="vm.signupForm.password.$touched" class='auth-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, you need to include a password</span>
+							</div>
+						</div>
 					</div>
 
 					<div class='auth-form-wrapper' ng-class="{'has-focus': vm.signupForm.confirm.hasFocus,
@@ -47,9 +73,20 @@
 					'is-empty': !vm.signupForm.confirm.$viewValue}">
 						<label>Confirm Password</label>
 						<input type='password' name='confirm' ng-model='vm.user.confirm' required ng-focus="vm.signupForm.confirm.hasFocus=true" ng-blur="vm.signupForm.confirm.hasFocus=false">
+						<i class='icon-checkmark auth-form-success-check' ng-if="vm.signupForm.confirm.$valid"></i>
+						<i class='icon-fire auth-form-error-icon' ng-if="vm.signupForm.confirm.$error && vm.signupForm.confirm.$touched && !vm.signupForm.confirm.$valid"></i>
+						<div ng-messages="vm.signupForm.confirm.$error" ng-if="vm.signupForm.confirm.$touched" class='auth-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, you need to confirm your password</span>
+							</div>
+
+							<div ng-message='passwordCheck'>
+								<span>Sorry, your passwords do not match</span>
+							</div>
+						</div>
 					</div>
 
-					<div class='register-form-submit'>
+					<div class='auth-form-submit' layout='row' layout-align='center none'>
 						<button type='submit' aria-label='submit signup form button'>
 							<span>Sign up!</span>
 						</button>
@@ -58,7 +95,7 @@
 			</md-content>
 		</md-card>
 
-		<div class='signup-form-login'>
+		<div class='signup-form-login' layout='row' layout-align='center none'>
 			<p>Already have an account? <a ui-sref='authentication.login'>Login in here</a></p>
 		</div>
 	</div>
