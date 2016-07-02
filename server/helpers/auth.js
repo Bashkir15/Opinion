@@ -35,7 +35,7 @@ module.exports = {
 			bearerToken = bearer[1];
 			req.token = bearerToken;
 
-			User.findOne({token: req.token}).exec(function (err, user) {
+			User.findOne({token: req.token}).populate('following').exec(function (err, user) {
 				if (user) {
 					req.user = user;
 				}

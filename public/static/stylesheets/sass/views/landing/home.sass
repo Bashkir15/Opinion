@@ -15,21 +15,23 @@
 			color: #dfe1df
 
 .home-page-toolbar
-	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
+	background: $darkest-blue !important
 	//box-shadow: 0 4px 16px 0 rgba(0,0,0,0.35)
 	height: 55px
 	min-height: 55px
 
 	.md-toolbar-tools
-		padding: 0
+		padding-left: 10px
 		padding-right: 15px
 
 	button
 		height: 55px
 
 		span
-			@include open
+			@include lato
 			color: #dfe1df
+			letter-spacing: 1px
+			font-size: 16px
 
 .home-page-order-threads
 	position: relative
@@ -38,30 +40,41 @@
 
 	i
 		transition: all .4s ease
-		color: #dfe1df
+		color: #9a9a9a
 		display: inline-block
 		position: absolute
 		right: 0
 		top: 19px
 
+	span
+		color: #9a9a9a !important
+		transition: all .4s ease
+
 	&:hover, &:active
-		background: darken($blue, 10%)
+		span
+			color: #fff !important
+
+		i
+			color: #fff
+
 
 	&.open
-		background: darken($blue, 10%)
+		span
+			color: #fff !important
 
 		i
 			transform: rotate(-180deg)
+			color: #fff
 
 
 .home-page-order-threads-dropdown
 	position: absolute
 	top: 55px
-	left: 0
+	left: 10px
 	transition: all .4s ease
 	height: 0
 	width: 180px
-	background: #fff
+	background: rgba(0,0,0,0.6)
 	text-align: center
 
 	&:not(.ng-hide)
@@ -69,7 +82,7 @@
 
 		li
 			height: 40px
-			border-bottom: 1px solid rgba(0,0,0,0.3)
+			border-bottom: 1px solid rgba(0,0,0,0.4)
 			transition: all .4s ease
 
 			&:last-child
@@ -80,12 +93,16 @@
 
 				span
 					opacity: 1
-					color: rgba(0,0,0,0.3)
-					@include open
+					color: #9a9a9a
+					@include lato
+					letter-spacing: 1px
 					visibility: visible
 
 			&:hover
-				background: rgba(0,0,0,0.35)
+				background: rgba(0,0,0,0.6)
+
+				span
+					color: #fff
 
 	li
 		button
@@ -97,7 +114,7 @@
 	height: 38px
 	width: 40px
 	margin-top: 2px
-	background: darken($darkest-green, 20%)
+	background: $accent-blue
 	position: relative
 	transition: all .4s ease
 
@@ -121,11 +138,10 @@
 	margin-top: 2px
 
 	label
-		@include open
-		font-weight: 400
+		@include lato
 		display: inline-block
 		position: absolute
-		left: 5px
+		left: 8px
 		top: 7px
 		color: #dfe1df
 		transition: all .4s ease
@@ -136,7 +152,7 @@
 	input
 		height: 38px
 		width: 180px
-		background: $grey
+		background: lighten($darkest-blue, 5%)
 		padding-left: 5px
 		@include lato
 		color: #dfe1df
@@ -161,67 +177,74 @@
 		md-list
 			md-list-item
 				width: 90%
+				border-radius: 4px
+				background: #d5d8dd
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
 				margin: 0 auto 15px auto
 				padding: 0
-				background: #212a33
 
 
 .home-threads-user
-	padding: 10px 0
+	padding-top: 8px
 
 	> img
 		height: 50px
 		width: 50px
-		border: 1px solid $accent-blue
 		border-radius: 50%
-		box-shadow: 0 4px 4px rgba(0,0,0,0.35)
-		margin-bottom: 8px
+		box-shadow: 0 4px 8px rgba(0,0,0,0.45)
+		margin-bottom: 10px
+		margin-top: 4px
 		display: inline-block
 		transition: all .4s ease
 
 		&:hover
-			transform: scale(1.1, 1.1)
+			transform: scale(1.2, 1.2)
 
 
 	p
 		@include lato
-		color: #dfe1df !important
+		font-size: 18px
+		color: #858f97 !important
+		margin-bottom: 4px
 
 .home-threads-content
-	padding: 10px 0
+	padding: 10px 0 0 10px
 	cursor: pointer
 	position: relative
 
 	p
 		@include open
-		color: #dfe1df !important
 		opacity: 1
-		transition: all .4s ease
+		transition: all .5s ease
+		color: rgba(0,0,0,0.45) !important
 
 	&:hover
+		> p
+			opacity: 0
+			transition: all .4s ease
+
 		.home-threads-content-overlay
 			opacity: 1
-			height: 100px
+			background-color: darken(#d5d8dd, 5%)
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35) inset
 
 .home-threads-content-overlay
-	background-image: -webkit-linear-gradient(bottom, $darkest-blue 0%, darken($darkest-blue, 10%) 100%)
 	position: absolute
 	top: 0
 	left: 0
 	bottom: 0
 	right: 0
 	opacity: 0
-	transition: all .4s ease
-	height: 0
+	transition: all 1s ease
+	height: 94px
 
 	p
 		@include lato
-		color: #fff
+		color: rgba(0,0,0,0.45)
 		padding-left: 10px
 		padding-top: 8px
 
 .home-threads-score
-	padding: 10px 0
 
 	span
 		@include open
@@ -235,10 +258,11 @@
 			color: $accent-red
 
 	i
-		color: #dfe1df
+		color: rgba(0,0,0,0.45)
 		transition: all .4s ease
 		outline: none
 		display: inline-block
+		font-size: 22px
 		cursor: pointer
 
 		&.upvoted
@@ -252,27 +276,23 @@
 
 
 .home-threads-toolbar
-	padding: 5px 10px
-	border-top: 1px solid #c19f66
 	height: 35px
-	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
+	border-top: 1px solid rgba(0,0,0,0.12)
+	padding: 0 10px
 
 	button
-		height: 25px
-		padding: 0
-		padding-right: 8px
+		i
+			color: rgba(0,0,0,0.35)
 
 		span
-			@include open
-			color: #dfe1df
+			color: rgba(0,0,0,0.45)
 
-		i
-			color: #9a9a9a
-			transition: all .4s ease
+.home-threads-saved
+	i
+		color: $accent-red !important
 
-		&.saved
-			i
-				color: $accent-red
+	&.ng-enter
+		@include slideInUp()
 
 
 

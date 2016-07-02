@@ -2,10 +2,11 @@
 	background: darken(#364351, 5%)
 
 .thread-content
-	background: #dfe1df
+	background: #d5d8dd
+
 .thread-title
 	padding-left: 10px
-	box-shadow: 0 2px 4px rgba(0,0,0,0.35)
+	box-shadow: 0 4px 4px rgba(0,0,0,0.45)
 	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
 	height: 40px
 	position: relative
@@ -13,16 +14,20 @@
 
 	p
 		@include open
-		color: #dfe1df
+		color: #d5d8dd
+		letter-spacing: 1px
+		text-shadow: 1px 1px rgba(0,0,0,0.3)
 
 	span
 		@include lato
-		color: #dfe1df
+		font-weight: 300
+		letter-spacing: 1px
+		color: #9a9a9a
 		padding-right: 10px
 
 .thread-content-stream
 	transition: all .4s ease
-	color: #dfe1df
+	color: #9a9a9a
 
 	&:hover
 		color: #fff
@@ -32,12 +37,15 @@
 
 .thread-content-user
 	padding-top: 10px
+	padding-bottom: 8px
+
 	> img
-		height: 40px
-		width: 40px
-		border: 1px solid rgba(0,0,0,0.5)
+		height: 55px
+		width: 55px
 		border-radius: 50%
+		margin-bottom: 8px
 		display: inline-block
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
 		transition: all .4s ease
 		cursor: pointer
 
@@ -46,14 +54,19 @@
 
 	p
 		@include lato
+		letter-spacing: 1px
+		font-weight: 300
+		color: rgba(0,0,0,0.45)
 
 .thread-content-content
-	border: 1px solid rgba(0,0,0,0.12)
+	border: 1px solid rgba(0,0,0,0.08)
 	border-radius: 5px
-	padding: 12px 0 0 10px
+	padding: 8px 0 0 10px
 
 	p
-		@include open
+		@include lato
+		font-weight: 300
+		letter-spacing: 1px
 		color: rgba(0,0,0,0.45)
 		word-wrap: break-word
 
@@ -61,6 +74,9 @@
 		i
 			transition: all .4s ease
 			outline: none
+			color: rgba(0,0,0,0.45)
+			display: inline-block
+			font-size: 22px
 
 			&.upvoted
 				color: $accent-green
@@ -68,8 +84,13 @@
 			&.downvoted
 				color: $accent-red
 
+			&:hover
+				trasnform: scale(1.3,1.3)
+
 		span
 			@include open
+			font-weight: 400
+			color: rgba(0,0,0,0.35)
 			transition: all .4s ease
 
 			&.positive
@@ -79,7 +100,7 @@
 				color: $accent-red
 
 .thread-content-toolbar
-	background: darken($darkest-green, 10%) !important
+	background: darken($darkest-blue, 5%) !important
 	height: 55px
 	min-height: 55px
 	
@@ -89,57 +110,67 @@
 
 		button
 			height: 55px
-			width: 150px
-			border-right: 1px solid darken($darkest-green, 20%)
+			width: 170px
+			border-right: 1px solid #888888
 			
 
 			&:hover
-				background: darken($darkest-green, 20%)
+				span
+					color: #fff
+
+				i
+					color: #fff
 
 			&.ng-enter
+				@include slideInUp()
 				
 
 			&:nth-of-type(1)
 				transition: all .4s ease
-			i
-				color: #dfe1df
 
-				&.saved
-					color: $accent-red
+				span
+					transition: all .4s ease
+
+			i
+				color: #9a9a9a
 
 			span
-				color: #dfe1df
-				@include open
-				text-shadow: 1px 1px rgba(0,0,0,0.35)
+				color: #9a9a9a
+				@include lato
+				letter-spacing: 1px
 				font-size: 14px
 
 .thread-mod-options
 	position: relative
 	transition: all .4s ease
-	width: 150px
+	width: 170px
 
 	i
 		transition: all .4s ease
-		color: #dfe1df
+		color: #9a9a9a
 		display: inline-block
 		position: absolute
 		right: 5px
 		top: 19px
 
+	span
+		transition: all .4s ease
 
 	&.open
-
+		span
+			color: #fff
 		i
+			color: #fff
 			transform: rotate(-180deg)
 
 .thread-mod-options-dropdown
 	position: absolute
 	top: 55px
-	left: 470px
+	left: 510px
 	transition: all .4s ease
 	height: 0
-	width: 150px
-	background: $grey
+	width: 169px
+	background: rgba(0,0,0,0.6)
 	text-align: center
 
 	&:not(.ng-hide)
@@ -155,16 +186,23 @@
 
 			button
 				height: 50px
-				width: 150px
+				width: 169px
 				border-right: none
 				transition: all .4s ease
 
 				span
 					opacity: 1
-					color: #dfe1df
+					color: #9a9a9a
 					@include lato
+					letter-spacing: 1px
 					transition: all .4s ease
 					text-shadow: none
+
+				&:hover
+					background: rgba(0,0,0,0.6)
+
+					span
+						color: #fff
 
 	li
 		button
@@ -179,28 +217,33 @@
 	transition: all .4s ease
 	width: 170px !important
 
+	span
+		transition: all .4s ease
+
 	i
 		transition: all .4s ease
-		color: #dfe1df
+		color: #9a9a9a
 		display: inline-block
 		position: absolute
 		right: 5px
 		top: 19px
 
 	&.open
+		span
+			color: #fff
 	
-
 		i
+			color: #fff
 			transform: rotate(-180deg)
 
 .thread-order-comments-dropdown
 	position: absolute
 	top: 55px
-	left: 300px
+	left: 340px
 	transition: all .4s ease
 	height: 0
-	width: 170px
-	background: $grey
+	width: 169px
+	background: rgba(0,0,0,0.6)
 	text-align: center
 
 	&:not(.ng-hide)
@@ -216,16 +259,22 @@
 
 			button
 				height: 50px
-				width: 170px
+				width: 169px
 				border-right: none
 				transition: all .4s ease
 
 				span
 					opacity: 1
-					color: #dfe1df
+					color: #9a9a9a
 					@include lato
 					transition: all .4s ease
 					text-shadow: none
+
+				&:hover
+					background: rgba(0,0,0,0.6)
+
+					span
+						color: #fff
 
 
 	li
@@ -239,7 +288,7 @@
 	height: 38px
 	width: 40px
 	margin-top: 2px
-	background: darken($darkest-green, 20%)
+	background: darken($accent-blue, 5%)
 	position: relative
 	transition: all .4s ease
 
@@ -263,13 +312,13 @@
 	margin-top: 2px
 
 	label
-		@include open
-		font-weight: 400
+		@include lato
+		font-weight: 300
 		display: inline-block
 		position: absolute
-		left: 5px
+		left: 7px
 		top: 7px
-		color: #dfe1df
+		color: #d5d8dd
 		transition: all .4s ease
 		opacity: 1
 		font-size: 16px
@@ -278,10 +327,10 @@
 	input
 		height: 38px
 		width: 180px
-		background: $grey
+		background: $darkest-blue
 		padding-left: 5px
 		@include lato
-		color: #dfe1df
+		color: #d5d8dd
 		transition: all .4s ease
 
 	&.has-focus
@@ -302,19 +351,22 @@
 		md-list
 			md-list-item
 				margin-left: 10px
-				margin-bottom: 10px
+				margin-bottom: 15px
+				border-radius: 5px
 				padding: 0
 				width: 85%
-				background: #212a33
+				background: #d5d8dd
 				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
 
 .thread-comments-user
+	padding-top: 10px
+	padding-bottom: 8px
 
 	> img
 		height: 40px
 		width: 40px
-		border: 1px solid #dfe1df
 		border-radius: 50%
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
 		margin: 6px 0
 		display: inline-block
 		transition: all .4s ease
@@ -324,22 +376,26 @@
 			transform: scale(1.1, 1.1)
 
 	p
-		@include open
-		color: #dfe1df !important
-		padding-bottom: 6px
+		@include lato
+		font-weight: 300
+		letter-spacing: 1px
+		color: rgba(0,0,0,0.35) !important
 
 .thread-comments-content
 	padding-top: 10px
 
 	p
 		@include lato
-		color: #dfe1df !important
+		letter-spacing: 1px
+		color: rgba(0,0,0,0.45) !important
 
 .thread-comments-score
 	i
-		color: #dfe1df
+		color: rgba(0,0,0,0.45)
 		transition: all .4s ease
 		outline: none
+		display: inline-block
+		font-size: 22px
 
 		&.upvoted
 			color: $accent-green
@@ -347,8 +403,11 @@
 		&.downvoted
 			color: $accent-red !important
 
+		&:hover
+			transform: scale(1.3,1.3)
+
 	span
-		color: #dfe1df
+		color: #rgba(0,0,0,0.45)
 		transition: all .4s ease
 
 		&.positive
@@ -359,25 +418,27 @@
 
 .thread-comments-toolbar
 	height: 35px
-	border-top: 1px solid $accent-orange
+	border-top: 1px solid rgba(0,0,0,0.12)
 	padding-left: 10px
-	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
 
 	button
 		height: 35px
 
 		i
 			font-size: 16px
+			color: rgba(0,0,0,0.35)
 
 		span
-			color: #dfe1df
+			color: rgba(0,0,0,0.35)
 
 .thread-comments-save-item
 	i
-		color: #dfe1df
+		color: rgba(0,0,0,0.35)
 
 	span
 		@include open
+		font-weight: 400
+		letter-spacing: 1px
 
 	&.ng-enter
 		@include slideInUp()
@@ -385,10 +446,12 @@
 .thread-comments-unsave-item
 
 	i
-		color: $accent-red
+		color: $accent-red !important
 
 	span
 		@include open
+		font-weight: 400
+		letter-spacing: 1px
 
 	&.ng-enter
 		@include slideInUp()
@@ -403,7 +466,7 @@
 
 	&:hover
 		span
-			color: #fff !important
+			color: $accent-blue !important
 
 .thread-comments-delete-comment
 	transition: all .4s ease
@@ -415,7 +478,7 @@
 
 	&:hover
 		span
-			color: #fff !important
+			color: $accent-warning !important
 
 .thread-comments-created
 	span
@@ -466,13 +529,13 @@
 		height: 40px
 		width: 140px
 		border-radius: 4px
-		border: 1px solid #9a9a9a
+		border: 2px solid lighten($darkest-blue, 10%)
 		position: relative
 		transition: all .4s ease
 
 		span
 			@include open
-			font-weight: 600
+			font-weight: 400
 			text-shadow: 1px 1px rgba(0,0,0,0.35)
 			color: #9a9a9a
 			transition: all .4s ease
@@ -481,12 +544,16 @@
 			position: absolute
 			top: 12px
 			right: 5px
-			color: #fff
+			color: #9a9a9a
+			transition: all .4s ease
 
 		&:hover
-			background: $accent-blue
+			background: lighten($darkest-blue, 10%)
 
 			span
+				color: #fff
+
+			i
 				color: #fff
 
 .thread-no-more-comments

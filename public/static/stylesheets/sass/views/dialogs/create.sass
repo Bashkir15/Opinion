@@ -1,31 +1,41 @@
+.create-dialog-container
+	background: #d5d8dd
+
 .create-dialog-header
 	height: 70px
-	padding: 0 10px
+	padding: 0 15px 0 25px
+	background: darken($darkest-blue, 5%)
 
 	h3
 		@include lato
-		color: rgba(0,0,0,0.4)
+		font-weight: 300
+		letter-spacing: 1px
+		color: #d5d8dd
+		line-height: 30px
 
 	button
 		outline: none
 
 		span
-			color: rgba(0,0,0,0.45)
+			color: #2f3547
 			display: inline-block
 			transition: all .4s ease
 
 		&:hover
 			span
 				transform: scale(1.4,1.4)
+				color: #fff
 
 .create-dialog-body
-	padding-top: 10px
+	padding-top: 40px
+	padding-bottom: 20px
 	width: 80%
 	margin: 0 auto
 
 .create-dialog-actions
 	padding-right: 10px
 	height: 60px
+	background: darken($darkest-blue, 5%)
 
 	button
 		height: 40px
@@ -38,17 +48,23 @@
 			@include lato
 			color: #dfe1df
 			text-shadow: 1px 1px rgba(0,0,0,0.25)
+			transition: all .4s ease
 
 .create-dialog-submit
-	background: $accent-green
+	background: darken($seafoam, 5%)
 	margin-right: 10px
+	border-bottom: 3px solid darken($seafoam, 15%)
 
 	&:hover
-		background: darken($accent-green, 10%)
+		background: darken($seafoam, 15%)
+
+		span
+			color: #fff
 
 .create-dialog-cancel
-	background: $accent-red
+	background: $accent-warning
+	border-bottom: 3px solid darken($accent-warning, 10%)
 
 	&:hover
-		background: darken($accent-red, 10%)
+		background: darken($accent-warning, 10%)
 

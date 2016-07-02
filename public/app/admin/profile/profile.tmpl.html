@@ -8,11 +8,15 @@
 		</div>
 
 		<div layout='row' layout-align='start center' class='profile-header-toolbar'>
-			<button aria-label='follow user button' ng-if="!vm.selfProfile" ng-click="vm.follow()">
+			<button aria-label='follow user button' ng-if="!vm.selfProfile && !vm.alreadyFollowing" ng-click="vm.follow()">
 				<span>Follow</span>
 			</button>
 
-			<button>
+			<button aria-label='unfollow user button' ng-if="!vm.selfProfile && vm.alreadyFollowing" ng-click="vm.unfollow()">
+				<span>Unfollow</span>
+			</button>
+
+			<button aria-label='message user button' ng-if="!vm.selfProfile">
 				<span>Message</span>
 			</button>
 

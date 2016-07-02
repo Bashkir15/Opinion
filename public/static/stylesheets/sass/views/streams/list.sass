@@ -1,5 +1,6 @@
 .streams-list-header
 	padding: 25px 0
+	background-image: -webkit-linear-gradient(bottom, darken($blue, 10%) 0%, darken($blue, 20%) 100%)
 
 
 	> div
@@ -15,7 +16,7 @@
 			color: #dfe1df
 
 .streams-list-toolbar
-	background: darken($darkest-green, 10%) !important
+	background: darken($darkest-blue, 5%) !important
 	height: 55px !important
 	min-height: 55px !important
 
@@ -25,40 +26,106 @@
 
 .streams-list-create-button
 	height: 55px
-	width: 150px
-	border-right: 1px solid darken($darkest-green, 15%)
+	width: 195px
+	border-right: 1px solid #9a9a9a
 	transition: all .4s ease
 
 	span
 		@include lato
-		color: #dfe1df
+		letter-spacing: 1px
+		color: #9a9a9a
+		transition: all .4s ease
 
 	&:hover
-		background: darken($darkest-green, 15%)
+		span
+			color: #fff
 
 .streams-list-order-streams
 	height: 55px
-	width: 180px
-	border-right: 1px solid darken($darkest-green, 15%)
+	width: 195px
+	border-right: 1px solid #9a9a9a
 	position: relative
 	transition: all .4s ease
 
 	span
 		@include lato
-		color: #dfe1df
+		letter-spacing: 1px
+		color: #9a9a9a
+		transition: all .4s ease
 
 	i
-		color: #dfe1df
+		color: #9a9a9a
 		position: absolute
 		top: 19px
+		right: 5px
+		transition: all .4s ease
 
 	&:hover
-		background: darken($darkest-green, 15%)
+		span
+			color: #fff
+
+		i
+			color: #fff
+
+	&.open
+		span
+			color: #fff
+
+		i
+			color: #fff
+
+.streams-list-order-streams-dropdown
+	position: absolute
+	top: 55px
+	left: 195px
+	transition: all .4s ease
+	height: 0
+	width: 194px
+	background: rgba(0,0,0,0.6)
+	text-align: center
+
+	&:not(.ng-hide)
+		height: 150px
+
+		li
+			height: 50px
+			border-bottom: 1px solid rgba(0,0,0,0.3)
+			transition: all .4s ease
+
+			&:last-child
+				border-bottom: none
+
+			button
+				height: 50px
+				width: 194px
+				border-right: none
+				transition: all .4s ease
+
+				span
+					opacity: 1
+					color: #9a9a9a
+					@include lato
+					transition: all .4s ease
+					text-shadow: none
+
+				&:hover
+					background: rgba(0,0,0,0.6)
+
+					span
+						color: #fff
+
+
+	li
+		button
+			border-right: none !important
+
+			span
+				opacity: 0
 
 .streams-list-search-icon
 	height: 40px
 	width: 40px
-	background: darken($darkest-green, 15%)
+	background: darken($accent-blue, 5%)
 	position: relative
 	transition: all .4s ease
 
@@ -98,7 +165,7 @@
 	input
 		height: 40px
 		width: 180px
-		background: $grey
+		background: $darkest-blue
 		padding-left: 5px
 		@include lato
 		color: #dfe1df
@@ -123,10 +190,11 @@
 		md-list
 			md-list-item
 				margin-left: 10px
-				margin-bottom: 10px
+				margin-bottom: 15px
 				width: 75%
 				padding: 0
-				background: #212a33
+				border-radius: 4px
+				background: #d5d8dd
 				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
 
 .streams-list-image
@@ -140,31 +208,31 @@
 		margin: 6px 0 10px 0
 		display: inline-block
 		cursor: pointer
-		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4)
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
 		transition: all .4s ease
 
 		&.subscribed
-			border: 1px solid darken($darkest-green, 10%)
+			border: 2px solid $accent-green
 
 		&:hover
 			transform: scale(1.2,1.2)
 
 	button
 		height: 25px
-		width: 100px
+		width: 120px
 		border-radius: 3px
 
 		&.stream-subscribed
-			border: 1px solid $accent-red
+			border: 1px solid #9f443a
 
 			&:hover
 				background: $accent-red
 
 		&.stream-unsubscribed
-			border: 1px solid darken($darkest-green, 10%)
+			border: 1px solid $accent-green
 
 			&:hover
-				background: darken($darkest-green, 10%)
+				background: darken($accent-green, 10%)
 
 		&.ng-enter
 			@include slideInUp()
@@ -173,8 +241,8 @@
 
 		span
 			@include lato
-			color: #fff
-			text-shadow: 1px 1px rgba(0,0,0,0.5)
+			color: rgba(0,0,0,0.4)
+			letter-spacing: 1px
 
 
 
@@ -186,40 +254,39 @@
 		height: 30px
 
 		h4
-			@include mont
-			color: #dfe1df !important
-			text-shadow: 2px 2px rgba(0,0,0,0.55)
+			@include open
+			font-weight: 400
+			letter-spacing: 1px
+			color: rgba(0,0,0,0.35) !important
 
 		> div
 			width: 80px
-			border-bottom: 1px solid #dfe1df
+			border-bottom: 1px solid #9a9a9a
 
 	p
 		@include lato
-		color: #dfe1df !important
-		text-shadow: 1px 1px rgba(0,0,0,0.6)
+		color: rgba(0,0,0,0.5) !important
 
 .streams-list-item-toolbar
 	height: 35px
-	border-top: 1px solid #c19f66
+	border-top: 1px solid rgba(0,0,0,0.12)
 	padding: 0 10px
 
 	button
 		i
-			color: #dfe1df
+			color: rgba(0,0,0,0.35)
 			transition: all .4s ease
 
 
 		span
 			@include open
-			color: #dfe1df
-			text-shadow: 1px 1px rgba(0,0,0,0.5)
+			color: rgba(0,0,0,0.35)
 
 		&:nth-of-type(3)
 			span
 				color: #9a9a9a
 				@include lato
-				font-weight: 100
+				font-weight: 300
 
 .streams-list-no-streams
 	padding-top: 35px

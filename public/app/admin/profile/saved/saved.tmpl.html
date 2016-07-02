@@ -2,14 +2,14 @@
 	<div class='profile-saved-body' layout='row'>
 		<div class='profile-saved-threads'>
 			<div>
-				<div class='profile-saved-threads-header' layout='row' layout-align='none center'>
-					<h4>Threads</h4>
+				<div class='profile-saved-header' layout='row' layout-align='none center'>
+					<h3>Threads</h3>
 					<span flex></span>
-					<div class='profile-saved-threads-search-icon' ng-class="{'is-searching': vm.threadsSearch.hasFocus}" layout='column' layout-align='center center'>
+					<div class='profile-saved-search-icon' ng-class="{'is-searching': vm.threadsSearch.hasFocus}" layout='column' layout-align='center center'>
 						<i class='icon-search'></i>
 					</div>
-					<div class='profile-saved-threads-search' ng-class="{'has-focus': vm.threadsSearch.hasFocus}">
-						<label for="savedThreadsSearch">Search</label>
+					<div class='profile-saved-search' ng-class="{'has-focus': vm.threadsSearch.hasFocus}">
+						<label for="savedThreadsSearch">Search . . .</label>
 						<input name='search' id='savedThreadsSearch' ng-model='vm.threadsFilter' ng-focus="vm.threadsSearch.hasFocus=true" ng-blur="vm.threadsSearch.hasFocus=false">
 					</div>
 				</div>
@@ -17,51 +17,51 @@
 					<md-list-item ng-repeat='thread in vm.threads'>
 						<div class='md-list-item-text'>
 							<div layout='row'>
-								<div layout='column' flex='15' layout-align='center center' class='profile-threads-user profile-saved-user'>
+								<div layout='column' flex='15' layout-align='center center' class='profile-saved-user'>
 									<img src="{{thread.creator.picture}}" ui-sref="profile.overview({userId: thread.creator._id})">
 									<p>{{thread.creator.name}}</p>
 								</div>
 
-								<div layout='column' flex class='profile-threads-title profile-saved-title' ui-sref="streams.thread({streamId: thread.stream._id, threadId: thread._id})">
+								<div layout='column' flex class='profile-saved-title' ui-sref="streams.thread({streamId: thread.stream._id, threadId: thread._id})">
 									<p>{{thread.title}}</p>
-									<div class='profile-threads-title-overlay profile-saved-title-overlay'>
+									<div class='profile-saved-title-overlay'>
 										<p>{{thread.content}}</p>
 									</div>
 								</div>
 
-								<div layout='column' flex='10' layout-align='center center' class='profile-threads-score-container'>
+								<div layout='column' flex='10' layout-align='center center' class='profile-saved-score-container'>
 									<i class='icon-expand_less' ng-class="{'upvoted': thread.upvoted}"></i>
 									<span ng-class="{'positive': thread.score >= 1, 'negative': thread.score <= -1}">{{thread.score}}</span>
 									<i class='icon-expand_more' ng-class="{'downvoted': thread.downvoted}"></i>
 								</div>
 							</div>
 
-							<div layout='row' layout-align='none center' class='profile-threads-thread-toolbar profile-saved-toolbar'>
-								<button>
+							<div layout='row' layout-align='none center' class='profile-saved-toolbar'>
+								<button class='profile-saved-toolbar-item'>
 									<i class='icon-bubble'></i>
 									<span>{{thread.comments.length}} Comment<span ng-if="thread.comments.length > 1 || thread.comments.length == 0">s</span></span>
 								</button>
 
-								<button>
+								<button class='profile-saved-toolbar-item'>
 									<i class='icon-favorite_border'></i>
 									<span>{{thread.saves.length}} Save<span ng-if="thread.saves.length > 1 || thread.saves.length == 0">s</span></span>
 								</button>
 
 								<span flex></span>
 
-								<button>
-									<span>{{thread.created}}</span>
+								<button class='profile-saved-created'>
+									<span>{{thread.created | opCalendar}}</span>
 								</button>
 							</div>
 						</div>
 					</md-list-item>
 				</md-list>
 
-				<div class='profile-saved-no-threads' ng-if="!vm.threads.length && !vm.threadsFilter">
+				<div class='profile-saved-no-threads' ng-if="!vm.threads.length && !vm.threadsFilter" layout='column' layout-align='center none'>
 					<p>{{profile.name}} has not saved any threads</p>
 				</div>
 
-				<div class='profile-saved-search-text' ng-if="!vm.threads.length && vm.threadsFilter">
+				<div class='profile-saved-search-text' ng-if="!vm.threads.length && vm.threadsFilter" layout='column' layout-align='center none'>
 					<p>Unraveling the threads <span>. . .</span></p>
 				</div>
 
@@ -80,13 +80,13 @@
 
 		<div class='profile-saved-comments'>
 			<div>
-				<div class='profile-saved-comments-header' layout='row' layout-align='none center'>
-					<h4>Comments</h4>
+				<div class='profile-saved-header' layout='row' layout-align='none center'>
+					<h3>Comments</h3>
 					<span flex></span>
-					<div class='profile-saved-comments-search-icon' ng-class="{'is-searching': vm.commentsSearch.hasFocus}" layout='column' layout-align='center center'>
+					<div class='profile-saved-search-icon' ng-class="{'is-searching': vm.commentsSearch.hasFocus}" layout='column' layout-align='center center'>
 						<i class='icon-search'></i>
 					</div>
-					<div class='profile-saved-comments-search' ng-class="{'has-focus': vm.commentsSearch.hasFocus}">
+					<div class='profile-saved-search' ng-class="{'has-focus': vm.commentsSearch.hasFocus}">
 						<label for="savedCommentsSearch">Search</label>
 						<input name='search' id='savedCommentsSearch' ng-model='vm.commentsFilter' ng-focus="vm.commentsSearch.hasFocus=true" ng-blur="vm.commentsSearch.hasFocus=false">
 					</div>
@@ -95,7 +95,7 @@
 					<md-list-item ng-repeat='comment in vm.comments'>
 						<div class='md-list-item-text'>
 							<div layout='row'>
-								<div layout='column' flex='15' layout-align='center center' class='profile-comments-user profile-saved-user'>
+								<div layout='column' flex='15' layout-align='center center' class='profile-saved-user'>
 									<img src='{{comment.creator.picture}}' ui-sref="profile.overview({userId: comment.creator._id})">
 									<p>{{comment.creator.name}}</p>
 								</div>
@@ -104,24 +104,24 @@
 									<p>{{comment.content}}</p>
 								</div>
 
-								<div layout='column' flex='10' layout-align='center center' class='profile-comments-score-container'>
+								<div layout='column' flex='10' layout-align='center center' class='profile-saved-score-container'>
 									<i class='icon-expand_less' ng-class="{'upvoted': comment.upvoted}"></i>
 									<span ng-class="{'positive': comment.score >= 1, 'negative': comment.score <= -1}">{{comment.score}}</span>
 									<i class='icon-expand_more' ng-class="{'downvoted': comment.downvoted}"></i>
 								</div>
 							</div>
 
-							<div layout='row' layout-align='none center' class='profile-comments-comment-toolbar profile-saved-toolbar'>
+							<div layout='row' layout-align='none center' class='profile-saved-toolbar'>
 
-								<button>
+								<button class='profile-saved-toolbar-item'>
 									<i class='icon-favorite_border'></i>
 									<span>{{comment.saves.length}} Save<span ng-if="comment.saves.length > 1 || comment.saves.length == 0">s</span></span>
 								</button>
 
 								<span flex></span>
 
-								<button>
-									<span>{{comment.created}}</span>
+								<button class='profile-saved-created'>
+									<span>{{comment.created | opCalendar}}</span>
 								</button>
 							</div>
 						</div>

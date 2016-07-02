@@ -54,7 +54,7 @@
 		<div class='streams-list-body' layout='column'>
 			<div>
 				<md-list>
-					<md-list-item class='md-2-line' ng-repeat='item in vm.streams'>
+					<md-list-item class='md-2-line' ng-repeat='item in vm.streams | orderBy: vm.rowFilter'>
 						<div class='md-list-item-text'>
 							<div layout='row'>
 								<div layout='column' flex='15' layout-align='center center' class='streams-list-image'>
@@ -109,7 +109,7 @@
 				<p>Parsing the streams now <span>. . .</span></p>
 			</div>
 
-			<div class='streams-list-load-more' ng-if="!vm.noMoreStreams && !vm.streamsFilter" layout='row' layout-align='end center'>
+		<!--	<div class='streams-list-load-more' ng-if="!vm.noMoreStreams && !vm.streamsFilter" layout='row' layout-align='end center'>
 				<button aria-label='load more streams' ng-click="vm.loadMore()">
 					<span>Load More</span>
 					<i class='icon-expand_more'></i>
@@ -119,6 +119,6 @@
 			<div class='streams-list-no-more-streams' ng-if="vm.noMoreStreams && vm.streamPage >= 1" layout='row' layout-align='center center'>
 				<p>There are no more streams to load</p>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>

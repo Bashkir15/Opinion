@@ -16,22 +16,26 @@
 			border-radius: 50%
 			margin-bottom: 8px
 			margin-top: 15px
-			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4)
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
 
 		p
 			margin: 0
 
 			&:nth-of-type(1)
 				@include mont
+				letter-spacing: 1px
 				margin-bottom: 8px
 
 			&:nth-of-type(2)
 				@include lato
+				color: #9a9a9a
+				letter-spacing: 1px
 
 .stream-single-toolbar
-	background: darken($darkest-green, 10%) !important
+	background: darken($darkest-blue, 5%) !important
 	height: 55px
 	min-height: 55px
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
 
 	> div
 		padding-left: 0
@@ -39,18 +43,21 @@
 		button
 			height: 55px
 			width: 150px
-			border-right: 1px solid darken($darkest-green, 20%)
+			border-right: 1px solid rgba(0,0,0,0.35)
 			padding-right: 10px
 			transition: all .4s ease
 
-			&:hover
-				background: darken($darkest-green, 20%)
-
 			span
-				@include open
-				color: #dfe1df
-				text-shadow: 1px 1px rgba(0,0,0,0.35)
+				@include lato
+				letter-spacing: 1px
+				color: #9a9a9a
 				font-size: 14px
+				transition: all .4s ease
+
+			&:hover
+				span
+					color: #fff
+
 .stream-single-mod-options
 	position: relative
 	transition: all .4s ease
@@ -66,9 +73,12 @@
 
 
 	&.open
+		span
+			color: #fff
 
 		i
 			transform: rotate(-180deg)
+			color: #fff
 
 .stream-single-mod-options-dropdown
 	position: absolute
@@ -77,7 +87,7 @@
 	transition: all .4s ease
 	height: 0
 	width: 150px
-	background: $grey
+	background: rgba(0,0,0,0.6)
 	text-align: center
 
 	&:not(.ng-hide)
@@ -99,10 +109,15 @@
 
 				span
 					opacity: 1
-					color: #dfe1df
+					color: #9a9a9a
 					@include lato
+					letter-spacing: 1px
 					transition: all .4s ease
 					text-shadow: none
+
+				&:hover
+					span
+						color: #fff
 
 	li
 		button
@@ -119,17 +134,22 @@
 
 	i
 		transition: all .4s ease
-		color: #dfe1df
+		color: #9a9a9a
 		display: inline-block
 		position: absolute
 		right: 5px
 		top: 19px
 
-	&.open
-	
+	&:hover
+		i
+			color: #fff
 
+	&.open
+		span
+			color: #fff
 		i
 			transform: rotate(-180deg)
+			color: #fff
 
 .stream-single-order-threads-dropdown
 	position: absolute
@@ -138,7 +158,7 @@
 	transition: all .4s ease
 	height: 0
 	width: 150px
-	background: $grey
+	background: rgba(0,0,0,0.6)
 	text-align: center
 
 	&:not(.ng-hide)
@@ -160,10 +180,18 @@
 
 				span
 					opacity: 1
-					color: #dfe1df
+					color: #9a9a9a
 					@include lato
+					letter-spacing: 1px
 					transition: all .4s ease
 					text-shadow: none
+
+				&:hover
+					background: rgba(0,0,0,0.6)
+
+					span
+						color: #fff
+
 
 
 	li
@@ -172,13 +200,12 @@
 
 			span
 				opacity: 0
-				transition: all .4s ease
 
 .stream-single-search-icon
 	height: 38px
 	width: 40px
 	margin-top: 2px
-	background: darken($darkest-green, 20%)
+	background: darken($accent-blue, 5%)
 	position: relative
 	transition: all .4s ease
 
@@ -202,8 +229,8 @@
 	margin-top: 2px
 
 	label
-		@include open
-		font-weight: 400
+		@include lato
+		font-weight: 300
 		display: inline-block
 		position: absolute
 		left: 5px
@@ -217,7 +244,7 @@
 	input
 		height: 38px
 		width: 180px
-		background: $grey
+		background: $darkest-blue
 		padding-left: 5px
 		@include lato
 		color: #dfe1df
@@ -237,19 +264,21 @@
 .stream-single-list
 	md-list-item
 		margin-left: 10px
-		margin-bottom: 10px
+		margin-bottom: 15px
+		border-radius: 5px
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
 		width: 75%
 		padding: 0
-		background: #212a33
+		background: #d5d8dd
 
 .stream-single-user
 	img
 		height: 40px
 		width: 40px
-		border: 1px solid #dfe1df
 		border-radius: 50%
 		margin: 6px 0
 		display: inline-block
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
 		transition: all .4s ease
 
 		&:hover
@@ -257,7 +286,8 @@
 
 	p
 		@include lato
-		color: #dfe1df !important
+		letter-spacing: 1px
+		color: rgba(0,0,0,0.35) !important
 
 
 
@@ -269,35 +299,47 @@
 
 	> p
 		opacity: 1
-		transition: all .4s ease-out
-		color: #dfe1df !important
+		@include lato
+		letter-spacing: 1px
+		transition: all .5s ease-out
+		color: rgba(0,0,0,0.45) !important
 
 	&:hover
+		> p
+			opacity: 0
+			transition: all .5s ease
+
 		.stream-single-title-overlay
 			opacity: 1
-			height: 70px
+			background-color: darken(#d5d8dd, 5%)
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35) inset
 
 .stream-single-title-overlay
-	background-color: $darkest-blue
 	position: absolute
 	top: 0
 	left: 0
 	opacity: 0
-	transition: all .4s ease
+	transition: all 1s ease
 	width: 100%
-	height: 0
+	height: 74px
 
 	p
 		@include lato
-		color: #fff !important
+		color: rgba(0,0,0,0.45) !important
 		padding-left: 10px
 		padding-top: 8px
 
 .stream-single-score-container
 	i
-		color: #dfe1df
+		color: rgba(0,0,0,0.45)
 		transition: all .4s ease
 		outline: none
+		display: inline-block
+		font-size: 22px
+		cursor: pointer
+
+		&:hover
+			transform: scale(1.3, 1.3)
 
 		&.upvoted
 			color: $accent-green
@@ -307,7 +349,7 @@
 
 	p
 		@include lato
-		color: #dfe1df !important
+		color: rgba(0,0,0,0.45) !important
 
 		&.positive
 			color: $accent-green !important
@@ -317,42 +359,40 @@
 
 .stream-single-item-toolbar
 	height: 35px
-	border-top: 1px solid #c19f66
+	border-top: 1px solid rgba(0,0,0,0.35)
 	padding-left: 10px
-	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
 
 	button
 		height: 35px
 
 		i
 			font-size: 16px
+			color: rgba(0,0,0,0.35)
 
 		span
-			color: #dfe1df
+			color: rgba(0,0,0,0.35)
 
-		&:nth-of-type(1)
-			i
-				color: #dfe1df
-
-			span
-				@include open
 
 .stream-single-item-save
 	i
-		color: #dfe1df
+		color: rgba(0,0,0,0.35)
 
 	span
-		@include open
+		@include lato
+		letter-spacing: 1px
+		color: rgba(0,0,0,0.35)
 
 	&.ng-enter
 		@include slideInUp()
 
 .stream-single-item-unsave
 	i
-		color: $accent-red
+		color: $accent-red !important
 
 	span
-		@include open
+		@include lato
+		letter-spacing: 1px
+		color: rgba(0,0,0,0.35)
 
 	&.ng-enter
 		@include slideInUp()
@@ -360,7 +400,8 @@
 .stream-single-item-created
 	span
 		@include lato
-		color: #888888 !important
+		color: #9a9a9a !important
+		letter-spacing: 1px
 										
 
 .stream-single-no-threads
@@ -407,27 +448,31 @@
 		height: 40px
 		width: 140px
 		border-radius: 4px
-		border: 1px solid #9a9a9a
+		border: 2px solid lighten($darkest-blue, 10%)
 		position: relative
 		transition: all .4s ease
 
 		span
 			@include open
-			font-weight: 600
+			font-weight: 400
 			text-shadow: 1px 1px rgba(0,0,0,0.35)
 			color: #9a9a9a
 			transition: all .4s ease
 
 		i
 			position: absolute
-			top: 12px
+			top: 11px
 			right: 5px
-			color: #fff
+			color: #9a9a9a
+			transition: all .4s ease
 
 		&:hover
-			background: $accent-blue
+			background: lighten($darkest-blue, 10%)
 
 			span
+				color: #fff
+
+			i
 				color: #fff
 
 .stream-single-no-more-threads

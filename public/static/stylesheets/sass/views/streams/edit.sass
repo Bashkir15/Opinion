@@ -1,17 +1,22 @@
 .edit-page-card
 	margin-top: 75px
 	border-radius: 5px
+	background: #d5d8dd
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
 
 .edit-page-header
 	height: 70px
+	background: $darkest-blue
 
 	h3
 		@include lato
-		color: rgba(0,0,0,0.45)
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 30px
+		color: #d5d8dd
 
 .edit-page-body
-	padding-top: 10px
+	padding-top: 30px
 	width: 80%
 	margin: 0 auto
 
@@ -60,20 +65,20 @@
 			opacity: 0
 
 		input
-			background: #d2d9dd
+			background: darken($input-grey, 5%)
 
 		textarea
-			background: #d2d9dd
+			background: darken($input-grey, 5%)
 
 	&.has-success
 		label
 			opacity: 0
 
 		input
-			background: #d2d9dd
+			background: darken($input-grey, 5%)
 
 		textarea
-			background: #d2d9dd
+			background: darken($input-grey, 5%)
 
 	&.has-error
 		label
@@ -116,14 +121,19 @@
 		width: 120px
 		transition: all .4s ease
 		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.45)
+		background: $seafoam
+		border-radius: 5px
+		border-bottom: 3px solid darken($seafoam, 10%)
 
 		span
-			@include lato
-			color: rgba(0,0,0,0.4)
+			@include open
+			letter-spacing: 1px
+			font-weight: 400
+			color: #d5d8dd
 			transition: all .4s ease
 
 		&:hover
-			background: $accent-green
+			background: darken($seafoam, 10%)
 
 			span
 				color: #fff

@@ -66,15 +66,21 @@
 	<span flex></span>
 
 	<div layout='column' flex='30'>
-		<md-card class='overview-score' layout='row'>
-			<div layout='column' layout-align='center center' flex='50'>
-				<p>{{profile.threadScore}}</p>
-				<span><i class='icon-checkmark'></i>Thread Score</span>
+		<md-card class='overview-score-container' layout='column'>
+			<div layout='row' layout-align='center center' class='overview-score-header'>
+				<h3>Score</h3>
 			</div>
 
-			<div layout='column' layout-align='center center' flex='50'>
-				<p>{{profile.commentScore}}</p>
-				<span><i class='icon-checkmark2'></i>Comment Score</span>
+			<div layout='row' class='overview-score'>
+				<div layout='column' layout-align='center center' flex='50' class='overview-thread-score'>
+					<p>{{profile.threadScore}}</p>
+					<span><i class='icon-checkmark' ng-class="{'positive': profile.threadScore >= 1, 'negative': profile.threadScore <= -1}"></i>Thread Score</span>
+				</div>
+
+				<div layout='column' layout-align='center center' flex='50' class='overview-comment-score'>
+					<p>{{profile.commentScore}}</p>
+					<span><i class='icon-checkmark2' ng-class="{'positive': profile.commentScore >= 1, 'negative': profile.commentScore <= -1}"></i>Comment Score</span>
+				</div>
 			</div>
 		</md-card>
 
@@ -82,7 +88,7 @@
 			<div class='overview-friends-header' layout='row' layout-align='none center'>
 				<p>{{profile.following.length}} Friend<span ng-if="profile.following.length > 1 || profile.following.length == 0">s</span></p>
 				<span flex></span>
-				<button>
+				<button aria-label='open user search dialog' ng-click="vm.openUserSearch()">
 					<span>Find Friends</span>
 				</button>
 			</div>
@@ -101,11 +107,11 @@
 				</div>
 			</div>
 
-			<div class='overview-friends-footer' layout='row' layout-align='end center'>
+			<!-- <div class='overview-friends-footer' layout='row' layout-align='end center'>
 				<button aria-label='view all friends button'>
 					<span>View All Friends</span>
 				</button>
-			</div>
+			</div> -->
 		</md-card>
 	</div>
 </div>

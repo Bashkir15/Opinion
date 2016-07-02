@@ -1,12 +1,14 @@
-<md-dialog flex='60'>
+<md-dialog flex='60' class='search-dialog-container'>
 	<md-dialog-content layout='column'>
-		<div class='users-search-header' layout='row' layout-align='none center'>
+		<div class='search-dialog-header' layout='row' layout-align='none center'>
 			<h3>Find Users</h3>
 			<span flex></span>
-			<span ng-click="close()">x</span>
+			<button aria-label='close user search dialog' ng-click="close()">
+				<span>x</span>
+			</button>
 		</div>
 
-		<div class='users-search-body'>
+		<div class='search-dialog-body'>
 			<md-autocomplete
 				md-search-text="search"
 				md-items="item in doSearch(search)"

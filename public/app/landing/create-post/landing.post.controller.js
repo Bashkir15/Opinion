@@ -17,7 +17,7 @@
 		};
 
 		function getStreams() {
-			var streamsData = appStreams.single.get({}, function() {
+			var streamsData = appStreams.list.get({}, function() {
 				vm.streamList = streamsData.res.records;
 			});
 		}

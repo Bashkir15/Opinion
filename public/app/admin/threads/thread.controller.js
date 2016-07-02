@@ -48,7 +48,6 @@
 			var threadData = appThreads.single.get({threadId: threadId}, function() {
 				vm.threads = [threadData.res.record];
 				vm.isMod = threadData.res.isMod;
-				threadName = vm.threads[2];
 			});
 		}
 

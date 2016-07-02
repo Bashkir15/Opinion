@@ -1,0 +1,46 @@
+.search-dialog-container
+
+.search-dialog-header
+	height: 60px
+	padding: 0 15px
+	background: $darkest-blue
+
+	h3
+		@include lato
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 30px
+		color: #d5d8dd
+
+	button
+		span
+			font-size: 20px
+			display: inline-block
+			color: lighten($darkest-blue, 10%)
+			display: inline-block
+			transition: all .4s ease
+
+		&:hover
+			span
+				color: #d5d8dd
+				transform: scale(1.4,1.4)
+
+.search-dialog-body
+	width: 75%
+	margin: 0 auto
+	padding-top: 20px
+
+	md-autocomplete
+		md-autocomplete-wrap
+			md-input-container
+				label
+					@include lato
+					font-weight: 300
+					letter-spacing: 1px
+
+				&.md-input-focused
+					label
+						color: $accent-blue
+
+					input
+						border-color: $accent-blue !important

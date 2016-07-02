@@ -116,7 +116,7 @@
 								<span>{{thread.comments.length}} Comment<span ng-if="thread.comments.length > 1 || thread.comments.length === 0">s</span></span>
 							</button>
 
-							<button ng-if="thread.saved" ng-click="vm.unsave(thread)" class='saved'>
+							<button ng-if="thread.saved" ng-click="vm.unsave(thread)" class='home-threads-saved'>
 								<i class='icon-favorite_border'></i>
 								<span>{{thread.saves.length}} Save<span ng-if="thread.saves.length > 1 || thread.saves.length === 0">s</span></span>
 							</button>
@@ -132,7 +132,7 @@
 								<span class='home-threads-stream'>In {{thread.stream.name}}</span>
 							</button>
 							<button>
-								<span class='home-threads-created'>{{thread.created}}</span>
+								<span class='home-threads-created'>{{thread.created | opCalendar}}</span>
 							</button>
 						</div>
 					</div>

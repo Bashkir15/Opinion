@@ -1,29 +1,40 @@
-<md-dialog flex='70'>
+<md-dialog flex='70' class='update-profile-dialog-container'>
 	<md-dialog-content layout='column' class='update-profile-dialog'>
 		<div class='update-profile-header' layout='row' layout-align='none center'>
 			<h3>Update Profile</h3>
 			<span flex></span>
-			<span ng-click="close()">x</span>
+			<button aria-label='close update profile dialog' ng-click="close()">
+				<span>x</span>
+			</button>
 		</div>
 
 		<div class='update-profile-body' layout='column'>
 			<form name='updateProfileForm' novalidate class='update-profile-form'>
-				<div class='update-profile-line-1'>
-					<div class='update-profile-wrapper'>
+				<div class='update-profile-line-1' layout='row' layout-align='none center'>
+					<div class='update-profile-wrapper' ng-class="{'has-focus': updateProfileForm.gender.hasFocus,
+					'has-success': updateProfileForm.gender.$valid && updateProfileForm.gender.$touched,
+					'has-error': updateProfileForm.gender.$error && updateProfileForm.gender.$touched}">
 						<label>Gender</label>
-						<input type='text' name='gender' ng-model='gender'>
+						<input type='text' name='gender' ng-model='gender' ng-focus="updateProfileForm.gender.hasFocus=true" ng-blur="updateProfileForm.gender.hasFocus=false">
+						<i class='icon-checkmark update-profile-success-check' ng-if="updateProfileForm.gender.$valid && updateProfileForm.gender.$touched"></i>
 					</div>
 
-					<div class='update-profile-wrapper'>
+					<div class='update-profile-wrapper' ng-class="{'has-focus': updateProfileForm.occupation.hasFocus,
+					'has-success': updateProfileForm.occupation.$valid && updateProfileForm.occupation.$touched,
+					'has-error': updateProfileForm.occupation.$error && updateProfileForm.occupation.$touched}">
 						<label>Occupation</label>
-						<input type='text' name='occupation' ng-model='occupation'>
+						<input type='text' name='occupation' ng-model='occupation' ng-focus="updateProfileForm.occupation.hasFocus=true" ng-blur="updateProfileForm.occupation.hasFocus=false">
+						<i class='icon-checkmark update-profile-success-check' ng-if="updateProfileForm.occupation.$valid && updateProfileForm.occupation.$touched"></i>
 					</div>
 				</div>
 
-				<div class='update-profile-line-2'>
-					<div class='update-profile-wrapper'>
+				<div class='update-profile-line-2' layout='row' layout-align='none center'>
+					<div class='update-profile-wrapper' ng-class="{'has-focus': updateProfileForm.phone.hasFocus,
+					'has-success': updateProfileForm.phone.$valid && updateProfileForm.phone.$touched,
+					'has-error': updateProfileForm.phone.$error && updateProfileForm.phone.$touched}">
 						<label>Phone</label>
-						<input type='text' name='phone' ng-model='phone'>
+						<input type='text' name='phone' ng-model='phone' ng-focus="updateProfileForm.phone.hasFocus=true" ng-blur="updateProfileForm.phone.hasFocus=false">
+						<i class='icon-checkmark update-profile-success-check' ng-if="updateProfileForm.phone.$valid && updateProfileForm.phone.$touched"></i>
 					</div>
 
 					<div class='update-profile-wrapper'>
@@ -32,29 +43,35 @@
 					</div>
 				</div>
 
-				<div class='update-profile-line-3'>
-					<div class='update-profile-wrapper'>
+				<div class='update-profile-line-3' layout='row' layout-align='none center'>
+					<div class='update-profile-full-wrapper' ng-class="{'has-focus': updateProfileForm.interests.hasFocus,
+					'has-success': updateProfileForm.interests.$valid && updateProfileForm.interests.$touched,
+					'has-error': updateProfileForm.interests.$error && updateProfileForm.interests.$touched}">
 						<label>Interests</label>
-						<textarea type='text' name='interests' ng-model='interests' rows='4' cols='40'></textarea>
+						<textarea type='text' name='interests' ng-model='interests' rows='4' cols='40' ng-focus="updateProfileForm.interests.hasFocus=true" ng-blur="updateProfileForm.interests.hasFocus=false"></textarea>
+						<i class='icon-checkmark update-profile-full-success-check' ng-if="updateProfileForm.interests.$valid && updateProfileForm.interests.$touched"></i>
 					</div>
 				</div>
 
 				<div class='update-profile-line-4'>
-					<div class='update-profile-wrapper'>
+					<div class='update-profile-full-wrapper' ng-class="{'has-focus': updateProfileForm.bio.hasFocus,
+					'has-success': updateProfileForm.bio.$valid && updateProfileForm.bio.$touched,
+					'has-error': updateProfileForm.bio.$error && updateProfileForm.bio.$touched}">
 						<label>Bio</label>
-						<textarea type='text' name='bio' ng-model='bio' rows='4' cols='40'></textarea>
+						<textarea type='text' name='bio' ng-model='bio' rows='4' cols='40' ng-focus="updateProfileForm.bio.hasFocus=true" ng-blur="updateProfileForm.bio.hasFocus=false"></textarea>
+						<i class='icon-checkmark update-profile-full-success-check' ng-if="updateProfileForm.bio.$valid && updateProfileForm.bio.$touched"></i>
 					</div>
 				</div>
 			</form>
 		</div>
 	</md-dialog-content>
 
-	<md-dialog-actions class='update-profile-actions' layout='row' layout-align='end center'>
-		<button aria-label='submit update profile form' ng-click="update()">
+	<md-dialog-actions class='update-profile-dialog-actions' layout='row' layout-align='end center'>
+		<button aria-label='submit update profile form' ng-click="update()" class='update-profile-dialog-submit'>
 			<span>Update</span>
 		</button>
 
-		<button aria-label='close update profile form' ng-click="close()">
+		<button aria-label='close update profile form' ng-click="close()" class='update-profile-dialog-cancel'>
 			<span>Nevermind</span>
 		</button>
 	</md-dialog-actions>

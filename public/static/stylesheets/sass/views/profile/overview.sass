@@ -3,64 +3,111 @@
 
 .overview-general
 	margin-bottom: 20px
+	background: darken(#d5d8dd, 7%)
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
 
 .overview-header
 	height: 40px
+	background: $darkest-blue
+	margin-bottom: 10px
 
 	h3
 		@include lato
-		color: rgba(0,0,0,0.35)
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 30px
+		color: #d5d8dd
 
 .overview-content
 	padding: 10px
 
 	h4
 		@include open
-		color: rgba(0,0,0,0.4)
+		font-weight: 400
+		letter-spacing: 1px
+		//color: rgba(0,0,0,0.4)
+		color: lighten($darkest-blue, 10%)
 
 	p
 		@include lato
-		color: rgba(0,0,0,0.35)
+		font-weight: 300
+		letter-spacing: 1px
+		color: rgba(0,0,0,0.45)
 
 .overview-extra
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
+	background: darken(#d5d8dd, 7%)
 
 .overview-extra-header
 	height: 40px
+	background: $darkest-blue
+	margin-bottom: 10px
 
 	h3
 		@include lato
-		color: rgba(0,0,0,0.35)
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 30px
+		color: #d5d8dd
 
 .overview-extra-content
+	padding: 10px
+
 	h4
 		@include open
-		color: rgba(0,0,0,0.4)
-		padding-left: 10px
+		font-weight: 400
+		letter-spacing: 1px
+		color: lighten($darkest-blue, 10%)
 
 	p
 		@include lato
-		color: rgba(0,0,0,0.35)
+		font-weight: 300
+		letter-spacing: 1px
+		color: rgba(0,0,0,0.45)
 		padding: 8px 12px 15px 12px
 
-.overview-score
+.overview-score-container
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
+	margin-bottom: 25px
 
-	div
-		border-right: 1px solid rgba(0,0,0,0.12)
+.overview-score-header
+	height: 40px
+	background: $darkest-blue
 
-	p
+	h3
 		@include lato
-		color: rgba(0,0,0,0.35)
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 30px
+		color: #d5d8dd
 
-	span
-		@include lato
-		color: rgba(0,0,0,0.35)
+.overview-score
 
-		i
+	> div 
+		&:nth-of-type(1)
+			border-right: 1px solid rgba(0,0,0,0.12)
+
+		p
+			@include lato
+			font-weight: 300
+			letter-spacing: 1px
 			color: rgba(0,0,0,0.35)
-			padding-right: 4px
+
+		span
+			@include lato
+			font-weight: 300
+			letter-spacing: 1px
+			color: rgba(0,0,0,0.35)
+
+			i
+				color: rgba(0,0,0,0.35)
+				padding-right: 4px
+
+				&.positive
+					color: $accent-green 
+
+				&.negative
+					color: $accent-red
 
 .overview-friends
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
@@ -68,38 +115,49 @@
 .overview-friends-header
 	height: 40px
 	padding: 0 10px
-	border-bottom: 1px solid rgba(0,0,0,0.12)
+	background: $darkest-blue
 
 	p
 		@include lato
-		color: rgba(0,0,0,0.35)
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 20px
+		color: #d5d8dd
 
 	button
 		span
 			@include lato
-			color: rgba(0,0,0,0.35)
+			font-weight: 300
+			letter-spacing: 1px
+			line-height: 20px
+			color: #9a9a9a
+			transition: all .4s ease
+
+		&:hover
+			span
+				color: #fff
 
 .overview-friends-body
-	padding-bottom: 10px
+	
 
 .overview-friends-friend
 	.profile-friends-repeat
 		height: 110px
 		border-bottom: 1px solid rgba(0,0,0,0.12)
-		transition: all .4s ease
+		transition: all .8s ease
 
-		&:nth-of-type(2n - 1)
+		&:nth-child(odd)
 			border-right: 1px solid rgba(0,0,0,0.12)
 
 		&:hover
-			background: $accent-blue
+			background: darken(#d5d8dd, 7%)
 
 			img
 				transform: scale(1.1,1.1)
 				border: 1px solid rgba(255, 255, 255, 1)
 
 			p
-				color: #fff
+				color: lighten($darkest-blue, 5%)
 
 
 		img
@@ -107,13 +165,15 @@
 			width: 40px
 			display: inline-block
 			border-radius: 50%
-			transition: all .4s ease
+			transition: all .8s ease
 
 		
 		p
 			@include lato
-			color: rgba(0,0,0,0.4)
-			transition: all .4s ease
+			font-weight: 300
+			letter-spacing: 1px
+			color: rgba(0,0,0,0.23)
+			transition: all .8s ease
 
 .profile-no-friends
 	width: 100%

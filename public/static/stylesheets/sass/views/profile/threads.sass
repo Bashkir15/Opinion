@@ -1,17 +1,114 @@
+.profile-threads-container
+	padding-bottom: 30px
+	background: darken(#d5d8dd, 7%)
+	
 .profile-threads-body
-	md-list-item
+	padding-top: 30px
+
+	> div
 		width: 80%
-		margin: 5px auto
-		padding: 0
-		background: #212a33
+		margin: 0 auto
+		box-shadow: 4px 4px 4px lighten($darkest-blue, 10%)
+
+		md-list
+			padding: 0
+			padding: 20px 0 10px 0
+			background: lighten($darkest-blue, 5%)
+
+			> md-list-item
+				padding: 0
+				width: 80%
+				border-radius: 4px
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
+				background: #dfe1df
+				margin: 0 auto 15px auto
+
+				.md-list-item-text
+					width: 100%
+
+.profile-threads-header
+	height: 70px
+	padding: 0 10px 0 17px
+	border-bottom: 1px solid #9a9a9a
+	background: $darkest-blue
+
+	h3
+		@include lato
+		font-weight: 300
+		color: #d5d8dd
+		letter-spacing: 1px
+		line-height: 30px
+
+.profile-threads-search-icon
+	margin-top: 3px
+	height: 35px
+	width: 30px
+	position: relative
+	transition: all .4s ease
+	background: $accent-blue
+
+	i
+		font-size: 16px
+		position: absolute
+		top: 9px
+		left: 8px
+		opacity: 1
+		transition: all .4s ease
+		color: #dfe1df
+
+	&.is-searching
+		width: 5px
+		transition: all .4s ease
+
+		i
+			opacity: 0
+			transition: all .4s ease
+
+.profile-threads-search
+	position: relative
+	height: 35px
+	margin-top: 3px
+
+	label
+		@include lato
+		font-size: 18px
+		display: inline-block
+		position: absolute
+		left: 8px
+		top: 5px
+		color: #d5d8dd
+		transition: all .4s ease
+		opacity: 1
+
+
+	input
+		height: 35px
+		width: 180px
+		padding: 0 0 0 5px
+		background: lighten($darkest-blue, 5%)
+		@include lato
+		color: #dfe1df
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		input
+			width: 205px
+			transition: all .4s ease
 
 .profile-threads-user
+	padding-top: 8px
+	padding-bottom: 10px
+
 	img
-		height: 40px
-		width: 40px
-		border: 1px solid #dfe1df
+		height: 50px
+		width: 50px
 		border-radius: 50%
-		margin: 6px 0
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
+		margin-top: 4px
+		margin-bottom: 10px
 		display: inline-block
 		transition: all .4s ease
 
@@ -20,45 +117,55 @@
 
 	p
 		@include lato
-		color: #dfe1df !important
+		font-size: 18px
+		font-weight: 300
+		color: #858f97
 
 .profile-threads-title
-	padding-top: 6px
+	padding-top: 10px
+	padding-left: 10px
 	cursor: pointer
 	position: relative
 
 	p
 		opacity: 1
-		transition: all .4s ease
-		color: #dfe1df !important
+		@include open
+		font-weight: 400
+		transition: all .5s ease
+		color: rgba(0,0,0,0.45) !important
 
 	&:hover
+		> p
+			opacity: 0
+			transition: all 1s ease
+
 		.profile-threads-title-overlay
 			opacity: 1
-			height: 70px
+			background-color: darken(#d5d8dd, 5%)
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35) inset
 
 .profile-threads-title-overlay
-	background-color: $darkest-blue
 	width: 100%
 	position: absolute
 	top: 0
 	left: 0
-	height: 0
+	height: 104px
 	opacity: 0
-	transition: all .4s ease
+	transition: all 1s ease
 
 	p
 		@include lato
-		color: #fff !important
+		color: rgba(0,0,0,0.45)
 		padding-left: 10px
 		padding-top: 8px
 
 .profile-threads-score-container
 	i
-		color: #dfe1df
+		color: rgba(0,0,0,0.45)
 		outline: none
 		transition: all .4s ease
 		display: inline-block
+		font-size: 22px
 
 		&.upvoted
 			color: $accent-green
@@ -71,7 +178,7 @@
 
 	span
 		@include lato
-		color: #dfe1df
+		color: rgba(0,0,0,0.45)
 		transition: all .4s ease
 
 		&.positive
@@ -82,62 +189,103 @@
 
 .profile-threads-thread-toolbar
 	height: 35px
-	border-top: 1px solid #c19f66
+	border-top: 1px solid rgba(0,0,0,0.12)
 	padding: 0 10px
 
 	button
 		i
-			color: #dfe1df
+			color: rgba(0,0,0,0.35)
 			transition: all .4s ease
+
+			&.saved
+				color: $accent-red
+
+		span
+			color: rgba(0,0,0,0.45)
+
+.profile-threads-thread-toolbar-item
+	span
+		@include open
+
+.profile-threads-thread-created
+	span
+		@include lato
+		color: rgba(0,0,0,0.23)
+
+
+.profile-threads-no-threads
+	background: lighten($darkest-blue, 5%)
+	min-height: 104px
+
+	p
+		@include lato
+		color: #dfe1df
+		font-weight: 300
+		letter-spacing: 1px
+		text-shadow: 1px 1px rgba(0,0,0,0.45)
+		text-align: center
+
+.profile-no-more-threads
+	background: lighten($darkest-blue, 5%)
+	min-height: 104px
+
+	p
+		@include lato
+		color: #dfe1df
+		letter-spacing: 1px
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
+		text-align: center
+
+.profile-threads-search-text
+	background: lighten($darkest-blue, 5%)
+	min-height: 80px
+
+	p
+		text-align: center
+		@include mont
+		color: #dfe1df
+		font-size: 18px
+		text-shadow: 1px 1px rgba(0,0,0,0.45)
 
 		span
 			@include open
-			color: #dfe1df
-
-.profile-threads-no-threads
-	padding-top: 30px
-
-	p
-		@include open
-		color: #9a9a9a
-		font-weight: 600
-		text-shadow: 1px 1px rgba(0,0,0,0.45)
-
-.profile-no-more-threads
-	padding-top: 25px
-
-	p
-		@include mont
-		color: #9a9a9a
-		text-shadow: 1px 1px rgba(0,0,0,0.35)
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.45)
+			color: $accent-orange
 
 .profile-threads-load-more
 	height: 60px
-	padding-right: 140px
+	padding-right: 100px
+	padding-bottom: 20px
+	background: lighten($darkest-blue, 5%)
 
 	button
 		height: 40px
-		width: 140px
+		width: 180px
 		border-radius: 4px
-		border: 1px solid #9a9a9a
+		border: 2px solid lighten($darkest-blue, 15%)
 		position: relative
 		transition: all .4s ease
 
 		span
 			@include open
-			font-weight: 600
+			font-weight: 400
 			text-shadow: 1px 1px rgba(0,0,0,0.35)
 			transition: all .4s ease
-			color: #9a9a9a
+			color: #d5d8dd
 
 		i
 			position: absolute
 			top: 12px
 			right: 5px
-			color: #fff
+			color: #d5d8dd
+			transition: all .4s ease
 
 		&:hover
-			background: $accent-blue
+			background: lighten($darkest-blue, 15%)
 
 			span
+				color: #fff
+
+			i
 				color: #fff

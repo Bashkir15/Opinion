@@ -5,8 +5,7 @@
 	z-index: 40
 	text-align: center
 	box-shadow: 0 4px 8px rgba(0,0,0,0.4)
-	border-bottom: 1px solid $accent-orange
-	background: $darkest-blue
+	background: $darkest-blue 
 
 .nav-left
 	display: flex
@@ -38,7 +37,7 @@
 
 	h3
 		@include lato
-		color: $darkest-green
+		color: $accent-blue
 		font-weight: 300
 		font-size: 24px
 		text-shadow: 1px 1px rgba(0,0,0,0.6)
@@ -108,15 +107,13 @@
 .nav-dropdown-menu
 	position: absolute
 	left: 75px
-	top: 56px
-	height: 0
-	transition: all .4s ease
+	top: 58px
+	min-height: 50px
 	min-width: 85px
 	background: $darkest-blue
 	text-align: center
 
 	&:not(.ng-hide)
-		min-height: 50px
 
 		li
 			height: 50px

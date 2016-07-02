@@ -1,30 +1,43 @@
+.delete-dialog-container
+	background: #d5d8dd
+
 .delete-dialog-header
 	height: 70px
-	padding: 0 10px
+	padding: 0 15px 0 25px
+	background: darken($darkest-blue, 5%)
 
 	h3
 		@include lato
-		color: rgba(0,0,0,0.45)
+		font-weight: 300
+		letter-spacing: 1px
+		color: #d5d8dd
+		line-height: 30px
 
 	button
 		outline: none
 
 		span
-			color: rgba(0,0,0,0.45)
+			color: #2f3547
 			transition: all .4s ease
 			display: inline-block
+			font-size: 18px
 
 		&:hover
 			span
+				color: #fff
 				transform: scale(1.2, 1.2)
 
 .delete-dialog-body
-	padding: 10px
+	padding-top: 40px
+	padding-bottom: 40px
 	width: 100%
 
 	p
 		text-align: center
-		@include open
+		@include lato
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 25px
 		color: rgba(0,0,0,0.55)
 
 
@@ -39,11 +52,14 @@
 	p
 		color: rgba(0,0,0,0.4)
 		@include lato
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 22px
 
 .delete-dialog-actions
 	padding-right: 10px
-	padding-top: 20px
 	height: 80px
+	background: darken($darkest-blue, 5%)
 
 	button
 		height: 40px
@@ -54,18 +70,21 @@
 
 		span
 			@include lato
-			color: #dfe1df
+			color: #d5d8dd
 			text-shadow: 1px 1px rgba(0,0,0,0.35)
+			transition: all .4s ease
 
 .delete-dialog-confirm
 	background: darken($accent-red, 10%)
+	border-bottom: 3px solid darken($accent-red, 15%)
 	margin-right: 10px
 
 	&:hover
 		background: darken($accent-red, 15%)
 
 .delete-dialog-cancel
-	background: $accent-orange
+	background: $accent-warning
+	border-bottom: 3px solid darken($accent-warning, 10%)
 
 	&:hover
-		background: darken($accent-orange, 10%)
+		background: darken($accent-warning, 10%)

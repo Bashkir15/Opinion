@@ -43,17 +43,10 @@ module.exports = function() {
 
 			Stream.find(criteria)
 			.populate('creator')
-			.skip(parseInt(req.query.page) * config.settings.perPage)
-			.limit(config.settings.perPage + 1)
 			.exec(function (err, streams) {
 				if (err) {
 					return json.bad(err, res);
 				} else {
-					var morePages = config.settings.perPage < streams.length;
-
-					if (morePages) {
-						streams.pop();
-					}
 
 					if (req.user) {
 						streams.map(function (e) {
@@ -62,8 +55,7 @@ module.exports = function() {
 					}
 
 					json.good({
-						records: streams,
-						morePages: morePages
+						records: streams
 					}, res);
 				}
 			});

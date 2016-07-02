@@ -55,16 +55,59 @@ module.exports = function() {
 			if (err) {
 				return json.bad(err, res);
 			} else if (user) {
+				var alreadyFollowing;
 				user.profileViews += 1;
+
+				var isInArray = req.user.following.some(function (follow) {
+					return follow.equals(user._id);
+				});
+
+				if (isInArray) {
+					alreadyFollowing = true;
+				} else {
+					alreadyFollowing = false;
+				}
+
 				user.save(function (err, item) {
 					if (err) {
 						return json.bad(err, res);
 					}
 
 					json.good({
-						record: item
+						record: item,
+						alreadyFollowing: alreadyFollowing
 					}, res);
 				});
+				/*var alreadyFollowing;
+				user.profileViews += 1;
+
+				var isInArray = req.user.following.some(function (follower) {
+					return follower.equals(user._id);
+				});
+
+				if (isInArray) {
+					alreadyFollowing = true;
+				} else {
+					alreadyFollowing = false;
+				}
+
+				user.save(function (err, item) {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					if (alreadyFollowing = true) {
+						return json.good({
+							record: item,
+							alreadyFollowing: alreadyFollowing
+						}, res);
+					} else {
+						json.good({
+							record: item
+						}, res);
+					}
+					
+				}); */
 			} else {
 				return json.bad({message: 'Sorry'}, res);
 			}
@@ -95,6 +138,37 @@ module.exports = function() {
 						record: item
 					}, res);
 				});
+			}
+		});
+	};
+
+	obj.unfollow = function (req, res) {
+		var toUnfollow = req.params.userId;
+
+		User.findOne({_id: req.params.userId})
+		.populate('following')
+		.exec(function (err, user) {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				var isInArray = req.user.following.some(function (follower) {
+					return follower.equals(user._id);
+				});
+
+				if (isInArray) {
+					req.user.following.splice(req.user.following.indexOf(user._id), 1);
+					req.user.save(function (err, item) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					return json.bad({message: 'Sorry, you are not following that user'}, res);
+				}
 			}
 		});
 	};

@@ -1,17 +1,25 @@
+.create-thread-container
+	padding-bottom: 20px
+
 .create-thread-card
 	margin-top: 75px
 	border-radius: 5px
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
+	background: #d5d8dd
 
 .create-thread-header
 	height: 70px
+	background: $darkest-blue
 
 	h3
 		@include lato
-		color: rgba(0,0,0,0.45)
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 30px
+		color: #d5d8dd
 
 .create-thread-body
-	padding-top: 10px
+	padding-top: 35px
 	width: 80%
 	margin: 0 auto
 
@@ -81,20 +89,20 @@
 			opacity: 0
 
 		input
-			background: $input-grey
+			background: darken($input-grey, 5%)
 
 		textarea
-			background: $input-grey
+			background: darken($input-grey, 5%)
 
 	&.has-success
 		label
 			opacity: 0
 
 		input
-			background: $input-grey
+			background: darken($input-grey, 5%)
 
 		textarea
-			background: $input-grey
+			background: darken($input-grey, 5%)
 
 	&.has-error
 		label
@@ -135,16 +143,21 @@
 	button
 		height: 40px
 		width: 120px
+		border-radius: 5px
 		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
 		transition: all .4s ease
+		background: darken($seafoam, 5%)
+		border-bottom: 3px solid darken($seafoam, 15%)
 
 		span
-			@include lato
-			color: rgba(0,0,0,0.4)
+			@include open
+			font-weight: 400
+			color: #d5d8dd
+			text-shadow: 1px 1px rgba(0,0,0,0.35)
 			transition: all .4s ease
 
 		&:hover
-			background: $accent-blue
+			background: darken($seafoam, 15%)
 
 			span
 				color: #fff
