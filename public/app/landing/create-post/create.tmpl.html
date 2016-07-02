@@ -1,5 +1,5 @@
 <div class='create-thread-container' layout='row' layout-align='center none'>
-	<div flex='55'>
+	<div flex='50'>
 		<md-card class='create-thread-card'>
 			<div class='create-thread-header' layout='column' layout-align='center center'>
 				<h3>Post A New Thread</h3>
@@ -9,18 +9,32 @@
 				<form name='vm.createThreadForm' ng-submit='vm.create(vm.createThreadForm.$valid)' novalidate>
 					<div class='thread-form-wrapper' ng-class="{'has-focus': vm.createThreadForm.title.hasFocus,
 					'has-success': vm.createThreadForm.title.$valid,
-					'has-error': vm.createThreadForm.title.$error,
+					'has-error': vm.createThreadForm.title.$error && vm.createThreadForm.title.$touched,
 					'is-empty': !vm.createThreadForm.title.$viewValue}">
 						<label>Title</label>
 						<input type='text' name='title' ng-model='vm.thread.title' required ng-focus="vm.createThreadForm.title.hasFocus=true" ng-blur='vm.createThreadForm.title.hasFocus=false'>
+						<i class='icon-checkmark thread-form-success-check' ng-if="vm.createThreadForm.title.$valid"></i>
+						<i class='icon-fire thread-form-error-icon' ng-if="vm.createThreadForm.title.$error && vm.createThreadForm.title.$touched && !vm.createThreadForm.title.$valid"></i>
+						<div ng-messages="vm.createThreadForm.title.$error" ng-if="vm.createThreadForm.title.$touched" class='thread-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, your thread should have a title or link</span>
+							</div>
+						</div>
 					</div>
 
 					<div class='thread-form-wrapper' ng-class="{'has-focus': vm.createThreadForm.content.hasFocus,
 					'has-success': vm.createThreadForm.content.$valid,
-					'has-error': vm.createThreadForm.content.$error,
+					'has-error': vm.createThreadForm.content.$error && vm.createThreadForm.content.$touched,
 					'is-empty': !vm.createThreadForm.content.$viewValue}">
 						<label>Content</label>
-						<textarea name='content' ng-model='vm.thread.content' rows='8' cols='40' ng-focus='vm.createThreadForm.content.hasFocus=true' ng-blur='vm.createThreadForm.content.hasFocus=false'></textarea>
+						<textarea name='content' ng-model='vm.thread.content' rows='8' cols='40' ng-focus='vm.createThreadForm.content.hasFocus=true' ng-blur='vm.createThreadForm.content.hasFocus=false' required></textarea>
+						<i class='icon-checkmark thread-form-success-check' ng-if="vm.createThreadForm.content.$valid"></i>
+						<i class='icon-fire thread-form-error-icon' ng-if="vm.createThreadForm.content.$error && vm.createThreadForm.content.$touched && !vm.createThreadForm.content.$valid"></i>
+						<div ng-messages="vm.createThreadForm.content.$error" ng-if="vm.createThreadForm.content.$touched" class='thread-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, your thread, even if it's a link should have content</span>
+							</div>
+						</div>
 					</div>
 
 					<div class='thread-form-wrapper'>

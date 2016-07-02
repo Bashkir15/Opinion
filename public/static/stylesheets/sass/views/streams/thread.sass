@@ -364,23 +364,54 @@
 	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
 
 	button
-		i
-			color: #dfe1df
-			font-size: 16px
-			transition: all .4s ease
+		height: 35px
 
-			&.saved
-				color: $accent-red
+		i
+			font-size: 16px
 
 		span
 			@include open
 			color: #dfe1df
 
+.thread-comments-save-item
+	i
+		color: #dfe1df
 
-		&:nth-of-type(2)
-			span
-				@include lato
-				color: #9a9a9a
+	&.ng-enter
+		@include slideInUp()
+
+.thread-comments-unsave-item
+
+	i
+		color: $accent-red
+
+	&.ng-enter
+		@include slideInUp()
+
+.thread-comments-edit-comment
+	transition: all .4s ease
+
+	span
+		@include lato
+		color: #9a9a9a !important
+		transition: all .4s ease
+
+	&:hover
+		span
+			color: #fff !important
+
+.thread-comments-delete-comment
+	transition: all .4s ease
+
+	span
+		@include lato
+		color: #9a9a9a !important
+		transition: all .4s ease
+
+	&:hover
+		span
+			color: #fff !important
+
 
 .thread-no-comments
 	padding-top: 35px

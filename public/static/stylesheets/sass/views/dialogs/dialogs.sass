@@ -1,0 +1,85 @@
+.dialog-form-wrapper
+	position: relative
+	margin-bottom: 42px
+	width: 100%
+
+	label
+		position: absolute
+		top: 2px
+		left: 6px
+		display: inline-block
+		@include lato
+		color: rgba(0,0,0,0.35)
+		opacity: 1
+		transition: all .4s ease
+
+	textarea
+		position: relative
+		width: 100%
+		padding: 0
+		padding-top: 3px
+		padding-left: 6px
+		@include lato
+		color: rgba(0,0,0,0.55)
+		background: rgba(0,0,0,0.1)
+		border-radius: 4px
+		box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			opacity: 0
+
+		textarea
+			background: $input-grey
+
+	&.has-success
+		label
+			opacity: 0
+
+		textarea
+			background: $input-grey
+
+	&.has-error
+		label
+			opacity: 0
+
+.dialog-form-success-check
+	position: absolute
+	top: 9px
+	right: 5px
+	color: $accent-green
+
+	&.ng-enter
+		@include slideInUp()
+
+	&.ng-leave
+		@include slideOutDown()
+
+.dialog-form-error-icon
+	position: absolute
+	top: 9px
+	right: 5px
+	color: $accent-red
+
+	&.ng-enter
+		@include slideInUp()
+
+	&.ng-leave
+		@include slideOutDown()
+
+.dialog-form-error-container
+	> div
+		padding-left: 10px
+
+		span
+			@include lato
+			color: $accent-red
+
+	&.ng-enter
+		@include slideInUp()
+
+	&.ng-leave
+		@include slideOutDown()
+
+@import "create"

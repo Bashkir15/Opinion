@@ -1,21 +1,21 @@
-.create-stream-card
+.create-thread-card
 	margin-top: 75px
 	border-radius: 5px
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
 
-.create-stream-header
+.create-thread-header
 	height: 70px
 
 	h3
 		@include lato
 		color: rgba(0,0,0,0.45)
 
-.create-stream-body
+.create-thread-body
 	padding-top: 10px
 	width: 80%
 	margin: 0 auto
 
-.stream-form-wrapper
+.thread-form-wrapper
 	position: relative
 	width: 100%
 	margin-bottom: 42px
@@ -45,9 +45,10 @@
 
 	textarea
 		position: relative
-		width: 99%
+		width: 100%
 		background: rgba(0,0,0,0.1)
 		@include lato
+		padding: 0
 		padding-top: 3px
 		padding-left: 6px
 		color: rgba(0,0,0,0.55)
@@ -55,31 +56,51 @@
 		box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
 		transition: all .4s ease
 
+	md-input-container
+		width: 100%
+		padding: 0
+
+		md-select
+			width: 100%
+
+			.md-select-value
+				width: 100%
+
+				span
+					@include lato
+			&:focus
+
+				.md-select-value
+					border-bottom-color: $accent-blue !important
+
+					span
+						color: rgba(0,0,0,0.3) !important
+
 	&.has-focus
 		label
 			opacity: 0
 
 		input
-			background: #d2d9dd
+			background: $input-grey
 
 		textarea
-			background: #d2d9dd
+			background: $input-grey
 
 	&.has-success
 		label
 			opacity: 0
 
 		input
-			background: #d2d9dd
+			background: $input-grey
 
 		textarea
-			background: #d2d9dd
+			background: $input-grey
 
 	&.has-error
 		label
 			opacity: 0
 
-.stream-form-success-check
+.thread-form-success-check
 	position: absolute
 	top: 9px
 	right: 5px
@@ -88,7 +109,7 @@
 	&.ng-enter
 		@include slideInUp()
 
-.stream-form-error-icon
+.thread-form-error-icon
 	position: absolute
 	top: 9px
 	right: 5px
@@ -97,7 +118,7 @@
 	&.ng-enter
 		@include slideInUp()
 
-.stream-form-error-container
+.thread-form-error-container
 	> div
 		padding-left: 10px
 
@@ -108,14 +129,14 @@
 	&.ng-enter
 		@include slideInUp()
 
-.stream-form-submit
+.create-thread-form-submit
 	height: 70px
 
 	button
-		height: 45px
+		height: 40px
 		width: 120px
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
 		transition: all .4s ease
-		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.45)
 
 		span
 			@include lato
@@ -123,9 +144,7 @@
 			transition: all .4s ease
 
 		&:hover
-			background: $accent-green
+			background: $accent-blue
 
 			span
 				color: #fff
-
-

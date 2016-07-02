@@ -5,7 +5,7 @@
 	.controller('ThreadController', ThreadController);
 
 	/* @ngInject */
-	function ThreadController ($scope, $state, $stateParams, $mdDialog, $location, $timeout, appAuth, appThreads, appComments) {
+	function ThreadController ($scope, $state, $stateParams, $mdDialog, $location, $timeout, appAuth, appThreads, appComments, appToast) {
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		var threadId = $stateParams.threadId;
@@ -41,7 +41,7 @@
 		function getThread() {
 			var threadData = appThreads.single.get({threadId: threadId}, function() {
 				vm.threads = [threadData.res.record];
-				vm.isMod = threadData.res.mods.mod;
+				vm.isMod = threadData.res.isMod;
 			});
 		}
 
@@ -219,15 +219,15 @@
 
 								comment.$save(function (response) {
 									if (response.success) {
-										//appToast('You just commented on this thread!');
+										appToast.success('You just commented on this thread!');
 										vm.getComments();
 										$mdDialog.hide();
 									} else {
-										appToast(response.res.message);
+										appToast.error(response.res.message);
 									}
 								});
 							} else {
-								appToast('Hmm... looks like something is missing');
+								appToast.error('Hmm... looks like something is missing');
 							}
 						};
 

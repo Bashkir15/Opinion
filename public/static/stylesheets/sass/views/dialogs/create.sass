@@ -1,0 +1,47 @@
+.create-dialog-header
+	height: 70px
+	padding: 0 10px
+
+	h3
+		@include lato
+		color: rgba(0,0,0,0.4)
+
+	button
+		outline: none
+		span
+			color: rgba(0,0,0,0.45)
+
+.create-dialog-body
+	padding-top: 10px
+	width: 80%
+	margin: 0 auto
+
+.create-dialog-actions
+	padding-right: 10px
+	height: 60px
+
+	button
+		height: 40px
+		width: 120px
+		border-radius: 5px
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
+		transition: all .4s ease
+
+		span
+			@include lato
+			color: #dfe1df
+			text-shadow: 1px 1px rgba(0,0,0,0.25)
+
+.create-dialog-submit
+	background: $accent-green
+	margin-right: 10px
+
+	&:hover
+		background: darken($accent-green, 10%)
+
+.create-dialog-cancel
+	background: $accent-red
+
+	&:hover
+		background: darken($accent-red, 10%)
+

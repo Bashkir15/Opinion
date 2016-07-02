@@ -8,5 +8,6 @@
 		'opinionated.utilities',
 		'opinionated.admin',
 		'opinionated.authentication',
-		'opinionated.landing'])
+		'opinionated.landing',
+		'opinionated.moment'])
 }());

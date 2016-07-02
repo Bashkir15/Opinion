@@ -8,15 +8,31 @@
 			<div class='create-stream-body'>
 				<form name='vm.createStreamForm' ng-submit='vm.create(vm.createStreamForm.$valid)' novalidate>
 					<div class='stream-form-wrapper' ng-class="{'has-focus': vm.createStreamForm.name.hasFocus,
-					'has-success': vm.createStreamForm.name.$valid}">
+					'has-success': vm.createStreamForm.name.$valid,
+					'has-error': vm.createStreamForm.name.$error && vm.createStreamForm.name.$touched}">
 						<label>Name</label>
 						<input type='text' name='name' ng-model='vm.stream.name' required ng-focus='vm.createStreamForm.name.hasFocus=true' ng-blur="vm.createStreamForm.name.hasFocus=false">
+						<i class='icon-checkmark stream-form-success-check' ng-if="vm.createStreamForm.name.$valid"></i>
+						<i class='icon-fire stream-form-error-icon' ng-if="vm.createStreamForm.name.$error && vm.createStreamForm.name.$touched && !vm.createStreamForm.name.$valid"></i>
+						<div ng-messages='vm.createStreamForm.name.$error' ng-if="vm.createStreamForm.name.$touched" class='stream-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, your Stream needs a name</span>
+							</div>
+						</div> 
 					</div>
 
 					<div class='stream-form-wrapper' ng-class="{'has-focus': vm.createStreamForm.description.hasFocus,
-					'has-success': vm.createStreamForm.description.$valid}">
+					'has-success': vm.createStreamForm.description.$valid,
+					'has-error': vm.createStreamForm.description.$error && vm.createStreamForm.description.$touched}">
 						<label>Description</label>
 						<textarea name='description' ng-model='vm.stream.description' rows='4' cols='40' required ng-focus="vm.createStreamForm.description.hasFocus=true" ng-blur="vm.createStreamForm.description.hasFocus=false"></textarea>
+						<i class='icon-checkmark stream-form-success-check' ng-if="vm.createStreamForm.description.$valid"></i>
+						<i class='icon-fire stream-form-error-icon' ng-if="vm.createStreamForm.description.$error && vm.createStreamForm.description.$touched && !vm.createStreamForm.description.$valid"></i>
+						<div ng-messages='vm.createStreamForm.description.$error' ng-if="vm.createStreamForm.description.$touched" class='stream-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, your Stream needs a description</span>
+							</div>
+						</div> 
 					</div>
 
 					<div class='stream-form-submit' layout='column' layout-align='center center'>

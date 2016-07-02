@@ -5,7 +5,7 @@
 	.controller('LandingPostController', LandingPostController);
 
 	/* @ngInject */
-	function LandingPostController ($state, $location, appStreams, appThreads) {
+	function LandingPostController ($state, $location, appStreams, appThreads, appToast) {
 		var vm = this;
 		vm.streamList = [];
 		vm.getStreams = getStreams;
@@ -35,13 +35,13 @@
 				thread.$save(function (response) {
 					if (response.success) {
 						$location.url('streams/' + vm.thread.stream + '/' + response.res.record._id);
-						alert('yay!');
+						appToast.success('You just posted a thread called: ' + response.res.record.title);
 					} else {
-						alert(response.res.message);
+						appToast.error(response.res.message);
 					}
 				});
 			} else {
-				alert('poop');
+				appToast.error('Seems like something is missing');
 			}
 		}
 	}
