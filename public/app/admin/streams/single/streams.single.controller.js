@@ -5,7 +5,7 @@
 	.controller('StreamsSingleController', StreamsSingleController);
 
 	/* @ngInject */
-	function StreamsSingleController ($scope, $state, $stateParams, $mdDialog, $location, $timeout, appAuth, appStreams, appThreads, Upload) {
+	function StreamsSingleController ($scope, $state, $stateParams, $mdDialog, $location, $timeout, appAuth, appStreams, appThreads, Upload, appToast) {
 		var vm = this;
 		var streamId = $stateParams.streamId;
 		vm.stream = [];
@@ -17,6 +17,8 @@
 		vm.openDeleteStream = openDeleteStream;
 		vm.upvote = upvote;
 		vm.downvote = downvote;
+		vm.save = save;
+		vm.unsave = unsave;
 		vm.openAddPost = openAddPost
 		vm.orderByScore = orderByScore;
 		vm.orderByDate = orderByDate;
@@ -25,6 +27,7 @@
 		vm.feedPage = 0;
 		vm.lastUpdated = 0;
 		vm.feedsFilter = '';
+		vm.loadMore = loadMore;
 
 		function getStream () {
 			var streamData = appStreams.single.get({streamId: streamId}, function() {
@@ -53,7 +56,7 @@
 					vm.feed = vm.feed.concat(threadData.res.records);
 				}
 
-				vm.noMorePages = !threadData.res.noMorePages;
+				vm.noMoreThreads = !threadData.res.morePages;
 				vm.lastUpdated = Date.now();
 			});
 		}
@@ -150,6 +153,22 @@
 			});
 		}
 
+		function save (item) {
+			var thread = appThreads.single.get({threadId: item._id}, function() {
+				thread.$doSave({threadId: item._id}, function() {
+					angular.extend(item, thread.res.record);
+				});
+			});
+		}
+
+		function unsave (item) {
+			var thread = appThreads.single.get({threadId: item._id}, function() {
+				thread.$doUnsave({threadId: item._id}, function() {
+					angular.extend(item, thread.res.record);
+				}) ;
+			});
+		}
+
 		function openAddPost() {
 			$mdDialog.show({
 				controller: [
@@ -178,20 +197,20 @@
 									if (response.success) {
 										$scope.reset();
 										$mdDialog.hide();
-										updateFeed();
+										$state.reload();
+										appToast.success('You just created a thread called: ' + response.res.record.title);
 									} else {
-										alert(response.res.message);
+										appToast.error(response.res.message);
 									}
 								});
 							} else {
-								alert('poop');
+								appToast.error('Hmm, something seems to be missing...');
 							}
 						};
 					}
 				],
 				templateUrl: '/app/admin/threads/dialogs/threads.create.dialog.tmpl.html'
 			}).finally(function() {
-				updateFeed();
 			});
 		}
 
@@ -225,6 +244,12 @@
 			} else {
 				vm.rowFilter = '-comments.length';
 			}
+		}
+
+		function loadMore() {
+			vm.feedPage++;
+			vm.lastUpdated = 0;
+			vm.updateFeed({append: true});
 		}
 
 		getStream();

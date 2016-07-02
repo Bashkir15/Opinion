@@ -5,7 +5,7 @@
 	.controller('ThreadEditController', ThreadEditController);
 
 	/* @ngInject */
-	function ThreadEditController ($state, $stateParams, $location, appThreads) {
+	function ThreadEditController ($state, $stateParams, $location, appThreads, appToast) {
 		var vm = this;
 		var threadId = $stateParams.threadId;
 		vm.edit = edit;
@@ -19,15 +19,15 @@
 
 					thread.$modify({threadId: threadId}, function (response) {
 						if (response.success) {
-							alert('yay');
+							appToast.success('You just edited your thread: ' + response.res.record.title);
 							window.history.go(-1);
 						} else {
-							alert(response.res.message);
+							appToast.error(response.res.message);
 						}
 					});
 				});
 			} else {
-				alert('poop');
+				appToast.error('Hmm, something seems to be missing...');
 			}
 		}
 

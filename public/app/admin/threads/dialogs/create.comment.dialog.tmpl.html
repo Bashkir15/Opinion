@@ -4,7 +4,7 @@
 			<h3>Add Comment</h3>
 			<span flex></span>
 
-			<button ng-click="close()">
+			<button ng-click="close()" aria-label='close add comment dialog'>
 				<span>x</span>
 			</button>
 		</div>
@@ -29,7 +29,7 @@
 	</md-dialog-content>
 
 	<md-dialog-actions class='create-dialog-actions' layout='row' layout-align='end center'>
-		<button ng-click="create(addCommentForm.$valid)" novalidate aria-label='submit create comment form' class='create-dialog-submit'>
+		<button ng-click="create(addCommentForm.$valid)" aria-label='submit add comment form' class='create-dialog-submit'>
 			<span>Create</span>
 		</button>
 

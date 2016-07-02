@@ -1,21 +1,34 @@
-<div class='stream-edit-container' layout='column' layout-align='none center'>
-	<div class='stream-edit-header' layout='row' layout-align='center none'>
-		<h3>Edit Your Stream</h3>
-	</div>
-
-	<div class='stream-edit-body'>
-		<form name='vm.editCommentForm' ng-submit='vm.edit(vm.editCommentForm.$valid)' novalidate>
-
-			<div class='edit-form-wrapper'>
-				<label>Content</label>
-				<textarea type='text' name='content' ng-model='vm.comment.content' required rows='4' cols='40'></textarea>
+<div class='edit-page-container' layout='row' layout-align='center none'>
+	<div flex='45'>
+		<md-card class='edit-page-card' layout='column'>
+			<div class='edit-page-header' layout='row' layout-align='center center'>
+				<h3>Edit Your Comment</h3>
 			</div>
 
-			<div class='edit-form-submit'>
-				<button type='submit' aria-label='submit edit stream form'>
-					<span>Submit</span>
-				</button>
+			<div class='edit-page-body'>
+				<form name='vm.editCommentForm' ng-submit='vm.edit(vm.editCommentForm.$valid)' novalidate>
+
+					<div class='edit-form-wrapper' ng-class="{'has-focus': vm.editCommentForm.content.hasFocus,
+					'has-success': vm.editCommentForm.content.$valid,
+					'has-error': vm.editCommentForm.content.$error && vn.editCommentForm.content.$touched}">
+						<label>Content</label>
+						<textarea type='text' name='content' ng-model='vm.comment.content' required rows='5' cols='40' ng-focus="vm.editCommentForm.content.hasFocus=true" ng-blur="vm.editCommentForm.content.hasFocus=false"></textarea>
+						<i class='icon-checkmark edit-form-success-check' ng-if="vm.editCommentForm.content.$valid && vm.editCommentForm.content.$touched"></i>
+						<i class='icon-fire edit-form-error-icon' ng-if="vm.editCommentForm.content.$error && vm.editCommentForm.content.$touched && !vm.editCommentForm.content.$valid"></i>
+						<div ng-messages='vm.editCommentForm.content.$error' ng-if="vm.editCommentForm.content.$touched" class='edit-form-error-container'>
+							<div ng-message='required'>
+								<span>Sorry, you can't edit your content to be blank</span>
+							</div>
+						</div>
+					</div>
+
+					<div class='edit-form-submit' layout='column' layout-align='center center'>
+						<button type='submit' aria-label='submit edit comment form'>
+							<span>Submit</span>
+						</button>
+					</div>
+				</form>
 			</div>
-		</form>
+		</md-card>
 	</div>
 </div>

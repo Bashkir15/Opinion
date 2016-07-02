@@ -216,7 +216,7 @@
 
 			button
 				height: 50px
-				width: 150px
+				width: 170px
 				border-right: none
 				transition: all .4s ease
 
@@ -339,12 +339,13 @@
 	i
 		color: #dfe1df
 		transition: all .4s ease
+		outline: none
 
 		&.upvoted
 			color: $accent-green
 
 		&.downvoted
-			color: $accent-red
+			color: $accent-red !important
 
 	span
 		color: #dfe1df
@@ -358,9 +359,8 @@
 
 .thread-comments-toolbar
 	height: 35px
-	border-top: 1px solid #c19f66
+	border-top: 1px solid $accent-orange
 	padding-left: 10px
-	padding-top: 5px
 	background-image: -webkit-linear-gradient(bottom, darken($darkest-blue, 10%) 0%, $darkest-blue 100%)
 
 	button
@@ -370,12 +370,14 @@
 			font-size: 16px
 
 		span
-			@include open
 			color: #dfe1df
 
 .thread-comments-save-item
 	i
 		color: #dfe1df
+
+	span
+		@include open
 
 	&.ng-enter
 		@include slideInUp()
@@ -384,6 +386,9 @@
 
 	i
 		color: $accent-red
+
+	span
+		@include open
 
 	&.ng-enter
 		@include slideInUp()
@@ -411,6 +416,11 @@
 	&:hover
 		span
 			color: #fff !important
+
+.thread-comments-created
+	span
+		@include lato
+		color: #888888 !important
 
 
 .thread-no-comments
@@ -447,4 +457,43 @@
 			font-weight: 600
 			text-shadow: 1px 1px rgba(0,0,0,0.45)
 			color: $accent-orange
+
+.thread-load-more-comments
+	height: 60px
+	padding-right: 15%
+
+	button
+		height: 40px
+		width: 140px
+		border-radius: 4px
+		border: 1px solid #9a9a9a
+		position: relative
+		transition: all .4s ease
+
+		span
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.35)
+			color: #9a9a9a
+			transition: all .4s ease
+
+		i
+			position: absolute
+			top: 12px
+			right: 5px
+			color: #fff
+
+		&:hover
+			background: $accent-blue
+
+			span
+				color: #fff
+
+.thread-no-more-comments
+	padding-top: 25px
+
+	p
+		@include mont
+		color: #9a9a9a
+		text-shadow: 1px 1px rgba(0,0,0,0.35)
 

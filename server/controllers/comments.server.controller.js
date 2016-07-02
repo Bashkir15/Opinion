@@ -434,6 +434,7 @@ module.exports = function() {
 
 	obj.remove = function (req, res) {
 		Comment.findOne({_id: req.params.commentId})
+		.populate('creator')
 		.exec(function (err, comment) {
 			if (err) {
 				return json.bad(err, res);
@@ -451,6 +452,20 @@ module.exports = function() {
 
 						thread.comments.splice(thread.comments.indexOf(comment._id), 1);
 						thread.save(function (err) {
+							if (err) {
+								return json.bad(err, res);
+							}
+						});
+					});
+
+					User.findOne({_id: comment.creator._id})
+					.exec(function (err, user) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						user.commentScore = user.commentScore - comment.upvotes.length;
+						user.save(function (err) {
 							if (err) {
 								return json.bad(err, res);
 							}

@@ -11,6 +11,7 @@
 		vm.getStreams = getStreams;
 		vm.subscribe = subscribe;
 		vm.unsubscribe = unsubscribe;
+		vm.loadMore = loadMore;
 		vm.streamPage = 0;
 		vm.lastUpdated = 0;
 		vm.streamsFilter = '';
@@ -18,7 +19,7 @@
 		function getStreams (options) {
 			options = options || {};
 
-			var streamsData = appStreams.single.get({
+			var streamsData = appStreams.list.get({
 				page: vm.streamPage,
 				timestamp: vm.lastUpdated,
 				filter: vm.streamsFilter
@@ -41,7 +42,6 @@
 		function subscribe (item) {
 			var stream = appStreams.single.get({streamId: item._id}, function() {
 				stream.$subscribe({streamId: item._id}, function() {
-					item.subscribed = true;
 					angular.extend(item, stream.res.record);
 				});
 			});
@@ -50,10 +50,15 @@
 		function unsubscribe (item) {
 			var stream = appStreams.single.get({streamId: item._id}, function() {
 				stream.$unsubscribe({streamId: item._id}, function() {
-					item.subscribed = false;
 					angular.extend(item, stream.res.record);
 				});
 			});
+		}
+
+		function loadMore() {
+			vm.streamPage++;
+			vm.lastUpdated = 0;
+			vm.getStreams({append: true});
 		}
 
 		getStreams();

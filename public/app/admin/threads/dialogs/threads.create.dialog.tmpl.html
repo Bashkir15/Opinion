@@ -1,37 +1,55 @@
-<md-dialog class='create-dialog-container' layout='column' flex='60'>
+<md-dialog class='create-dialog-container' layout='column' flex='50'>
 	<md-dialog-content>
 		<div class='create-dialog-header' layout='row' layout-align='none center'>
 			<h3>Create a post</h3>
 
 			<span flex></span>
-			<button>
-				<span ng-click="close()" aria-label='close dialog'>x</span>
+			<button ng-click="close()" aria-label='close add thread dialog'>
+				<span>x</span>
 			</button>
 		</div>
 
 		<div class='create-dialog-body'>
 			<form name='addPostForm' ng-submit='create(addPostForm.$valid)' novalidate>
 				<div class='dialog-form-wrapper' ng-class="{'has-focus': addPostForm.title.hasFocus,
-				'has-success': addPostForm.title.$valid}">
+				'has-success': addPostForm.title.$valid,
+				'has-error': addPostForm.title.$error && addPostForm.title.$touched}">
 					<label>Title</label>
 					<input type='text' ng-model='title' required name='title' ng-focus="addPostForm.title.hasFocus=true" ng-blur="addPostForm.title.hasFocus=false">
+					<i class='icon-checkmark dialog-form-success-check' ng-if="addPostForm.title.$valid"></i>
+					<i class='icon-fire dialog-form-error-icon' ng-if="addPostForm.title.$error && addPostForm.title.$touched && !addPostForm.title.$valid"></i>
+
+					<div class='dialog-form-error-container' ng-messages="addPostForm.title.$error" ng-if="addPostForm.title.$touched">
+						<div ng-message='required'>
+							<span>Sorry, your thread needs a title or link</span>
+						</div>
+					</div>
 				</div>
 
 				<div class='dialog-form-wrapper' ng-class="{'has-focus': addPostForm.content.hasFocus,
-				'has-success': addPostForm.content.$valid}">
+				'has-success': addPostForm.content.$valid,
+				'has-error': addPostForm.content.$error && addPostForm.content.$touched}">
 					<label>Content</label>
 					<textarea name='content' ng-model='content' rows='4' cols='40' required ng-focus="addPostForm.content.hasFocus=true" ng-blur="addPostForm.content.hasFocus=false"></textarea>
+					<i class='icon-checkmark dialog-form-success-check' ng-if="addPostForm.content.$valid"></i>
+					<i class='icon-fire dialog-form-error-icon' ng-if="addPostForm.content.$error && addPostForm.content.$touched && !addPostForm.content.$valid"></i>
+
+					<div class='dialog-form-error-container' ng-messages="addPostForm.content.$error" ng-if="addPostForm.content.$touched">
+						<div ng-message='required'>
+							<span>Sorry, your thread needs some content</span>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>
 	</md-dialog-content>
 
 	<md-dialog-actions class='create-dialog-actions' layout='row' layout-align='end center'>
-		<button ng-click="create(addPostForm.$valid)" aria-label='submit form to create new post'>
+		<button ng-click="create(addPostForm.$valid)" aria-label='submit add thread form' class='create-dialog-submit'>
 			<span>Create</span>
 		</button>
 
-		<button ng-click='close()' aria-label='close dialog button'>
+		<button ng-click='close()' aria-label='close add thread dialog' class='create-dialog-cancel'>
 			<span>Nevermind</span>
 		</button>
 	</md-dialog-actions>

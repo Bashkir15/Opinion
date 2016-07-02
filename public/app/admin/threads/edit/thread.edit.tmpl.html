@@ -1,25 +1,49 @@
-<div class='edit-form-container' layout='column' layout-align='none center'>
-	<div class='stream-edit-header' layout='row' layout-align='center none'>
-		<h3>Edit Your Stream</h3>
-	</div>
-
-	<div class='edit-form-body'>
-		<form name='vm.editThreadForm' ng-submit='vm.edit(vm.editThreadForm.$valid)' novalidate>
-			<div class='edit-form-wrapper'>
-				<label>Name</label>
-				<input type='text' name='name' ng-model='vm.thread.title' required>
+<div class='edit-page-container' layout='row' layout-align='center none'>
+	<div flex='45'>
+		<md-card class='edit-page-card' layout='column'>
+			<div class='edit-page-header' layout='row' layout-align='center center'>
+				<h3>Edit Your Thread</h3>
 			</div>
 
-			<div class='edit-form-wrapper'>
-				<label>Description</label>
-				<textarea type='text' name='description' ng-model='vm.thread.content' required rows='4' cols='40'></textarea>
-			</div>
+			<div class='edit-page-body'>
+				<form name='vm.editThreadForm' ng-submit='vm.edit(vm.editThreadForm.$valid)' novalidate>
+					<div class='edit-form-wrapper' ng-class="{'has-focus': vm.editThreadForm.title.hasFocus,
+					'has-success': vm.editThreadForm.title.$valid,
+					'has-error': vm.editThreadForm.title.$error && vm.editThreadForm.title.$touched}">
+						<label>Title</label>
+						<input type='text' name='title' ng-model='vm.thread.title' required ng-focus="vm.editThreadForm.title.hasFocus=true" ng-blur="vm.editThreadForm.title.hasFocus=false">
+						<i class='icon-checkmark edit-form-success-check' ng-if="vm.editThreadForm.title.$valid && vm.editThreadForm.title.$touched"></i>
+						<i class='icon-fire edit-form-error-icon' ng-if="vm.editThreadForm.title.$error && vm.editThreadForm.title.$touched && !vm.editThreadForm.title.$valid"></i>
 
-			<div class='edit-form-submit'>
-				<button type='submit' aria-label='submit edit stream form'>
-					<span>Submit</span>
-				</button>
+						<div class='edit-form-error-container' ng-messages='vm.editThreadForm.title.$error' ng-if="vm.editThreadForm.title.$touched">
+							<div ng-message='required'>
+								<span>Sorry, your need to provide a title or a link</span>
+							</div>
+						</div>
+					</div>
+
+					<div class='edit-form-wrapper' ng-class="{'has-focus': vm.editThreadForm.content.hasFocus,
+					'has-success': vm.editThreadForm.content.$valid,
+					'has-error': vm.editThreadForm.content.$error && vm.editThreadForm.content.$touched}">
+						<label>Content</label>
+						<textarea type='text' name='content' ng-model='vm.thread.content' required rows='5' cols='40' ng-focus="vm.editThreadForm.content.hasFocus=true" ng-blur="vm.editThreadForm.content.hasFocus=false"></textarea>
+						<i class='icon-checkmark edit-form-success-check' ng-if="vm.editThreadForm.content.$valid && vm.editThreadForm.content.$touched"></i>
+						<i class='icon-fire edit-form-error-icon' ng-if="vm.editThreadForm.content.$error && vm.editThreadForm.content.$touched && !vm.editThreadForm.content.$valid"></i>
+
+						<div class='edit-form-error-container' ng-messages='vm.editThreadForm.content.$error' ng-if="vm.editThreadForm.content.$touched">
+							<div ng-message='required'>
+								<span>Sorry, you need content even with a link</span>
+							</div>
+						</div>
+					</div>
+
+					<div class='edit-form-submit' layout='column' layout-align='center center'>
+						<button type='submit' aria-label='submit edit stream form'>
+							<span>Submit</span>
+						</button>
+					</div>
+				</form>
 			</div>
-		</form>
+		</md-card>
 	</div>
 </div>

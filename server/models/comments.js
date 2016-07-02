@@ -87,7 +87,7 @@ CommentSchema.methods = {
 	afterSave: function (user) {
 		var obj = this;
 		obj.upvoted = obj.upvotes.indexOf(user._id) != -1;
-		obj.downvotes = obj.downvotes.indexOf(user._id) != -1;
+		obj.downvoted = obj.downvotes.indexOf(user._id) != -1;
 		obj.saved = obj.saves.indexOf(user._id) != -1;
 		return obj;
 	}

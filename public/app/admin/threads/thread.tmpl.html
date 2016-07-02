@@ -5,7 +5,7 @@
 				<p>{{thread.title}}</p>
 				<span flex></span>
 				<button ui-sref='streams.single({streamId: thread.stream._id})' class='thread-content-stream'> In {{thread.stream.name}}</button>
-				<span>{{thread.created}}</span>
+				<span>{{thread.created | opCalendar}}</span>
 			</div>
 
 			<div layout='row' class='thread-body-content'>
@@ -140,7 +140,7 @@
 
 							<span flex></span>
 
-							<button>
+							<button class='thread-comments-created'>
 								<span>{{item.created | opCalendar}}</span>
 							</button>
 						</div>
@@ -155,6 +155,17 @@
 
 		<div class='thread-searching-text' layout='row' layout-align='center none' ng-if="!vm.comments.length && vm.commentsFilter">
 			<p>Compounding the comments <span>. . .</span></p>
+		</div>
+
+		<div class='thread-load-more-comments' layout='row' layout-align='end center' ng-if="!vm.noMoreComments && !vm.commentsFilter">
+			<button aria-label='load more comments' ng-click="vm.loadMore()">
+				<span>Load More</span>
+				<i class='icon-expand_more'></i>
+			</button>
+		</div>
+
+		<div class='thread-no-more-comments' layout='row' layout-align='center center' ng-if="vm.noMoreComments && vm.commentPage >= 1">
+			<p>There are no more comments to load</p>
 		</div>
 	</div>
 

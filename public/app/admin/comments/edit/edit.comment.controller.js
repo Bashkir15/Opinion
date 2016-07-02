@@ -5,7 +5,7 @@
 	.controller('EditCommentController', EditCommentController);
 
 	/* @ngInject */
-	function EditCommentController ($state, $stateParams, $scope, $location, appThreads, appComments) {
+	function EditCommentController ($state, $stateParams, $scope, $location, appThreads, appComments, appToast) {
 		var vm = this;
 		var threadId = $stateParams.threadId;
 		var commentId = $stateParams.commentId;
@@ -19,15 +19,15 @@
 
 					comment.$modify({commentId: commentId}, function (response) {
 						if (response.success) {
-							alert('yay');
+							appToast.success('You just edited your comment!');
 							window.history.go(-1);
 						} else {
-							alert(response.res.message);
+							appToast.error(response.res.message);
 						}
 					});
 				});
 			} else {
-				alert('poop');
+				appToast.error('Hmm, something seems to be missing');
 			}
 		}
 

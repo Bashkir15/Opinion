@@ -79,6 +79,9 @@
 
 		$rootScope.$on('$stateChangeSuccess', function() {
 			$mdSidenav('left').close();
+			if (vm.showStreams) {
+				vm.showStreams = !vm.showStreams;
+			}
 		});
 
 		updateLoginStatus();

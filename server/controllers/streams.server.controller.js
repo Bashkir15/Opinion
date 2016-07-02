@@ -25,48 +25,52 @@ module.exports = function() {
 	};
 
 	obj.list = function (req, res) {
-		var criteria = {};
+		var getStreams = function() {
+			var criteria = {};
 
-		if (req.query && req.query.subscribed) {
-			criteria.subscribers = req.user._id;
-		}
-
-		if (req.query && req.query.timestamp) {
-			criteria.created = {$gte: req.query.timestamp};
-		}
-
-		if (req.query && req.query.filter) {
-			delete criteria.created;
-			criteria.name = new RegExp(req.query.filter, 'i');
-		}
-
-		Stream.find(criteria, null)
-		.populate('creator')
-		.populate('subscribers')
-		.skip(parseInt(req.query.page) * config.settings.perPage)
-		.limit(config.settings.perPage + 1)
-		.exec(function (err, streams) {
-			if (err) {
-				return json.bad(err, res);
-			} else {
-				var morePages = config.settings.perPage < streams.length;
-
-				if (morePages) {
-					streams.pop();
-				}
-
-				if (req.user) {
-					streams.map(function (e) {
-						e = e.afterSave(req.user);
-					});
-				}
-
-				json.good({
-					records: streams,
-					morePages: morePages
-				}, res);
+			if (req.query && req.query.subscribed) {
+				criteria.subscribers = req.user._id;
 			}
-		});
+
+			if (req.query && req.query.timestamp) {
+				criteria.created = {$gte: req.query.timestamp};
+			}
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+				criteria.name = new RegExp(req.query.filter, 'i');
+			}
+
+			Stream.find(criteria)
+			.populate('creator')
+			.skip(parseInt(req.query.page) * config.settings.perPage)
+			.limit(config.settings.perPage + 1)
+			.exec(function (err, streams) {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					var morePages = config.settings.perPage < streams.length;
+
+					if (morePages) {
+						streams.pop();
+					}
+
+					if (req.user) {
+						streams.map(function (e) {
+							e = e.afterSave(req.user);
+						});
+					}
+
+					json.good({
+						records: streams,
+						morePages: morePages
+					}, res);
+				}
+			});
+		};
+
+		return getStreams();
+		
 	};
 
 	obj.single = function (req, res) {

@@ -20,6 +20,7 @@
 		vm.save = save;
 		vm.unsave = unsave;
 		vm.getComments = getComments;
+		vm.loadMore = loadMore;
 		vm.openAddComment = openAddComment;
 		vm.openDeleteComment = openDeleteComment;
 		vm.commentUpvote = commentUpvote;
@@ -29,6 +30,9 @@
 		vm.commentPage = 0;
 		vm.lastUpdated = 0;
 		vm.commentsFilter = '';
+		vm.orderByDate = orderByDate;
+		vm.orderByScore = orderByScore;
+		vm.orderBySaves = orderBySaves;
 
 		function getCurrentUser() {
 			if (appAuth.isLoggedIn()) {
@@ -39,9 +43,12 @@
 		}
 
 		function getThread() {
+			var threadName;
+
 			var threadData = appThreads.single.get({threadId: threadId}, function() {
 				vm.threads = [threadData.res.record];
 				vm.isMod = threadData.res.isMod;
+				threadName = vm.threads[2];
 			});
 		}
 
@@ -101,6 +108,12 @@
 			});
 		}
 
+		function loadMore() {
+			vm.commentPage++;
+			vm.lastUpdated = 0;
+			vm.getComments({append: true});
+		}
+
 		function openDeleteThread () {
 			$mdDialog.show({
 				controller: [
@@ -109,6 +122,8 @@
 					function ($scope, $mdDialog) {
 						$scope.close = function() {
 							$mdDialog.hide();
+							appToast.success('Phew, that was a close one');
+							vm.showMod = !vm.showMod;
 						};
 
 						$scope.getThread = function() {
@@ -124,8 +139,9 @@
 									if (response.success) {
 										$mdDialog.hide();
 										$location.url('streams/' + streamId);
+										appToast.error('You have just deleted your thread');
 									} else {
-										alert(response.res.message);
+										appToast.error(response.res.message);
 									}
 								});
 							});
@@ -148,6 +164,7 @@
 					function ($scope, $mdDialog) {
 						$scope.close = function() {
 							$mdDialog.hide();
+							appToast.success('Phew, that was a close one');
 						};
 
 						$scope.getComment = function() {
@@ -161,8 +178,10 @@
 								comment.$destroy({commentId: item._id}, function(response) {
 									if (response.success) {
 										$mdDialog.hide();
+										$state.reload();
+										appToast.error('You have deleted your comment');
 									} else {
-										alert(response.res.message);
+										appToast.error(response.res.message);
 									}
 								});
 							});
@@ -173,7 +192,7 @@
 				],
 				templateUrl: '/app/admin/comments/dialogs/delete.comment.dialog.tmpl.html'
 			}).finally(function() {
-				$state.reload();
+				vm.getComment();
 			});
 		}
 
@@ -272,6 +291,30 @@
 					angular.extend(item, comment.res.record);
 				});
 			});
+		}
+
+		function orderByDate() {
+			if (vm.rowFilter == 'created') {
+				vm.rowFilter = '-created';
+			} else {
+				vm.rowFilter = 'created';
+			}
+		}
+
+		function orderByScore() {
+			if (vm.rowFilter == '-score') {
+				vm.rowFilter = 'score';
+			} else {
+				vm.rowFilter = '-score';
+			}
+		}
+
+		function orderBySaves() {
+			if (vm.rowFilter == '-saves.length') {
+				vm.rowFilter = 'saves.length';
+			} else {
+				vm.rowFilter = '-saves.length';
+			}
 		}
 
 		getCurrentUser();

@@ -1,7 +1,24 @@
-.dialog-form-wrapper
+.edit-page-card
+	margin-top: 75px
+	border-radius: 5px
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5)
+
+.edit-page-header
+	height: 70px
+
+	h3
+		@include lato
+		color: rgba(0,0,0,0.45)
+
+.edit-page-body
+	padding-top: 10px
+	width: 80%
+	margin: 0 auto
+
+.edit-form-wrapper
 	position: relative
-	margin-bottom: 42px
 	width: 100%
+	margin-bottom: 42px
 
 	label
 		position: absolute
@@ -16,26 +33,24 @@
 	input
 		position: relative
 		width: 100%
-		height: 30px
-		padding: 0
-		padding-top: 3px
-		padding-left: 6px
-		@include lato
-		color: rgba(0,0,0,0.55)
 		background: rgba(0,0,0,0.1)
+		@include lato
+		height: 30px
 		border-radius: 4px
+		padding-left: 6px
+		color: rgba(0,0,0,0.55)
 		box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
 		transition: all .4s ease
 
+
 	textarea
 		position: relative
-		width: 100%
-		padding: 0
+		width: 99%
+		background: rgba(0,0,0,0.1)
+		@include lato
 		padding-top: 3px
 		padding-left: 6px
-		@include lato
 		color: rgba(0,0,0,0.55)
-		background: rgba(0,0,0,0.1)
 		border-radius: 4px
 		box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
 		transition: all .4s ease
@@ -45,26 +60,26 @@
 			opacity: 0
 
 		input
-			background: $input-grey
+			background: #d2d9dd
 
 		textarea
-			background: $input-grey
+			background: #d2d9dd
 
 	&.has-success
 		label
 			opacity: 0
 
 		input
-			background: $input-grey
+			background: #d2d9dd
 
 		textarea
-			background: $input-grey
+			background: #d2d9dd
 
 	&.has-error
 		label
 			opacity: 0
 
-.dialog-form-success-check
+.edit-form-success-check
 	position: absolute
 	top: 9px
 	right: 5px
@@ -73,10 +88,7 @@
 	&.ng-enter
 		@include slideInUp()
 
-	&.ng-leave
-		@include slideOutDown()
-
-.dialog-form-error-icon
+.edit-form-error-icon
 	position: absolute
 	top: 9px
 	right: 5px
@@ -85,10 +97,7 @@
 	&.ng-enter
 		@include slideInUp()
 
-	&.ng-leave
-		@include slideOutDown()
-
-.dialog-form-error-container
+.edit-form-error-container
 	> div
 		padding-left: 10px
 
@@ -99,8 +108,23 @@
 	&.ng-enter
 		@include slideInUp()
 
-	&.ng-leave
-		@include slideOutDown()
+.edit-form-submit
+	height: 70px
 
-@import "create"
-@import "delete"
+	button
+		height: 45px
+		width: 120px
+		transition: all .4s ease
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.45)
+
+		span
+			@include lato
+			color: rgba(0,0,0,0.4)
+			transition: all .4s ease
+
+		&:hover
+			background: $accent-green
+
+			span
+				color: #fff
+

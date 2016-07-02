@@ -5,7 +5,7 @@
 	.controller('StreamsCreateController', StreamsCreateController);
 
 	/* @ngInject */
-	function StreamsCreateController ($rootScope, $location, appStreams) {
+	function StreamsCreateController ($rootScope, $location, appStreams, appToast) {
 		var vm = this;
 		vm.reset = reset;
 		vm.create = create;
@@ -31,13 +31,13 @@
 					if (response.success) {
 						reset();
 						$location.url('streams/' + response.res.record._id);
-						alert('yay');
+						appToast.success('You just created a stream called: ' + response.res.record.name);
 					} else {
-						alert(response.res.message);
+						appToast.error(response.res.message);
 					}
 				});
 			} else {
-				alert('poop');
+				appToast.error('Hmm, something seems to be missing...');
 			}
 		}
 	}

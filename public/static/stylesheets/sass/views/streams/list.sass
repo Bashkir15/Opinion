@@ -254,4 +254,43 @@
 			@include open
 			font-weight: 600
 			text-shadow: 1px 1px rgba(0,0,0,0.45)
-			color: #c19f66
+			color: $accent-orange
+
+.streams-list-load-more
+	height: 60px
+	padding-right: 25%
+
+	button
+		height: 40px
+		width: 140px
+		border-radius: 4px
+		border: 1px solid #9a9a9a
+		position: relative
+		transition: all .4s ease
+
+		span
+			@include open
+			font-weight: 600
+			text-shadow: 1px 1px rgba(0,0,0,0.35)
+			color: #9a9a9a
+			transition: all .4s ease
+
+		i
+			position: absolute
+			top: 12px
+			right: 5px
+			color: #fff
+
+		&:hover
+			background: $accent-blue
+
+			span
+				color: #fff
+
+.streams-list-no-more-streams
+	padding-top: 25px
+
+	p
+		@include mont
+		color: #9a9a9a
+		text-shadow: 1px 1px rgba(0,0,0,0.35)

@@ -94,7 +94,8 @@ module.exports = function() {
 					} 
 
 					return json.good({
-						records: threads
+						records: threads,
+						morePages: morePages
 					}, res);
 				}
 			});
@@ -508,6 +509,7 @@ module.exports = function() {
 
 	obj.remove = function (req, res) {
 		Thread.findOne({_id: req.params.threadId})
+		.populate('creator')
 		.exec(function (err, thread) {
 			if (err) {
 				return json.bad(err, res);
@@ -516,6 +518,20 @@ module.exports = function() {
 					if (err) {
 						return json.bad(err, res);
 					}
+
+					User.findOne({_id: thread.creator._id})
+					.exec(function (err, user) {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						user.threadScore = user.threadScore - thread.upvotes.length;
+						user.save(function (err) {
+							if (err) {
+								return json.bad(err, res);
+							}
+						});
+					});
 
 					json.good({}, res);
 				});

@@ -1,0 +1,71 @@
+.delete-dialog-header
+	height: 70px
+	padding: 0 10px
+
+	h3
+		@include lato
+		color: rgba(0,0,0,0.45)
+
+	button
+		outline: none
+
+		span
+			color: rgba(0,0,0,0.45)
+			transition: all .4s ease
+			display: inline-block
+
+		&:hover
+			span
+				transform: scale(1.2, 1.2)
+
+.delete-dialog-body
+	padding: 10px
+	width: 100%
+
+	p
+		text-align: center
+		@include open
+		color: rgba(0,0,0,0.55)
+
+
+.delete-dialog-info-container
+	width: 100%
+	padding-top: 25px
+
+.delete-dialog-info
+	i
+		color: rgba(0,0,0,0.45)
+
+	p
+		color: rgba(0,0,0,0.4)
+		@include lato
+
+.delete-dialog-actions
+	padding-right: 10px
+	padding-top: 20px
+	height: 80px
+
+	button
+		height: 40px
+		width: 120px
+		border-radius: 5px
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
+		transition: all .4s ease
+
+		span
+			@include lato
+			color: #dfe1df
+			text-shadow: 1px 1px rgba(0,0,0,0.35)
+
+.delete-dialog-confirm
+	background: darken($accent-red, 10%)
+	margin-right: 10px
+
+	&:hover
+		background: darken($accent-red, 15%)
+
+.delete-dialog-cancel
+	background: $accent-orange
+
+	&:hover
+		background: darken($accent-orange, 10%)

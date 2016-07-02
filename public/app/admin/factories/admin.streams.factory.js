@@ -29,7 +29,9 @@
 					method: 'DELETE',
 					params: {action: 'remove'}
 				}
-			})
+			}),
+
+			list: $resource('streams/list')
 		};
 	}
 }());
