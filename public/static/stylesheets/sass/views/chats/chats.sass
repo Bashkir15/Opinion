@@ -1,0 +1,55 @@
+.chats-page-container
+	padding-top: 20px
+	padding-bottom: 35px
+	background: darken(#d5d8dd, 7%)
+	min-height: 700px
+
+	> div
+		width: 80%
+		margin: 0 auto
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
+
+.chats-page-header
+	height: 70px
+	background: $darkest-blue
+	box-shadow: 0 0 8px 0 rgba(0,0,0,0.45)
+	padding-left: 15px
+
+	h3
+		@include lato
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 30px
+		color: #d5d8dd
+
+	button
+		height: 70px
+		width: 100px
+		transition: all .4s ease
+		border-right: 1px solid rgba(0,0,0,0.12)
+
+		&:last-child
+			border-right: none
+
+		span
+			@include lato
+			font-weight: 300
+			letter-spacing: 1px
+			line-height: 30px
+			color: #9a9a9a
+			transition: all .4s ease
+
+		&.active
+			background: lighten($darkest-blue, 10%)
+
+			span
+				color: #fff
+
+		&:hover
+			background: lighten($darkest-blue, 10%)
+
+			span
+				color: #fff
+
+@import "inbox"
+@import "single"

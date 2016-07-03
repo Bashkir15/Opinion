@@ -2,10 +2,10 @@
 	'use strict';
 
 	angular.module('opinionated.admin')
-	.controller('ChatsOverviewController', ChatsOverviewController);
+	.controller('ChatsInboxController', ChatsInboxController);
 
 	/* @ngInject */
-	function ChatsOverviewController ($scope, $rootScope, $state, $timeout, $mdDialog, appAuth, appToast, appChats) {
+	function ChatsInboxController ($scope, $rootScope, $state, $timeout, $mdDialog, appAuth, appToast, appChats) {
 		var vm = this;
 		var openChats = {};
 		vm.chats = [];
@@ -13,6 +13,7 @@
 		vm.updateBadges = updateBadges;
 		vm.message = message;
 		vm.updateChats = updateChats;
+		vm.user = appAuth.getUser();
 
 		function updateBadges() {
 			var messageCount = 0;

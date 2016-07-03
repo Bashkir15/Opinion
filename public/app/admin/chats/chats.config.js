@@ -11,10 +11,17 @@
 			abstract: true
 		});
 
-		$stateProvider.state('chats.overview', {
-			url: '/overview',
-			templateUrl: '/app/admin/chats/overview/chats.overview.tmpl.html',
-			controller: 'ChatsOverviewController',
+		$stateProvider.state('chats.inbox', {
+			url: '/inbox',
+			templateUrl: '/app/admin/chats/inbox/chats.inbox.tmpl.html',
+			controller: 'ChatsInboxController',
+			controllerAs: 'vm'
+		});
+
+		$stateProvider.state('chats.inbox.single', {
+			url: '/:chatId',
+			templateUrl: '/app/admin/chats/dialogs/chats.single.tmpl.html',
+			controller: 'ChatsSingleController',
 			controllerAs: 'vm'
 		});
 	}

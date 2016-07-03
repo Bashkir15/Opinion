@@ -102,6 +102,7 @@ module.exports = function() {
 		Chat.find(criteria, null, {sort: {modified: 1}})
 		.populate('creator')
 		.populate('participants')
+		.populate('messages')
 		.skip(parseInt(req.query.page) * config.settings.perPage)
 		.limit(config.settings.perPage + 1)
 		.exec(function (err, chats) {

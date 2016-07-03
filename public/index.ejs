@@ -113,7 +113,7 @@
 						</li>
 					</ul>
 
-				<md-list-item md-ink-ripple ui-sref='chats.overview'>
+				<md-list-item md-ink-ripple ui-sref='chats.inbox'>
 					<i class='icon-bubble'></i>
 
 					<div class='inset'>
@@ -127,13 +127,7 @@
 
 				<ul class='user-menu-nested-list' ng-show="vm.showMessages">
 					<li>
-						<button class='md-ink-ripple' ui-sref='chats.overview'>
-							<span>Overview</span>
-						</button>
-					</li>
-
-					<li>
-						<button class='md-ink-ripple'>
+						<button class='md-ink-ripple' ui-sref='chats.inbox'>
 							<span>Inbox</span>
 						</button>
 					</li>
@@ -223,6 +217,7 @@
 
 			<!-- Directives -->
 			<script src='/app/utilities/directives/password-match/password.match.directive.js'></script>
+			<script src='/app/utilities/directive/set-focus.directive.js'></script>
 
 
 		<!-- Admin -->
@@ -257,7 +252,8 @@
 
 			<!-- Chats -->
 			<script src='/app/admin/chats/chats.config.js'></script>
-			<script src='/app/admin/chats/overview/chats.overview.controller.js'></script>
+			<script src='/app/admin/chats/inbox/chats.inbox.controller.js'></script>
+			<script src='/app/admin/chats/single/chats.single.controller.js'></script>
 
 		<!-- Authentication -->
 		<script src='/app/authentication/authentication.setter.js'></script>

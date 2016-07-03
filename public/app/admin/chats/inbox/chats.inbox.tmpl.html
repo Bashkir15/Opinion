@@ -1,0 +1,47 @@
+<div class='chats-inbox-container'>
+	<div layout='row'>
+		<div class='chats-inbox-left' layout='column'>
+			<div class='chats-inbox-header' layout='row' layout-align='none center'>
+				<h3>Inbox</h3>
+				<span flex></span>
+				<button>Search</button>
+			</div>
+
+			<md-content class='chats-inbox-messages'>
+				<md-list>
+					<md-list-item class='md-2-line' ng-repeat='chat in vm.chats' ui-sref='chats.inbox.single({chatId: chat._id})'>
+						<div class='md-list-item-text'>
+							<div layout='row'>
+								<div layout='column' layout-align='center center' class='chats-inbox-user'>
+									<img ng-src="{{chat.participants[0].picture === vm.user.name ? chat.participants[1].picture : chat.participants[0].picture}}">
+									<p ng-if="vm.user._id === chat.creator._id">{{chat.participants[1].name}}</p>
+									<p ng-if="vm.user._id !== chat.creator._id">{{chat.participants[0].name}}</p> 
+								</div>
+
+								<div flex class='chats-inbox-preview'>
+									<p>{{chat.messages[0].message}}</p>
+								</div>
+							</div>
+
+							<div layout='row' layout-align='none center' class='chats-inbox-chat-toolbar'>
+								<p>{{chat.participants.length}} Participants</p>
+								<span flex></span>
+								<p>{{chat.created | opCalendar}}</p>
+							</div>
+						</div>
+					</md-list-item>
+				</md-list>
+
+				<div ng-if="!vm.chats.length">
+					<p>There are no chats</p>
+				</div>
+			</md-content>
+		</div>
+
+		<div class='chats-inbox-right' layout='column'>
+			<div id='animation-wrapper'>
+				<div ui-view class='chats-single-views'></div>
+			</div>
+		</div>
+	</div>
+</div>
