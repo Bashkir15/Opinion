@@ -88,7 +88,7 @@ ChatsSchema.methods = {
 		var obj = this;
 		obj.lastAccessed.map(function (access) {
 			if (access.user.toString() === user._id.toString()) {
-				obj.unread = acccess.unread;
+				obj.unread = access.unread;
 			}
 		});
 	},

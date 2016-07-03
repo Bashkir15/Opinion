@@ -1,0 +1,34 @@
+<md-dialog class='chat-dialog' flex='60'>
+	<md-dialog-content>
+		<div class='chat-dialog-header' layout='row' layout-align='none center'>
+			<h3>Chat</h3>
+			<span flex></span>
+			<button aria-label='close chat dialog' ng-click="close()">
+				<span>x</span>
+			</button>
+		</div>
+
+		<form name='chatForm' ng-submit="sendMessage(chatForm.$valid)" novalidate>
+			<div class='chat-dialog-wrapper'>
+				<label>Message</label>
+				<textarea name='message' ng-model='message' rows='4' cols='40'></textarea>
+			</div>
+
+			<button type='submit' aria-label='send chat button'>
+				<span>Send Message</span>
+			</button>
+		</form>
+
+		<md-list ng-if="messages.length">
+			<md-list-item ng-repeat='item in messages'>
+				<div class='md-list-item-text' layout='row'>
+					<img ng-src="{{item.creator.picture}}">
+					<div flex>
+						<p>{{item.creator.name}}</p>
+						<p>{{item.message}}</p>
+					</div>
+				</div>
+			</md-list-item>
+		</md-list>
+	</md-dialog-content>
+</md-dialog>

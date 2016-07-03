@@ -1,0 +1,18 @@
+<div class='chat-over-container'>
+	<div class='chats-header'>
+		<h3>Chats</h3>
+	</div>
+
+	<ul ng-if="vm.lastUpdated && vm.chats.length">
+		<li ng-repeat='chat in vm.chats' layout='row'>
+			<button ng-click="vm.message($event, {}, chat)">
+				$ {{chat.participants[0].name === vm.user.name ? chat.participants[1].name : chat.participants[0].name}}
+				<span ng-if="chat.unread">{{chat.unread}}</span>
+			</button>
+		</li>
+	</ul>
+
+	<div ng-if="vm.lastUpdated && !vm.chats.length">
+		<p>You don't have any chats yet</p>
+	</div>
+</div>
