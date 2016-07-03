@@ -9,6 +9,7 @@ import usersRoutes from '../routes/users.server.routes';
 import streamsRoutes from '../routes/streams.server.routes';
 import threadsRoutes from '../routes/threads.server.routes';
 import commentsRoutes from '../routes/comments.server.routes';
+import chatsRoutes from '../routes/chats.server.routes';
 
 module.exports = function (db) {
 	var app = express();
@@ -27,6 +28,7 @@ module.exports = function (db) {
 	app.use('/streams', streamsRoutes);
 	app.use('/threads', threadsRoutes);
 	app.use('/comments', commentsRoutes);
+	app.use('/chats', chatsRoutes);
 
 	return app;
 };
