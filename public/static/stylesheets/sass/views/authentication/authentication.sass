@@ -32,7 +32,7 @@
 		height: 30px
 		padding-left: 6px
 		border-radius: 4px
-		color: rgba(0,0,0,0.4)
+		color: rgba(0,0,0,0.55)
 		box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
 		transition: all .4s ease
 
@@ -41,7 +41,7 @@
 			opacity: 0
 
 		input
-			background: #d2d9dd
+			background: darken($input-grey, 10%)
 
 	&.has-success
 		label
@@ -83,22 +83,25 @@
 		@include slideInUp()
 
 .auth-form-submit
-	height: 75px
+	height: 70px
 
 	button
-		height: 40px
-		width: 220px
-		border-radius: 4px
-		border: 1px solid $accent-green
+		height: 45px
+		width: 150px
 		transition: all .4s ease
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.45)
+		background: $seafoam
+		border-radius: 5px
 
 		span
-			@include lato
-			color: rgba(0,0,0,0.45)
+			@include open
+			letter-spacing: 1px
+			font-weight: 400
+			color: #d5d8dd
 			transition: all .4s ease
 
 		&:hover
-			background: $accent-green
+			background: darken($seafoam, 10%)
 
 			span
 				color: #fff
@@ -109,3 +112,4 @@
 
 @import "signup"
 @import "login"
+@import "profile"

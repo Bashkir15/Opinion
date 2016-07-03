@@ -5,7 +5,7 @@
 	.controller('SignupController', SignupController);
 
 	/* @ngInject */
-	function SignupController ($state, $scope, appStorage, appUsers) {
+	function SignupController ($state, $scope, $rootScope, $location, appStorage, appUsers, appToast) {
 		var vm = this;
 		vm.reset = reset;
 		vm.create = create;
@@ -34,14 +34,23 @@
 				user.$save(function (response) {
 					if (response.success) {
 						reset();
-						$state.go('authentication.login');
+						postSignup(response.res.record, response.res.token);
 					} else {
-						alert(reponse.res.message);
+						appToast.error(reponse.res.message);
 					}
 				});
 			} else {
-				alert('poop');
+				appToast.error('Hmm, something seems to be missing...');
 			}
+		}
+
+		function postSignup (user, token) {
+			var serializedUser = angular.toJson(user);
+			appStorage.set('user', serializedUser);
+			appStorage.set('opinion-token', token);
+			$rootScope.$broadcast('loggedIn')
+			appToast.success('Welcome to Opinionated, ' + user.name + '. Let\'s get started');
+			$location.url(user._id + '/profileInfo');
 		}
 	}
 }());

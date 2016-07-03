@@ -5,7 +5,7 @@
 	.controller('ProfileController', ProfileController);
 
 	/* @ngInject */
-	function ProfileController ($scope, $state, $stateParams, $location, $timeout, $mdDialog, appAuth, appUsers, Upload, appToast) {
+	function ProfileController ($scope, $rootScope, $state, $stateParams, $location, $timeout, $mdDialog, appAuth, appUsers, Upload, appToast) {
 		var vm = this;
 		var userId = $stateParams.userId;
 		vm.stateName = $state.current.name;
@@ -52,6 +52,8 @@
 				}).progress(function (evt) {
 					vm.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 				}).success(function (data, status, headers, config) {
+					$rootScope.$broadcast('userImageUpload');
+				}).then(function() {
 					vm.getProfile({reload: true});
 				});
 			}

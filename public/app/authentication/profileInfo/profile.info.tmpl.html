@@ -1,0 +1,85 @@
+<div class='profile-info-container'>
+	<div>
+		<md-card class='profile-info-card'>
+			<div class='profile-info-header' layout='row' layout-align='center center'>
+				<h3>{{vm.user.name}}, Your Profile Awaits</h3>
+			</div>
+
+			<div class='profile-info-body' layout='column'>
+				<p>Here you you can provide some infomation to buff up your account</p>
+				<span>None of this is required, so if you want <a ui-sref="profile.overview({userId: vm.user._id})">you can skip it</a></span>
+				<p>Don't worry, you can update this information when you feel like it from your profile</p>
+
+				<form name='vm.profileInfoForm' novalidate>
+					<div class='profile-info-line-1' layout='row' layout-align='none center'>
+						<div class='profile-info-wrapper' ng-class="{'has-focus': vm.profileInfoForm.gender.hasFocus,
+						'has-success': vm.profileInfoForm.gender.$valid && vm.profileInfoForm.gender.$touched}">
+							<label>Gender</label>
+							<input type='text' name='gender' ng-model='vm.profile.gender' ng-focus='vm.profileInfoForm.gender.hasFocus=true' ng-blur="vm.profileInfoForm.gender.hasFocus=false">
+							<i class='icon-checkmark profile-info-success-check' ng-if="vm.profileInfoForm.gender.$valid && vm.profileInfoForm.gender.$touched"></i>
+						</div>
+
+						<div class='profile-info-wrapper' ng-class="{'has-focus': vm.profileInfoForm.occupation.hasFocus,
+						'has-success': vm.profileInfoForm.occupation.$valid && vm.profileInfoForm.occupation.$touched}">
+							<label>Occupation</label>
+							<input type='text' name='occupation' ng-model='vm.profile.occupation' ng-focus='vm.profileInfoForm.occupation.hasFocus=true' ng-blur="vm.profileInfoForm.occupation.hasFocus=false">
+							<i class='icon-checkmark profile-info-success-check' ng-if="vm.profileInfoForm.occupation.$valid && vm.profileInfoForm.occupation.$touched"></i>
+						</div>
+					</div>
+
+					<div class='profile-info-line-2' layout='row' layout-align='none center'>
+						<div class='profile-info-wrapper' ng-class="{'has-focus': vm.profileInfoForm.phone.hasFocus,
+						'has-success': vm.profileInfoForm.phone.$valid && vm.profileInfoForm.phone.$touched}">
+							<label>Phone</label>
+							<input type='text' name='phone' ng-model='vm.profile.phone' ng-focus='vm.profileInfoForm.phone.hasFocus=true' ng-blur="vm.profileInfoForm.phone.hasFocus=false">
+							<i class='icon-checkmark profile-info-success-check' ng-if="vm.profileInfoForm.phone.$valid && vm.profileInfoForm.phone.$touched"></i>
+						</div>
+
+						<div class='profile-info-wrapper' ng-class="{'has-focus': vm.profileInfoForm.birthday.hasFocus,
+						'has-success': vm.profileInfoForm.birthday.$valid && vm.profileInfoForm.birthday.$touched}">
+							<label>Birthday</label>
+							<input type='text' name='birthday' ng-model='vm.profile.birthday' ng-focus='vm.profileInfoForm.birthday.hasFocus=true' ng-blur="vm.profileInfoForm.birthday.hasFocus=false">
+							<i class='icon-checkmark profile-info-success-check' ng-if="vm.profileInfoForm.birthday.$valid && vm.profileInfoForm.birthday.$touched"></i>
+						</div>
+					</div>
+
+					<div class='profile-info-line-3' layout='row' layout-align='none center'>
+						<div class='profile-info-full-wrapper' ng-class="{'has-focus': vm.profileInfoForm.interests.hasFocus,
+						'has-success': vm.profileInfoForm.interests.$valid && vm.profileInfoForm.interests.$touched}">
+							<label>Interests</label>
+							<textarea type='text' name='interests' ng-model='vm.profile.interests' rows='4' cols='40' ng-focus='vm.profileInfoForm.interests.hasFocus=true' ng-blur="vm.profileInfoForm.interests.hasFocus=false"></textarea>
+							<i class='icon-checkmark profile-info-full-success-check' ng-if="vm.profileInfoForm.interests.$valid && vm.profileInfoForm.interests.$touched"></i>
+						</div>
+					</div>
+
+					<div class='profile-info-line-4' layout='row' layout-align='none center'>
+						<div class='profile-info-full-wrapper' ng-class="{'has-focus': vm.profileInfoForm.bio.hasFocus,
+						'has-success': vm.profileInfoForm.bio.$valid && vm.profileInfoForm.bio.$touched}">
+							<label>Bio</label>
+							<textarea type='text' name='bio' ng-model='vm.profile.bio' rows='5' cols='40' ng-focus='vm.profileInfoForm.bio.hasFocus=true' ng-blur="vm.profileInfoForm.bio.hasFocus=false"></textarea>
+							<i class='icon-checkmark profile-info-full-success-check' ng-if="vm.profileInfoForm.bio.$valid && vm.profileInfoForm.bio.$touched"></i>
+						</div>
+					</div>
+
+					<div class='profile-info-line-5' layout='row' layout-align='center center'>
+						<button ngf-select="vm.uploadImage(file)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/*" ng-class="{'uploaded': vm.uploaded != ''}">
+							<span>Upload Picture</span>
+							<i class='icon-checkmark' ng-if="vm.uploaded != ''"></i>
+						</button>
+					</div>
+
+				</form>
+			</div>
+
+			<div class='profile-info-actions' layout='row' layout-align='end center'>
+				<button aria-label='submit profile info form' ng-click="vm.submit()" class='profile-info-submit'>
+					<span>Submit</span>
+				</button>
+
+				<button aria-label='skip profile info form' ui-sref="profile.overview({userId: vm.user._id})" class='profile-info-skip'>
+					<span>Skip</span>
+				</button>
+			</div>
+		</md-card>
+	</div>
+</div>

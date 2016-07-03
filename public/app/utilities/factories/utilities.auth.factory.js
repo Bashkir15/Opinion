@@ -5,11 +5,12 @@
 	.factory('appAuth', appAuth);
 
 	/* @ngInject */
-	function appAuth (appStorage) {
+	function appAuth ($http, appStorage) {
 		var service = {
 			getUser: getUser,
 			getToken: getToken,
-			isLoggedIn: isLoggedIn
+			isLoggedIn: isLoggedIn,
+			refreshUser: refreshUser
 		};
 
 		return service;
@@ -30,6 +31,13 @@
 
 		function isLoggedIn() {
 			return appStorage.get('opinion-token');
+		}
+
+		function refreshUser () {
+			$http.get('users/me').success(function (response) {
+				var serializedUser = angular.toJson(response.res.record);
+				appStorage.set('user', serializedUser);
+			});
 		}
 	}
 }());

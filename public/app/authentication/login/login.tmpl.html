@@ -8,7 +8,7 @@
 			<div class='login-form-container'>
 				<form name='vm.loginForm' ng-submit="vm.login(vm.loginForm.$valid)" novaliate>
 					<div class='auth-form-wrapper' ng-class="{'has-focus': vm.loginForm.email.hasFocus,
-					'has-success': vm.loginForm.email.$valid,
+					'has-success': vm.loginForm.email.$valid && vm.loginForm.email.$touched,
 					'has-error': vm.loginForm.email.$error && vm.loginForm.email.$touched,
 					'is-empty': !vm.loginForm.email.$viewValue}">
 						<label>Email</label>
@@ -23,7 +23,7 @@
 					</div>
 
 					<div class='auth-form-wrapper' ng-class="{'has-focus': vm.loginForm.password.hasFocus,
-					'has-success': vm.loginForm.password.$valid,
+					'has-success': vm.loginForm.password.$valid && vm.loginForm.password.$touched,
 					'has-error': vm.loginForm.password.$error && vm.loginForm.password.$touched,
 					'is-empty': !vm.loginForm.password.$viewValue}">
 						<label>Password</label>

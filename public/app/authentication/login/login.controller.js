@@ -5,7 +5,7 @@
 	.controller('LoginController', LoginController);
 
 	/* @ngInject */
-	function LoginController ($scope, $rootScope, $location, appStorage, appUsers) {
+	function LoginController ($scope, $rootScope, $location, appStorage, appUsers, appToast) {
 		var vm = this;
 		vm.reset = reset;
 		vm.login = login;
@@ -33,11 +33,11 @@
 						reset();
 						postLogin(response.res.record, response.res.token);
 					} else {
-						alert(response.res.message);
+						appToast.error(response.res.message);
 					}
 				});
 			} else {
-				alert('poop');
+				appToast.error('Hmm, seems like something is missing');
 			}
 		}
 
@@ -46,7 +46,8 @@
 			appStorage.set('user', serializedUser);
 			appStorage.set('opinion-token', token);
 			$rootScope.$broadcast('loggedIn');
-			$location.url('profile/' + user._id);
+			appToast.success('Welcome back, ' + user.name);
+			$location.url('profile/' + user._id + '/overview');
 		}
 	}
 }());
