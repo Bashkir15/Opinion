@@ -21,6 +21,7 @@ module.exports = function (db) {
 	app.use(morgan('dev'));
 	app.use(multipart());
 	app.use(express.static(path.join(__dirname, '../../public')));
+	app.use(express.static(path.join(__dirname, '../../dist')));
 	app.disable('etag');
 
 	app.use('/', indexRoutes);
