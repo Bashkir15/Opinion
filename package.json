@@ -17,6 +17,7 @@
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.1",
     "connect-multiparty": "^2.0.0",
+    "ejs": "^2.4.2",
     "express": "^4.13.4",
     "fs": "0.0.2",
     "gulp-angular-filesort": "^1.1.1",
