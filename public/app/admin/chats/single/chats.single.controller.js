@@ -11,6 +11,7 @@
 		vm.getChat = getChat;
 		vm.sendMessage = sendMessage;
 		vm.scrollToBottom = scrollToBottom;
+		vm.closeMessage = closeMessage;
 		vm.user = appAuth.getUser();
 		vm.chat = [];
 		vm.obj = {
@@ -30,6 +31,10 @@
 				var scroller = document.getElementById('scrollContainer');
 				scroller.scrollTop = scroller.scrollHeight;
 			}, 0, false);
+		}
+
+		function closeMessage() {
+			$state.go('chats.inbox');
 		}
 
 		function sendMessage (isValid) {

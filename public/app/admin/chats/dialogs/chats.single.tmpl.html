@@ -5,7 +5,7 @@
 			<p>{{chat.participants[0].name === vm.user.name ? chat.participants[1].name : chat.participants[0].name}}</p>
 			<p>{{chat.participants[0].name === vm.user.name ? chat.participants[1].email : chat.participants[0].email}}</p>
 			<span flex></span>
-			<button aria-label='close this chat'>
+			<button aria-label='close this chat' ng-click="vm.closeMessage()">
 				<span>x</span>
 			</button>
 		</div>
@@ -40,9 +40,9 @@
 
 		<div class='chats-single-form' layout='column'>
 			<form name='vm.chatForm' novalidate>
-				<div class='chat-form-wrapper'>
+				<div class='chat-form-wrapper' ng-class="{'has-focus': vm.chatForm.message.hasFocus}">
 					<label>Message</label>
-					<textarea ng-model='vm.obj.message' ng-keyup="$event.keyCode == 13 && vm.sendMessage(vm.chatForm.$valid)" name='message' rows='4' cols='20' required></textarea>
+					<textarea ng-model='vm.obj.message' ng-keyup="$event.keyCode == 13 && vm.sendMessage(vm.chatForm.$valid)" name='message' rows='4' cols='20' required ng-focus="vm.chatForm.message.hasFocus=true" ng-blur="vm.chatForm.message.hasFocus=false"></textarea>
 				</div>
 			</form>
 		</div>

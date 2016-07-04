@@ -4533,7 +4533,8 @@ md-toast.md-error-toast-theme .md-toast-content {
   margin-right: 70px; }
   .chats-bubble span {
     font-family: 'Lato', sans-serif;
-    color: rgba(0, 0, 0, 0.45); }
+    color: rgba(0, 0, 0, 0.45);
+    word-wrap: break-word; }
 
 .chats-bubble-corner {
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/bubble-corner.png") 0 0 no-repeat;

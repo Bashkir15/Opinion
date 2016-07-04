@@ -20,7 +20,8 @@ module.exports = function() {
 			}
 
 			json.good({
-				record: user
+				record: user,
+				token: user.token
 			}, res);
 		});
 	};

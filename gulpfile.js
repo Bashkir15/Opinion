@@ -20,7 +20,7 @@ var config = {
 	},
 
 	prod: {
-		css: './dist',
+		css: './dist/styles',
 		js: './dist/scripts'
 	}
 };
@@ -37,6 +37,7 @@ gulp.task('mincss', function() {
 	gulp.src(config.dev.mainCss)
 		.pipe(plumber())
 		.pipe(mincss())
+		.pipe(rename('main.min.css'))
 		.pipe(gulp.dest(config.prod.css))
 	}
 );
@@ -47,7 +48,7 @@ gulp.task('scripts', function() {
 		.pipe(annotate())
 		.pipe(concat('app.js'))
 		.pipe(uglifyJs())
-		.pipe(rename('app.js.min'))
+		.pipe(rename('app.min.js'))
 		.pipe(gulp.dest(config.prod.js))
 	}
 );
