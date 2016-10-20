@@ -343,6 +343,10 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
+	var _login = __webpack_require__(24);
+
+	var _login2 = _interopRequireDefault(_login);
+
 	var _signup = __webpack_require__(22);
 
 	var _signup2 = _interopRequireDefault(_signup);
@@ -351,6 +355,7 @@ webpackJsonp([0],[
 
 	var authComponents = _angular2.default.module('auth.components', []);
 	authComponents.component('signupForm', _signup2.default);
+	authComponents.component('loginForm', _login2.default);
 
 	exports.default = authComponents;
 
@@ -444,6 +449,56 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = Auth;
+
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var LoginFormCtrl = function () {
+		function LoginFormCtrl(authService) {
+			'ngInject';
+
+			_classCallCheck(this, LoginFormCtrl);
+
+			this.data = {};
+			this._Auth = authService;
+		}
+
+		_createClass(LoginFormCtrl, [{
+			key: 'login',
+			value: function login(isValid) {
+				if (isValid) {
+					this._Auth.login(this.data).then(function (response) {
+						alert('yay!');
+					}, function (err) {
+						alert('boo, but still yay');
+					});
+				} else {
+					alert('hmm, form issue!');
+				}
+			}
+		}]);
+
+		return LoginFormCtrl;
+	}();
+
+	var loginForm = {
+		scope: {},
+		controller: LoginFormCtrl,
+		templateUrl: './app/components/auth/login/login.component.html'
+	};
+
+	exports.default = loginForm;
 
 /***/ }
 ]);

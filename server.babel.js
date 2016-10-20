@@ -1,7 +1,11 @@
 import http from 'http';
 import cluster from 'cluster'
+import mongoose from 'mongoose'
 
 var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
+const db = mongoose.connect(config.db, () => {
+	console.log('The application has connected to the: ' + config.db + ' database');
+});
 
 if (cluster.isMaster) {
 	var cpuCount = require('os').cpus().length;
@@ -15,7 +19,7 @@ if (cluster.isMaster) {
 		cluster.fork();
 	});
 } else {
-	var app = require('./server/config/express')();
+	var app = require('./server/config/express')(db);
 	var server = require('http').Server(app);
 
 	server.listen(config.server.port, () => {

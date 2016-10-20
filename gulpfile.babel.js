@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
+import notify from 'gulp-notify';
 import sass from 'gulp-sass';
 import uglifycss from 'gulp-uglifycss';
 import autoprefixer from 'gulp-autoprefixer';
@@ -21,6 +22,17 @@ const paths = {
 	}
 };
 
+const interceptErrors = (error) => {
+	let args = Array.prototype.slice.call(arguments);
+
+	notify.onError({
+		title: 'Compile Error',
+		message: '<%= error.message %>'
+	}).apply(this, args);
+
+	this.emit('end');
+};
+
 gulp.task('browserSync', () => {
 	browserSync.init(null, {
 		proxy: 'http://localhost:8000',
@@ -32,7 +44,8 @@ gulp.task('browserSync', () => {
 gulp.task('styles', () => {
 	gulp.src(paths.dev.sass)
 		.pipe(plumber({
-			errorHandler: function (err) {
+			errorhandler: function(err) {
+				notify("Error: <%= err" );
 				console.log(err);
 				this.emit('end');
 			}
@@ -46,16 +59,17 @@ gulp.task('styles', () => {
 		.pipe(autoprefixer({
 			browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 			cascade: true
-		}))	
+		}))
 		.pipe(uglifycss({
 			maxLineLne: 80
 		}))
 		.pipe(sourceMaps.write())
 		.pipe(rename((path) => {
 			path.extname = '.min.css'
-		})
+		}))
 		.pipe(gulp.dest(paths.prod.css))
-		.pipe(browserSync.reload({stream: true}))
+		.pipe(notify('Styles task completed'))
+		.pipe(browserSync.reload({stream: true}))		
 });
 
 gulp.task('html', () => {

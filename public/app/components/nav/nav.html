@@ -1,10 +1,35 @@
 <div class='nav'>
 	<div class='nav-left'>
 		<div class='nav-item'>
-			<p>Yay!!</p>
+			<a ui-sref='app.home'>
+				<button>
+					<span>Opinionated</span>
+				</button>
+			</a>
+		</div>
+
+		<div class='nav-item'>
+			<button>
+				<span>Streams</span>
+			</button>
 		</div>
 	</div>
 
-	<a ui-sref='app.auth.signup'>Signup</a>
-	<a ui-sref='app.auth.login'>Login</a>
+	<div class='nav-right'>
+		<div class='nav-item'>
+			<a ui-sref='app.auth.signup'>
+				<button>
+					<span>Signup</span>
+				</button>
+			</a>
+		</div>
+
+		<div class='nav-item'>
+			<a ui-sref='app.auth.login'>
+				<button>
+					<span>Login</span>
+				</button>
+			</a>
+		</div>
+	</div>
 </div>
