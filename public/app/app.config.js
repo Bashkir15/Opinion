@@ -1,13 +1,15 @@
-(function() {
-	'use strict';
+function appConfig ($stateProvider, $urlRouterProvider, $locationProvider) {
+	'ngInject';
 
-	angular.module('opinionated')
-	.config(appConfig);
+	//$locationProvider.html5Mode(true);
 
-	/* @ngInject */
-	function appConfig ($stateProvider, $urlRouterProvider, $httpProvider) {
-		$urlRouterProvider.when('', '/home');
-		$urlRouterProvider.when('/', '/home');
-		$httpProvider.interceptors.push('tokenHttpInterceptor');
-	}
-}());
+
+	$stateProvider.state('app', {
+		abstract: true,
+		templateUrl: './app/pages/app-layout.html'
+	});
+
+	$urlRouterProvider.otherwise("/");
+}
+
+export default appConfig;

@@ -1,25 +1,29 @@
-'use strict';
+import http from 'http';
+import cluster from 'cluster'
 
-import mongoose from 'mongoose';
-import users from './server/models/users';
-import streams from './server/models/streams';
-import threads from './server/models/threads';
-import comments from './server/models/comments';
-import chats from './server/models/chats';
 var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
 
-var db = mongoose.connect(config.db, ()=> {
-	console.log('Mongoose connected');
-});
+if (cluster.isMaster) {
+	var cpuCount = require('os').cpus().length;
 
-var app = require('./server/config/express')(db);
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+	for (var i = 0; i < cpuCount; i++) {
+		cluster.fork();
+	}
 
-app.listen(config.server.port, () => {
-	var host = config.server.host;
-	var port = config.server.port;
-	console.log('Application up and running at ' + host + port);
-});
+	cluster.on('exit', (worker) => {
+		console.log('Worker %d died', worker.id);
+		cluster.fork();
+	});
+} else {
+	var app = require('./server/config/express')();
+	var server = require('http').Server(app);
 
-module.exports = app;
+	server.listen(config.server.port, () => {
+		console.log('The application is up and running at: ' + config.server.host + config.server.port);
+	});
+
+	global.config = config;
+	global.server = server;
+
+	module.exports = app;
+}

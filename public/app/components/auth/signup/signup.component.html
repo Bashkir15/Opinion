@@ -1,0 +1,35 @@
+<div class='signup-form-container'>
+	<form name='$ctrl.signupForm' ng-submit="$ctrl.signup($ctrl.signupForm.$valid)" novalidate>
+		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.name.hasFocus,
+		'has-success': $ctrl.signupForm.name.$valid}">
+			<label>Name</label>
+			<input type='text' name='name' ng-model='$ctrl.data.name' required ng-focus="$ctrl.signupForm.name.hasFocus=true" ng-blur="$ctrl.signupForm.hasFocus=false">
+		</div>
+
+		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.username.hasFocus}">
+			<label>Username</label>
+			<input type='text' name='username' ng-model='$ctrl.data.username' required>
+		</div>
+
+		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.email.hasFocus}">
+			<label>Email</label>
+			<input type='email' name='email' ng-model="$ctrl.data.email" required>
+		</div>
+
+		<div class='auth-form-wrapper'>
+			<label>Password</label>
+			<input type='password' name='password' ng-model='$ctrl.data.password' required>
+		</div>
+
+		<div class='auth-form-wrapper'>
+			<label>Confirm Password</label>
+			<input type='password' name='confirm' ng-model="$ctrl.data.confirm" required>
+		</div>
+
+		<div class='auth-form-submit'>
+			<button type='submit' aria-label='submit signup form'>
+				<span>Sign up!</span>
+			</button>
+		</div>
+	</form>
+</div>
