@@ -1,15 +1,21 @@
 class SignupFormCtrl {
-	constructor(authService) {
+	constructor($state, authService) {
 		'ngInject';
 
-		this.data = {};
+		this.data = {
+			name: '',
+			username: '',
+			email: '',
+			password: ''
+		};
+
 		this._Auth = authService;
 	}
 
 	signup(isValid) {
 		if (isValid) {
 			this._Auth.signup(this.data).then((response) => {
-				alert('yay!');
+				$state.go('app.auth.login');
 			},
 				(err) => {
 					alert('boo, but still yay');

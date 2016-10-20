@@ -8,9 +8,7 @@ class Auth {
 		return this._$http({
 			url: '/users',
 			method: 'POST',
-			data: {
-				user: credentials
-			}
+			data: credentials
 		}).then((response) => {
 			console.log(response);
 		});

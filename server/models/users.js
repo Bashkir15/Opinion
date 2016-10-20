@@ -46,6 +46,11 @@ var UserSchema = new mongoose.Schema({
 		default: 'local'
 	},
 
+	roles: {
+		type: Array,
+		default: ['authenticated']
+	},
+
 /*	loginAttempts: {
 		type: Number,
 		default: 0,

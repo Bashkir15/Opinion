@@ -12,6 +12,8 @@ webpackJsonp([0],[
 
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 
+	__webpack_require__(25);
+
 	__webpack_require__(4);
 
 	__webpack_require__(12);
@@ -22,7 +24,7 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = [_angularUiRouter2.default, 'app.pages', 'app.components'];
+	var requires = [_angularUiRouter2.default, 'app.config', 'app.pages', 'app.components'];
 
 	window.app = _angular2.default.module('app', requires);
 
@@ -374,12 +376,18 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var SignupFormCtrl = function () {
-		function SignupFormCtrl(authService) {
+		function SignupFormCtrl($state, authService) {
 			'ngInject';
 
 			_classCallCheck(this, SignupFormCtrl);
 
-			this.data = {};
+			this.data = {
+				name: '',
+				username: '',
+				email: '',
+				password: ''
+			};
+
 			this._Auth = authService;
 		}
 
@@ -388,7 +396,7 @@ webpackJsonp([0],[
 			value: function signup(isValid) {
 				if (isValid) {
 					this._Auth.signup(this.data).then(function (response) {
-						alert('yay!');
+						$state.go('app.auth.login');
 					}, function (err) {
 						alert('boo, but still yay');
 					});
@@ -436,9 +444,7 @@ webpackJsonp([0],[
 				return this._$http({
 					url: '/users',
 					method: 'POST',
-					data: {
-						user: credentials
-					}
+					data: credentials
 				}).then(function (response) {
 					console.log(response);
 				});
@@ -499,6 +505,74 @@ webpackJsonp([0],[
 	};
 
 	exports.default = loginForm;
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _jwtService = __webpack_require__(26);
+
+	var _jwtService2 = _interopRequireDefault(_jwtService);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var configModule = _angular2.default.module('app.config', []);
+	configModule.service('storage', _jwtService2.default);
+
+	exports.default = configModule;
+
+/***/ },
+/* 26 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Storage = function () {
+		function Storage() {
+			_classCallCheck(this, Storage);
+
+			this.title = 'localStorage';
+		}
+
+		_createClass(Storage, [{
+			key: 'get',
+			value: function get(item) {
+				return localStorage.getItem(item);
+			}
+		}, {
+			key: 'set',
+			value: function set(item, val) {
+				return localStorage.setItem(item, val);
+			}
+		}, {
+			key: 'remove',
+			value: function remove(item) {
+				return localStorage.removeItem(item);
+			}
+		}]);
+
+		return Storage;
+	}();
+
+	exports.default = Storage;
 
 /***/ }
 ]);

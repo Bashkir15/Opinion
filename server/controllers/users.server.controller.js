@@ -11,7 +11,7 @@ module.exports = () => {
 	obj.create = (req, res) => {
 		var roles = ['authenticated'];
 
-		User.cound({}, (err, len) => {
+		User.count({}, (err, len) => {
 			if (!len) {
 				roles.push('admin');
 			}

@@ -1,6 +1,7 @@
 import http from 'http';
 import cluster from 'cluster'
 import mongoose from 'mongoose'
+import Users from './server/models/users'
 
 var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
 const db = mongoose.connect(config.db, () => {

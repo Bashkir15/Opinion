@@ -1,12 +1,14 @@
 import angular from 'angular';
 import router from 'angular-ui-router'
 
+import "./config/app.config";
 import "./pages/pages";
 import "./components/components";
 
 
 const requires = [
 	router,
+	'app.config',
 	'app.pages',
 	'app.components'
 ];
