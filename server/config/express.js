@@ -5,6 +5,8 @@ import compression from 'compression';
 import fs from 'fs';
 import path from 'path';
 
+import userRoutes from '../routes/users.server.routes';
+
 module.exports = (db) => {
 	const app = express();
 
@@ -27,6 +29,8 @@ module.exports = (db) => {
 	app.use(express.static(path.join(__dirname, '../../public')));
 	app.use(express.static(path.join(__dirname, '../../dist')));
 	app.use(express.static(path.join(__dirname, '../../node_modules')));
+
+	app.use('/users', userRoutes);
 
 	return app;
 }
