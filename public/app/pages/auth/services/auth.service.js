@@ -29,6 +29,15 @@ class Auth {
 			this._Storage.set('opinion-token', response.data.res.token);
 		});
 	}
+
+	test() {
+		return this._$http({
+			url: '/users',
+			method: 'GET'
+		}).then((response) => {
+			console.log(response.data.res.stuff);
+		});
+	}
 }
 
 export default Auth

@@ -17,7 +17,6 @@ module.exports = () => {
 			}
 
 			var user = new User(req.body);
-			var token = auth.generateToken(user);
 			user.provider = 'local';
 			user.roles = roles;
 
@@ -27,8 +26,7 @@ module.exports = () => {
 				}
 
 				json.good({
-					record: user,
-					token: token
+					record: user
 				}, res);
 			});
 		});
@@ -48,8 +46,6 @@ module.exports = () => {
 				if (isMatch) {
 					var token = auth.generateToken(user);
 
-					console.log(user);
-
 					return json.good({
 						record: user,
 						token: token
@@ -58,6 +54,14 @@ module.exports = () => {
 					return json.bad({message: 'Sorry, either your email or password were incorrect'}, res);
 				}
 			});
+		});
+	};
+
+	obj.test = (req, res) => {
+		User.findOne({email: 'Forest.d.collins@gmail.com'}, (err, user) => {
+			json.good({
+				user: user
+			}, res);
 		});
 	};
 

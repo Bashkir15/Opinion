@@ -24,6 +24,16 @@ class LoginFormCtrl {
 			alert('hmm, form issue!');
 		}
 	}
+
+	tester() {
+		this._Auth.test().then((response) => {
+			alert('meow');
+		},
+			(err) => {
+				alert('blah');
+			}
+		);
+	}
 }
 
 

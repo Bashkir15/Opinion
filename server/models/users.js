@@ -59,7 +59,9 @@ var UserSchema = new mongoose.Schema({
 
 	lockUntil: {
 		type: Number
-	}
+	},
+
+	token: String
 });
 
 UserSchema.set('toJSON', {

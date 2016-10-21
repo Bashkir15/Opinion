@@ -479,6 +479,16 @@ webpackJsonp([0],[
 					_this._Storage.set('opinion-token', response.data.res.token);
 				});
 			}
+		}, {
+			key: 'test',
+			value: function test() {
+				return this._$http({
+					url: '/users',
+					method: 'GET'
+				}).then(function (response) {
+					console.log(response.data.res.stuff);
+				});
+			}
 		}]);
 
 		return Auth;
@@ -527,6 +537,15 @@ webpackJsonp([0],[
 				} else {
 					alert('hmm, form issue!');
 				}
+			}
+		}, {
+			key: 'tester',
+			value: function tester() {
+				this._Auth.test().then(function (response) {
+					alert('meow');
+				}, function (err) {
+					alert('blah');
+				});
 			}
 		}]);
 
