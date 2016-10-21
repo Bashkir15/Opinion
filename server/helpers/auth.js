@@ -38,7 +38,30 @@ function ensureAuthorized (req, res, next) {
 	}
 }
 
+function justGetUser (req, res, next) {
+	var User = mongoose.model("User");
+	var bearerToken;
+	var bearerHeader = req.headers['authorization'];
+
+	if (typeof bearerHeader !== 'undefined') {
+		var bearer = bearerHeader.split(" ");
+		bearerToken = bearer[1];
+
+		var decoded = jwt.verify(bearerToken, global.config.secret);
+		var requestedUser = decoded.user._id;
+
+		User.findOne({_id: requestedUser}, (err, user) => {
+			if (user) {
+				req.user = user;
+			}
+
+			next();
+		});
+	}
+}
+
 module.exports = {
 	generateToken: generateToken,
-	ensureAuthorized: ensureAuthorized
+	ensureAuthorized: ensureAuthorized,
+	justGetUser: justGetUser
 };

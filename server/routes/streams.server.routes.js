@@ -6,5 +6,6 @@ var router = express.Router();
 var streams = streamController();
 
 router.post('/', auth.ensureAuthorized, streams.create);
+router.get('/', auth.justGetUser, streams.list);
 
 module.exports = router;

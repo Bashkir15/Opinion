@@ -24,11 +24,11 @@ var StreamSchema = new mongoose.Schema({
 		get: escapeProperty
 	},
 
-/*	creator: {
+	creator: {
 		type: mongoose.Schema.ObjectId,
 		required: true,
 		ref: 'User'
-	}, */
+	}, 
 
 	subscribers: [{
 		type: mongoose.Schema.ObjectId,
