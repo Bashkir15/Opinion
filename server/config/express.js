@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 
 import userRoutes from '../routes/users.server.routes';
+import streamRoutes from '../routes/streams.server.routes';
 
 module.exports = (db) => {
 	const app = express();
@@ -31,6 +32,7 @@ module.exports = (db) => {
 	app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 	app.use('/users', userRoutes);
+	app.use('/streams', streamRoutes);
 
 	return app;
 }

@@ -52,9 +52,11 @@ webpackJsonp([0],[
 
 	__webpack_require__(8);
 
+	__webpack_require__(29);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['home', 'auth'];
+	var requires = ['home', 'auth', 'streams'];
 
 	var pagesModule = _angular2.default.module("app.pages", requires);
 
@@ -266,9 +268,11 @@ webpackJsonp([0],[
 
 	__webpack_require__(21);
 
+	__webpack_require__(32);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['auth.components'];
+	var requires = ['auth.components', 'stream.components'];
 
 	var componentModule = _angular2.default.module('app.components', requires);
 	componentModule.component('appNav', _nav2.default);
@@ -643,7 +647,7 @@ webpackJsonp([0],[
 
 		return {
 			request: function request(config) {
-				config.headers.Authorizaton = 'Bearer ' + Storage.get('opinion-token');
+				config.headers.Authorization = 'Bearer ' + Storage.get('opinion-token');
 				return config;
 			},
 
@@ -663,6 +667,201 @@ webpackJsonp([0],[
 	}
 
 	exports.default = authInterceptor;
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _streams = __webpack_require__(30);
+
+	var _streams2 = _interopRequireDefault(_streams);
+
+	var _streams3 = __webpack_require__(34);
+
+	var _streams4 = _interopRequireDefault(_streams3);
+
+	var _streamCreate = __webpack_require__(31);
+
+	var _streamCreate2 = _interopRequireDefault(_streamCreate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var streamsModule = _angular2.default.module('streams', []);
+	streamsModule.config(_streams2.default);
+	streamsModule.service('streamService', _streams4.default);
+	streamsModule.controller('StreamCreateController', _streamCreate2.default);
+
+	exports.default = streamsModule;
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function streamConfig($stateProvider) {
+		'ngInject';
+
+		$stateProvider.state('app.streamsCreate', {
+			url: '/create-stream',
+			controller: 'StreamCreateController',
+			controllerAs: '$ctrl',
+			templateUrl: './app/pages/streams/create/create.html'
+		});
+	}
+
+	exports.default = streamConfig;
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var StreamCtrl = function StreamCtrl() {
+		_classCallCheck(this, StreamCtrl);
+
+		this.title = 'create a stream';
+	};
+
+	exports.default = StreamCtrl;
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _streamCreate = __webpack_require__(33);
+
+	var _streamCreate2 = _interopRequireDefault(_streamCreate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var streamComponents = _angular2.default.module('stream.components', []);
+	streamComponents.component('createStream', _streamCreate2.default);
+
+	exports.default = streamComponents;
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var CreateStreamCtrl = function () {
+		function CreateStreamCtrl(streamService) {
+			'ngInject';
+
+			_classCallCheck(this, CreateStreamCtrl);
+
+			this.data = {
+				name: '',
+				description: ''
+			};
+
+			this._Stream = streamService;
+		}
+
+		_createClass(CreateStreamCtrl, [{
+			key: 'create',
+			value: function create(isValid) {
+				if (isValid) {
+					this._Stream.create(this.data).then(function (response) {
+						alert('yay');
+					}, function (err) {
+						alert('boo');
+					});
+				}
+			}
+		}]);
+
+		return CreateStreamCtrl;
+	}();
+
+	var createStream = {
+		scope: {},
+		controller: CreateStreamCtrl,
+		templateUrl: './app/components/streams/create/create.stream.html'
+	};
+
+	exports.default = createStream;
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Stream = function () {
+		function Stream($http) {
+			'ngInject';
+
+			_classCallCheck(this, Stream);
+
+			this._$http = $http;
+		}
+
+		_createClass(Stream, [{
+			key: 'create',
+			value: function create(credentials) {
+				return this._$http({
+					url: '/streams',
+					method: 'POST',
+					data: credentials
+				}).then(function (response) {
+					console.log(response);
+				});
+			}
+		}]);
+
+		return Stream;
+	}();
+
+	exports.default = Stream;
 
 /***/ }
 ]);

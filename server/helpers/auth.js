@@ -22,8 +22,19 @@ function ensureAuthorized (req, res, next) {
 		var bearer = bearerHeader.split(" ");
 		bearerToken = bearer[1];
 
-		var decodedToken = jwt.decode(bearerToken, global.config.secret);
-		console.log(decodedToken);
+		var decoded = jwt.verify(bearerToken, global.config.secret);
+		var requestedUser = decoded.user._id;
+
+		User.findOne({_id: requestedUser}, (err, user) => {
+			if (err || !user) {
+				return res.sendStatus(403);
+			}
+
+			req.user = user;
+			next();
+		})
+	} else {
+		res.sendStatus(403);
 	}
 }
 

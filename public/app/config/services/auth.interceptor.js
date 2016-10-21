@@ -3,7 +3,7 @@ function authInterceptor($window, Storage) {
 
 	return {
 		request: (config) => {
-			config.headers.Authorizaton = 'Bearer ' + Storage.get('opinion-token');
+			config.headers.Authorization = 'Bearer ' + Storage.get('opinion-token');
 			return config;
 		},
 
