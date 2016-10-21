@@ -1,0 +1,33 @@
+@mixin rale
+	font-family: 'Raleway', Helvetica, sans-serif
+
+@mixin open
+	font-family: 'Open Sans', Helvetica, sans-serif
+
+
+h1
+	@include rale()
+	font-weight: 300
+	font-size: 30px
+	letter-spacing: 3px
+
+
+@media screen and (min-width: 630px)
+	h1
+		font-size: 35px
+		letter-spacing: 6px
+
+@media screen and (min-width: 1000px)
+	h1
+		font-size: 40px
+		letter-spacing: 9px
+
+@media screen and (min-width: 1300px)
+	h1
+		font-size: 45px
+		letter-spacing: 12px
+
+@media screen and (min-width: 1670px)
+	h1
+		font-size: 50px
+		letter-spacing: 15px

@@ -1,0 +1,174 @@
+.authentication-page-wrapper
+	padding-top: 50px
+
+.signup-page-container
+	display: flex
+	flex-direction: column
+	align-items: center
+	padding-top: 50px
+
+
+
+.signup-form
+	width: 80%
+	margin: 0 auto
+
+.signup-form-container
+	padding-top: 70px
+
+.login-page-container
+	display: flex
+	flex-direction: column
+	align-items: center
+	padding-top: 50px
+
+.login-form-container
+	padding-top: 70px
+
+.login-form
+	width: 80%
+	margin: 0 auto
+
+.auth-form-wrapper
+	position: relative
+	width: 100%
+	margin-bottom: 35px
+
+	label
+		position: absolute
+		top: 12px
+		left: 12px
+		opacity: 1
+		@include open()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 16px
+		transition: all .4s ease-out
+
+	input
+		position: relative
+		height: 35px
+		width: 100%
+		padding-left: 12px
+		background: none
+		outline: none
+		border: 1px solid rgba(0,0,0,0.35)
+		@include open()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 16px
+
+	&.has-focus
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-success
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-error
+		label
+			left: -30px
+			opacity: 0
+
+		&.is-empty
+			label
+				left: 12px
+				opacity: 1
+
+	&.is-empty
+		label
+			left: 12px
+			opacity: 1
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
+.auth-form-submit
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 30px 0
+
+	button
+		height: 40px
+		width: 180px
+		border: 1px solid rgba(0,0,0,0.12)
+
+		span
+			@include rale()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 16px
+
+@media screen and (min-width: 630px)
+	.signup-page-container
+		padding-top: 100px
+
+
+	.signup-form
+		width: 70%
+
+	.signup-form-container
+		padding-top: 100px
+
+	.auth-form-submit
+		padding: 60px 0
+
+	.login-page-container
+		padding-top: 100px
+
+	.login-form
+		width: 70%
+
+@media screen and (min-width: 1000px)
+
+	.signup-form
+		width: 60%
+
+	.signup-form-container
+		padding-top: 130px
+
+	.login-form
+		width: 60%
+
+	.login-form-container
+		padding-top: 130px
+
+
+	.auth-form-submit
+		padding: 60px 0 100px 0
+
+@media screen and (min-width: 1300px)
+	.signup-page-container
+		padding-top: 130px
+
+	.signup-form
+		width: 55%
+
+	.login-page-container
+		padding-top: 130px
+
+	.login-form
+		width: 55%
+
+	.auth-form-wrapper
+		margin-bottom: 50px
+
+		input
+			height: 45px
+
+		label
+			top: 18px
+
+	.auth-form-submit
+		button
+			height: 55px
+			width: 220px
+
+			span
+				font-size: 18px

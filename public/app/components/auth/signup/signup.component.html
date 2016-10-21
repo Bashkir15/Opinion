@@ -1,29 +1,43 @@
 <div class='signup-form-container'>
 	<form name='$ctrl.signupForm' ng-submit="$ctrl.signup($ctrl.signupForm.$valid)" novalidate>
 		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.name.hasFocus,
-		'has-success': $ctrl.signupForm.name.$valid}">
+		'has-success': $ctrl.signupForm.name.$valid,
+		'has-error': $ctrl.signupForm.name.$error && $ctrl.signupForm.name.$touched && !$ctrl.signupForm.name.$valid,
+		'is-empty': !$ctrl.signupForm.name.$viewValue}">
 			<label>Name</label>
-			<input type='text' name='name' ng-model='$ctrl.data.name' required ng-focus="$ctrl.signupForm.name.hasFocus=true" ng-blur="$ctrl.signupForm.hasFocus=false">
+			<input type='text' name='name' ng-model='$ctrl.data.name' required ng-focus="$ctrl.signupForm.name.hasFocus=true" ng-blur="$ctrl.signupForm.name.hasFocus=false">
 		</div>
 
-		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.username.hasFocus}">
+		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.username.hasFocus,
+		'has-success': $ctrl.signupForm.username.$valid,
+		'has-error': $ctrl.signupForm.username.$error && $ctrl.signupForm.username.$touched && !$ctrl.signupForm.username.$valid,
+		'is-empty': !$ctrl.signupForm.username.$viewValue}">
 			<label>Username</label>
-			<input type='text' name='username' ng-model='$ctrl.data.username' required>
+			<input type='text' name='username' ng-model='$ctrl.data.username' required ng-focus="$ctrl.signupForm.username.hasFocus=true" ng-blur="$ctrl.signupForm.username.hasFocus=false">
 		</div>
 
-		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.email.hasFocus}">
+		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.email.hasFocus,
+		'has-success': $ctrl.signupForm.email.$valid,
+		'has-error': $ctrl.signupForm.email.$error && $ctrl.signupForm.email.$touched && !$ctrl.signupForm.email.$valid,
+		'is-empty': !$ctrl.signupForm.email.$viewValue}">
 			<label>Email</label>
-			<input type='email' name='email' ng-model="$ctrl.data.email" required>
+			<input type='email' name='email' ng-model="$ctrl.data.email" required ng-focus="$ctrl.signupForm.email.hasFocus=true" ng-blur="$ctrl.signupForm.email.hasFocus=false">
 		</div>
 
-		<div class='auth-form-wrapper'>
+		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.password.hasFocus,
+		'has-success': $ctrl.signupForm.password.$valid,
+		'has-error': $ctrl.signupForm.password.$error && $ctrl.signupForm.password.$touched && !$ctrl.signupForm.password.$valid,
+		'is-empty': !$ctrl.signupForm.password.$viewValue}">
 			<label>Password</label>
-			<input type='password' name='password' ng-model='$ctrl.data.password' required>
+			<input type='password' name='password' ng-model='$ctrl.data.password' required ng-focus='$ctrl.signupForm.password.hasFocus=true' ng-blur="$ctrl.signupForm.password.hasFocus=false">
 		</div>
 
-		<div class='auth-form-wrapper'>
+		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.signupForm.confirm.hasFocus,
+		'has-success': $ctrl.signupForm.confirm.$valid,
+		'has-error': $ctrl.signupForm.confirm.$error && $ctrl.signupForm.confirm.$touched && !$ctrl.signupForm.confirm.$valid,
+		'is-empty': !$ctrl.signupForm.confirm.$viewValue}">
 			<label>Confirm Password</label>
-			<input type='password' name='confirm' ng-model="$ctrl.data.confirm" required>
+			<input type='password' name='confirm' ng-model="$ctrl.data.confirm" required ng-focus="$ctrl.signupForm.confirm.hasFocus=true" ng-blur="$ctrl.signupForm.confirm.hasFocus=false">
 		</div>
 
 		<div class='auth-form-submit'>
