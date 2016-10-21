@@ -48,6 +48,8 @@ module.exports = () => {
 				if (isMatch) {
 					var token = auth.generateToken(user);
 
+					console.log(user);
+
 					return json.good({
 						record: user,
 						token: token

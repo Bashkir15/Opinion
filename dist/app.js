@@ -473,6 +473,9 @@ webpackJsonp([0],[
 					method: 'POST',
 					data: credentials
 				}).then(function (response) {
+					var user = response.data.res.record;
+					var serializedUser = angular.toJson(user);
+					_this._Storage.set('user', serializedUser);
 					_this._Storage.set('opinion-token', response.data.res.token);
 				});
 			}
