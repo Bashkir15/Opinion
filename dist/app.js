@@ -12,7 +12,7 @@ webpackJsonp([0],[
 
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 
-	__webpack_require__(25);
+	__webpack_require__(27);
 
 	__webpack_require__(4);
 
@@ -302,16 +302,24 @@ webpackJsonp([0],[
 
 /***/ },
 /* 14 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	function appConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+
+	var _auth = __webpack_require__(28);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function appConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 		'ngInject';
 
+		$httpProvider.interceptors.push(_auth2.default);
 		//$locationProvider.html5Mode(true);
 
 
@@ -388,15 +396,18 @@ webpackJsonp([0],[
 				password: ''
 			};
 
+			this._state = $state;
 			this._Auth = authService;
 		}
 
 		_createClass(SignupFormCtrl, [{
 			key: 'signup',
 			value: function signup(isValid) {
+				var _this = this;
+
 				if (isValid) {
 					this._Auth.signup(this.data).then(function (response) {
-						$state.go('app.auth.login');
+						_this._state.go('app.auth.login');
 					}, function (err) {
 						alert('boo, but still yay');
 					});
@@ -432,10 +443,13 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Auth = function () {
-		function Auth($http) {
+		function Auth($http, Storage) {
+			'ngInject';
+
 			_classCallCheck(this, Auth);
 
 			this._$http = $http;
+			this._Storage = Storage;
 		}
 
 		_createClass(Auth, [{
@@ -447,6 +461,19 @@ webpackJsonp([0],[
 					data: credentials
 				}).then(function (response) {
 					console.log(response);
+				});
+			}
+		}, {
+			key: 'login',
+			value: function login(credentials) {
+				var _this = this;
+
+				return this._$http({
+					url: '/users/authenticate',
+					method: 'POST',
+					data: credentials
+				}).then(function (response) {
+					_this._Storage.set('opinion-token', response.data.res.token);
 				});
 			}
 		}]);
@@ -471,12 +498,17 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var LoginFormCtrl = function () {
-		function LoginFormCtrl(authService) {
+		function LoginFormCtrl(authService, Storage) {
 			'ngInject';
 
 			_classCallCheck(this, LoginFormCtrl);
 
-			this.data = {};
+			this.data = {
+				email: '',
+				password: ''
+			};
+
+			this._Storage = Storage;
 			this._Auth = authService;
 		}
 
@@ -485,7 +517,7 @@ webpackJsonp([0],[
 			value: function login(isValid) {
 				if (isValid) {
 					this._Auth.login(this.data).then(function (response) {
-						alert('yay!');
+						alert('yay');
 					}, function (err) {
 						alert('boo, but still yay');
 					});
@@ -507,31 +539,7 @@ webpackJsonp([0],[
 	exports.default = loginForm;
 
 /***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _jwtService = __webpack_require__(26);
-
-	var _jwtService2 = _interopRequireDefault(_jwtService);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var configModule = _angular2.default.module('app.config', []);
-	configModule.service('storage', _jwtService2.default);
-
-	exports.default = configModule;
-
-/***/ },
+/* 25 */,
 /* 26 */
 /***/ function(module, exports) {
 
@@ -573,6 +581,66 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = Storage;
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _jwtService = __webpack_require__(26);
+
+	var _jwtService2 = _interopRequireDefault(_jwtService);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var configModule = _angular2.default.module('app.config', []);
+	configModule.service('Storage', _jwtService2.default);
+
+	exports.default = configModule;
+
+/***/ },
+/* 28 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function authInterceptor($window, Storage) {
+		'ngInject';
+
+		return {
+			request: function request(config) {
+				config.headers.Authorizaton = 'Bearer ' + Storage.get('opinion-token');
+				return config;
+			},
+
+			responseError: function responseError(response) {
+				if (response.status == '401' || response.status == '403') {
+					Storage.remove('opinion-token');
+					$state.go('app.home');
+					alert('unauthorized');
+				}
+
+				if (response.status == '404') {
+					$state.go('app.home');
+					alert('page not found');
+				}
+			}
+		};
+	}
+
+	exports.default = authInterceptor;
 
 /***/ }
 ]);

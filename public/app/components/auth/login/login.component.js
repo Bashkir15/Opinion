@@ -1,15 +1,20 @@
 class LoginFormCtrl {
-	constructor(authService) {
+	constructor(authService, Storage) {
 		'ngInject';
 
-		this.data = {};
+		this.data = {
+			email: '',
+			password: ''
+		};
+		
+		this._Storage = Storage
 		this._Auth = authService;
 	}
 
 	login(isValid) {
 		if (isValid) {
 			this._Auth.login(this.data).then((response) => {
-				alert('yay!');
+				alert('yay');
 			},
 				(err) => {
 					alert('boo, but still yay');

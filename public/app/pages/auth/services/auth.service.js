@@ -1,6 +1,9 @@
 class Auth {
-	constructor($http) {
+	constructor($http, Storage) {
+		'ngInject';
+
 		this._$http = $http;
+		this._Storage = Storage;
 
 	}
 
@@ -11,6 +14,16 @@ class Auth {
 			data: credentials
 		}).then((response) => {
 			console.log(response);
+		});
+	}
+
+	login(credentials) {
+		return this._$http({
+			url: '/users/authenticate',
+			method: 'POST',
+			data: credentials
+		}).then((response) => {
+			this._Storage.set('opinion-token', response.data.res.token);
 		});
 	}
 }

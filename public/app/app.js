@@ -1,7 +1,7 @@
 import angular from 'angular';
 import router from 'angular-ui-router'
 
-import "./config/app.config";
+import "./config/config.module";
 import "./pages/pages";
 import "./components/components";
 

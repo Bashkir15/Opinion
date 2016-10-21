@@ -9,13 +9,14 @@ class SignupFormCtrl {
 			password: ''
 		};
 
+		this._state = $state;
 		this._Auth = authService;
 	}
 
 	signup(isValid) {
 		if (isValid) {
 			this._Auth.signup(this.data).then((response) => {
-				$state.go('app.auth.login');
+				this._state.go('app.auth.login');
 			},
 				(err) => {
 					alert('boo, but still yay');
