@@ -14,6 +14,13 @@ class Stream {
 			console.log(response);
 		});
 	}
+
+	get() {
+		return this._$http({
+			url: '/streams',
+			methods: 'GET'
+		});
+	}
 }
 
 export default Stream

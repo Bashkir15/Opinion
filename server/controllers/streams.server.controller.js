@@ -26,19 +26,17 @@ module.exports = () => {
 		var user = req.user;
 		var criteria = {};
 
-		if (req.user) {
-			if (req.query.subscribed) {
-				criteria.subscribers = req.user._id;
-			}
-
-			if (req.query.unsubscribed) {
-				criteria.subscibers = {
-					$ne: req.user._id
-				};
-			}
+		if (req.query.subscribed) {
+			criteria.subscribers = req.user._id;
 		}
 
-		Stream.find(criteria, null {sort: {name: 1}})
+		if (req.query.unsubscribed) {
+			criteria.subscibers = {
+				$ne: req.user._id
+			};
+		}
+
+		Stream.find(criteria, null, {sort: {name: 1}})
 		.populate('creator')
 		.populate('moderators')
 		.populate('subscibers')
@@ -48,7 +46,7 @@ module.exports = () => {
 			} else {
 				json.good({
 					records: streams
-				});
+				}, res);
 			}
 		});
 	};

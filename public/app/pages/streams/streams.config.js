@@ -7,6 +7,13 @@ function streamConfig ($stateProvider) {
 		controllerAs: '$ctrl',
 		templateUrl: './app/pages/streams/create/create.html'
 	});
+
+	$stateProvider.state('app.streamsList', {
+		url: '/streams',
+		controller: 'StreamListController',
+		controllerAs: '$ctrl',
+		templateUrl: './app/pages/streams/list/list.html'
+	});
 }
 
 export default streamConfig
