@@ -1,0 +1,71 @@
+.streams-list-component-container
+	padding: 80px 0
+
+	> div
+		padding: 40px 0
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+
+.stream-single-component
+	display: flex
+	flex-direction: column
+	width: 90%
+	margin: 0 auto
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+	margin-bottom: 35px
+
+.single-container
+	display: flex
+	border-bottom: 1px solid rgba(0,0,0,0.12)
+
+.stream-left
+	display: flex
+	flex-direction: column
+	justfiy-content: center
+	align-items: center
+	padding: 25px 10px
+
+	> div
+		height: 45px
+		width: 45px
+		border-radius: 50%
+		background: rgba(0,0,0,0.6)
+		margin-bottom: 25px
+
+	button
+		height: 35px
+		width: 80px
+		border: 1px solid rgba(0,0,0,0.45)
+
+.stream-content
+	display: flex
+	flex-direction: column
+	flex: 1
+	padding-top: 35px
+
+	h3
+		@include rale()
+		font-weight: 400
+		font-size: 18px
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.6)
+		margin-bottom: 20px
+
+	p
+		@include open()
+		font-weight: 300
+		font-size: 14px
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.45)
+
+.stream-info
+	display: flex
+	align-items: center
+	padding: 15px 0 15px 10px
+
+	span
+		@include open()
+		font-weight: 300
+		font-size: 14px
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.35)
+

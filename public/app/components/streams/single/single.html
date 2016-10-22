@@ -1,4 +1,21 @@
+<div class='stream-single-component'>
+	<div class='single-container'>
+		<div class='stream-left'>
+			<div></div>
 
-<p>{{$ctrl.stream.name}}</p>
-<p>{{$ctrl.stream.description}}</p>
-<p>{{$ctrl.stream.creator.name}}</p>
+			<button>
+				<span>Subscribe</span>
+			</button>
+		</div>
+
+		<div class='stream-content'>
+			<h3>{{$ctrl.stream.name}}</h3>
+
+			<p>{{$ctrl.stream.description}}</p>
+		</div>
+	</div>
+
+	<div class='stream-info'>
+		<span>{{$ctrl.stream.subscribers.length}} Subscriber<span ng-if="$ctrl.stream.subscribers.length > 1 || $ctr.stream.subscribers.length == 0">s</span></span>
+	</div>
+</div>

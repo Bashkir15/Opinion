@@ -18,7 +18,7 @@ webpackJsonp([0],[
 
 	__webpack_require__(20);
 
-	var _app = __webpack_require__(28);
+	var _app = __webpack_require__(29);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -793,7 +793,7 @@ webpackJsonp([0],[
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamSingle = __webpack_require__(36);
+	var _streamSingle = __webpack_require__(28);
 
 	var _streamSingle2 = _interopRequireDefault(_streamSingle);
 
@@ -887,6 +887,33 @@ webpackJsonp([0],[
 
 /***/ },
 /* 28 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var singleStreamCtrl = function singleStreamCtrl() {
+		_classCallCheck(this, singleStreamCtrl);
+	};
+
+	var singleStream = {
+		scope: {},
+		bindings: {
+			stream: '='
+		},
+		controller: singleStreamCtrl,
+		templateUrl: './app/components/streams/single/single.html'
+	};
+
+	exports.default = singleStream;
+
+/***/ },
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -895,7 +922,7 @@ webpackJsonp([0],[
 		value: true
 	});
 
-	var _auth = __webpack_require__(29);
+	var _auth = __webpack_require__(30);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -919,7 +946,7 @@ webpackJsonp([0],[
 	exports.default = appConfig;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -952,39 +979,6 @@ webpackJsonp([0],[
 	}
 
 	exports.default = authInterceptor;
-
-/***/ },
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var singleStreamCtrl = function singleStreamCtrl() {
-		_classCallCheck(this, singleStreamCtrl);
-	};
-
-	var singleStream = {
-		scope: {},
-		bindings: {
-			stream: '='
-		},
-		controller: singleStreamCtrl,
-		templateUrl: './app/components/streams/single/single.html'
-	};
-
-	exports.default = singleStream;
 
 /***/ }
 ]);
