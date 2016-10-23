@@ -45,6 +45,12 @@ var StreamSchema = new mongoose.Schema({
 		type: mongoose.Schema.ObjectId,
 		required: true,
 		ref: 'User'
+	}],
+
+	threads: [{
+		type: mongoose.Schema.ObjectId,
+		requried: false,
+		ref: 'Thread'
 	}]
 });
 
