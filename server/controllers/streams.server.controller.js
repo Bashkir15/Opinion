@@ -54,5 +54,23 @@ module.exports = () => {
 		});
 	};
 
+	obj.single = (req, res) => {
+		Stream.findOne({_id: req.params.streamId})
+		.populate('creator')
+		.populate('subscribers')
+		.populate('moderators')
+		.exec((err, stream) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (stream) {
+				return json.good({
+					record: stream
+				}, res);
+			} else {
+				return json.bad({message: 'Sorry, that stream could not be found'}, res);
+			}
+		});
+	};
+
 	return obj;
 };
