@@ -47,16 +47,20 @@ function justGetUser (req, res, next) {
 		var bearer = bearerHeader.split(" ");
 		bearerToken = bearer[1];
 
-		var decoded = jwt.verify(bearerToken, global.config.secret);
-		var requestedUser = decoded.user._id;
+		try {
+			var decoded = jwt.verify(bearerToken, global.config.secret);
+			var requestedUser = decoded.user._id;
 
-		User.findOne({_id: requestedUser}, (err, user) => {
-			if (user) {
-				req.user = user;
-			}
+			User.findOne({_id: requestedUser}, (err, user) => {
+				if (user) {
+					req.user = user;
+				}
 
+				next();
+			});
+		} catch(err) {
 			next();
-		});
+		}
 	}
 }
 

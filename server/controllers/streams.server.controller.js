@@ -23,7 +23,10 @@ module.exports = () => {
 	};
 
 	obj.list = (req, res) => {
-		var user = req.user;
+		if (req.user) {
+			var user = req.user;
+		}
+		
 		var criteria = {};
 
 		if (req.query.subscribed) {
@@ -43,11 +46,11 @@ module.exports = () => {
 		.exec((err, streams) => {
 			if (err) {
 				return json.bad(err, res);
-			} else {
-				json.good({
-					records: streams
-				}, res);
-			}
+			} 
+			
+			return json.good({
+				records: streams
+			}, res);
 		});
 	};
 
