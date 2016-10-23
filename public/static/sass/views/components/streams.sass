@@ -1,16 +1,32 @@
 .streams-list-component-container
-	padding: 80px 0
+	padding: 140px 0 80px 0
+	background: #dfe3e6
+	margin-top: -35px
 
 	> div
 		padding: 40px 0
-		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+
+.load-more-button
+	button
+		height: 40px
+		width: 180px
+		background: #f7f8f9
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16)
+
+		span
+			@incude rale()
+			font-weight: 400
+			font-size: 16px
+			letter-spacing: 2px
+			color: #86898b
 
 .stream-single-component
 	display: flex
 	flex-direction: column
 	width: 90%
 	margin: 0 auto
-	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+	background: #a6a8aa
+	box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 	margin-bottom: 35px
 
 .single-container
@@ -22,25 +38,31 @@
 	flex-direction: column
 	justfiy-content: center
 	align-items: center
-	padding: 25px 10px
+	padding: 25px
 
 	> div
 		height: 45px
 		width: 45px
 		border-radius: 50%
-		background: rgba(0,0,0,0.6)
-		margin-bottom: 25px
+		background: #86898b
 
 	button
 		height: 35px
 		width: 80px
-		border: 1px solid rgba(0,0,0,0.45)
+		border: 1px solid #86898b
+
+		span
+			@include rale()
+			font-weight: 400
+			font-size: 16px
+			letter-spacing: 2px
+			color: rgba(0,0,0,0.8)
 
 .stream-content
 	display: flex
 	flex-direction: column
 	flex: 1
-	padding-top: 35px
+	padding-top: 20px
 
 	h3
 		@include rale()
@@ -49,6 +71,7 @@
 		letter-spacing: 2px
 		color: rgba(0,0,0,0.6)
 		margin-bottom: 20px
+		text-align: left
 
 	p
 		@include open()
@@ -56,16 +79,111 @@
 		font-size: 14px
 		letter-spacing: 2px
 		color: rgba(0,0,0,0.45)
+		text-align: left
 
 .stream-info
 	display: flex
 	align-items: center
-	padding: 15px 0 15px 10px
+	justify-content: stretch
+	padding: 15px 0
 
-	span
+	.left
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-start
+		padding-left: 10px
+
+	.right
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-end
+		padding-right: 10px
+
+		> div
+			display: flex
+			align-items: center
+			justify-content: center
+
+			button
+				height: 35px
+				width: 100px
+				border: 1px solid #86898b
+
+				span
+					@include rale()
+					font-weight: 400
+					letter-spacing: 1px
+					font-size: 14px
+					color: rgba(0,0,0,0.6)
+
+.stream-info-text
+	display: flex
+	align-items: center
+	justify-content: center
+
+
+	> span
 		@include open()
 		font-weight: 300
 		font-size: 14px
 		letter-spacing: 2px
-		color: rgba(0,0,0,0.35)
+		color: rgba(0,0,0,0.6)
+
+
+@media screen and (min-width: 630px)
+	.streams-list-component-container
+		padding-top: 200px
+
+	.stream-content
+		padding: 32px 0
+
+	.stream-left
+		padding-left: 30px
+		padding-right: 30px
+
+		> div
+			height: 70px
+			width: 70px
+
+	.stream-content
+		padding-top: 30px
+
+		h3
+			font-size: 24px
+			letter-spacing: 4px
+
+		p
+			font-size: 16px
+
+	.stream-info
+		.left
+
+		.right
+			> div
+				button
+					height: 40px
+					width: 160px
+
+					span
+						font-size: 15px
+						text-transform: uppercase
+
+	.stream-info-text
+		padding: 0 5px
+
+		> span
+			font-size: 15px
+			letter-spacing: 2px
+
+	.load-more-button
+		button
+			height: 55px
+			width: 220px
+
+			span
+				font-size: 16px
 

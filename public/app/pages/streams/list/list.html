@@ -5,5 +5,21 @@
 
 	<p>Opinionated is home to over {{$ctrl.streams.length}} each one with a different purpose and function. There is always something to be discussed. If you don't see a form here for what you want, create your own!</p>
 
+	<button>
+		<span>Create Stream</span>
+	</button>
+
+
+	<div class='streams-search-container'>
+		<div>
+			<label>Search</label>
+			<input type='text' name='search' ng-model='$ctrl.search'>
+			<button class='large-mobile'>
+				<span>Filter</span>
+			</button>
+		</div>
+	</div>
+
+
 	<list-stream streams="$ctrl.streams"></list-stream>
 </div>

@@ -3,13 +3,15 @@
 	text-align: center
 
 .streams-list-container
-	padding-top: 100px
+	padding-top: 160px
 	text-align: center
+	position: relative
+	background: #f7f8f9
 
 	header
-		padding-bottom: 60px
+		padding-bottom: 100px
 
-	p
+	> p
 		@include open()
 		font-weight: 300
 		letter-spacing: 2px
@@ -17,11 +19,104 @@
 		line-height: 28px
 		color: rgba(0,0,0,0.45)
 		width: 80%
+		padding-bottom: 80px
 		margin: 0 auto
+
+	> button	
+		height: 45px
+		width: 180px
+		background: #dfe3d6
+		box-shadow: 0 3px 6px rgba(0,0,0,0.26)
+		margin-bottom: 100px
+
+		span
+			color: rgba(0,0,0,0.6)
+
+
+
+.streams-search-container
+	position: relative
+	display: flex
+	align-items: center
+	width: 80%
+	padding: 15px 0 
+	margin: 35px auto 0 auto
+	background: #a6a8aa
+
+	> div
+		position: relative
+		width: 80%
+		margin: 0 auto
+
+
+		label
+			@include open()
+			font-weight: 300
+			letter-spacing: 2px
+			position: absolute
+			top: 14px
+			left: 14px
+			font-size: 16px
+			letter-spacing: 2px
+			opacity: 1
+			z-index: 50
+			transition: all .4s ease
+
+		input
+			@include open()
+			font-weight: 300
+			position: relative
+			width: 100%
+			font-size: 16px
+			letter-spacing: 2px
+			height: 40px
+			background: #f1f3f3
+			outline: none
+			border: none
+			box-shadow: inset 2px 3px 6px rgba(0,0,0,0.12)
+			transition: inset all .4s ease
+
+
 
 @media screen and (min-width: 630px)
 	.streams-create-container
 		padding-top: 155px
+
+	.streams-list-container
+		padding-top: 175px
+
+		> p
+			line-height: 35px
+			padding-bottom: 115px
+
+		> button
+			height: 55px
+			width: 220px
+
+			span
+				font-size: 16px
+				letter-spacing: 2px
+
+	.streams-search-container
+		
+		> div
+			display: flex
+			width: 90%
+
+			input
+				flex: 1
+
+			button
+				height: 42px
+				width: 120px
+				padding: 0
+				margin-left: 15px
+				background: #86898b
+
+				span
+					color: #f7f8f9
+					text-transform: uppercase
+
 
 
 @media screen and (min-width: 1000px)
