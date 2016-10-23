@@ -7,6 +7,7 @@ import path from 'path';
 
 import userRoutes from '../routes/users.server.routes';
 import streamRoutes from '../routes/streams.server.routes';
+import threadRoutes from '../routes/threads.server.routes';
 
 module.exports = (db) => {
 	const app = express();
