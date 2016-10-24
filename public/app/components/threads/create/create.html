@@ -1,0 +1,20 @@
+<div class='form-container threads-orm-container'>
+	<form name='$ctrl.createThread' ng-submit='$ctrl.create($ctrl.createThread.$valid)' novalidate>
+		<div class='form-wrapper'>
+			<label>Title</label>
+			<input type='text' name='title' ng-model="$ctrl.data.title">
+		</div>
+
+		<div class='from-wrapper'>
+			<label>Content</label>
+			<textarea rows='7' cols='40' name='content' ng-model='$ctrl.data.content'></textarea>
+		</div>
+
+
+		<div class='form-submit'>
+			<button type='submit' aria-label='submit thread create form'>
+				<span>Create</span>
+			</button>
+		</div>
+	</form>
+</div>

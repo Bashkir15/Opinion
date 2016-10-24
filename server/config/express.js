@@ -34,6 +34,7 @@ module.exports = (db) => {
 
 	app.use('/users', userRoutes);
 	app.use('/streams', streamRoutes);
+	app.use('/threads', threadRoutes);
 
 	return app;
 }

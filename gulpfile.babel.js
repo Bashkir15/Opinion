@@ -8,17 +8,30 @@ import cmq from 'gulp-combine-media-queries';
 import rename from 'gulp-rename';
 import sourceMaps from 'gulp-sourcemaps';
 import browserSync from 'browser-sync';
+import concat from 'gulp-concat'
 
 
 const paths = {
 	dev: {
 		html: './public/*.html',
 		sass: './public/static/sass/main.sass',
-		sass2: './public/static/sass/**/*.*'
+		sass2: './public/static/sass/**/*.*',
+		materialModules: [
+			'angular-material/modules/js/core',
+			'angular-material/modules/js/checkbox',
+			'angular-material/modules/js/button',
+			'angular-material/modules/js/chips',
+			'angular-material/modules/js/dialog',
+			'angular-material/modules/js/sidenav',
+			'angular-material/modules/js/tabs',
+			'angular-material/modules/js/toast',
+			'angular-material/modules/js/tooltip'
+		]
 	},
 
 	prod: {
-		css: './dist/styles'
+		css: './dist/styles',
+		material: './dist'
 	}
 };
 
@@ -40,6 +53,7 @@ gulp.task('browserSync', () => {
 		port: 7000
 	});
 });
+
 
 gulp.task('styles', () => {
 	gulp.src(paths.dev.sass)

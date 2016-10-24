@@ -1,0 +1,31 @@
+<div class='single-stream-page-container'>
+	<header>
+		<h1>{{$ctrl.stream.name}}</h1>
+	</header>
+
+	<div class='stream-image'></div>
+
+	<p>{{$ctrl.stream.description}}</p>
+
+	<button ng-click="$ctrl.openCreate()">
+		<span>Create Thread</span>
+	</button>
+
+	<md-sidenav class='md-sidenav-right' md-component-id='create-thread' md-whiteframe='4'>
+		<h2>Create Thread</h2>
+
+		<thread-create></thread-create>
+	</md-sidenav>
+
+	<div class='threads-search-container'>
+		<div>
+			<label>Search</label>
+			<input type='text' name='search' ng-model='$ctrl.search'>
+			<button class='large-mobile'>
+				<span>Filter</span>
+			</button>
+		</div>
+	</div>
+
+	<thread-list></thread-list>
+</div>

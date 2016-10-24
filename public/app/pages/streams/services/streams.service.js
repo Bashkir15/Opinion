@@ -21,6 +21,13 @@ class Stream {
 			methods: 'GET'
 		});
 	}
+
+	single(id) {
+		return this._$http({
+			url: '/streams/' + id,
+			method: 'GET'
+		});
+	}
 }
 
 export default Stream

@@ -101,9 +101,9 @@
 
 	__webpack_require__(1);
 	__webpack_require__(3);
-	__webpack_require__(31);
-	__webpack_require__(32);
-	module.exports = __webpack_require__(34);
+	__webpack_require__(37);
+	__webpack_require__(38);
+	module.exports = __webpack_require__(40);
 
 
 /***/ },
@@ -36473,18 +36473,18 @@
 
 /***/ },
 
-/***/ 31:
+/***/ 37:
 /***/ function(module, exports, __webpack_require__) {
 
 	// Should already be required, here for clarity
 	__webpack_require__(1);
 
 	// Load Angular and dependent libs
-	__webpack_require__(32);
-	__webpack_require__(34);
+	__webpack_require__(38);
+	__webpack_require__(40);
 
 	// Now load Angular Material
-	__webpack_require__(36);
+	__webpack_require__(42);
 
 	// Export namespace
 	module.exports = 'ngMaterial';
@@ -36492,16 +36492,16 @@
 
 /***/ },
 
-/***/ 32:
+/***/ 38:
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(33);
+	__webpack_require__(39);
 	module.exports = 'ngAnimate';
 
 
 /***/ },
 
-/***/ 33:
+/***/ 39:
 /***/ function(module, exports) {
 
 	/**
@@ -40647,16 +40647,16 @@
 
 /***/ },
 
-/***/ 34:
+/***/ 40:
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(35);
+	__webpack_require__(41);
 	module.exports = 'ngAria';
 
 
 /***/ },
 
-/***/ 35:
+/***/ 41:
 /***/ function(module, exports) {
 
 	/**
@@ -41068,7 +41068,7 @@
 
 /***/ },
 
-/***/ 36:
+/***/ 42:
 /***/ function(module, exports) {
 
 	/*!

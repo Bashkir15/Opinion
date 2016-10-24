@@ -1,7 +1,7 @@
 <div class='streams-list-component-container'>
 
 	<div ng-repeat='item in $ctrl.streams'>
-		<single-stream stream="item"></single-stream>
+		<single-stream stream="item" ui-sref="app.singleStream({streamId: item._id})"></single-stream>
 	</div>
 
 	<div class='load-more-button'>
