@@ -12,6 +12,13 @@ class threadService {
 			console.log(response);
 		});
 	}
+
+	get(id) {
+		return this._$http({
+			url: '/threads/' + id + '/threads',
+			method: 'GET'
+		});
+	}
 }
 
 export default threadService

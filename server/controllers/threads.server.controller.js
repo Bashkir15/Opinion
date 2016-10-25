@@ -52,7 +52,7 @@ module.exports = () => {
 					return json.bad(err, res);
 				}
 
-				json.good({
+				return json.good({
 					records: threads
 				}, res);
 			});

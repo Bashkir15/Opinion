@@ -59,7 +59,7 @@ function justGetUser (req, res, next) {
 				next();
 			});
 		} catch(err) {
-			next();
+			console.log(err);
 		}
 	}
 }

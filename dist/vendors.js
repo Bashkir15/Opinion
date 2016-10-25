@@ -94,21 +94,19 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
 	__webpack_require__(3);
-	__webpack_require__(37);
-	__webpack_require__(38);
-	module.exports = __webpack_require__(40);
+	__webpack_require__(4);
+	__webpack_require__(5);
+	module.exports = __webpack_require__(7);
 
 
 /***/ },
-
-/***/ 1:
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -116,8 +114,7 @@
 
 
 /***/ },
-
-/***/ 2:
+/* 2 */
 /***/ function(module, exports) {
 
 	/**
@@ -31890,8 +31887,7 @@
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-
-/***/ 3:
+/* 3 */
 /***/ function(module, exports) {
 
 	/**
@@ -36472,36 +36468,33 @@
 	})(window, window.angular);
 
 /***/ },
-
-/***/ 37:
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Should already be required, here for clarity
 	__webpack_require__(1);
 
 	// Load Angular and dependent libs
-	__webpack_require__(38);
-	__webpack_require__(40);
+	__webpack_require__(5);
+	__webpack_require__(7);
 
 	// Now load Angular Material
-	__webpack_require__(42);
+	__webpack_require__(9);
 
 	// Export namespace
 	module.exports = 'ngMaterial';
 
 
 /***/ },
-
-/***/ 38:
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(39);
+	__webpack_require__(6);
 	module.exports = 'ngAnimate';
 
 
 /***/ },
-
-/***/ 39:
+/* 6 */
 /***/ function(module, exports) {
 
 	/**
@@ -40646,17 +40639,15 @@
 
 
 /***/ },
-
-/***/ 40:
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(41);
+	__webpack_require__(8);
 	module.exports = 'ngAria';
 
 
 /***/ },
-
-/***/ 41:
+/* 8 */
 /***/ function(module, exports) {
 
 	/**
@@ -41067,8 +41058,7 @@
 
 
 /***/ },
-
-/***/ 42:
+/* 9 */
 /***/ function(module, exports) {
 
 	/*!
@@ -74023,5 +74013,4 @@
 	})(window, window.angular);;window.ngMaterial={version:{full: "1.1.1"}};
 
 /***/ }
-
-/******/ });
+/******/ ]);
