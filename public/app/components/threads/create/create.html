@@ -1,13 +1,13 @@
-<div class='form-container threads-orm-container'>
+<div class='form-container threads-form-container'>
 	<form name='$ctrl.createThread' ng-submit='$ctrl.create($ctrl.createThread.$valid)' novalidate>
 		<div class='form-wrapper'>
 			<label>Title</label>
 			<input type='text' name='title' ng-model="$ctrl.data.title">
 		</div>
 
-		<div class='from-wrapper'>
+		<div class='form-wrapper'>
 			<label>Content</label>
-			<textarea rows='7' cols='40' name='content' ng-model='$ctrl.data.content'></textarea>
+			<textarea rows='7' cols='30' name='content' ng-model='$ctrl.data.content'></textarea>
 		</div>
 
 
