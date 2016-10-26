@@ -1,0 +1,141 @@
+.thread-list-component
+	width: 100%
+
+.threads-list-component-container
+	background: #dfe3e6
+	margin-top: -35px
+
+	> div
+		padding: 140px 0 80px 0
+
+.threads-single-component
+	display: flex
+	flex-direction: column
+	width: 90%
+	margin: 0 auto
+	background: #a6a8aa
+	box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+	margin-bottom: 35px
+
+.thread-single-container
+	display: flex
+	border-bottom: 1px solid rgba(0,0,0,0.23)
+
+.thread-left
+	display: flex
+	flex-direction: column
+	align-items: center
+	padding: 25px
+
+	> span
+		&:nth-of-type(1)
+			margin-bottom: 8px
+			font-size: 26px
+
+		&:nth-of-type(2)
+			font-size: 18px
+
+		&:nth-of-type(3)
+			margin-top: 8px
+			font-size: 26px
+
+.thread-content
+	display: flex
+	flex-direction: column
+	flex: 1
+	padding-top: 20px
+
+	h3
+		@include rale()
+		font-weight: 400
+		font-size: 18px
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.6)
+		margin-bottom: 20px
+		text-align: left
+
+	p
+		@include open()
+		font-weight: 300
+		font-size: 14px
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.45)
+		text-align: left
+
+.thread-info
+	display: flex
+	align-items: center
+	justify-content: stretch
+	padding: 15px 0
+
+	.left
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-start
+		padding-left: 10px
+
+	.right
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-end
+		padding-right: 10px
+
+		span
+			@incude rale()
+			font-weight: 400
+			letter-spacing: 1px
+			font-size: 15px
+			color: rgba(0,0,0,0.6)
+
+.thread-info-text
+	display: flex
+	align-items: center
+	justify-content: center
+
+	button
+		span
+			@include rale()
+			font-weight: 400
+			font-size: 14px
+			letter-spacing: 1px
+			color: rgba(0,0,0,0.6)
+
+@media screen and (min-width: 630px)
+	.thread-content
+		padding-top: 30px
+
+		h3
+			font-size: 24px
+			letter-spacing: 4px
+
+		p
+			font-size: 16px
+
+	.thread-info
+		.right
+			span
+				font-size: 15px
+
+	.thread-info-text
+		span
+			font-size: 15px
+
+
+@media screen and (min-width: 1000px)
+	.thread-content
+		p
+			font-size: 18px
+
+	.thread-info
+		.right
+			span
+				font-size: 17px
+
+	.thread-info-text
+		button
+			span
+				font-size: 17px

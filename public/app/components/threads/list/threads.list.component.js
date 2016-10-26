@@ -8,6 +8,9 @@ class threadListController {
 
 let threadsList = {
 	scope: {},
+	bindings: {
+		threads: '='
+	},
 	controller: threadListController,
 	templateUrl: './app/components/threads/list/list.html'
 };

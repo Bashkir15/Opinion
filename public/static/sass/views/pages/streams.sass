@@ -181,8 +181,36 @@
 				font-size: 16px
 				letter-spacing: 2px
 
+	.single-stream-page-container
+		> button
+			height: 55px
+			width: 220px
+
+			span
+				font-size: 16px
+				letter-spacing: 2px
+
 	.streams-search-container
 		
+		> div
+			display: flex
+			width: 90%
+
+			input
+				flex: 1
+
+			button
+				height: 42px
+				width: 120px
+				padding: 0
+				margin-left: 15px
+				background: #86898b
+
+				span
+					color: #f7f8f9
+					text-transform: uppercase
+
+	.threads-search-container
 		> div
 			display: flex
 			width: 90%
@@ -216,6 +244,9 @@
 	.streams-search-container
 		width: 75%
 
+	.threads-search-container
+		width: 75%
+
 @media screen and (min-width: 1300px)
 	.streams-create-container
 		padding-top: 220px
@@ -236,6 +267,9 @@
 
 @media screen and (min-width: 1630px)
 	.streams-search-container
+		width: 50%
+
+	.threads-search-container
 		width: 50%
 
 

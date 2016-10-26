@@ -18,6 +18,7 @@
     "angular-animate": "^1.5.8",
     "angular-aria": "^1.5.8",
     "angular-material": "^1.1.1",
+    "angular-moment": "^1.0.0",
     "angular-ui-router": "^0.3.1",
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
@@ -28,6 +29,7 @@
     "http": "0.0.0",
     "jsonwebtoken": "^7.1.9",
     "lodash.escape": "^4.0.1",
+    "moment": "^2.15.2",
     "mongoose": "^4.6.4",
     "morgan": "^1.7.0",
     "path": "^0.12.7"
@@ -50,6 +52,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.1.1",
     "gulp-uglifycss": "^1.0.6",
+    "mdi": "^1.7.22",
     "webpack": "^1.13.2"
   }
 }

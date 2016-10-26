@@ -27,10 +27,5 @@
 		</div>
 	</div>
 
-	<div ng-repeat='thread in $ctrl.threads'>
-		<p>{{thread.title}}</p>
-		<p>{{thread.content}}</p>
-	</div>
-
-	<thread-list></thread-list>
+		<thread-list threads='$ctrl.threads' class='thread-list-component'></thread-list>
 </div>
