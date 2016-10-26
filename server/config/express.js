@@ -8,6 +8,7 @@ import path from 'path';
 import userRoutes from '../routes/users.server.routes';
 import streamRoutes from '../routes/streams.server.routes';
 import threadRoutes from '../routes/threads.server.routes';
+import commentRoutes from '../routes/comments.server.routes';
 
 module.exports = (db) => {
 	const app = express();
@@ -35,6 +36,7 @@ module.exports = (db) => {
 	app.use('/users', userRoutes);
 	app.use('/streams', streamRoutes);
 	app.use('/threads', threadRoutes);
+	app.use('/comments', commentRoutes);
 
 	return app;
 }

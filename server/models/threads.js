@@ -33,7 +33,13 @@ var threadSchema = new mongoose.Schema({
 		type: mongoose.Schema.ObjectId,
 		required: true,
 		ref: 'Stream'
-	}
+	},
+
+	comments: [{
+		type: mongoose.Schema.ObjectId,
+		required: false,
+		ref: 'Comments'
+	}]
 });
 
 threadSchema.methods = {
