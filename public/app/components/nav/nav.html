@@ -18,7 +18,7 @@
 	</div>
 
 	<div class='nav-right'>
-		<div class='nav-item'>
+		<div class='nav-item' ng-if="!$ctrl.isLoggedIn">
 			<a ui-sref='app.auth.signup'>
 				<button>
 					<span>Signup</span>
@@ -26,12 +26,24 @@
 			</a>
 		</div>
 
-		<div class='nav-item'>
+		<div class='nav-item' ng-if="!$ctrl.isLoggedIn">
 			<a ui-sref='app.auth.login'>
 				<button>
 					<span>Login</span>
 				</button>
 			</a>
 		</div>
+
+		<div class='nav-item' ng-if="$ctrl.isLoggedIn">
+			<button ng-click="$ctrl.openUserMenu()">
+				<span>Menu</span>
+			</button>
+		</div>
 	</div>
 </div>
+
+<md-sidenav class='md-sidenav-left' md-component-id='user-menu' md-whiteframe='4'>
+	<div>
+		Stuff
+	</div>
+</md-sidenav>

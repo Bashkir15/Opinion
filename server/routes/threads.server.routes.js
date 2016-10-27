@@ -7,5 +7,6 @@ var threads = threadController();
 
 router.post('/', auth.ensureAuthorized, threads.create);
 router.get('/:streamId/threads', auth.justGetUser, threads.list);
+router.get('/:threadId', auth.justGetUser, threads.single);
 
 module.exports = router;

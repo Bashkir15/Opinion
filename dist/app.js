@@ -22,9 +22,9 @@ webpackJsonp([0],[
 
 	__webpack_require__(120);
 
-	__webpack_require__(138);
+	__webpack_require__(140);
 
-	var _app = __webpack_require__(151);
+	var _app = __webpack_require__(157);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -450,14 +450,9 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
-			key: 'test',
-			value: function test() {
-				return this._$http({
-					url: '/users',
-					method: 'GET'
-				}).then(function (response) {
-					console.log(response.data.res.stuff);
-				});
+			key: 'isLoggedIn',
+			value: function isLoggedIn() {
+				return this._Storage.get('opinion-token');
 			}
 		}]);
 
@@ -783,11 +778,21 @@ webpackJsonp([0],[
 
 	var _thread2 = _interopRequireDefault(_thread);
 
+	var _comments = __webpack_require__(138);
+
+	var _comments2 = _interopRequireDefault(_comments);
+
+	var _singleThread = __webpack_require__(139);
+
+	var _singleThread2 = _interopRequireDefault(_singleThread);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var threadsModule = _angular2.default.module('threads', []);
 	threadsModule.config(_threads2.default);
 	threadsModule.service('threadService', _thread2.default);
+	threadsModule.service('commentsService', _comments2.default);
+	threadsModule.controller('singleThreadCtrl', _singleThread2.default);
 
 	exports.default = threadsModule;
 
@@ -806,6 +811,13 @@ webpackJsonp([0],[
 		$stateProvider.state('app.createThread', {
 			url: '/create-thread',
 			templateUrl: './app/pages/threads/create/create.html'
+		});
+
+		$stateProvider.state('app.singleThread', {
+			url: '/:threadId',
+			templateUrl: './app/pages/threads/single/single.html',
+			controller: 'singleThreadCtrl',
+			controllerAs: '$ctrl'
 		});
 	}
 
@@ -851,6 +863,14 @@ webpackJsonp([0],[
 					method: 'GET'
 				});
 			}
+		}, {
+			key: 'single',
+			value: function single(id) {
+				return this._$http({
+					url: '/threads/' + id,
+					method: 'GET'
+				});
+			}
 		}]);
 
 		return threadService;
@@ -860,6 +880,109 @@ webpackJsonp([0],[
 
 /***/ },
 /* 138 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var commentsService = function () {
+		function commentsService($http) {
+			_classCallCheck(this, commentsService);
+
+			this._$http = $http;
+		}
+
+		_createClass(commentsService, [{
+			key: 'create',
+			value: function create(credentials) {
+				return this._$http({
+					url: '/comments',
+					method: 'POST',
+					data: credentials
+				}).then(function (response) {
+					console.log(response);
+				});
+			}
+		}, {
+			key: 'get',
+			value: function get(id) {
+				return this._$http({
+					url: '/comments/' + id,
+					method: 'GET'
+				});
+			}
+		}]);
+
+		return commentsService;
+	}();
+
+	exports.default = commentsService;
+
+/***/ },
+/* 139 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var singleThreadCtrl = function () {
+		function singleThreadCtrl(threadService, commentsService, $stateParams, $mdSidenav) {
+			_classCallCheck(this, singleThreadCtrl);
+
+			this._threadId = $stateParams.threadId;
+			this._Thread = threadService;
+			this._Comment = commentsService;
+			this._$Sidenav = $mdSidenav;
+			this.getThread();
+			this.getComments();
+		}
+
+		_createClass(singleThreadCtrl, [{
+			key: 'getThread',
+			value: function getThread() {
+				var _this = this;
+
+				this._Thread.single(this._threadId).then(function (response) {
+					_this.thread = response.data.res.record;
+				});
+			}
+		}, {
+			key: 'getComments',
+			value: function getComments() {
+				var _this2 = this;
+
+				this._Comment.get(this._threadId).then(function (response) {
+					_this2.comments = response.data.res.records;
+				});
+			}
+		}, {
+			key: 'openCreate',
+			value: function openCreate() {
+				this._$Sidenav('create-comment').toggle();
+			}
+		}]);
+
+		return singleThreadCtrl;
+	}();
+
+	exports.default = singleThreadCtrl;
+
+/***/ },
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -872,19 +995,21 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _nav = __webpack_require__(139);
+	var _nav = __webpack_require__(141);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
-	__webpack_require__(140);
+	__webpack_require__(142);
 
-	__webpack_require__(143);
+	__webpack_require__(145);
 
-	__webpack_require__(147);
+	__webpack_require__(149);
+
+	__webpack_require__(153);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['auth.components', 'stream.components', 'thread.components'];
+	var requires = ['auth.components', 'stream.components', 'thread.components', 'comments.components'];
 
 	var componentModule = _angular2.default.module('app.components', requires);
 	componentModule.component('appNav', _nav2.default);
@@ -892,7 +1017,7 @@ webpackJsonp([0],[
 	exports.default = componentModule;
 
 /***/ },
-/* 139 */
+/* 141 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -901,13 +1026,29 @@ webpackJsonp([0],[
 		value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var navCtrl = function navCtrl() {
-		_classCallCheck(this, navCtrl);
+	var navCtrl = function () {
+		function navCtrl(authService, $mdSidenav) {
+			_classCallCheck(this, navCtrl);
 
-		this.name = 'nav';
-	};
+			this.name = 'nav';
+			this._Auth = authService;
+			this.isLoggedIn = this._Auth.isLoggedIn();
+			this._$sidenav = $mdSidenav;
+		}
+
+		_createClass(navCtrl, [{
+			key: 'openUserMenu',
+			value: function openUserMenu() {
+				this._$sidenav('user-menu').toggle();
+			}
+		}]);
+
+		return navCtrl;
+	}();
 
 	var appNav = {
 		controller: navCtrl,
@@ -917,7 +1058,7 @@ webpackJsonp([0],[
 	exports.default = appNav;
 
 /***/ },
-/* 140 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -930,11 +1071,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _login = __webpack_require__(141);
+	var _login = __webpack_require__(143);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _signup = __webpack_require__(142);
+	var _signup = __webpack_require__(144);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
@@ -947,7 +1088,7 @@ webpackJsonp([0],[
 	exports.default = authComponents;
 
 /***/ },
-/* 141 */
+/* 143 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1011,7 +1152,7 @@ webpackJsonp([0],[
 	exports.default = loginForm;
 
 /***/ },
-/* 142 */
+/* 144 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1070,7 +1211,7 @@ webpackJsonp([0],[
 	exports.default = signupForm;
 
 /***/ },
-/* 143 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1083,15 +1224,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _streamCreate = __webpack_require__(144);
+	var _streamCreate = __webpack_require__(146);
 
 	var _streamCreate2 = _interopRequireDefault(_streamCreate);
 
-	var _streamsList = __webpack_require__(145);
+	var _streamsList = __webpack_require__(147);
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamSingle = __webpack_require__(146);
+	var _streamSingle = __webpack_require__(148);
 
 	var _streamSingle2 = _interopRequireDefault(_streamSingle);
 
@@ -1105,7 +1246,7 @@ webpackJsonp([0],[
 	exports.default = streamComponents;
 
 /***/ },
-/* 144 */
+/* 146 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1157,7 +1298,7 @@ webpackJsonp([0],[
 	exports.default = createStream;
 
 /***/ },
-/* 145 */
+/* 147 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1184,7 +1325,7 @@ webpackJsonp([0],[
 	exports.default = listStream;
 
 /***/ },
-/* 146 */
+/* 148 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1211,7 +1352,7 @@ webpackJsonp([0],[
 	exports.default = singleStream;
 
 /***/ },
-/* 147 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1224,15 +1365,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threadsList = __webpack_require__(148);
+	var _threadsList = __webpack_require__(150);
 
 	var _threadsList2 = _interopRequireDefault(_threadsList);
 
-	var _threadsCreate = __webpack_require__(149);
+	var _threadsCreate = __webpack_require__(151);
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
-	var _threadSingle = __webpack_require__(150);
+	var _threadSingle = __webpack_require__(152);
 
 	var _threadSingle2 = _interopRequireDefault(_threadSingle);
 
@@ -1246,7 +1387,7 @@ webpackJsonp([0],[
 	exports.default = threadComponent;
 
 /***/ },
-/* 148 */
+/* 150 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1276,7 +1417,7 @@ webpackJsonp([0],[
 	exports.default = threadsList;
 
 /***/ },
-/* 149 */
+/* 151 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1329,7 +1470,7 @@ webpackJsonp([0],[
 	exports.default = createThread;
 
 /***/ },
-/* 150 */
+/* 152 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1356,7 +1497,148 @@ webpackJsonp([0],[
 	exports.default = singleThread;
 
 /***/ },
-/* 151 */
+/* 153 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _commentsCreate = __webpack_require__(154);
+
+	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
+
+	var _commentsList = __webpack_require__(155);
+
+	var _commentsList2 = _interopRequireDefault(_commentsList);
+
+	var _commentsSingle = __webpack_require__(156);
+
+	var _commentsSingle2 = _interopRequireDefault(_commentsSingle);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var commentsComponents = _angular2.default.module('comments.components', []);
+	commentsComponents.component('createComment', _commentsCreate2.default);
+	commentsComponents.component('listComments', _commentsList2.default);
+	commentsComponents.component('singleComment', _commentsSingle2.default);
+
+	exports.default = commentsComponents;
+
+/***/ },
+/* 154 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var commentsCreateCtrl = function () {
+		function commentsCreateCtrl(commentsService, $stateParams) {
+			_classCallCheck(this, commentsCreateCtrl);
+
+			this._Comment = commentsService;
+			this.threadId = $stateParams.threadId;
+			this.data = {
+				content: '',
+				thread: this.threadId
+			};
+		}
+
+		_createClass(commentsCreateCtrl, [{
+			key: 'create',
+			value: function create(isValid) {
+				if (isValid) {
+					this._Comment.create(this.data).then(function (response) {
+						alert('yay');
+					}, function (err) {
+						alert('boo');
+					});
+				} else {
+					alert('man');
+				}
+			}
+		}]);
+
+		return commentsCreateCtrl;
+	}();
+
+	var commentsCreate = {
+		scope: {},
+		controller: commentsCreateCtrl,
+		templateUrl: './app/components/comments/create/create.html'
+	};
+
+	exports.default = commentsCreate;
+
+/***/ },
+/* 155 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var commentsListCtrl = function commentsListCtrl() {
+		_classCallCheck(this, commentsListCtrl);
+	};
+
+	var commentsList = {
+		scope: {},
+		bindings: {
+			comments: '='
+		},
+		templateUrl: './app/components/comments/list/list.html',
+		controller: commentsListCtrl
+	};
+
+	exports.default = commentsList;
+
+/***/ },
+/* 156 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var commentsSingleCtrl = function commentsSingleCtrl() {
+		_classCallCheck(this, commentsSingleCtrl);
+	};
+
+	var commentsSingle = {
+		scope: {},
+		bindings: {
+			comment: '='
+		},
+		templateUrl: './app/components/comments/single/single.html',
+		controller: commentsSingleCtrl
+	};
+
+	exports.default = commentsSingle;
+
+/***/ },
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1365,7 +1647,7 @@ webpackJsonp([0],[
 		value: true
 	});
 
-	var _auth = __webpack_require__(152);
+	var _auth = __webpack_require__(158);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -1389,7 +1671,7 @@ webpackJsonp([0],[
 	exports.default = appConfig;
 
 /***/ },
-/* 152 */
+/* 158 */
 /***/ function(module, exports) {
 
 	'use strict';

@@ -14,7 +14,6 @@ var commentSchema = new mongoose.Schema({
 	content: {
 		type: String,
 		required: true,
-		get: escapeProperty
 	},
 
 	creator: {
@@ -35,7 +34,7 @@ commentSchema.methods = {
 		var obj = this.toObject();
 
 		if (obj.creator) {
-			delete obj.create.password;
+			delete obj.creator.password;
 		}
 
 		return obj;

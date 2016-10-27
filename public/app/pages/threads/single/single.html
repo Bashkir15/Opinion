@@ -1,0 +1,75 @@
+<div class='single-thread-page-container'>
+	<div class='single-thread-thread'>
+		<div class='thread-title'>
+			<div class='thread-title-left'>
+				<div>
+					<h2>{{$ctrl.thread.title}}</h2>
+				</div>
+			</div>
+
+			<div class='thread-title-right'>
+				<div>
+					<span>Created in {{$ctrl.thread.stream.name}} -- <span am-time-ago="$ctrl.thread.created"></span></span>
+				</div>
+			</div>
+		</div>
+
+		<div class='thread-content-container'>
+			<div class='thread-content-left'>
+				<div>
+					<div></div>
+
+					<h3>{{$ctrl.thread.creator}}</h3>
+				</div>
+			</div>
+
+			<div class='thread-content-center'>
+				<p>{{$ctrl.thread.content}}</p>
+			</div>
+
+			<div class='thread-content-right'>
+				<div>
+					<span class='mdi mdi-chevron-up'></span>
+					<span>7</span>
+					<span class='mdi mdi-chevron-down'></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class='thread-single-info'>
+		<div class='thread-single-info-left'>
+			<div>
+				<button ng-click="$ctrl.openCreate()">
+					<span>Add Comment</span>
+				</button>
+			</div>
+
+			<div>
+				<button>
+					<span class='mdi mdi-heart-outline'></span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div class='threads-search-container'>
+		<div>
+			<label>Search</label>
+			<input name='search'>
+			<button class='large-mobile'>
+				<span>Filter</span>
+			</button>
+		</div>
+	</div>
+
+	<md-sidenav class='md-sidenav-right comment-create-sidenav' md-component-id='create-comment' md-whiteframe='4'>
+		<h2>Create Comment</h2>
+
+		<create-comment class='create-thread'></create-comment>
+	</md-sidenav>
+
+	<div class='thread-single-comments-container'>
+		<list-comments comments="$ctrl.comments" class='comments-list-component'></list-comments>
+	</div>
+</div>

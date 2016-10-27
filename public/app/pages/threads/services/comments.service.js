@@ -1,11 +1,11 @@
-class threadService {
+class commentsService {
 	constructor($http) {
 		this._$http = $http;
 	}
 
 	create(credentials) {
 		return this._$http({
-			url: '/threads',
+			url: '/comments',
 			method: 'POST',
 			data: credentials
 		}).then((response) => {
@@ -15,17 +15,10 @@ class threadService {
 
 	get(id) {
 		return this._$http({
-			url: '/threads/' + id + '/threads',
-			method: 'GET'
-		});
-	}
-
-	single(id) {
-		return this._$http({
-			url: '/threads/' + id,
+			url: '/comments/' + id,
 			method: 'GET'
 		});
 	}
 }
 
-export default threadService
+export default commentsService

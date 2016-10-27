@@ -30,13 +30,8 @@ class Auth {
 		});
 	}
 
-	test() {
-		return this._$http({
-			url: '/users',
-			method: 'GET'
-		}).then((response) => {
-			console.log(response.data.res.stuff);
-		});
+	isLoggedIn() {
+		return this._Storage.get('opinion-token');
 	}
 }
 

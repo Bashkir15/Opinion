@@ -6,7 +6,7 @@ var router = express.Router();
 var comments = commentController();
 
 router.post('/', auth.ensureAuthorized, comments.create);
-router.get('/:threadId/:commentId', auth.justGetUser, comments.list);
+router.get('/:threadId', auth.justGetUser, comments.list);
 
 
 module.exports = router;

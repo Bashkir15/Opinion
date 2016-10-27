@@ -61,5 +61,21 @@ module.exports = () => {
 		return getPosts();
 	};
 
+
+	obj.single = (req, res) => {
+		Thread.findOne({_id: req.params.threadId})
+		.populate('stream')
+		.populate('creator')
+		.exec((err, thread) => {
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			json.good({
+				record: thread
+			}, res);
+		});
+	};
+
 	return obj;
 };

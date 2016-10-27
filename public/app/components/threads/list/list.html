@@ -1,6 +1,6 @@
 <div class='threads-list-component-container'>
 	<div ng-repeat="item in $ctrl.threads">
-		<single-thread thread='item'></single-thread>
+		<single-thread thread='item' ui-sref="app.singleThread({threadId: item._id})"></single-thread>
 	</div>
 
 	<div class='load-more-button'>

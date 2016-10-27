@@ -23,6 +23,12 @@ var threadSchema = new mongoose.Schema({
 		get: escapeProperty
 	},
 
+	creator: {
+		type: mongoose.Schema.ObjectId,
+		required: true,
+		ref: 'User'
+	},
+
 	content: {
 		type: String,
 		required: false,
@@ -38,7 +44,7 @@ var threadSchema = new mongoose.Schema({
 	comments: [{
 		type: mongoose.Schema.ObjectId,
 		required: false,
-		ref: 'Comments'
+		ref: 'Comment'
 	}]
 });
 

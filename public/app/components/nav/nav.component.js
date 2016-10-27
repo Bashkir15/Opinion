@@ -1,6 +1,13 @@
 class navCtrl {
-	constructor() {
+	constructor(authService, $mdSidenav) {
 		this.name = 'nav';
+		this._Auth = authService;
+		this.isLoggedIn = this._Auth.isLoggedIn();
+		this._$sidenav = $mdSidenav
+	}
+
+	openUserMenu() {
+		this._$sidenav('user-menu').toggle();
 	}
 }
 
