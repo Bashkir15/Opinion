@@ -12,6 +12,7 @@ import appConfig from './app.config'
 const requires = [
 	router,
 	'ngMaterial',
+	'ngAnimate',
 	'angularMoment',
 	'app.config',
 	'app.pages',

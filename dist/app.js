@@ -1,4 +1,4 @@
-webpackJsonp([1],{
+webpackJsonp([0],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
@@ -17,21 +17,21 @@ webpackJsonp([1],{
 
 	var _angularMaterial2 = _interopRequireDefault(_angularMaterial);
 
-	__webpack_require__(117);
-
-	__webpack_require__(126);
+	__webpack_require__(10);
 
 	__webpack_require__(118);
 
-	__webpack_require__(119);
+	__webpack_require__(121);
 
-	var _app = __webpack_require__(122);
+	__webpack_require__(128);
+
+	var _app = __webpack_require__(134);
 
 	var _app2 = _interopRequireDefault(_app);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = [_angularUiRouter2.default, 'ngMaterial', 'angularMoment', 'app.config', 'app.pages', 'app.components'];
+	var requires = [_angularUiRouter2.default, 'ngMaterial', 'ngAnimate', 'angularMoment', 'app.config', 'app.pages', 'app.components'];
 
 	window.app = _angular2.default.module('app', requires);
 
@@ -46,60 +46,6 @@ webpackJsonp([1],{
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	__webpack_require__(123);
-
-	__webpack_require__(129);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var requires = ['home', 'auth'];
-
-	var pagesModule = _angular2.default.module('app.pages', requires);
-
-	exports.default = pagesModule;
-
-/***/ },
-
-/***/ 119:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	__webpack_require__(120);
-
-	__webpack_require__(132);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var requires = ['shared.components', 'auth.components'];
-
-	var componentModule = _angular2.default.module('app.components', requires);
-
-	exports.default = componentModule;
-
-/***/ },
-
-/***/ 120:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
@@ -107,174 +53,11 @@ webpackJsonp([1],{
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _nav = __webpack_require__(121);
-
-	var _nav2 = _interopRequireDefault(_nav);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var sharedComponents = _angular2.default.module('shared.components', []);
-	sharedComponents.component('appNav', _nav2.default);
-
-	exports.default = sharedComponents;
-
-/***/ },
-
-/***/ 121:
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var navCtrl = function () {
-		function navCtrl($mdSidenav) {
-			'ngInject';
-
-			_classCallCheck(this, navCtrl);
-
-			this._$sidenav = $mdSidenav;
-		}
-
-		_createClass(navCtrl, [{
-			key: 'openUserMenu',
-			value: function openUserMenu() {
-				this._$sidenav('user-menu').toggle();
-			}
-		}]);
-
-		return navCtrl;
-	}();
-
-	var appNav = {
-		controller: navCtrl,
-		templateUrl: './app/components/shared/nav/nav.html'
-	};
-
-	exports.default = appNav;
-
-/***/ },
-
-/***/ 122:
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function appConfig($stateProvider, $urlRouterProvider) {
-		'ngInject';
-
-		$stateProvider.state('app', {
-			abstract: true,
-			templateUrl: './app/pages/app-layout.html'
-		});
-
-		$urlRouterProvider.otherwise('/');
-	}
-
-	exports.default = appConfig;
-
-/***/ },
-
-/***/ 123:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _home = __webpack_require__(124);
-
-	var _home2 = _interopRequireDefault(_home);
-
-	var _home3 = __webpack_require__(125);
-
-	var _home4 = _interopRequireDefault(_home3);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var homeModule = _angular2.default.module('home', []);
-	homeModule.config(_home2.default);
-	homeModule.controller('HomeCtrl', _home4.default);
-
-	exports.default = homeModule;
-
-/***/ },
-
-/***/ 124:
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function homeConfig($stateProvider) {
-		'ngInject';
-
-		$stateProvider.state('app.home', {
-			url: '/',
-			controller: 'HomeCtrl',
-			controllerAs: '$ctrl',
-			templateUrl: './app/pages/home/home.html'
-		});
-	}
-
-	exports.default = homeConfig;
-
-/***/ },
-
-/***/ 125:
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var HomeCtrl = function HomeCtrl() {
-		_classCallCheck(this, HomeCtrl);
-	};
-
-	exports.default = HomeCtrl;
-
-/***/ },
-
-/***/ 126:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _storage = __webpack_require__(127);
+	var _storage = __webpack_require__(119);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
-	var _toasts = __webpack_require__(128);
+	var _toasts = __webpack_require__(120);
 
 	var _toasts2 = _interopRequireDefault(_toasts);
 
@@ -288,7 +71,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 127:
+/***/ 119:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -332,7 +115,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 128:
+/***/ 120:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -375,7 +158,34 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 129:
+/***/ 121:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	__webpack_require__(122);
+
+	__webpack_require__(125);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var requires = ['home', 'auth'];
+
+	var pagesModule = _angular2.default.module('app.pages', requires);
+
+	exports.default = pagesModule;
+
+/***/ },
+
+/***/ 122:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -388,11 +198,84 @@ webpackJsonp([1],{
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _auth = __webpack_require__(130);
+	var _home = __webpack_require__(123);
+
+	var _home2 = _interopRequireDefault(_home);
+
+	var _home3 = __webpack_require__(124);
+
+	var _home4 = _interopRequireDefault(_home3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var homeModule = _angular2.default.module('home', []);
+	homeModule.config(_home2.default);
+	homeModule.controller('HomeCtrl', _home4.default);
+
+	exports.default = homeModule;
+
+/***/ },
+
+/***/ 123:
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function homeConfig($stateProvider) {
+		'ngInject';
+
+		$stateProvider.state('app.home', {
+			url: '/',
+			controller: 'HomeCtrl',
+			controllerAs: '$ctrl',
+			templateUrl: './app/pages/home/home.html'
+		});
+	}
+
+	exports.default = homeConfig;
+
+/***/ },
+
+/***/ 124:
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var HomeCtrl = function HomeCtrl() {
+		_classCallCheck(this, HomeCtrl);
+	};
+
+	exports.default = HomeCtrl;
+
+/***/ },
+
+/***/ 125:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _auth = __webpack_require__(126);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _auth3 = __webpack_require__(131);
+	var _auth3 = __webpack_require__(127);
 
 	var _auth4 = _interopRequireDefault(_auth3);
 
@@ -406,7 +289,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 130:
+/***/ 126:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -432,7 +315,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 131:
+/***/ 127:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -508,7 +391,34 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 132:
+/***/ 128:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	__webpack_require__(129);
+
+	__webpack_require__(131);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var requires = ['shared.components', 'auth.components'];
+
+	var componentModule = _angular2.default.module('app.components', requires);
+
+	exports.default = componentModule;
+
+/***/ },
+
+/***/ 129:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -521,11 +431,86 @@ webpackJsonp([1],{
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _signup = __webpack_require__(133);
+	var _nav = __webpack_require__(130);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var sharedComponents = _angular2.default.module('shared.components', []);
+	sharedComponents.component('appNav', _nav2.default);
+
+	exports.default = sharedComponents;
+
+/***/ },
+
+/***/ 130:
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var navCtrl = function () {
+		function navCtrl(Auth, $mdSidenav) {
+			'ngInject';
+
+			_classCallCheck(this, navCtrl);
+
+			this._$sidenav = $mdSidenav;
+			this._Auth = Auth;
+			this.isLoggedIn = this._Auth.isLoggedIn();
+			this.getUserInfo();
+		}
+
+		_createClass(navCtrl, [{
+			key: 'openUserMenu',
+			value: function openUserMenu() {
+				this._$sidenav('user-menu').toggle();
+			}
+		}, {
+			key: 'getUserInfo',
+			value: function getUserInfo() {
+				this.user = this._Auth.getUser();
+			}
+		}]);
+
+		return navCtrl;
+	}();
+
+	var appNav = {
+		controller: navCtrl,
+		templateUrl: './app/components/shared/nav/nav.html'
+	};
+
+	exports.default = appNav;
+
+/***/ },
+
+/***/ 131:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _signup = __webpack_require__(132);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
-	var _login = __webpack_require__(134);
+	var _login = __webpack_require__(133);
 
 	var _login2 = _interopRequireDefault(_login);
 
@@ -539,7 +524,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 133:
+/***/ 132:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -601,7 +586,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 134:
+/***/ 133:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -651,6 +636,29 @@ webpackJsonp([1],{
 	};
 
 	exports.default = loginForm;
+
+/***/ },
+
+/***/ 134:
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function appConfig($stateProvider, $urlRouterProvider) {
+		'ngInject';
+
+		$stateProvider.state('app', {
+			abstract: true,
+			templateUrl: './app/pages/app-layout.html'
+		});
+
+		$urlRouterProvider.otherwise('/');
+	}
+
+	exports.default = appConfig;
 
 /***/ }
 

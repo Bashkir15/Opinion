@@ -1,12 +1,19 @@
 class navCtrl {
-	constructor($mdSidenav) {
+	constructor(Auth, $mdSidenav) {
 		'ngInject';
 
-		this._$sidenav = $mdSidenav
+		this._$sidenav = $mdSidenav;
+		this._Auth = Auth;
+		this.isLoggedIn = this._Auth.isLoggedIn();
+		this.getUserInfo();
 	}
 
 	openUserMenu() {
 		this._$sidenav('user-menu').toggle();
+	}
+
+	getUserInfo() {
+		this.user = this._Auth.getUser();
 	} 
 }
 

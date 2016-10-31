@@ -124,6 +124,13 @@
 	 		align-items: center
 	 		justify-content: flex-end
 
+	 		p
+	 			@include open()
+	 			font-weight: 300
+	 			letter-spacing: 1px
+	 			font-size: 16px
+	 			color: rgba(0,0,0,0.8)
+
 .auth-form-submit
 	display: flex
 	align-items: center
@@ -189,6 +196,9 @@
 	.auth-form-submit
 		padding: 60px 0 100px 0
 
+	.auth-form-utilities
+		padding: 30px
+
 @media screen and (min-width: 1000px)
 	.auth-page-container
 		padding: 130px
@@ -216,3 +226,17 @@
 
 			span
 				font-size: 20px
+
+	.auth-form-utilities
+		padding: 30px 45px
+
+		> div
+			&:nth-of-type(1)
+				md-checkbox
+					.md-label
+						span
+							font-size: 18px
+
+			&:nth-of-type(2)
+				p
+					font-size: 18px
