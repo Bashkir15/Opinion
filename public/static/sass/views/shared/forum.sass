@@ -1,0 +1,72 @@
+.forum-search-container
+	position: relative
+	display: flex
+	align-items: center
+	width: 80%
+	padding: 15px 0
+	margin: 35px auto 0 auto
+	background: #aec5d9
+
+	> div
+		position: relative
+		width: 90%
+		margin: 0 auto
+
+		label
+			position: absolute
+			top: 14px
+			left: 14px
+			@include open()
+			font-weight: 300
+			letter-spacing: 2px
+			font-size: 16px
+			opacity: 1
+			z-index: 50
+			transition: all .4s ease
+
+		input
+			position: relative
+			height: 40px
+			width: 100%
+			@include open()
+			font-weight: 300
+			letter-spacing: 2px
+			font-size: 16px
+			outline: none
+			border: none
+
+		button
+			height: 42px
+			width: 100px
+			margin-left: 15px
+
+			span
+				text-transform: uppercase
+
+@media screen and (min-width: 630px)
+	.forum-search-container
+		> div
+			display: flex
+			width: 90%
+
+			input
+				flex: 1
+
+			button
+				height: 42px
+				width: 120px
+				padding: 0
+				margin-left: 15px
+				background: darken(#aec5d9, 20%)
+
+				span
+					color: $white-text
+					text-transform: uppercase
+
+@media screen and (min-width: 1000px)
+	.forum-search-container
+		width: 75%
+
+@media screen and (min-width: 1630px)
+	.forum-search-container
+		width: 50%

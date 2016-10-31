@@ -1,0 +1,171 @@
+.stream-single-component
+	display: flex
+	flex-direction: column
+	width: 90%
+	margin: 0 auto
+	box-shadow: 0 5px 6px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.35)
+	margin-bottom: 35px
+	background: #f8f9f0
+
+.single-container
+	display: flex
+	width: 90%
+	margin: 0 auto
+	border-bottom: 1px solid $lightest-blue
+
+.stream-left
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: center
+	padding: 25px
+
+	> div
+		height: 60px
+		width: 60px
+		border-radius: 50%
+		border: 2px solid $orange
+
+
+.stream-content
+	display: flex
+	flex-direction: column
+	flex: 1
+	padding-top: 20px
+
+	h3
+		@include rale()
+		font-weight: 400
+		font-size: 20px
+		letter-spacing: 2px
+		color: $grey-text
+		margin-bottom: 28px
+		text-align: left
+
+	p
+		@include open()
+		font-weight: 300
+		font-size: 16px
+		letter-spacing: 2px
+		color: lighten($grey-text, 10%)
+		text-align: left
+
+.stream-info
+	display: flex
+	align-items: stretch
+	width: 90%
+	margin: 0 auto
+	padding: 23px 0
+
+
+	.left
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-start
+		padding-left: 10px
+
+	.right
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-end
+		padding-right: 10px
+
+		> div
+			display: flex
+			align-items: center
+			justify-content: center
+
+			button
+				height: 45px
+				width: 145px
+				box-shadow: 0 3px 6px rgba(0,0,0,0.23)
+
+				span
+					@include rale()
+					font-weight: 300
+					letter-spacing: 1px
+					font-size: 14px
+					color: $white-text
+
+		.subscribe-button
+			background: $success
+
+		.unsubscribe-button
+			background: $error
+
+
+
+.stream-info-text
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 0 5px
+
+	.mdi
+		margin-right: 6px
+
+		&:nth-of-type(1)
+			font-size: 20px
+
+		&.subscribed
+			color: $error
+
+	> span
+		@include open()
+		font-weight: 300
+		font-size: 14px
+		letter-spacing: 2px
+		line-height: 24px
+		color: $grey-text
+
+
+@media screen and (min-width: 630px)
+	.stream-content
+		padding: 32px 0
+
+	.stream-left
+		padding: 30px
+
+		> div
+			height: 70px
+			width: 70px
+
+	.stream-content
+		h3
+			font-size: 24px
+			letter-spacing: 4px
+
+		p
+			font-size: 18px
+
+	.stream-info
+		.right
+			> div
+				button
+					height: 55px
+					width: 160px
+
+					span
+						font-size: 15px
+
+	.stream-info-text
+		padding: 0 5px
+
+		> span
+			font-size: 15px
+			letter-spacing: 2px
+
+@media screen and (min-width: 1000px)
+	.stream-info-text
+		> span
+			font-size: 17px
+
+@media screen and (min-width: 1630px)
+	.stream-left
+		> div
+			height: 90px
+			width: 90px

@@ -1,24 +1,12 @@
 @import "./shared/shared"
+@import "./pages/pages"
 @import "./components/components"
 
 
-@keyframes fade-out
-	0%
-		opacity: 1
-
-	100%
-		opacity: 0
-
-@keyframes fade-in
-	0%
-		opacity: 0
-
-	100%
-		opacity: 1
 
 .main-view
 	&.ng-enter
-		animation: fade-in 0.5s ease-out
+		@include slideInUp()
 
 	&.ng-leave
-		animation: fade-out 0.5s ease-out
+		@include slideOutDown()

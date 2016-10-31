@@ -53,14 +53,13 @@ function justGetUser (req, res, next) {
 			var requestedUser = decoded.user._id;
 
 			User.findOne({_id: requestedUser}, (err, user) => {
-				if (user) {
+				if (user){
 					req.user = user;
 				}
 
 				next();
 			});
-		} catch(err) {
-			res.sendStatus(500);
+		} catch (err) {
 			console.log(err);
 		}
 	}

@@ -63,6 +63,12 @@ StreamSchema.methods = {
 		}
 
 		return obj;
+	},
+
+	afterSave: function (user) {
+		var obj = this;
+		obj.subscribed = obj.subscribers.indexOf(user._id) != -1;
+		return obj;
 	}
 };
 

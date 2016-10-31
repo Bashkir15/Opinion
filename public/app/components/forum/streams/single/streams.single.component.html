@@ -1,0 +1,37 @@
+<div class='stream-single-component'>
+	<div class='single-container' ui-sref="app.singleStream({streamId: $ctrl.stream._id})">
+		<div class='stream-left'>
+			<div></div>
+		</div>
+
+		<div class='stream-content'>
+			<h3>{{$ctrl.stream.name}}</h3>
+
+			<p>{{$ctrl.stream.description}}</p>
+		</div>
+	</div>
+
+	<div class='stream-info'>
+		<div class='left'>
+			<div class='stream-info-text'>
+
+				<span><span class='mdi mdi-heart-outline' ng-class="{'subscribed': $ctrl.stream.subscribed}"></span>{{$ctrl.stream.subscribers.length}} Subscriber<span ng-if="$ctrl.stream.subscribers.length > 1 || $ctrl.stream.subscribers.length == 0">s</span></span>
+			</div>
+			<div class='large-mobile stream-info-text'>
+				<span><span class='mdi mdi-comment-outline'></span>{{$ctrl.stream.threads.length}} Thread<span ng-if='$ctrl.stream.threads.length > 1 || $ctrl.stream.threads.length == 0'>s</span></span>
+			</div>
+		</div>
+
+		<div class='right'>
+			<div>
+				<button ng-if="!$ctrl.stream.subscribed" ng-click="$ctrl.subscribe($ctrl.stream)" class='subscribe-button'>
+					<span>Subscribe</span>
+				</button>
+
+				<button ng-if="$ctrl.stream.subscribed" ng-click="$ctrl.unsubscribe($ctrl.stream)" class='unsubscribe-button'>
+					<span>Unsubscribe</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

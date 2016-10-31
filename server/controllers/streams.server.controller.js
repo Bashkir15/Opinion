@@ -23,9 +23,6 @@ module.exports = () => {
 	};
 
 	obj.list = (req, res) => {
-		if (req.user) {
-			var user = req.user;
-		}
 		
 		var criteria = {};
 
@@ -46,11 +43,18 @@ module.exports = () => {
 		.exec((err, streams) => {
 			if (err) {
 				return json.bad(err, res);
-			} 
+			} else {
+				if (req.user) {
+					streams.map((e) => {
+						e = e.afterSave(req.user);
+					});
+				}
+
+				json.good({
+					records: streams
+				}, res);
+			}
 			
-			return json.good({
-				records: streams
-			}, res);
 		});
 	};
 
@@ -68,6 +72,60 @@ module.exports = () => {
 				}, res);
 			} else {
 				return json.bad({message: 'Sorry, that stream could not be found'}, res);
+			}
+		});
+	};
+
+	obj.subscribe = (req, res) => {
+		Stream.findOne({_id: req.params.streamId})
+		.populate('creator')
+		.exec((err, stream) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				if (stream.subscribers.indexOf(req.user._id) !== -1) {
+					return json.bad({message: 'Sorry, you are already subscribed to that stream'}, res);
+				}
+
+				stream.subscribers.push(req.user._id);
+				stream.save((err, item) => {
+					stream = stream.afterSave(req.user);
+
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: item
+					}, res);
+				});
+			}
+		});
+	};
+
+	obj.unsubscribe = (req, res) => {
+		Stream.findOne({_id: req.params.streamId})
+		.populate('creator')
+		.exec((err, stream) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				if (stream.subscribers.indexOf(req.user._id) !== -1) {
+					stream.subscribers.splice(stream.subscribers.indexOf(req.user._id), 1);
+					stream.save((err, item) => {
+						stream = stream.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					return json.bad({message: 'SOrry, you are not subscribed to this stream'}, res);
+				}
 			}
 		});
 	};

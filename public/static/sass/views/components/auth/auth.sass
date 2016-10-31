@@ -5,13 +5,13 @@
 	flex-direction: column
 	align-items: center
 	padding: 80px 0
-	background: #36afe8
+	background: $light-blue
 
 	header
 		padding-bottom: 80px
 		
 		h1
-			color: #f8f9f0
+			color: $white-text
 
 .auth-form-wrapper
 	position: relative
@@ -27,7 +27,7 @@
 		font-weight: 300
 		letter-spacing: 2px
 		font-size: 16px
-		color: #737786
+		color: $grey-text
 		transition: all .4s ease-out
 
 	input
@@ -38,7 +38,7 @@
 		padding-left: 12px
 		background: none
 		outline: none
-		border: 1px solid #c2bcc0
+		border: 1px solid $grey-outline
 		@include open()
 		font-weight: 300
 		letter-spacing: 2px
@@ -52,7 +52,7 @@
 
 	&.has-success
 		input
-			border: 1px solid #6acc6c
+			border: 1px solid $success
 
 		label
 			left: -30px
@@ -60,7 +60,7 @@
 
 	&.has-error
 		input
-			border: 1px solid #c75866
+			border: 1px solid $error
 
 		label
 			left: -30px
@@ -70,7 +70,7 @@
 			label
 				left: 12px
 				opacity: 1
-				color: #c75866
+				color: $error
 
 	&.is-empty
 		label
@@ -91,7 +91,10 @@
 		font-weight: 300
 		letter-spacing: 1px
 		font-size: 14px
-		color: #c75866
+		color: $error
+
+	&.ng-enter
+		@include slideInUp()
 
 .auth-form-utilities
 	display: flex
@@ -140,7 +143,7 @@
 	button
 		height: 55px
 		width: 180px
-		border: 1px solid #c2bcc0
+		border: 1px solid $grey-outline
 		transition: all .4s ease-out
 
 		span
@@ -148,7 +151,7 @@
 			font-weight: 400
 			letter-spacing: 2px
 			font-size: 18px
-			color: #737786
+			color: $grey-text
 			transition: all .4s ease-out
 
 		&.form-valid
@@ -157,7 +160,7 @@
 			box-shadow: 0 3px 6px rgba(0,0,0,0.23)
 
 			span
-				color: #f8f9f0
+				color: $white-text
 				text-transform: uppercase
 
 			&:hover
@@ -170,7 +173,7 @@
 	width: 80%
 	margin: 0 auto
 	padding: 70px 0 55px 0
-	border-top: 2px solid #9ed3ec
+	border-top: 2px solid $lightest-blue
 
 	p
 		@include open()
@@ -185,7 +188,7 @@
 		letter-spacing: 3px
 		font-size: 16px
 		cursor: pointer
-		color: darken(#737786, 5%)
+		color: darken($grey-text, 5%)
 
 
 
