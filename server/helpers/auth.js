@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
+import json from './json';
 
 
 function generateToken(obj) {
@@ -59,6 +60,7 @@ function justGetUser (req, res, next) {
 				next();
 			});
 		} catch(err) {
+			res.sendStatus(500);
 			console.log(err);
 		}
 	}

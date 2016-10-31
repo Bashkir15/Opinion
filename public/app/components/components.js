@@ -1,20 +1,13 @@
-import angular from 'angular';
-import nav from './nav/nav.component';
+import angular from 'angular'
 
-import './auth/auth.components';
-import './streams/stream.components';
-import './threads/thread.components';
-import './comments/comments.components';
+import './shared/shared.components'
+import './auth/auth.components'
 
 const requires = [
-	'auth.components',
-	'stream.components',
-	'thread.components',
-	'comments.components'
+	'shared.components',
+	'auth.components'
 ];
 
 let componentModule = angular.module('app.components', requires);
-componentModule.component('appNav', nav);
 
 export default componentModule
-

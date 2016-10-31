@@ -1,0 +1,132 @@
+<nav class='nav'>
+	<div class='nav-left'>
+		<div class='nav-item'>
+			<a ui-sref='app.home'>
+				<button>
+					<span>Opinionated</span>
+				</button>
+			</a>
+		</div>
+
+		<div class='nav-item'>
+			<button>
+				<span>Streams</span>
+			</button>
+		</div>
+	</div>
+
+	<div class='nav-right'>
+		<div class='nav-item'>
+			<a ui-sref='app.signup'>
+				<button>
+					<span>Signup</span>
+				</button>
+			</a>
+		</div>
+
+		<div class='nav-item'>
+			<a ui-sref='app.login'>
+				<button>
+					<span>Login</span>
+				</button>
+			</a>
+		</div>
+
+		<div class='nav-item'>
+			<button ng-click="$ctrl.openUserMenu()">
+				<span>Menu</span>
+			</button>
+		</div>
+	</div>
+</nav>
+
+<md-sidenav class='md-sidenav-left user-menu' md-component-id='user-menu' md-whiteframe='4'>
+	<div class='user-menu-user-info'>
+		<div></div>
+		<p>Username</p>
+		<p>Email</p>
+	</div>
+
+	<md-list class='user-menu-body'>
+		<md-list-item md-ink-ripple>
+			<div>
+				<i class='mdi mdi-account'></i>
+			</div>
+
+			<div class='inset'>
+				<span>
+					Profile
+				</span>
+			</div>
+
+			<button class='md-secondary' ng-click="$ctrl.showProfile = !$ctrl.showProfile">
+				<i class='mdi mdi-chevron-down'></i>
+			</button>
+		</md-list-item>
+
+		<ul class='user-menu-nested-list' ng-show='$ctrl.showProfile'>
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Overview</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Threads</span>
+					</button>
+				</li>
+			</div>
+		</ul>
+
+		<md-list-item md-ink-ripple>
+			<div>
+				<i class='mdi mdi-comment-outline'></i>
+			</div>
+
+			<div class='inset'>
+				<span>
+					Messages
+				</span>
+			</div>
+
+			<button class='md-secondary'>
+				<i class='mdi mdi-chevron-down'></i>
+			</button>
+		</md-list-item>
+
+		<md-list-item md-ink-ripple>
+			<div>
+				<i class='mdi mdi-book'></i>
+			</div>
+
+			<div class='inset'>
+				<span>Manage Streams</span>
+			</div>
+		</md-list-item>
+
+		<md-list-item md-ink-ripple>
+			<div>
+				<i class='mdi mdi-pencil'></i>
+			</div>
+
+			<div class='inset'>
+				<span>Add Thread</span>
+			</div>
+		</md-list-item>
+
+		<md-list-item md-ink-ripple>
+			<div>
+				<i class='mdi mdi-magnify'></i>
+			</div>
+
+			<div class='inset'>
+				<span>Find Users</span>
+			</div>
+		</md-list-item>
+	</md-list>
+
+</md-sidenav>

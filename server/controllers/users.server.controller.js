@@ -57,10 +57,14 @@ module.exports = () => {
 		});
 	};
 
-	obj.test = (req, res) => {
-		User.findOne({email: 'Forest.d.collins@gmail.com'}, (err, user) => {
+	obj.single = (req, res) => {
+		User.findOne({username: req.params.username}, (err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			}
+
 			json.good({
-				user: user
+				record: user
 			}, res);
 		});
 	};

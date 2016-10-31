@@ -1,9 +1,9 @@
-function authInterceptor($window, Storage) {
+function authInterceptor(Storage) {
 	'ngInject';
 
 	return {
 		request: (config) => {
-			config.headers.Authorization = 'Bearer ' + Storage.get('opinion-token');
+			config.headers.Authorization = "Bearer " + Storage.get('opinion-token');
 			return config;
 		},
 
@@ -11,12 +11,10 @@ function authInterceptor($window, Storage) {
 			if (response.status == '401' || response.status == '403') {
 				Storage.remove('opinion-token');
 				$state.go('app.home');
-				alert('unauthorized');
 			}
 
 			if (response.status == '404') {
 				$state.go('app.home');
-				alert('page not found');
 			}
 		}
 	}

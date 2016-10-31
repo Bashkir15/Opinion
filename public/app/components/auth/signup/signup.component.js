@@ -1,5 +1,5 @@
 class SignupFormCtrl {
-	constructor($state, authService) {
+	constructor($state, Auth, Toast) {
 		'ngInject';
 
 		this.data = {
@@ -10,20 +10,22 @@ class SignupFormCtrl {
 		};
 
 		this._state = $state;
-		this._Auth = authService;
+		this._Auth = Auth;
+		this._Toaster = Toast;
 	}
 
 	signup(isValid) {
 		if (isValid) {
 			this._Auth.signup(this.data).then((response) => {
-				this._state.go('app.auth.login');
+				this._Toaster.success('Welcome to Opinionated!');
+				this._state.go('app.login');
 			},
 				(err) => {
-					alert('boo, but still yay');
+					this._Toast.error('boo, but still yay');
 				}
 			);
 		} else {
-			alert('hmm, form issue!');
+			this._Toast('hmm, form issue!');
 		}
 	}
 }

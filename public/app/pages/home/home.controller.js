@@ -1,6 +1,6 @@
 class HomeCtrl {
 	constructor() {
-		this.title = 'home';
+
 	}
 }
 

@@ -1,23 +1,9 @@
-function authConfig ($stateProvider, $urlRouterProvider) {
+function authConfig ($stateProvider) {
 	'ngInject';
 
-	$stateProvider.state('app.auth', {
-		abstract: true,
-		templateUrl: './app/pages/auth/auth.html'
-	});
-
-	$stateProvider.state('app.auth.signup', {
+	$stateProvider.state('app.signup', {
 		url: '/signup',
-		controller: 'signupCtrl',
-		controllerAs: '$ctrl',
 		templateUrl: './app/pages/auth/signup/signup.html'
-	});
-
-	$stateProvider.state('app.auth.login', {
-		url: '/login',
-		controller: 'loginCtrl',
-		controllerAs: '$ctrl',
-		templateUrl: './app/pages/auth/login/login.html'
 	});
 }
 

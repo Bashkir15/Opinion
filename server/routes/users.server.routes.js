@@ -7,5 +7,6 @@ let users = userController();
 
 router.post('/', users.create);
 router.post('/authenticate', users.authenticate);
+router.get('/:username', auth.justGetUser, users.single);
 
 module.exports = router;

@@ -1,16 +1,12 @@
-import angular from 'angular';
-import './home';
-import './auth/auth';
-import './streams/streams';
-import './threads/threads';
+import angular from 'angular'
+import './home/home'
+import './auth/auth'
 
 const requires = [
 	'home',
-	'auth',
-	'streams',
-	'threads'
+	'auth'
 ];
 
-let pagesModule = angular.module("app.pages", requires);
+let pagesModule = angular.module('app.pages', requires);
 
-export default pagesModule;
+export default pagesModule
