@@ -12,7 +12,7 @@
 	<div class='forum-search-container'>
 		<div>
 			<label>Search</label>
-			<input type='text' name='search' ng-model='$ctrl.search'>
+			<input type='text' name='search' ng-model='$ctrl.streamsSearch' ng-change="$ctrl.search()">
 			<button class='large-mobile'>
 				<span>Filter</span>
 			</button>

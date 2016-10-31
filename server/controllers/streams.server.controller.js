@@ -30,6 +30,18 @@ module.exports = () => {
 			criteria.subscribers = req.user._id;
 		}
 
+		if (req.query && req.query.timestamp) {
+			criteria.created = {
+				$gte: req.query.timestamp
+			};
+		}
+
+
+		if (req.query && req.query.filter) {
+			delete criteria.created;
+			criteria.name = new RegExp(req.query.filter, 'i');
+		}
+
 		if (req.query.unsubscribed) {
 			criteria.subscibers = {
 				$ne: req.user._id

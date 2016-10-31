@@ -1,8 +1,9 @@
 class StreamsListCtrl {
-	constructor(Stream) {
+	constructor(Stream, $timeout) {
 		'ngInject';
 
 		this._Stream = Stream;
+		this._$timeout = $timeout;
 		this.streams = [];
 		this.streamsSearch = '';
 		this.lastUpdated = 0;
@@ -28,6 +29,29 @@ class StreamsListCtrl {
 
 			this.lastUpdated = Date.now();
 		});
+	}
+
+	search(newValue, oldValue) {
+		var streamsSearchTimeout;
+		
+		if (!newValue !== oldValue) {
+			this.streams = [];
+		}
+
+		this._$timeout.cancel(streamsSearchTimeout);
+
+		streamsSearchTimeout = this._$timeout(() => {
+			if (!newValue) {
+				if (this.streamsSearchEnabled) {
+					this.lastUpdated = 0;
+					this.getStreams();
+				}
+			} else {
+				this.getStreams();
+			}
+
+			this.streamsSearchEnabled = this.streamsSearch !== '';
+		}, 500);
 	}
 }
 
