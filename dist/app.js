@@ -754,17 +754,34 @@ webpackJsonp([0],{
 			_classCallCheck(this, StreamsListCtrl);
 
 			this._Stream = Stream;
+			this.streams = [];
+			this.streamsSearch = '';
+			this.lastUpdated = 0;
 			this.getStreams();
 		}
 
 		_createClass(StreamsListCtrl, [{
 			key: 'getStreams',
-			value: function getStreams() {
+			value: function getStreams(options) {
 				var _this = this;
 
-				this._Stream.get().success(function (response) {
-					_this.streams = response.res.records;
-					console.log(response);
+				options = options || {};
+
+				this._Stream.get({
+					timestamp: this.lastUpdated,
+					filter: this.streamsSearch
+				}).success(function (response) {
+					if (_this.streamsSearch) {
+						_this.streams = [];
+					}
+
+					if (!options.append) {
+						_this.streams = response.res.records.concat(_this.streams);
+					} else {
+						_this.streams = _this.streams.concat(response.res.records);
+					}
+
+					_this.lastUpdated = Date.now();
 				});
 			}
 		}]);
