@@ -1,0 +1,51 @@
+<div class='login-form-container'>
+	<form name='$ctrl.loginForm' ng-submit="$ctrl.login($ctrl.loginForm.$valid)" novalidate>
+		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.loginForm.email.hasFocus,
+		'has-success': $ctrl.loginForm.email.$valid,
+		'has-error': $ctrl.loginForm.email.$error && $ctrl.loginForm.email.$touched && !$ctrl.loginForm.email.$valid,
+		'is-empty': !$ctrl.loginForm.email.$viewValue}">
+			<label>Email</label>
+			<input type='email' name='email' ng-model="$ctrl.data.email" required ng-focus="$ctrl.loginForm.email.hasFocus=true", ng-blur="$ctrl.loginForm.email.hasFocus=false">
+			<div ng-messages='$ctrl.loginForm.email.$error' ng-if='$ctrl.loginForm.email.$touched && !$ctrl.loginForm.email.$valid' class='auth-form-error-container'>
+				<div ng-message='required'>
+					<span>Please provide an email</span>
+				</div>
+			</div>
+		</div>
+
+		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.loginForm.password.hasFocus,
+		'has-success': $ctrl.loginForm.password.$valid,
+		'has-error': $ctrl.loginForm.password.$error && $ctrl.loginForm.password.$touched && !$ctrl.loginForm.password.$valid,
+		'is-empty': !$ctrl.loginForm.password.$viewValue}">
+			<label>Password</label>
+			<input type='password' name='password' ng-model='$ctrl.data.password' required ng-focus="$ctrl.loginForm.password.hasFocus=true" ng-blur="$ctrl.loginForm.password.hasFocus=false">
+			<div ng-messages='$ctrl.loginForm.password.$error' ng-if="$ctrl.loginForm.password.$touched && !$ctrl.loginForm.password.$valid" class='auth-form-error-container'>
+				<div ng-message='required'>
+					<span>Sorry, you need your password</span>
+				</div>
+			</div>
+		</div>
+
+		<div class='auth-form-utilities'>
+			<div>
+				<md-checkbox ng-model="$ctrl.remember" md-true-value="'isRemembered'">
+					Remember Me
+				</md-checkbox>
+			</div>
+
+			<div>
+				<p>Forgot Password?</p>
+			</div>
+		</div>
+		<div class='auth-form-submit'>
+			<button type='submit' aria-label='submit login form' ng-class="{'form-valid': $ctrl.loginForm.$valid}">
+				<span>Login</span>
+			</button>
+		</div>
+
+		<div class='auth-form-other-link'>
+			<p>Don't have an account yet?</p>
+			<a ui-sref='app.signup'>Signup Here</a>
+		</div>
+	</form> 
+</div>

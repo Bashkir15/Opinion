@@ -6,7 +6,7 @@
 		'is-empty': !$ctrl.signupForm.name.$viewValue}">
 			<label>Name</label>
 			<input type='text' name='name' ng-model='$ctrl.data.name' required ng-focus="$ctrl.signupForm.name.hasFocus=true" ng-blur="$ctrl.signupForm.name.hasFocus=false">
-			<div ng-messages="$ctrl.signupForm.name.$error" ng-if="$ctrl.signupForm.name.$touched" class='auth-form-error-container'>
+			<div ng-messages="$ctrl.signupForm.name.$error" ng-if="$ctrl.signupForm.name.$touched && !$ctrl.signupForm.name.$valid" class='auth-form-error-container'>
 				<div ng-message='required'>
 					<span>Sorry, your name is required</span>
 				</div>
@@ -19,7 +19,7 @@
 		'is-empty': !$ctrl.signupForm.username.$viewValue}">
 			<label>Username</label>
 			<input type='text' name='username' ng-model='$ctrl.data.username' required ng-focus="$ctrl.signupForm.username.hasFocus=true" ng-blur="$ctrl.signupForm.username.hasFocus=false">
-			<div ng-messages="$ctrl.signupForm.username.$error" ng-if="$ctrl.signupForm.username.$touched" class='auth-form-error-container'>
+			<div ng-messages="$ctrl.signupForm.username.$error" ng-if="$ctrl.signupForm.username.$touched && !$ctrl.signupForm.username.$valid" class='auth-form-error-container'>
 				<div ng-message="required">
 					<span>Sorry, your username is required</span>
 				</div>
@@ -32,7 +32,7 @@
 		'is-empty': !$ctrl.signupForm.email.$viewValue}">
 			<label>Email</label>
 			<input type='email' name='email' ng-model="$ctrl.data.email" required ng-focus="$ctrl.signupForm.email.hasFocus=true" ng-blur="$ctrl.signupForm.email.hasFocus=false">
-			<div ng-messages='$ctrl.signupForm.email.$error' ng-if="$ctrl.signupForm.email.$touched" class='auth-form-error-container'>
+			<div ng-messages='$ctrl.signupForm.email.$error' ng-if="$ctrl.signupForm.email.$touched && !$ctrl.signupForm.email.$valid" class='auth-form-error-container'>
 				<div ng-message="required">
 					<span>Sorry, your email is required</span>
 				</div>
@@ -45,7 +45,7 @@
 		'is-empty': !$ctrl.signupForm.password.$viewValue}">
 			<label>Password</label>
 			<input type='password' name='password' ng-model='$ctrl.data.password' required ng-focus='$ctrl.signupForm.password.hasFocus=true' ng-blur="$ctrl.signupForm.password.hasFocus=false">
-			<div ng-messages='$ctrl.signupForm.password.$error' ng-if="$ctrl.signupForm.password.$touched" class='auth-form-error-container'>
+			<div ng-messages='$ctrl.signupForm.password.$error' ng-if="$ctrl.signupForm.password.$touched && !$ctrl.signupForm.password.$valid" class='auth-form-error-container'>
 				<div ng-message='required'>
 					<span>Sorry, you need a password</span>
 				</div>

@@ -421,6 +421,11 @@ webpackJsonp([1],{
 			url: '/signup',
 			templateUrl: './app/pages/auth/signup/signup.html'
 		});
+
+		$stateProvider.state('app.login', {
+			url: '/login',
+			templateUrl: './app/pages/auth/login/login.html'
+		});
 	}
 
 	exports.default = authConfig;
@@ -520,10 +525,15 @@ webpackJsonp([1],{
 
 	var _signup2 = _interopRequireDefault(_signup);
 
+	var _login = __webpack_require__(134);
+
+	var _login2 = _interopRequireDefault(_login);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var authComponents = _angular2.default.module('auth.components', []);
 	authComponents.component('signupForm', _signup2.default);
+	authComponents.component('loginForm', _login2.default);
 
 	exports.default = authComponents;
 
@@ -588,6 +598,59 @@ webpackJsonp([1],{
 	};
 
 	exports.default = signupForm;
+
+/***/ },
+
+/***/ 134:
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var LoginCtrl = function () {
+		function LoginCtrl($state, Auth, Toast) {
+			'ngInject';
+
+			_classCallCheck(this, LoginCtrl);
+
+			this._Auth = Auth;
+			this._Toast = Toast;
+		}
+
+		_createClass(LoginCtrl, [{
+			key: 'login',
+			value: function login(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this._Auth.login(this.data).then(function (response) {
+						_this._Toast.success('Welcome back');
+					}, function (err) {
+						_this._Toast.error(response.res.message);
+					});
+				} else {
+					alert('hmm, form issue!');
+				}
+			}
+		}]);
+
+		return LoginCtrl;
+	}();
+
+	var loginForm = {
+		scope: {},
+		controller: LoginCtrl,
+		templateUrl: './app/components/auth/login/login.component.html'
+	};
+
+	exports.default = loginForm;
 
 /***/ }
 
