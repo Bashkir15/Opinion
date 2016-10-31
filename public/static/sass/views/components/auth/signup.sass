@@ -1,9 +1,24 @@
 .signup-form
 	width: 90%
 	margin: 0 auto
-	border-radius: 12px
 	box-shadow: 0 3px 6px rgba(0,0,0,0.3), 0 3px 6px rgba(0,0,0,0.43)
-	background: #eaf0f9
+	background: lighten(#eaf0f9, 10%)
 
 .signup-form-container
 	padding-top: 70px
+
+@media screen and (min-width: 630px)
+	.signup-form
+		width: 70%
+
+
+@media screen and (min-width: 1000px)
+	.signup-form
+		width: 60%
+
+	.signup-form-container
+		padding-top: 100px
+
+@media screen and (min-width: 1300px)
+	.signup-form
+		width: 40%
