@@ -8,5 +8,9 @@ var threads = threadController();
 router.post('/', auth.ensureAuthorized, threads.create);
 router.get('/:streamId/threads', auth.justGetUser, threads.list);
 router.get('/:threadId', auth.justGetUser, threads.single);
+router.post('/:threadId/like', auth.ensureAuthorized, threads.like);
+router.post('/:threadId/dislike', auth.ensureAuthorized, threads.dislike);
+router.post('/:threadId/save', auth.ensureAuthorized, threads.save);
+router.post('/:threadId/unsave', auth.ensureAuthorized, threads.unsave);
 
 module.exports = router;

@@ -7,6 +7,13 @@ function streamsConfig ($stateProvider) {
 		controller: 'StreamsListCtrl',
 		controllerAs: '$ctrl'
 	});
+
+	$stateProvider.state('app.singleStream', {
+		url: '/streams/:streamId',
+		templateUrl: './app/pages/streams/single/single.html',
+		controller: 'StreamsSingleCtrl',
+		controllerAs: '$ctrl'
+	});
 }
 
 export default streamsConfig

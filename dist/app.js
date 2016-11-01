@@ -1,6 +1,5 @@
-webpackJsonp([0],{
-
-/***/ 0:
+webpackJsonp([0],[
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39,8 +38,124 @@ webpackJsonp([0],{
 	_angular2.default.bootstrap(document, ['app']);
 
 /***/ },
-
-/***/ 118:
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70,8 +185,7 @@ webpackJsonp([0],{
 	exports.default = configModule;
 
 /***/ },
-
-/***/ 119:
+/* 119 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -114,8 +228,7 @@ webpackJsonp([0],{
 	exports.default = Storage;
 
 /***/ },
-
-/***/ 120:
+/* 120 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -157,8 +270,7 @@ webpackJsonp([0],{
 	exports.default = Toast;
 
 /***/ },
-
-/***/ 121:
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -177,17 +289,18 @@ webpackJsonp([0],{
 
 	__webpack_require__(128);
 
+	__webpack_require__(145);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['home', 'auth', 'streams'];
+	var requires = ['home', 'auth', 'streams', 'threads'];
 
 	var pagesModule = _angular2.default.module('app.pages', requires);
 
 	exports.default = pagesModule;
 
 /***/ },
-
-/***/ 122:
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -217,8 +330,7 @@ webpackJsonp([0],{
 	exports.default = homeModule;
 
 /***/ },
-
-/***/ 123:
+/* 123 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -240,8 +352,7 @@ webpackJsonp([0],{
 	exports.default = homeConfig;
 
 /***/ },
-
-/***/ 124:
+/* 124 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -259,8 +370,7 @@ webpackJsonp([0],{
 	exports.default = HomeCtrl;
 
 /***/ },
-
-/***/ 125:
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -290,8 +400,7 @@ webpackJsonp([0],{
 	exports.default = authModule;
 
 /***/ },
-
-/***/ 126:
+/* 126 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -316,8 +425,7 @@ webpackJsonp([0],{
 	exports.default = authConfig;
 
 /***/ },
-
-/***/ 127:
+/* 127 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -392,8 +500,7 @@ webpackJsonp([0],{
 	exports.default = Auth;
 
 /***/ },
-
-/***/ 128:
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -418,18 +525,22 @@ webpackJsonp([0],{
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
+	var _streamsSingle = __webpack_require__(147);
+
+	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var streamsModule = _angular2.default.module('streams', []);
 	streamsModule.config(_streams2.default);
 	streamsModule.service('Stream', _streams4.default);
 	streamsModule.controller('StreamsListCtrl', _streamsList2.default);
+	streamsModule.controller('StreamsSingleCtrl', _streamsSingle2.default);
 
 	exports.default = streamsModule;
 
 /***/ },
-
-/***/ 129:
+/* 129 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -446,13 +557,19 @@ webpackJsonp([0],{
 			controller: 'StreamsListCtrl',
 			controllerAs: '$ctrl'
 		});
+
+		$stateProvider.state('app.singleStream', {
+			url: '/streams/:streamId',
+			templateUrl: './app/pages/streams/single/single.html',
+			controller: 'StreamsSingleCtrl',
+			controllerAs: '$ctrl'
+		});
 	}
 
 	exports.default = streamsConfig;
 
 /***/ },
-
-/***/ 130:
+/* 130 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -527,8 +644,7 @@ webpackJsonp([0],{
 	exports.default = StreamService;
 
 /***/ },
-
-/***/ 131:
+/* 131 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -621,8 +737,7 @@ webpackJsonp([0],{
 	exports.default = StreamsListCtrl;
 
 /***/ },
-
-/***/ 132:
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -650,8 +765,7 @@ webpackJsonp([0],{
 	exports.default = componentModule;
 
 /***/ },
-
-/***/ 133:
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -676,8 +790,7 @@ webpackJsonp([0],{
 	exports.default = sharedComponents;
 
 /***/ },
-
-/***/ 134:
+/* 134 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -725,8 +838,7 @@ webpackJsonp([0],{
 	exports.default = appNav;
 
 /***/ },
-
-/***/ 135:
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -756,8 +868,7 @@ webpackJsonp([0],{
 	exports.default = authComponents;
 
 /***/ },
-
-/***/ 136:
+/* 136 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -818,8 +929,7 @@ webpackJsonp([0],{
 	exports.default = signupForm;
 
 /***/ },
-
-/***/ 137:
+/* 137 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -871,8 +981,7 @@ webpackJsonp([0],{
 	exports.default = loginForm;
 
 /***/ },
-
-/***/ 138:
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -887,17 +996,18 @@ webpackJsonp([0],{
 
 	__webpack_require__(139);
 
+	__webpack_require__(148);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['streams.components'];
+	var requires = ['streams.components', 'threads.components'];
 
 	var forumComponents = _angular2.default.module('forum.components', requires);
 
 	exports.default = forumComponents;
 
 /***/ },
-
-/***/ 139:
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -932,8 +1042,7 @@ webpackJsonp([0],{
 	exports.default = streamComponents;
 
 /***/ },
-
-/***/ 140:
+/* 140 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -960,8 +1069,7 @@ webpackJsonp([0],{
 	exports.default = listStream;
 
 /***/ },
-
-/***/ 141:
+/* 141 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1014,8 +1122,7 @@ webpackJsonp([0],{
 	exports.default = singleStream;
 
 /***/ },
-
-/***/ 142:
+/* 142 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1071,8 +1178,7 @@ webpackJsonp([0],{
 	exports.default = createStream;
 
 /***/ },
-
-/***/ 143:
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1103,8 +1209,7 @@ webpackJsonp([0],{
 	exports.default = appConfig;
 
 /***/ },
-
-/***/ 144:
+/* 144 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1136,6 +1241,169 @@ webpackJsonp([0],{
 
 	exports.default = authInterceptor;
 
-/***/ }
+/***/ },
+/* 145 */
+/***/ function(module, exports, __webpack_require__) {
 
-});
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _threads = __webpack_require__(146);
+
+	var _threads2 = _interopRequireDefault(_threads);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var threadsModule = _angular2.default.module('threads', []);
+	threadsModule.service('Thread', _threads2.default);
+
+	exports.default = threadsModule;
+
+/***/ },
+/* 146 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Thread = function () {
+		function Thread($http) {
+			'ngInject';
+
+			_classCallCheck(this, Thread);
+
+			this._$http = $http;
+		}
+
+		_createClass(Thread, [{
+			key: 'get',
+			value: function get(id, options) {
+				this._$http({
+					url: '/threads/' + id + '/threads',
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter
+					}
+				});
+			}
+		}]);
+
+		return Thread;
+	}();
+
+	exports.default = Thread;
+
+/***/ },
+/* 147 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var singleStreamCtrl = function () {
+		function singleStreamCtrl(Stream, Thread, $stateParams) {
+			'ngInject';
+
+			_classCallCheck(this, singleStreamCtrl);
+
+			this._Stream = Stream;
+			this._Thread = Thread;
+			this.streamId = $stateParams.streamId;
+			this.getStream();
+			//this.getThreads();
+		}
+
+		_createClass(singleStreamCtrl, [{
+			key: 'getStream',
+			value: function getStream() {
+				var _this = this;
+
+				this._Stream.single(this.streamId).then(function (response) {
+					_this.stream = response.data.res.record;
+				});
+			}
+		}]);
+
+		return singleStreamCtrl;
+	}();
+
+	exports.default = singleStreamCtrl;
+
+/***/ },
+/* 148 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _threadsList = __webpack_require__(149);
+
+	var _threadsList2 = _interopRequireDefault(_threadsList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var threadComponents = _angular2.default.module('threads.components', []);
+	threadComponents.component('threadList', _threadsList2.default);
+
+	exports.default = threadComponents;
+
+/***/ },
+/* 149 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var threadListController = function threadListController($stateParams) {
+		_classCallCheck(this, threadListController);
+
+		this.streamId = $stateParams.streamId;
+	};
+
+	var threadsList = {
+		scope: {},
+		bindings: {
+			threads: '='
+		},
+		controller: threadListController,
+		templateUrl: './app/components/forum/threads/list/threads.list.component.html'
+	};
+
+	exports.default = threadsList;
+
+/***/ }
+]);
