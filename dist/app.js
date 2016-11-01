@@ -1290,6 +1290,15 @@ webpackJsonp([0],[
 		}
 
 		_createClass(threadService, [{
+			key: 'create',
+			value: function create(data) {
+				return this._$http({
+					url: '/threads',
+					method: 'POST',
+					data: data
+				});
+			}
+		}, {
 			key: 'get',
 			value: function get(id, options) {
 				return this._$http({
@@ -1323,52 +1332,61 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var singleStreamCtrl = function () {
-		function singleStreamCtrl(Stream, Thread, $stateParams) {
+		function singleStreamCtrl(Stream, Thread, $stateParams, $rootScope) {
 			'ngInject';
+
+			var _this = this;
 
 			_classCallCheck(this, singleStreamCtrl);
 
 			this._Stream = Stream;
 			this._Thread = Thread;
+			this._$rootScope = $rootScope;
 			this.streamId = $stateParams.streamId;
 			this.threads = [];
 			this.threadsSearch = '';
 			this.lastUpdated = 0;
 			this.getStream();
-			this.getThreads({
-				timestamp: this.lastUpdated,
-				filter: this.threadsSearch
+			this.getThreads();
+
+			this._$rootScope.$on('threadCreated', function () {
+				_this.showCreate = !_this.showCreate;
+				_this.getThreads({
+					append: true
+				});
 			});
 		}
 
 		_createClass(singleStreamCtrl, [{
 			key: 'getStream',
 			value: function getStream() {
-				var _this = this;
+				var _this2 = this;
 
 				this._Stream.single(this.streamId).then(function (response) {
-					_this.stream = response.data.res.record;
+					_this2.stream = response.data.res.record;
 				});
 			}
 		}, {
 			key: 'getThreads',
 			value: function getThreads(options) {
-				var _this2 = this;
+				var _this3 = this;
 
 				options = options || {};
+				options.filter = this.threadsSearch;
+				options.timestamp = this.lastUpdated;
 
 				this._Thread.get(this.streamId, options).then(function (response) {
-					if (_this2.threadsSearch) {
-						_this2.threads = [];
+					if (_this3.threadsSearch) {
+						_this3.threads = [];
 					}
 
 					if (!options.append) {
-						_this2.threads = response.data.res.records.concat(_this2.threads);
+						_this3.threads = response.data.res.records.concat(_this3.threads);
 					} else {
-						_this2.threads = _this2.threads.concat(response.data.res.records);
+						_this3.threads = _this3.threads.concat(response.data.res.records);
 					}
 
-					_this2.lastUpdated = Date.now();
+					_this3.lastUpdated = Date.now();
 				});
 			}
 		}]);
@@ -1400,11 +1418,16 @@ webpackJsonp([0],[
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
+	var _threadsCreate = __webpack_require__(151);
+
+	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var threadComponents = _angular2.default.module('threads.components', []);
 	threadComponents.component('threadList', _threadsList2.default);
 	threadComponents.component('singleThread', _threadsSingle2.default);
+	threadComponents.component('createThread', _threadsCreate2.default);
 
 	exports.default = threadComponents;
 
@@ -1463,6 +1486,69 @@ webpackJsonp([0],[
 	};
 
 	exports.default = singleThread;
+
+/***/ },
+/* 151 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var threadCreateCtrl = function () {
+		function threadCreateCtrl(Toast, Thread, $stateParams, $rootScope) {
+			'ngInject';
+
+			_classCallCheck(this, threadCreateCtrl);
+
+			this._Toast = Toast;
+			this._Thread = Thread;
+			this._$rootScope = $rootScope;
+			this._$stateParams = $stateParams;
+
+			this.data = {
+				title: '',
+				content: '',
+				stream: ''
+			};
+		}
+
+		_createClass(threadCreateCtrl, [{
+			key: 'create',
+			value: function create(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					if (this._$stateParams.streamId) {
+						this.data.stream = this._$stateParams.streamId;
+					}
+
+					this._Thread.create(this.data).then(function (response) {
+						_this._Toast.success('You have just posted a new thread');
+						_this._$rootScope.$broadcast('threadCreated');
+					});
+				} else {
+					this._Toast.error('Hmm.. your form is not valid');
+				}
+			}
+		}]);
+
+		return threadCreateCtrl;
+	}();
+
+	var createThread = {
+		scope: {},
+		controller: threadCreateCtrl,
+		templateUrl: './app/components/forum/threads/create/threads.create.component.html'
+	};
+
+	exports.default = createThread;
 
 /***/ }
 ]);

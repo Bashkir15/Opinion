@@ -27,13 +27,15 @@
 		</div>
 
 		<div>
-			<button>
+			<button ng-click="$ctrl.showCreate = !$ctrl.showCreate">
 				<span>Create Thread</span>
 			</button>
 		</div>
 	</div>
 
-	<div class='single-stream-create-thread' ng-if="$ctrl.openCreate"></div>
+	<div class='single-stream-create-thread' ng-if="$ctrl.showCreate">
+		<create-thread></create-thread>
+	</div>
 
 	<div class='forum-search-container'>
 		<div>

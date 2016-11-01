@@ -1,17 +1,22 @@
 class singleStreamCtrl {
-	constructor(Stream, Thread, $stateParams) {
+	constructor(Stream, Thread, $stateParams, $rootScope) {
 		'ngInject';
 
 		this._Stream = Stream;
 		this._Thread = Thread;
+		this._$rootScope = $rootScope;
 		this.streamId = $stateParams.streamId;
 		this.threads = [];
 		this.threadsSearch = '';
 		this.lastUpdated = 0;
 		this.getStream();
-		this.getThreads({
-			timestamp: this.lastUpdated,
-			filter: this.threadsSearch
+		this.getThreads();
+
+		this._$rootScope.$on('threadCreated', () => {
+			this.showCreate = !this.showCreate;
+			this.getThreads({
+				append: true
+			});
 		});
 	}
 
@@ -23,6 +28,8 @@ class singleStreamCtrl {
 
 	getThreads(options) {
 		options = options || {};
+		options.filter = this.threadsSearch;
+		options.timestamp = this.lastUpdated;
 
 		this._Thread.get(this.streamId, options).then((response) => {
 			if (this.threadsSearch) {
