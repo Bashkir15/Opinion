@@ -557,7 +557,7 @@ webpackJsonp([0],{
 				_this.lastUpdated = 0;
 				_this.showCreate = !_this.showCreate;
 				_this.getStreams({
-					append: true
+					reload: true
 				});
 			});
 		}

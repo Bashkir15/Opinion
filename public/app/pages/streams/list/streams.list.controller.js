@@ -14,7 +14,7 @@ class StreamsListCtrl {
 			this.lastUpdated = 0
 			this.showCreate = !this.showCreate;
 			this.getStreams({
-				append: true
+				reload: true
 			});
 		});
 	}
