@@ -11,21 +11,20 @@ class StreamsListCtrl {
 		this.getStreams();
 
 		this._$rootScope.$on('streamCreated', () => {
-			this.lastUpdated = 0
 			this.showCreate = !this.showCreate;
 			this.getStreams({
-				reload: true
+				append: true
 			});
 		});
 	}
 
 	getStreams(options) {
 		options = options || {};
+		options.filter = this.streamsSearch,
+		options.timestamp = this.lastUpdated
 
-		this._Stream.get({
-			timestamp: this.lastUpdated,
-			filter: this.streamsSearch
-		}).success((response) => {
+
+		this._Stream.get(options).success((response) => {
 			if (this.streamsSearch) {
 				this.streams = [];
 			}

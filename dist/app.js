@@ -485,10 +485,14 @@ webpackJsonp([0],{
 			}
 		}, {
 			key: 'get',
-			value: function get() {
+			value: function get(options) {
 				return this._$http({
 					url: '/streams',
-					method: 'GET'
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter
+					}
 				});
 			}
 		}, {
@@ -554,10 +558,9 @@ webpackJsonp([0],{
 			this.getStreams();
 
 			this._$rootScope.$on('streamCreated', function () {
-				_this.lastUpdated = 0;
 				_this.showCreate = !_this.showCreate;
 				_this.getStreams({
-					reload: true
+					append: true
 				});
 			});
 		}
@@ -568,11 +571,9 @@ webpackJsonp([0],{
 				var _this2 = this;
 
 				options = options || {};
+				options.filter = this.streamsSearch, options.timestamp = this.lastUpdated;
 
-				this._Stream.get({
-					timestamp: this.lastUpdated,
-					filter: this.streamsSearch
-				}).success(function (response) {
+				this._Stream.get(options).success(function (response) {
 					if (_this2.streamsSearch) {
 						_this2.streams = [];
 					}

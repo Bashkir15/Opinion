@@ -23,10 +23,9 @@ var threadSchema = new mongoose.Schema({
 		get: escapeProperty
 	},
 
-	creator: {
-		type: mongoose.Schema.ObjectId,
-		required: true,
-		ref: 'User'
+	hasLink: {
+		type: Boolean,
+		default: false
 	},
 
 	content: {
@@ -35,10 +34,55 @@ var threadSchema = new mongoose.Schema({
 		ref: 'User'
 	},
 
+	creator: {
+		type: mongoose.Schema.ObjectId,
+		required: true,
+		ref: 'User'
+	},
+
+
 	stream: {
 		type: mongoose.Schema.ObjectId,
 		required: true,
 		ref: 'Stream'
+	},
+
+	likes: [{
+		type: mongoose.Schema.ObjectId,
+		required: false,
+		ref: 'User'
+	}],
+
+	liked: {
+		type: Boolean,
+		default: false
+	},
+
+	dislikes: [{
+		type: mongoose.Schema.ObjectId,
+		required: false,
+		ref: 'User'
+	}],
+
+	disliked: {
+		type: Boolean,
+		default: false
+	},
+
+	saves: [{
+		type: mongoose.Schema.ObjectId,
+		required: false,
+		ref: 'User'
+	}],
+
+	saved: {
+		type: Boolean,
+		default: false
+	},
+
+	score: {
+		type: Number,
+		default: 0
 	},
 
 	comments: [{
@@ -56,6 +100,18 @@ threadSchema.methods = {
 			delete obj.creator.password;
 		}
 
+		if (obj.likes || obj.dislikes) {
+			obj.score = obj.likes.length - obj.dislikes.length;
+		}
+
+		return obj;
+	},
+
+	afterSave: function (user) {
+		let obj = this;
+		obj.liked = obj.likes.indexOf(user._id) != -1;
+		obj.disliked = obj.dislikes.indexOf(user._id) != -1;
+		obj.saved = obj.saves.indexOf(user._id) != -1;
 		return obj;
 	}
 };
