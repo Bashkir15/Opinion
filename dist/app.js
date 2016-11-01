@@ -25,7 +25,7 @@ webpackJsonp([0],{
 
 	__webpack_require__(132);
 
-	var _app = __webpack_require__(142);
+	var _app = __webpack_require__(143);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -538,23 +538,34 @@ webpackJsonp([0],{
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var StreamsListCtrl = function () {
-		function StreamsListCtrl(Stream, $timeout) {
+		function StreamsListCtrl(Stream, $timeout, $rootScope) {
 			'ngInject';
+
+			var _this = this;
 
 			_classCallCheck(this, StreamsListCtrl);
 
 			this._Stream = Stream;
 			this._$timeout = $timeout;
+			this._$rootScope = $rootScope;
 			this.streams = [];
 			this.streamsSearch = '';
 			this.lastUpdated = 0;
 			this.getStreams();
+
+			this._$rootScope.$on('streamCreated', function () {
+				_this.lastUpdated = 0;
+				_this.showCreate = !_this.showCreate;
+				_this.getStreams({
+					append: true
+				});
+			});
 		}
 
 		_createClass(StreamsListCtrl, [{
 			key: 'getStreams',
 			value: function getStreams(options) {
-				var _this = this;
+				var _this2 = this;
 
 				options = options || {};
 
@@ -562,23 +573,23 @@ webpackJsonp([0],{
 					timestamp: this.lastUpdated,
 					filter: this.streamsSearch
 				}).success(function (response) {
-					if (_this.streamsSearch) {
-						_this.streams = [];
+					if (_this2.streamsSearch) {
+						_this2.streams = [];
 					}
 
 					if (!options.append) {
-						_this.streams = response.res.records.concat(_this.streams);
+						_this2.streams = response.res.records.concat(_this2.streams);
 					} else {
-						_this.streams = _this.streams.concat(response.res.records);
+						_this2.streams = _this2.streams.concat(response.res.records);
 					}
 
-					_this.lastUpdated = Date.now();
+					_this2.lastUpdated = Date.now();
 				});
 			}
 		}, {
 			key: 'search',
 			value: function search(newValue, oldValue) {
-				var _this2 = this;
+				var _this3 = this;
 
 				var streamsSearchTimeout;
 
@@ -590,15 +601,15 @@ webpackJsonp([0],{
 
 				streamsSearchTimeout = this._$timeout(function () {
 					if (!newValue) {
-						if (_this2.streamsSearchEnabled) {
-							_this2.lastUpdated = 0;
-							_this2.getStreams();
+						if (_this3.streamsSearchEnabled) {
+							_this3.lastUpdated = 0;
+							_this3.getStreams();
 						}
 					} else {
-						_this2.getStreams();
+						_this3.getStreams();
 					}
 
-					_this2.streamsSearchEnabled = _this2.streamsSearch !== '';
+					_this3.streamsSearchEnabled = _this3.streamsSearch !== '';
 				}, 500);
 			}
 		}]);
@@ -906,11 +917,16 @@ webpackJsonp([0],{
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
+	var _streamCreate = __webpack_require__(142);
+
+	var _streamCreate2 = _interopRequireDefault(_streamCreate);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var streamComponents = _angular2.default.module('streams.components', []);
 	streamComponents.component('streamsList', _streamsList2.default);
 	streamComponents.component('singleStream', _streamsSingle2.default);
+	streamComponents.component('createStream', _streamCreate2.default);
 
 	exports.default = streamComponents;
 
@@ -999,6 +1015,63 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 142:
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var createStreamCtrl = function () {
+		function createStreamCtrl(Stream, Toast, $rootScope) {
+			'ngInject';
+
+			_classCallCheck(this, createStreamCtrl);
+
+			this._Stream = Stream;
+			this._Toast = Toast;
+			this._$rootScope = $rootScope;
+			this.data = {
+				name: '',
+				description: ''
+			};
+		}
+
+		_createClass(createStreamCtrl, [{
+			key: 'create',
+			value: function create(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this._Stream.create(this.data).then(function (response) {
+						_this._Toast.success('You just created a Stream: ');
+						_this._$rootScope.$broadcast('streamCreated');
+					});
+				} else {
+					this._Toast('Hmm... Your form isn\'t valid');
+				}
+			}
+		}]);
+
+		return createStreamCtrl;
+	}();
+
+	var createStream = {
+		scope: {},
+		controller: createStreamCtrl,
+		templateUrl: './app/components/forum/streams/create/stream.create.component.html'
+	};
+
+	exports.default = createStream;
+
+/***/ },
+
+/***/ 143:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1007,7 +1080,7 @@ webpackJsonp([0],{
 		value: true
 	});
 
-	var _auth = __webpack_require__(143);
+	var _auth = __webpack_require__(144);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -1030,7 +1103,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 143:
+/***/ 144:
 /***/ function(module, exports) {
 
 	'use strict';

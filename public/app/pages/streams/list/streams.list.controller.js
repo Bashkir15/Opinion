@@ -1,13 +1,22 @@
 class StreamsListCtrl {
-	constructor(Stream, $timeout) {
+	constructor(Stream, $timeout, $rootScope) {
 		'ngInject';
 
 		this._Stream = Stream;
 		this._$timeout = $timeout;
+		this._$rootScope = $rootScope
 		this.streams = [];
 		this.streamsSearch = '';
 		this.lastUpdated = 0;
 		this.getStreams();
+
+		this._$rootScope.$on('streamCreated', () => {
+			this.lastUpdated = 0
+			this.showCreate = !this.showCreate;
+			this.getStreams({
+				append: true
+			});
+		});
 	}
 
 	getStreams(options) {

@@ -32,6 +32,13 @@
 			font-size: 18px
 			color: $white-text
 
+.streams-list-create-stream
+	&.ng-enter
+		@include slideInUp()
+
+	&.ng-leave
+		@include slideOutDown()
+
 @media screen and (min-width: 630px)
 	.streams-list-container
 		padding-top: 175px
