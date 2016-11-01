@@ -1,4 +1,4 @@
-class Thread {
+class threadService {
 	constructor($http) {
 		'ngInject';
 
@@ -6,7 +6,7 @@ class Thread {
 	}
 
 	get(id, options) {
-		this._$http({
+		return this._$http({
 			url: '/threads/' + id + '/threads',
 			method: 'GET',
 			params: {
@@ -17,4 +17,4 @@ class Thread {
 	}
 }
 
-export default Thread
+export default threadService

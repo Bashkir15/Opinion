@@ -1280,19 +1280,19 @@ webpackJsonp([0],[
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Thread = function () {
-		function Thread($http) {
+	var threadService = function () {
+		function threadService($http) {
 			'ngInject';
 
-			_classCallCheck(this, Thread);
+			_classCallCheck(this, threadService);
 
 			this._$http = $http;
 		}
 
-		_createClass(Thread, [{
+		_createClass(threadService, [{
 			key: 'get',
 			value: function get(id, options) {
-				this._$http({
+				return this._$http({
 					url: '/threads/' + id + '/threads',
 					method: 'GET',
 					params: {
@@ -1303,10 +1303,10 @@ webpackJsonp([0],[
 			}
 		}]);
 
-		return Thread;
+		return threadService;
 	}();
 
-	exports.default = Thread;
+	exports.default = threadService;
 
 /***/ },
 /* 147 */
@@ -1331,8 +1331,14 @@ webpackJsonp([0],[
 			this._Stream = Stream;
 			this._Thread = Thread;
 			this.streamId = $stateParams.streamId;
+			this.threads = [];
+			this.threadsSearch = '';
+			this.lastUpdated = 0;
 			this.getStream();
-			//this.getThreads();
+			this.getThreads({
+				timestamp: this.lastUpdated,
+				filter: this.threadsSearch
+			});
 		}
 
 		_createClass(singleStreamCtrl, [{
@@ -1342,6 +1348,27 @@ webpackJsonp([0],[
 
 				this._Stream.single(this.streamId).then(function (response) {
 					_this.stream = response.data.res.record;
+				});
+			}
+		}, {
+			key: 'getThreads',
+			value: function getThreads(options) {
+				var _this2 = this;
+
+				options = options || {};
+
+				this._Thread.get(this.streamId, options).then(function (response) {
+					if (_this2.threadsSearch) {
+						_this2.threads = [];
+					}
+
+					if (!options.append) {
+						_this2.threads = response.data.res.records.concat(_this2.threads);
+					} else {
+						_this2.threads = _this2.threads.concat(response.data.res.records);
+					}
+
+					_this2.lastUpdated = Date.now();
 				});
 			}
 		}]);
@@ -1369,10 +1396,15 @@ webpackJsonp([0],[
 
 	var _threadsList2 = _interopRequireDefault(_threadsList);
 
+	var _threadsSingle = __webpack_require__(150);
+
+	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var threadComponents = _angular2.default.module('threads.components', []);
 	threadComponents.component('threadList', _threadsList2.default);
+	threadComponents.component('singleThread', _threadsSingle2.default);
 
 	exports.default = threadComponents;
 
@@ -1404,6 +1436,33 @@ webpackJsonp([0],[
 	};
 
 	exports.default = threadsList;
+
+/***/ },
+/* 150 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var SingleThreadCtrl = function SingleThreadCtrl() {
+		_classCallCheck(this, SingleThreadCtrl);
+	};
+
+	var singleThread = {
+		scope: {},
+		bindings: {
+			thread: '='
+		},
+		controller: SingleThreadCtrl,
+		templateUrl: './app/components/forum/threads/single/threads.single.component.html'
+	};
+
+	exports.default = singleThread;
 
 /***/ }
 ]);
