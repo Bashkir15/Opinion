@@ -108,7 +108,7 @@ module.exports = () => {
 					return json.bad({message: 'Sorry, you have already liked that thread'}, res);
 				} else if (thread.dislikes.indexOf(req.user._id) !== -1) {
 					thread.dislikes.splice(thread.dislikes.indexOf(req.user._id), 1);
-					thread.upvotes.push(req.user._id);
+					thread.likes.push(req.user._id);
 					thread.score -= 1;
 					thread.save((err, item) => {
 						thread = thread.afterSave(req.user);
@@ -122,7 +122,7 @@ module.exports = () => {
 						}, res);
 					});
 				} else {
-					thread.upvotes.push(req.user._id);
+					thread.likes.push(req.user._id);
 					thread.save((err, item) => {
 						thread = thread.afterSave(req.user);
 
@@ -137,6 +137,46 @@ module.exports = () => {
 				}
 			}
 		});
+
+		obj.dislike = (req, res) => {
+			Thread.findOne({_id: req.params.threadId}, (err, thread) => {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					if (thread.dislikes.indexOf(req.user._id) !== -1) {
+						return json.bad({message: 'Sorry, you haven\'t liked that thread yet'}, res);
+					} else if (thread.likes.indexOf(req.user._id) !== -1) {
+						thread.likes.splice(thread.likes.indexOf(req.user._id), 1);
+						thread.dislikes.push(req.user._id);
+						thread.score += 1;
+						thread.save((err, item) => {
+							thread = thread.afterSave(req.user);
+
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							json.good({
+								record: item
+							}, res);
+						});
+					} else {
+						thread.dislikes.push(req.user._id);
+						thread.save((err, item) => {
+							thread = thread.afterSave(req.user);
+
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							json.good({
+								record: item
+							}, res);
+						});
+					}
+				}
+			});
+		};
 	};
 
 	return obj;
