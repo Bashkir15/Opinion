@@ -177,6 +177,57 @@ module.exports = () => {
 				}
 			});
 		};
+
+
+		obj.save = (req, res) => {
+			Thread.findOne({_id: req.params.threadId}, (err, thread) => {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					if (thread.saves.indexOf(req.user._id) !== -1) {
+						return json.bad({message: 'Sorry, you have already saved that thread'}, res);
+					}
+
+					thread.saves.push(req.user._id);
+					thread.save((err, item) => {
+						thread = thread.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			});
+		};
+
+		obj.unsave = (req, res) => {
+			Thread.findOne({_id: req.params.threadId}, (err, thread) => {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					if (thread.saves.indexOf(req.user._id) !== -1) {
+						thread.saves.splice(thread.saves.indexOf(req.user._id), 1);
+						thread.save((err, item) => {
+							thread = thread.afterSave(req.user);
+
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							json.good({
+								record: item
+							}, res);
+						});
+					} else {
+						return json.bad({message: 'Sorry, you have not saved that thread yet'}, res);
+					}
+				}
+			});
+		};
 	};
 
 	return obj;
