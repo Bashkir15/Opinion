@@ -10,6 +10,7 @@
 .single-container
 	display: flex
 	width: 90%
+	padding: 12px 0
 	margin: 0 auto
 	border-bottom: 1px solid $lightest-blue
 
@@ -32,6 +33,9 @@
 	flex-direction: column
 	flex: 1
 	padding-top: 20px
+	text-overflow: ellipsis
+	white-space: no-wrap
+	word-break: break-all
 
 	h3
 		@include rale()
@@ -64,7 +68,6 @@
 		flex-basis: 0
 		align-items: center
 		justify-content: flex-start
-		padding-left: 10px
 
 	.right
 		display: flex
@@ -72,7 +75,6 @@
 		flex-basis: 0
 		align-items: center
 		justify-content: flex-end
-		padding-right: 10px
 
 		> div
 			display: flex
@@ -81,7 +83,7 @@
 
 			button
 				height: 45px
-				width: 145px
+				width: 110px
 				box-shadow: 0 3px 6px rgba(0,0,0,0.23)
 
 				span

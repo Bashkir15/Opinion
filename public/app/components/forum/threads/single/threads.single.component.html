@@ -1,9 +1,17 @@
-<div class='threads-single-component'>
+<div class='thread-single-component'>
 	<div class='thread-single-container'>
 		<div class='thread-left'>
-			<span class='mdi mdi-chevron-up'></span>
-			<span>score</span>
-			<span class='mdi mdi-chevron-down'></span>
+			<span class='mdi mdi-chevron-up'>
+				<md-tooltip md-direction="left">
+					Like
+				</md-tooltip>
+			</span>
+			<span>{{$ctrl.thread.score}}</span>
+			<span class='mdi mdi-chevron-down'>
+				<md-tooltip md-direction='bottom'>
+					Dislike
+				</md-tooltip>
+			</span>
 		</div>
 
 		<div class='thread-content'>
@@ -16,12 +24,16 @@
 		<div class='left'>
 			<div class='thread-info-text'>
 				<button>
-					<span>View 7 Comments</span>
+					<span>View {{$ctrl.thread.comments.length}} Comment<span ng-if="$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length == 0">s</span></span>
 				</button>
 			</div>
 
 			<div class='thread-info-text'>
 				<button>
+					<md-tooltip md-direction="bottom">
+						Save
+					</md-tooltip>
+
 					<span class='mdi mdi-heart-outline'></span>
 				</button>
 			</div>
