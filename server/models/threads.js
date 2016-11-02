@@ -108,7 +108,7 @@ threadSchema.methods = {
 	},
 
 	afterSave: function (user) {
-		let obj = this;
+		var obj = this;
 		obj.liked = obj.likes.indexOf(user._id) != -1;
 		obj.disliked = obj.dislikes.indexOf(user._id) != -1;
 		obj.saved = obj.saves.indexOf(user._id) != -1;

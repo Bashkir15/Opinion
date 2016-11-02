@@ -43,17 +43,35 @@ module.exports = () => {
 		var getComments = () => {
 			var criteria = {thread: threadId};
 
+			if (req.query && req.query.timestamp) {
+				criteria.created = {
+					$gte: req.user.timestamp
+				};
+			}
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+
+				criteria.content = new RegExp(req.query.filter, 'i');
+			}
+
 			Comment.find(criteria)
 			.populate('creator')
 			.populate('thread')
 			.exec((err, comments) => {
 				if (err) {
 					return json.bad(err, res);
-				}
+				} else {
+					if (req.user) {
+						comments.map((e) => {
+							e = e.afterSave(req.user);
+						});
+					}
 
-				return json.good({
-					records: comments
-				}, res);
+					return json.good({
+						records: comments
+					}, res);
+				}
 			});
 		};
 

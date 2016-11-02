@@ -26,6 +26,39 @@ var commentSchema = new mongoose.Schema({
 		type: mongoose.Schema.ObjectId,
 		required: true,
 		ref: 'Thread'
+	},
+
+	likes: [{
+		type: mongoose.Schema.ObjectId,
+		required: false,
+		ref: 'User'
+	}],
+
+	liked: {
+		type: Boolean,
+		default: false
+	},
+
+	dislikes: [{
+		type: mongoose.Schema.ObjectId,
+		required: false,
+		ref: 'User'
+	}],
+
+	disliked: {
+		type: Boolean,
+		default: false
+	},
+
+	saves: [{
+		type: mongoose.Schema.ObjectId,
+		required: false,
+		ref: 'User'
+	}],
+
+	saved: {
+		type: Boolean,
+		default: false
 	}
 });
 
@@ -36,6 +69,19 @@ commentSchema.methods = {
 		if (obj.creator) {
 			delete obj.creator.password;
 		}
+
+		if (obj.likes || obj.dislikes) {
+			obj.score = obj.likes.length - obj.dislikes.length;
+		}
+
+		return obj;
+	},
+
+	afterSave: function (user) {
+		var obj = this;
+		obj.liked = obj.likes.indexOf(user._id) != -1;
+		obj.disliked = obj.dislikes.indexOf(user._id) != -1;
+		obj.saved = obj.saves.indexOf(user._id) != -1;
 
 		return obj;
 	}
