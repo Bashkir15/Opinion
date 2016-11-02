@@ -19,6 +19,20 @@ class commentsService {
 			method: 'GET'
 		});
 	}
+
+	like(id) {
+		return this._$http({
+			url: '/comments/' + id + '/like',
+			method: 'POST'
+		});
+	}
+
+	dislike(id) {
+		return this._$http({
+			url: '/comments/' + id + '/dislike',
+			method: 'POST'
+		});
+	}
 }
 
 export default commentsService

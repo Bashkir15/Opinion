@@ -11,7 +11,7 @@
 				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.comment.liked}" ng-click="$ctrl.like($ctrl.comment)"></span>
 				<span ng-class="{'positive': $ctrl.comment.score >= 1,
 				'negative': $ctrl.comment.score <= -1}">{{$ctrl.comment.score}}</span>
-				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.comment.disliked}" ng-click="$ctrl.unlike($ctrl.comment)"></span>
+				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.comment.disliked}" ng-click="$ctrl.dislike($ctrl.comment)"></span>
 			</div>
 		</div>
 

@@ -1014,6 +1014,22 @@ webpackJsonp([0],[
 					method: 'GET'
 				});
 			}
+		}, {
+			key: 'like',
+			value: function like(id) {
+				return this._$http({
+					url: '/comments/' + id + '/like',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'dislike',
+			value: function dislike(id) {
+				return this._$http({
+					url: '/comments/' + id + '/dislike',
+					method: 'POST'
+				});
+			}
 		}]);
 
 		return commentsService;
@@ -1872,13 +1888,37 @@ webpackJsonp([0],[
 		value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var commentsSingleCtrl = function commentsSingleCtrl() {
-		'ngInject';
+	var commentsSingleCtrl = function () {
+		function commentsSingleCtrl(Comment) {
+			'ngInject';
 
-		_classCallCheck(this, commentsSingleCtrl);
-	};
+			_classCallCheck(this, commentsSingleCtrl);
+
+			this._Comment = Comment;
+		}
+
+		_createClass(commentsSingleCtrl, [{
+			key: 'like',
+			value: function like(item) {
+				this._Comment.like(item._id).then(function (response) {
+					angular.extend(item, response.data.res.record);
+				});
+			}
+		}, {
+			key: 'dislike',
+			value: function dislike(item) {
+				this._Comment.dislike(item._id).then(function (response) {
+					angular.extend(item, response.data.res.record);
+				});
+			}
+		}]);
+
+		return commentsSingleCtrl;
+	}();
 
 	var singleComment = {
 		scope: {},

@@ -78,5 +78,89 @@ module.exports = () => {
 		return getComments();
 	};
 
+	obj.like = (req, res) => {
+		Comment.findOne({_id: req.params.commentId})
+		.populate('thread')
+		.populate('creator')
+		.exec((err, comment) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				if (comment.likes.indexOf(req.user._id) != -1) {
+					return json.bad({message: 'Sorry, you have already liked that comment'}, res);
+				} else if (comment.dislikes.indexOf(req.user._id) != -1) {
+					comment.dislikes.splice(comment.dislikes.indexOf(req.user._id), 1);
+					comment.likes.push(req.user._id);
+					comment.save((err, item) => {
+						comment = comment.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					comment.likes.push(req.user._id);
+					comment.save((err, item) => {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						comment = comment.afterSave(req.user);
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			} 
+		});
+	};
+
+	obj.dislike = (req, res) => {
+		Comment.findOne({_id: req.params.commentId})
+		.populate('creator')
+		.populate('thread')
+		.exec((err, comment) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				if (comment.dislikes.indexOf(req.user._id) !== -1) {
+					return json.bad({message: 'Sorry, this comment is already disliked'}, res);
+				} else if (comment.likes.indexOf(req.user._id) !== -1) {
+					comment.likes.splice(comment.likes.indexOf(req.user._id), 1);
+					comment.dislikes.push(req.user._id);
+					comment.save((err, item) => {
+						comment = comment.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					comment.dislikes.push(req.user._id);
+					comment.save((err, item) => {
+						comment = comment.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			}
+		});
+	};
+
 	return obj;
 };
