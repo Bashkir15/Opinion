@@ -835,14 +835,24 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threads = __webpack_require__(134);
+	var _threads = __webpack_require__(153);
 
 	var _threads2 = _interopRequireDefault(_threads);
+
+	var _threads3 = __webpack_require__(134);
+
+	var _threads4 = _interopRequireDefault(_threads3);
+
+	var _threadsSingle = __webpack_require__(154);
+
+	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var threadsModule = _angular2.default.module('threads', []);
-	threadsModule.service('Thread', _threads2.default);
+	threadsModule.config(_threads2.default);
+	threadsModule.service('Thread', _threads4.default);
+	threadsModule.controller('threadsSingleCtrl', _threadsSingle2.default);
 
 	exports.default = threadsModule;
 
@@ -888,6 +898,14 @@ webpackJsonp([0],[
 						timestamp: options.timestamp,
 						filter: options.filter
 					}
+				});
+			}
+		}, {
+			key: 'single',
+			value: function single(id) {
+				return this._$http({
+					url: './threads/' + id,
+					method: 'GET'
 				});
 			}
 		}, {
@@ -1645,6 +1663,70 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
+
+/***/ },
+/* 153 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function threadsConfig($stateProvider) {
+		'ngInject';
+
+		$stateProvider.state('app.singleThread', {
+			url: '/:streamId/:threadId',
+			templateUrl: './app/pages/threads/single/single.html',
+			controller: 'threadsSingleCtrl',
+			controllerAs: '$ctrl'
+		});
+	}
+
+	exports.default = threadsConfig;
+
+/***/ },
+/* 154 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var threadsSingleCtrl = function () {
+		function threadsSingleCtrl(Thread, $stateParams) {
+			'ngInject';
+
+			_classCallCheck(this, threadsSingleCtrl);
+
+			this._Thread = Thread;
+			this.threadId = $stateParams.threadId;
+			this.streamId = $stateParams.streamId;
+			this.getThread();
+		}
+
+		_createClass(threadsSingleCtrl, [{
+			key: 'getThread',
+			value: function getThread() {
+				var _this = this;
+
+				this._Thread.single(this.threadId).then(function (response) {
+					_this.thread = response.data.res.record;
+				});
+			}
+		}]);
+
+		return threadsSingleCtrl;
+	}();
+
+	exports.default = threadsSingleCtrl;
 
 /***/ }
 ]);

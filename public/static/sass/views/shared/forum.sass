@@ -7,7 +7,7 @@
 	padding: 15px 0
 	margin: 35px auto 0 auto
 	background: #b1c8de
-	overflow: hidden
+	z-index: 100
 	transition: all .7s ease
 
 	> div
@@ -39,10 +39,11 @@
 			outline: none
 			border: none
 
-		button
+		> button
 			height: 42px
 			width: 100px
 			margin-left: 15px
+			overflow: hidden
 
 			span
 				text-transform: uppercase
@@ -51,6 +52,7 @@
 			label
 				left: -30px
 				opacity: 0
+
 
 @media screen and (min-width: 630px)
 	.forum-search-container

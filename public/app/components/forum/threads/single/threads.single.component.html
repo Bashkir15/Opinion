@@ -6,7 +6,7 @@
 				<h4>{{$ctrl.thread.creator.username}}</h4>
 				<p am-time-ago="$ctrl.thread.created"></p>
 			</div>
-			<div class='thread-score-container'>
+			<div class='thread-score-container below-mobile'>
 				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.thread.liked}" ng-click="$ctrl.like($ctrl.thread)"></span>
 				<span ng-class="{'positive': $ctrl.thread.score >= 1,
 				'negative': $ctrl.thread.score <= -1}">{{$ctrl.thread.score}}</span>
@@ -15,6 +15,13 @@
 		</div>
 
 		<div class='thread-single-content-container'>
+			<div class='thread-score-container above-mobile'>
+				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.thread.liked}" ng-click="$ctrl.like($ctrl.thread)"></span>
+				<span ng-class="{'positive': $ctrl.thread.score >= 1,
+				'negative': $ctrl.thread.score <= -1}">{{$ctrl.thread.score}}</span>
+				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.thread.disliked}" ng-click="$ctrl.unlike($ctrl.thread)"></span>
+			</div>
+
 			<div class='thread-single-content'>
 				<h3>{{$ctrl.thread.title}}</h3>
 				<p>{{$ctrl.thread.content}}</p>
@@ -25,7 +32,7 @@
 	<div class='thread-single-info'>
 		<div class='left'>
 			<div class='thread-info-item'>
-				<button>
+				<button ui-sref="app.singleThread({streamId: $ctrl.thread.stream._id, threadId: $ctrl.thread._id})">
 				<!-- 	<p>View <span>{{$ctrl.thread.comments.length}}</span> Comment<span ng-if='$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length = 0'>s</span></p> -->
 				<span>7</span>
 				<p>Comments</p>
