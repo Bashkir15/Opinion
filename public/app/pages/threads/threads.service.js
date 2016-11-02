@@ -37,6 +37,20 @@ class threadService {
 			method: 'POST'
 		});
 	}
+
+	like(id) {
+		return this._$http({
+			url: '/threads/' + id + '/like',
+			method: 'POST'
+		});
+	}
+
+	unlike(id) {
+		return this._$http({
+			url: '/threads/' + id + '/dislike',
+			method: 'POST'
+		});
+	}
 }
 
 export default threadService

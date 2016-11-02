@@ -100,7 +100,10 @@ module.exports = () => {
 	};
 
 	obj.like = (req, res) => {
-		Thread.findOne({_id: req.params.threadId}, (err, thread) => {
+		Thread.findOne({_id: req.params.threadId})
+		.populate('creator')
+		.populate('comments')
+		.exec((err, thread) => {
 			if (err) {
 				return json.bad(err, res);
 			} else {
@@ -140,7 +143,10 @@ module.exports = () => {
 	};
 
 	obj.dislike = (req, res) => {
-		Thread.findOne({_id: req.params.threadId}, (err, thread) => {
+		Thread.findOne({_id: req.params.threadId})
+		.populate('creator')
+		.populate('comments')
+		.exec((err, thread) => {
 			if (err) {
 				return json.bad(err, res);
 			} else {
@@ -181,7 +187,10 @@ module.exports = () => {
 
 
 	obj.save = (req, res) => {
-		Thread.findOne({_id: req.params.threadId}, (err, thread) => {
+		Thread.findOne({_id: req.params.threadId})
+		.populate('creator')
+		.populate('comments')
+		.exec((err, thread) => {
 			if (err) {
 				return json.bad(err, res);
 			} else {
@@ -202,11 +211,14 @@ module.exports = () => {
 					}, res);
 				});
 			}
-		});
+		});		 
 	};
 
 	obj.unsave = (req, res) => {
-		Thread.findOne({_id: req.params.threadId}, (err, thread) => {
+		Thread.findOne({_id: req.params.threadId})
+		.populate('creator')
+		.populate('comments')
+		.exec((err, thread) => {
 			if (err) {
 				return json.bad(err, res);
 			} else {

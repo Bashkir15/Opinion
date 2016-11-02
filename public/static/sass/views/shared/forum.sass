@@ -3,12 +3,15 @@
 	display: flex
 	align-items: center
 	width: 80%
+	height: 40px
 	padding: 15px 0
 	margin: 35px auto 0 auto
-	background: #aec5d9
+	background: #b1c8de
+	overflow: hidden
 	transition: all .7s ease
 
 	> div
+		display: inline-block
 		position: relative
 		width: 90%
 		margin: 0 auto
@@ -68,6 +71,34 @@
 				span
 					color: $white-text
 					text-transform: uppercase
+
+@media screen and (min-width: 800px)
+
+	.forum-create-container
+		position: relative
+		overflow: hidden
+		height: 1px
+		width: 89%
+		margin: 0 auto
+
+		> div
+			transform: translateY(-100%)
+			opacity: 0
+			z-index: 120
+			pointer-events: none
+			background: #fff
+			transition: all .4s ease
+			width: 90%
+			margin: 0 auto
+
+		&.create-open
+			overflow: visible
+			> div
+				transform: translateY(0)
+				opacity: 1
+				pointer-events: auto
+
+
 
 @media screen and (min-width: 1000px)
 	.forum-search-container

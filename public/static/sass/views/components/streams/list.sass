@@ -1,7 +1,7 @@
 .streams-list-component-container
-	padding: 140px 0 80px 0
+	padding: 160px 0 80px 0
 	margin-top: -35px
-	background: #5288ca
+	background: lighten(#d0d3d5, 12%)
 
 	> div
 		padding: 40px 0
@@ -11,8 +11,10 @@
 
 	&.ng-leave
 		@include slideOutDown()
+
 		
 .load-more-button
+	padding-top: 80px
 	display: flex
 	align-items: center
 	justify-content: center
@@ -32,7 +34,12 @@
 
 @media screen and (min-width: 630px)
 	.streams-list-component-container
-		padding: 200px 0 80px 0
+		padding: 185px 0 80px 0
+
+@media screen and (min-width: 1350px)
+	.streams-load-more-button
+		width: 70%
+		margin: 0
 
 
 

@@ -19,13 +19,9 @@
 		</div>
 	</div>
 
-	<button ng-click="$ctrl.showCreate = !$ctrl.showCreate">
-		<span>Create Thread</span>
-	</button>
-
-	<div class='single-stream-create-thread' ng-if="$ctrl.showCreate">
+	<!-- <div class='single-stream-create-thread' ng-if="$ctrl.showCreate">
 		<create-thread></create-thread>
-	</div>
+	</div> -->
 
 	<div class='forum-search-container' ng-class="{'create-open': $ctrl.showCreate}">
 		<div>
@@ -34,6 +30,15 @@
 			<button class='large-mobile'>
 				<span>Filter</span>
 			</button>
+			<button class='above-mobile' ng-click="$ctrl.showCreate = !$ctrl.showCreate">
+				<span>Create Thread</span>
+			</button>
+		</div>
+	</div>
+
+	<div class='forum-create-container above-mobile' ng-class="{'create-open': $ctrl.showCreate}">
+		<div>
+			<create-thread></create-thread>
 		</div>
 	</div>
 

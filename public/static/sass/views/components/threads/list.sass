@@ -4,8 +4,41 @@
 .threads-list-component-container
 	padding: 140px 0 80px 0 
 	margin-top: -35px
-	//background: #5288ca
-	background: #d0d3d5
+	background: lighten(#d0d3d5, 12%)
 
-	> div
-		padding-bottom: 20px
+.threads-list-repeat
+	padding-bottom: 20px
+
+
+.threads-list-no-threads
+	width: 85%
+	padding: 40px 20px
+	margin: 0 auto 60px auto
+	background: #fdfdfe
+	border-left: 5px solid darken(#aec5d9, 20%)
+	box-shadow: 1px 3px 6px rgba(0,0,0,0.16), 1px 3px 6px rgba(0,0,0,0.23)
+
+	> p
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		line-height: 25px
+		font-size: 16px
+		margin-bottom: 20px
+		color: rgba(0,0,0,0.7)
+
+	> span
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		font-size: 16px
+		color: #9d9e9f
+
+		> span
+			@include rale()
+			font-weight: 400
+			letter-spacing: 2px
+			line-height: 25px
+			color: #539bd1
+			font-size: 18px
+

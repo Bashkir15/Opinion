@@ -6,16 +6,15 @@
 				<h4>{{$ctrl.thread.creator.username}}</h4>
 				<p am-time-ago="$ctrl.thread.created"></p>
 			</div>
+			<div class='thread-score-container'>
+				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.thread.liked}" ng-click="$ctrl.like($ctrl.thread)"></span>
+				<span ng-class="{'positive': $ctrl.thread.score >= 1,
+				'negative': $ctrl.thread.score <= -1}">{{$ctrl.thread.score}}</span>
+				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.thread.disliked}" ng-click="$ctrl.unlike($ctrl.thread)"></span>
+			</div>
 		</div>
 
 		<div class='thread-single-content-container'>
-			<div class='thread-single-left'>
-				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.thread.liked}"></span>
-				<span ng-class="{'positive': $ctrl.thread.score >= 1,
-				'negative': $ctrl.thread.score <= -1}">{{$ctrl.thread.score}}</span>
-				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.thread.disliked}"></span>
-			</div>
-
 			<div class='thread-single-content'>
 				<h3>{{$ctrl.thread.title}}</h3>
 				<p>{{$ctrl.thread.content}}</p>

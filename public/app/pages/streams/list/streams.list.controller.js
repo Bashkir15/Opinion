@@ -9,7 +9,6 @@ class StreamsListCtrl {
 		this.streamsSearch = '';
 		this.lastUpdated = 0;
 		this.getStreams();
-
 		this._$rootScope.$on('streamCreated', () => {
 			this.showCreate = !this.showCreate;
 			this.getStreams({
@@ -25,6 +24,7 @@ class StreamsListCtrl {
 
 
 		this._Stream.get(options).success((response) => {
+
 			if (this.streamsSearch) {
 				this.streams = [];
 			}
@@ -35,6 +35,7 @@ class StreamsListCtrl {
 				this.streams = this.streams.concat(response.res.records);
 			}
 
+			console.log(this.streams);
 			this.lastUpdated = Date.now();
 		});
 	}

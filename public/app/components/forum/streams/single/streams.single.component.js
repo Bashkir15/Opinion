@@ -6,16 +6,16 @@ class singleStreamCtrl {
 
 	}
 
-	subscribe(item) {
-		this._Stream.subscribe(item._id).success((response) => {
-			angular.extend(item, response.res.record);
-		});
-	}
-
-	unsubscribe(item) {
-		this._Stream.unsubscribe(item._id).success((response) => {
-			angular.extend(item, response.res.record);
-		});
+	toggleSubscribe(item) {
+		if (!item.subscribed) {
+			this._Stream.subscribe(item._id).then((response) => {
+				angular.extend(item, response.data.res.record);
+			});
+		} else {
+			this._Stream.unsubscribe(item._id).then((response) => {
+				angular.extend(item, response.data.res.record);
+			});
+		}
 	}
 }
 

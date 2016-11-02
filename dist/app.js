@@ -28,6 +28,10 @@ webpackJsonp([0],[
 
 	var _app2 = _interopRequireDefault(_app);
 
+	var _app3 = __webpack_require__(152);
+
+	var _app4 = _interopRequireDefault(_app3);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var requires = [_angularUiRouter2.default, 'ngMaterial', 'ngAnimate', 'angularMoment', 'app.config', 'app.pages', 'app.components'];
@@ -35,6 +39,7 @@ webpackJsonp([0],[
 	window.app = _angular2.default.module('app', requires);
 
 	_angular2.default.module('app').config(_app2.default);
+	_angular2.default.module('app').run(_app4.default);
 	_angular2.default.bootstrap(document, ['app']);
 
 /***/ },
@@ -672,7 +677,6 @@ webpackJsonp([0],[
 			this.streamsSearch = '';
 			this.lastUpdated = 0;
 			this.getStreams();
-
 			this._$rootScope.$on('streamCreated', function () {
 				_this.showCreate = !_this.showCreate;
 				_this.getStreams({
@@ -690,6 +694,7 @@ webpackJsonp([0],[
 				options.filter = this.streamsSearch, options.timestamp = this.lastUpdated;
 
 				this._Stream.get(options).success(function (response) {
+
 					if (_this2.streamsSearch) {
 						_this2.streams = [];
 					}
@@ -700,6 +705,7 @@ webpackJsonp([0],[
 						_this2.streams = _this2.streams.concat(response.res.records);
 					}
 
+					console.log(_this2.streams);
 					_this2.lastUpdated = Date.now();
 				});
 			}
@@ -897,6 +903,22 @@ webpackJsonp([0],[
 			value: function unsave(id) {
 				return this._$http({
 					url: '/threads/' + id + '/unsave',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'like',
+			value: function like(id) {
+				return this._$http({
+					url: '/threads/' + id + '/like',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'unlike',
+			value: function unlike(id) {
+				return this._$http({
+					url: '/threads/' + id + '/dislike',
 					method: 'POST'
 				});
 			}
@@ -1263,18 +1285,17 @@ webpackJsonp([0],[
 		}
 
 		_createClass(singleStreamCtrl, [{
-			key: 'subscribe',
-			value: function subscribe(item) {
-				this._Stream.subscribe(item._id).success(function (response) {
-					angular.extend(item, response.res.record);
-				});
-			}
-		}, {
-			key: 'unsubscribe',
-			value: function unsubscribe(item) {
-				this._Stream.unsubscribe(item._id).success(function (response) {
-					angular.extend(item, response.res.record);
-				});
+			key: 'toggleSubscribe',
+			value: function toggleSubscribe(item) {
+				if (!item.subscribed) {
+					this._Stream.subscribe(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				} else {
+					this._Stream.unsubscribe(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				}
 			}
 		}]);
 
@@ -1448,6 +1469,21 @@ webpackJsonp([0],[
 					});
 				}
 			}
+		}, {
+			key: 'like',
+			value: function like(item) {
+				console.log(item);
+				this._Thread.like(item._id).then(function (response) {
+					angular.extend(item, response.data.res.record);
+				});
+			}
+		}, {
+			key: 'unlike',
+			value: function unlike(item) {
+				this._Thread.unlike(item._id).then(function (response) {
+					angular.extend(item, response.data.res.record);
+				});
+			}
 		}]);
 
 		return SingleThreadCtrl;
@@ -1590,6 +1626,25 @@ webpackJsonp([0],[
 	}
 
 	exports.default = authInterceptor;
+
+/***/ },
+/* 152 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function runAway($rootScope, $anchorScroll) {
+		'ngInject';
+
+		$rootScope.$on('$stateChangeStart', function () {
+			$anchorScroll('nav');
+		});
+	}
+
+	exports.default = runAway;
 
 /***/ }
 ]);

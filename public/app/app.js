@@ -8,6 +8,7 @@ import './pages/pages'
 import './components/components'
 
 import appConfig from './app.config'
+import appRun from './app.run'
 
 const requires = [
 	router,
@@ -22,4 +23,5 @@ const requires = [
 window.app = angular.module('app', requires);
 
 angular.module('app').config(appConfig);
+angular.module('app').run(appRun);
 angular.bootstrap(document, ['app']);

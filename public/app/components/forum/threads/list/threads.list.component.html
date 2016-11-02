@@ -1,9 +1,14 @@
 <div class='threads-list-component-container'>
-	<div ng-repeat="item in $ctrl.threads">
-		<single-thread thread='item' ui-sref="app.singleThread({threadId: item._id})"></single-thread>
+	<div ng-repeat="item in $ctrl.threads" class='threads-list-repeat'>
+		<single-thread thread='item'></single-thread>
 	</div>
 
-	<div class='load-more-button'>
+	<div ng-if='!$ctrl.threads.length' class='threads-list-no-threads'>
+		<p>It doesn't look like there is anything here</p>
+		<span>You should create a <span>new thread!</span></span>
+	</div>
+
+	<div class='load-more-button' ng-if="$ctrl.threads.length">
 		<button>
 			<span>Load More</span>
 		</button>
