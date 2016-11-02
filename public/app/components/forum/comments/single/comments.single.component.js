@@ -16,6 +16,18 @@ class commentsSingleCtrl {
 			angular.extend(item, response.data.res.record);
 		});
 	}
+
+	toggleSave(item) {
+		if (!item.saved) {
+			this._Comment.save(item._id).then((response) => {
+				angular.extend(item, response.data.res.record);
+			});
+		} else {
+			this._Comment.unsave(item._id).then((response) => {
+				angular.extend(item, response.data.res.record);
+			});
+		}
+	}
 }
 
 let singleComment = {

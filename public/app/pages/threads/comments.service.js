@@ -33,6 +33,20 @@ class commentsService {
 			method: 'POST'
 		});
 	}
+
+	save(id) {
+		return this._$http({
+			url: '/comments/' + id + '/save',
+			method: 'POST'
+		});
+	}
+
+	unsave(id) {
+		return this._$http({
+			url: '/comments/' + id + '/unsave',
+			method: 'POST'
+		});
+	}
 }
 
 export default commentsService

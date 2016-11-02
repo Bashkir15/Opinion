@@ -1030,6 +1030,22 @@ webpackJsonp([0],[
 					method: 'POST'
 				});
 			}
+		}, {
+			key: 'save',
+			value: function save(id) {
+				return this._$http({
+					url: '/comments/' + id + '/save',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'unsave',
+			value: function unsave(id) {
+				return this._$http({
+					url: '/comments/' + id + '/unsave',
+					method: 'POST'
+				});
+			}
 		}]);
 
 		return commentsService;
@@ -1914,6 +1930,19 @@ webpackJsonp([0],[
 				this._Comment.dislike(item._id).then(function (response) {
 					angular.extend(item, response.data.res.record);
 				});
+			}
+		}, {
+			key: 'toggleSave',
+			value: function toggleSave(item) {
+				if (!item.saved) {
+					this._Comment.save(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				} else {
+					this._Comment.unsave(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				}
 			}
 		}]);
 

@@ -162,5 +162,59 @@ module.exports = () => {
 		});
 	};
 
+	obj.save = (req, res) => {
+		Comment.findOne({_id: req.params.commentId})
+		.populate('thread')
+		.populate('creator')
+		.exec((err, comment) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				if (comment.saves.indexOf(req.user._id) !== -1) {
+					return json.bad({message: 'Sorry, you have already saved that comment'}, res);
+				} else {
+					comment.saves.push(req.user._id);
+					comment.save((err, item) => {
+						comment = comment.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			}
+		});
+	};
+
+	obj.unsave = (req, res) => {
+		Comment.findOne({_id: req.params.commentId})
+		.populate('creator')
+		.exec((err, comment) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				if (comment.saves.indexOf(req.user._id) !== -1) {
+					comment.saves.splice(comment.saves.indexOf(req.user._id), 1);
+					comment.save((err, item) => {
+						comment = comment.afterSave(req.user);
+
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			}
+		});
+	};
+
+
 	return obj;
 };
