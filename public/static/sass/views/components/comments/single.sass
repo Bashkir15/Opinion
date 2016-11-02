@@ -1,0 +1,156 @@
+.comment-single-container
+	display: flex
+	flex-direction: column
+	align-items: center
+	width: 95%
+	margin-left: 5%
+	background: #fdfdfe
+	border-bottom: 1px solid $grey-outline
+	box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.23)
+
+.comment-single
+	width: 90%
+	margin: 0 auto
+	border-bottom: 1px solid rgba(0,0,0,0.12)
+	padding: 15px 0
+
+.comment-single-header
+	display: flex
+	align-items: center
+
+.comment-creator-image
+	height: 45px
+	width: 45px
+	border-radius: 50%
+	border: 1px solid rgba(0,0,0,0.6)
+
+.comment-created-info
+	display: flex
+	flex-direction: column
+	flex: 1
+	padding-left: 18px
+	text-align: left
+
+	h4
+		@include rale()
+		font-weight: 400
+		letter-spacing: 2px
+		font-size: 18px
+		color: rgba(0,0,0,0.8)
+		margin-bottom: 10px
+
+	p
+		@include open()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 14px
+		color: rgba(0,0,0,0.5)
+
+.comment-score-container
+	display: flex
+	align-items: center
+
+	&.above-mobile
+		display: none
+
+	> span
+		transition: all .4s ease
+		color: rgba(0,0,0,0.5)
+		outline: none
+
+		&:nth-of-type(1)
+			font-size: 27px
+			cursor: pointer
+
+		&:nth-of-type(2)
+			font-size: 16px
+			margin-left: 10px
+
+		&:nth-of-type(3)
+			cursor: pointer
+			font-size: 27px
+			margin-left: 10px
+
+		&.liked
+			color: #47aeac
+
+		&.positive
+			color: #47aeac
+
+		&.negative
+			color: $error
+
+		&.disliked
+			color: $error
+
+.comment-content
+	display: flex
+	flex-direction: column
+	flex: 1
+	padding-left: 10px
+	padding-top: 20px
+	text-align: left
+
+	p
+		width: 95%
+		@include open()
+		font-weight: 300
+		letter-spacing: 2px
+		line-height: 35px
+		font-size: 16px
+		color: rgba(0,0,0,0.5)
+
+.comment-single-info
+	display: flex
+	align-items: stretch
+	width: 90%
+	margin: 0 auto
+	padding: 20px 0
+
+	.left
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-start
+
+	.right
+		display: flex
+		align-items: center
+		justify-content: flex-end
+
+.comment-single-info-text
+	display: flex
+	align-items: center
+	justify-content: center
+
+
+	> button
+		display: flex
+		align-items: center
+		justify-content: center
+		padding: 0
+
+		> span
+			display: inline-block
+			@include rale()
+			font-weight: 400
+			letter-spacing: 3px
+			color: rgba(0,0,0,0.7)
+			font-size: 16px
+		p
+			@include open()
+			font-weight: 300
+			letter-spacing: 2px
+			font-size: 16px
+			margin-left: 5px
+			color: rgba(0,0,0,0.4)
+
+		i
+			font-size: 20px
+			//color: darken(#aec5d9, 20%)
+			color: #539bd1
+			transition: all .4s ease
+
+			&.saved
+				color: $error

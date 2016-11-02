@@ -10,7 +10,7 @@ let singleComment = {
 		comment: '<'
 	},
 	controller: commentsSingleCtrl,
-	templateUrl: './app/components/forum/comments/single/single.comment.component.html'
+	templateUrl: './app/components/forum/comments/single/comments.single.component.html'
 };
 
 export default singleComment

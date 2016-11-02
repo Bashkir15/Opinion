@@ -7,6 +7,18 @@
 		<div>
 			<label>Search</label>
 			<input type='text' name='search'>
+			<button class='large-mobile'>
+				<span>Filter</span>
+			</button>
+			<button class='above-mobile' ng-click="$ctrl.showCreate = !$ctrl.showCreate">
+				<span>Add Comment</span>
+			</button>
 		</div>
 	</div>
+
+	<div class='comments-create-container' ng-if="$ctrl.showCreate">
+		<create-comment></create-comment>
+	</div>
+
+	<comments-list comments="$ctrl.comments" class='comments-list-component'></comments-list>
 </div>

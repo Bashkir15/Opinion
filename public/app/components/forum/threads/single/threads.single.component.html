@@ -34,8 +34,8 @@
 			<div class='thread-info-item'>
 				<button ui-sref="app.singleThread({streamId: $ctrl.thread.stream._id, threadId: $ctrl.thread._id})">
 				<!-- 	<p>View <span>{{$ctrl.thread.comments.length}}</span> Comment<span ng-if='$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length = 0'>s</span></p> -->
-				<span>7</span>
-				<p>Comments</p>
+				<span>{{$ctrl.thread.comments.length}}</span>
+				<p>Comment<span ng-if="$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length == 0">s</span></p>
 				</button>
 			</div>
 

@@ -1,0 +1,41 @@
+<div class='comment-single-container'>
+	<div class='comment-single'>
+		<div class='comment-single-header'>
+			<div class='comment-creator-image'></div>
+			<div class='comment-created-info'>
+				<h4>{{$ctrl.comment.creator.username}}</h4>
+				<p am-time-ago='$ctrl.comment.created'></p>
+			</div>
+
+			<div class='comment-score-container below-mobile'>
+				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.comment.liked}" ng-click="$ctrl.like($ctrl.comment)"></span>
+				<span ng-class="{'positive': $ctrl.comment.score >= 1,
+				'negative': $ctrl.comment.score <= -1}">{{$ctrl.comment.score}}</span>
+				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.comment.disliked}" ng-click="$ctrl.unlike($ctrl.comment)"></span>
+			</div>
+		</div>
+
+		<div class='comment-content'>
+			<p>{{$ctrl.comment.content}}</p>
+		</div>
+	</div>
+
+	<div class='comment-single-info'>
+		<div class='left'>
+			<div class='comment-single-info-text'>
+				<button>
+					<span>{{$ctrl.comment.saves.length}}</span>
+					<p>Save<span ng-if='$ctrl.comment.saves.length > 1 || $ctrl.comment.saves.length == 0'>s</span></p>
+				</button>
+			</div>
+		</div>
+
+		<div class='right'>
+			<div class='comment-single-info-text'>
+				<button ng-click="$ctrl.toggleSave($ctrl.comment)">
+					<i class='mdi mdi-heart-outline' ng-class="{'saved': $ctrl.comment.saved}"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

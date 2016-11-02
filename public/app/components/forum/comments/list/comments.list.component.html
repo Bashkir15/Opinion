@@ -1,0 +1,16 @@
+<div class='comments-list-component-container'>
+	<div ng-repeat="item in $ctrl.comments" class='comments-list-repeat'>
+		<single-comment comment='item'></single-comment>
+	</div>
+
+	<div ng-if='!$ctrl.comments.length' class='comments-list-no-comments'>
+		<p>It doesn't look like there is anything here</p>
+		<span>You should create a <span>new comment!</span></span>
+	</div>
+
+	<div class='load-more-button' ng-if="$ctrl.comments.length">
+		<button>
+			<span>Load More</span>
+		</button>
+	</div>
+</div>
