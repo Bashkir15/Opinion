@@ -23,6 +23,20 @@ class threadService {
 			}
 		});
 	}
+
+	save(id) {
+		return this._$http({
+			url: '/threads/' + id + '/save',
+			method: 'POST'
+		});
+	}
+
+	unsave(id) {
+		return this._$http({
+			url: '/threads/' + id + '/unsave',
+			method: 'POST'
+		});
+	}
 }
 
 export default threadService

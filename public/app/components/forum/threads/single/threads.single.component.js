@@ -1,6 +1,20 @@
 class SingleThreadCtrl {
-	constructor() {
+	constructor(Thread) {
+		'ngInject';
 
+		this._Thread = Thread
+	}
+
+	toggleSave(item) {
+		if (!item.saved) {
+			this._Thread.save(item._id).then((response) => {
+				angular.extend(item, response.data.res.record);
+			});
+		} else {
+			this._Thread.unsave(item._id).then((response) => {
+				angular.extend(item, response.data.res.record);
+			});
+		}
 	}
 }
 

@@ -50,8 +50,8 @@
 
 		<div class='right'>
 			<div class='thread-info-item'>
-				<button>
-					<i class='mdi mdi-heart-outline'></i>
+				<button ng-click="$ctrl.toggleSave($ctrl.thread)">
+					<i class='mdi mdi-heart-outline' ng-class="{'saved': $ctrl.thread.saved}"></i>
 				</button>
 			</div>
 		</div>
