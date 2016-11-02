@@ -19,25 +19,15 @@
 		</div>
 	</div>
 
-	<div class='single-stream-options'>
-		<div>
-			<button>
-				<span>Subscribe</span>
-			</button>
-		</div>
-
-		<div>
-			<button ng-click="$ctrl.showCreate = !$ctrl.showCreate">
-				<span>Create Thread</span>
-			</button>
-		</div>
-	</div>
+	<button ng-click="$ctrl.showCreate = !$ctrl.showCreate">
+		<span>Create Thread</span>
+	</button>
 
 	<div class='single-stream-create-thread' ng-if="$ctrl.showCreate">
 		<create-thread></create-thread>
 	</div>
 
-	<div class='forum-search-container'>
+	<div class='forum-search-container' ng-class="{'create-open': $ctrl.showCreate}">
 		<div>
 			<label>Search</label>
 			<input type='text' name='search' ng-model='$ctrl.search'>

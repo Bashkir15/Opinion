@@ -1,5 +1,64 @@
 <div class='thread-single-component'>
-	<div class='thread-single-container'>
+	<div class='thread-single'>
+		<div class='thread-single-header'>
+			<div class='thread-creator-image'></div>
+			<div class='thread-created-info'>
+				<h4>{{$ctrl.thread.creator.username}}</h4>
+				<p am-time-ago="$ctrl.thread.created"></p>
+			</div>
+		</div>
+
+		<div class='thread-single-content-container'>
+			<div class='thread-single-left'>
+				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.thread.liked}"></span>
+				<span ng-class="{'positive': $ctrl.thread.score >= 1,
+				'negative': $ctrl.thread.score <= -1}">{{$ctrl.thread.score}}</span>
+				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.thread.disliked}"></span>
+			</div>
+
+			<div class='thread-single-content'>
+				<h3>{{$ctrl.thread.title}}</h3>
+				<p>{{$ctrl.thread.content}}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class='thread-single-info'>
+		<div class='left'>
+			<div class='thread-info-item'>
+				<button>
+				<!-- 	<p>View <span>{{$ctrl.thread.comments.length}}</span> Comment<span ng-if='$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length = 0'>s</span></p> -->
+				<span>7</span>
+				<p>Comments</p>
+				</button>
+			</div>
+
+			<div class='thread-info-item'>
+				<button>
+					<span>734</span>
+					<p>Views</p>
+				</button>
+			</div>
+
+			<div class='thread-info-item'>
+				<button>
+					<span>{{$ctrl.thread.saves.length}}</span>
+					<p>Save<span ng-if="$ctrl.thread.saves.length > 1 || $ctrl.thread.saves.length == 0">s</span></p>
+				</button>
+			</div>
+		</div>
+
+		<div class='right'>
+			<div class='thread-info-item'>
+				<button>
+					<i class='mdi mdi-heart-outline'></i>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<!--<div class='thread-single-container'>
 		<div class='thread-left'>
 			<span class='mdi mdi-chevron-up'>
 				<md-tooltip md-direction="left">
@@ -46,5 +105,5 @@
 				</button>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </div>

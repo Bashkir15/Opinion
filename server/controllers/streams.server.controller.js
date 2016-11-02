@@ -16,6 +16,8 @@ module.exports = () => {
 				return json.bad(err, res);
 			}
 
+			stream = stream.afterSave(req.user);
+
 			json.good({
 				record: stream
 			}, res);
@@ -79,6 +81,11 @@ module.exports = () => {
 			if (err) {
 				return json.bad(err, res);
 			} else if (stream) {
+
+				if (req.user) {
+					stream = stream.afterSave(req.user);
+				}
+
 				return json.good({
 					record: stream
 				}, res);

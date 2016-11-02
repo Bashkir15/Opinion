@@ -3,13 +3,13 @@
 	flex-direction: column
 	align-items: center
 	position: relative
-	padding-top: 60px
+	padding-top: 20px
 	text-align: center
 	overflow-x: hidden
 	background: #f4f5f6
 
 	header
-		padding-bottom: 20px
+		padding: 30px 0
 
 	> p
 		@include open()
@@ -28,7 +28,7 @@
 	> button
 		height: 60px
 		width: 180px
-		margin-bottom: 100px
+		margin: 100px 0
 		box-shadow: 0 3px 6px rgba(0,0,0,0.36), 0 3px 6px rgba(0,0,0,0.44)
 		background: $success
 
@@ -74,28 +74,9 @@
 			margin-left: 15px
 
 
-.single-stream-options
-	display: flex
-	align-items: center
-	justify-content: center
-	width: 95%
-	margin: 0 auto
-	padding: 35px 0 
+.single-stream-create-thread
+	&.ng-enter
+		@include slideInUp()
 
-	> div
-		display: flex
-		align-items: center
-		justify-content: center
-
-		button
-			height: 40px
-			width: 110px
-			box-shadow: 0 3px 6px rgba(0,0,0,0.36), 0 3px 6px rgba(0,0,0,0.44)
-
-
-		&:nth-of-type(1)
-			margin-right: 15px
-
-		&:nth-of-type(2)
-			margin-left: 15px
-
+	&.ng-leave
+		@include slideOutDown()

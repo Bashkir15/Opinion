@@ -22,9 +22,9 @@ webpackJsonp([0],[
 
 	__webpack_require__(121);
 
-	__webpack_require__(132);
+	__webpack_require__(135);
 
-	var _app = __webpack_require__(143);
+	var _app = __webpack_require__(150);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -289,7 +289,7 @@ webpackJsonp([0],[
 
 	__webpack_require__(128);
 
-	__webpack_require__(145);
+	__webpack_require__(133);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -525,7 +525,7 @@ webpackJsonp([0],[
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamsSingle = __webpack_require__(147);
+	var _streamsSingle = __webpack_require__(132);
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
@@ -738,587 +738,6 @@ webpackJsonp([0],[
 
 /***/ },
 /* 132 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	__webpack_require__(133);
-
-	__webpack_require__(135);
-
-	__webpack_require__(138);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var requires = ['shared.components', 'auth.components', 'forum.components'];
-
-	var componentModule = _angular2.default.module('app.components', requires);
-
-	exports.default = componentModule;
-
-/***/ },
-/* 133 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _nav = __webpack_require__(134);
-
-	var _nav2 = _interopRequireDefault(_nav);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var sharedComponents = _angular2.default.module('shared.components', []);
-	sharedComponents.component('appNav', _nav2.default);
-
-	exports.default = sharedComponents;
-
-/***/ },
-/* 134 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var navCtrl = function () {
-		function navCtrl(Auth, $mdSidenav) {
-			'ngInject';
-
-			_classCallCheck(this, navCtrl);
-
-			this._$sidenav = $mdSidenav;
-			this._Auth = Auth;
-			this.isLoggedIn = this._Auth.isLoggedIn();
-			this.getUserInfo();
-		}
-
-		_createClass(navCtrl, [{
-			key: 'openUserMenu',
-			value: function openUserMenu() {
-				this._$sidenav('user-menu').toggle();
-			}
-		}, {
-			key: 'getUserInfo',
-			value: function getUserInfo() {
-				this.user = this._Auth.getUser();
-			}
-		}]);
-
-		return navCtrl;
-	}();
-
-	var appNav = {
-		controller: navCtrl,
-		templateUrl: './app/components/shared/nav/nav.html'
-	};
-
-	exports.default = appNav;
-
-/***/ },
-/* 135 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _signup = __webpack_require__(136);
-
-	var _signup2 = _interopRequireDefault(_signup);
-
-	var _login = __webpack_require__(137);
-
-	var _login2 = _interopRequireDefault(_login);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var authComponents = _angular2.default.module('auth.components', []);
-	authComponents.component('signupForm', _signup2.default);
-	authComponents.component('loginForm', _login2.default);
-
-	exports.default = authComponents;
-
-/***/ },
-/* 136 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var SignupFormCtrl = function () {
-		function SignupFormCtrl($state, Auth, Toast) {
-			'ngInject';
-
-			_classCallCheck(this, SignupFormCtrl);
-
-			this.data = {
-				name: '',
-				username: '',
-				email: '',
-				password: ''
-			};
-
-			this._state = $state;
-			this._Auth = Auth;
-			this._Toaster = Toast;
-		}
-
-		_createClass(SignupFormCtrl, [{
-			key: 'signup',
-			value: function signup(isValid) {
-				var _this = this;
-
-				if (isValid) {
-					this._Auth.signup(this.data).then(function (response) {
-						_this._Toaster.success('Welcome to Opinionated!');
-						_this._state.go('app.login');
-					}, function (err) {
-						_this._Toast.error('boo, but still yay');
-					});
-				} else {
-					this._Toast('hmm, form issue!');
-				}
-			}
-		}]);
-
-		return SignupFormCtrl;
-	}();
-
-	var signupForm = {
-		scope: {},
-		controller: SignupFormCtrl,
-		templateUrl: './app/components/auth/signup/signup.component.html'
-	};
-
-	exports.default = signupForm;
-
-/***/ },
-/* 137 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var LoginCtrl = function () {
-		function LoginCtrl($state, Auth, Toast) {
-			'ngInject';
-
-			_classCallCheck(this, LoginCtrl);
-
-			this._Auth = Auth;
-			this._Toast = Toast;
-		}
-
-		_createClass(LoginCtrl, [{
-			key: 'login',
-			value: function login(isValid) {
-				var _this = this;
-
-				if (isValid) {
-					this._Auth.login(this.data).then(function (response) {
-						_this._Toast.success('Welcome back');
-					}, function (err) {
-						_this._Toast.error(response.res.message);
-					});
-				} else {
-					alert('hmm, form issue!');
-				}
-			}
-		}]);
-
-		return LoginCtrl;
-	}();
-
-	var loginForm = {
-		scope: {},
-		controller: LoginCtrl,
-		templateUrl: './app/components/auth/login/login.component.html'
-	};
-
-	exports.default = loginForm;
-
-/***/ },
-/* 138 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	__webpack_require__(139);
-
-	__webpack_require__(148);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var requires = ['streams.components', 'threads.components'];
-
-	var forumComponents = _angular2.default.module('forum.components', requires);
-
-	exports.default = forumComponents;
-
-/***/ },
-/* 139 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _streamsList = __webpack_require__(140);
-
-	var _streamsList2 = _interopRequireDefault(_streamsList);
-
-	var _streamsSingle = __webpack_require__(141);
-
-	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
-
-	var _streamCreate = __webpack_require__(142);
-
-	var _streamCreate2 = _interopRequireDefault(_streamCreate);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var streamComponents = _angular2.default.module('streams.components', []);
-	streamComponents.component('streamsList', _streamsList2.default);
-	streamComponents.component('singleStream', _streamsSingle2.default);
-	streamComponents.component('createStream', _streamCreate2.default);
-
-	exports.default = streamComponents;
-
-/***/ },
-/* 140 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var ListStreamCtrl = function ListStreamCtrl() {
-		_classCallCheck(this, ListStreamCtrl);
-	};
-
-	var listStream = {
-		scope: {},
-		bindings: {
-			streams: '='
-		},
-		controller: ListStreamCtrl,
-		templateUrl: './app/components/forum/streams/list/streams.list.component.html'
-	};
-
-	exports.default = listStream;
-
-/***/ },
-/* 141 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var singleStreamCtrl = function () {
-		function singleStreamCtrl(Stream) {
-			'ngInject';
-
-			_classCallCheck(this, singleStreamCtrl);
-
-			this._Stream = Stream;
-		}
-
-		_createClass(singleStreamCtrl, [{
-			key: 'subscribe',
-			value: function subscribe(item) {
-				this._Stream.subscribe(item._id).success(function (response) {
-					angular.extend(item, response.res.record);
-				});
-			}
-		}, {
-			key: 'unsubscribe',
-			value: function unsubscribe(item) {
-				this._Stream.unsubscribe(item._id).success(function (response) {
-					angular.extend(item, response.res.record);
-				});
-			}
-		}]);
-
-		return singleStreamCtrl;
-	}();
-
-	var singleStream = {
-		scope: {},
-		bindings: {
-			stream: '='
-		},
-		controller: singleStreamCtrl,
-		templateUrl: './app/components/forum/streams/single/streams.single.component.html'
-	};
-
-	exports.default = singleStream;
-
-/***/ },
-/* 142 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var createStreamCtrl = function () {
-		function createStreamCtrl(Stream, Toast, $rootScope) {
-			'ngInject';
-
-			_classCallCheck(this, createStreamCtrl);
-
-			this._Stream = Stream;
-			this._Toast = Toast;
-			this._$rootScope = $rootScope;
-			this.data = {
-				name: '',
-				description: ''
-			};
-		}
-
-		_createClass(createStreamCtrl, [{
-			key: 'create',
-			value: function create(isValid) {
-				var _this = this;
-
-				if (isValid) {
-					this._Stream.create(this.data).then(function (response) {
-						_this._Toast.success('You just created a Stream: ');
-						_this._$rootScope.$broadcast('streamCreated');
-					});
-				} else {
-					this._Toast('Hmm... Your form isn\'t valid');
-				}
-			}
-		}]);
-
-		return createStreamCtrl;
-	}();
-
-	var createStream = {
-		scope: {},
-		controller: createStreamCtrl,
-		templateUrl: './app/components/forum/streams/create/stream.create.component.html'
-	};
-
-	exports.default = createStream;
-
-/***/ },
-/* 143 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _auth = __webpack_require__(144);
-
-	var _auth2 = _interopRequireDefault(_auth);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function appConfig($stateProvider, $urlRouterProvider, $httpProvider) {
-		'ngInject';
-
-		$httpProvider.interceptors.push(_auth2.default);
-
-		$stateProvider.state('app', {
-			abstract: true,
-			templateUrl: './app/pages/app-layout.html'
-		});
-
-		$urlRouterProvider.otherwise('/');
-	}
-
-	exports.default = appConfig;
-
-/***/ },
-/* 144 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function authInterceptor(Storage) {
-		'ngInject';
-
-		return {
-			request: function request(config) {
-				config.headers.Authorization = "Bearer " + Storage.get('opinion-token');
-				return config;
-			},
-
-			responseError: function responseError(response) {
-				if (response.status == '401' || response.status == '403') {
-					Storage.remove('opinion-token');
-					$state.go('app.home');
-				}
-
-				if (response.status == '404') {
-					$state.go('app.home');
-				}
-			}
-		};
-	}
-
-	exports.default = authInterceptor;
-
-/***/ },
-/* 145 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _threads = __webpack_require__(146);
-
-	var _threads2 = _interopRequireDefault(_threads);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var threadsModule = _angular2.default.module('threads', []);
-	threadsModule.service('Thread', _threads2.default);
-
-	exports.default = threadsModule;
-
-/***/ },
-/* 146 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var threadService = function () {
-		function threadService($http) {
-			'ngInject';
-
-			_classCallCheck(this, threadService);
-
-			this._$http = $http;
-		}
-
-		_createClass(threadService, [{
-			key: 'create',
-			value: function create(data) {
-				return this._$http({
-					url: '/threads',
-					method: 'POST',
-					data: data
-				});
-			}
-		}, {
-			key: 'get',
-			value: function get(id, options) {
-				return this._$http({
-					url: '/threads/' + id + '/threads',
-					method: 'GET',
-					params: {
-						timestamp: options.timestamp,
-						filter: options.filter
-					}
-				});
-			}
-		}]);
-
-		return threadService;
-	}();
-
-	exports.default = threadService;
-
-/***/ },
-/* 147 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1397,7 +816,7 @@ webpackJsonp([0],[
 	exports.default = singleStreamCtrl;
 
 /***/ },
-/* 148 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1410,15 +829,532 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threadsList = __webpack_require__(149);
+	var _threads = __webpack_require__(134);
+
+	var _threads2 = _interopRequireDefault(_threads);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var threadsModule = _angular2.default.module('threads', []);
+	threadsModule.service('Thread', _threads2.default);
+
+	exports.default = threadsModule;
+
+/***/ },
+/* 134 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var threadService = function () {
+		function threadService($http) {
+			'ngInject';
+
+			_classCallCheck(this, threadService);
+
+			this._$http = $http;
+		}
+
+		_createClass(threadService, [{
+			key: 'create',
+			value: function create(data) {
+				return this._$http({
+					url: '/threads',
+					method: 'POST',
+					data: data
+				});
+			}
+		}, {
+			key: 'get',
+			value: function get(id, options) {
+				return this._$http({
+					url: '/threads/' + id + '/threads',
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter
+					}
+				});
+			}
+		}]);
+
+		return threadService;
+	}();
+
+	exports.default = threadService;
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	__webpack_require__(136);
+
+	__webpack_require__(138);
+
+	__webpack_require__(141);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var requires = ['shared.components', 'auth.components', 'forum.components'];
+
+	var componentModule = _angular2.default.module('app.components', requires);
+
+	exports.default = componentModule;
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _nav = __webpack_require__(137);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var sharedComponents = _angular2.default.module('shared.components', []);
+	sharedComponents.component('appNav', _nav2.default);
+
+	exports.default = sharedComponents;
+
+/***/ },
+/* 137 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var navCtrl = function () {
+		function navCtrl(Auth, $mdSidenav) {
+			'ngInject';
+
+			_classCallCheck(this, navCtrl);
+
+			this._$sidenav = $mdSidenav;
+			this._Auth = Auth;
+			this.isLoggedIn = this._Auth.isLoggedIn();
+			this.getUserInfo();
+		}
+
+		_createClass(navCtrl, [{
+			key: 'openUserMenu',
+			value: function openUserMenu() {
+				this._$sidenav('user-menu').toggle();
+			}
+		}, {
+			key: 'getUserInfo',
+			value: function getUserInfo() {
+				this.user = this._Auth.getUser();
+			}
+		}]);
+
+		return navCtrl;
+	}();
+
+	var appNav = {
+		controller: navCtrl,
+		templateUrl: './app/components/shared/nav/nav.html'
+	};
+
+	exports.default = appNav;
+
+/***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _signup = __webpack_require__(139);
+
+	var _signup2 = _interopRequireDefault(_signup);
+
+	var _login = __webpack_require__(140);
+
+	var _login2 = _interopRequireDefault(_login);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var authComponents = _angular2.default.module('auth.components', []);
+	authComponents.component('signupForm', _signup2.default);
+	authComponents.component('loginForm', _login2.default);
+
+	exports.default = authComponents;
+
+/***/ },
+/* 139 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var SignupFormCtrl = function () {
+		function SignupFormCtrl($state, Auth, Toast) {
+			'ngInject';
+
+			_classCallCheck(this, SignupFormCtrl);
+
+			this.data = {
+				name: '',
+				username: '',
+				email: '',
+				password: ''
+			};
+
+			this._state = $state;
+			this._Auth = Auth;
+			this._Toaster = Toast;
+		}
+
+		_createClass(SignupFormCtrl, [{
+			key: 'signup',
+			value: function signup(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this._Auth.signup(this.data).then(function (response) {
+						_this._Toaster.success('Welcome to Opinionated!');
+						_this._state.go('app.login');
+					}, function (err) {
+						_this._Toast.error('boo, but still yay');
+					});
+				} else {
+					this._Toast('hmm, form issue!');
+				}
+			}
+		}]);
+
+		return SignupFormCtrl;
+	}();
+
+	var signupForm = {
+		scope: {},
+		controller: SignupFormCtrl,
+		templateUrl: './app/components/auth/signup/signup.component.html'
+	};
+
+	exports.default = signupForm;
+
+/***/ },
+/* 140 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var LoginCtrl = function () {
+		function LoginCtrl($state, Auth, Toast) {
+			'ngInject';
+
+			_classCallCheck(this, LoginCtrl);
+
+			this._Auth = Auth;
+			this._Toast = Toast;
+		}
+
+		_createClass(LoginCtrl, [{
+			key: 'login',
+			value: function login(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this._Auth.login(this.data).then(function (response) {
+						_this._Toast.success('Welcome back');
+					}, function (err) {
+						_this._Toast.error(response.res.message);
+					});
+				} else {
+					alert('hmm, form issue!');
+				}
+			}
+		}]);
+
+		return LoginCtrl;
+	}();
+
+	var loginForm = {
+		scope: {},
+		controller: LoginCtrl,
+		templateUrl: './app/components/auth/login/login.component.html'
+	};
+
+	exports.default = loginForm;
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	__webpack_require__(142);
+
+	__webpack_require__(146);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var requires = ['streams.components', 'threads.components'];
+
+	var forumComponents = _angular2.default.module('forum.components', requires);
+
+	exports.default = forumComponents;
+
+/***/ },
+/* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _streamsList = __webpack_require__(143);
+
+	var _streamsList2 = _interopRequireDefault(_streamsList);
+
+	var _streamsSingle = __webpack_require__(144);
+
+	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
+
+	var _streamCreate = __webpack_require__(145);
+
+	var _streamCreate2 = _interopRequireDefault(_streamCreate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var streamComponents = _angular2.default.module('streams.components', []);
+	streamComponents.component('streamsList', _streamsList2.default);
+	streamComponents.component('singleStream', _streamsSingle2.default);
+	streamComponents.component('createStream', _streamCreate2.default);
+
+	exports.default = streamComponents;
+
+/***/ },
+/* 143 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ListStreamCtrl = function ListStreamCtrl() {
+		_classCallCheck(this, ListStreamCtrl);
+	};
+
+	var listStream = {
+		scope: {},
+		bindings: {
+			streams: '='
+		},
+		controller: ListStreamCtrl,
+		templateUrl: './app/components/forum/streams/list/streams.list.component.html'
+	};
+
+	exports.default = listStream;
+
+/***/ },
+/* 144 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var singleStreamCtrl = function () {
+		function singleStreamCtrl(Stream) {
+			'ngInject';
+
+			_classCallCheck(this, singleStreamCtrl);
+
+			this._Stream = Stream;
+		}
+
+		_createClass(singleStreamCtrl, [{
+			key: 'subscribe',
+			value: function subscribe(item) {
+				this._Stream.subscribe(item._id).success(function (response) {
+					angular.extend(item, response.res.record);
+				});
+			}
+		}, {
+			key: 'unsubscribe',
+			value: function unsubscribe(item) {
+				this._Stream.unsubscribe(item._id).success(function (response) {
+					angular.extend(item, response.res.record);
+				});
+			}
+		}]);
+
+		return singleStreamCtrl;
+	}();
+
+	var singleStream = {
+		scope: {},
+		bindings: {
+			stream: '='
+		},
+		controller: singleStreamCtrl,
+		templateUrl: './app/components/forum/streams/single/streams.single.component.html'
+	};
+
+	exports.default = singleStream;
+
+/***/ },
+/* 145 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var createStreamCtrl = function () {
+		function createStreamCtrl(Stream, Toast, $rootScope) {
+			'ngInject';
+
+			_classCallCheck(this, createStreamCtrl);
+
+			this._Stream = Stream;
+			this._Toast = Toast;
+			this._$rootScope = $rootScope;
+			this.data = {
+				name: '',
+				description: ''
+			};
+		}
+
+		_createClass(createStreamCtrl, [{
+			key: 'create',
+			value: function create(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this._Stream.create(this.data).then(function (response) {
+						_this._Toast.success('You just created a Stream: ');
+						_this._$rootScope.$broadcast('streamCreated');
+					});
+				} else {
+					this._Toast('Hmm... Your form isn\'t valid');
+				}
+			}
+		}]);
+
+		return createStreamCtrl;
+	}();
+
+	var createStream = {
+		scope: {},
+		controller: createStreamCtrl,
+		templateUrl: './app/components/forum/streams/create/stream.create.component.html'
+	};
+
+	exports.default = createStream;
+
+/***/ },
+/* 146 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _threadsList = __webpack_require__(147);
 
 	var _threadsList2 = _interopRequireDefault(_threadsList);
 
-	var _threadsSingle = __webpack_require__(150);
+	var _threadsSingle = __webpack_require__(148);
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
-	var _threadsCreate = __webpack_require__(151);
+	var _threadsCreate = __webpack_require__(149);
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
@@ -1432,7 +1368,7 @@ webpackJsonp([0],[
 	exports.default = threadComponents;
 
 /***/ },
-/* 149 */
+/* 147 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1461,7 +1397,7 @@ webpackJsonp([0],[
 	exports.default = threadsList;
 
 /***/ },
-/* 150 */
+/* 148 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1488,7 +1424,7 @@ webpackJsonp([0],[
 	exports.default = singleThread;
 
 /***/ },
-/* 151 */
+/* 149 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1549,6 +1485,70 @@ webpackJsonp([0],[
 	};
 
 	exports.default = createThread;
+
+/***/ },
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _auth = __webpack_require__(151);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function appConfig($stateProvider, $urlRouterProvider, $httpProvider) {
+		'ngInject';
+
+		$httpProvider.interceptors.push(_auth2.default);
+
+		$stateProvider.state('app', {
+			abstract: true,
+			templateUrl: './app/pages/app-layout.html'
+		});
+
+		$urlRouterProvider.otherwise('/');
+	}
+
+	exports.default = appConfig;
+
+/***/ },
+/* 151 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function authInterceptor(Storage) {
+		'ngInject';
+
+		return {
+			request: function request(config) {
+				config.headers.Authorization = "Bearer " + Storage.get('opinion-token');
+				return config;
+			},
+
+			responseError: function responseError(response) {
+				if (response.status == '401' || response.status == '403') {
+					Storage.remove('opinion-token');
+					$state.go('app.home');
+				}
+
+				if (response.status == '404') {
+					$state.go('app.home');
+				}
+			}
+		};
+	}
+
+	exports.default = authInterceptor;
 
 /***/ }
 ]);
