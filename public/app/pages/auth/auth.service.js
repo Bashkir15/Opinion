@@ -21,12 +21,6 @@ class Auth {
 			url: '/users/authenticate',
 			method: 'POST',
 			data: credentials
-		}).then((response) => {
-			let user = response.data.res.record;
-			let serializedUser = angular.toJson(user);
-
-			this._Storage.set('user', serializedUser);
-			this._Storage.set('opinion-token', response.data.res.token);
 		});
 	}
 

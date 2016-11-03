@@ -39,7 +39,7 @@ webpackJsonp([0],[
 	window.app = _angular2.default.module('app', requires);
 
 	_angular2.default.module('app').config(_app2.default);
-	_angular2.default.module('app').run(_app4.default);
+	//angular.module('app').run(appRun);
 	_angular2.default.bootstrap(document, ['app']);
 
 /***/ },
@@ -467,18 +467,10 @@ webpackJsonp([0],[
 		}, {
 			key: 'login',
 			value: function login(credentials) {
-				var _this = this;
-
 				return this._$http({
 					url: '/users/authenticate',
 					method: 'POST',
 					data: credentials
-				}).then(function (response) {
-					var user = response.data.res.record;
-					var serializedUser = angular.toJson(user);
-
-					_this._Storage.set('user', serializedUser);
-					_this._Storage.set('opinion-token', response.data.res.token);
 				});
 			}
 		}, {
@@ -1332,29 +1324,70 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var LoginCtrl = function () {
-		function LoginCtrl($state, Auth, Toast) {
+		function LoginCtrl($state, Auth, Toast, Storage) {
 			'ngInject';
 
 			_classCallCheck(this, LoginCtrl);
 
 			this._Auth = Auth;
 			this._Toast = Toast;
+			this._Storage = Storage;
+			this.data = {
+				email: '',
+				password: ''
+			};
+
+			this.checkRemember();
 		}
 
 		_createClass(LoginCtrl, [{
+			key: 'checkRemember',
+			value: function checkRemember() {
+				var storedEmail = this._Storage.get('userEmail');
+
+				if (storedEmail) {
+					this.data.email = atob(storedEmail);
+					this.isRemembered = true;
+				} else {
+					this.data.email = '';
+				}
+			}
+		}, {
 			key: 'login',
 			value: function login(isValid) {
 				var _this = this;
 
+				this.isLoading = true;
+
 				if (isValid) {
+					if (typeof this.remember !== 'undefined') {
+						var rememberEmail = btoa(this.data.email);
+						this._Storage.set('userEmail', rememberEmail);
+					}
+
+					if (typeof this.forget !== 'undefined') {
+						this._Storage.remove('userEmail');
+					}
+
 					this._Auth.login(this.data).then(function (response) {
-						_this._Toast.success('Welcome back');
-					}, function (err) {
-						_this._Toast.error(response.res.message);
+						if (response.data.success) {
+							_this.postLogin(response);
+							_this._Toast.success('Welcome back ' + response.data.res.record.username);
+						} else {
+							_this._Toast.error(response.data.res.message);
+						}
 					});
 				} else {
-					alert('hmm, form issue!');
+					this._Toast.error('hmm, form issue!');
 				}
+			}
+		}, {
+			key: 'postLogin',
+			value: function postLogin(response) {
+				var user = response.data.res.record;
+				var serializedUser = angular.toJson(user);
+				this._Storage.set('user', serializedUser);
+				this._Storage.set('opinion-token', response.data.res.token);
 			}
 		}]);
 

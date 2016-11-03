@@ -27,9 +27,37 @@
 		<div>
 			<label>Search</label>
 			<input type='text' name='search' ng-model='$ctrl.search'>
-			<button class='large-mobile'>
-				<span>Filter</span>
-			</button>
+			<md-menu class='forum-search-dropdown' md-offset='0 65'>
+				<button class='large-mobile' ng-click="$mdOpenMenu()">
+					<span>Filter</span>
+				</button>
+
+				<md-menu-content>
+					<md-menu-item>
+						<button>
+							<span>Score</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button>
+							<span>Comments</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button>
+							<span>Saves</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button>
+							<span>Date</span>
+						</button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
 			<button class='above-mobile' ng-click="$ctrl.showCreate = !$ctrl.showCreate">
 				<span>Create Thread</span>
 			</button>

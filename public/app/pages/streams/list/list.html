@@ -17,9 +17,39 @@
 		<div ng-class="{'has-focus': $ctrl.search.hasFocus}">
 			<label>Search</label>
 			<input type='text' name='search' ng-model='$ctrl.streamsSearch' ng-change="$ctrl.search()" ng-focus="$ctrl.search.hasFocus=true" ng-blur="$ctrl.search.hasFocus=false">
-			<button class='large-mobile'>
-				<span>Filter</span>
-			</button>
+			<md-menu class='forum-search-dropdown' md-offset='0 65'>
+				<button class='large-mobile' ng-click="$mdOpenMenu()">
+					<span>Filter</span>
+				</button>
+
+				<md-menu-content>
+					<md-menu-item>
+						<button>
+							<span>
+								Score
+							</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button>
+							<span>Threads</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button>
+							<span>Subscribers</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button>
+							<span>Date</span>
+						</button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
 		</div>
 	</div>
 

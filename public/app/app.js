@@ -23,5 +23,5 @@ const requires = [
 window.app = angular.module('app', requires);
 
 angular.module('app').config(appConfig);
-angular.module('app').run(appRun);
+//angular.module('app').run(appRun);
 angular.bootstrap(document, ['app']);

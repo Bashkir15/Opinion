@@ -1,4 +1,4 @@
-<div class='login-form-container'>
+<div class='auth-form-container'>
 	<form name='$ctrl.loginForm' ng-submit="$ctrl.login($ctrl.loginForm.$valid)" novalidate>
 		<div class='auth-form-wrapper' ng-class="{'has-focus': $ctrl.loginForm.email.hasFocus,
 		'has-success': $ctrl.loginForm.email.$valid,
@@ -26,15 +26,21 @@
 			</div>
 		</div>
 
-		<div class='auth-form-utilities'>
+		<div class='auth-form-utilities' >
 			<div>
-				<md-checkbox ng-model="$ctrl.remember" md-true-value="'isRemembered'">
+				<md-checkbox ng-model="$ctrl.remember" md-true-value="'isRemembered'" ng-if="!$ctrl.isRemembered">
 					Remember Me
+				</md-checkbox>
+
+				<md-checkbox ng-model="$ctrl.forget" md-true-value="'isForgotten'" ng-if="$ctrl.isRemembered">
+					Forget Me
 				</md-checkbox>
 			</div>
 
 			<div>
-				<p>Forgot Password?</p>
+				<button>
+					<span>Forgot Password</span>
+				</button>
 			</div>
 		</div>
 		<div class='auth-form-submit'>

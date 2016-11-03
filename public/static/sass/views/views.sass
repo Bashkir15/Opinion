@@ -1,19 +1,4 @@
-@import "./shared/shared"
-@import "./pages/pages"
 @import "./components/components"
 
-
-.app-container
+.view-content-holder
 	height: 100vh
-	overflow-y: hidden
-
-.main-view-container
-	height: calc(100vh - 80px)
-
-	
-.main-view
-	&.ng-enter
-		@include slideInUp()
-
-	&.ng-leave
-		@include slideOutDown()

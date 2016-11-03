@@ -1,0 +1,52 @@
+.nav
+	position: relative
+	display: flex
+	align-items: stretch
+	height: 80px
+	padding: 10px
+	overflow: hidden
+	background: $default-red
+
+.nav-left
+	display: flex
+	flex: 1
+	flex-basis: 0
+	align-items: center
+	justify-content: flex-start
+
+	> div
+		&:nth-of-type(1)
+			display: none
+
+.nav-right
+	display: flex
+	flex: 1
+	flex-basis: 0
+	align-items: center
+	justify-content: flex-end
+
+.nav-item
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 0 10px
+
+	button
+		span
+			font-size: 20px
+			@include rale()
+			font-weight: 400
+			letter-spacing: 2px
+			color: $default-grey
+
+.nav-menu-icon
+	button
+		span
+			font-size: 35px
+			color: $default-grey
+
+@media screen and (min-width: 640px)
+	.nav-left
+		> div
+			&:nth-of-type(1)
+				display: flex

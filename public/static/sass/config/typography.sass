@@ -7,17 +7,38 @@
 
 h1
 	@include rale()
-	font-weight: 300
+	font-weight: 400
 	font-size: 30px
+	letter-spacing: 5px
+
+h2
+	@include rale()
+	font-weight: 400
+	font-size: 25px
+	letter-spacing: 4px
+
+h3
+	@include rale()
+	font-weight: 400
+	font-size: 22px
 	letter-spacing: 3px
 
+h4
+	@include rale()
+	font-weight: 400
+	font-size: 18px
+	letter-spacing: 3px
 
-button
-	span
-		@include rale()
-		font-weight: 400
-		font-size: 14px
-		letter-spacing: 1px
+p
+	@include open()
+	font-size: 16px
+	letter-spacing: 2px
+	font-size: 16px
+
+span
+	font-size: 14px
+	letter-spacing: 1px
+
 
 
 @media screen and (min-width: 630px)
@@ -25,15 +46,70 @@ button
 		font-size: 35px
 		letter-spacing: 6px
 
+	h2
+		font-size: 30px
+		letter-spacing: 5px
+
+	h3
+		font-size: 25px
+		letter-spacing: 4px
+
+	h4
+		font-size: 22px
+		letter-spacing: 3px
+
+	p
+		font-size: 17px
+
+	span
+		font-size: 15px
+
 @media screen and (min-width: 1000px)
 	h1
 		font-size: 40px
 		letter-spacing: 9px
 
+	h2
+		font-size: 35px
+		letter-spacing: 8px
+
+	h3
+		font-size: 30px
+		letter-spacing: 7px
+
+	h4
+		font-size: 25px
+		letter-spacing: 6px
+
+	p
+		font-size: 18px
+
+	span
+		font-size: 16px
+
 @media screen and (min-width: 1300px)
 	h1
 		font-size: 45px
 		letter-spacing: 12px
+
+	h2
+		font-size: 40px
+		letter-spacing: 11px
+
+	h3
+		font-size: 35px
+		letter-spacing: 10px
+
+	h4
+		font-size: 30px
+		letter-spacing: 9px
+
+	p
+		font-size: 19px
+
+	span
+		font-size: 17px
+		
 
 @media screen and (min-width: 1670px)
 	h1
