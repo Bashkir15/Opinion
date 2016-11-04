@@ -1,10 +1,12 @@
 class LoginCtrl {
-	constructor($state, Auth, Toast, Storage) {
+	constructor($state, $mdDialog, Auth, Toast, Storage) {
 		'ngInject';
 
 		this._Auth = Auth;
 		this._Toast = Toast;
-		this._Storage = Storage
+		this._Storage = Storage;
+		this._$state = $state;
+		this._$dialog = $mdDialog;
 		this.data = {
 			email: '',
 			password: ''
@@ -56,6 +58,15 @@ class LoginCtrl {
 		let serializedUser = angular.toJson(user);
 		this._Storage.set('user', serializedUser);
 		this._Storage.set('opinion-token', response.data.res.token);
+		this._$state.go('app.home');
+	}
+
+	openPasswordReset() {
+		this._$dialog.show({
+			controller: 'PasswordResetController',
+			controllerAs: '$ctrl',
+			templateUrl: './app/pages/auth/reset/reset.html'
+		});
 	}
 }
 

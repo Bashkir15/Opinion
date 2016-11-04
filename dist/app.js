@@ -396,11 +396,16 @@ webpackJsonp([0],[
 
 	var _auth4 = _interopRequireDefault(_auth3);
 
+	var _passwordReset = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./reset/password.reset.controller\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _passwordReset2 = _interopRequireDefault(_passwordReset);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var authModule = _angular2.default.module('auth', []);
 	authModule.config(_auth2.default);
 	authModule.service('Auth', _auth4.default);
+	authModule.controller('PasswordResetController', _passwordReset2.default);
 
 	exports.default = authModule;
 
@@ -1324,7 +1329,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var LoginCtrl = function () {
-		function LoginCtrl($state, Auth, Toast, Storage) {
+		function LoginCtrl($state, $mdDialog, Auth, Toast, Storage) {
 			'ngInject';
 
 			_classCallCheck(this, LoginCtrl);
@@ -1332,6 +1337,8 @@ webpackJsonp([0],[
 			this._Auth = Auth;
 			this._Toast = Toast;
 			this._Storage = Storage;
+			this._$state = $state;
+			this._$dialog = $mdDialog;
 			this.data = {
 				email: '',
 				password: ''
@@ -1388,6 +1395,16 @@ webpackJsonp([0],[
 				var serializedUser = angular.toJson(user);
 				this._Storage.set('user', serializedUser);
 				this._Storage.set('opinion-token', response.data.res.token);
+				this._$state.go('app.home');
+			}
+		}, {
+			key: 'openPasswordReset',
+			value: function openPasswordReset() {
+				this._$dialog.show({
+					controller: 'PasswordResetController',
+					controllerAs: '$ctrl',
+					templateUrl: './app/pages/auth/reset/reset.html'
+				});
 			}
 		}]);
 
