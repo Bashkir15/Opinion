@@ -51,6 +51,8 @@ module.exports = () => {
 		}
 
 		Stream.find(criteria, null, {sort: {name: 1}})
+		.skip(parseInt(req.query.page) * global.config.settings.perPage)
+		.limit(global.config.settings.perPage + 1)
 		.populate('creator')
 		.populate('moderators')
 		.populate('subscibers')
@@ -58,6 +60,13 @@ module.exports = () => {
 			if (err) {
 				return json.bad(err, res);
 			} else {
+
+				var morePages = global.config.settings.perPage < streams.length;
+
+				if (morePages) {
+					streams.pop();
+				}
+
 				if (req.user) {
 					streams.map((e) => {
 						e = e.afterSave(req.user);
@@ -65,7 +74,8 @@ module.exports = () => {
 				}
 
 				json.good({
-					records: streams
+					records: streams,
+					morePages: morePages
 				}, res);
 			}
 			

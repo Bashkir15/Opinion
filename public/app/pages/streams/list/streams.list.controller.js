@@ -8,6 +8,7 @@ class StreamsListCtrl {
 		this._$dialog = $mdDialog;
 		this.streams = [];
 		this.streamsSearch = '';
+		this.streamPage = 0;
 		this.lastUpdated = 0;
 		this.getStreams();
 		this._$rootScope.$on('streamCreated', () => {
@@ -16,12 +17,19 @@ class StreamsListCtrl {
 				append: true
 			});
 		});
+
+		this._$rootScope.$on('loadMoreStreams', () => {
+			this.streamPage++;
+			this.lastUpdated = 0;
+			this.getStreams({append: true});
+		});
 	}
 
 	getStreams(options) {
 		options = options || {};
 		options.filter = this.streamsSearch,
 		options.timestamp = this.lastUpdated
+		options.page = this.streamPage
 
 
 		this._Stream.get(options).success((response) => {
@@ -36,10 +44,11 @@ class StreamsListCtrl {
 				this.streams = this.streams.concat(response.res.records);
 			}
 
-			console.log(this.streams);
+			this.noMoreStreams = !response.res.morePages;
 			this.lastUpdated = Date.now();
 		});
 	}
+
 
 	search(newValue, oldValue) {
 		var streamsSearchTimeout;

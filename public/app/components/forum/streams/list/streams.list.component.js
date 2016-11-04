@@ -35,6 +35,10 @@ class ListStreamCtrl {
 			templateUrl: './app/pages/streams/dialogs/create.html'
 		});
 	}
+
+	loadMore() {
+		this._$rootScope.$broadcast('loadMoreStreams');
+	}
 }
 
 let listStream = {

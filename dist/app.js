@@ -801,6 +801,7 @@ webpackJsonp([0],[
 			this._$dialog = $mdDialog;
 			this.streams = [];
 			this.streamsSearch = '';
+			this.streamPage = 0;
 			this.lastUpdated = 0;
 			this.getStreams();
 			this._$rootScope.$on('streamCreated', function () {
@@ -808,6 +809,12 @@ webpackJsonp([0],[
 				_this.getStreams({
 					append: true
 				});
+			});
+
+			this._$rootScope.$on('loadMoreStreams', function () {
+				_this.streamPage++;
+				_this.lastUpdated = 0;
+				_this.getStreams({ append: true });
 			});
 		}
 
@@ -818,6 +825,7 @@ webpackJsonp([0],[
 
 				options = options || {};
 				options.filter = this.streamsSearch, options.timestamp = this.lastUpdated;
+				options.page = this.streamPage;
 
 				this._Stream.get(options).success(function (response) {
 
@@ -831,7 +839,7 @@ webpackJsonp([0],[
 						_this2.streams = _this2.streams.concat(response.res.records);
 					}
 
-					console.log(_this2.streams);
+					_this2.noMoreStreams = !response.res.morePages;
 					_this2.lastUpdated = Date.now();
 				});
 			}
@@ -1725,6 +1733,11 @@ webpackJsonp([0],[
 				this._$dialog.show({
 					templateUrl: './app/pages/streams/dialogs/create.html'
 				});
+			}
+		}, {
+			key: 'loadMore',
+			value: function loadMore() {
+				this._$rootScope.$broadcast('loadMoreStreams');
 			}
 		}]);
 
