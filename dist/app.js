@@ -810,12 +810,6 @@ webpackJsonp([0],[
 					append: true
 				});
 			});
-
-			this._$rootScope.$on('loadMoreStreams', function () {
-				_this.streamPage++;
-				_this.lastUpdated = Date.now();
-				_this.getStreams({ append: true });
-			});
 		}
 
 		_createClass(StreamsListCtrl, [{
@@ -841,11 +835,17 @@ webpackJsonp([0],[
 
 					if (response.res.morePages == false) {
 						_this2.noMoreStreams = true;
-						console.log(_this2.noMoreStreams);
 					}
 
 					_this2.lastUpdated = Date.now();
 				});
+			}
+		}, {
+			key: 'loadMore',
+			value: function loadMore() {
+				this.streamPage++;
+				this.lastUpdated = Date.now();
+				this.getStreams({ append: true });
 			}
 		}, {
 			key: 'search',
@@ -1672,12 +1672,17 @@ webpackJsonp([0],[
 
 	var _streamCreate2 = _interopRequireDefault(_streamCreate);
 
+	var _streamsTrending = __webpack_require__(163);
+
+	var _streamsTrending2 = _interopRequireDefault(_streamsTrending);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var streamComponents = _angular2.default.module('streams.components', []);
 	streamComponents.component('streamsList', _streamsList2.default);
 	streamComponents.component('singleStream', _streamsSingle2.default);
 	streamComponents.component('createStream', _streamCreate2.default);
+	streamComponents.component('trendingStream', _streamsTrending2.default);
 
 	exports.default = streamComponents;
 
@@ -1741,11 +1746,6 @@ webpackJsonp([0],[
 				this._$dialog.show({
 					templateUrl: './app/pages/streams/dialogs/create.html'
 				});
-			}
-		}, {
-			key: 'loadMore',
-			value: function loadMore() {
-				this._$rootScope.$broadcast('loadMoreStreams');
 			}
 		}]);
 
@@ -2346,6 +2346,59 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
+
+/***/ },
+/* 162 */,
+/* 163 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var streamTrendingCtrl = function () {
+		function streamTrendingCtrl(Stream) {
+			'ngInject';
+
+			_classCallCheck(this, streamTrendingCtrl);
+
+			this._Stream = Stream;
+		}
+
+		_createClass(streamTrendingCtrl, [{
+			key: 'toggleSubscribe',
+			value: function toggleSubscribe(item) {
+				if (!item.subscribed) {
+					this._Stream.subscribe(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				} else {
+					this._Stream.unsubscribe(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				}
+			}
+		}]);
+
+		return streamTrendingCtrl;
+	}();
+
+	var trendingStream = {
+		scope: {},
+		bindings: {
+			stream: '<'
+		},
+		controller: streamTrendingCtrl,
+		templateUrl: './app/components/forum/streams/trending/streams.trending.component.html'
+	};
+
+	exports.default = trendingStream;
 
 /***/ }
 ]);

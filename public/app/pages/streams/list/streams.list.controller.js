@@ -17,12 +17,6 @@ class StreamsListCtrl {
 				append: true
 			});
 		});
-
-		this._$rootScope.$on('loadMoreStreams', () => {
-			this.streamPage++;
-			this.lastUpdated = Date.now();
-			this.getStreams({append: true});
-		});
 	}
 
 	getStreams(options) {
@@ -47,11 +41,16 @@ class StreamsListCtrl {
 			
 			if (response.res.morePages == false) {
 				this.noMoreStreams = true;
-				console.log(this.noMoreStreams);
 			}
 
 			this.lastUpdated = Date.now();
 		});
+	}
+
+	loadMore() {
+		this.streamPage++;
+		this.lastUpdated = Date.now();
+		this.getStreams({append: true});
 	}
 
 

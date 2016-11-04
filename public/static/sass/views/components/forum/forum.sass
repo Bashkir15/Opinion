@@ -230,7 +230,6 @@
 
 .forum-list-view
 	display: flex
-	align-items: center
 	width: 100%
 
 .forum-list-list
@@ -282,6 +281,92 @@
 			@include rale()
 			font-weight: 400
 			color: $default-white-background
+
+@media screen and (min-width: 1000px)
+	.forum-list-list
+		width: 75%
+		margin-right: 0
+
+
+
+// ******************* Trending ***********************//
+
+@media screen and (min-width: 1000px)
+	.forum-side-bar
+		width: 20%
+		margin-left: 40px
+		background: $default-white-background
+
+	.forum-trending-header
+		padding: 25px 0
+		border-bottom: 1px solid rgba(0,0,0,0.12)
+
+	.forum-trending-repeat
+		display: flex
+		flex-direction: column
+		align-items: center
+		padding: 0 15px
+
+		&.ng-move
+			transition: all .4s ease
+
+		&.ng-move-active
+			@include slideInUp()
+
+	.forum-trending-component-container
+		width: 100%
+	
+	.forum-single-trending-component
+		display: flex
+		flex-direction: column
+		padding-top: 20px
+		margin-bottom: 20px
+
+	.forum-single-trending
+		display: flex
+		flex-direction: column
+		height: 55px
+		width: 100%
+
+		> div
+
+			&:nth-of-type(2)
+				display: flex
+				align-items: stretch
+				padding: 30px 0
+
+				> div
+
+					&:nth-of-type(1)
+						display: flex
+						flex: 1
+						flex-basis: 0
+						align-items: center
+						justify-content: flex-start
+
+						span
+							@include open()
+							font-weight: 400
+							letter-spacing: 2px
+							color: rgba(0,0,0,0.6)
+
+					&:nth-of-type(2)
+						display: flex
+						flex: 1
+						flex-basis: 0
+						align-items: center
+						justify-content: flex-end
+
+						i
+							font-size: 24px
+							color: rgba(0,0,0,0.7)
+							outline: none
+							transition: all .4s ease
+
+							&.subscribed
+								color: $default-green
+
+
 
 
 // ******************* Single *************************//

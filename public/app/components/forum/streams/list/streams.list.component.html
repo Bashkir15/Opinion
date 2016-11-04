@@ -6,7 +6,17 @@
 			</div>
 		</div>
 
-		<div class='forum-side-bar'></div>
+		<div class='forum-side-bar above-tablet'>
+			<div class='forum-trending-list'>
+				<div class='forum-trending-header'>
+					<h4>Trending</h4>
+				</div>
+
+				<div ng-repeat='item in $ctrl.streams | orderBy: "-subscribers.length"' class='forum-trending-repeat'>
+					<trending-stream stream='item' class='forum-trending-component-container'></trending-stream>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateStream()">
