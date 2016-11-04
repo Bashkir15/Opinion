@@ -4,6 +4,7 @@ module.exports = {
 		port: 8000
 	},
 
+	
 	db: 'mongodb://localhost/opinion',
 	secret: 'adsfaiusdfwjk23rae'
 

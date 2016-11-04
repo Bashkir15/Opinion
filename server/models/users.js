@@ -61,7 +61,8 @@ var UserSchema = new mongoose.Schema({
 		type: Number
 	},
 
-	token: String
+	resetPasswordToken: String,
+	resetPasswordExpires: Date
 });
 
 UserSchema.set('toJSON', {

@@ -63,7 +63,7 @@ module.exports = () => {
 	};
 
 	obj.forgot = (req, res) => {
-		async.waterfaller([
+		async.waterfall([
 			function (done) {
 				crypto.randomBytes(20, (err, buf) => {
 					var token = buf.toString('hex');
@@ -88,7 +88,7 @@ module.exports = () => {
 
 			function (token, user, done) {
 				var emailTemplate = fs.readFileSync('./server/templates/email.template.html', {encoding: 'utf-8'});
-				var template = handlebars.compile(html);
+				var template = handlebars.compile(emailTemplate);
 
 				var replacements = {
 					token: user.resetPasswordToken
@@ -108,7 +108,7 @@ module.exports = () => {
 					to: user.email,
 					from: 'Opinionated',
 					subject: 'Your password reset',
-					html: htmlToSend
+					html: templateToSend
 				};
 
 				mailTransport.sendMail(mailOptions, (error, info) => {
@@ -129,6 +129,28 @@ module.exports = () => {
 			json.good({
 				record: success
 			}, res);
+		});
+	};
+
+	obj.reset = (req, res) => {
+		User.findOne({resetPasswordToken: req.body.token}, (err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			user.password = req.body.password;
+			user.resetPasswordToken = undefined;
+			user.resetPasswordExpires = undefined;
+
+			user.save((err) => {
+				if (err) {
+					return json.bad(err, res);
+				}
+
+				json.good({
+					record: user
+				}, res);
+			});
 		});
 	};
 

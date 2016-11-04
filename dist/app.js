@@ -396,7 +396,7 @@ webpackJsonp([0],[
 
 	var _auth4 = _interopRequireDefault(_auth3);
 
-	var _passwordReset = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./reset/password.reset.controller\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _passwordReset = __webpack_require__(160);
 
 	var _passwordReset2 = _interopRequireDefault(_passwordReset);
 
@@ -476,6 +476,24 @@ webpackJsonp([0],[
 					url: '/users/authenticate',
 					method: 'POST',
 					data: credentials
+				});
+			}
+		}, {
+			key: 'forgot',
+			value: function forgot(data) {
+				return this._$http({
+					url: '/users/forgot',
+					method: 'POST',
+					data: data
+				});
+			}
+		}, {
+			key: 'reset',
+			value: function reset(data) {
+				return this._$http({
+					url: '/users/reset',
+					method: 'POST',
+					data: data
 				});
 			}
 		}, {
@@ -2092,6 +2110,78 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var passwordReset = function () {
+		function passwordReset($state, $mdDialog, Auth, Toast) {
+			'ngInject';
+
+			_classCallCheck(this, passwordReset);
+
+			this._$state = $state;
+			this._$dialog = $mdDialog;
+			this._Auth = Auth;
+			this._Toast = Toast;
+
+			this.data = {
+				email: '',
+				token: '',
+				password: ''
+			};
+		}
+
+		_createClass(passwordReset, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'generateReset',
+			value: function generateReset() {
+				var _this = this;
+
+				this._Auth.forgot(this.data).then(function (response) {
+					if (response) {
+						_this.tokenSent = true;
+						_this._Toast.success('Great! Check your email for futher instructions');
+					} else {
+						_this._Toast.error(response.data.res.message);
+					}
+				});
+			}
+		}, {
+			key: 'attemptReset',
+			value: function attemptReset() {
+				var _this2 = this;
+
+				this._Auth.reset(this.data).then(function (response) {
+					if (response) {
+						_this2._Toast.success('Hooray! Now you can login');
+						_this2.close();
+					} else {
+						_this2._Toast.error(response.data.res.error);
+					}
+				});
+			}
+		}]);
+
+		return passwordReset;
+	}();
+
+	exports.default = passwordReset;
 
 /***/ }
 ]);

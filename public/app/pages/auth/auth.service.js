@@ -24,6 +24,22 @@ class Auth {
 		});
 	}
 
+	forgot(data) {
+		return this._$http({
+			url: '/users/forgot',
+			method: 'POST',
+			data: data
+		});
+	}
+
+	reset(data) {
+		return this._$http({
+			url: '/users/reset',
+			method: 'POST',
+			data: data
+		});
+	}
+
 	isLoggedIn() {
 		return this._Storage.get('opinion-token');
 	}
