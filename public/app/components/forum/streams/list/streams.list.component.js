@@ -28,10 +28,6 @@ class ListStreamCtrl {
 				this.rowFilter = 'created';
 			}
 		});
-
-		$rootScope.$on('noMoreStreams', () => {
-			this.noMoreStreams = true;
-		});
 	}
 
 	openCreateStream() {

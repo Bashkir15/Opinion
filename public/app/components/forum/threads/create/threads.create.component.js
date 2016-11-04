@@ -6,11 +6,13 @@ class threadCreateCtrl {
 		this._Thread = Thread;
 		this._$rootScope = $rootScope;
 		this._$stateParams = $stateParams;
+		this.streamId = this._$stateParams.streamId;
 
 		this.data = {
 			title: '',
 			content: '',
-			stream: ''
+			stream: this.streamId,
+			link: ''
 		};
 	}
 
@@ -28,10 +30,17 @@ class threadCreateCtrl {
 			this._Toast.error('Hmm.. your form is not valid');
 		}
 	}
+
+	makeLink() {
+		this.hasLink = !this.hasLink;
+	}
 }
 
 let createThread = {
 	scope: {},
+	bindings: {
+		streamId: '<'
+	},
 	controller: threadCreateCtrl,
 	templateUrl: './app/components/forum/threads/create/threads.create.component.html'
 };

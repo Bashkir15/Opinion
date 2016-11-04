@@ -5,8 +5,8 @@ class threadsSingleCtrl {
 		this._Thread = Thread;
 		this._Comment = Comment;
 		this._$rootScope = $rootScope;
+		this.streamName = $stateParams.streamName;
 		this.threadId = $stateParams.threadId;
-		this.streamId = $stateParams.streamId;
 		this.comments = [];
 		this.getThread();
 		this.getComments();

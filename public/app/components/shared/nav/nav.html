@@ -16,7 +16,7 @@
 
 				<md-menu-content>
 					<md-menu-item ng-repeat='item in $ctrl.streams'>
-						<button ui-sref='app.singleStream({streamId: item._id})'>
+						<button ui-sref='app.singleStream({streamName: item.name})'>
 							<span>{{item.name}}</span>
 						</button>
 					</md-menu-item>

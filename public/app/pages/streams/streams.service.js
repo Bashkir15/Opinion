@@ -25,9 +25,9 @@ class StreamService {
 		});
 	}
 
-	single(id) {
+	single(name) {
 		return this._$http({
-			url: '/streams/' + id,
+			url: '/streams/' + name,
 			method: 'GET'
 		});
 	}

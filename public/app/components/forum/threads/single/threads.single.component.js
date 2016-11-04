@@ -1,6 +1,9 @@
 class SingleThreadCtrl {
-	constructor(Thread) {
+	constructor(Thread, $stateParams) {
 		'ngInject';
+
+		this._$stateParams = $stateParams;
+		this.streamName = $stateParams.streamName;
 
 		this._Thread = Thread
 	}

@@ -24,9 +24,9 @@ class threadService {
 		});
 	}
 
-	single(id) {
+	single(title) {
 		return this._$http({
-			url: './threads/' + id,
+			url: './threads/' + title,
 			method: 'GET'
 		});
 	}

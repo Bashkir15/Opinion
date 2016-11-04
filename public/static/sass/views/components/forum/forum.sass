@@ -15,6 +15,13 @@
 		margin: 0 auto
 		padding-bottom: 80px
 
+	&.single-stream-container
+		header
+			padding-bottom: 45px
+
+		> p
+			padding-bottom: 45px
+
 
 .forum-search-container
 	position: relative
@@ -72,6 +79,50 @@
 			label
 				left: -30px
 				opacity: 0
+
+.forum-header-image
+	display: flex
+	align-items: center
+	justify-content: center
+	width: 100%
+
+	> div
+		height: 65px
+		width: 65px
+		margin-bottom: 30px
+		border-radius: 50%
+		border: 1px solid rgba(0,0,0,0.3)
+		box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.23)
+
+.forum-stats
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 20px 0
+
+	> div
+		display: flex
+		flex-direction: column
+		align-items: center
+		width: 120px
+
+		> span
+			font-size: 25px
+			margin-bottom: 10px
+			color: $default-blue
+
+		p
+			@include open()
+			font-weight: 400
+			font-size: 15px
+			letter-spacing: 2px
+			color: rgba(0,0,0,0.6)
+
+		&:nth-of-type(1)
+			margin-right: 15px
+
+		&:nth-of-type(2)
+			margin-left: 15px
 
 //************************Create*********************//
 
@@ -186,6 +237,12 @@
 				left: -30px
 				opacity: 0
 
+&.forum-link-input
+	transition: all .4s ease
+
+	&:not(.ng-hide)
+		@include slideInUp()
+		transition: all .4s ease
 
 
 
@@ -238,6 +295,8 @@
 	flex-direction: column
 
 .forum-single-repeat
+	overflow: hidden
+
 	&.ng-enter
 		transition: all .5s ease
 
@@ -295,6 +354,7 @@
 	.forum-side-bar
 		width: 20%
 		margin-left: 40px
+		max-height: 900px
 		background: $default-white-background
 
 	.forum-trending-header
@@ -314,7 +374,9 @@
 			@include slideInUp()
 
 	.forum-trending-component-container
-		width: 100%
+		width: 90%
+		margin: 0 auto
+		border-bottom: 1px solid rgba(0,0,0,0.12)
 	
 	.forum-single-trending-component
 		display: flex
@@ -374,9 +436,9 @@
 .forum-single-component
 	display: flex
 	flex-direction: column
-	box-shadow: 0 5px 6px rgba(0,0,0,0.23), 0 3px 6px rgba(0,0,0,0.33)
 	margin-bottom: 30px
 	background: $default-white-background
+	overflow: hidden
 
 .forum-single-container
 	display: flex
@@ -384,6 +446,78 @@
 	margin: 0 auto
 	padding: 12px 0
 	border-bottom: 1px solid rgba(0,0,0,0.12)
+
+	&.thread-single
+
+.forum-single-header
+	display: flex
+	align-items: center
+	width: 90%
+	padding: 15px 0
+	margin: 0 auto
+
+.forum-creator-image
+	height: 45px
+	width: 45px
+	border-radius: 50%
+	border: 1px solid rgba(0,0,0,0.6)
+
+.forum-created-info
+	display: flex
+	flex-direction: column
+	flex: 1
+	padding-left: 18px
+	text-align: left
+
+	h4
+		font-weight: 400
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.8)
+		margin-bottom: 10px
+
+
+	p
+		@include open()
+		font-weight: 300
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.5)
+
+.forum-score-container
+	display: flex
+	align-items: center
+
+	&.above-mobile
+		display: none
+
+	> span
+		transition: all .4s ease
+		color: rgba(0,0,0,0.5)
+		outline: none
+
+		&:nth-of-type(1)
+			font-size: 27px
+			cursor: pointer
+
+		&:nth-of-type(2)
+			font-size: 16px
+			margin-left: 10px
+
+		&:nth-of-type(3)
+			font-size: 27px
+			margin-left: 10px
+			cursor: pointer
+
+		&.liked
+			color: $default-green
+
+		&.positive
+			color: $default-green
+
+		&.negative
+			color: $default-red
+
+		&.disliked
+			color: $default-red
 
 .forum-single-left
 	display: flex
@@ -411,6 +545,9 @@
 		color: $default-blue
 		margin-bottom: 20px
 		text-align: left
+
+		a
+			color: $default-blue
 
 	p
 		line-height: 30px
@@ -452,6 +589,9 @@
 
 					&.subscribed
 						color: $default-green
+
+					&.saved
+						color: $default-red
 
 .forum-single-info-text
 	display: flex

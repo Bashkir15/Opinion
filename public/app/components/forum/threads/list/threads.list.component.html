@@ -1,16 +1,20 @@
-<div class='threads-list-component-container'>
-	<div ng-repeat="item in $ctrl.threads" class='threads-list-repeat'>
-		<single-thread thread='item'></single-thread>
+<div class='forum-list-component-container'>
+	<div class='forum-list-view'>
+		<div class='forum-list-list'>
+			<div ng-repeat="item in $ctrl.threads" class='forum-list-repeat'>
+			<single-thread thread='item' class='forum-single-repeat'></single-thread>
+		</div>
+
+		<div class='forum-side-bar above-tablet'></div>
 	</div>
 
-	<div ng-if='!$ctrl.threads.length' class='threads-list-no-threads'>
+	<div ng-if='!$ctrl.threads.length' class='forum-list-no-items'>
 		<p>It doesn't look like there is anything here</p>
 		<span>You should create a <span>new thread!</span></span>
 	</div>
 
-	<div class='load-more-button' ng-if="$ctrl.threads.length">
-		<button>
-			<span>Load More</span>
-		</button>
-	</div>
+	
+	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateThread()">
+		<i class='mdi mdi-pencil'></i>
+	</md-button>
 </div>

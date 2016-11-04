@@ -83,7 +83,7 @@ module.exports = () => {
 	};
 
 	obj.single = (req, res) => {
-		Stream.findOne({_id: req.params.streamId})
+		Stream.findOne({name: req.params.streamName})
 		.populate('creator')
 		.populate('subscribers')
 		.populate('moderators')

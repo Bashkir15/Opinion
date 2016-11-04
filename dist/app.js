@@ -744,9 +744,9 @@ webpackJsonp([0],[
 			}
 		}, {
 			key: 'single',
-			value: function single(id) {
+			value: function single(name) {
 				return this._$http({
-					url: '/streams/' + id,
+					url: '/streams/' + name,
 					method: 'GET'
 				});
 			}
@@ -910,7 +910,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var singleStreamCtrl = function () {
-		function singleStreamCtrl(Stream, Thread, $stateParams, $rootScope) {
+		function singleStreamCtrl(Stream, Thread, $stateParams, $mdDialog, $rootScope) {
 			'ngInject';
 
 			var _this = this;
@@ -920,6 +920,7 @@ webpackJsonp([0],[
 			this._Stream = Stream;
 			this._Thread = Thread;
 			this._$rootScope = $rootScope;
+			this._$dialog = $mdDialog;
 			this.streamId = $stateParams.streamId;
 			this.threads = [];
 			this.threadsSearch = '';
@@ -928,7 +929,7 @@ webpackJsonp([0],[
 			this.getThreads();
 
 			this._$rootScope.$on('threadCreated', function () {
-				_this.showCreate = !_this.showCreate;
+				_this._$dialog.hide();
 				_this.getThreads({
 					append: true
 				});
@@ -954,6 +955,7 @@ webpackJsonp([0],[
 				options.timestamp = this.lastUpdated;
 
 				this._Thread.get(this.streamId, options).then(function (response) {
+					console.log(response);
 					if (_this3.threadsSearch) {
 						_this3.threads = [];
 					}
@@ -1082,9 +1084,9 @@ webpackJsonp([0],[
 			}
 		}, {
 			key: 'single',
-			value: function single(id) {
+			value: function single(title) {
 				return this._$http({
-					url: './threads/' + id,
+					url: './threads/' + title,
 					method: 'GET'
 				});
 			}
@@ -1231,8 +1233,8 @@ webpackJsonp([0],[
 			this._Thread = Thread;
 			this._Comment = Comment;
 			this._$rootScope = $rootScope;
+			this.streamName = $stateParams.streamName;
 			this.threadId = $stateParams.threadId;
-			this.streamId = $stateParams.streamId;
 			this.comments = [];
 			this.getThread();
 			this.getComments();
@@ -1734,10 +1736,6 @@ webpackJsonp([0],[
 					_this.rowFilter = 'created';
 				}
 			});
-
-			$rootScope.$on('noMoreStreams', function () {
-				_this.noMoreStreams = true;
-			});
 		}
 
 		_createClass(ListStreamCtrl, [{
@@ -1916,18 +1914,74 @@ webpackJsonp([0],[
 		value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var threadListController = function threadListController($stateParams) {
-		_classCallCheck(this, threadListController);
+	var threadListController = function () {
+		function threadListController($stateParams, $mdDialog, $rootScope) {
+			'ngInject';
 
-		this.streamId = $stateParams.streamId;
-	};
+			var _this = this;
+
+			_classCallCheck(this, threadListController);
+
+			this._$stateParams = $stateParams;
+			this._$dialog = $mdDialog;
+			this._$rootScope = $rootScope;
+
+			this.streamId = $stateParams.streamId;
+
+			this._$rootScope.$on('threadByScore', function () {
+				if (_this.rowFilter = '-score') {
+					_this.rowFilter = 'score';
+				} else {
+					_this.rowFilter = '-score';
+				}
+			});
+
+			this._$rootScope.$on('threadBySaves', function () {
+				if (_this.rowFilter = '-saves.length') {
+					_this.rowFilter = 'saves.length';
+				} else {
+					_this.rowFilter = '-saves.length';
+				}
+			});
+
+			this._$rootScope.$on('threadByDate', function () {
+				if (_this.rowFilter = '-created') {
+					_this.rowFilter = 'created';
+				} else {
+					_this.rowFilter = '-created';
+				}
+			});
+
+			this._$rootScope.$on('threadByComments', function () {
+				if (_this.rowFilter = '-comments.length') {
+					_this.rowFilter = 'comments.length';
+				} else {
+					_this.rowFilter = 'comments.length';
+				}
+			});
+		}
+
+		_createClass(threadListController, [{
+			key: 'openCreateThread',
+			value: function openCreateThread() {
+				this._$dialog.show({
+					templateUrl: './app/pages/threads/dialogs/create.html',
+					clickOutsideToClose: true
+				});
+			}
+		}]);
+
+		return threadListController;
+	}();
 
 	var threadsList = {
 		scope: {},
 		bindings: {
-			threads: '='
+			threads: '<'
 		},
 		controller: threadListController,
 		templateUrl: './app/components/forum/threads/list/threads.list.component.html'
@@ -1950,10 +2004,13 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var SingleThreadCtrl = function () {
-		function SingleThreadCtrl(Thread) {
+		function SingleThreadCtrl(Thread, $stateParams) {
 			'ngInject';
 
 			_classCallCheck(this, SingleThreadCtrl);
+
+			this._$stateParams = $stateParams;
+			this.streamName = $stateParams.streamName;
 
 			this._Thread = Thread;
 		}
@@ -2026,11 +2083,13 @@ webpackJsonp([0],[
 			this._Thread = Thread;
 			this._$rootScope = $rootScope;
 			this._$stateParams = $stateParams;
+			this.streamId = this._$stateParams.streamId;
 
 			this.data = {
 				title: '',
 				content: '',
-				stream: ''
+				stream: this.streamId,
+				link: ''
 			};
 		}
 
@@ -2052,6 +2111,11 @@ webpackJsonp([0],[
 					this._Toast.error('Hmm.. your form is not valid');
 				}
 			}
+		}, {
+			key: 'makeLink',
+			value: function makeLink() {
+				this.hasLink = !this.hasLink;
+			}
 		}]);
 
 		return threadCreateCtrl;
@@ -2059,6 +2123,9 @@ webpackJsonp([0],[
 
 	var createThread = {
 		scope: {},
+		bindings: {
+			streamId: '<'
+		},
 		controller: threadCreateCtrl,
 		templateUrl: './app/components/forum/threads/create/threads.create.component.html'
 	};

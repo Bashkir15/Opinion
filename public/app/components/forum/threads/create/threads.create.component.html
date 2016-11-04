@@ -1,4 +1,4 @@
-<div class='thread-form-container'>
+<div class='forum-create-container'>
 	<form name='$ctrl.createThread' ng-submit="$ctrl.create($ctrl.createThread.$valid)" novalidate>
 		<div class='forum-form-wrapper' ng-class="{'has-focus': $ctrl.createThread.title.hasFocus,
 			'has-success': $ctrl.createThread.title.$valid,
@@ -9,7 +9,7 @@
 		</div>
 
 		<div class='forum-form-wrapper' ng-class="{'has-focus': $ctrl.createThread.content.hasFocus,
-			'has-success': $ctrl.createThread.content.$valid,
+			'has-success': $ctrl.createThread.content.$valid && $ctrl.createThread.content.$touched,
 			'has-error': $ctrl.createThread.content.$error && $ctrl.createThread.content.$touched && !$ctrl.createThread.content.$valid,
 			'is-empty': !$ctrl.createThread.content.$viewValue}">
 			<label>Description</label>
@@ -17,8 +17,16 @@
 			</textarea>
 		</div>
 
+		<div class='forum-form-wrapper forum-link-input'  ng-class="{'has-focus': $ctrl.createThread.link.hasFocus,
+			'has-success': $ctrl.createThread.link.$valid && $ctrl.createThread.content.$touched,
+			'has-error': $ctrl.createThread.link.$error && $ctrl.createThread.link.$touched && !$ctrl.createThread.link.$valid,
+			'is-empty': !$ctrl.createThread.link.$viewValue}" ng-show="$ctrl.hasLink">
+			<label>Link</label>
+			<input type='text' name='link' ng-model="$ctrl.data.link" ng-focus='$ctrl.createThread.link.hasFocus=true' ng-blur="$ctrl.createThread.link.hasFocus=false">
+		</div>
+
 		<div class='forum-form-check'>
-			<md-checkbox>
+			<md-checkbox ng-model='$ctrl.link' md-true-value="hasLink" ng-change='$ctrl.makeLink()'>
 				Should this be a link?
 			</md-checkbox>
 		</div>

@@ -1,13 +1,15 @@
-<div class='single-stream-page-container'>
+<div class='forum-page-container single-stream-container'>
 	<header>
 		<h1>{{$ctrl.stream.name}}</h1>
 	</header>
 
-	<div class='stream-image'></div>
+	<div class='forum-header-image'>
+		<div></div>
+	</div>
 
 	<p>{{$ctrl.stream.description}}</p>
 
-	<div class='single-stream-stats'>
+	<div class='forum-stats'>
 		<div>
 			<span class='mdi mdi-heart-outline'></span>
 			<p>{{$ctrl.stream.subscribers.length}} Subscriber<span ng-if="$ctrl.stream.subscribers.length > 1 || $ctrl.stream.subscribers.length == 0">s</span></p>
@@ -58,17 +60,14 @@
 					</md-menu-item>
 				</md-menu-content>
 			</md-menu>
-			<button class='above-mobile' ng-click="$ctrl.showCreate = !$ctrl.showCreate">
-				<span>Create Thread</span>
-			</button>
 		</div>
 	</div>
 
-	<div class='forum-create-container above-mobile' ng-class="{'create-open': $ctrl.showCreate}">
-		<div>
-			<create-thread></create-thread>
-		</div>
-	</div>
+	<thread-list threads='$ctrl.threads' stream="$ctrl.stream" class='thread-list-component'></thread-list>
 
-	<thread-list threads='$ctrl.threads' class='thread-list-component'></thread-list>
+	<div class='load-more-button' ng-if="$ctrl.threads.length">
+		<button>
+			<span>Load More</span>
+		</button>
+	</div>
 </div>
