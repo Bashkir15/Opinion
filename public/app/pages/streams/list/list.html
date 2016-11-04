@@ -38,4 +38,10 @@
 	</div>
 
 	<streams-list streams="$ctrl.streams"></streams-list>
+
+	<div class='load-more-button streams-load-more-button' ng-if='!$ctrl.noMoreStreams'>
+		<button ng-click="$ctrl.loadMore()">
+			<span>Load More</span>
+		</button>
+	</div>
 </div>

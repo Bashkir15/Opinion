@@ -75,6 +75,10 @@
 
 //************************Create*********************//
 
+.forum-create-dialog
+	display: flex
+	flex-direction: column
+
 .forum-create-dialog-header
 	padding: 25px 0 25px 15px
 
@@ -209,6 +213,10 @@
 
 			span
 				color: $default-white-background
+
+@media screen and (min-width: 630px)
+	.forum-create-dialog
+		width: 70%
 
 
 // *********************** List *********************//

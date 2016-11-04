@@ -5,7 +5,7 @@ module.exports = {
 	},
 
 	settings: {
-		perPage: 2
+		perPage: 20
 	},
 	
 	db: 'mongodb://localhost/opinion',

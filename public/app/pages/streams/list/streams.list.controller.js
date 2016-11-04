@@ -20,7 +20,7 @@ class StreamsListCtrl {
 
 		this._$rootScope.$on('loadMoreStreams', () => {
 			this.streamPage++;
-			this.lastUpdated = 0;
+			this.lastUpdated = Date.now();
 			this.getStreams({append: true});
 		});
 	}
@@ -44,7 +44,12 @@ class StreamsListCtrl {
 				this.streams = this.streams.concat(response.res.records);
 			}
 
-			this.noMoreStreams = !response.res.morePages;
+			
+			if (response.res.morePages == false) {
+				this.noMoreStreams = true;
+				console.log(this.noMoreStreams);
+			}
+
 			this.lastUpdated = Date.now();
 		});
 	}

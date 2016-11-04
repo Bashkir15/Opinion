@@ -813,7 +813,7 @@ webpackJsonp([0],[
 
 			this._$rootScope.$on('loadMoreStreams', function () {
 				_this.streamPage++;
-				_this.lastUpdated = 0;
+				_this.lastUpdated = Date.now();
 				_this.getStreams({ append: true });
 			});
 		}
@@ -839,7 +839,11 @@ webpackJsonp([0],[
 						_this2.streams = _this2.streams.concat(response.res.records);
 					}
 
-					_this2.noMoreStreams = !response.res.morePages;
+					if (response.res.morePages == false) {
+						_this2.noMoreStreams = true;
+						console.log(_this2.noMoreStreams);
+					}
+
 					_this2.lastUpdated = Date.now();
 				});
 			}
@@ -1724,6 +1728,10 @@ webpackJsonp([0],[
 				} else {
 					_this.rowFilter = 'created';
 				}
+			});
+
+			$rootScope.$on('noMoreStreams', function () {
+				_this.noMoreStreams = true;
 			});
 		}
 
