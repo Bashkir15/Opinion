@@ -1,7 +1,7 @@
 <div class='forum-list-component-container'>
 	<div class='forum-list-view'>
 		<div class='forum-list-list'>
-			<div ng-repeat="item in $ctrl.threads" class='forum-list-repeat'>
+			<div ng-repeat="item in $ctrl.threads | orderBy: $ctrl.rowFilter" class='forum-list-repeat'>
 			<single-thread thread='item' class='forum-single-repeat'></single-thread>
 		</div>
 

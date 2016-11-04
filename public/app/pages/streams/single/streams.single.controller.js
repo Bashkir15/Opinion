@@ -47,6 +47,22 @@ class singleStreamCtrl {
 			this.lastUpdated = Date.now();
 		});
 	}
+
+	byScore() {
+		this._$rootScope.$broadcast('threadByScore');
+	}
+
+	byComments() {
+		this._$rootScope.$broadcast('threadByComments');
+	}
+
+	bySaves() {
+		this._$rootScope.$broadcast('threadBySaves');
+	}
+
+	byDate() {
+		this._$rootScope.$broadcast('threadByDate');
+	}
 }
 
 export default singleStreamCtrl

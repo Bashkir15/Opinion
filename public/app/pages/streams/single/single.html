@@ -25,10 +25,10 @@
 		<create-thread></create-thread>
 	</div> -->
 
-	<div class='forum-search-container' ng-class="{'create-open': $ctrl.showCreate}">
-		<div>
-			<label>Search</label>
-			<input type='text' name='search' ng-model='$ctrl.search'>
+	<div class='forum-search-container'>
+		<div ng-class="{'has-focus': $ctrl.search.hasFocus}">
+			<label class='mdi mdi-magnify'></label>
+			<input type='text' name='search' ng-model='$ctrl.threadsSearch' ng-change="$ctrl.search()" ng-focus="$ctrl.search.hasFocus=true" ng-blur="$ctrl.search.hasFocus=false">
 			<md-menu class='forum-search-dropdown' md-offset='0 65'>
 				<button class='large-mobile' ng-click="$mdOpenMenu()">
 					<span>Filter</span>
@@ -36,25 +36,25 @@
 
 				<md-menu-content>
 					<md-menu-item>
-						<button>
+						<button ng-click="$ctrl.byScore()">
 							<span>Score</span>
 						</button>
 					</md-menu-item>
 
 					<md-menu-item>
-						<button>
+						<button ng-click="$ctrl.byComments()">
 							<span>Comments</span>
 						</button>
 					</md-menu-item>
 
 					<md-menu-item>
-						<button>
+						<button ng-click='$ctrl.bySaves()'>
 							<span>Saves</span>
 						</button>
 					</md-menu-item>
 
 					<md-menu-item>
-						<button>
+						<button ng-click='$ctrl.byDate()'>
 							<span>Date</span>
 						</button>
 					</md-menu-item>

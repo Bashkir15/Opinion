@@ -24,11 +24,11 @@ webpackJsonp([0],[
 
 	__webpack_require__(140);
 
-	var _app = __webpack_require__(159);
+	var _app = __webpack_require__(160);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _app3 = __webpack_require__(161);
+	var _app3 = __webpack_require__(162);
 
 	var _app4 = _interopRequireDefault(_app3);
 
@@ -744,9 +744,9 @@ webpackJsonp([0],[
 			}
 		}, {
 			key: 'single',
-			value: function single(name) {
+			value: function single(id) {
 				return this._$http({
-					url: '/streams/' + name,
+					url: '/streams/' + id,
 					method: 'GET'
 				});
 			}
@@ -968,6 +968,26 @@ webpackJsonp([0],[
 
 					_this3.lastUpdated = Date.now();
 				});
+			}
+		}, {
+			key: 'byScore',
+			value: function byScore() {
+				this._$rootScope.$broadcast('threadByScore');
+			}
+		}, {
+			key: 'byComments',
+			value: function byComments() {
+				this._$rootScope.$broadcast('threadByComments');
+			}
+		}, {
+			key: 'bySaves',
+			value: function bySaves() {
+				this._$rootScope.$broadcast('threadBySaves');
+			}
+		}, {
+			key: 'byDate',
+			value: function byDate() {
+				this._$rootScope.$broadcast('threadByDate');
 			}
 		}]);
 
@@ -1636,9 +1656,9 @@ webpackJsonp([0],[
 
 	__webpack_require__(147);
 
-	__webpack_require__(151);
+	__webpack_require__(152);
 
-	__webpack_require__(155);
+	__webpack_require__(156);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1674,7 +1694,7 @@ webpackJsonp([0],[
 
 	var _streamCreate2 = _interopRequireDefault(_streamCreate);
 
-	var _streamsTrending = __webpack_require__(163);
+	var _streamsTrending = __webpack_require__(151);
 
 	var _streamsTrending2 = _interopRequireDefault(_streamsTrending);
 
@@ -1871,6 +1891,58 @@ webpackJsonp([0],[
 
 /***/ },
 /* 151 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var streamTrendingCtrl = function () {
+		function streamTrendingCtrl(Stream) {
+			'ngInject';
+
+			_classCallCheck(this, streamTrendingCtrl);
+
+			this._Stream = Stream;
+		}
+
+		_createClass(streamTrendingCtrl, [{
+			key: 'toggleSubscribe',
+			value: function toggleSubscribe(item) {
+				if (!item.subscribed) {
+					this._Stream.subscribe(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				} else {
+					this._Stream.unsubscribe(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				}
+			}
+		}]);
+
+		return streamTrendingCtrl;
+	}();
+
+	var trendingStream = {
+		scope: {},
+		bindings: {
+			stream: '<'
+		},
+		controller: streamTrendingCtrl,
+		templateUrl: './app/components/forum/streams/trending/streams.trending.component.html'
+	};
+
+	exports.default = trendingStream;
+
+/***/ },
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1883,15 +1955,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threadsList = __webpack_require__(152);
+	var _threadsList = __webpack_require__(153);
 
 	var _threadsList2 = _interopRequireDefault(_threadsList);
 
-	var _threadsSingle = __webpack_require__(153);
+	var _threadsSingle = __webpack_require__(154);
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
-	var _threadsCreate = __webpack_require__(154);
+	var _threadsCreate = __webpack_require__(155);
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
@@ -1905,7 +1977,7 @@ webpackJsonp([0],[
 	exports.default = threadComponents;
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1932,35 +2004,35 @@ webpackJsonp([0],[
 
 			this.streamId = $stateParams.streamId;
 
-			this._$rootScope.$on('threadByScore', function () {
-				if (_this.rowFilter = '-score') {
+			$rootScope.$on('threadByScore', function () {
+				if (_this.rowFilter == '-score') {
 					_this.rowFilter = 'score';
 				} else {
 					_this.rowFilter = '-score';
 				}
 			});
 
-			this._$rootScope.$on('threadBySaves', function () {
-				if (_this.rowFilter = '-saves.length') {
+			$rootScope.$on('threadBySaves', function () {
+				if (_this.rowFilter == '-saves.length') {
 					_this.rowFilter = 'saves.length';
 				} else {
 					_this.rowFilter = '-saves.length';
 				}
 			});
 
-			this._$rootScope.$on('threadByDate', function () {
-				if (_this.rowFilter = '-created') {
+			$rootScope.$on('threadByDate', function () {
+				if (_this.rowFilter == '-created') {
 					_this.rowFilter = 'created';
 				} else {
 					_this.rowFilter = '-created';
 				}
 			});
 
-			this._$rootScope.$on('threadByComments', function () {
-				if (_this.rowFilter = '-comments.length') {
+			$rootScope.$on('threadByComments', function () {
+				if (_this.rowFilter == '-comments.length') {
 					_this.rowFilter = 'comments.length';
 				} else {
-					_this.rowFilter = 'comments.length';
+					_this.rowFilter = '-comments.length';
 				}
 			});
 		}
@@ -1990,7 +2062,7 @@ webpackJsonp([0],[
 	exports.default = threadsList;
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2060,7 +2132,7 @@ webpackJsonp([0],[
 	exports.default = singleThread;
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2133,7 +2205,7 @@ webpackJsonp([0],[
 	exports.default = createThread;
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2146,15 +2218,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _commentsCreate = __webpack_require__(156);
+	var _commentsCreate = __webpack_require__(157);
 
 	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
 
-	var _commentsList = __webpack_require__(157);
+	var _commentsList = __webpack_require__(158);
 
 	var _commentsList2 = _interopRequireDefault(_commentsList);
 
-	var _commentsSingle = __webpack_require__(158);
+	var _commentsSingle = __webpack_require__(159);
 
 	var _commentsSingle2 = _interopRequireDefault(_commentsSingle);
 
@@ -2168,7 +2240,7 @@ webpackJsonp([0],[
 	exports.default = commentComponents;
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2237,7 +2309,7 @@ webpackJsonp([0],[
 	exports.default = createComment;
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2266,7 +2338,7 @@ webpackJsonp([0],[
 	exports.default = commmentsList;
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2332,7 +2404,7 @@ webpackJsonp([0],[
 	exports.default = singleComment;
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2341,7 +2413,7 @@ webpackJsonp([0],[
 		value: true
 	});
 
-	var _auth = __webpack_require__(160);
+	var _auth = __webpack_require__(161);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -2363,7 +2435,7 @@ webpackJsonp([0],[
 	exports.default = appConfig;
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2396,7 +2468,7 @@ webpackJsonp([0],[
 	exports.default = authInterceptor;
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2413,59 +2485,6 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
-
-/***/ },
-/* 162 */,
-/* 163 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var streamTrendingCtrl = function () {
-		function streamTrendingCtrl(Stream) {
-			'ngInject';
-
-			_classCallCheck(this, streamTrendingCtrl);
-
-			this._Stream = Stream;
-		}
-
-		_createClass(streamTrendingCtrl, [{
-			key: 'toggleSubscribe',
-			value: function toggleSubscribe(item) {
-				if (!item.subscribed) {
-					this._Stream.subscribe(item._id).then(function (response) {
-						angular.extend(item, response.data.res.record);
-					});
-				} else {
-					this._Stream.unsubscribe(item._id).then(function (response) {
-						angular.extend(item, response.data.res.record);
-					});
-				}
-			}
-		}]);
-
-		return streamTrendingCtrl;
-	}();
-
-	var trendingStream = {
-		scope: {},
-		bindings: {
-			stream: '<'
-		},
-		controller: streamTrendingCtrl,
-		templateUrl: './app/components/forum/streams/trending/streams.trending.component.html'
-	};
-
-	exports.default = trendingStream;
 
 /***/ }
 ]);

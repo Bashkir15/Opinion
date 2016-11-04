@@ -8,35 +8,35 @@ class threadListController {
 
 		this.streamId = $stateParams.streamId;
 
-		this._$rootScope.$on('threadByScore', () => {
-			if (this.rowFilter = '-score') {
+		$rootScope.$on('threadByScore', () => {
+			if (this.rowFilter == '-score') {
 				this.rowFilter = 'score';
 			} else {
 				this.rowFilter = '-score';
 			}
 		});
 
-		this._$rootScope.$on('threadBySaves', () => {
-			if (this.rowFilter = '-saves.length') {
+		$rootScope.$on('threadBySaves', () => {
+			if (this.rowFilter == '-saves.length') {
 				this.rowFilter = 'saves.length';
 			} else {
 				this.rowFilter = '-saves.length';
 			}
 		});
 
-		this._$rootScope.$on('threadByDate', () => {
-			if (this.rowFilter = '-created') {
+		$rootScope.$on('threadByDate', () => {
+			if (this.rowFilter == '-created') {
 				this.rowFilter = 'created';
 			} else {
 				this.rowFilter = '-created';
 			}
 		});
 
-		this._$rootScope.$on('threadByComments', () => {
-			if (this.rowFilter = '-comments.length') {
+		$rootScope.$on('threadByComments', () => {
+			if (this.rowFilter == '-comments.length') {
 				this.rowFilter = 'comments.length';
 			} else {
-				this.rowFilter = 'comments.length';
+				this.rowFilter = '-comments.length';
 			}
 		});
 	}
