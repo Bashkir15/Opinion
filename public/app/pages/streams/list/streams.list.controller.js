@@ -63,6 +63,18 @@ class StreamsListCtrl {
 			this.streamsSearchEnabled = this.streamsSearch !== '';
 		}, 500);
 	}
+
+	byThreads() {
+		this._$rootScope.$broadcast('streamByThreads');
+	}
+
+	bySubscribers() {
+		this._$rootScope.$broadcast('streamBySubscribers');
+	}
+
+	byDate() {
+		this._$rootScope.$broadcast('streamByDate');
+	}
 }
 
 export default StreamsListCtrl

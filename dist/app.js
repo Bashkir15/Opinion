@@ -861,6 +861,21 @@ webpackJsonp([0],[
 					_this3.streamsSearchEnabled = _this3.streamsSearch !== '';
 				}, 500);
 			}
+		}, {
+			key: 'byThreads',
+			value: function byThreads() {
+				this._$rootScope.$broadcast('streamByThreads');
+			}
+		}, {
+			key: 'bySubscribers',
+			value: function bySubscribers() {
+				this._$rootScope.$broadcast('streamBySubscribers');
+			}
+		}, {
+			key: 'byDate',
+			value: function byDate() {
+				this._$rootScope.$broadcast('streamByDate');
+			}
 		}]);
 
 		return StreamsListCtrl;
@@ -1669,12 +1684,39 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var ListStreamCtrl = function () {
-		function ListStreamCtrl($mdDialog) {
+		function ListStreamCtrl($mdDialog, $rootScope) {
 			'ngInject';
+
+			var _this = this;
 
 			_classCallCheck(this, ListStreamCtrl);
 
 			this._$dialog = $mdDialog;
+			this._$rootScope = $rootScope;
+
+			$rootScope.$on('streamByThreads', function () {
+				if (_this.rowFilter == '-threads.length') {
+					_this.rowFilter = 'threads.length';
+				} else {
+					_this.rowFilter = '-threads.length';
+				}
+			});
+
+			$rootScope.$on('streamBySubscribers', function () {
+				if (_this.rowFilter == 'subscribers.length') {
+					_this.rowFilter = 'subscribers.length';
+				} else {
+					_this.rowFilter = '-subscribers.length';
+				}
+			});
+
+			$rootScope.$on('streamByDate', function () {
+				if (_this.rowFilter == 'created') {
+					_this.rowFilter = '-created';
+				} else {
+					_this.rowFilter = 'created';
+				}
+			});
 		}
 
 		_createClass(ListStreamCtrl, [{

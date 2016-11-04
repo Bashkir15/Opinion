@@ -1,8 +1,33 @@
 class ListStreamCtrl {
-	constructor($mdDialog) {
+	constructor($mdDialog, $rootScope) {
 		'ngInject';
 
-		this._$dialog = $mdDialog
+		this._$dialog = $mdDialog;
+		this._$rootScope = $rootScope;
+
+		$rootScope.$on('streamByThreads', () => {
+			if (this.rowFilter == '-threads.length') {
+				this.rowFilter = 'threads.length';
+			} else {
+				this.rowFilter = '-threads.length';
+			}
+		});
+
+		$rootScope.$on('streamBySubscribers', () => {
+			if (this.rowFilter == 'subscribers.length') {
+				this.rowFilter = 'subscribers.length';
+			} else {
+				this.rowFilter = '-subscribers.length';
+			}
+		});
+
+		$rootScope.$on('streamByDate', () => {
+			if (this.rowFilter == 'created') {
+				this.rowFilter = '-created';
+			} else {
+				this.rowFilter = 'created';
+			}
+		});
 	}
 
 	openCreateStream() {
