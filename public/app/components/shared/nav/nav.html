@@ -9,9 +9,19 @@
 		</div>
 
 		<div class='nav-item'>
-			<button ui-sref="app.streamsList">
-				<span>Streams</span>
-			</button>
+			<md-menu>
+				<button ng-click='$mdOpenMenu()'>
+					<span>Streams</span>
+				</button>
+
+				<md-menu-content>
+					<md-menu-item ng-repeat='item in $ctrl.streams'>
+						<button ui-sref='app.singleStream({streamId: item._id})'>
+							<span>{{item.name}}</span>
+						</button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
 		</div>
 	</div>
 
@@ -80,6 +90,30 @@
 					</button>
 				</li>
 			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Comments</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Saved</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Activity</span>
+					</button>
+				</li>
+			</div>
 		</ul>
 
 		<md-list-item md-ink-ripple>
@@ -93,10 +127,36 @@
 				</span>
 			</div>
 
-			<button class='md-secondary'>
+			<button class='md-secondary' ng-click="$ctrl.showMessages = !$ctrl.showMessages">
 				<i class='mdi mdi-chevron-down'></i>
 			</button>
 		</md-list-item>
+
+		<ul class='user-menu-nested-list' ng-show="$ctrl.showMessages">
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Inbox</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Saved</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Trash</span>
+					</button>
+				</li>
+			</div>
+		</ul>
 
 		<md-list-item md-ink-ripple>
 			<div>
@@ -104,9 +164,127 @@
 			</div>
 
 			<div class='inset'>
-				<span>Manage Streams</span>
+				<span>Streams</span>
 			</div>
+
+			<button class='md-secondary' ng-click="$ctrl.showStreams = !$ctrl.showStreams">
+				<i class='mdi mdi-chevron-down'></i>
+			</button>
 		</md-list-item>
+
+		<ul class='user-menu-nested-list' ng-show="$ctrl.showStreams">
+			<div>
+				<li>
+					<button class='md-ink-ripple' ui-sref="app.streamsList">
+						<span>All</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Trending</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Subscribed</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Create</span>
+					</button>
+				</li>
+			</div>
+		</ul>
+
+		<md-list-item md-ink-ripple>
+			<div>
+				<i class='mdi mdi-settings'></i>
+			</div>
+
+			<div class='inset'>
+				<span>Settings</span>
+			</div>
+
+			<button class='md-secondary' ng-click="$ctrl.showSettings = !$ctrl.showSettings">
+				<i class='mdi mdi-chevron-down'></i>
+			</button>
+		</md-list-item>
+
+		<ul class='user-menu-nested-list' ng-show="$ctrl.showSettings">
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>User</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Theme</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Notifications</span>
+					</button>
+				</li>
+			</div>
+		</ul>
+
+		<md-list-item md-ink-ripple>
+			<div>
+				<i class='mdi mdi-magnify'></i>
+			</div>
+
+			<div class='inset'>
+				<span>Search</span>
+			</div>
+
+			<button class='md-secondary' ng-click='$ctrl.showSearch = !$ctrl.showSearch'>
+				<i class='mdi mdi-chevron-down'></i>
+			</button>
+		</md-list-item>
+
+		<ul class='user-menu-nested-list' ng-show='$ctrl.showSearch'>
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Users</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Streams</span>
+					</button>
+				</li>
+			</div>
+
+			<div>
+				<li>
+					<button class='md-ink-ripple'>
+						<span>Threads</span>
+					</button>
+				</li>
+			</div>
+		</ul>
 
 		<md-list-item md-ink-ripple>
 			<div>
@@ -118,13 +296,13 @@
 			</div>
 		</md-list-item>
 
-		<md-list-item md-ink-ripple>
+		<md-list-item md-ink-ripple ng-click='$ctrl.logout()'>
 			<div>
-				<i class='mdi mdi-magnify'></i>
+				<i class='mdi mdi-emoticon-poop'></i>
 			</div>
 
 			<div class='inset'>
-				<span>Find Users</span>
+				<span>Logout</span>
 			</div>
 		</md-list-item>
 	</md-list>

@@ -22,13 +22,13 @@ webpackJsonp([0],[
 
 	__webpack_require__(121);
 
-	__webpack_require__(138);
+	__webpack_require__(140);
 
-	var _app = __webpack_require__(157);
+	var _app = __webpack_require__(159);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _app3 = __webpack_require__(159);
+	var _app3 = __webpack_require__(161);
 
 	var _app4 = _interopRequireDefault(_app3);
 
@@ -292,9 +292,9 @@ webpackJsonp([0],[
 
 	__webpack_require__(125);
 
-	__webpack_require__(128);
+	__webpack_require__(130);
 
-	__webpack_require__(133);
+	__webpack_require__(135);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -396,11 +396,11 @@ webpackJsonp([0],[
 
 	var _auth4 = _interopRequireDefault(_auth3);
 
-	var _passwordReset = __webpack_require__(160);
+	var _passwordReset = __webpack_require__(128);
 
 	var _passwordReset2 = _interopRequireDefault(_passwordReset);
 
-	var _passwordMatch = __webpack_require__(161);
+	var _passwordMatch = __webpack_require__(129);
 
 	var _passwordMatch2 = _interopRequireDefault(_passwordMatch);
 
@@ -526,6 +526,110 @@ webpackJsonp([0],[
 
 /***/ },
 /* 128 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var passwordReset = function () {
+		function passwordReset($state, $mdDialog, Auth, Toast) {
+			'ngInject';
+
+			_classCallCheck(this, passwordReset);
+
+			this._$state = $state;
+			this._$dialog = $mdDialog;
+			this._Auth = Auth;
+			this._Toast = Toast;
+
+			this.data = {
+				email: '',
+				token: '',
+				password: ''
+			};
+		}
+
+		_createClass(passwordReset, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'generateReset',
+			value: function generateReset() {
+				var _this = this;
+
+				this._Auth.forgot(this.data).then(function (response) {
+					if (response) {
+						_this.tokenSent = true;
+						_this._Toast.success('Great! Check your email for futher instructions');
+					} else {
+						_this._Toast.error(response.data.res.message);
+					}
+				});
+			}
+		}, {
+			key: 'attemptReset',
+			value: function attemptReset() {
+				var _this2 = this;
+
+				this._Auth.reset(this.data).then(function (response) {
+					if (response) {
+						_this2._Toast.success('Hooray! Now you can login');
+						_this2.close();
+					} else {
+						_this2._Toast.error(response.data.res.error);
+					}
+				});
+			}
+		}]);
+
+		return passwordReset;
+	}();
+
+	exports.default = passwordReset;
+
+/***/ },
+/* 129 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function passwordMatch() {
+		'ngInject';
+
+		return {
+			require: 'ngModel',
+			scope: {
+				otherModelValue: "=compareTo"
+			},
+
+			link: function link(scope, element, attributes, ngModel) {
+				ngModel.$validators.compareTo = function (modelValue) {
+					return modelValue == scope.otherModelValue;
+				};
+
+				scope.$watch("otherModelValue", function () {
+					ngModel.$validate();
+				});
+			}
+		};
+	}
+
+	exports.default = passwordMatch;
+
+/***/ },
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -538,19 +642,19 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _streams = __webpack_require__(129);
+	var _streams = __webpack_require__(131);
 
 	var _streams2 = _interopRequireDefault(_streams);
 
-	var _streams3 = __webpack_require__(130);
+	var _streams3 = __webpack_require__(132);
 
 	var _streams4 = _interopRequireDefault(_streams3);
 
-	var _streamsList = __webpack_require__(131);
+	var _streamsList = __webpack_require__(133);
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamsSingle = __webpack_require__(132);
+	var _streamsSingle = __webpack_require__(134);
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
@@ -565,7 +669,7 @@ webpackJsonp([0],[
 	exports.default = streamsModule;
 
 /***/ },
-/* 129 */
+/* 131 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -594,7 +698,7 @@ webpackJsonp([0],[
 	exports.default = streamsConfig;
 
 /***/ },
-/* 130 */
+/* 132 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -632,8 +736,7 @@ webpackJsonp([0],[
 					url: '/streams',
 					method: 'GET',
 					params: {
-						timestamp: options.timestamp,
-						filter: options.filter
+						subscribed: options.subscribed
 					}
 				});
 			}
@@ -669,7 +772,7 @@ webpackJsonp([0],[
 	exports.default = StreamService;
 
 /***/ },
-/* 131 */
+/* 133 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -763,7 +866,7 @@ webpackJsonp([0],[
 	exports.default = StreamsListCtrl;
 
 /***/ },
-/* 132 */
+/* 134 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -842,7 +945,7 @@ webpackJsonp([0],[
 	exports.default = singleStreamCtrl;
 
 /***/ },
-/* 133 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -855,19 +958,19 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threads = __webpack_require__(134);
+	var _threads = __webpack_require__(136);
 
 	var _threads2 = _interopRequireDefault(_threads);
 
-	var _threads3 = __webpack_require__(135);
+	var _threads3 = __webpack_require__(137);
 
 	var _threads4 = _interopRequireDefault(_threads3);
 
-	var _comments = __webpack_require__(136);
+	var _comments = __webpack_require__(138);
 
 	var _comments2 = _interopRequireDefault(_comments);
 
-	var _threadsSingle = __webpack_require__(137);
+	var _threadsSingle = __webpack_require__(139);
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
@@ -882,7 +985,7 @@ webpackJsonp([0],[
 	exports.default = threadsModule;
 
 /***/ },
-/* 134 */
+/* 136 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -904,7 +1007,7 @@ webpackJsonp([0],[
 	exports.default = threadsConfig;
 
 /***/ },
-/* 135 */
+/* 137 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -995,7 +1098,7 @@ webpackJsonp([0],[
 	exports.default = threadService;
 
 /***/ },
-/* 136 */
+/* 138 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1074,7 +1177,7 @@ webpackJsonp([0],[
 	exports.default = commentsService;
 
 /***/ },
-/* 137 */
+/* 139 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1146,7 +1249,7 @@ webpackJsonp([0],[
 	exports.default = threadsSingleCtrl;
 
 /***/ },
-/* 138 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1159,11 +1262,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(139);
-
 	__webpack_require__(141);
 
-	__webpack_require__(144);
+	__webpack_require__(143);
+
+	__webpack_require__(146);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1172,79 +1275,6 @@ webpackJsonp([0],[
 	var componentModule = _angular2.default.module('app.components', requires);
 
 	exports.default = componentModule;
-
-/***/ },
-/* 139 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _nav = __webpack_require__(140);
-
-	var _nav2 = _interopRequireDefault(_nav);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var sharedComponents = _angular2.default.module('shared.components', []);
-	sharedComponents.component('appNav', _nav2.default);
-
-	exports.default = sharedComponents;
-
-/***/ },
-/* 140 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var navCtrl = function () {
-		function navCtrl(Auth, $mdSidenav) {
-			'ngInject';
-
-			_classCallCheck(this, navCtrl);
-
-			this._$sidenav = $mdSidenav;
-			this._Auth = Auth;
-			this.isLoggedIn = this._Auth.isLoggedIn();
-			this.getUserInfo();
-		}
-
-		_createClass(navCtrl, [{
-			key: 'openUserMenu',
-			value: function openUserMenu() {
-				this._$sidenav('user-menu').toggle();
-			}
-		}, {
-			key: 'getUserInfo',
-			value: function getUserInfo() {
-				this.user = this._Auth.getUser();
-			}
-		}]);
-
-		return navCtrl;
-	}();
-
-	var appNav = {
-		controller: navCtrl,
-		templateUrl: './app/components/shared/nav/nav.html'
-	};
-
-	exports.default = appNav;
 
 /***/ },
 /* 141 */
@@ -1260,11 +1290,127 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _signup = __webpack_require__(142);
+	var _nav = __webpack_require__(142);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var sharedComponents = _angular2.default.module('shared.components', []);
+	sharedComponents.component('appNav', _nav2.default);
+
+	exports.default = sharedComponents;
+
+/***/ },
+/* 142 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var navCtrl = function () {
+		function navCtrl(Auth, Storage, Stream, $mdSidenav, $state, $rootScope) {
+			'ngInject';
+
+			var _this = this;
+
+			_classCallCheck(this, navCtrl);
+
+			this._$sidenav = $mdSidenav;
+			this._Auth = Auth;
+			this._Storage = Storage;
+			this._Stream = Stream;
+			this._$state = $state;
+			this._$rootScope = $rootScope;
+			this.isLoggedIn = this._Auth.isLoggedIn();
+			this.getUserInfo();
+
+			this._$rootScope.$on('$stateChangeStart', function () {
+				_this._$sidenav('user-menu').close();
+			});
+
+			this.getStreams();
+		}
+
+		_createClass(navCtrl, [{
+			key: 'openUserMenu',
+			value: function openUserMenu() {
+				this._$sidenav('user-menu').toggle();
+			}
+		}, {
+			key: 'getUserInfo',
+			value: function getUserInfo() {
+				this.user = this._Auth.getUser();
+			}
+		}, {
+			key: 'getStreams',
+			value: function getStreams(options) {
+				var _this2 = this;
+
+				options = options || {};
+
+				if (this.isLoggedIn) {
+					options.subscribed = true;
+
+					this._Stream.get(options).then(function (response) {
+						console.log(response);
+						_this2.streams = response.data.res.records;
+					});
+				} else {
+					options.subscribed = '';
+
+					this._Stream.get(options).then(function (response) {
+						console.log(response);
+						_this2.streams = response.data.res.records;
+					});
+				}
+			}
+		}, {
+			key: 'logout',
+			value: function logout() {
+				this._Storage.remove('user');
+				this._Storage.remove('opinion-token');
+				this._$state.go('app.home', {}, { reload: true });
+				this._$sidenav('user-menu').close();
+			}
+		}]);
+
+		return navCtrl;
+	}();
+
+	var appNav = {
+		controller: navCtrl,
+		templateUrl: './app/components/shared/nav/nav.html'
+	};
+
+	exports.default = appNav;
+
+/***/ },
+/* 143 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _signup = __webpack_require__(144);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
-	var _login = __webpack_require__(143);
+	var _login = __webpack_require__(145);
 
 	var _login2 = _interopRequireDefault(_login);
 
@@ -1277,7 +1423,7 @@ webpackJsonp([0],[
 	exports.default = authComponents;
 
 /***/ },
-/* 142 */
+/* 144 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1338,7 +1484,7 @@ webpackJsonp([0],[
 	exports.default = signupForm;
 
 /***/ },
-/* 143 */
+/* 145 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1418,7 +1564,7 @@ webpackJsonp([0],[
 				var serializedUser = angular.toJson(user);
 				this._Storage.set('user', serializedUser);
 				this._Storage.set('opinion-token', response.data.res.token);
-				this._$state.go('app.home');
+				this._$state.go('app.home', {}, { reload: true });
 			}
 		}, {
 			key: 'openPasswordReset',
@@ -1443,7 +1589,7 @@ webpackJsonp([0],[
 	exports.default = loginForm;
 
 /***/ },
-/* 144 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1456,11 +1602,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(145);
+	__webpack_require__(147);
 
-	__webpack_require__(149);
+	__webpack_require__(151);
 
-	__webpack_require__(153);
+	__webpack_require__(155);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1471,7 +1617,7 @@ webpackJsonp([0],[
 	exports.default = forumComponents;
 
 /***/ },
-/* 145 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1484,15 +1630,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _streamsList = __webpack_require__(146);
+	var _streamsList = __webpack_require__(148);
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamsSingle = __webpack_require__(147);
+	var _streamsSingle = __webpack_require__(149);
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
-	var _streamCreate = __webpack_require__(148);
+	var _streamCreate = __webpack_require__(150);
 
 	var _streamCreate2 = _interopRequireDefault(_streamCreate);
 
@@ -1506,7 +1652,7 @@ webpackJsonp([0],[
 	exports.default = streamComponents;
 
 /***/ },
-/* 146 */
+/* 148 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1533,7 +1679,7 @@ webpackJsonp([0],[
 	exports.default = listStream;
 
 /***/ },
-/* 147 */
+/* 149 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1585,7 +1731,7 @@ webpackJsonp([0],[
 	exports.default = singleStream;
 
 /***/ },
-/* 148 */
+/* 150 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1641,7 +1787,7 @@ webpackJsonp([0],[
 	exports.default = createStream;
 
 /***/ },
-/* 149 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1654,15 +1800,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threadsList = __webpack_require__(150);
+	var _threadsList = __webpack_require__(152);
 
 	var _threadsList2 = _interopRequireDefault(_threadsList);
 
-	var _threadsSingle = __webpack_require__(151);
+	var _threadsSingle = __webpack_require__(153);
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
-	var _threadsCreate = __webpack_require__(152);
+	var _threadsCreate = __webpack_require__(154);
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
@@ -1676,7 +1822,7 @@ webpackJsonp([0],[
 	exports.default = threadComponents;
 
 /***/ },
-/* 150 */
+/* 152 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1705,7 +1851,7 @@ webpackJsonp([0],[
 	exports.default = threadsList;
 
 /***/ },
-/* 151 */
+/* 153 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1772,7 +1918,7 @@ webpackJsonp([0],[
 	exports.default = singleThread;
 
 /***/ },
-/* 152 */
+/* 154 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1835,7 +1981,7 @@ webpackJsonp([0],[
 	exports.default = createThread;
 
 /***/ },
-/* 153 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1848,15 +1994,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _commentsCreate = __webpack_require__(154);
+	var _commentsCreate = __webpack_require__(156);
 
 	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
 
-	var _commentsList = __webpack_require__(155);
+	var _commentsList = __webpack_require__(157);
 
 	var _commentsList2 = _interopRequireDefault(_commentsList);
 
-	var _commentsSingle = __webpack_require__(156);
+	var _commentsSingle = __webpack_require__(158);
 
 	var _commentsSingle2 = _interopRequireDefault(_commentsSingle);
 
@@ -1870,7 +2016,7 @@ webpackJsonp([0],[
 	exports.default = commentComponents;
 
 /***/ },
-/* 154 */
+/* 156 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1939,7 +2085,7 @@ webpackJsonp([0],[
 	exports.default = createComment;
 
 /***/ },
-/* 155 */
+/* 157 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1968,7 +2114,7 @@ webpackJsonp([0],[
 	exports.default = commmentsList;
 
 /***/ },
-/* 156 */
+/* 158 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2034,7 +2180,7 @@ webpackJsonp([0],[
 	exports.default = singleComment;
 
 /***/ },
-/* 157 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2043,7 +2189,7 @@ webpackJsonp([0],[
 		value: true
 	});
 
-	var _auth = __webpack_require__(158);
+	var _auth = __webpack_require__(160);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -2065,7 +2211,7 @@ webpackJsonp([0],[
 	exports.default = appConfig;
 
 /***/ },
-/* 158 */
+/* 160 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2098,7 +2244,7 @@ webpackJsonp([0],[
 	exports.default = authInterceptor;
 
 /***/ },
-/* 159 */
+/* 161 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2115,110 +2261,6 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
-
-/***/ },
-/* 160 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var passwordReset = function () {
-		function passwordReset($state, $mdDialog, Auth, Toast) {
-			'ngInject';
-
-			_classCallCheck(this, passwordReset);
-
-			this._$state = $state;
-			this._$dialog = $mdDialog;
-			this._Auth = Auth;
-			this._Toast = Toast;
-
-			this.data = {
-				email: '',
-				token: '',
-				password: ''
-			};
-		}
-
-		_createClass(passwordReset, [{
-			key: 'close',
-			value: function close() {
-				this._$dialog.hide();
-			}
-		}, {
-			key: 'generateReset',
-			value: function generateReset() {
-				var _this = this;
-
-				this._Auth.forgot(this.data).then(function (response) {
-					if (response) {
-						_this.tokenSent = true;
-						_this._Toast.success('Great! Check your email for futher instructions');
-					} else {
-						_this._Toast.error(response.data.res.message);
-					}
-				});
-			}
-		}, {
-			key: 'attemptReset',
-			value: function attemptReset() {
-				var _this2 = this;
-
-				this._Auth.reset(this.data).then(function (response) {
-					if (response) {
-						_this2._Toast.success('Hooray! Now you can login');
-						_this2.close();
-					} else {
-						_this2._Toast.error(response.data.res.error);
-					}
-				});
-			}
-		}]);
-
-		return passwordReset;
-	}();
-
-	exports.default = passwordReset;
-
-/***/ },
-/* 161 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function passwordMatch() {
-		'ngInject';
-
-		return {
-			require: 'ngModel',
-			scope: {
-				otherModelValue: "=compareTo"
-			},
-
-			link: function link(scope, element, attributes, ngModel) {
-				ngModel.$validators.compareTo = function (modelValue) {
-					return modelValue == scope.otherModelValue;
-				};
-
-				scope.$watch("otherModelValue", function () {
-					ngModel.$validate();
-				});
-			}
-		};
-	}
-
-	exports.default = passwordMatch;
 
 /***/ }
 ]);

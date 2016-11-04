@@ -1,0 +1,147 @@
+.auth-dialog
+	display: flex
+	flex-direction: column
+
+
+.auth-dialog-header
+	display: flex
+	align-items: stretch
+	height: 50px
+	padding: 15px
+
+	> div
+		&:nth-of-type(1)
+			display: flex
+			flex: 1
+			flex-basis: 0
+			align-items: center
+			justify-content: flex-start
+
+			h3
+				color: $default-grey-text
+
+		&:nth-of-type(2)
+			display: flex
+			align-items: center
+
+			button
+				span
+					font-size: 24px
+					color: $default-grey-text
+
+.auth-dialog-body
+	display: flex
+	flex-direction: column
+	align-items: center
+	width: 75%
+	padding-top: 20px
+	margin: 0 auto
+
+	p
+		line-height: 24px
+
+
+	form
+		padding-top: 25px
+
+
+.auth-dialog-form
+	position: relative
+	width: 100%
+	margin-bottom: 32px
+
+	
+	label
+		position: absolute
+		top: 15px
+		left: 12px
+		opacity: 1
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		font-size: 16px
+		color: $default-grey-text
+		transition: all .4s ease-out
+
+	input
+		position: relative
+		height: 45px
+		width: 100%
+		padding-left: 12px
+		background: none
+		outline: none
+		@include open()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 16px
+		color: $default-grey-text
+		border: 1px solid $default-grey-text
+		transition: all .4s ease-out
+
+	&.has-focus
+		input
+			border: 1px solid $default-light-blue
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-success
+		input
+			border: 1px solid $default-green
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-error
+		input
+			border: 1px solid $default-red
+
+		label
+			left: -30px
+			opacity: 0
+
+		&.is-empty
+			label
+				left: 12px
+				opacity: 1
+				color: $default-red
+
+	&.is-empty
+		label
+			left: 12px
+			opacity: 1
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
+.auth-dialog-actions
+	padding-bottom: 20px
+
+	button
+		height: 45px
+		width: 130px
+
+		&:nth-of-type(1)
+			background: $default-green
+
+		
+		&:nth-of-type(2)
+			margin: 0 15px
+			background: $default-red
+
+		span
+			@include rale()
+			font-weight: 400
+			letter-spacing: 1px
+			color: $default-white-background
+
+@media screen and (min-width: 1000px)
+	.auth-dialog-actions
+
+		button
+			width: 160px
+

@@ -1,10 +1,15 @@
 <md-dialog class='auth-dialog'>
 	<md-dialog-content>
 		<div class='auth-dialog-header'>
-			<h3>Reset your password</h3>
-			<button ng-click='$ctrl.close()'>
-				<i class='mdi mdi-close'></i>
-			</button>
+			<div>
+				<h3>Reset password</h3>
+			</div>
+
+			<div>
+				<button ng-click="$ctrl.close()">
+					<span class='mdi mdi-close'></span>
+				</button>
+			</div>
 		</div>
 
 		<div class='auth-dialog-body' ng-if="!$ctrl.tokenSent">
@@ -12,9 +17,12 @@
 
 			<div class='auth-dialog-form'>
 				<form name='$ctrl.resetForm' novalidate>
-					<div class='auth-form-wraper auth-dialog-form'>
+					<div class='auth-form-wraper auth-dialog-form' ng-class="{'has-focus': $ctrl.resetForm.email.hasFocus,
+					'has-success': $ctrl.resetForm.email.$valid,
+					'has-error': $ctrl.resetForm.email.$error && $ctrl.resetForm.email.$touched && !$ctrl.resetForm.email.$valid,
+					'is-empty': !$ctrl.resetForm.email.$viewValue}">
 						<label>Email</label>
-						<input type='email' name='email' ng-model="$ctrl.data.email">
+						<input type='email' name='email' ng-model="$ctrl.data.email" required ng-focus='$ctrl.resetForm.email.hasFocus=true' ng-blur='$ctrl.resetForm.email.hasFocus=false'>
 					</div>
 				</form>
 			</div>

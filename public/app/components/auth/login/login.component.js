@@ -58,7 +58,7 @@ class LoginCtrl {
 		let serializedUser = angular.toJson(user);
 		this._Storage.set('user', serializedUser);
 		this._Storage.set('opinion-token', response.data.res.token);
-		this._$state.go('app.home');
+		this._$state.go('app.home', {}, {reload: true});
 	}
 
 	openPasswordReset() {

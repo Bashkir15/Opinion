@@ -18,8 +18,7 @@ class StreamService {
 			url: '/streams',
 			method: 'GET',
 			params: {
-				timestamp: options.timestamp,
-				filter: options.filter
+				subscribed: options.subscribed
 			}
 		});
 	}
