@@ -1,22 +1,22 @@
-<div class='stream-single-component'>
-	<div class='single-container' ui-sref="app.singleStream({streamId: $ctrl.stream._id})">
-		<div class='stream-left'>
+<div class='forum-single-component'>
+	<div class='forum-single-container' ui-sref="app.singleStream({streamId: $ctrl.stream._id})">
+		<div class='forum-single-left'>
 			<div></div>
 		</div>
 
-		<div class='stream-content'>
+		<div class='forum-single-content'>
 			<h3>{{$ctrl.stream.name}}</h3>
 
 			<p>{{$ctrl.stream.description}}</p>
 		</div>
 	</div>
 
-	<div class='stream-info'>
+	<div class='forum-single-info'>
 		<div class='left'>
-			<div class='stream-info-text'>
+			<div class='forum-single-info-text'>
 				<span ng-class="{'subscribed': $ctrl.stream.subscribed}">{{$ctrl.stream.subscribers.length}}</span> <p>Subscriber<span ng-if="$ctrl.stream.subscribers.length > 1 || $ctrl.stream.subscribers.length == 0">s</span></p>
 			</div>
-			<div class='stream-info-text'>
+			<div class='forum-single-info-text'>
 				<span class='stream-info-data'>{{$ctrl.stream.threads.length}}</span> <p>Thread<span ng-if='$ctrl.stream.threads.length > 1 || $ctrl.stream.threads.length == 0'>s</span></p>
 			</div>
 		</div>

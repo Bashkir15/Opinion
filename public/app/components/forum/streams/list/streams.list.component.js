@@ -1,6 +1,14 @@
 class ListStreamCtrl {
-	constructor() {
+	constructor($mdDialog) {
+		'ngInject';
 
+		this._$dialog = $mdDialog
+	}
+
+	openCreateStream() {
+		this._$dialog.show({
+			templateUrl: './app/pages/streams/dialogs/create.html'
+		});
 	}
 }
 

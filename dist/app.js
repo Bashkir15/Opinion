@@ -583,7 +583,7 @@ webpackJsonp([0],[
 				this._Auth.reset(this.data).then(function (response) {
 					if (response) {
 						_this2._Toast.success('Hooray! Now you can login');
-						_this2.close();
+						_this2._$dialog.hide();
 					} else {
 						_this2._Toast.error(response.data.res.error);
 					}
@@ -736,7 +736,9 @@ webpackJsonp([0],[
 					url: '/streams',
 					method: 'GET',
 					params: {
-						subscribed: options.subscribed
+						subscribed: options.subscribed,
+						timestamp: options.timestamp,
+						filter: options.filter
 					}
 				});
 			}
@@ -786,7 +788,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var StreamsListCtrl = function () {
-		function StreamsListCtrl(Stream, $timeout, $rootScope) {
+		function StreamsListCtrl(Stream, $timeout, $rootScope, $mdDialog) {
 			'ngInject';
 
 			var _this = this;
@@ -796,12 +798,13 @@ webpackJsonp([0],[
 			this._Stream = Stream;
 			this._$timeout = $timeout;
 			this._$rootScope = $rootScope;
+			this._$dialog = $mdDialog;
 			this.streams = [];
 			this.streamsSearch = '';
 			this.lastUpdated = 0;
 			this.getStreams();
 			this._$rootScope.$on('streamCreated', function () {
-				_this.showCreate = !_this.showCreate;
+				_this._$dialog.hide();
 				_this.getStreams({
 					append: true
 				});
@@ -1661,11 +1664,30 @@ webpackJsonp([0],[
 		value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var ListStreamCtrl = function ListStreamCtrl() {
-		_classCallCheck(this, ListStreamCtrl);
-	};
+	var ListStreamCtrl = function () {
+		function ListStreamCtrl($mdDialog) {
+			'ngInject';
+
+			_classCallCheck(this, ListStreamCtrl);
+
+			this._$dialog = $mdDialog;
+		}
+
+		_createClass(ListStreamCtrl, [{
+			key: 'openCreateStream',
+			value: function openCreateStream() {
+				this._$dialog.show({
+					templateUrl: './app/pages/streams/dialogs/create.html'
+				});
+			}
+		}]);
+
+		return ListStreamCtrl;
+	}();
 
 	var listStream = {
 		scope: {},

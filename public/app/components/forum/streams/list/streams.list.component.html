@@ -1,7 +1,17 @@
-<div class='streams-list-component-container'>
-	<div ng-repeat='item in $ctrl.streams' class='single-stream-repeat'>
-		<single-stream stream="item"></single-stream>
+<div class='forum-list-component-container'>
+	<div class='forum-list-view'>
+		<div class='forum-list-list'>
+			<div ng-repeat='item in $ctrl.streams' class='forum-single-repeat'>
+				<single-stream stream="item"></single-stream>
+			</div>
+		</div>
+
+		<div class='forum-side-bar'></div>
 	</div>
+
+	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateStream()">
+		<i class='mdi mdi-pencil'></i>
+	</md-button>
 
 	<div class='load-more-button streams-load-more-button'>
 		<button>

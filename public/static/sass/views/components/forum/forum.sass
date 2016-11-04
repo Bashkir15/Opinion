@@ -1,0 +1,381 @@
+.forum-page-container
+	position: relative
+	padding-top: 100px
+	text-align: center
+	background: $default-white-background
+
+	header
+		padding-bottom: 80px
+
+	> p
+		font-weight: 400
+		line-height: 30px
+		color: rgba(0,0,0,0.6)
+		width: 80%
+		margin: 0 auto
+		padding-bottom: 80px
+
+
+.forum-search-container
+	position: relative
+	display: flex
+	align-items: center
+	width: 80%
+	height: 60px
+	padding: 15px 0
+	margin: 35px auto 0 auto
+	background: $default-light-blue
+	z-index: 5
+
+	> div
+		display: flex
+		position: relative
+		width: 90%
+		margin: 0 auto
+
+		label
+			position: absolute
+			top: 12px
+			left: 12px
+			z-index: 5
+			font-size: 20px
+			opacity: 1
+			transition: all .4s ease
+
+		input
+			display: flex
+			flex: 1
+			position: relative
+			height: 40px
+			//width: 60%
+			@include open()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 16px
+			outline: none
+			border: none
+
+		button
+			height: 42px
+			width: 100px
+			margin-left: 15px
+			background: darken($default-light-blue, 20%)
+
+			span
+				@include rale()
+				font-weight: 400
+				letter-spacing: 2px
+				font-size: 16px
+				color: $default-white-background
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
+//************************Create*********************//
+
+.forum-create-dialog-header
+	padding: 25px 0 25px 15px
+
+	h2
+		color: rgba(0,0,0,0.6)
+
+.forum-create-container
+	display: flex
+	align-items: center
+	padding-top: 20px
+	width: 90%
+	margin: 0 auto
+
+	form
+		width: 90%
+		margin: 0 auto
+
+.forum-form-wrapper
+	position: relative
+	width: 100%
+	margin-bottom: 30px
+
+	label
+		position: absolute
+		top: 12px
+		left: 12px
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		color: $default-grey-text
+		opacity: 1
+		transition: all .4s ease
+
+	input
+		position: relative
+		width: 100%
+		padding-left: 12px
+		@include open()
+		font-weight: 400
+		height: 40px
+		letter-spacing: 2px
+		color: $default-grey-text
+		outline: none
+		background: none
+		border: 1px solid $default-grey-text
+
+	textarea
+		position: relative
+		width: 100%
+		padding-left: 12px
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		color: $default-grey-text
+		outline: none
+		background: none
+		border: 1px solid $default-grey-text
+
+	&.has-focus
+		input
+			border: 1px solid $default-light-blue
+
+		textarea
+			border: 1px solid $default-light-blue
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-success
+		input
+			border: 1px solid $default-green
+
+		textarea
+			border: 1px solid $default-green
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-error
+		input
+			border: 1px solid $default-red
+
+		textarea
+			border: 1px solid $default-red
+
+		label
+			left: -30px
+			opacity: 0
+
+		&.is-empty
+			label
+				left: 12px
+				opacity: 1
+				color: $default-red
+
+	&.is-empty
+		label
+			left: 12px
+			opacity: 1
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
+
+
+
+.forum-form-submit
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 25px 0
+
+	button
+		height: 45px
+		width: 180px
+		border: 1px solid $default-grey-text
+		transition: all .4s ease
+
+		span
+			@include rale()
+			font-weight: 400
+			font-size: 18px
+			letter-spacing: 1px
+			color: $default-grey-text
+
+		&.form-valid
+			background: $default-green
+
+			span
+				color: $default-white-background
+
+
+// *********************** List *********************//
+
+.forum-list-component-container
+	position: relative
+	padding: 100px 0 80px 0
+	margin-top: -35px
+	background: $default-grey-background
+
+
+.forum-list-view
+	display: flex
+	align-items: center
+	width: 100%
+
+.forum-list-list
+	width: 100%
+	display: flex
+	flex-direction: column
+
+.forum-single-repeat
+	&.ng-enter
+		transition: all .5s ease
+
+	&.ng-enter-active
+		@include slideInUp()
+
+	&.ng-leave-active
+		@include slideOutDown()
+
+.forum-create-button
+	position: fixed
+	bottom: 40px
+	right: 40px
+
+	&.md-button
+		&.md-fab
+			background-color: darken($default-light-blue, 20%)
+
+			&:hover
+				background-color: darken($default-light-blue, 10%)
+
+.load-more-button
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 80px 0 
+
+	button
+		height: 55px
+		width: 150px
+		box-shadow: 0 3px 6px rgba(0,0,0,0.33)
+		background: darken($default-light-blue, 20%)
+
+		span
+			@include rale()
+			font-weight: 400
+			color: $default-white-background
+
+
+// ******************* Single *************************//
+
+.forum-single-component
+	display: flex
+	flex-direction: column
+	box-shadow: 0 5px 6px rgba(0,0,0,0.23), 0 3px 6px rgba(0,0,0,0.33)
+	margin-bottom: 30px
+	background: $default-white-background
+
+.forum-single-container
+	display: flex
+	width: 90%
+	margin: 0 auto
+	padding: 12px 0
+	border-bottom: 1px solid rgba(0,0,0,0.12)
+
+.forum-single-left
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: center
+	padding: 25px 25px 25px 0
+
+	> div
+		height: 60px
+		width: 60px
+		border-radius: 50%
+		border: 2px solid rgba(0,0,0,0.6)
+
+.forum-single-content
+	display: flex
+	flex-direction: column
+	flex: 1
+	padding-top: 20px
+	text-overflow: ellipsis
+	white-space: no-wrap
+	word-break: break-all
+
+	h3
+		color: $default-blue
+		margin-bottom: 20px
+		text-align: left
+
+	p
+		line-height: 30px
+		padding-right: 10px
+		color: rgba(0,0,0,0.6)
+		text-align: left
+
+.forum-single-info
+	display: flex
+	align-items: stretch
+	width: 90%
+	margin: 0 auto
+	padding: 23px 0
+
+	.left
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-start
+
+	.right
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-end
+
+		> div
+			display: flex
+			align-items: center
+			justify-content: center
+
+			button
+				i
+					font-size: 26px
+					color: rgba(0,0,0,0.6)
+					transition: all .4s ease
+
+					&.subscribed
+						color: $default-green
+
+.forum-single-info-text
+	display: flex
+	align-items: center
+	justify-content: center
+	width: 120px
+
+	> span
+		display: inline-block
+		@include rale()
+		font-weight: 400
+		color: rgba(0,0,0,0.7)
+		transition: all .4s ease
+
+		&.subscribed
+			color: $default-green
+
+	p
+		@include open()
+		font-weight: 400
+		margin-left: 5px
+		color: rgba(0,0,0,0.6)
+
+
+
+

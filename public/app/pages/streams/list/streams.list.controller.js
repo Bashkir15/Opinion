@@ -1,16 +1,17 @@
 class StreamsListCtrl {
-	constructor(Stream, $timeout, $rootScope) {
+	constructor(Stream, $timeout, $rootScope, $mdDialog) {
 		'ngInject';
 
 		this._Stream = Stream;
 		this._$timeout = $timeout;
 		this._$rootScope = $rootScope
+		this._$dialog = $mdDialog;
 		this.streams = [];
 		this.streamsSearch = '';
 		this.lastUpdated = 0;
 		this.getStreams();
 		this._$rootScope.$on('streamCreated', () => {
-			this.showCreate = !this.showCreate;
+			this._$dialog.hide();
 			this.getStreams({
 				append: true
 			});

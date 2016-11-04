@@ -33,7 +33,7 @@ class passwordReset {
 		this._Auth.reset(this.data).then((response) => {
 			if (response) {
 				this._Toast.success('Hooray! Now you can login');
-				this.close();
+				this._$dialog.hide();
 			} else {
 				this._Toast.error(response.data.res.error);
 			}

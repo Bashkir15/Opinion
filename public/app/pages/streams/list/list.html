@@ -1,21 +1,13 @@
-<div class='streams-list-container'>
+<div class='forum-page-container'>
 	<header>
 		<h1>Streams</h1>
 	</header>
 
 	<p>Opinionated is home to over {{$ctrl.streams.length}} different Stream<span ng-if="$ctrl.streams.length > 1 || $ctrl.streams.length == 0">s</span>, each one with a different purpose and function. There is always something to be discussed or found here. If you don't see a Stream for what you want, feel free to create your own! Remember though, being a moderator can be a hefty task</p>
 
-	<button ng-click="$ctrl.showCreate = !$ctrl.showCreate">
-		<span>Create Stream</span>
-	</button>
-
-	<div class='streams-list-create-stream' ng-if="$ctrl.showCreate">
-		<create-stream></create-stream>
-	</div>
-
 	<div class='forum-search-container'>
 		<div ng-class="{'has-focus': $ctrl.search.hasFocus}">
-			<label>Search</label>
+			<label class='mdi mdi-magnify'></label>
 			<input type='text' name='search' ng-model='$ctrl.streamsSearch' ng-change="$ctrl.search()" ng-focus="$ctrl.search.hasFocus=true" ng-blur="$ctrl.search.hasFocus=false">
 			<md-menu class='forum-search-dropdown' md-offset='0 65'>
 				<button class='large-mobile' ng-click="$mdOpenMenu()">
@@ -24,7 +16,7 @@
 
 				<md-menu-content>
 					<md-menu-item>
-						<button>
+						<button ng-click="$ctrl.byScore()">
 							<span>
 								Score
 							</span>
@@ -32,19 +24,19 @@
 					</md-menu-item>
 
 					<md-menu-item>
-						<button>
+						<button ng-click="$ctrl.byThreads()">
 							<span>Threads</span>
 						</button>
 					</md-menu-item>
 
 					<md-menu-item>
-						<button>
+						<button ng-click='$ctrl.bySubscribers()'>
 							<span>Subscribers</span>
 						</button>
 					</md-menu-item>
 
 					<md-menu-item>
-						<button>
+						<button ng-click='$ctrl.bySubscribers()'>
 							<span>Date</span>
 						</button>
 					</md-menu-item>

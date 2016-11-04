@@ -4,7 +4,7 @@ class createStreamCtrl {
 
 		this._Stream = Stream;
 		this._Toast = Toast;
-		this._$rootScope = $rootScope
+		this._$rootScope = $rootScope;
 		this.data = {
 			name: '',
 			description: ''
