@@ -57,7 +57,16 @@
 		'has-error': $ctrl.signupForm.confirm.$error && $ctrl.signupForm.confirm.$touched && !$ctrl.signupForm.confirm.$valid,
 		'is-empty': !$ctrl.signupForm.confirm.$viewValue}">
 			<label>Confirm Password</label>
-			<input type='password' name='confirm' ng-model="$ctrl.data.confirm" required ng-focus="$ctrl.signupForm.confirm.hasFocus=true" ng-blur="$ctrl.signupForm.confirm.hasFocus=false">
+			<input type='password' name='confirm' ng-model="$ctrl.data.confirm" required ng-focus="$ctrl.signupForm.confirm.hasFocus=true" ng-blur="$ctrl.signupForm.confirm.hasFocus=false" compare-to="$ctrl.data.password" required>
+			<div ng-messages='$ctrl.signupForm.confirm.$error' ng-if="!$ctrl.signupForm.confirm.$valid && $ctrl.signupForm.confirm.$touched" class='auth-form-error-container'>
+				<div ng-message='compareTo'>
+					<span>Sorry, your passwords do not match</span>
+				</div>
+
+				<div ng-message='required'>
+					<span>Sorry, you need to confirm your password</span>
+				</div>
+			</div>
 		</div>
 
 		<div class='auth-form-submit'>

@@ -400,12 +400,17 @@ webpackJsonp([0],[
 
 	var _passwordReset2 = _interopRequireDefault(_passwordReset);
 
+	var _passwordMatch = __webpack_require__(161);
+
+	var _passwordMatch2 = _interopRequireDefault(_passwordMatch);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var authModule = _angular2.default.module('auth', []);
 	authModule.config(_auth2.default);
 	authModule.service('Auth', _auth4.default);
 	authModule.controller('PasswordResetController', _passwordReset2.default);
+	authModule.directive('compareTo', _passwordMatch2.default);
 
 	exports.default = authModule;
 
@@ -2182,6 +2187,38 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = passwordReset;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function passwordMatch() {
+		'ngInject';
+
+		return {
+			require: 'ngModel',
+			scope: {
+				otherModelValue: "=compareTo"
+			},
+
+			link: function link(scope, element, attributes, ngModel) {
+				ngModel.$validators.compareTo = function (modelValue) {
+					return modelValue == scope.otherModelValue;
+				};
+
+				scope.$watch("otherModelValue", function () {
+					ngModel.$validate();
+				});
+			}
+		};
+	}
+
+	exports.default = passwordMatch;
 
 /***/ }
 ]);
