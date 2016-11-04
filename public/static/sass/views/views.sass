@@ -2,3 +2,13 @@
 
 .view-content-holder
 	height: 100vh
+
+	&.ng-enter,
+	&.ng-leave
+		transition: all .4s ease
+
+	&.ng-enter-active
+		@include slideInUp()
+
+	&.ng-leave-active
+		@include slideOutDown()
