@@ -2,6 +2,11 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import json from '../helpers/json';
 import auth from '../helpers/auth';
+import fs from 'fs';
+import nodemailer from 'nodemailer'
+import async from 'async'
+import crypto from 'crypto'
+import handlebars from 'handlebars'
 
 var User = mongoose.model("User");
 
@@ -54,6 +59,76 @@ module.exports = () => {
 					return json.bad({message: 'Sorry, either your email or password were incorrect'}, res);
 				}
 			});
+		});
+	};
+
+	obj.forgot = (req, res) => {
+		async.waterfaller([
+			function (done) {
+				crypto.randomBytes(20, (err, buf) => {
+					var token = buf.toString('hex');
+					done(err, token);
+				});
+			},
+
+			function (token, done) {
+				User.findOne({email: req.body.email}, (err, user) => {
+					if (!user) {
+						return json.bad({message: 'Sorry, there is no user with that email'}, res);
+					}
+
+					user.resetPasswordToken = token;
+					user.resetPasswordExpires = Date.now() + 3600000;
+
+					user.save((err) => {
+						done(err, token, user);
+					});
+				});
+			},
+
+			function (token, user, done) {
+				var emailTemplate = fs.readFileSync('./server/templates/email.template.html', {encoding: 'utf-8'});
+				var template = handlebars.compile(html);
+
+				var replacements = {
+					token: user.resetPasswordToken
+				};
+
+				var templateToSend = template(replacements);
+
+				var mailTransport = nodemailer.createTransport({
+					service: global.config.mailer.service,
+					auth: {
+						user: global.config.mailer.auth.user,
+						pass: global.config.mailer.auth.pass
+					}
+				});
+
+				var mailOptions = {
+					to: user.email,
+					from: 'Opinionated',
+					subject: 'Your password reset',
+					html: htmlToSend
+				};
+
+				mailTransport.sendMail(mailOptions, (error, info) => {
+					if (error) {
+						json.bad(error, res);
+					} else {
+						json.good(info.response, res);
+					}
+				});
+			}
+		], (err) => {
+			var success = true;
+
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			json.good({
+				record: success
+			}, res);
 		});
 	};
 
