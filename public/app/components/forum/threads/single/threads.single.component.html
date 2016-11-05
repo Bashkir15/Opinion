@@ -35,7 +35,7 @@
 	<div class='forum-single-info'>
 		<div class='left'>
 			<div class='forum-single-info-text'>
-				<button ui-sref="app.singleThread({streamName: $ctrl.streamName, threadId: $ctrl.thread._id})">
+				<button ui-sref="app.singleThread({streamId: $ctrl.streamId, threadId: $ctrl.thread._id})">
 				<!-- 	<p>View <span>{{$ctrl.thread.comments.length}}</span> Comment<span ng-if='$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length = 0'>s</span></p> -->
 				<span>{{$ctrl.thread.comments.length}}</span>
 				<p>Comment<span ng-if="$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length == 0">s</span></p>
@@ -44,8 +44,8 @@
 
 			<div class='forum-single-info-text'>
 				<button>
-					<span>734</span>
-					<p>Views</p>
+					<span>{{$ctrl.thread.views}}</span>
+					<p>View<span ng-if='$ctrl.thread.views > 1 || $ctrl.thread.views == 0'>s</span></p>
 				</button>
 			</div>
 

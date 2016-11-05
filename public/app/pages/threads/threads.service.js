@@ -24,6 +24,13 @@ class threadService {
 		});
 	}
 
+	home() {
+		return this._$http({
+			url: '/threads/home',
+			method: 'GET'
+		});
+	}
+
 	single(title) {
 		return this._$http({
 			url: './threads/' + title,

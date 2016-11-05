@@ -32,15 +32,15 @@
 					</md-menu-item>
 				</md-menu-content>
 			</md-menu>
-			<button class='above-mobile' ng-click="$ctrl.showCreate = !$ctrl.showCreate">
-				<span>Add Comment</span>
-			</button>
 		</div>
 	</div>
 
-	<div class='comments-create-container' ng-if="$ctrl.showCreate">
-		<create-comment></create-comment>
-	</div>
 
 	<comments-list comments="$ctrl.comments" class='comments-list-component'></comments-list>
+
+	<div class='load-more-button' ng-if="!$ctrl.noMoreComments">
+		<button>
+			<span>Load More</span>
+		</button>
+	</div>
 </div>

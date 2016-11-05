@@ -360,17 +360,41 @@ webpackJsonp([0],[
 /* 124 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var HomeCtrl = function HomeCtrl() {
-		_classCallCheck(this, HomeCtrl);
-	};
+	var HomeCtrl = function () {
+		function HomeCtrl(Thread, Auth) {
+			'ngInject';
+
+			_classCallCheck(this, HomeCtrl);
+
+			this._Thread = Thread;
+			this._Auth = Auth;
+			this._isLoggedIn = this._Auth.isLoggedIn();
+			this.getHome();
+		}
+
+		_createClass(HomeCtrl, [{
+			key: 'getHome',
+			value: function getHome() {
+				if (this._isLoggedIn) {
+					this._Thread.home().then(function (response) {
+						console.log(response);
+					});
+				}
+			}
+		}]);
+
+		return HomeCtrl;
+	}();
 
 	exports.default = HomeCtrl;
 
@@ -737,6 +761,7 @@ webpackJsonp([0],[
 					method: 'GET',
 					params: {
 						subscribed: options.subscribed,
+						unsubscribed: options.unsubscribed,
 						timestamp: options.timestamp,
 						filter: options.filter
 					}
@@ -854,7 +879,7 @@ webpackJsonp([0],[
 
 				var streamsSearchTimeout;
 
-				if (!newValue !== oldValue) {
+				if (newValue !== oldValue) {
 					this.streams = [];
 				}
 
@@ -910,7 +935,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var singleStreamCtrl = function () {
-		function singleStreamCtrl(Stream, Thread, $stateParams, $mdDialog, $rootScope) {
+		function singleStreamCtrl(Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout) {
 			'ngInject';
 
 			var _this = this;
@@ -921,9 +946,11 @@ webpackJsonp([0],[
 			this._Thread = Thread;
 			this._$rootScope = $rootScope;
 			this._$dialog = $mdDialog;
+			this._$timeout = $timeout;
 			this.streamId = $stateParams.streamId;
 			this.threads = [];
 			this.threadsSearch = '';
+			this.threadPage = 0;
 			this.lastUpdated = 0;
 			this.getStream();
 			this.getThreads();
@@ -942,6 +969,7 @@ webpackJsonp([0],[
 				var _this2 = this;
 
 				this._Stream.single(this.streamId).then(function (response) {
+					console.log(response);
 					_this2.stream = response.data.res.record;
 				});
 			}
@@ -953,9 +981,9 @@ webpackJsonp([0],[
 				options = options || {};
 				options.filter = this.threadsSearch;
 				options.timestamp = this.lastUpdated;
+				options.page = this.threadPage;
 
 				this._Thread.get(this.streamId, options).then(function (response) {
-					console.log(response);
 					if (_this3.threadsSearch) {
 						_this3.threads = [];
 					}
@@ -966,8 +994,43 @@ webpackJsonp([0],[
 						_this3.threads = _this3.threads.concat(response.data.res.records);
 					}
 
+					_this3.noMoreThreads = !response.data.res.morePages;
 					_this3.lastUpdated = Date.now();
 				});
+			}
+		}, {
+			key: 'loadMore',
+			value: function loadMore() {
+				this.threadPage++;
+				this.lastUpdated = Date.now();
+				this.getThreads({
+					append: true
+				});
+			}
+		}, {
+			key: 'search',
+			value: function search(newValue, oldValue) {
+				var _this4 = this;
+
+				var threadsSearchTimeout;
+
+				if (newValue !== oldValue) {
+					this.threads = [];
+				}
+
+				this._$timeout.cancel(threadsSearchTimeout);
+				threadsSearchTimeout = this._$timeout(function () {
+					if (!newValue) {
+						if (_this4.threadsSearchEnabled) {
+							_this4.lastUpdated = 0;
+							_this4.getThreads();
+						}
+					} else {
+						_this4.getThreads();
+					}
+
+					_this4.threadsSearchEnabled = _this4.threadsSearch !== '';
+				}, 500);
 			}
 		}, {
 			key: 'byScore',
@@ -1100,6 +1163,14 @@ webpackJsonp([0],[
 						timestamp: options.timestamp,
 						filter: options.filter
 					}
+				});
+			}
+		}, {
+			key: 'home',
+			value: function home() {
+				return this._$http({
+					url: '/threads/home',
+					method: 'GET'
 				});
 			}
 		}, {
@@ -1253,7 +1324,7 @@ webpackJsonp([0],[
 			this._Thread = Thread;
 			this._Comment = Comment;
 			this._$rootScope = $rootScope;
-			this.streamName = $stateParams.streamName;
+			this.streamId = $stateParams.streamId;
 			this.threadId = $stateParams.threadId;
 			this.comments = [];
 			this.getThread();
@@ -1416,8 +1487,7 @@ webpackJsonp([0],[
 						_this2.streams = response.data.res.records;
 					});
 				} else {
-					options.subscribed = '';
-
+					options.unsubscribed = true;
 					this._Stream.get(options).then(function (response) {
 						console.log(response);
 						_this2.streams = response.data.res.records;

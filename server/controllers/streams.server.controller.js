@@ -45,9 +45,14 @@ module.exports = () => {
 		}
 
 		if (req.query.unsubscribed) {
-			criteria.subscibers = {
-				$ne: req.user._id
-			};
+			if (req.user) {
+				criteria.subscribers = {
+					$ne: req.user._id
+				};
+				
+			} else {
+				criteria.subscribers = '';
+			}
 		}
 
 		Stream.find(criteria, null, {sort: {name: 1}})

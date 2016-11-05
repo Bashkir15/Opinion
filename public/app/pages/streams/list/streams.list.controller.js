@@ -57,7 +57,7 @@ class StreamsListCtrl {
 	search(newValue, oldValue) {
 		var streamsSearchTimeout;
 		
-		if (!newValue !== oldValue) {
+		if (newValue !== oldValue) {
 			this.streams = [];
 		}
 

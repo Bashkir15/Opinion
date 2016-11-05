@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import json from '../helpers/json';
+import async from 'async';
 
 var Thread = mongoose.model('Thread');
 var Stream = mongoose.model('Stream');
@@ -52,17 +53,26 @@ module.exports = () => {
 			}
 
 			if (req.query && req.query.filter) {
-				delete critera.created;
+				delete criteria.created;
 				criteria.title = new RegExp(req.query.filter, 'i');
 			}
 
 			Thread.find(criteria)
+			.skip(parseInt(req.query.page) * global.config.settings.perPage)
+			.limit(global.config.settings.perPage + 1)
 			.populate('creator')
 			.populate('stream')
 			.exec((err, threads) => {
 				if (err) {
 					return json.bad(err, res);
 				} else {
+
+					var morePages = global.config.settings.perPage < threads.length;
+
+					if (morePages) {
+						threads.pop();
+					}
+
 					if (req.user) {
 						threads.map((e) => {
 							e = e.afterSave(req.user);
@@ -70,7 +80,8 @@ module.exports = () => {
 					}
 
 					return json.good({
-						records: threads
+						records: threads,
+						morePages: morePages
 					}, res);
 				}
 			});
@@ -79,6 +90,43 @@ module.exports = () => {
 		return getPosts();
 	};
 
+	obj.home = (req, res) => {
+		async.waterfall([
+			function(done) {
+				Stream.find({subscribers: req.user._id})
+				.populate('threads')
+				.exec((err, streams) => {
+					done(err, streams);
+				});
+			},
+			function (streams, done) {
+				var threadList = [];
+				streams.forEach((single) => {
+					if (single.threads) {
+						Thread.find({_id: single._id})
+						.populate('comment')
+						.exec((err, threads) => {
+							threadList.push(threads);
+							done(err, threadList);
+						});
+					}
+				});
+			},
+
+			function (threadList, done) {
+				var homeItems = [];
+
+				threadList.forEach((thread) => {
+					homeItems.push(thread);
+					done(homeItems);
+				});
+			}
+		], (homeItems) => {
+			json.good({
+				records: homeItems
+			}, res);
+		});
+	};
 
 	obj.single = (req, res) => {
 		Thread.findOne({_id: req.params.threadId})
@@ -88,14 +136,16 @@ module.exports = () => {
 			if (err) {
 				return json.bad(err, res);
 			}
+			thread.views++;
+			thread.save((err) => {
+				if (req.user) {
+					thread = thread.afterSave(req.user);
+				}
 
-			if (req.user) {
-				thread = thread.afterSave(req.user);
-			}
-
-			json.good({
-				record: thread
-			}, res);
+				json.good({
+					record: thread
+				}, res);
+			});
 		});
 	};
 

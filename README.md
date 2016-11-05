@@ -24,14 +24,14 @@ If anyone sees these and finds some more issues, please let me know! I will be h
 1. More Features for Users
 * Requesting and storing a users location with geospatial indexing
 * Social logins from facebook, twitter, reddit, and github
-* A better implementation of JSON web tokens that will expire
-* Password Reset Emailing
+~~* A better implementation of JSON web tokens that will expire~~
+~~* Password Reset Emailing~~
 * Abililty to Change your Password
 * Send Invite emails to invite friends to Opinionated
 * Settings to decide how the site will look for you (themes, layout options, hiding sensitive info)
 * A custom datepicker to allow users to enter birthday
 * Rewards you can earn such as badges or trophies
-* A better role system
+~~* A better role system~~
 * Your recently activity displayed on your profile
 
 2. A More Complete Message Board
@@ -46,23 +46,25 @@ If anyone sees these and finds some more issues, please let me know! I will be h
 * Ability to sticky posts, remove posts but not delete, and selectively turn off the ability to post or reply.
 
 3. Better Server Implementation
-* Using Cluster to increase performance
+~~* Using Cluster to increase performance~~
 * Using something like NGNIX as a proxy over node to cache some static files
 * Implementing websockets 
 * Possibly either switching to Redis or using Redis along with mongo for some specific features
-* Better Archetecture haha
+~~* Better Archetecture haha~~
 * Better logging
 * Include monitoring and profiling
 * Writing Tests
-* Using Async or something similar to reduce my deeply nested callbacks
+~~* Using Async or something similar to reduce my deeply nested callbacks~~
 
 4. Better Frontend Features
-* Fully Responsive
-* Possibily upgrading to angular 1.5.x for use of components
-* Making use of more directives
-* Cutting down on controller bloat and repeating myself with plans to architect the site well enough to reuse some templates and such
-* Take use of angular template cache
-* Better Design and Layout
+~~* Fully Responsive~~
+~~* Possibily upgrading to angular 1.5.x for use of components~~
+~~* Making use of more directives~~
+~~* Cutting down on controller bloat and repeating myself with plans to architect the site well enough to reuse some templates and such~~
+~~* Take use of angular template cache~~
+~~* Better Design and Layout~~
+
+Front end done!
 
 And many more features! I'll add to this list as I think of things and if anyone has any suggestions I'd be happy to take them into consideration/add to the list
 

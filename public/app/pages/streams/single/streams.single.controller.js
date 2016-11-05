@@ -1,14 +1,16 @@
 class singleStreamCtrl {
-	constructor(Stream, Thread, $stateParams, $mdDialog, $rootScope) {
+	constructor(Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout) {
 		'ngInject';
 
 		this._Stream = Stream;
 		this._Thread = Thread;
 		this._$rootScope = $rootScope;
 		this._$dialog = $mdDialog;
+		this._$timeout = $timeout;
 		this.streamId = $stateParams.streamId;
 		this.threads = [];
 		this.threadsSearch = '';
+		this.threadPage = 0;
 		this.lastUpdated = 0;
 		this.getStream();
 		this.getThreads();
@@ -23,6 +25,7 @@ class singleStreamCtrl {
 
 	getStream() {
 		this._Stream.single(this.streamId).then((response) => {
+			console.log(response);
 			this.stream = response.data.res.record;
 		});
 	}
@@ -31,9 +34,9 @@ class singleStreamCtrl {
 		options = options || {};
 		options.filter = this.threadsSearch;
 		options.timestamp = this.lastUpdated;
+		options.page = this.threadPage;
 
 		this._Thread.get(this.streamId, options).then((response) => {
-			console.log(response);
 			if (this.threadsSearch) {
 				this.threads = [];
 			}
@@ -44,8 +47,39 @@ class singleStreamCtrl {
 				this.threads = this.threads.concat(response.data.res.records);
 			}
 
+			this.noMoreThreads = !response.data.res.morePages;
 			this.lastUpdated = Date.now();
 		});
+	}
+
+	loadMore() {
+		this.threadPage++;
+		this.lastUpdated = Date.now();
+		this.getThreads({
+			append: true
+		});
+	}
+
+	search(newValue, oldValue) {
+		var threadsSearchTimeout;
+
+		if (newValue !== oldValue) {
+			this.threads = [];
+		}
+
+		this._$timeout.cancel(threadsSearchTimeout);
+		threadsSearchTimeout = this._$timeout(() => {
+			if (!newValue) {
+				if (this.threadsSearchEnabled) {
+					this.lastUpdated = 0;
+					this.getThreads();
+				}
+			} else {
+				this.getThreads();
+			}
+
+			this.threadsSearchEnabled = this.threadsSearch !== '';
+		}, 500);
 	}
 
 	byScore() {

@@ -65,7 +65,7 @@
 
 	<thread-list threads='$ctrl.threads' stream="$ctrl.stream" class='thread-list-component'></thread-list>
 
-	<div class='load-more-button' ng-if="$ctrl.threads.length">
+	<div class='load-more-button' ng-if="!$ctrl.noMoreThreads">
 		<button>
 			<span>Load More</span>
 		</button>

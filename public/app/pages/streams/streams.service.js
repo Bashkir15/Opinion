@@ -19,6 +19,7 @@ class StreamService {
 			method: 'GET',
 			params: {
 				subscribed: options.subscribed,
+				unsubscribed: options.unsubscribed,
 				timestamp: options.timestamp,
 				filter: options.filter
 			}

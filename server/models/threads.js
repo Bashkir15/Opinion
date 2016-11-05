@@ -47,6 +47,11 @@ var threadSchema = new mongoose.Schema({
 		ref: 'Stream'
 	},
 
+	views: {
+		type: Number,
+		default: 0
+	},
+
 	likes: [{
 		type: mongoose.Schema.ObjectId,
 		required: false,
