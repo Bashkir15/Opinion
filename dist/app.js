@@ -969,7 +969,6 @@ webpackJsonp([0],[
 				var _this2 = this;
 
 				this._Stream.single(this.streamId).then(function (response) {
-					console.log(response);
 					_this2.stream = response.data.res.record;
 				});
 			}
@@ -1257,7 +1256,11 @@ webpackJsonp([0],[
 			value: function get(id, options) {
 				return this._$http({
 					url: '/comments/' + id,
-					method: 'GET'
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter
+					}
 				});
 			}
 		}, {
@@ -1314,7 +1317,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var threadsSingleCtrl = function () {
-		function threadsSingleCtrl(Thread, Comment, $stateParams, $rootScope, $mdDialog) {
+		function threadsSingleCtrl(Thread, Comment, $stateParams, $rootScope, $mdDialog, $timeout) {
 			'ngInject';
 
 			var _this = this;
@@ -1325,9 +1328,13 @@ webpackJsonp([0],[
 			this._Comment = Comment;
 			this._$rootScope = $rootScope;
 			this._$dialog = $mdDialog;
+			this._$timeout = $timeout;
 			this.streamId = $stateParams.streamId;
 			this.threadId = $stateParams.threadId;
 			this.comments = [];
+			this.commentPage = 0;
+			this.commentsSearch = '';
+			this.lastUpdated = 0;
 			this.getThread();
 			this.getComments();
 
@@ -1354,16 +1361,58 @@ webpackJsonp([0],[
 				var _this3 = this;
 
 				options = options || {};
+				options.filter = this.commentsSearch;
+				options.timestamp = this.lastUpdated;
+				options.page = this.commentPage;
 
 				this._Comment.get(this.threadId, options).then(function (response) {
-					console.log(response);
+					if (_this3.commentsSearch) {
+						_this3.comments = [];
+					}
 
 					if (!options.append) {
 						_this3.comments = response.data.res.records.concat(_this3.comments);
 					} else {
 						_this3.comments = _this3.comments.concat(response.data.res.records);
 					}
+
+					_this3.noMoreComments = !response.data.res.morePages;
+					_this3.lastUpdated = Date.now();
 				});
+			}
+		}, {
+			key: 'loadMore',
+			value: function loadMore() {
+				this.commentPage++;
+				this.lastUpdated = Date.now();
+				this.getComments({
+					append: true
+				});
+			}
+		}, {
+			key: 'search',
+			value: function search(newValue, oldValue) {
+				var _this4 = this;
+
+				var commentsSearchTimeout;
+
+				if (newValue != oldValue) {
+					this.comments = [];
+				}
+
+				this._$timeout.cancel(commentsSearchTimeout);
+				commentsSearchTimeout = this._$timeout(function () {
+					if (!newValue) {
+						if (_this4.commentsSearchEnabled) {
+							_this4.lastUpdated = 0;
+							_this4.getComments();
+						}
+					} else {
+						_this4.getComments();
+					}
+
+					_this4.commentsSearchEnabled = _this4.commentsSearch !== '';
+				}, 500);
 			}
 		}]);
 
@@ -2153,7 +2202,7 @@ webpackJsonp([0],[
 			_classCallCheck(this, SingleThreadCtrl);
 
 			this._$stateParams = $stateParams;
-			this.streamName = $stateParams.streamName;
+			this.streamId = $stateParams.streamId;
 
 			this._Thread = Thread;
 		}

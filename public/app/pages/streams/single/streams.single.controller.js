@@ -25,7 +25,6 @@ class singleStreamCtrl {
 
 	getStream() {
 		this._Stream.single(this.streamId).then((response) => {
-			console.log(response);
 			this.stream = response.data.res.record;
 		});
 	}

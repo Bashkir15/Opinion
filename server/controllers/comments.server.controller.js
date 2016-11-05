@@ -45,7 +45,7 @@ module.exports = () => {
 
 			if (req.query && req.query.timestamp) {
 				criteria.created = {
-					$gte: req.user.timestamp
+					$gte: req.query.timestamp
 				};
 			}
 
@@ -56,12 +56,21 @@ module.exports = () => {
 			}
 
 			Comment.find(criteria)
+			.skip(parseInt(req.query.page) * global.config.settings.perPage)
+			.limit(global.config.settings.perPage + 1)
 			.populate('creator')
 			.populate('thread')
 			.exec((err, comments) => {
 				if (err) {
 					return json.bad(err, res);
 				} else {
+
+					var morePages = global.config.settings.perPage < comments.length;
+
+					if (morePages) {
+						comments.pop();
+					}
+
 					if (req.user) {
 						comments.map((e) => {
 							e = e.afterSave(req.user);
@@ -69,7 +78,8 @@ module.exports = () => {
 					}
 
 					return json.good({
-						records: comments
+						records: comments,
+						morePages: morePages
 					}, res);
 				}
 			});

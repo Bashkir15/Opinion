@@ -16,7 +16,11 @@ class commentsService {
 	get(id, options) {
 		return this._$http({
 			url: '/comments/' + id,
-			method: 'GET'
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				filter: options.filter
+			}
 		});
 	}
 

@@ -3,7 +3,7 @@ class SingleThreadCtrl {
 		'ngInject';
 
 		this._$stateParams = $stateParams;
-		this.streamName = $stateParams.streamName;
+		this.streamId = $stateParams.streamId;
 
 		this._Thread = Thread
 	}
