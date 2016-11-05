@@ -1314,7 +1314,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var threadsSingleCtrl = function () {
-		function threadsSingleCtrl(Thread, Comment, $stateParams, $rootScope) {
+		function threadsSingleCtrl(Thread, Comment, $stateParams, $rootScope, $mdDialog) {
 			'ngInject';
 
 			var _this = this;
@@ -1324,6 +1324,7 @@ webpackJsonp([0],[
 			this._Thread = Thread;
 			this._Comment = Comment;
 			this._$rootScope = $rootScope;
+			this._$dialog = $mdDialog;
 			this.streamId = $stateParams.streamId;
 			this.threadId = $stateParams.threadId;
 			this.comments = [];
@@ -1331,7 +1332,7 @@ webpackJsonp([0],[
 			this.getComments();
 
 			this._$rootScope.$on('commentCreated', function () {
-				_this.showCreate = !_this.showCreate;
+				_this._$dialog.hide();
 				_this.getComments({
 					append: true
 				});
@@ -2388,13 +2389,30 @@ webpackJsonp([0],[
 		value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var commentsListCtrl = function commentsListCtrl() {
-		'ngInject';
+	var commentsListCtrl = function () {
+		function commentsListCtrl($mdDialog, $rootScope) {
+			'ngInject';
 
-		_classCallCheck(this, commentsListCtrl);
-	};
+			_classCallCheck(this, commentsListCtrl);
+
+			this._$dialog = $mdDialog;
+		}
+
+		_createClass(commentsListCtrl, [{
+			key: 'openCreateComment',
+			value: function openCreateComment() {
+				this._$dialog.show({
+					templateUrl: './app/pages/threads/dialogs/comment-create.html'
+				});
+			}
+		}]);
+
+		return commentsListCtrl;
+	}();
 
 	var commmentsList = {
 		scope: {},

@@ -14,7 +14,7 @@ Being the very first beta release, threre are bound to be some known issues that
 
 4. Users have access to some small parts of the application that they should not have access to, such as some mod options and the user profile when not logged in. Another small fix.
 
-5. The site is NOT responsive at the moment because they layout and design is not in any way finalized. It is a rough, working idea and it seemed silly to design a completely responsive interface when that interface is likely to change dramatically over the next few weeks
+5. ~~ The site is NOT responsive at the moment because they layout and design is not in any way finalized. It is a rough, working idea and it seemed silly to design a completely responsive interface when that interface is likely to change dramatically over the next few weeks~~
 
 If anyone sees these and finds some more issues, please let me know! I will be happy to add them to the list and get to fixing them. All of these issues, except for maybe number 1 should be covered in 0.1.1.
 

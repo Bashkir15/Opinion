@@ -1,6 +1,13 @@
 class commentsListCtrl {
-	constructor() {
+	constructor($mdDialog, $rootScope) {
 		'ngInject';
+		this._$dialog = $mdDialog;
+	}
+
+	openCreateComment() {
+		this._$dialog.show({
+			templateUrl: './app/pages/threads/dialogs/comment-create.html'
+		});
 	}
 }
 

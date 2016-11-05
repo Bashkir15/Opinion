@@ -1,10 +1,11 @@
 class threadsSingleCtrl {
-	constructor(Thread, Comment, $stateParams, $rootScope) {
+	constructor(Thread, Comment, $stateParams, $rootScope, $mdDialog) {
 		'ngInject';
 
 		this._Thread = Thread;
 		this._Comment = Comment;
 		this._$rootScope = $rootScope;
+		this._$dialog = $mdDialog;
 		this.streamId = $stateParams.streamId;
 		this.threadId = $stateParams.threadId;
 		this.comments = [];
@@ -12,7 +13,7 @@ class threadsSingleCtrl {
 		this.getComments();
 
 		this._$rootScope.$on('commentCreated', () => {
-			this.showCreate = !this.showCreate;
+			this._$dialog.hide();
 			this.getComments({
 				append: true
 			});
