@@ -90,43 +90,6 @@ module.exports = () => {
 		return getPosts();
 	};
 
-	obj.home = (req, res) => {
-		async.waterfall([
-			function(done) {
-				Stream.find({subscribers: req.user._id})
-				.populate('threads')
-				.exec((err, streams) => {
-					done(err, streams);
-				});
-			},
-			function (streams, done) {
-				var threadList = [];
-				streams.forEach((single) => {
-					if (single.threads) {
-						Thread.find({_id: single._id})
-						.populate('comment')
-						.exec((err, threads) => {
-							threadList.push(threads);
-							done(err, threadList);
-						});
-					}
-				});
-			},
-
-			function (threadList, done) {
-				var homeItems = [];
-
-				threadList.forEach((thread) => {
-					homeItems.push(thread);
-					done(homeItems);
-				});
-			}
-		], (homeItems) => {
-			json.good({
-				records: homeItems
-			}, res);
-		});
-	};
 
 	obj.single = (req, res) => {
 		Thread.findOne({_id: req.params.threadId})
@@ -188,6 +151,36 @@ module.exports = () => {
 						}, res);
 					});
 				}
+			}
+		});
+	};
+
+	obj.unauthHome = (req, res) => {
+		Thread.find()
+		.skip(parseInt(req.query.page) * global.config.settings.perPage)
+		.limit(global.config.settings.perPage + 1)
+		.popuate('creator')
+		.populate('comments')
+		.exec((err, threads) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				var morePages = global.config.settings.perPage < threads.length;
+
+				if (morePages) {
+					threads.pop();
+				}
+
+				if (req.user) {
+					threads.map((e) => {
+						e = e.afterSave(req.user);
+					});
+				}
+
+				json.good({
+					records: threads,
+					morePages: morePages
+				});
 			}
 		});
 	};

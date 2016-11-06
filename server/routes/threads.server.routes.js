@@ -6,7 +6,7 @@ var router = express.Router();
 var threads = threadController();
 
 router.post('/', auth.ensureAuthorized, threads.create);
-router.get('/home', auth.ensureAuthorized, threads.home);
+router.get('/unauthHome', auth.justGetUser, threads.unauthHome);
 router.get('/:streamId/threads', auth.justGetUser, threads.list);
 router.get('/:threadId', auth.justGetUser, threads.single);
 router.post('/:threadId/like', auth.ensureAuthorized, threads.like);
