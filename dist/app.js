@@ -1533,13 +1533,11 @@ webpackJsonp([0],[
 					options.subscribed = true;
 
 					this._Stream.get(options).then(function (response) {
-						console.log(response);
 						_this2.streams = response.data.res.records;
 					});
 				} else {
 					options.unsubscribed = true;
 					this._Stream.get(options).then(function (response) {
-						console.log(response);
 						_this2.streams = response.data.res.records;
 					});
 				}

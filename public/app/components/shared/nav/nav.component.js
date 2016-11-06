@@ -33,13 +33,11 @@ class navCtrl {
 			options.subscribed = true;
 
 			this._Stream.get(options).then((response) => {
-				console.log(response);
 				this.streams = response.data.res.records;
 			});
 		} else {
 			options.unsubscribed = true;
 			this._Stream.get(options).then((response) => {
-				console.log(response);
 				this.streams = response.data.res.records;
 			});
 		}

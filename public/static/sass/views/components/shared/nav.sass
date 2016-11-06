@@ -56,7 +56,7 @@
 	flex-direction: column
 	align-items: center
 	padding: 45px 0 30px 0
-	min-height: 200px
+	min-height: 220px
 
 	> div
 		height: 70px
@@ -71,17 +71,33 @@
 
 .user-menu-body
 	width: 100%
-	padding-left: 20px
-	padding-right: 20px
-	md-list-item
-		height: 65px
-		padding-left: 0
-		padding-right: 0
+	padding-bottom: 0
+
+	.first-item
+		border-top: 1px solid darken($default-red, 10%)
 
 		> div
 			&:nth-of-type(1)
+				border-bottom: 1px solid darken($default-red, 10%)
+	
+	md-list-item
+		height: 75px
+		padding: 0
+		border-bottom: 1px solid darken($default-red, 10%)
+		transition: all .4s ease
+
+		> div
+			&:nth-of-type(1)
+				display: flex
+				align-items: center
+				justify-content: center
+				background: darken($default-red, 5%)
+				height: 74px
+				width: 60px
+				transition: all .4s ease
+
 				i
-					color: $default-grey-background
+					color: darken($default-grey, 20%)
 					font-size: 25px
 
 			&:nth-of-type(2)
@@ -91,11 +107,12 @@
 					@include open()
 					font-weight: 400
 					letter-spacing: 2px
-					font-size: 16px
+					font-size: 18px
 					color: $default-white-background
 
 			&.md-button
 				padding-left: 0
+				background: $default-red
 
 				button
 					span
@@ -105,28 +122,61 @@
 						font-size: 16px
 						color: $default-white-background
 
-		&._md-button-wrap
-			.md-button
-				&.md-no-style
-					padding-left: 0
+		&:hover
+			background: darken($default-red, 10%)
 
-				.md-list-item-inner
-
-					.inset
-						padding-left: 20px
-						
-						span
-							@include open()
-							font-weight: 400
-							letter-spacing: 2px
-							font-size: 16px
-							color: $default-white-background
+			> div
+				&:nth-of-type(1)
+					background: darken($default-red, 10%)
 
 
 		button
 			i
 				font-size: 22px
 				color: $default-white-background
+
+.logout-container
+	display: flex
+	align-items: center
+	width: 100%
+	height: 75px
+	min-height: 75px
+	cursor: pointer
+	transition: all .4s ease
+	border-bottom: 1px solid darken($default-red, 10%)
+
+	> div
+		&:nth-of-type(1)
+			display: flex
+			align-items: center
+			justify-content: center
+			width: 60px
+			height: 75px
+			background: darken($default-red, 5%)
+			transition: all .4s ease
+
+			i
+				font-size: 25px
+				color: darken($default-grey, 20%)
+
+		&:nth-of-type(2)
+			padding-left: 20px
+
+			span
+				@include open()
+				font-weight: 400
+				letter-spacing: 2px
+				font-size: 18px
+				color: $default-white-background
+
+	&:hover
+		background: darken($default-red, 10%)
+
+		> div
+			&:nth-of-type(1)
+				background: darken($default-red, 10%)
+
+
 
 .user-menu-nested-list
 	list-style-type: none
@@ -136,13 +186,25 @@
 	position: relative
 	z-index: 1
 	transition: all .4s ease
+	border-bottom: 1px solid darken($default-red, 10%)
 
 	li
+		width: 100%
 		padding-left: 0
 		transition: all .4s ease
 
 		button
-			height: 50px
+			height: 60px
+
+			span
+				@include open()
+				font-weight: 400
+				letter-spacing: 2px
+				font-size: 16px
+				color: $default-white-background
+
+		&:hover
+			background: darken($default-red, 5%)
 
 	&.ng-hide
 		max-height: 0

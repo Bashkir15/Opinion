@@ -58,7 +58,7 @@
 	</div>
 
 	<md-list class='user-menu-body'>
-		<md-list-item md-ink-ripple>
+		<md-list-item md-ink-ripple class='first-item'>
 			<div>
 				<i class='mdi mdi-account'></i>
 			</div>
@@ -295,16 +295,16 @@
 				<span>Add Thread</span>
 			</div>
 		</md-list-item>
-
-		<md-list-item md-ink-ripple ng-click='$ctrl.logout()'>
-			<div>
-				<i class='mdi mdi-emoticon-poop'></i>
-			</div>
-
-			<div class='inset'>
-				<span>Logout</span>
-			</div>
-		</md-list-item>
 	</md-list>
+
+	<div class='logout-container' ng-click="$ctrl.logout()">
+		<div>
+			<i class='mdi mdi-emoticon-poop'></i>
+		</div>
+
+		<div>
+			<span>Logout</span>
+		</div>
+	</div>
 
 </md-sidenav>
