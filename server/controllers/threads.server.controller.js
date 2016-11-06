@@ -156,33 +156,51 @@ module.exports = () => {
 	};
 
 	obj.unauthHome = (req, res) => {
-		Thread.find()
-		.skip(parseInt(req.query.page) * global.config.settings.perPage)
-		.limit(global.config.settings.perPage + 1)
-		.popuate('creator')
-		.populate('comments')
-		.exec((err, threads) => {
-			if (err) {
-				return json.bad(err, res);
-			} else {
-				var morePages = global.config.settings.perPage < threads.length;
+		var getPosts = () => {
+			var criteria = {};
 
-				if (morePages) {
-					threads.pop();
-				}
-
-				if (req.user) {
-					threads.map((e) => {
-						e = e.afterSave(req.user);
-					});
-				}
-
-				json.good({
-					records: threads,
-					morePages: morePages
-				});
+			if (req.query && req.query.timestamp) {
+				criteria.created = {
+					$gte: req.query.timestamp
+				};
 			}
-		});
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+				criteria.title = new RegExp(req.query.fiter, 'i');
+			}
+
+			Thread.find(criteria)
+			.skip(parseInt(req.query.page) * global.config.settings.perPage)
+			.limit(global.config.settings.perPage + 1)
+			.populate('creator')
+			.populate('comments')
+			.exec((err, threads) => {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					var morePages = global.config.settings.perPage < threads.length;
+
+					if (morePages) {
+						threads.pop();
+					}
+
+
+					if (req.user) {
+						threads.map((e) => {
+							e = e.afterSave(req.user);
+						});
+					}
+
+					return json.good({
+						records: threads,
+						morePages: morePages
+					}, res);
+				}
+			});
+		};
+
+		return getPosts();
 	};
 
 	obj.dislike = (req, res) => {

@@ -380,16 +380,38 @@ webpackJsonp([0],[
 			this._Auth = Auth;
 			this._isLoggedIn = this._Auth.isLoggedIn();
 			this.getHome();
+			this.threads = [];
+			this.lastUpdated = 0;
+			this.homeSearch = '';
+			this.homePage = 0;
 		}
 
 		_createClass(HomeCtrl, [{
 			key: 'getHome',
-			value: function getHome() {
-				if (this._isLoggedIn) {
-					this._Thread.home().then(function (response) {
-						console.log(response);
-					});
-				}
+			value: function getHome(options) {
+				var _this = this;
+
+				options = options || {};
+				options.timestamp = this.lastUpdated;
+				options.filter = this.homeSearch;
+				options.page = this.homePage;
+
+				this._Thread.unHome(options).then(function (response) {
+					console.log(response);
+
+					if (_this.homeSearch) {
+						_this.threads = [];
+					}
+
+					if (!options.append) {
+						_this.threads = response.data.res.records.concat(_this.threads);
+					} else {
+						_this.threads = _this.threads.concat(response.data.res.records);
+					}
+
+					_this.lastUpdated = Date.now();
+					_this.noMoreThreads = !response.data.res.morePages;
+				});
 			}
 		}]);
 
@@ -1160,16 +1182,22 @@ webpackJsonp([0],[
 					method: 'GET',
 					params: {
 						timestamp: options.timestamp,
-						filter: options.filter
+						filter: options.filter,
+						page: options.page
 					}
 				});
 			}
 		}, {
-			key: 'home',
-			value: function home() {
+			key: 'unHome',
+			value: function unHome(options) {
 				return this._$http({
-					url: '/threads/home',
-					method: 'GET'
+					url: '/threads/unauthHome',
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter,
+						page: options.page
+					}
 				});
 			}
 		}, {
@@ -2109,7 +2137,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var threadListController = function () {
-		function threadListController($stateParams, $mdDialog, $rootScope) {
+		function threadListController($stateParams, $mdDialog, $rootScope, $state) {
 			'ngInject';
 
 			var _this = this;
@@ -2119,6 +2147,11 @@ webpackJsonp([0],[
 			this._$stateParams = $stateParams;
 			this._$dialog = $mdDialog;
 			this._$rootScope = $rootScope;
+			this._$state = $state;
+
+			if (this._$state.current.name == 'app.home') {
+				this.hideCreate = true;
+			}
 
 			this.streamId = $stateParams.streamId;
 

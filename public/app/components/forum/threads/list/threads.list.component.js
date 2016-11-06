@@ -1,10 +1,15 @@
 class threadListController {
-	constructor($stateParams, $mdDialog, $rootScope) {
+	constructor($stateParams, $mdDialog, $rootScope, $state) {
 		'ngInject';
 
 		this._$stateParams = $stateParams;
 		this._$dialog = $mdDialog;
 		this._$rootScope = $rootScope;
+		this._$state = $state;
+
+		if (this._$state.current.name == 'app.home') {
+			this.hideCreate = true;
+		}
 
 		this.streamId = $stateParams.streamId;
 

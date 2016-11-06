@@ -19,15 +19,21 @@ class threadService {
 			method: 'GET',
 			params: {
 				timestamp: options.timestamp,
-				filter: options.filter
+				filter: options.filter,
+				page: options.page
 			}
 		});
 	}
 
-	home() {
+	unHome(options) {
 		return this._$http({
-			url: '/threads/home',
-			method: 'GET'
+			url: '/threads/unauthHome',
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				filter: options.filter,
+				page: options.page
+			}
 		});
 	}
 
