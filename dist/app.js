@@ -296,9 +296,11 @@ webpackJsonp([0],[
 
 	__webpack_require__(135);
 
+	__webpack_require__(163);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['home', 'auth', 'streams', 'threads'];
+	var requires = ['home', 'auth', 'streams', 'threads', 'profile'];
 
 	var pagesModule = _angular2.default.module('app.pages', requires);
 
@@ -2653,6 +2655,151 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _users = __webpack_require__(164);
+
+	var _users2 = _interopRequireDefault(_users);
+
+	var _profile = __webpack_require__(165);
+
+	var _profile2 = _interopRequireDefault(_profile);
+
+	var _profile3 = __webpack_require__(166);
+
+	var _profile4 = _interopRequireDefault(_profile3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var profileModule = _angular2.default.module('profile', []);
+	profileModule.config(_profile2.default);
+	profileModule.service('User', _users2.default);
+	profileModule.controller('ProfileController', _profile4.default);
+
+	exports.default = profileModule;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var UsersService = function () {
+		function UsersService($http) {
+			'ngInject';
+
+			_classCallCheck(this, UsersService);
+
+			this._$http = $http;
+		}
+
+		_createClass(UsersService, [{
+			key: 'single',
+			value: function single(username) {
+				return this._$http({
+					url: '/users/' + username,
+					method: 'GET'
+				});
+			}
+		}]);
+
+		return UsersService;
+	}();
+
+	exports.default = UsersService;
+
+/***/ },
+/* 165 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function profileConfig($stateProvider) {
+		'ngInject';
+
+		$stateProvider.state('app.profile', {
+			url: '/profile/:userName',
+			templateUrl: './app/pages/profile/profile.tmpl.html',
+			controller: 'ProfileController',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.profile.overview', {
+			url: '/overview',
+			templateUrl: './app/pages/profile/overview/overview.html'
+		});
+	}
+
+	exports.default = profileConfig;
+
+/***/ },
+/* 166 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var profileCtrl = function () {
+		function profileCtrl(User, Auth, $stateParams) {
+			'ngInject';
+
+			_classCallCheck(this, profileCtrl);
+
+			this._User = User;
+			this._Auth = Auth;
+			this._$stateParams = $stateParams;
+			this._username = $stateParams.username;
+
+			this.currentUser = this._Auth.getUser();
+			this.getUser();
+		}
+
+		_createClass(profileCtrl, [{
+			key: 'getUser',
+			value: function getUser() {
+				var _this = this;
+
+				this._User.single(this._username).then(function (response) {
+					_this.user = response.data.res.record;
+				});
+			}
+		}]);
+
+		return profileCtrl;
+	}();
+
+	exports.default = profileCtrl;
 
 /***/ }
 ]);

@@ -174,6 +174,7 @@ module.exports = () => {
 			.skip(parseInt(req.query.page) * global.config.settings.perPage)
 			.limit(global.config.settings.perPage + 1)
 			.populate('creator')
+			.populate('stream')
 			.populate('comments')
 			.exec((err, threads) => {
 				if (err) {

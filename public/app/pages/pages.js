@@ -3,12 +3,14 @@ import './home/home'
 import './auth/auth'
 import './streams/streams'
 import './threads/threads'
+import './profile/profile'
 
 const requires = [
 	'home',
 	'auth',
 	'streams',
-	'threads'
+	'threads',
+	'profile'
 ];
 
 let pagesModule = angular.module('app.pages', requires);
