@@ -57,6 +57,14 @@ class ProfileThreadsCtrl {
 			this.threadsSearchEnabled = this.threadsSearch !== '';
 		}, 500)
 	}
+
+	loadMore() {
+		this.threadPage++;
+		this.lastUpdated = 0;
+		this.getThreads({
+			append: true
+		});
+	}
 }
 
 export default ProfileThreadsCtrl

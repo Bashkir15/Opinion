@@ -107,11 +107,11 @@ module.exports = () => {
 			}
 
 			Thread.find(criteria)
-			.skip(parseInt(req.query.page) * global.config.settings.perPage)
-			.limit(global.config.settings.perPage + 1)
 			.populate('creator')
 			.populate('stream')
 			.populate('comments')
+			.skip(parseInt(req.query.page) * global.config.settings.perPage)
+			.limit(global.config.settings.perPage + 1)
 			.exec((err, threads) => {
 				if (err) {
 					return json.bad(err, res);

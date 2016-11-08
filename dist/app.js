@@ -893,7 +893,7 @@ webpackJsonp([0],[
 			key: 'loadMore',
 			value: function loadMore() {
 				this.streamPage++;
-				this.lastUpdated = Date.now();
+				this.lastUpdated = 0;
 				this.getStreams({ append: true });
 			}
 		}, {
@@ -1025,7 +1025,7 @@ webpackJsonp([0],[
 			key: 'loadMore',
 			value: function loadMore() {
 				this.threadPage++;
-				this.lastUpdated = Date.now();
+				this.lastUpdated = 0;
 				this.getThreads({
 					append: true
 				});
@@ -3070,6 +3070,15 @@ webpackJsonp([0],[
 
 					_this2.threadsSearchEnabled = _this2.threadsSearch !== '';
 				}, 500);
+			}
+		}, {
+			key: 'loadMore',
+			value: function loadMore() {
+				this.threadPage++;
+				this.lastUpdated = 0;
+				this.getThreads({
+					append: true
+				});
 			}
 		}]);
 

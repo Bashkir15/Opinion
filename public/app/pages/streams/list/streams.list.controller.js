@@ -49,7 +49,7 @@ class StreamsListCtrl {
 
 	loadMore() {
 		this.streamPage++;
-		this.lastUpdated = Date.now();
+		this.lastUpdated = 0;
 		this.getStreams({append: true});
 	}
 

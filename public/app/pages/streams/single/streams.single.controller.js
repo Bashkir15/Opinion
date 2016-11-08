@@ -53,7 +53,7 @@ class singleStreamCtrl {
 
 	loadMore() {
 		this.threadPage++;
-		this.lastUpdated = Date.now();
+		this.lastUpdated = 0;
 		this.getThreads({
 			append: true
 		});
