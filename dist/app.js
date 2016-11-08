@@ -22,13 +22,13 @@ webpackJsonp([0],[
 
 	__webpack_require__(121);
 
-	__webpack_require__(140);
+	__webpack_require__(144);
 
-	var _app = __webpack_require__(160);
+	var _app = __webpack_require__(167);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _app3 = __webpack_require__(162);
+	var _app3 = __webpack_require__(169);
 
 	var _app4 = _interopRequireDefault(_app3);
 
@@ -296,7 +296,7 @@ webpackJsonp([0],[
 
 	__webpack_require__(135);
 
-	__webpack_require__(163);
+	__webpack_require__(140);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1458,6 +1458,156 @@ webpackJsonp([0],[
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _users = __webpack_require__(141);
+
+	var _users2 = _interopRequireDefault(_users);
+
+	var _profile = __webpack_require__(142);
+
+	var _profile2 = _interopRequireDefault(_profile);
+
+	var _profile3 = __webpack_require__(143);
+
+	var _profile4 = _interopRequireDefault(_profile3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var profileModule = _angular2.default.module('profile', []);
+	profileModule.config(_profile2.default);
+	profileModule.service('User', _users2.default);
+	profileModule.controller('ProfileController', _profile4.default);
+
+	exports.default = profileModule;
+
+/***/ },
+/* 141 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var UsersService = function () {
+		function UsersService($http) {
+			'ngInject';
+
+			_classCallCheck(this, UsersService);
+
+			this._$http = $http;
+		}
+
+		_createClass(UsersService, [{
+			key: 'single',
+			value: function single(username) {
+				return this._$http({
+					url: '/users/' + username,
+					method: 'GET'
+				});
+			}
+		}]);
+
+		return UsersService;
+	}();
+
+	exports.default = UsersService;
+
+/***/ },
+/* 142 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function profileConfig($stateProvider) {
+		'ngInject';
+
+		$stateProvider.state('app.profile', {
+			url: '/profile/:username',
+			templateUrl: './app/pages/profile/profile.tmpl.html',
+			controller: 'ProfileController',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.profile.overview', {
+			url: '/overview',
+			templateUrl: './app/pages/profile/overview/overview.html'
+		});
+
+		$stateProvider.state('app.profile.threads', {
+			url: '/threads',
+			templateUrl: './app/pages/profile/threads/threads.html'
+		});
+	}
+
+	exports.default = profileConfig;
+
+/***/ },
+/* 143 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var profileCtrl = function () {
+		function profileCtrl(User, Auth, $stateParams) {
+			'ngInject';
+
+			_classCallCheck(this, profileCtrl);
+
+			this._User = User;
+			this._Auth = Auth;
+			this._$stateParams = $stateParams;
+			this._username = $stateParams.username;
+
+			this.currentUser = this._Auth.getUser();
+			this.getUser();
+		}
+
+		_createClass(profileCtrl, [{
+			key: 'getUser',
+			value: function getUser() {
+				var _this = this;
+
+				this._User.single(this._username).then(function (response) {
+					_this.user = response.data.res.record;
+				});
+			}
+		}]);
+
+		return profileCtrl;
+	}();
+
+	exports.default = profileCtrl;
+
+/***/ },
+/* 144 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 
@@ -1465,22 +1615,24 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(141);
+	__webpack_require__(145);
 
-	__webpack_require__(143);
+	__webpack_require__(147);
 
-	__webpack_require__(146);
+	__webpack_require__(150);
+
+	__webpack_require__(164);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['shared.components', 'auth.components', 'forum.components'];
+	var requires = ['shared.components', 'auth.components', 'forum.components', 'profile.components'];
 
 	var componentModule = _angular2.default.module('app.components', requires);
 
 	exports.default = componentModule;
 
 /***/ },
-/* 141 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1493,7 +1645,7 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _nav = __webpack_require__(142);
+	var _nav = __webpack_require__(146);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
@@ -1505,7 +1657,7 @@ webpackJsonp([0],[
 	exports.default = sharedComponents;
 
 /***/ },
-/* 142 */
+/* 146 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1593,7 +1745,7 @@ webpackJsonp([0],[
 	exports.default = appNav;
 
 /***/ },
-/* 143 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1606,11 +1758,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _signup = __webpack_require__(144);
+	var _signup = __webpack_require__(148);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
-	var _login = __webpack_require__(145);
+	var _login = __webpack_require__(149);
 
 	var _login2 = _interopRequireDefault(_login);
 
@@ -1623,7 +1775,7 @@ webpackJsonp([0],[
 	exports.default = authComponents;
 
 /***/ },
-/* 144 */
+/* 148 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1684,7 +1836,7 @@ webpackJsonp([0],[
 	exports.default = signupForm;
 
 /***/ },
-/* 145 */
+/* 149 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1789,7 +1941,7 @@ webpackJsonp([0],[
 	exports.default = loginForm;
 
 /***/ },
-/* 146 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1802,11 +1954,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(147);
-
-	__webpack_require__(152);
+	__webpack_require__(151);
 
 	__webpack_require__(156);
+
+	__webpack_require__(160);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1817,7 +1969,7 @@ webpackJsonp([0],[
 	exports.default = forumComponents;
 
 /***/ },
-/* 147 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1830,19 +1982,19 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _streamsList = __webpack_require__(148);
+	var _streamsList = __webpack_require__(152);
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamsSingle = __webpack_require__(149);
+	var _streamsSingle = __webpack_require__(153);
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
-	var _streamCreate = __webpack_require__(150);
+	var _streamCreate = __webpack_require__(154);
 
 	var _streamCreate2 = _interopRequireDefault(_streamCreate);
 
-	var _streamsTrending = __webpack_require__(151);
+	var _streamsTrending = __webpack_require__(155);
 
 	var _streamsTrending2 = _interopRequireDefault(_streamsTrending);
 
@@ -1857,7 +2009,7 @@ webpackJsonp([0],[
 	exports.default = streamComponents;
 
 /***/ },
-/* 148 */
+/* 152 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1930,7 +2082,7 @@ webpackJsonp([0],[
 	exports.default = listStream;
 
 /***/ },
-/* 149 */
+/* 153 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1982,7 +2134,7 @@ webpackJsonp([0],[
 	exports.default = singleStream;
 
 /***/ },
-/* 150 */
+/* 154 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2038,7 +2190,7 @@ webpackJsonp([0],[
 	exports.default = createStream;
 
 /***/ },
-/* 151 */
+/* 155 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2090,7 +2242,7 @@ webpackJsonp([0],[
 	exports.default = trendingStream;
 
 /***/ },
-/* 152 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2103,15 +2255,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threadsList = __webpack_require__(153);
+	var _threadsList = __webpack_require__(157);
 
 	var _threadsList2 = _interopRequireDefault(_threadsList);
 
-	var _threadsSingle = __webpack_require__(154);
+	var _threadsSingle = __webpack_require__(158);
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
-	var _threadsCreate = __webpack_require__(155);
+	var _threadsCreate = __webpack_require__(159);
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
@@ -2125,7 +2277,7 @@ webpackJsonp([0],[
 	exports.default = threadComponents;
 
 /***/ },
-/* 153 */
+/* 157 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2215,7 +2367,7 @@ webpackJsonp([0],[
 	exports.default = threadsList;
 
 /***/ },
-/* 154 */
+/* 158 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2285,7 +2437,7 @@ webpackJsonp([0],[
 	exports.default = singleThread;
 
 /***/ },
-/* 155 */
+/* 159 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2358,7 +2510,7 @@ webpackJsonp([0],[
 	exports.default = createThread;
 
 /***/ },
-/* 156 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2371,15 +2523,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _commentsCreate = __webpack_require__(157);
+	var _commentsCreate = __webpack_require__(161);
 
 	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
 
-	var _commentsList = __webpack_require__(158);
+	var _commentsList = __webpack_require__(162);
 
 	var _commentsList2 = _interopRequireDefault(_commentsList);
 
-	var _commentsSingle = __webpack_require__(159);
+	var _commentsSingle = __webpack_require__(163);
 
 	var _commentsSingle2 = _interopRequireDefault(_commentsSingle);
 
@@ -2393,7 +2545,7 @@ webpackJsonp([0],[
 	exports.default = commentComponents;
 
 /***/ },
-/* 157 */
+/* 161 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2462,7 +2614,7 @@ webpackJsonp([0],[
 	exports.default = createComment;
 
 /***/ },
-/* 158 */
+/* 162 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2508,7 +2660,7 @@ webpackJsonp([0],[
 	exports.default = commmentsList;
 
 /***/ },
-/* 159 */
+/* 163 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2574,7 +2726,98 @@ webpackJsonp([0],[
 	exports.default = singleComment;
 
 /***/ },
-/* 160 */
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _profileHeader = __webpack_require__(165);
+
+	var _profileHeader2 = _interopRequireDefault(_profileHeader);
+
+	var _profileOverview = __webpack_require__(166);
+
+	var _profileOverview2 = _interopRequireDefault(_profileOverview);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var profileComponents = _angular2.default.module('profile.components', []);
+	profileComponents.component('profileHeader', _profileHeader2.default);
+	profileComponents.component('profileOverview', _profileOverview2.default);
+
+	exports.default = profileComponents;
+
+/***/ },
+/* 165 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var headerCtrl = function headerCtrl(Auth) {
+		'ngInject';
+
+		_classCallCheck(this, headerCtrl);
+
+		this._Auth = Auth;
+		this.currentUser = this._Auth.getUser();
+	};
+
+	var headerComponent = {
+		scope: {},
+		bindings: {
+			user: '<'
+		},
+		controller: headerCtrl,
+		templateUrl: './app/components/profile/header/profile.header.component.html'
+	};
+
+	exports.default = headerComponent;
+
+/***/ },
+/* 166 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var overviewCtrl = function overviewCtrl() {
+		'ngInject';
+
+		_classCallCheck(this, overviewCtrl);
+	};
+
+	var overviewComponent = {
+		scope: {},
+		bindings: {
+			user: '<'
+		},
+		controller: overviewCtrl,
+		templateUrl: './app/components/profile/overview/profile.overview.component.html'
+	};
+
+	exports.default = overviewComponent;
+
+/***/ },
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2583,7 +2826,7 @@ webpackJsonp([0],[
 		value: true
 	});
 
-	var _auth = __webpack_require__(161);
+	var _auth = __webpack_require__(168);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -2605,7 +2848,7 @@ webpackJsonp([0],[
 	exports.default = appConfig;
 
 /***/ },
-/* 161 */
+/* 168 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2638,7 +2881,7 @@ webpackJsonp([0],[
 	exports.default = authInterceptor;
 
 /***/ },
-/* 162 */
+/* 169 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2655,151 +2898,6 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
-
-/***/ },
-/* 163 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _users = __webpack_require__(164);
-
-	var _users2 = _interopRequireDefault(_users);
-
-	var _profile = __webpack_require__(165);
-
-	var _profile2 = _interopRequireDefault(_profile);
-
-	var _profile3 = __webpack_require__(166);
-
-	var _profile4 = _interopRequireDefault(_profile3);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var profileModule = _angular2.default.module('profile', []);
-	profileModule.config(_profile2.default);
-	profileModule.service('User', _users2.default);
-	profileModule.controller('ProfileController', _profile4.default);
-
-	exports.default = profileModule;
-
-/***/ },
-/* 164 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var UsersService = function () {
-		function UsersService($http) {
-			'ngInject';
-
-			_classCallCheck(this, UsersService);
-
-			this._$http = $http;
-		}
-
-		_createClass(UsersService, [{
-			key: 'single',
-			value: function single(username) {
-				return this._$http({
-					url: '/users/' + username,
-					method: 'GET'
-				});
-			}
-		}]);
-
-		return UsersService;
-	}();
-
-	exports.default = UsersService;
-
-/***/ },
-/* 165 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function profileConfig($stateProvider) {
-		'ngInject';
-
-		$stateProvider.state('app.profile', {
-			url: '/profile/:userName',
-			templateUrl: './app/pages/profile/profile.tmpl.html',
-			controller: 'ProfileController',
-			controllerAs: '$ctrl'
-		});
-
-		$stateProvider.state('app.profile.overview', {
-			url: '/overview',
-			templateUrl: './app/pages/profile/overview/overview.html'
-		});
-	}
-
-	exports.default = profileConfig;
-
-/***/ },
-/* 166 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var profileCtrl = function () {
-		function profileCtrl(User, Auth, $stateParams) {
-			'ngInject';
-
-			_classCallCheck(this, profileCtrl);
-
-			this._User = User;
-			this._Auth = Auth;
-			this._$stateParams = $stateParams;
-			this._username = $stateParams.username;
-
-			this.currentUser = this._Auth.getUser();
-			this.getUser();
-		}
-
-		_createClass(profileCtrl, [{
-			key: 'getUser',
-			value: function getUser() {
-				var _this = this;
-
-				this._User.single(this._username).then(function (response) {
-					_this.user = response.data.res.record;
-				});
-			}
-		}]);
-
-		return profileCtrl;
-	}();
-
-	exports.default = profileCtrl;
 
 /***/ }
 ]);

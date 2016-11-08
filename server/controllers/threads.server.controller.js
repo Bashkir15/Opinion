@@ -90,6 +90,55 @@ module.exports = () => {
 		return getPosts();
 	};
 
+	obj.userThreads = (req, res) => {
+		var getThreads = () => {
+			var criteria = {};
+			criteria.creator = req.params.userId;
+
+			if (req.query && req.query.timestamp) {
+				criteria.created = {
+					$gte: req.query.timestamp
+				};
+			} 
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+				criteria.title = new RegExp(req.query.filter, 'i');
+			}
+
+			Thread.find(criteria)
+			.skip(parseInt(req.query.page) * global.config.settings.perPage)
+			.limit(global.config.settings.perPage + 1)
+			.populate('creator')
+			.populate('stream')
+			.populate('comments')
+			.exec((err, threads) => {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					var morePages = global.config.settings.perPage < threads.length;
+
+					if (morePages) {
+						threads.pop();
+					}
+
+					if (req.user) {
+						threads.map((e) => {
+							e = e.afterSave(req.user);
+						});
+					}
+
+					return json.good({
+						morePages: morePages,
+						records: threads
+					}, res);
+				}
+			});
+		};
+
+		return getThreads();
+	};
+
 
 	obj.single = (req, res) => {
 		Thread.findOne({_id: req.params.threadId})

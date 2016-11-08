@@ -8,10 +8,6 @@
 		<div class='forum-side-bar above-tablet'></div>
 	</div>
 
-	<div ng-if='!$ctrl.threads.length' class='forum-list-no-items'>
-		<p>It doesn't look like there is anything here</p>
-		<span>You should create a <span>new thread!</span></span>
-	</div>
 
 	
 	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateThread()" ng-if="!$ctrl.hideCreate">

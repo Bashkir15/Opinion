@@ -1,0 +1,48 @@
+<div class='profile-header-component-container'>
+	<div class='profile-header-info'>
+		<div class='profile-header-image'></div>
+		<div class='profile-header-user'>
+			<h4>{{$ctrl.user.name}}</h4>
+			<p>{{$ctrl.user.username}}</p>
+		</div>
+		<div class='profile-header-options'>
+			<md-menu class='profile-header-dropdown'>
+				<button ng-click="$mdOpenMenu()">
+					<span>Options</span>
+				</button>
+
+				<md-menu-content>
+					<md-menu-item ng-if="$ctrl.currentUser._id != $ctrl.user._id">
+						<button>
+							<span>Follow</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item ng-if="$ctrl.currentUser._id != $ctrl.user._id">
+						<button>
+							<span>Unfollow</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item ng-if="$ctrl.currentUser._id != $ctrl.user._id">
+						<button>
+							<span>Message</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item ng-if='$ctrl.currentUser._id == $ctrl.user._id'>
+						<button>
+							<span>Edit Profile</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item ng-if='$ctrl.currentUser._id == $ctrl.user._id'>
+						<button>
+							<span>Upload Image</span>
+						</button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</div>
+	</div>
+</div>
