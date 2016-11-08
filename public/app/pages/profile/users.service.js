@@ -5,9 +5,9 @@ class UsersService {
 		this._$http = $http;
 	}
 
-	single(username) {
+	single(id) {
 		return this._$http({
-			url: '/users/' + username,
+			url: '/users/' + id,
 			method: 'GET'
 		});
 	}

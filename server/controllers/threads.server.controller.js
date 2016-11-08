@@ -92,8 +92,8 @@ module.exports = () => {
 
 	obj.userThreads = (req, res) => {
 		var getThreads = () => {
-			var criteria = {};
-			criteria.creator = req.params.userId;
+			var criteria = {creator: req.params.userId};
+
 
 			if (req.query && req.query.timestamp) {
 				criteria.created = {
@@ -116,6 +116,7 @@ module.exports = () => {
 				if (err) {
 					return json.bad(err, res);
 				} else {
+					console.log(threads);
 					var morePages = global.config.settings.perPage < threads.length;
 
 					if (morePages) {

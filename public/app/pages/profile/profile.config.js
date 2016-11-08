@@ -2,7 +2,7 @@ function profileConfig ($stateProvider) {
 	'ngInject';
 
 	$stateProvider.state('app.profile', {
-		url: '/profile/:username',
+		url: '/profile/:userId',
 		templateUrl: './app/pages/profile/profile.tmpl.html',
 		controller: 'ProfileController',
 		controllerAs: '$ctrl'
@@ -15,7 +15,9 @@ function profileConfig ($stateProvider) {
 
 	$stateProvider.state('app.profile.threads', {
 		url: '/threads',
-		templateUrl: './app/pages/profile/threads/threads.html'
+		templateUrl: './app/pages/profile/threads/threads.html',
+		controller: 'ProfileThreadsController',
+		controllerAs: '$ctrl'
 	});
 }
 

@@ -2,31 +2,31 @@
 	<profile-header user="$ctrl.user" class='profile-header-component'></profile-header>
 
 	<md-tabs class='profile-tabs' md-dynamic-height md-swipe-content="true">
-		<md-tab ui-sref="app.profile.overview({username: $ctrl.user.username})">
+		<md-tab ui-sref="app.profile.overview({userId: $ctrl.user._id})">
 			<md-tab-label>
 				<span>Overview</span>
 			</md-tab-label>
 		</md-tab>
 
-		<md-tab ui-sref="app.profile.threads({username: $ctrl.user.username})">
+		<md-tab ui-sref="app.profile.threads({userId: $ctrl.user._id})">
 			<md-tab-label>
 				<span>Threads</span>
 			</md-tab-label>
 		</md-tab>
 
-		<md-tab ui-sref="app.profile.comments({username: $ctrl.user.username})">
+		<md-tab ui-sref="app.profile.comments({userId: $ctrl.user._id})">
 			<md-tab-label>
 				<span>Comments</span>
 			</md-tab-label>
 		</md-tab>
 
-		<md-tab ui-sref="app.profile.saved({username: $ctrl.user.username})">
+		<md-tab ui-sref="app.profile.saved({userId: $ctrl.user._id})">
 			<md-tab-label>
 				<span>Saved</span>
 			</md-tab-label>
 		</md-tab>
 
-		<md-tab ui-sref="app.profile.activity({username: $ctrl.user.username})">
+		<md-tab ui-sref="app.profile.activity({userId: $ctrl.user._id})">
 			<md-tab-label>
 				<span>Activity</span>
 			</md-tab-label>

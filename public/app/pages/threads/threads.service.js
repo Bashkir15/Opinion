@@ -37,6 +37,18 @@ class threadService {
 		});
 	}
 
+	userThreads(id, options) {
+		return this._$http({
+			url: '/threads/user/' + id,
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				filter: options.filter,
+				page: options.page
+			}
+		});
+	}
+
 	single(title) {
 		return this._$http({
 			url: './threads/' + title,

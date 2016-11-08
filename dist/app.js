@@ -1203,6 +1203,19 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'userThreads',
+			value: function userThreads(id, options) {
+				return this._$http({
+					url: '/threads/user/' + id,
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter,
+						page: options.page
+					}
+				});
+			}
+		}, {
 			key: 'single',
 			value: function single(title) {
 				return this._$http({
@@ -1477,12 +1490,17 @@ webpackJsonp([0],[
 
 	var _profile4 = _interopRequireDefault(_profile3);
 
+	var _profileThreads = __webpack_require__(170);
+
+	var _profileThreads2 = _interopRequireDefault(_profileThreads);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var profileModule = _angular2.default.module('profile', []);
 	profileModule.config(_profile2.default);
 	profileModule.service('User', _users2.default);
 	profileModule.controller('ProfileController', _profile4.default);
+	profileModule.controller('ProfileThreadsController', _profileThreads2.default);
 
 	exports.default = profileModule;
 
@@ -1511,9 +1529,9 @@ webpackJsonp([0],[
 
 		_createClass(UsersService, [{
 			key: 'single',
-			value: function single(username) {
+			value: function single(id) {
 				return this._$http({
-					url: '/users/' + username,
+					url: '/users/' + id,
 					method: 'GET'
 				});
 			}
@@ -1537,7 +1555,7 @@ webpackJsonp([0],[
 		'ngInject';
 
 		$stateProvider.state('app.profile', {
-			url: '/profile/:username',
+			url: '/profile/:userId',
 			templateUrl: './app/pages/profile/profile.tmpl.html',
 			controller: 'ProfileController',
 			controllerAs: '$ctrl'
@@ -1550,7 +1568,9 @@ webpackJsonp([0],[
 
 		$stateProvider.state('app.profile.threads', {
 			url: '/threads',
-			templateUrl: './app/pages/profile/threads/threads.html'
+			templateUrl: './app/pages/profile/threads/threads.html',
+			controller: 'ProfileThreadsController',
+			controllerAs: '$ctrl'
 		});
 	}
 
@@ -1571,15 +1591,16 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var profileCtrl = function () {
-		function profileCtrl(User, Auth, $stateParams) {
+		function profileCtrl(User, Auth, Thread, $stateParams) {
 			'ngInject';
 
 			_classCallCheck(this, profileCtrl);
 
 			this._User = User;
 			this._Auth = Auth;
+			this._Thread = Thread;
 			this._$stateParams = $stateParams;
-			this._username = $stateParams.username;
+			this._userId = $stateParams.userId;
 
 			this.currentUser = this._Auth.getUser();
 			this.getUser();
@@ -1590,7 +1611,7 @@ webpackJsonp([0],[
 			value: function getUser() {
 				var _this = this;
 
-				this._User.single(this._username).then(function (response) {
+				this._User.single(this._userId).then(function (response) {
 					_this.user = response.data.res.record;
 				});
 			}
@@ -2303,7 +2324,7 @@ webpackJsonp([0],[
 			this._$rootScope = $rootScope;
 			this._$state = $state;
 
-			if (this._$state.current.name == 'app.home') {
+			if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.profile.threads') {
 				this.hideCreate = true;
 			}
 
@@ -2898,6 +2919,69 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
+
+/***/ },
+/* 170 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ProfileThreadsCtrl = function () {
+		function ProfileThreadsCtrl(Thread, User, $stateParams) {
+			'ngInject';
+
+			_classCallCheck(this, ProfileThreadsCtrl);
+
+			this._Thread = Thread;
+			this._User = User;
+			this._$stateParams = $stateParams;
+			this._userId = $stateParams.userId;
+
+			this.lastUpdated = 0;
+			this.threadsSearch = '';
+			this.threadPage = 0;
+			this.getThreads();
+		}
+
+		_createClass(ProfileThreadsCtrl, [{
+			key: 'getThreads',
+			value: function getThreads(options) {
+				var _this = this;
+
+				options = options || {};
+				options.timestamp = this.lastUpdated;
+				options.filter = this.threadsSearch;
+				options.page = this.threadPage;
+
+				this._Thread.userThreads(this._userId, options).then(function (response) {
+					if (_this.threadsSearch) {
+						_this.threads = [];
+					}
+
+					if (!options.append) {
+						_this.threads = response.data.res.records.concat(_this.threads);
+					} else {
+						_this.threads = _this.threads.concat(response.data.res.records);
+					}
+
+					_this.lastUpdated = Date.now();
+					_this.noMoreThreads = !response.data.res.morePages;
+				});
+			}
+		}]);
+
+		return ProfileThreadsCtrl;
+	}();
+
+	exports.default = ProfileThreadsCtrl;
 
 /***/ }
 ]);

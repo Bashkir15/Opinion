@@ -155,7 +155,7 @@ module.exports = () => {
 	};
 
 	obj.single = (req, res) => {
-		User.findOne({username: req.params.username}, (err, user) => {
+		User.findOne({_id: req.params.userId}, (err, user) => {
 			if (err) {
 				return json.bad(err, res);
 			}
