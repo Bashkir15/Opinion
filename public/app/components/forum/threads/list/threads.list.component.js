@@ -7,7 +7,7 @@ class threadListController {
 		this._$rootScope = $rootScope;
 		this._$state = $state;
 
-		if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.profile.threads') {
+		if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.profile.threads' || this._$state.current.name == 'app.profile.saved') {
 			this.hideCreate = true;
 		}
 

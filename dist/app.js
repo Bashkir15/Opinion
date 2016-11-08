@@ -2388,7 +2388,7 @@ webpackJsonp([0],[
 			this._$rootScope = $rootScope;
 			this._$state = $state;
 
-			if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.profile.threads') {
+			if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.profile.threads' || this._$state.current.name == 'app.profile.saved') {
 				this.hideCreate = true;
 			}
 
@@ -2713,12 +2713,17 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var commentsListCtrl = function () {
-		function commentsListCtrl($mdDialog, $rootScope) {
+		function commentsListCtrl($mdDialog, $state) {
 			'ngInject';
 
 			_classCallCheck(this, commentsListCtrl);
 
 			this._$dialog = $mdDialog;
+			this._$state = $state;
+
+			if (this._$state.current.name = 'app.profile.comments' || this._$state.current.name == 'app.profile.saved') {
+				this.hideCreate = true;
+			}
 		}
 
 		_createClass(commentsListCtrl, [{
