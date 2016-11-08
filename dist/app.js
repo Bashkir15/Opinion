@@ -1315,7 +1315,8 @@ webpackJsonp([0],[
 					method: 'GET',
 					params: {
 						timestamp: options.timestamp,
-						filter: options.filter
+						filter: options.filter,
+						page: options.page
 					}
 				});
 			}
@@ -1324,6 +1325,19 @@ webpackJsonp([0],[
 			value: function userComments(id, options) {
 				return this._$http({
 					url: '/comments/user/' + id,
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter,
+						page: options.page
+					}
+				});
+			}
+		}, {
+			key: 'userSaved',
+			value: function userSaved(id, options) {
+				return this._$http({
+					url: '/comments/saved/' + id,
 					method: 'GET',
 					params: {
 						timestamp: options.timestamp,
@@ -3127,7 +3141,12 @@ webpackJsonp([0],[
 			this.threadSearch = '';
 			this.threadPage = 0;
 
+			this.lastCommentUpdated = 0;
+			this.commentsSearch = '';
+			this.commentPage = 0;
+
 			this.getThreads();
+			this.getComments();
 		}
 
 		_createClass(ProfileSavedCtrl, [{
@@ -3153,6 +3172,31 @@ webpackJsonp([0],[
 
 					_this.lastThreadUpdated = Date.now();
 					_this.noMoreThreads = !response.data.res.morePages;
+				});
+			}
+		}, {
+			key: 'getComments',
+			value: function getComments(options) {
+				var _this2 = this;
+
+				options = options || {};
+				options.timestamp = this.lastCommentUpdated;
+				options.page = this.commentPage;
+				options.filter = this.commentsSearch;
+
+				this._Comment.userSaved(this._userId, options).then(function (response) {
+					if (_this2.commentsSearch) {
+						_this2.comments = [];
+					}
+
+					if (!options.append) {
+						_this2.comments = response.data.res.records.concat(_this2.comments);
+					} else {
+						_this2.comments = _this2.comments.concat(response.data.res.records);
+					}
+
+					_this2.lastCommentUpdated = Date.now();
+					_this2.noMoreComments = !response.data.res.morePages;
 				});
 			}
 		}]);

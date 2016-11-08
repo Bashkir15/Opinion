@@ -19,7 +19,8 @@ class commentsService {
 			method: 'GET',
 			params: {
 				timestamp: options.timestamp,
-				filter: options.filter
+				filter: options.filter,
+				page: options.page
 			}
 		});
 	}
@@ -27,6 +28,18 @@ class commentsService {
 	userComments(id, options) {
 		return this._$http({
 			url: '/comments/user/' + id,
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				filter: options.filter,
+				page: options.page
+			}
+		});
+	}
+
+	userSaved(id, options) {
+		return this._$http({
+			url: '/comments/saved/' + id,
 			method: 'GET',
 			params: {
 				timestamp: options.timestamp,

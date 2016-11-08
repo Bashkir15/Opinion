@@ -9,4 +9,15 @@
 
 		<thread-list threads="$ctrl.threads" ng-show='$ctrl.showThreads'></thread-list>
 	</div>
+
+	<div class='profile-saved-comments'>
+		<div>
+			<h4>Saved Comments</h4>
+			<button ng-click="$ctrl.showComments = !$ctrl.showComments">
+				<span>Toggle Show</span>
+			</button>
+		</div>
+
+		<comments-list comments='$ctrl.comments' ng-show='$ctrl.showComments'></comments-list>
+	</div>
 </div>

@@ -11,7 +11,12 @@ class ProfileSavedCtrl {
 		this.threadSearch = '';
 		this.threadPage = 0;
 
+		this.lastCommentUpdated = 0;
+		this.commentsSearch = '';
+		this.commentPage = 0;
+
 		this.getThreads();
+		this.getComments();
 	}
 
 	getThreads(options) {
@@ -33,6 +38,28 @@ class ProfileSavedCtrl {
 
 			this.lastThreadUpdated = Date.now();
 			this.noMoreThreads = !response.data.res.morePages;
+		});
+	}
+
+	getComments(options) {
+		options = options || {};
+		options.timestamp = this.lastCommentUpdated;
+		options.page = this.commentPage;
+		options.filter = this.commentsSearch;
+
+		this._Comment.userSaved(this._userId, options).then((response) => {
+			if (this.commentsSearch) {
+				this.comments = [];
+			}
+
+			if (!options.append) {
+				this.comments = response.data.res.records.concat(this.comments);
+			} else {
+				this.comments = this.comments.concat(response.data.res.records);
+			}
+
+			this.lastCommentUpdated = Date.now();
+			this.noMoreComments = !response.data.res.morePages;
 		});
 	}
 }

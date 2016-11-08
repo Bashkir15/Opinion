@@ -135,6 +135,53 @@ module.exports = () => {
 		return getComments();
 	};
 
+	obj.userSaved = (req, res) => {
+		var getComments = () => {
+			var criteria = {saves: req.params.userId};
+
+			if (req.query && req.query.timestamp) {
+				criteria.created = {
+					$gte: req.query.timestamp
+				};
+			}
+
+			if (req.query && req.query.filter) {
+				delete criteria.created;
+				criteria.content = new RegExp(req.query.filter, 'i');
+			}
+
+			Comment.find(criteria)
+			.skip(parseInt(req.query.page) * global.config.settings.perPage)
+			.limit(global.config.settings.perPage + 1)
+			.populate('thread')
+			.populate('creator')
+			.exec((err, comments) => {
+				if (err) {
+					return json.bad(err, res);
+				} else {
+					var morePages = global.config.settings.perPage < comments.length;
+
+					if (morePages) {
+						comments.pop();
+					}
+
+					if (req.user) {
+						comments.map((e) => {
+							e = e.afterSave(req.user);
+						});
+					}
+
+					return json.good({
+						morePages: morePages,
+						records: comments
+					}, res);
+				}
+			});
+		};
+
+		return getComments();
+	};
+
 	obj.like = (req, res) => {
 		Comment.findOne({_id: req.params.commentId})
 		.populate('thread')
