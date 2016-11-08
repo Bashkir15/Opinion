@@ -3004,7 +3004,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var ProfileThreadsCtrl = function () {
-		function ProfileThreadsCtrl(Thread, User, $stateParams) {
+		function ProfileThreadsCtrl(Thread, User, $stateParams, $timeout) {
 			'ngInject';
 
 			_classCallCheck(this, ProfileThreadsCtrl);
@@ -3013,6 +3013,7 @@ webpackJsonp([0],[
 			this._User = User;
 			this._$stateParams = $stateParams;
 			this._userId = $stateParams.userId;
+			this._$timeout = $timeout;
 
 			this.lastUpdated = 0;
 			this.threadsSearch = '';
@@ -3044,6 +3045,31 @@ webpackJsonp([0],[
 					_this.lastUpdated = Date.now();
 					_this.noMoreThreads = !response.data.res.morePages;
 				});
+			}
+		}, {
+			key: 'search',
+			value: function search(newValue, oldValue) {
+				var _this2 = this;
+
+				var threadsSearchTimeout;
+
+				if (newValue != oldValue) {
+					this.threads = [];
+				}
+
+				this._$timeout.cancel(threadsSearchTimeout);
+				threadsSearchTimeout = this._$timeout(function () {
+					if (!newValue) {
+						if (_this2.threadsSearchEnabled) {
+							_this2.lastUpdated = 0;
+							_this2.getThreads();
+						}
+					} else {
+						_this2.getThreads();
+					}
+
+					_this2.threadsSearchEnabled = _this2.threadsSearch !== '';
+				}, 500);
 			}
 		}]);
 

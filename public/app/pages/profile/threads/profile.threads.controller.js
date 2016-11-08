@@ -1,11 +1,12 @@
 class ProfileThreadsCtrl {
-	constructor(Thread, User, $stateParams) {
+	constructor(Thread, User, $stateParams, $timeout) {
 		'ngInject';
 
 		this._Thread = Thread;
 		this._User = User;
 		this._$stateParams = $stateParams;
 		this._userId = $stateParams.userId;
+		this._$timeout = $timeout;
 
 		this.lastUpdated = 0;
 		this.threadsSearch = '';
@@ -33,6 +34,28 @@ class ProfileThreadsCtrl {
 			this.lastUpdated = Date.now();
 			this.noMoreThreads = !response.data.res.morePages;
 		});
+	}
+
+	search(newValue, oldValue) {
+		var threadsSearchTimeout;
+
+		if (newValue != oldValue) {
+			this.threads = [];
+		}
+
+		this._$timeout.cancel(threadsSearchTimeout);
+		threadsSearchTimeout = this._$timeout(() => {
+			if (!newValue) {
+				if (this.threadsSearchEnabled) {
+					this.lastUpdated = 0;
+					this.getThreads();
+				}
+			} else {
+				this.getThreads();
+			}
+
+			this.threadsSearchEnabled = this.threadsSearch !== '';
+		}, 500)
 	}
 }
 
