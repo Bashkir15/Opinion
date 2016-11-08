@@ -24,6 +24,18 @@ class commentsService {
 		});
 	}
 
+	userComments(id, options) {
+		return this._$http({
+			url: '/comments/user/' + id,
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				filter: options.filter,
+				page: options.page
+			}
+		});
+	}
+
 	like(id) {
 		return this._$http({
 			url: '/comments/' + id + '/like',

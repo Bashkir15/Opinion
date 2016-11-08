@@ -1307,6 +1307,19 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'userComments',
+			value: function userComments(id, options) {
+				return this._$http({
+					url: '/comments/user/' + id,
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter,
+						page: options.page
+					}
+				});
+			}
+		}, {
 			key: 'like',
 			value: function like(id) {
 				return this._$http({
@@ -1494,6 +1507,10 @@ webpackJsonp([0],[
 
 	var _profileThreads2 = _interopRequireDefault(_profileThreads);
 
+	var _profileComments = __webpack_require__(171);
+
+	var _profileComments2 = _interopRequireDefault(_profileComments);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var profileModule = _angular2.default.module('profile', []);
@@ -1501,6 +1518,7 @@ webpackJsonp([0],[
 	profileModule.service('User', _users2.default);
 	profileModule.controller('ProfileController', _profile4.default);
 	profileModule.controller('ProfileThreadsController', _profileThreads2.default);
+	profileModule.controller('ProfileCommentsController', _profileComments2.default);
 
 	exports.default = profileModule;
 
@@ -1570,6 +1588,13 @@ webpackJsonp([0],[
 			url: '/threads',
 			templateUrl: './app/pages/profile/threads/threads.html',
 			controller: 'ProfileThreadsController',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.profile.comments', {
+			url: '/comments',
+			templateUrl: './app/pages/profile/comments/comments.html',
+			controller: 'ProfileCommentsController',
 			controllerAs: '$ctrl'
 		});
 	}
@@ -2982,6 +3007,71 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = ProfileThreadsCtrl;
+
+/***/ },
+/* 171 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ProfileCommentsCtrl = function () {
+		function ProfileCommentsCtrl(Comment, $stateParams) {
+			'ngInject';
+
+			_classCallCheck(this, ProfileCommentsCtrl);
+
+			this._Comment = Comment;
+			this._$stateParams = $stateParams;
+			this._userId = this._$stateParams.userId;
+
+			this.lastUpdated = 0;
+			this.commentsSearch = '';
+			this.commentsPage = 0;
+
+			this.getComments();
+		}
+
+		_createClass(ProfileCommentsCtrl, [{
+			key: 'getComments',
+			value: function getComments(options) {
+				var _this = this;
+
+				options = options || {};
+				options.filter = this.commentsSearch;
+				options.timestamp = this.lastUpdated;
+				options.page = this.commentsPage;
+
+				this._Comment.userComments(this._userId, options).then(function (response) {
+					if (_this.commentsSearch) {
+						_this.comments = [];
+					}
+
+					console.log(response);
+
+					if (!options.append) {
+						_this.comments = response.data.res.records.concat(_this.comments);
+					} else {
+						_this.comments = _this.comments.concat(response.data.res.records);
+					}
+
+					_this.lastUpdated = Date.now();
+					_this.noMoreComments = !response.data.res.morePages;
+				});
+			}
+		}]);
+
+		return ProfileCommentsCtrl;
+	}();
+
+	exports.default = ProfileCommentsCtrl;
 
 /***/ }
 ]);

@@ -19,6 +19,13 @@ function profileConfig ($stateProvider) {
 		controller: 'ProfileThreadsController',
 		controllerAs: '$ctrl'
 	});
+
+	$stateProvider.state('app.profile.comments', {
+		url: '/comments',
+		templateUrl: './app/pages/profile/comments/comments.html',
+		controller: 'ProfileCommentsController',
+		controllerAs: '$ctrl'
+	});
 }
 
 export default profileConfig;
