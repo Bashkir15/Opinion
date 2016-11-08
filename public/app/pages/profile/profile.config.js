@@ -26,6 +26,13 @@ function profileConfig ($stateProvider) {
 		controller: 'ProfileCommentsController',
 		controllerAs: '$ctrl'
 	});
+
+	$stateProvider.state('app.profile.saved', {
+		url: '/saved',
+		templateUrl: '/app/pages/profile/saved/saved.html',
+		controller: 'ProfileSavedController',
+		controllerAs: '$ctrl'
+	});
 }
 
 export default profileConfig;

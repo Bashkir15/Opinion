@@ -49,6 +49,18 @@ class threadService {
 		});
 	}
 
+	userSaved(id, options) {
+		return this._$http({
+			url: '/threads/saved/' + id,
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				filter: options.filter,
+				page: options.page
+			}
+		});
+	}
+
 	single(title) {
 		return this._$http({
 			url: './threads/' + title,

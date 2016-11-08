@@ -1,0 +1,12 @@
+<div class='profile-saved-container'>
+	<div class='profile-saved-threads'>
+		<div>
+			<h4>Saved Threads</h4>
+			<button ng-click="$ctrl.showThreads = !$ctrl.showThreads">
+				<span>Toggle Show</span>
+			</button>
+		</div>
+
+		<thread-list threads="$ctrl.threads" ng-show='$ctrl.showThreads'></thread-list>
+	</div>
+</div>

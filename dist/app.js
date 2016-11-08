@@ -1216,6 +1216,19 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'userSaved',
+			value: function userSaved(id, options) {
+				return this._$http({
+					url: '/threads/saved/' + id,
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter,
+						page: options.page
+					}
+				});
+			}
+		}, {
 			key: 'single',
 			value: function single(title) {
 				return this._$http({
@@ -1511,6 +1524,10 @@ webpackJsonp([0],[
 
 	var _profileComments2 = _interopRequireDefault(_profileComments);
 
+	var _profileSaved = __webpack_require__(172);
+
+	var _profileSaved2 = _interopRequireDefault(_profileSaved);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var profileModule = _angular2.default.module('profile', []);
@@ -1519,6 +1536,7 @@ webpackJsonp([0],[
 	profileModule.controller('ProfileController', _profile4.default);
 	profileModule.controller('ProfileThreadsController', _profileThreads2.default);
 	profileModule.controller('ProfileCommentsController', _profileComments2.default);
+	profileModule.controller('ProfileSavedController', _profileSaved2.default);
 
 	exports.default = profileModule;
 
@@ -1595,6 +1613,13 @@ webpackJsonp([0],[
 			url: '/comments',
 			templateUrl: './app/pages/profile/comments/comments.html',
 			controller: 'ProfileCommentsController',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.profile.saved', {
+			url: '/saved',
+			templateUrl: '/app/pages/profile/saved/saved.html',
+			controller: 'ProfileSavedController',
 			controllerAs: '$ctrl'
 		});
 	}
@@ -3072,6 +3097,70 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = ProfileCommentsCtrl;
+
+/***/ },
+/* 172 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ProfileSavedCtrl = function () {
+		function ProfileSavedCtrl(Thread, Comment, $stateParams) {
+			'ngInject';
+
+			_classCallCheck(this, ProfileSavedCtrl);
+
+			this._Thread = Thread;
+			this._Comment = Comment;
+			this._$stateParams = $stateParams;
+			this._userId = this._$stateParams.userId;
+
+			this.lastThreadUpdated = 0;
+			this.threadSearch = '';
+			this.threadPage = 0;
+
+			this.getThreads();
+		}
+
+		_createClass(ProfileSavedCtrl, [{
+			key: 'getThreads',
+			value: function getThreads(options) {
+				var _this = this;
+
+				options = options || {};
+				options.timestamp = this.lastThreadUpdated;
+				options.page = this.threadPage;
+				options.filter = this.threadSearch;
+
+				this._Thread.userSaved(this._userId, options).then(function (response) {
+					if (_this.threadSearch) {
+						_this.threads = [];
+					}
+
+					if (!options.append) {
+						_this.threads = response.data.res.records.concat(_this.threads);
+					} else {
+						_this.threads = _this.threads.concat(response.data.res.records);
+					}
+
+					_this.lastThreadUpdated = Date.now();
+					_this.noMoreThreads = !response.data.res.morePages;
+				});
+			}
+		}]);
+
+		return ProfileSavedCtrl;
+	}();
+
+	exports.default = ProfileSavedCtrl;
 
 /***/ }
 ]);
