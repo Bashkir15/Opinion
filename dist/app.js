@@ -706,6 +706,10 @@ webpackJsonp([0],[
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
+	var _trendingStreams = __webpack_require__(173);
+
+	var _trendingStreams2 = _interopRequireDefault(_trendingStreams);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var streamsModule = _angular2.default.module('streams', []);
@@ -713,6 +717,7 @@ webpackJsonp([0],[
 	streamsModule.service('Stream', _streams4.default);
 	streamsModule.controller('StreamsListCtrl', _streamsList2.default);
 	streamsModule.controller('StreamsSingleCtrl', _streamsSingle2.default);
+	streamsModule.controller('TrendingStreamsCtrl', _trendingStreams2.default);
 
 	exports.default = streamsModule;
 
@@ -740,6 +745,20 @@ webpackJsonp([0],[
 			templateUrl: './app/pages/streams/single/single.html',
 			controller: 'StreamsSingleCtrl',
 			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.trendingStreams', {
+			url: '/trending',
+			templateUrl: './app/pages/streams/trending/trending.html',
+			controller: 'TrendingStreamsCtrl',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.subscribedStreams', {
+			url: '/streams/subscribed',
+			templateUrl: './app/pages/streams/subscribed/subscribed.html',
+			controller: 'SubscribedStreamsCtrl',
+			controllerAs: "$ctrl"
 		});
 	}
 
@@ -3301,6 +3320,66 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = ProfileSavedCtrl;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var TrendingStreamCtrl = function () {
+		function TrendingStreamCtrl(Stream) {
+			'ngInject';
+
+			_classCallCheck(this, TrendingStreamCtrl);
+
+			this._Stream = Stream;
+			this.lastUpdated = 0;
+			this.streamPage = 0;
+			this.streamSearch = '';
+			this.streams = [];
+			this.getStreams();
+		}
+
+		_createClass(TrendingStreamCtrl, [{
+			key: 'getStreams',
+			value: function getStreams(options) {
+				var _this = this;
+
+				options = options || {};
+				options.timestamp = this.lastUpdated;
+				options.filter = this.streamSearch;
+				options.page = this.streamPage;
+
+				this._Stream.get(options).then(function (response) {
+					if (_this.streamSearch) {
+						_this.streams = [];
+					}
+
+					if (!options.append) {
+						_this.streams = response.data.res.records.concat(_this.streams);
+					} else {
+						_this.streams = _this.streams.concat(response.data.res.records);
+					}
+
+					_this.lastUpdated = Date.now();
+					_this.noMoreStreams = !response.data.res.morePages;
+				});
+			}
+		}]);
+
+		return TrendingStreamCtrl;
+	}();
+
+	exports.default = TrendingStreamCtrl;
 
 /***/ }
 ]);

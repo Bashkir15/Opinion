@@ -14,6 +14,20 @@ function streamsConfig ($stateProvider) {
 		controller: 'StreamsSingleCtrl',
 		controllerAs: '$ctrl'
 	});
+
+	$stateProvider.state('app.trendingStreams', {
+		url: '/trending',
+		templateUrl: './app/pages/streams/trending/trending.html',
+		controller: 'TrendingStreamsCtrl',
+		controllerAs: '$ctrl'
+	});
+
+	$stateProvider.state('app.subscribedStreams', {
+		url: '/streams/subscribed',
+		templateUrl: './app/pages/streams/subscribed/subscribed.html',
+		controller:'SubscribedStreamsCtrl',
+		controllerAs: "$ctrl"
+	});
 }
 
 export default streamsConfig
