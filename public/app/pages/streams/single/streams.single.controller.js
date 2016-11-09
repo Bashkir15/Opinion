@@ -5,7 +5,7 @@ class singleStreamCtrl {
 		this._Stream = Stream;
 		this._Thread = Thread;
 		this._Auth = Auth;
-		this.currentUser = this._Auth.getUser()._id;
+		this._isLoggedIn = this._Auth.isLoggedIn();
 		this._$rootScope = $rootScope;
 		this._$dialog = $mdDialog;
 		this._$timeout = $timeout;
@@ -16,6 +16,10 @@ class singleStreamCtrl {
 		this.lastUpdated = 0;
 		this.getStream();
 		this.getThreads();
+
+		if (this._isLoggedIn) {
+			this.currentUser = this._Auth.getUser()._id;
+		}
 
 		this._$rootScope.$on('threadCreated', () => {
 			this._$dialog.hide();

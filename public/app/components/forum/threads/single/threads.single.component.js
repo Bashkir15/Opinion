@@ -8,7 +8,11 @@ class SingleThreadCtrl {
 
 		this._Thread = Thread;
 		this._Auth = Auth;
-		this.currentUser = this._Auth.getUser()._id;
+		this._isLoggedIn = this._Auth.isLoggedIn();
+
+		if (this._isLoggedIn) {
+			this.currentUser = this._Auth.getUser()._id;
+		}
 
 		if (this._$state.current.name == 'app.singleStream') {
 			this.thread.stream.moderators.forEach((moderator) => {

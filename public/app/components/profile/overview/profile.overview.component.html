@@ -66,31 +66,19 @@
 				<div>
 					<h3>Friends</h3>
 				</div>
-				<span>14 Friends</span>
+				<span>{{$ctrl.user.following.length}} Friend<span ng-if="$ctrl.user.following.length > 1 || $ctrl.user.following.length == 0">s</span></span>
 			</div>
 			<div class='friends-list-body'>
-				<div>
+				<div ng-repeat="item in $ctrl.user.following">
 					<div></div>
-					<p>Name</p>
-					<p>Username</p>
-				</div>
-
-				<div>
-					<div></div>
-					<p>Name</p>
-					<p>Username</p>
-				</div>
-
-				<div>
-					<div></div>
-					<p>Name</p>
-					<p>Username</p>
+					<p>{{item.name}}</p>
+					<p>{{item.username}}</p>
 				</div>
 			</div>
 			<div class='friends-list-footer'>
 				<div>
 					<button>
-						<span>See all 234 Friends</span>
+						<span>See all {{$ctrl.user.following.length}} Friend<span ng-if="$ctrl.user.following.length > 1 || $ctrl.user.following.length < 1">s</span></span>
 					</button>
 				</div>
 			</div>

@@ -51,6 +51,12 @@ var UserSchema = new mongoose.Schema({
 		default: ['authenticated']
 	},
 
+	following: [{
+		type: mongoose.Schema.ObjectId,
+		required: true,
+		ref: 'User'
+	}],
+
 /*	loginAttempts: {
 		type: Number,
 		default: 0,

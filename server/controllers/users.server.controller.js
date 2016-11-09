@@ -155,13 +155,114 @@ module.exports = () => {
 	};
 
 	obj.single = (req, res) => {
-		User.findOne({_id: req.params.userId}, (err, user) => {
+		User.findOne({_id: req.params.userId})
+		.populate('following')
+		.exec((err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (user) {
+				return User.find({following: user._id}, (err, followers) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					var alreadyFollowing;
+
+					var isInArray = req.user.following.some((follow) => {
+						return follow.equals(user._id);
+					});
+
+					if (isInArray) {
+						alreadyFollowing = true;
+					} else {
+						alreadyFollowing = false;
+					}
+
+					console.log(alreadyFollowing);
+
+					
+
+					return json.good({
+						record: user,
+						followers: followers,
+						following: user.following,
+						alreadyFollowing: alreadyFollowing
+					}, res);
+				});
+			} else {
+				return json.bad({message: 'Sorry, that user could not be found'}, res);
+			}
+		});
+	};
+
+	obj.follow = (req, res) => {
+		User.findOne({_id: req.params.userId})
+		.populate('following')
+		.exec((err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (user) {
+				if (req.user.following.indexOf(user._id) != -1) {
+					return json.bad({message: 'Sorry, you are already following that user'}, res);
+				}
+
+				req.user.following.push(user._id);
+				req.user.save((err, item) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: item
+					}, res);
+				});
+			}
+		});
+	};
+
+	obj.unfollow = (req, res) => {
+		User.findOne({_id: req.params.userId})
+		.populate('following')
+		.exec((err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (user) {
+				if (req.user.following.indexOf(user._id) != -1) {
+					req.user.following.splice(req.user.following.indexOf(user._id), 1);
+					req.user.save((err, item) => {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: item
+						}, res);
+					});
+				}
+			}
+		});
+	};
+
+	obj.search = (req, res) => {
+		var keyword = req.params.keyword;
+
+		var criteria = {
+			$or: [
+				{name: new RegExp(keyword, 'ig')},
+				{username: new RegExp(keyword, 'ig')}
+			]
+		};
+
+		criteria._id = {$ne: req.user._id};
+
+		User.find(criteria, null)
+		.exec((err, items) => {
 			if (err) {
 				return json.bad(err, res);
 			}
 
 			json.good({
-				record: user
+				records: items
 			}, res);
 		});
 	};

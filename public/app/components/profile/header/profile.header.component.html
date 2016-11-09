@@ -6,20 +6,20 @@
 			<p>{{$ctrl.user.username}}</p>
 		</div>
 		<div class='profile-header-options'>
-			<md-menu class='profile-header-dropdown'>
+			<md-menu class='profile-header-dropdown' ng-if="$ctrl._isLoggedIn">
 				<button ng-click="$mdOpenMenu()">
 					<span>Options</span>
 				</button>
 
 				<md-menu-content>
-					<md-menu-item ng-if="$ctrl.currentUser._id != $ctrl.user._id">
-						<button>
+					<md-menu-item ng-if="$ctrl.currentUser._id != $ctrl.user._id && !$ctrl.alreadyFollowing">
+						<button ng-click="$ctrl.follow($ctrl.user)">
 							<span>Follow</span>
 						</button>
 					</md-menu-item>
 
-					<md-menu-item ng-if="$ctrl.currentUser._id != $ctrl.user._id">
-						<button>
+					<md-menu-item ng-if="$ctrl.currentUser._id != $ctrl.user._id && $ctrl.alreadyFollowing">
+						<button ng-click="$ctrl.unfollow($ctrl.user)">
 							<span>Unfollow</span>
 						</button>
 					</md-menu-item>

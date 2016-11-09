@@ -56,6 +56,15 @@ class navCtrl {
 		});
 	}
 
+	openUsersSearch() {
+		this._$sidenav('user-menu').close();
+		this._$dialog.show({
+			templateUrl: './app/pages/profile/dialogs/search.html',
+			controller: 'UsersSearchController',
+			controllerAs: '$ctrl'
+		});
+	}
+
 	logout() {
 		this._Storage.remove('user');
 		this._Storage.remove('opinion-token');
