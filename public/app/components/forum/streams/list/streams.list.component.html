@@ -6,7 +6,7 @@
 			</div>
 		</div>
 
-		<div class='forum-side-bar above-tablet'>
+		<div class='forum-side-bar above-tablet' ng-if='!$ctrl.hideTrending'>
 			<div class='forum-trending-list'>
 				<div class='forum-trending-header'>
 					<h4>Trending</h4>
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 
-	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateStream()">
+	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateStream()" ng-if="!$ctrl.hideCreate">
 		<i class='mdi mdi-pencil'></i>
 	</md-button>
 </div>

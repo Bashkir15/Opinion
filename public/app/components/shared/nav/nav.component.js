@@ -1,5 +1,5 @@
 class navCtrl {
-	constructor(Auth,Storage, Stream, $mdSidenav, $state, $rootScope) {
+	constructor(Auth,Storage, Stream, $mdSidenav, $state, $rootScope, $mdDialog) {
 		'ngInject';
 
 		this._$sidenav = $mdSidenav;
@@ -7,13 +7,19 @@ class navCtrl {
 		this._Storage = Storage;
 		this._Stream = Stream;
 		this._$state = $state;
-		this._$rootScope = $rootScope
+		this._$rootScope = $rootScope;
+		this._$dialog = $mdDialog;
 		this.isLoggedIn = this._Auth.isLoggedIn();
 		this.getUserInfo();
 
 		this._$rootScope.$on('$stateChangeStart', () => {
 			this._$sidenav('user-menu').close();
 		});
+
+		this._$rootScope.$on('streamCreated', () => {
+			this._$dialog.hide();
+		});
+
 
 		this.getStreams();
 	}
@@ -41,6 +47,13 @@ class navCtrl {
 				this.streams = response.data.res.records;
 			});
 		}
+	}
+
+	openCreateStream() {
+		this._$sidenav('user-menu').close();
+		this._$dialog.show({
+			templateUrl: './app/pages/streams/dialogs/create.html'
+		});
 	}
 
 	logout() {

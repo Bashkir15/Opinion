@@ -710,6 +710,10 @@ webpackJsonp([0],[
 
 	var _trendingStreams2 = _interopRequireDefault(_trendingStreams);
 
+	var _subscribedStreams = __webpack_require__(174);
+
+	var _subscribedStreams2 = _interopRequireDefault(_subscribedStreams);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var streamsModule = _angular2.default.module('streams', []);
@@ -718,6 +722,7 @@ webpackJsonp([0],[
 	streamsModule.controller('StreamsListCtrl', _streamsList2.default);
 	streamsModule.controller('StreamsSingleCtrl', _streamsSingle2.default);
 	streamsModule.controller('TrendingStreamsCtrl', _trendingStreams2.default);
+	streamsModule.controller('SubscribedStreamsCtrl', _subscribedStreams2.default);
 
 	exports.default = streamsModule;
 
@@ -755,7 +760,7 @@ webpackJsonp([0],[
 		});
 
 		$stateProvider.state('app.subscribedStreams', {
-			url: '/streams/subscribed',
+			url: '/subscribed',
 			templateUrl: './app/pages/streams/subscribed/subscribed.html',
 			controller: 'SubscribedStreamsCtrl',
 			controllerAs: "$ctrl"
@@ -1801,7 +1806,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var navCtrl = function () {
-		function navCtrl(Auth, Storage, Stream, $mdSidenav, $state, $rootScope) {
+		function navCtrl(Auth, Storage, Stream, $mdSidenav, $state, $rootScope, $mdDialog) {
 			'ngInject';
 
 			var _this = this;
@@ -1814,11 +1819,16 @@ webpackJsonp([0],[
 			this._Stream = Stream;
 			this._$state = $state;
 			this._$rootScope = $rootScope;
+			this._$dialog = $mdDialog;
 			this.isLoggedIn = this._Auth.isLoggedIn();
 			this.getUserInfo();
 
 			this._$rootScope.$on('$stateChangeStart', function () {
 				_this._$sidenav('user-menu').close();
+			});
+
+			this._$rootScope.$on('streamCreated', function () {
+				_this._$dialog.hide();
 			});
 
 			this.getStreams();
@@ -1853,6 +1863,14 @@ webpackJsonp([0],[
 						_this2.streams = response.data.res.records;
 					});
 				}
+			}
+		}, {
+			key: 'openCreateStream',
+			value: function openCreateStream() {
+				this._$sidenav('user-menu').close();
+				this._$dialog.show({
+					templateUrl: './app/pages/streams/dialogs/create.html'
+				});
 			}
 		}, {
 			key: 'logout',
@@ -2153,7 +2171,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var ListStreamCtrl = function () {
-		function ListStreamCtrl($mdDialog, $rootScope) {
+		function ListStreamCtrl($mdDialog, $rootScope, $state) {
 			'ngInject';
 
 			var _this = this;
@@ -2161,7 +2179,13 @@ webpackJsonp([0],[
 			_classCallCheck(this, ListStreamCtrl);
 
 			this._$dialog = $mdDialog;
+			this._$state = $state;
 			this._$rootScope = $rootScope;
+
+			if (this._$state.current.name == 'app.subscribedStreams') {
+				this.hideTrending = true;
+				this.hideCreate = true;
+			}
 
 			$rootScope.$on('streamByThreads', function () {
 				if (_this.rowFilter == '-threads.length') {
@@ -3374,12 +3398,77 @@ webpackJsonp([0],[
 					_this.noMoreStreams = !response.data.res.morePages;
 				});
 			}
+		}, {
+			key: 'loadMore',
+			value: function loadMore() {
+				this.streamPage++;
+				this.lastUpdated = 0;
+				this.getStreams({
+					append: true
+				});
+			}
 		}]);
 
 		return TrendingStreamCtrl;
 	}();
 
 	exports.default = TrendingStreamCtrl;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var subscribedStreamsCtrl = function () {
+		function subscribedStreamsCtrl(Stream) {
+			'ngInject';
+
+			_classCallCheck(this, subscribedStreamsCtrl);
+
+			this._Stream = Stream;
+			this.lastUpdated = 0;
+			this.streamPage = 0;
+			this.streams = [];
+			this.getStreams();
+		}
+
+		_createClass(subscribedStreamsCtrl, [{
+			key: 'getStreams',
+			value: function getStreams(options) {
+				var _this = this;
+
+				options = options || {};
+				options.timestamp = this.lastUpdated;
+				options.page = this.streamPage;
+				options.subscribed = true;
+
+				this._Stream.get(options).then(function (response) {
+
+					if (!options.append) {
+						_this.streams = response.data.res.records.concat(_this.streams);
+					} else {
+						_this.streams = _this.streams.concat(response.data.res.records);
+					}
+
+					_this.lastUpdated = Date.now();
+					_this.noMoreStreams = !response.data.res.morePages;
+				});
+			}
+		}]);
+
+		return subscribedStreamsCtrl;
+	}();
+
+	exports.default = subscribedStreamsCtrl;
 
 /***/ }
 ]);

@@ -1,5 +1,17 @@
 <div class='trending-streams-container'>
-	<div ng-repeat="item in $ctrl.streams">
+	<header>
+		<h1>Hot Streams</h1>
+	</header>
+
+	<p>These are the most popular streams on Opinionable</p>
+
+	<div ng-repeat="item in $ctrl.streams | orderBy: '-subscribers.length'" class='trending-streams-repeat'>
 		<trending-stream stream='item'></trending-stream>
+	</div>
+
+	<div class='load-more-button streams-load-more-button' ng-if='!$ctrl.noMoreStreams'>
+		<button ng-click="$ctrl.loadMore()">
+			<span>Load More</span>
+		</button>
 	</div>
 </div>

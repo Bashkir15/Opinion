@@ -1,9 +1,15 @@
 class ListStreamCtrl {
-	constructor($mdDialog, $rootScope) {
+	constructor($mdDialog, $rootScope, $state) {
 		'ngInject';
 
 		this._$dialog = $mdDialog;
+		this._$state = $state;
 		this._$rootScope = $rootScope;
+
+		if (this._$state.current.name == 'app.subscribedStreams') {
+			this.hideTrending = true;
+			this.hideCreate = true;
+		}
 
 		$rootScope.$on('streamByThreads', () => {
 			if (this.rowFilter == '-threads.length') {

@@ -23,7 +23,7 @@ function streamsConfig ($stateProvider) {
 	});
 
 	$stateProvider.state('app.subscribedStreams', {
-		url: '/streams/subscribed',
+		url: '/subscribed',
 		templateUrl: './app/pages/streams/subscribed/subscribed.html',
 		controller:'SubscribedStreamsCtrl',
 		controllerAs: "$ctrl"
