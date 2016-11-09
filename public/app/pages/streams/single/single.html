@@ -21,6 +21,22 @@
 		</div>
 	</div>
 
+	<div class='stream-mod-options'>
+		<md-menu class='stream-mod-options-dropdown'>
+			<button ng-click="$mdOpenMenu()">
+				<span>Mod Options</span>
+			</button>
+
+			<md-menu-content>
+				<md-menu-item>
+					<button ng-click="$ctrl.deleteThreads()">
+						<span>Delete Threads</span>
+					</button>
+				</md-menu-item>
+			</md-menu-content>
+		</md-menu>
+	</div>
+
 	<!-- <div class='single-stream-create-thread' ng-if="$ctrl.showCreate">
 		<create-thread></create-thread>
 	</div> -->

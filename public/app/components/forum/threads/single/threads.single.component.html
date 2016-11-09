@@ -3,7 +3,7 @@
 		<div class='forum-single-header'>
 			<div class='forum-creator-image'></div>
 			<div class='forum-created-info'>
-				<h4 ui-sref="app.profile.overview({username: $ctrl.thread.creator.username})">{{$ctrl.thread.creator.username}}</h4>
+				<h4 ui-sref="app.profile.overview({userId: $ctrl.thread.creator._id})">{{$ctrl.thread.creator.username}}</h4>
 				<p am-time-ago="$ctrl.thread.created"></p>
 			</div>
 			<div class='forum-score-container below-mobile'>
@@ -61,6 +61,12 @@
 			<div class='forum-single-info-text'>
 				<button ng-click="$ctrl.toggleSave($ctrl.thread)">
 					<i class='mdi mdi-heart-outline' ng-class="{'saved': $ctrl.thread.saved}"></i>
+				</button>
+			</div>
+
+			<div class='forum-single-info-text' ng-if="$ctrl.moderator">
+				<button ng-click="$ctrl.delete($ctrl.thread)">
+					<span>Delete</span>
 				</button>
 			</div>
 		</div>

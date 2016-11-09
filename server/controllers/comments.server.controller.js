@@ -319,6 +319,23 @@ module.exports = () => {
 		});
 	};
 
+	obj.remove = (req, res) => {
+		Comment.findOne({_id: req.params.commentId})
+		.exec((err, comment) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				comment.remove((err) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({}, res);
+				});
+			}
+		});
+	};
+
 
 	return obj;
 };

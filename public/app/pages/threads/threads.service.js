@@ -61,9 +61,9 @@ class threadService {
 		});
 	}
 
-	single(title) {
+	single(id) {
 		return this._$http({
-			url: './threads/' + title,
+			url: './threads/' + id,
 			method: 'GET'
 		});
 	}
@@ -93,6 +93,13 @@ class threadService {
 		return this._$http({
 			url: '/threads/' + id + '/dislike',
 			method: 'POST'
+		});
+	}
+
+	remove(id) {
+		return this._$http({
+			url: '/threads/' + id + '/remove',
+			method: 'DELETE'
 		});
 	}
 }

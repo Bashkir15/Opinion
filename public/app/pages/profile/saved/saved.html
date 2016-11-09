@@ -1,97 +1,14 @@
 <div class='profile-saved-container'>
 	<div class='profile-saved-items'>
-		<div class='profile-saved-items-header'>
-			<h4>Saved Threads</h4>
-			<button ng-click="$ctrl.showThreads = !$ctrl.showThreads">
-				<span>Toggle Show</span>
-			</button>
-		</div>
+		<md-tabs class='profile-saved-tabs' md-dynamic-height>
+			<md-tab label="threads">
 
-		<div class='profile-saved-list-container' ng-show='$ctrl.showThreads'>
+				<thread-list threads="$ctrl.threads"></thread-list>
+			</md-tab>
 
-			<div class='forum-search-container'>
-				<div ng-class="{'has-focus': $ctrl.search.hasFocus}">
-					<label class='mdi mdi-magnify'></label>
-					<input type='text' name='search' ng-model='$ctrl.threadsSearch' ng-change="$ctrl.search()" ng-focus="$ctrl.search.hasFocus=true" ng-blur="$ctrl.search.hasFocus=false">
-					<md-menu class='forum-search-dropdown' md-offset='0 65'>
-						<button class='large-mobile' ng-click="$mdOpenMenu()">
-							<span>Filter</span>
-						</button>
-
-						<md-menu-content>
-							<md-menu-item>
-								<button ng-click="$ctrl.byScore()">
-									<span>Score</span>
-								</button>
-							</md-menu-item>
-
-							<md-menu-item>
-								<button ng-click="$ctrl.byComments()">
-									<span>Comments</span>
-								</button>
-							</md-menu-item>
-
-							<md-menu-item>
-								<button ng-click='$ctrl.bySaves()'>
-									<span>Saves</span>
-								</button>
-							</md-menu-item>
-
-							<md-menu-item>
-								<button ng-click='$ctrl.byDate()'>
-									<span>Date</span>
-								</button>
-							</md-menu-item>
-						</md-menu-content>
-					</md-menu>
-				</div>
-			</div>
-
-			<thread-list threads="$ctrl.threads" ng-show='$ctrl.showThreads' class='profile-saved-threads'></thread-list>
-		</div>
-	</div>
-
-	<div class='profile-saved-items'>
-		<div class='profile-saved-items-header'>
-			<h4>Saved Comments</h4>
-			<button ng-click="$ctrl.showComments = !$ctrl.showComments">
-				<span>Toggle Show</span>
-			</button>
-		</div>
-		<div class='profile-saved-list-container' ng-show="$ctrl.showComments">
-			<div class='forum-search-container'>
-				<div ng-class="{'has-focus': $ctrl.search.hasFocus}">
-					<label class='mdi mdi-magnify'></label>
-					<input type='text' name='search' ng-model='$ctrl.commentsSearch' ng-change="$ctrl.search()" ng-focus="$ctrl.search.hasFocus=true" ng-blur="$ctrl.search.hasFocus=false">
-					<md-menu md-offset='0 65' class='forum-search-dropdown'>
-						<button class='large-mobile' ng-click="$mdOpenMenu()">
-							<span>Filter</span>
-						</button>
-
-						<md-menu-content>
-							<md-menu-item>
-								<button>
-									<span>Score</span>
-								</button>
-							</md-menu-item>
-
-							<md-menu-item>
-								<button>
-									<span>Saves</span>
-								</button>
-							</md-menu-item>
-
-							<md-menu-item>
-								<button>
-									<span>Date</span>
-								</button>
-							</md-menu-item>
-						</md-menu-content>
-					</md-menu>
-				</div>
-			</div>
-
-			<comments-list comments='$ctrl.comments' ng-show='$ctrl.showComments' class='profile-saved-comments'></comments-list>
-		</div>
+			<md-tab label="comments">
+				<comments-list comments='$ctrl.comments'></comments-list>
+			</md-tab>
+		</md-tabs>
 	</div>
 </div>

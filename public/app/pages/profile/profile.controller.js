@@ -1,5 +1,5 @@
 class profileCtrl {
-	constructor(User, Auth, Thread, $stateParams) {
+	constructor(User, Auth, Thread, $stateParams, $state) {
 		'ngInject';
 
 		this._User = User;
@@ -7,6 +7,8 @@ class profileCtrl {
 		this._Thread = Thread;
 		this._$stateParams = $stateParams;
 		this._userId = $stateParams.userId;
+		this._$state = $state;
+		this.currentState = this._$state.current.name;
 
 		this.currentUser = this._Auth.getUser();
 		this.getUser();

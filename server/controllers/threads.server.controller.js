@@ -39,7 +39,7 @@ module.exports = () => {
 			}, res);
 		});
 	};
-
+	
 	obj.list = (req, res) => {
 		var streamId = req.params.streamId;
 
@@ -398,6 +398,23 @@ module.exports = () => {
 				} else {
 					return json.bad({message: 'Sorry, you have not saved that thread yet'}, res);
 				}
+			}
+		});
+	};
+
+	obj.remove = (req, res) => {
+		Thread.findOne({_id: req.params.threadId})
+		.exec((err, thread) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				thread.remove((err) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({}, res);
+				});
 			}
 		});
 	};

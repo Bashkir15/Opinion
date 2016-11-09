@@ -1,13 +1,15 @@
 class ProfileCommentsCtrl {
-	constructor(Comment, $stateParams) {
+	constructor(Comment, $stateParams, $timeout, $rootScope) {
 		'ngInject';
 
 		this._Comment = Comment;
 		this._$stateParams = $stateParams;
 		this._userId = this._$stateParams.userId;
+		this._$timeout = $timeout;
+		this._$rootScope = $rootScope;
+		this.comments = [];
 
 		this.lastUpdated = 0;
-		this.commentsSearch = '';
 		this.commentsPage = 0;
 
 		this.getComments();
@@ -15,16 +17,10 @@ class ProfileCommentsCtrl {
 
 	getComments(options) {
 		options = options || {};
-		options.filter = this.commentsSearch;
 		options.timestamp = this.lastUpdated;
 		options.page = this.commentsPage;
 
 		this._Comment.userComments(this._userId, options).then((response) => {
-			if (this.commentsSearch) {
-				this.comments = [];
-			}
-
-			console.log(response);
 			
 			if (!options.append) {
 				this.comments = response.data.res.records.concat(this.comments);
@@ -34,6 +30,14 @@ class ProfileCommentsCtrl {
 
 			this.lastUpdated = Date.now();
 			this.noMoreComments = !response.data.res.morePages;
+		});
+	}
+
+	loadMore() {
+		this.commentsPage++;
+		this.lastUpdated = 0;
+		this.getComments({
+			append: true
 		});
 	}
 }

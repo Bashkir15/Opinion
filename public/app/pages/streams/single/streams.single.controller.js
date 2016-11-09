@@ -1,9 +1,11 @@
 class singleStreamCtrl {
-	constructor(Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout) {
+	constructor(Auth, Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout) {
 		'ngInject';
 
 		this._Stream = Stream;
 		this._Thread = Thread;
+		this._Auth = Auth;
+		this.currentUser = this._Auth.getUser()._id;
 		this._$rootScope = $rootScope;
 		this._$dialog = $mdDialog;
 		this._$timeout = $timeout;
@@ -26,6 +28,12 @@ class singleStreamCtrl {
 	getStream() {
 		this._Stream.single(this.streamId).then((response) => {
 			this.stream = response.data.res.record;
+
+			this.stream.moderators.forEach((moderator) => {
+				if (this.currentUser == moderator._id) {
+					this.moderator = true;
+				}
+			});
 		});
 	}
 

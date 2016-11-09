@@ -15,6 +15,9 @@ class ProfileSavedCtrl {
 		this.commentsSearch = '';
 		this.commentPage = 0;
 
+		this.threads = [];
+		this.comments = [];
+
 		this.getThreads();
 		this.getComments();
 	}

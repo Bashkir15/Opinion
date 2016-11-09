@@ -959,7 +959,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var singleStreamCtrl = function () {
-		function singleStreamCtrl(Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout) {
+		function singleStreamCtrl(Auth, Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout) {
 			'ngInject';
 
 			var _this = this;
@@ -968,6 +968,8 @@ webpackJsonp([0],[
 
 			this._Stream = Stream;
 			this._Thread = Thread;
+			this._Auth = Auth;
+			this.currentUser = this._Auth.getUser()._id;
 			this._$rootScope = $rootScope;
 			this._$dialog = $mdDialog;
 			this._$timeout = $timeout;
@@ -994,6 +996,12 @@ webpackJsonp([0],[
 
 				this._Stream.single(this.streamId).then(function (response) {
 					_this2.stream = response.data.res.record;
+
+					_this2.stream.moderators.forEach(function (moderator) {
+						if (_this2.currentUser == moderator._id) {
+							_this2.moderator = true;
+						}
+					});
 				});
 			}
 		}, {
@@ -1230,9 +1238,9 @@ webpackJsonp([0],[
 			}
 		}, {
 			key: 'single',
-			value: function single(title) {
+			value: function single(id) {
 				return this._$http({
-					url: './threads/' + title,
+					url: './threads/' + id,
 					method: 'GET'
 				});
 			}
@@ -1266,6 +1274,14 @@ webpackJsonp([0],[
 				return this._$http({
 					url: '/threads/' + id + '/dislike',
 					method: 'POST'
+				});
+			}
+		}, {
+			key: 'remove',
+			value: function remove(id) {
+				return this._$http({
+					url: '/threads/' + id + '/remove',
+					method: 'DELETE'
 				});
 			}
 		}]);
@@ -1378,6 +1394,14 @@ webpackJsonp([0],[
 					method: 'POST'
 				});
 			}
+		}, {
+			key: 'remove',
+			value: function remove(id) {
+				return this._$http({
+					url: '/comments/' + id + '/remove',
+					method: 'DELETE'
+				});
+			}
 		}]);
 
 		return commentsService;
@@ -1467,7 +1491,7 @@ webpackJsonp([0],[
 			key: 'loadMore',
 			value: function loadMore() {
 				this.commentPage++;
-				this.lastUpdated = Date.now();
+				this.lastUpdated = 0;
 				this.getComments({
 					append: true
 				});
@@ -1655,7 +1679,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var profileCtrl = function () {
-		function profileCtrl(User, Auth, Thread, $stateParams) {
+		function profileCtrl(User, Auth, Thread, $stateParams, $state) {
 			'ngInject';
 
 			_classCallCheck(this, profileCtrl);
@@ -1665,6 +1689,8 @@ webpackJsonp([0],[
 			this._Thread = Thread;
 			this._$stateParams = $stateParams;
 			this._userId = $stateParams.userId;
+			this._$state = $state;
+			this.currentState = this._$state.current.name;
 
 			this.currentUser = this._Auth.getUser();
 			this.getUser();
@@ -2466,15 +2492,28 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var SingleThreadCtrl = function () {
-		function SingleThreadCtrl(Thread, $stateParams) {
+		function SingleThreadCtrl(Auth, Thread, $stateParams, $state) {
 			'ngInject';
+
+			var _this = this;
 
 			_classCallCheck(this, SingleThreadCtrl);
 
 			this._$stateParams = $stateParams;
-			this.streamId = $stateParams.streamId;
+			this.streamId = this._$stateParams.streamId;
+			this._$state = $state;
 
 			this._Thread = Thread;
+			this._Auth = Auth;
+			this.currentUser = this._Auth.getUser()._id;
+
+			if (this._$state.current.name == 'app.singleStream') {
+				this.thread.stream.moderators.forEach(function (moderator) {
+					if (_this.currentUser == moderator) {
+						_this.moderator = true;
+					}
+				});
+			}
 		}
 
 		_createClass(SingleThreadCtrl, [{
@@ -2505,6 +2544,15 @@ webpackJsonp([0],[
 					angular.extend(item, response.data.res.record);
 				});
 			}
+		}, {
+			key: 'delete',
+			value: function _delete(item) {
+				var _this2 = this;
+
+				this._Thread.remove(item._id).then(function (response) {
+					_this2._$state.reload();
+				});
+			}
 		}]);
 
 		return SingleThreadCtrl;
@@ -2513,7 +2561,7 @@ webpackJsonp([0],[
 	var singleThread = {
 		scope: {},
 		bindings: {
-			thread: '='
+			thread: '<'
 		},
 		controller: SingleThreadCtrl,
 		templateUrl: './app/components/forum/threads/single/threads.single.component.html'
@@ -2764,15 +2812,36 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var commentsSingleCtrl = function () {
-		function commentsSingleCtrl(Comment) {
+		function commentsSingleCtrl(Auth, Comment, Thread, $stateParams, $state) {
 			'ngInject';
 
 			_classCallCheck(this, commentsSingleCtrl);
 
+			this._Auth = Auth;
 			this._Comment = Comment;
+			this._Thread = Thread;
+			this._$state = $state;
+			this.currentUser = this._Auth.getUser()._id;
+			this._$stateParams = $stateParams;
+			this._threadId = $stateParams.threadId;
+
+			this.getThread();
 		}
 
 		_createClass(commentsSingleCtrl, [{
+			key: 'getThread',
+			value: function getThread() {
+				var _this = this;
+
+				this._Thread.single(this._threadId).then(function (response) {
+					response.data.res.record.stream.moderators.forEach(function (moderator) {
+						if (_this.currentUser == moderator) {
+							_this.moderator = true;
+						}
+					});
+				});
+			}
+		}, {
 			key: 'like',
 			value: function like(item) {
 				this._Comment.like(item._id).then(function (response) {
@@ -2798,6 +2867,13 @@ webpackJsonp([0],[
 						angular.extend(item, response.data.res.record);
 					});
 				}
+			}
+		}, {
+			key: 'delete',
+			value: function _delete(item) {
+				this._Comment.remove(item._id).then(function (response) {
+					history.go(-1);
+				});
 			}
 		}]);
 
@@ -3004,7 +3080,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var ProfileThreadsCtrl = function () {
-		function ProfileThreadsCtrl(Thread, User, $stateParams, $timeout) {
+		function ProfileThreadsCtrl(Thread, User, $stateParams, $timeout, $rootScope) {
 			'ngInject';
 
 			_classCallCheck(this, ProfileThreadsCtrl);
@@ -3012,11 +3088,12 @@ webpackJsonp([0],[
 			this._Thread = Thread;
 			this._User = User;
 			this._$stateParams = $stateParams;
+			this._$rootScope = $rootScope;
 			this._userId = $stateParams.userId;
 			this._$timeout = $timeout;
+			this.threads = [];
 
 			this.lastUpdated = 0;
-			this.threadsSearch = '';
 			this.threadPage = 0;
 			this.getThreads();
 		}
@@ -3028,13 +3105,9 @@ webpackJsonp([0],[
 
 				options = options || {};
 				options.timestamp = this.lastUpdated;
-				options.filter = this.threadsSearch;
 				options.page = this.threadPage;
 
 				this._Thread.userThreads(this._userId, options).then(function (response) {
-					if (_this.threadsSearch) {
-						_this.threads = [];
-					}
 
 					if (!options.append) {
 						_this.threads = response.data.res.records.concat(_this.threads);
@@ -3045,31 +3118,6 @@ webpackJsonp([0],[
 					_this.lastUpdated = Date.now();
 					_this.noMoreThreads = !response.data.res.morePages;
 				});
-			}
-		}, {
-			key: 'search',
-			value: function search(newValue, oldValue) {
-				var _this2 = this;
-
-				var threadsSearchTimeout;
-
-				if (newValue != oldValue) {
-					this.threads = [];
-				}
-
-				this._$timeout.cancel(threadsSearchTimeout);
-				threadsSearchTimeout = this._$timeout(function () {
-					if (!newValue) {
-						if (_this2.threadsSearchEnabled) {
-							_this2.lastUpdated = 0;
-							_this2.getThreads();
-						}
-					} else {
-						_this2.getThreads();
-					}
-
-					_this2.threadsSearchEnabled = _this2.threadsSearch !== '';
-				}, 500);
 			}
 		}, {
 			key: 'loadMore',
@@ -3102,7 +3150,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var ProfileCommentsCtrl = function () {
-		function ProfileCommentsCtrl(Comment, $stateParams) {
+		function ProfileCommentsCtrl(Comment, $stateParams, $timeout, $rootScope) {
 			'ngInject';
 
 			_classCallCheck(this, ProfileCommentsCtrl);
@@ -3110,9 +3158,11 @@ webpackJsonp([0],[
 			this._Comment = Comment;
 			this._$stateParams = $stateParams;
 			this._userId = this._$stateParams.userId;
+			this._$timeout = $timeout;
+			this._$rootScope = $rootScope;
+			this.comments = [];
 
 			this.lastUpdated = 0;
-			this.commentsSearch = '';
 			this.commentsPage = 0;
 
 			this.getComments();
@@ -3124,16 +3174,10 @@ webpackJsonp([0],[
 				var _this = this;
 
 				options = options || {};
-				options.filter = this.commentsSearch;
 				options.timestamp = this.lastUpdated;
 				options.page = this.commentsPage;
 
 				this._Comment.userComments(this._userId, options).then(function (response) {
-					if (_this.commentsSearch) {
-						_this.comments = [];
-					}
-
-					console.log(response);
 
 					if (!options.append) {
 						_this.comments = response.data.res.records.concat(_this.comments);
@@ -3143,6 +3187,15 @@ webpackJsonp([0],[
 
 					_this.lastUpdated = Date.now();
 					_this.noMoreComments = !response.data.res.morePages;
+				});
+			}
+		}, {
+			key: 'loadMore',
+			value: function loadMore() {
+				this.commentsPage++;
+				this.lastUpdated = 0;
+				this.getComments({
+					append: true
 				});
 			}
 		}]);
@@ -3184,6 +3237,9 @@ webpackJsonp([0],[
 			this.lastCommentUpdated = 0;
 			this.commentsSearch = '';
 			this.commentPage = 0;
+
+			this.threads = [];
+			this.comments = [];
 
 			this.getThreads();
 			this.getComments();

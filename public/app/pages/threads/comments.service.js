@@ -76,6 +76,13 @@ class commentsService {
 			method: 'POST'
 		});
 	}
+
+	remove(id) {
+		return this._$http({
+			url: '/comments/' + id + '/remove',
+			method: 'DELETE'
+		});
+	}
 }
 
 export default commentsService

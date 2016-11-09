@@ -1,11 +1,22 @@
 class SingleThreadCtrl {
-	constructor(Thread, $stateParams) {
+	constructor(Auth, Thread, $stateParams, $state) {
 		'ngInject';
 
 		this._$stateParams = $stateParams;
-		this.streamId = $stateParams.streamId;
+		this.streamId = this._$stateParams.streamId;
+		this._$state = $state;
 
-		this._Thread = Thread
+		this._Thread = Thread;
+		this._Auth = Auth;
+		this.currentUser = this._Auth.getUser()._id;
+
+		if (this._$state.current.name == 'app.singleStream') {
+			this.thread.stream.moderators.forEach((moderator) => {
+				if (this.currentUser == moderator) {
+					this.moderator = true;
+				}
+			});
+		}
 	}
 
 	toggleSave(item) {
@@ -32,13 +43,19 @@ class SingleThreadCtrl {
 			angular.extend(item, response.data.res.record);
 		});
 	}
+
+	delete(item) {
+		this._Thread.remove(item._id).then((response) => {
+			this._$state.reload();
+		});
+	}
 }
 
 
 let singleThread = {
 	scope: {},
 	bindings: {
-		thread: '='
+		thread: '<'
 	},
 	controller: SingleThreadCtrl,
 	templateUrl: './app/components/forum/threads/single/threads.single.component.html'

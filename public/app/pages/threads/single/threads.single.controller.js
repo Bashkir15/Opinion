@@ -54,7 +54,7 @@ class threadsSingleCtrl {
 
 	loadMore() {
 		this.commentPage++;
-		this.lastUpdated = Date.now();
+		this.lastUpdated = 0;
 		this.getComments({
 			append: true
 		});

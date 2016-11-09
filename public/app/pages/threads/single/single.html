@@ -39,7 +39,7 @@
 	<comments-list comments="$ctrl.comments" class='comments-list-component'></comments-list>
 
 	<div class='load-more-button' ng-if="!$ctrl.noMoreComments">
-		<button>
+		<button ng-click="$ctrl.loadMore()">
 			<span>Load More</span>
 		</button>
 	</div>

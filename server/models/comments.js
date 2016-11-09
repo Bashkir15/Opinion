@@ -62,6 +62,10 @@ var commentSchema = new mongoose.Schema({
 	}
 });
 
+commentSchema.pre('remove', function (next) {
+	this.model('Thread').update({comments: this._id}, {$pull: {comments: {$in: [this._id]}}}, next);
+});
+
 commentSchema.methods = {
 	toJSON: function() {
 		var obj = this.toObject();

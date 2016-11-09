@@ -15,5 +15,6 @@ router.post('/:threadId/like', auth.ensureAuthorized, threads.like);
 router.post('/:threadId/dislike', auth.ensureAuthorized, threads.dislike);
 router.post('/:threadId/save', auth.ensureAuthorized, threads.save);
 router.post('/:threadId/unsave', auth.ensureAuthorized, threads.unsave);
+router.delete('/:threadId/remove', auth.ensureAuthorized, threads.remove);
 
 module.exports = router;

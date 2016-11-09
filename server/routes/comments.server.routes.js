@@ -13,6 +13,7 @@ router.post('/:commentId/like', auth.ensureAuthorized, comments.like);
 router.post('/:commentId/dislike', auth.ensureAuthorized, comments.dislike);
 router.post('/:commentId/save', auth.ensureAuthorized, comments.save);
 router.post('/:commentId/unsave', auth.ensureAuthorized, comments.unsave);
+router.delete('/:commentId/remove', auth.ensureAuthorized, comments.remove);
 
 
 module.exports = router;

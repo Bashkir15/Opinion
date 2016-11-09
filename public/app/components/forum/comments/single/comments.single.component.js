@@ -1,8 +1,26 @@
 class commentsSingleCtrl {
-	constructor(Comment) {
+	constructor(Auth, Comment, Thread, $stateParams, $state) {
 		'ngInject';
 
+		this._Auth = Auth;
 		this._Comment = Comment;
+		this._Thread = Thread;
+		this._$state = $state;
+		this.currentUser = this._Auth.getUser()._id;
+		this._$stateParams = $stateParams;
+		this._threadId = $stateParams.threadId;
+
+		this.getThread();
+	}
+
+	getThread() {
+		this._Thread.single(this._threadId).then((response) => {
+			response.data.res.record.stream.moderators.forEach((moderator) => {
+				if (this.currentUser == moderator) {
+					this.moderator = true;
+				}
+			});
+		});
 	}
 
 	like(item) {
@@ -27,6 +45,12 @@ class commentsSingleCtrl {
 				angular.extend(item, response.data.res.record);
 			});
 		}
+	}
+
+	delete(item) {
+		this._Comment.remove(item._id).then((response) => {
+			history.go(-1);
+		});
 	}
 }
 
