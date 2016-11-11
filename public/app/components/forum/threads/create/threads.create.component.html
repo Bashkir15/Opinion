@@ -20,7 +20,7 @@
 		<div class='forum-form-wrapper forum-link-input'  ng-class="{'has-focus': $ctrl.createThread.link.hasFocus,
 			'has-success': $ctrl.createThread.link.$valid && $ctrl.createThread.content.$touched,
 			'has-error': $ctrl.createThread.link.$error && $ctrl.createThread.link.$touched && !$ctrl.createThread.link.$valid,
-			'is-empty': !$ctrl.createThread.link.$viewValue}" ng-show="$ctrl.hasLink">
+			'is-empty': !$ctrl.createThread.link.$viewValue}" ng-if="$ctrl.hasLink">
 			<label>Link</label>
 			<input type='text' name='link' ng-model="$ctrl.data.link" ng-focus='$ctrl.createThread.link.hasFocus=true' ng-blur="$ctrl.createThread.link.hasFocus=false">
 		</div>

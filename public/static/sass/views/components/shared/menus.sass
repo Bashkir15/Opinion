@@ -24,3 +24,38 @@
 
 			&:hover
 				background: $default-grey-background
+
+	.forum-search-dropdown
+		background: $default-white-background
+		width: 130px
+		padding-top: 0
+		padding-bottom: 0
+
+		md-menu-item
+			height: 55px
+			transition: all .4s ease
+			border-bottom: 1px solid rgba(0,0,0,0.12)
+
+			button
+				span
+					@include open()
+					font-weight: 400
+					font-size: 16px
+					letter-spacing: 2px
+					color: $default-dark-blue
+
+			&:last-child
+				border-bottom: none
+
+			&:hover
+				background: $default-grey-background
+
+@media screen and (min-width: 1000px)
+	.md-open-menu-container
+		.forum-search-dropdown
+			width: 165px
+
+@media screen and (min-width: 1300px)
+	.md-open-menu-container
+		.forum-search-dropdown
+			width: 185px

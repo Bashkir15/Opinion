@@ -12,7 +12,7 @@ class threadListController {
 			this.hideSidebar = true;
 		}
 
-		if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.singleStream') {
+		if (this._$state.current.name == 'app.home') {
 			this.hideNoItems = true;
 		}
 

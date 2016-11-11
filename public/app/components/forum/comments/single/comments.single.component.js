@@ -6,9 +6,13 @@ class commentsSingleCtrl {
 		this._Comment = Comment;
 		this._Thread = Thread;
 		this._$state = $state;
-		this.currentUser = this._Auth.getUser()._id;
+		this._isLoggedIn = this._Auth.isLoggedIn();
 		this._$stateParams = $stateParams;
 		this._threadId = $stateParams.threadId;
+
+		if (this._isLoggedIn) {
+			this.currentUser = this._Auth.getUser()._id;
+		}
 
 		this.getThread();
 	}

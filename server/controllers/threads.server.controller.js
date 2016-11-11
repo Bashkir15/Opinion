@@ -30,6 +30,21 @@ module.exports = () => {
 				}
 			});
 
+			User.findOne({_id: req.user._id})
+			.exec((err, user) => {
+				if (err) {
+					return json.bad(err, res);
+				}
+
+				user.threadScore += 1;
+				user.save((err) => {
+
+					if (err) {
+						return json.bad(err, res);
+					}
+				});
+			});
+
 			if (err) {
 				return json.bad(err, res);
 			}
@@ -227,6 +242,20 @@ module.exports = () => {
 					thread.save((err, item) => {
 						thread = thread.afterSave(req.user);
 
+						User.findOne({_id: thread.creator._id})
+						.exec((err, user) => {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							user.threadScore += 1;
+							user.save((err) => {
+								if (err) {
+									return json.bad(err, res);
+								}
+							});
+						});
+
 						if (err) {
 							return json.bad(err, res);
 						}
@@ -239,6 +268,20 @@ module.exports = () => {
 					thread.likes.push(req.user._id);
 					thread.save((err, item) => {
 						thread = thread.afterSave(req.user);
+
+						User.findOne({_id: thread.creator._id})
+						.exec((err, user) => {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							User.threadScore += 1;
+							user.save((err) => {
+								if (err) {
+									return json.bad(err, res);
+								}
+							});
+						});
 
 						if (err) {
 							return json.bad(err, res);
@@ -319,6 +362,20 @@ module.exports = () => {
 					thread.save((err, item) => {
 						thread = thread.afterSave(req.user);
 
+						User.findOne({_id: thread.creator._id})
+						.exec((err, user) => {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							user.threadScore -= 1;
+							user.save((err) => {
+								if (err) {
+									return json.bad(err, res);
+								}
+							});
+						});
+
 						if (err) {
 							return json.bad(err, res);
 						}
@@ -331,6 +388,20 @@ module.exports = () => {
 					thread.dislikes.push(req.user._id);
 					thread.save((err, item) => {
 						thread = thread.afterSave(req.user);
+
+						User.findOne({_id: thread.creator._id})
+						.exec((err, user) => {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							user.threadScore -= 1;
+							user.save((err) => {
+								if (err) {
+									return json.bad(err, res);
+								}
+							});
+						});
 
 						if (err) {
 							return json.bad(err, res);

@@ -1,0 +1,148 @@
+.forum-create-dialog
+	display: flex
+	flex-direction: column
+
+.forum-create-dialog-header
+	padding: 25px 0 25px 15px
+
+	h2
+		color: rgba(0,0,0,0.6)
+
+.forum-create-container
+	display: flex
+	align-items: center
+	padding-top: 20px
+	width: 90%
+	margin: 0 auto
+
+	form
+		width: 90%
+		margin: 0 auto
+
+.forum-form-wrapper
+	position: relative
+	width: 100%
+	margin-bottom: 30px
+
+	label
+		position: absolute
+		top: 12px
+		left: 12px
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		color: $default-grey-text
+		opacity: 1
+		transition: all .4s ease
+
+	input
+		position: relative
+		width: 100%
+		padding-left: 12px
+		@include open()
+		font-weight: 400
+		height: 40px
+		letter-spacing: 2px
+		color: $default-grey-text
+		outline: none
+		background: none
+		border: 1px solid $default-grey-text
+
+	textarea
+		position: relative
+		width: 100%
+		padding-left: 12px
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		color: $default-grey-text
+		outline: none
+		background: none
+		border: 1px solid $default-grey-text
+
+	&.has-focus
+		input
+			border: 1px solid $default-light-blue
+
+		textarea
+			border: 1px solid $default-light-blue
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-success
+		input
+			border: 1px solid $default-green
+
+		textarea
+			border: 1px solid $default-green
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-error
+		input
+			border: 1px solid $default-red
+
+		textarea
+			border: 1px solid $default-red
+
+		label
+			left: -30px
+			opacity: 0
+
+		&.is-empty
+			label
+				left: 12px
+				opacity: 1
+				color: $default-red
+
+	&.is-empty
+		label
+			left: 12px
+			opacity: 1
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
+&.forum-link-input
+	transition: all .4s ease
+
+	&:not(.ng-hide)
+		@include slideInUp()
+		transition: all .4s ease
+
+
+
+.forum-form-submit
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 25px 0
+
+	button
+		height: 45px
+		width: 180px
+		border: 1px solid $default-grey-text
+		transition: all .4s ease
+
+		span
+			@include rale()
+			font-weight: 400
+			font-size: 18px
+			letter-spacing: 1px
+			color: $default-grey-text
+
+		&.form-valid
+			background: $default-green
+
+			span
+				color: $default-white-background
+
+@media screen and (min-width: 630px)
+	.forum-create-dialog
+		width: 70%

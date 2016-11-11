@@ -37,9 +37,16 @@
 				</button>
 			</div>
 
-			<div class='forum-single-info-item' ng-if='$ctrl.moderator'>
+			<div class='forum-single-info-item' ng-if="$ctrl.moderator || $ctrl.currentUser == $ctrl.comment.creator._id">
+				<button>
+					<i class='mdi mdi-pencil'></i>
+				</button>
+			</div>
+
+			
+			<div class='forum-single-info-item' ng-if='$ctrl.moderator || $ctrl.currentUser == $ctrl.comment.creator._id'>
 				<button ng-click="$ctrl.delete($ctrl.comment)">
-					<span>Delete</span>
+					<i class='mdi mdi-delete'></i>
 				</button>
 			</div>
 		</div>

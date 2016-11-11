@@ -2934,7 +2934,7 @@ webpackJsonp([0],[
 				this.hideSidebar = true;
 			}
 
-			if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.singleStream') {
+			if (this._$state.current.name == 'app.home') {
 				this.hideNoItems = true;
 			}
 
@@ -3345,9 +3345,13 @@ webpackJsonp([0],[
 			this._Comment = Comment;
 			this._Thread = Thread;
 			this._$state = $state;
-			this.currentUser = this._Auth.getUser()._id;
+			this._isLoggedIn = this._Auth.isLoggedIn();
 			this._$stateParams = $stateParams;
 			this._threadId = $stateParams.threadId;
+
+			if (this._isLoggedIn) {
+				this.currentUser = this._Auth.getUser()._id;
+			}
 
 			this.getThread();
 		}
