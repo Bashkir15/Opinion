@@ -43,7 +43,7 @@ var ActivitySchema = new mongoose.Schema({
 });
 
 ActivitySchema.methods = {
-	toJson: function() => {
+	toJson: function() {
 		var obj = this.toObject();
 
 		if (obj.actor) {
