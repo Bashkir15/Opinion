@@ -18,22 +18,35 @@ class HomeCtrl {
 		options.filter = this.homeSearch;
 		options.page = this.homePage;
 
-		this._Thread.unHome(options).then((response) => {
-			console.log(response);
+		if (this._isLoggedIn) {
+			this._Thread.authedHome(options).then((response) => {
+				if (!options.append) {
+					this.threads = response.data.res.records.concat(this.threads);
+				} else {
+					this.threads = this.threads.concat(response.data.res.records);
+				}
 
-			if (this.homeSearch) {
-				this.threads = [];
-			}
+				this.lastUpdated = Date.now();
+				this.noMoreThreads = !response.data.res.morePages;
+			});
+		} else {
+			this._Thread.unHome(options).then((response) => {
+				console.log(response);
 
-			if (!options.append) {
-				this.threads = response.data.res.records.concat(this.threads);
-			} else {
-				this.threads = this.threads.concat(response.data.res.records);
-			}
+				if (this.homeSearch) {
+					this.threads = [];
+				}
 
-			this.lastUpdated = Date.now();
-			this.noMoreThreads = !response.data.res.morePages;
-		});
+				if (!options.append) {
+					this.threads = response.data.res.records.concat(this.threads);
+				} else {
+					this.threads = this.threads.concat(response.data.res.records);
+				}
+
+				this.lastUpdated = Date.now();
+				this.noMoreThreads = !response.data.res.morePages;
+			});
+		}
 	}
 }
 

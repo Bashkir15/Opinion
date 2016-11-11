@@ -10,7 +10,7 @@ Being the very first beta release, threre are bound to be some known issues that
 
 2. The update profile forms reset filled in fields when they are submitted empty, this is a simple fix so it should be done rather quickly
 
-3. The Subscribed Home feeds will be changed in the future. Right now They are just the top rated from all the Streams, but they will be the top rated from your subscribed Streams on log in soon. Because of this the front page is mostly just for show right now, without the ability to load more threads.
+~~3. The Subscribed Home feeds will be changed in the future. Right now They are just the top rated from all the Streams, but they will be the top rated from your subscribed Streams on log in soon. Because of this the front page is mostly just for show right now, without the ability to load more threads. ~~
 
 4. Users have access to some small parts of the application that they should not have access to, such as some mod options and the user profile when not logged in. Another small fix.
 

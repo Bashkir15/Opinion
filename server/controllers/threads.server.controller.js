@@ -3,6 +3,7 @@ import json from '../helpers/json';
 import async from 'async';
 
 var Thread = mongoose.model('Thread');
+var User = mongoose.model("User");
 var Stream = mongoose.model('Stream');
 
 module.exports = () => {
@@ -345,6 +346,66 @@ module.exports = () => {
 		return getPosts();
 	};
 
+	obj.authedHome = (req, res) => {
+		var streamsId = [];
+		var homeThreadsFirst = [];
+		var homeThreadsSecond = [];
+
+		var criteria = {
+			stream: {
+				$in: req.user.streams
+			}
+		};
+
+		Thread.find(criteria)
+		.populate('creator')
+		.populate('comments')
+		.skip(parseInt(req.query.page) * global.config.settings.perPage)
+		.limit(global.config.settings.perPage + 1)
+		.exec((err, threads) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				var morePages = global.config.settings.perPage < threads.length;
+
+				if (morePages) {
+					threads.pop();
+				}
+
+				threads.map((e) => {
+					e = e.afterSave(req.user);
+				});
+
+				json.good({
+					morePages: morePages,
+					records: threads
+				}, res);
+			}
+		});
+	};
+		/*var streamsId = [];
+		var homeThreadsFirst = [];
+		var homeThreadsSecond = [];
+
+		Stream.find({subscribers: req.user._id})
+		.populate('threads')
+		.exec((err, streams) => {
+			
+			for (var i in streams) {
+				streamsId[i] = streams[i]._id;
+			}
+
+			streamsId.forEach((streamId) => {
+				Thread.find({stream: streamId})
+				.populate('comments')
+				.exec((err, threads) => {
+					for (var i = 0; i < threads.length; i++) {
+						homeThreadsFirst[i] = threads[i];
+					}
+				});
+			});
+		}); */
+
 	obj.dislike = (req, res) => {
 		Thread.findOne({_id: req.params.threadId})
 		.populate('creator')
@@ -469,6 +530,28 @@ module.exports = () => {
 				} else {
 					return json.bad({message: 'Sorry, you have not saved that thread yet'}, res);
 				}
+			}
+		});
+	};
+
+	obj.modify = (req, res) => {
+		Thread.findOne({_id: req.params.threadId})
+		.exec((err, thread) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				thread.title = req.body.title;
+				thread.content = req.body.content;
+				thread.link = req.body.link;
+				thread.save((err, item) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: item
+					}, res);
+				});
 			}
 		});
 	};

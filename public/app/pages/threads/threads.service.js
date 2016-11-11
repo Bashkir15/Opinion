@@ -37,6 +37,18 @@ class threadService {
 		});
 	}
 
+	authedHome(options) {
+		return this._$http({
+			url: '/threads/authedHome',
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				filter: options.filter,
+				page: options.page
+			}
+		});
+	}
+
 	userThreads(id, options) {
 		return this._$http({
 			url: '/threads/user/' + id,
@@ -92,6 +104,13 @@ class threadService {
 	unlike(id) {
 		return this._$http({
 			url: '/threads/' + id + '/dislike',
+			method: 'POST'
+		});
+	}
+
+	modify(id) {
+		return this._$http({
+			url: '/threads/' + id + '/modify',
 			method: 'POST'
 		});
 	}

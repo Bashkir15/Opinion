@@ -57,6 +57,12 @@ var UserSchema = new mongoose.Schema({
 		ref: 'User'
 	}],
 
+	streams: [{
+		type: mongoose.Schema.ObjectId,
+		required: false,
+		ref: 'Stream'
+	}],
+
 	threadScore: {
 		type: Number,
 		default: 0

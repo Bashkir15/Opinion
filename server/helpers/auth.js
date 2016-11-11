@@ -26,7 +26,9 @@ function ensureAuthorized (req, res, next) {
 		var decoded = jwt.verify(bearerToken, global.config.secret);
 		var requestedUser = decoded.user._id;
 
-		User.findOne({_id: requestedUser}, (err, user) => {
+		User.findOne({_id: requestedUser})
+		.populate('streams._id')
+		.exec((err, user) => {
 			if (err || !user) {
 				return res.sendStatus(403);
 			}

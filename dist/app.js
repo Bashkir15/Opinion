@@ -398,22 +398,35 @@ webpackJsonp([0],[
 				options.filter = this.homeSearch;
 				options.page = this.homePage;
 
-				this._Thread.unHome(options).then(function (response) {
-					console.log(response);
+				if (this._isLoggedIn) {
+					this._Thread.authedHome(options).then(function (response) {
+						if (!options.append) {
+							_this.threads = response.data.res.records.concat(_this.threads);
+						} else {
+							_this.threads = _this.threads.concat(response.data.res.records);
+						}
 
-					if (_this.homeSearch) {
-						_this.threads = [];
-					}
+						_this.lastUpdated = Date.now();
+						_this.noMoreThreads = !response.data.res.morePages;
+					});
+				} else {
+					this._Thread.unHome(options).then(function (response) {
+						console.log(response);
 
-					if (!options.append) {
-						_this.threads = response.data.res.records.concat(_this.threads);
-					} else {
-						_this.threads = _this.threads.concat(response.data.res.records);
-					}
+						if (_this.homeSearch) {
+							_this.threads = [];
+						}
 
-					_this.lastUpdated = Date.now();
-					_this.noMoreThreads = !response.data.res.morePages;
-				});
+						if (!options.append) {
+							_this.threads = response.data.res.records.concat(_this.threads);
+						} else {
+							_this.threads = _this.threads.concat(response.data.res.records);
+						}
+
+						_this.lastUpdated = Date.now();
+						_this.noMoreThreads = !response.data.res.morePages;
+					});
+				}
 			}
 		}]);
 
@@ -1364,6 +1377,19 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'authedHome',
+			value: function authedHome(options) {
+				return this._$http({
+					url: '/threads/authedHome',
+					method: 'GET',
+					params: {
+						timestamp: options.timestamp,
+						filter: options.filter,
+						page: options.page
+					}
+				});
+			}
+		}, {
 			key: 'userThreads',
 			value: function userThreads(id, options) {
 				return this._$http({
@@ -1426,6 +1452,14 @@ webpackJsonp([0],[
 			value: function unlike(id) {
 				return this._$http({
 					url: '/threads/' + id + '/dislike',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'modify',
+			value: function modify(id) {
+				return this._$http({
+					url: '/threads/' + id + '/modify',
 					method: 'POST'
 				});
 			}

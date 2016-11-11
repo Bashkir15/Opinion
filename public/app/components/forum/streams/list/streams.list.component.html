@@ -19,6 +19,12 @@
 		</div>
 	</div>
 
+	<div ng-if='!$ctrl.streams.length && !$ctrl.hideNoItems' class='forum-list-no-items'>
+		<p>It doesn't look like there is anything here</p>
+		<span>You should create a <span>new stream!</span></span>
+	</div>
+
+
 	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateStream()" ng-if="!$ctrl.hideCreate">
 		<i class='mdi mdi-pencil'></i>
 	</md-button>

@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import json from '../helpers/json';
 
 var Stream = mongoose.model('Stream');
+var User = mongoose.model("User");
 
 module.exports = () => {
 	var obj = {};
@@ -17,6 +18,20 @@ module.exports = () => {
 			}
 
 			stream = stream.afterSave(req.user);
+
+			User.findOne({_id: req.user._id})
+			.exec((err, user) => {
+				if (err) {
+					return json.bad(err, res);
+				}
+
+				user.streams.push(steam._id);
+				user.save((err) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+				});
+			});
 
 			json.good({
 				record: stream
@@ -124,6 +139,20 @@ module.exports = () => {
 				stream.subscribers.push(req.user._id);
 				stream.save((err, item) => {
 					stream = stream.afterSave(req.user);
+
+					User.findOne({_id: req.user._id})
+					.exec((err, user) => {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						user.streams.push(stream._id);
+						user.save((err) => {
+							if (err) {
+								return json.bad(err, res);
+							}
+						});
+					});
 
 					if (err) {
 						return json.bad(err, res);
