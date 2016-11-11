@@ -1,0 +1,26 @@
+.md-open-menu-container
+	.nav-item-dropdown
+		background: $default-white-background
+		width: 120px
+		padding-top: 0
+		padding-bottom: 0
+
+
+		md-menu-item
+			height: 65px
+			transition: all .4s ease
+			border-bottom: 1px solid rgba(0,0,0,0.12)
+
+			button
+				span
+					@include open()
+					font-weight: 400
+					font-size: 16px
+					letter-spacing: 2px
+					color: $default-dark-blue
+
+			&:last-child
+				border-bottom: none
+
+			&:hover
+				background: $default-grey-background

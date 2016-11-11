@@ -49,7 +49,6 @@ If anyone sees these and finds some more issues, please let me know! I will be h
 ~~* Using Cluster to increase performance~~
 * Using something like NGNIX as a proxy over node to cache some static files
 * Implementing websockets 
-* Possibly either switching to Redis or using Redis along with mongo for some specific features
 ~~* Better Archetecture haha~~
 * Better logging
 * Include monitoring and profiling

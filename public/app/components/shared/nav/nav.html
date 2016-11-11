@@ -9,12 +9,17 @@
 		</div>
 
 		<div class='nav-item'>
-			<md-menu>
+			<md-menu md-offset='-14 73'>
 				<button ng-click='$mdOpenMenu()'>
 					<span>Streams</span>
 				</button>
 
-				<md-menu-content>
+				<md-menu-content class='nav-item-dropdown'>
+					<md-menu-item>
+						<button ui-sref='app.streamsList'>
+							<span>All</span>
+						</button>
+					</md-menu-item>
 					<md-menu-item ng-repeat='item in $ctrl.streams'>
 						<button ui-sref='app.singleStream({streamId: item._id})'>
 							<span>{{item.name}}</span>
@@ -58,7 +63,7 @@
 	</div>
 
 	<md-list class='user-menu-body'>
-		<md-list-item md-ink-ripple class='first-item'>
+		<md-list-item md-ink-ripple class='first-item' ng-class="{'open': $ctrl.showProfile}">
 			<div>
 				<i class='mdi mdi-account'></i>
 			</div>
@@ -116,7 +121,7 @@
 			</div>
 		</ul>
 
-		<md-list-item md-ink-ripple>
+		<md-list-item md-ink-ripple ng-class="{'open': $ctrl.showMessages}">
 			<div>
 				<i class='mdi mdi-comment-outline'></i>
 			</div>
@@ -158,7 +163,7 @@
 			</div>
 		</ul>
 
-		<md-list-item md-ink-ripple>
+		<md-list-item md-ink-ripple ng-class="{'open': $ctrl.showStreams}">
 			<div>
 				<i class='mdi mdi-book'></i>
 			</div>
@@ -206,7 +211,7 @@
 			</div>
 		</ul>
 
-		<md-list-item md-ink-ripple>
+		<md-list-item md-ink-ripple ng-class="{'open': $ctrl.showSettings}">
 			<div>
 				<i class='mdi mdi-settings'></i>
 			</div>
@@ -246,7 +251,7 @@
 			</div>
 		</ul>
 
-		<md-list-item md-ink-ripple>
+		<md-list-item md-ink-ripple ng-class="{'open': $ctrl.showSearch}">
 			<div>
 				<i class='mdi mdi-magnify'></i>
 			</div>

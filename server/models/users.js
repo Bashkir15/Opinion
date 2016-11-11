@@ -57,6 +57,16 @@ var UserSchema = new mongoose.Schema({
 		ref: 'User'
 	}],
 
+	threadScore: {
+		type: Number,
+		default: 0
+	},
+
+	commentScore: {
+		type: Number,
+		default: 0
+	},
+
 /*	loginAttempts: {
 		type: Number,
 		default: 0,

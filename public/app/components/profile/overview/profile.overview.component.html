@@ -69,7 +69,7 @@
 				<span>{{$ctrl.user.following.length}} Friend<span ng-if="$ctrl.user.following.length > 1 || $ctrl.user.following.length == 0">s</span></span>
 			</div>
 			<div class='friends-list-body'>
-				<div ng-repeat="item in $ctrl.user.following">
+				<div ng-repeat="item in $ctrl.user.following" ui-sref="app.profile.overview({userId: item._id})" class='profile-friends-list-repeat'>
 					<div></div>
 					<p>{{item.name}}</p>
 					<p>{{item.username}}</p>
@@ -78,7 +78,7 @@
 			<div class='friends-list-footer'>
 				<div>
 					<button>
-						<span>See all {{$ctrl.user.following.length}} Friend<span ng-if="$ctrl.user.following.length > 1 || $ctrl.user.following.length < 1">s</span></span>
+						<span ng-if="$ctrl.friends.length > 3">See all {{$ctrl.user.following.length}} Friends></span>
 					</button>
 				</div>
 			</div>

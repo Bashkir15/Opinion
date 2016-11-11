@@ -9,6 +9,11 @@ class threadListController {
 
 		if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.profile.threads' || this._$state.current.name == 'app.profile.saved') {
 			this.hideCreate = true;
+			this.hideSidebar = true;
+		}
+
+		if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.singleStream') {
+			this.hideNoItems = true;
 		}
 
 		this.streamId = $stateParams.streamId;

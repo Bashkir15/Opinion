@@ -31,13 +31,14 @@
 	height: 60px
 	padding: 15px 0
 	margin: 35px auto 0 auto
-	background: $default-light-blue
+	//background: $default-light-blue
+	background: $default-dark-blue
 	z-index: 5
 
 	> div
 		display: flex
 		position: relative
-		width: 90%
+		width: 95%
 		margin: 0 auto
 
 		label
@@ -66,7 +67,8 @@
 			height: 42px
 			width: 100px
 			margin-left: 15px
-			background: darken($default-light-blue, 20%)
+			//background: darken($default-light-blue, 20%)
+			background: $default-red
 
 			span
 				@include rale()
@@ -109,20 +111,40 @@
 		> span
 			font-size: 25px
 			margin-bottom: 10px
-			color: $default-blue
+			color: $default-dark-blue
 
 		p
 			@include open()
 			font-weight: 400
 			font-size: 15px
 			letter-spacing: 2px
-			color: rgba(0,0,0,0.6)
+			color: #93949b
 
 		&:nth-of-type(1)
 			margin-right: 15px
 
 		&:nth-of-type(2)
 			margin-left: 15px
+
+@media screen and (min-width: 1000px)
+	.forum-search-container
+		> div
+			button
+				width: 135px
+
+@media screen and (min-width: 1300px)
+	.forum-search-container
+		width: 65%
+
+		> div
+			button
+				width: 155px
+
+@media screen and (min-width: 1600px)
+	.forum-search-container
+		width: 50%
+
+
 
 //************************Create*********************//
 
@@ -313,7 +335,7 @@
 
 	&.md-button
 		&.md-fab
-			background-color: darken($default-light-blue, 20%)
+			background-color: lighten($default-dark-blue, 20%)
 			height: 68px
 			width: 68px
 
@@ -322,7 +344,7 @@
 
 
 			&:hover
-				background-color: darken($default-light-blue, 10%)
+				background-color: lighten($default-dark-blue, 30%)
 
 .load-more-button
 	display: flex
@@ -587,7 +609,7 @@
 	word-break: break-all
 
 	h3
-		color: darken($default-blue, 10%)
+		color: $default-dark-blue
 		margin-bottom: 20px
 		text-align: left
 

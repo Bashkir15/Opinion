@@ -4,7 +4,7 @@ class commentsListCtrl {
 		this._$dialog = $mdDialog;
 		this._$state = $state;
 
-		if (this._$state.current.name = 'app.profile.comments' || this._$state.current.name == 'app.profile.saved') {
+		if (this._$state.current.name == 'app.profile.comments' || this._$state.current.name == 'app.profile.saved') {
 			this.hideCreate = true;
 		}
 	}

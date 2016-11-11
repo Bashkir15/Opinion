@@ -2,12 +2,17 @@
 	<div class='forum-list-view'>
 		<div class='forum-list-list'>
 			<div ng-repeat="item in $ctrl.threads | orderBy: $ctrl.rowFilter" class='forum-list-repeat'>
-			<single-thread thread='item' class='forum-single-repeat'></single-thread>
+				<single-thread thread='item' class='forum-single-repeat'></single-thread>
+			</div>
 		</div>
 
-		<div class='forum-side-bar above-tablet'></div>
+		<div class='forum-side-bar above-tablet' ng-if='!$ctrl.hideSidebar'></div>
 	</div>
 
+	<div ng-if='!$ctrl.threads.length && !$ctrl.hideNoItems' class='forum-list-no-items'>
+		<p>It doesn't look like there is anything here</p>
+		<span>You should create a <span>new comment!</span></span>
+	</div>
 
 	
 	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateThread()" ng-if="!$ctrl.hideCreate">

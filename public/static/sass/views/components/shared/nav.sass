@@ -37,19 +37,20 @@
 			@include rale()
 			font-weight: 400
 			letter-spacing: 2px
-			color: $default-grey
+			color: $default-white-background
 
 .nav-menu-icon
 	button
 		span
 			font-size: 35px
-			color: $default-grey
+			color: #f1ddd6
+
 
 .user-menu
 	display: flex
 	flex-direction: column
 	align-items: center
-	background: $default-red
+	background: $default-dark-blue
 
 .user-menu-user-info
 	display: flex
@@ -65,7 +66,7 @@
 		margin-bottom: 20px
 		border: 2px solid $default-white-background
 
-	p
+	> p
 		padding-bottom: 10px
 		color: $default-white-background
 
@@ -74,16 +75,16 @@
 	padding-bottom: 0
 
 	.first-item
-		border-top: 1px solid darken($default-red, 10%)
+		border-top: 1px solid darken($default-dark-blue, 10%)
 
 		> div
 			&:nth-of-type(1)
-				border-bottom: 1px solid darken($default-red, 10%)
+				border-bottom: 1px solid darken($default-dark-blue, 10%)
 	
 	md-list-item
 		height: 75px
 		padding: 0
-		border-bottom: 1px solid darken($default-red, 10%)
+		border-bottom: 1px solid darken($default-dark-blue, 10%)
 		transition: all .4s ease
 
 		> div
@@ -91,7 +92,7 @@
 				display: flex
 				align-items: center
 				justify-content: center
-				background: darken($default-red, 5%)
+				background: darken($default-dark-blue, 5%)
 				height: 74px
 				width: 60px
 				transition: all .4s ease
@@ -123,11 +124,18 @@
 						color: $default-white-background
 
 		&:hover
-			background: darken($default-red, 10%)
+			background: darken($default-red, 5%)
 
 			> div
 				&:nth-of-type(1)
-					background: darken($default-red, 10%)
+					background: darken($default-red, 5%)
+
+		&.open
+			background: darken($default-red, 5%)
+
+			> div
+				&:nth-of-type(1)
+					background: darken($default-red, 5%)
 
 
 		button
@@ -143,7 +151,7 @@
 	min-height: 75px
 	cursor: pointer
 	transition: all .4s ease
-	border-bottom: 1px solid darken($default-red, 10%)
+	border-bottom: 1px solid darken($default-dark-blue, 10%)
 
 	> div
 		&:nth-of-type(1)
@@ -152,7 +160,7 @@
 			justify-content: center
 			width: 60px
 			height: 75px
-			background: darken($default-red, 5%)
+			background: darken($default-dark-blue, 5%)
 			transition: all .4s ease
 
 			i
@@ -202,9 +210,13 @@
 				letter-spacing: 2px
 				font-size: 16px
 				color: $default-white-background
+				transition: all .4s ease
 
 		&:hover
-			background: darken($default-red, 5%)
+			background: darken($default-dark-blue, 10%)
+
+			span
+				color: #fff
 
 	&.ng-hide
 		max-height: 0

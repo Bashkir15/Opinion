@@ -6,6 +6,7 @@ import Streams from './server/models/streams'
 import Threads from './server/models/threads'
 import Comments from './server/models/comments'
 
+
 var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
 const db = mongoose.connect(config.db, () => {
 	console.log('The application has connected to the: ' + config.db + ' database');
@@ -25,6 +26,7 @@ if (cluster.isMaster) {
 } else {
 	var app = require('./server/config/express')(db);
 	var server = require('http').Server(app);
+	var io = require('socket.io')(server);
 
 	server.listen(config.server.port, () => {
 		console.log('The application is up and running at: ' + config.server.host + config.server.port);
@@ -33,5 +35,4 @@ if (cluster.isMaster) {
 	global.config = config;
 	global.server = server;
 
-	module.exports = app;
 }

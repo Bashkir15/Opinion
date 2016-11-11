@@ -2931,6 +2931,11 @@ webpackJsonp([0],[
 
 			if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.profile.threads' || this._$state.current.name == 'app.profile.saved') {
 				this.hideCreate = true;
+				this.hideSidebar = true;
+			}
+
+			if (this._$state.current.name == 'app.home' || this._$state.current.name == 'app.singleStream') {
+				this.hideNoItems = true;
 			}
 
 			this.streamId = $stateParams.streamId;
@@ -3288,7 +3293,7 @@ webpackJsonp([0],[
 			this._$dialog = $mdDialog;
 			this._$state = $state;
 
-			if (this._$state.current.name = 'app.profile.comments' || this._$state.current.name == 'app.profile.saved') {
+			if (this._$state.current.name == 'app.profile.comments' || this._$state.current.name == 'app.profile.saved') {
 				this.hideCreate = true;
 			}
 		}
