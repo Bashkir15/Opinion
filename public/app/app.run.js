@@ -1,9 +1,12 @@
-function runAway($rootScope, $anchorScroll) {
-	'ngInject';
+function runAway($rootScope) {
+	connect();
 
-	$rootScope.$on('$stateChangeStart', () => {
-		$anchorScroll('nav');
-	});
+	function connect() {
+		var socket = window.io();
+		socket.on('connect', () => {
+			console.log('connected');
+		});
+	}
 }
 
 export default runAway

@@ -10,9 +10,15 @@ var Stream = mongoose.model('Stream');
 module.exports = () => {
 	var obj = {};
 
-	['newThread'].map((action) => {
+	['like', 'unlike'].map((action) => {
 		event.on(action, (data) => {
-			
+			var thread = data.thread;
+			var user = data.user;
+			thread.notifyUsers({
+				threadId: thread._id,
+				userId: user._id,
+				type: action
+			});
 		});
 	});
 

@@ -5,6 +5,7 @@ import Users from './server/models/users'
 import Streams from './server/models/streams'
 import Threads from './server/models/threads'
 import Comments from './server/models/comments'
+import Activity from './server/models/activity';
 
 
 var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
@@ -27,6 +28,12 @@ if (cluster.isMaster) {
 	var app = require('./server/config/express')(db);
 	var server = require('http').Server(app);
 	var io = require('socket.io')(server);
+	var notifications = require('./server/helpers/notifications');
+	var websockets = require('./server/helpers/websockets')(io);
+
+	io.on('connection', (socket) => {
+		console.log('woot');
+	});
 
 	server.listen(config.server.port, () => {
 		console.log('The application is up and running at: ' + config.server.host + config.server.port);
@@ -34,5 +41,6 @@ if (cluster.isMaster) {
 
 	global.config = config;
 	global.server = server;
+	global.notifications = notifications;
 
 }

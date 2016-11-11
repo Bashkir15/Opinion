@@ -181,11 +181,16 @@ webpackJsonp([0],[
 
 	var _toasts2 = _interopRequireDefault(_toasts);
 
+	var _sockets = __webpack_require__(176);
+
+	var _sockets2 = _interopRequireDefault(_sockets);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var configModule = _angular2.default.module('app.config', []);
 	configModule.service('Storage', _storage2.default);
 	configModule.service('Toast', _toasts2.default);
+	configModule.service('Socket', _sockets2.default);
 
 	exports.default = configModule;
 
@@ -3663,15 +3668,76 @@ webpackJsonp([0],[
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	function runAway($rootScope, $anchorScroll) {
-		'ngInject';
+	function runAway($rootScope) {
+		connect();
 
-		$rootScope.$on('$stateChangeStart', function () {
-			$anchorScroll('nav');
-		});
+		function connect() {
+			var socket = window.io();
+			socket.on('connect', function () {
+				console.log('connected');
+			});
+		}
 	}
 
 	exports.default = runAway;
+
+/***/ },
+/* 176 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var websockets = function () {
+		function websockets() {
+			'ngInject';
+
+			_classCallCheck(this, websockets);
+
+			this.conn = {};
+			this.connect();
+		}
+
+		_createClass(websockets, [{
+			key: 'connect',
+			value: function connect() {
+				var _this = this;
+
+				var socket = window.io();
+				socket.on('connect', function () {
+					console.log('connected');
+				});
+
+				socket.on('disconnect', function () {
+					_this.connect();
+				});
+
+				this.conn = socket;
+			}
+		}, {
+			key: 'reconnect',
+			value: function reconnect() {
+				this.conn.close();
+				this.connect();
+			}
+		}, {
+			key: 'close',
+			value: function close() {
+				this.conn.close();
+			}
+		}]);
+
+		return websockets;
+	}();
+
+	exports.default = websockets;
 
 /***/ }
 ]);

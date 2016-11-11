@@ -73,6 +73,44 @@ var UserSchema = new mongoose.Schema({
 		default: 0
 	},
 
+	notifications: [{
+		thread: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'Thread'
+		},
+
+		user: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'User'
+		},
+
+		created: {
+			type: Date,
+			default: Date.now()
+		},
+
+		notificationType: String,
+		unread: {
+			type: Boolean,
+			default: true
+		}
+	}],
+
+	socketId: {
+		type: String,
+		default: false
+	},
+
+	onlineStatus: {
+		type: Boolean,
+		default: false
+	},
+
+	loggedIn: {
+		type: Boolean,
+		default: false
+	},
+
 /*	loginAttempts: {
 		type: Number,
 		default: 0,

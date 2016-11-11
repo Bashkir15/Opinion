@@ -134,6 +134,20 @@ threadSchema.methods = {
 		obj.disliked = obj.dislikes.indexOf(user._id) != -1;
 		obj.saved = obj.saves.indexOf(user._id) != -1;
 		return obj;
+	},
+
+	notifyUsers: function (data) {
+		var notification = {
+			threadId: this._id,
+			userId: data.creatorId,
+			notificationType: data.type
+		};
+
+		this.populate('creator', (err, thread) => {
+			if (thread.creator._id.toString() !== data.userId.toString()) {
+				thread.creator.notify(notification);
+			}
+		});
 	}
 };
 
