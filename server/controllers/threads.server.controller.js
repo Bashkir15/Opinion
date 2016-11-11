@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import json from '../helpers/json';
+import event from '../helpers/events';
 import async from 'async';
 
 var Thread = mongoose.model('Thread');
@@ -9,12 +10,20 @@ var Stream = mongoose.model('Stream');
 module.exports = () => {
 	var obj = {};
 
+	['newThread'].map((action) => {
+		event.on(action, (data) => {
+			
+		});
+	});
+
 	obj.create = (req, res) => {
 		var thread = new Thread(req.body);
 		thread.stream = req.body.stream;
 		thread.creator = req.user._id;
 		thread.likes.push(req.user._id);
 		thread.save((err) => {
+
+			thread = thread.afterSave(req.user);
 
 			Stream.findOne({_id: req.body.stream}, (err, stream) => {
 				if (err) {
@@ -44,6 +53,11 @@ module.exports = () => {
 						return json.bad(err, res);
 					}
 				});
+			});
+
+			event.trigger('newThread', {
+				thread: thread,
+				creator: req.user
 			});
 
 			if (err) {

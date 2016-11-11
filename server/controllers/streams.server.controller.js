@@ -25,7 +25,7 @@ module.exports = () => {
 					return json.bad(err, res);
 				}
 
-				user.streams.push(steam._id);
+				user.streams.push(stream._id);
 				user.save((err) => {
 					if (err) {
 						return json.bad(err, res);
