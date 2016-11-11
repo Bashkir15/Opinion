@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import json from '../helpers/json';
 import auth from '../helpers/auth';
+import event from '../helpers/events';
 import fs from 'fs';
 import nodemailer from 'nodemailer'
 import async from 'async'
@@ -212,6 +213,11 @@ module.exports = () => {
 						return json.bad(err, res);
 					}
 
+					event.trigger('followed', {
+						user: user,
+						actor: req.user
+					});
+
 					json.good({
 						record: item
 					}, res);
@@ -233,6 +239,11 @@ module.exports = () => {
 						if (err) {
 							return json.bad(err, res);
 						}
+
+						event.trigger('unfollowed', {
+							user: user,
+							actor: req.user
+						});
 
 						json.good({
 							record: item

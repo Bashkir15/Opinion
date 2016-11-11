@@ -32,6 +32,13 @@ class UsersService {
 			method: 'POST'
 		});
 	}
+
+	activity(id) {
+		return this._$http({
+			url: '/activity/feed/' + id,
+			method: 'GET'
+		});
+	}
 }
 
 export default UsersService

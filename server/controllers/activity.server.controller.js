@@ -8,7 +8,7 @@ var Activity = mongoose.model('Activity');
 module.exports = () => {
 	var obj = {};
 
-	['like', 'unlike', 'comment', 'newThread', 'save', 'unsave'].map((action) => {
+	['liked', 'disliked', 'commented', 'new thread', 'saved', 'unsaved'].map((action) => {
 		event.on(action, (data) => {
 			var thread = data.thread;
 			var actor = data.actor;

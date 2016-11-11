@@ -33,6 +33,13 @@ function profileConfig ($stateProvider) {
 		controller: 'ProfileSavedController',
 		controllerAs: '$ctrl'
 	});
+
+	$stateProvider.state('app.profile.activity', {
+		url: '/activity',
+		templateUrl: './app/pages/profile/activity/activity.html',
+		controller: 'ProfileActivityController',
+		controllerAs: '$ctrl'
+	});
 }
 
 export default profileConfig;

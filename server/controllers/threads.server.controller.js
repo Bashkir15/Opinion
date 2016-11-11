@@ -10,17 +10,6 @@ var Stream = mongoose.model('Stream');
 module.exports = () => {
 	var obj = {};
 
-	['like', 'unlike'].map((action) => {
-		event.on(action, (data) => {
-			var thread = data.thread;
-			var user = data.user;
-			thread.notifyUsers({
-				threadId: thread._id,
-				userId: user._id,
-				type: action
-			});
-		});
-	});
 
 	obj.create = (req, res) => {
 		var thread = new Thread(req.body);
@@ -61,9 +50,9 @@ module.exports = () => {
 				});
 			});
 
-			event.trigger('newThread', {
+			event.trigger('new thread', {
 				thread: thread,
-				creator: req.user
+				actor: req.user
 			});
 
 			if (err) {
@@ -281,6 +270,11 @@ module.exports = () => {
 							return json.bad(err, res);
 						}
 
+						event.trigger('liked', {
+							thread: thread,
+							actor: req.user
+						});
+
 						json.good({
 							record: item
 						}, res);
@@ -307,6 +301,11 @@ module.exports = () => {
 						if (err) {
 							return json.bad(err, res);
 						}
+
+						event.trigger('liked', {
+							thread: thread,
+							actor: req.user
+						});
 
 						json.good({
 							record: item
@@ -461,6 +460,11 @@ module.exports = () => {
 							return json.bad(err, res);
 						}
 
+						event.trigger('disliked', {
+							thread: thread,
+							actor: req.user
+						});
+
 						json.good({
 							record: item
 						}, res);
@@ -487,6 +491,11 @@ module.exports = () => {
 						if (err) {
 							return json.bad(err, res);
 						}
+
+						event.trigger('disliked', {
+							thread: thread,
+							actor: req.user
+						});
 
 						json.good({
 							record: item
@@ -518,6 +527,11 @@ module.exports = () => {
 						return json.bad(err, res);
 					}
 
+					event.trigger('saved', {
+						thread: thread,
+						actor: req.user
+					});
+
 					json.good({
 						record: item
 					}, res);
@@ -542,6 +556,11 @@ module.exports = () => {
 						if (err) {
 							return json.bad(err, res);
 						}
+
+						event.trigger('unsaved', {
+							thread: thread,
+							actor: req.user
+						});
 
 						json.good({
 							record: item

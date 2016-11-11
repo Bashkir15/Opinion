@@ -1,0 +1,14 @@
+<div class='activity-page-container'>
+	<div ng-repeat="item in $ctrl.activities">
+		<small>{{item.created | date:'short'}}</small>
+		<span>
+			<span ng-if="item.action == 'liked'">Liked this<span>Thread</span></span>
+			<span ng-if="item.action == 'disliked'">Disliked this<span>Thread</span></span>
+			<span ng-if="item.action == 'saved'">Saved this <span>Thread</span></span>
+			<span ng-if="item.action =='unsaved'">Unsaved this <span>Thread</span></span>
+			<span ng-if="item.action =='newThread'">Create a new<span>Thread</span></span>
+			<span ng-if="item.action =='followed'">Followed <span>{{item.user.name}}</span></span>
+			<span ng-if="item.action=='unfollowed'">Unfollowed <span>{{item.user.name}}</span></span>
+		</span>
+	</div>
+</div>
