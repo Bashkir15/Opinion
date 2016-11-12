@@ -1,0 +1,62 @@
+.thread-delete-dialog
+	display: flex
+	width: 80%
+	margin: 0 auto
+
+.thread-delete-dialog-header
+	display: flex
+	align-items: center
+	padding: 25px
+
+	h3
+		display: flex
+		flex: 1
+		color: $default-light-blue
+
+	button
+		i
+			font-size: 25px
+			color: $default-red
+
+.thread-delete-dialog-body
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 35px 0 60px 0
+
+	p
+		@incude open()
+		font-weight: 400
+		font-size: 17px
+		letter-spacing: 2px
+		color: $default-dark-blue
+
+.thread-delete-dialog-actions
+	padding-bottom: 25px
+	button
+		transition: all .4s ease
+
+		&:nth-of-type(1)
+			height: 50px
+			width: 150px
+			background: $default-red
+			margin-right: 20px
+
+			&:hover
+				background: darken($default-red, 10%)
+
+		&:nth-of-type(2)
+			height: 50px
+			width: 150px
+			background: $default-light-blue
+			margin-right: 20px
+
+			&:hover
+				background: darken($default-light-blue, 10%)
+
+		span
+			@include rale()
+			font-weight: 400
+			font-size: 15px
+			text-transform: uppercase
+			color: $default-white-background

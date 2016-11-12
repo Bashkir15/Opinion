@@ -73,7 +73,7 @@
 			</div>
 
 			<div class='forum-single-info-text' ng-if="$ctrl.moderator || $ctrl.currentUser == $ctrl.thread.creator._id">
-				<button ng-click="$ctrl.delete($ctrl.thread)">
+				<button ng-click="$ctrl.openDeleteThread($ctrl.thread)">
 					<i class='mdi mdi-delete'></i>
 				</button>
 			</div>

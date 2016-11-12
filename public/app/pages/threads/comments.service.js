@@ -77,6 +77,13 @@ class commentsService {
 		});
 	}
 
+	modify(id, data) {
+		return this._$http({
+			url: '/commens/' + id + '/modify',
+			method: 'POST'
+		});
+	}
+
 	remove(id) {
 		return this._$http({
 			url: '/comments/' + id + '/remove',

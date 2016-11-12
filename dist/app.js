@@ -22,13 +22,13 @@ webpackJsonp([0],[
 
 	__webpack_require__(122);
 
-	__webpack_require__(152);
+	__webpack_require__(155);
 
-	var _app = __webpack_require__(175);
+	var _app = __webpack_require__(179);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _app3 = __webpack_require__(177);
+	var _app3 = __webpack_require__(181);
 
 	var _app4 = _interopRequireDefault(_app3);
 
@@ -359,7 +359,7 @@ webpackJsonp([0],[
 
 	__webpack_require__(138);
 
-	__webpack_require__(143);
+	__webpack_require__(146);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1349,9 +1349,17 @@ webpackJsonp([0],[
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
-	var _editThreadDialog = __webpack_require__(178);
+	var _editThreadDialog = __webpack_require__(143);
 
 	var _editThreadDialog2 = _interopRequireDefault(_editThreadDialog);
+
+	var _deleteThreadDialog = __webpack_require__(144);
+
+	var _deleteThreadDialog2 = _interopRequireDefault(_deleteThreadDialog);
+
+	var _deleteComment = __webpack_require__(145);
+
+	var _deleteComment2 = _interopRequireDefault(_deleteComment);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1361,6 +1369,8 @@ webpackJsonp([0],[
 	threadsModule.service('Comment', _comments2.default);
 	threadsModule.controller('threadsSingleCtrl', _threadsSingle2.default);
 	threadsModule.controller('EditThreadDialogController', _editThreadDialog2.default);
+	threadsModule.controller('DeleteThreadDialogController', _deleteThreadDialog2.default);
+	threadsModule.controller('DeleteCommentController', _deleteComment2.default);
 
 	exports.default = threadsModule;
 
@@ -1651,6 +1661,14 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'modify',
+			value: function modify(id, data) {
+				return this._$http({
+					url: '/commens/' + id + '/modify',
+					method: 'POST'
+				});
+			}
+		}, {
 			key: 'remove',
 			value: function remove(id) {
 				return this._$http({
@@ -1786,6 +1804,149 @@ webpackJsonp([0],[
 
 /***/ },
 /* 143 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var editThread = function () {
+		function editThread(Thread, $mdDialog, item) {
+			'ngInject';
+
+			_classCallCheck(this, editThread);
+
+			this._Thread = Thread;
+			this._$dialog = $mdDialog;
+			this._item = item;
+			this.getThread;
+		}
+
+		_createClass(editThread, [{
+			key: 'getThread',
+			value: function getThread() {
+				var _this = this;
+
+				this._Thread.single(this._item._id).then(function (response) {
+					_this.thread = response.data.res.record;
+				});
+			}
+		}, {
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}]);
+
+		return editThread;
+	}();
+
+	exports.default = editThread;
+
+/***/ },
+/* 144 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var DeleteThreadCtrl = function () {
+		function DeleteThreadCtrl(Thread, $state, $mdDialog, item) {
+			'ngInject';
+
+			_classCallCheck(this, DeleteThreadCtrl);
+
+			this._$dialog = $mdDialog;
+			this._$state = $state;
+			this._Thread = Thread;
+			this._item = item;
+		}
+
+		_createClass(DeleteThreadCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'delete',
+			value: function _delete() {
+				var _this = this;
+
+				this._Thread.remove(this._item._id).then(function (response) {
+					_this._$dialog.hide();
+					_this._$state.reload();
+				});
+			}
+		}]);
+
+		return DeleteThreadCtrl;
+	}();
+
+	exports.default = DeleteThreadCtrl;
+
+/***/ },
+/* 145 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var deleteCommentCtrl = function () {
+		function deleteCommentCtrl(Comment, $state, $mdDialog, item) {
+			'ngInject';
+
+			_classCallCheck(this, deleteCommentCtrl);
+
+			this._$dialog = $mdDialog;
+			this._$state = $state;
+			this._Comment = Comment;
+			this._item = item;
+		}
+
+		_createClass(deleteCommentCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'delete',
+			value: function _delete() {
+				var _this = this;
+
+				this._Comment.remove(this._item._id).then(function (response) {
+					_this._$dialog.hide();
+					_this._$state.reload();
+				});
+			}
+		}]);
+
+		return deleteCommentCtrl;
+	}();
+
+	exports.default = deleteCommentCtrl;
+
+/***/ },
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1798,35 +1959,35 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _users = __webpack_require__(144);
+	var _users = __webpack_require__(147);
 
 	var _users2 = _interopRequireDefault(_users);
 
-	var _profile = __webpack_require__(145);
+	var _profile = __webpack_require__(148);
 
 	var _profile2 = _interopRequireDefault(_profile);
 
-	var _profile3 = __webpack_require__(146);
+	var _profile3 = __webpack_require__(149);
 
 	var _profile4 = _interopRequireDefault(_profile3);
 
-	var _profileThreads = __webpack_require__(147);
+	var _profileThreads = __webpack_require__(150);
 
 	var _profileThreads2 = _interopRequireDefault(_profileThreads);
 
-	var _profileComments = __webpack_require__(148);
+	var _profileComments = __webpack_require__(151);
 
 	var _profileComments2 = _interopRequireDefault(_profileComments);
 
-	var _profileSaved = __webpack_require__(149);
+	var _profileSaved = __webpack_require__(152);
 
 	var _profileSaved2 = _interopRequireDefault(_profileSaved);
 
-	var _profileActivity = __webpack_require__(150);
+	var _profileActivity = __webpack_require__(153);
 
 	var _profileActivity2 = _interopRequireDefault(_profileActivity);
 
-	var _usersSearch = __webpack_require__(151);
+	var _usersSearch = __webpack_require__(154);
 
 	var _usersSearch2 = _interopRequireDefault(_usersSearch);
 
@@ -1845,7 +2006,7 @@ webpackJsonp([0],[
 	exports.default = profileModule;
 
 /***/ },
-/* 144 */
+/* 147 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1915,7 +2076,7 @@ webpackJsonp([0],[
 	exports.default = UsersService;
 
 /***/ },
-/* 145 */
+/* 148 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1970,7 +2131,7 @@ webpackJsonp([0],[
 	exports.default = profileConfig;
 
 /***/ },
-/* 146 */
+/* 149 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2031,7 +2192,7 @@ webpackJsonp([0],[
 	exports.default = profileCtrl;
 
 /***/ },
-/* 147 */
+/* 150 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2101,7 +2262,7 @@ webpackJsonp([0],[
 	exports.default = ProfileThreadsCtrl;
 
 /***/ },
-/* 148 */
+/* 151 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2171,7 +2332,7 @@ webpackJsonp([0],[
 	exports.default = ProfileCommentsCtrl;
 
 /***/ },
-/* 149 */
+/* 152 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2268,7 +2429,7 @@ webpackJsonp([0],[
 	exports.default = ProfileSavedCtrl;
 
 /***/ },
-/* 150 */
+/* 153 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2313,7 +2474,7 @@ webpackJsonp([0],[
 	exports.default = activityCtrl;
 
 /***/ },
-/* 151 */
+/* 154 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2367,7 +2528,7 @@ webpackJsonp([0],[
 	exports.default = UsersSearchCtrl;
 
 /***/ },
-/* 152 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2380,13 +2541,13 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(153);
-
-	__webpack_require__(155);
+	__webpack_require__(156);
 
 	__webpack_require__(158);
 
-	__webpack_require__(172);
+	__webpack_require__(161);
+
+	__webpack_require__(176);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2397,7 +2558,7 @@ webpackJsonp([0],[
 	exports.default = componentModule;
 
 /***/ },
-/* 153 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2410,7 +2571,7 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _nav = __webpack_require__(154);
+	var _nav = __webpack_require__(157);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
@@ -2422,7 +2583,7 @@ webpackJsonp([0],[
 	exports.default = sharedComponents;
 
 /***/ },
-/* 154 */
+/* 157 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2533,7 +2694,7 @@ webpackJsonp([0],[
 	exports.default = appNav;
 
 /***/ },
-/* 155 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2546,11 +2707,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _signup = __webpack_require__(156);
+	var _signup = __webpack_require__(159);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
-	var _login = __webpack_require__(157);
+	var _login = __webpack_require__(160);
 
 	var _login2 = _interopRequireDefault(_login);
 
@@ -2563,7 +2724,7 @@ webpackJsonp([0],[
 	exports.default = authComponents;
 
 /***/ },
-/* 156 */
+/* 159 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2624,7 +2785,7 @@ webpackJsonp([0],[
 	exports.default = signupForm;
 
 /***/ },
-/* 157 */
+/* 160 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2729,7 +2890,7 @@ webpackJsonp([0],[
 	exports.default = loginForm;
 
 /***/ },
-/* 158 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2742,11 +2903,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(159);
+	__webpack_require__(162);
 
-	__webpack_require__(164);
+	__webpack_require__(167);
 
-	__webpack_require__(168);
+	__webpack_require__(172);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2757,7 +2918,7 @@ webpackJsonp([0],[
 	exports.default = forumComponents;
 
 /***/ },
-/* 159 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2770,19 +2931,19 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _streamsList = __webpack_require__(160);
+	var _streamsList = __webpack_require__(163);
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamsSingle = __webpack_require__(161);
+	var _streamsSingle = __webpack_require__(164);
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
-	var _streamCreate = __webpack_require__(162);
+	var _streamCreate = __webpack_require__(165);
 
 	var _streamCreate2 = _interopRequireDefault(_streamCreate);
 
-	var _streamsTrending = __webpack_require__(163);
+	var _streamsTrending = __webpack_require__(166);
 
 	var _streamsTrending2 = _interopRequireDefault(_streamsTrending);
 
@@ -2797,7 +2958,7 @@ webpackJsonp([0],[
 	exports.default = streamComponents;
 
 /***/ },
-/* 160 */
+/* 163 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2876,7 +3037,7 @@ webpackJsonp([0],[
 	exports.default = listStream;
 
 /***/ },
-/* 161 */
+/* 164 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2928,7 +3089,7 @@ webpackJsonp([0],[
 	exports.default = singleStream;
 
 /***/ },
-/* 162 */
+/* 165 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2984,7 +3145,7 @@ webpackJsonp([0],[
 	exports.default = createStream;
 
 /***/ },
-/* 163 */
+/* 166 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3036,7 +3197,7 @@ webpackJsonp([0],[
 	exports.default = trendingStream;
 
 /***/ },
-/* 164 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3049,19 +3210,19 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threadsList = __webpack_require__(165);
+	var _threadsList = __webpack_require__(168);
 
 	var _threadsList2 = _interopRequireDefault(_threadsList);
 
-	var _threadsSingle = __webpack_require__(166);
+	var _threadsSingle = __webpack_require__(169);
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
-	var _threadsCreate = __webpack_require__(167);
+	var _threadsCreate = __webpack_require__(170);
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
-	var _editThread = __webpack_require__(179);
+	var _editThread = __webpack_require__(171);
 
 	var _editThread2 = _interopRequireDefault(_editThread);
 
@@ -3076,7 +3237,7 @@ webpackJsonp([0],[
 	exports.default = threadComponents;
 
 /***/ },
-/* 165 */
+/* 168 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3171,7 +3332,7 @@ webpackJsonp([0],[
 	exports.default = threadsList;
 
 /***/ },
-/* 166 */
+/* 169 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3264,6 +3425,19 @@ webpackJsonp([0],[
 					}
 				});
 			}
+		}, {
+			key: 'openDeleteThread',
+			value: function openDeleteThread(item) {
+				this._$dialog.show({
+					templateUrl: './app/pages/threads/dialogs/delete/delete.html',
+					controller: 'DeleteThreadDialogController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true,
+					locals: {
+						item: item
+					}
+				});
+			}
 		}]);
 
 		return SingleThreadCtrl;
@@ -3281,7 +3455,7 @@ webpackJsonp([0],[
 	exports.default = singleThread;
 
 /***/ },
-/* 167 */
+/* 170 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3354,7 +3528,69 @@ webpackJsonp([0],[
 	exports.default = createThread;
 
 /***/ },
-/* 168 */
+/* 171 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var editThreadCtrl = function () {
+		function editThreadCtrl(Thread, $mdDialog, $rootScope) {
+			'ngInject';
+
+			_classCallCheck(this, editThreadCtrl);
+
+			this._$dialog = $mdDialog;
+			this._$rootScope = $rootScope;
+			this._Thread = Thread;
+		}
+
+		_createClass(editThreadCtrl, [{
+			key: 'edit',
+			value: function edit(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this.data = {
+						title: this.thread.title,
+						content: this.thread.content
+					};
+
+					if (this.thread.link) {
+						this.data.link = this.thread.link;
+					}
+
+					this._Thread.modify(this.thread._id, this.data).then(function (response) {
+						_this._$rootScope.$broadcast('threadEdited');
+						_this._$dialog.hide();
+					});
+				}
+			}
+		}]);
+
+		return editThreadCtrl;
+	}();
+
+	var editThread = {
+		scope: {},
+		bindings: {
+			thread: '='
+		},
+		controller: editThreadCtrl,
+		templateUrl: './app/components/forum/threads/edit/edit.html'
+	};
+
+	exports.default = editThread;
+
+/***/ },
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3367,15 +3603,15 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _commentsCreate = __webpack_require__(169);
+	var _commentsCreate = __webpack_require__(173);
 
 	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
 
-	var _commentsList = __webpack_require__(170);
+	var _commentsList = __webpack_require__(174);
 
 	var _commentsList2 = _interopRequireDefault(_commentsList);
 
-	var _commentsSingle = __webpack_require__(171);
+	var _commentsSingle = __webpack_require__(175);
 
 	var _commentsSingle2 = _interopRequireDefault(_commentsSingle);
 
@@ -3389,7 +3625,7 @@ webpackJsonp([0],[
 	exports.default = commentComponents;
 
 /***/ },
-/* 169 */
+/* 173 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3458,7 +3694,7 @@ webpackJsonp([0],[
 	exports.default = createComment;
 
 /***/ },
-/* 170 */
+/* 174 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3509,7 +3745,7 @@ webpackJsonp([0],[
 	exports.default = commmentsList;
 
 /***/ },
-/* 171 */
+/* 175 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3523,7 +3759,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var commentsSingleCtrl = function () {
-		function commentsSingleCtrl(Auth, Comment, Thread, $stateParams, $state) {
+		function commentsSingleCtrl(Auth, Comment, Thread, $stateParams, $state, $mdDialog) {
 			'ngInject';
 
 			_classCallCheck(this, commentsSingleCtrl);
@@ -3534,6 +3770,7 @@ webpackJsonp([0],[
 			this._$state = $state;
 			this._isLoggedIn = this._Auth.isLoggedIn();
 			this._$stateParams = $stateParams;
+			this._$dialog = $mdDialog;
 			this._threadId = $stateParams.threadId;
 
 			if (this._isLoggedIn) {
@@ -3584,10 +3821,29 @@ webpackJsonp([0],[
 				}
 			}
 		}, {
-			key: 'delete',
-			value: function _delete(item) {
-				this._Comment.remove(item._id).then(function (response) {
-					history.go(-1);
+			key: 'openEditComment',
+			value: function openEditComment(item) {
+				this._$dialog.show({
+					templateUrl: './app/pages/threads/dialogs/edit/edit.comment.html',
+					controller: 'EditCommentController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true,
+					locals: {
+						item: item
+					}
+				});
+			}
+		}, {
+			key: 'openDeleteComment',
+			value: function openDeleteComment(item) {
+				this._$dialog.show({
+					templateUrl: './app/pages/threads/dialogs/delete/delete.comment.html',
+					controller: 'DeleteCommentController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true,
+					locals: {
+						item: item
+					}
 				});
 			}
 		}]);
@@ -3607,7 +3863,7 @@ webpackJsonp([0],[
 	exports.default = singleComment;
 
 /***/ },
-/* 172 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3620,11 +3876,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _profileHeader = __webpack_require__(173);
+	var _profileHeader = __webpack_require__(177);
 
 	var _profileHeader2 = _interopRequireDefault(_profileHeader);
 
-	var _profileOverview = __webpack_require__(174);
+	var _profileOverview = __webpack_require__(178);
 
 	var _profileOverview2 = _interopRequireDefault(_profileOverview);
 
@@ -3637,7 +3893,7 @@ webpackJsonp([0],[
 	exports.default = profileComponents;
 
 /***/ },
-/* 173 */
+/* 177 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3715,7 +3971,7 @@ webpackJsonp([0],[
 	exports.default = headerComponent;
 
 /***/ },
-/* 174 */
+/* 178 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3744,7 +4000,7 @@ webpackJsonp([0],[
 	exports.default = overviewComponent;
 
 /***/ },
-/* 175 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3753,7 +4009,7 @@ webpackJsonp([0],[
 		value: true
 	});
 
-	var _auth = __webpack_require__(176);
+	var _auth = __webpack_require__(180);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -3775,7 +4031,7 @@ webpackJsonp([0],[
 	exports.default = appConfig;
 
 /***/ },
-/* 176 */
+/* 180 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3808,7 +4064,7 @@ webpackJsonp([0],[
 	exports.default = authInterceptor;
 
 /***/ },
-/* 177 */
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3828,115 +4084,6 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
-
-/***/ },
-/* 178 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var editThread = function () {
-		function editThread(Thread, $mdDialog, item) {
-			'ngInject';
-
-			_classCallCheck(this, editThread);
-
-			this._Thread = Thread;
-			this._$dialog = $mdDialog;
-			this._item = item;
-			this.getThread;
-		}
-
-		_createClass(editThread, [{
-			key: 'getThread',
-			value: function getThread() {
-				var _this = this;
-
-				this._Thread.single(this._item._id).then(function (response) {
-					_this.thread = response.data.res.record;
-				});
-			}
-		}, {
-			key: 'close',
-			value: function close() {
-				this._$dialog.hide();
-			}
-		}]);
-
-		return editThread;
-	}();
-
-	exports.default = editThread;
-
-/***/ },
-/* 179 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var editThreadCtrl = function () {
-		function editThreadCtrl(Thread, $mdDialog, $rootScope) {
-			'ngInject';
-
-			_classCallCheck(this, editThreadCtrl);
-
-			this._$dialog = $mdDialog;
-			this._$rootScope = $rootScope;
-			this._Thread = Thread;
-		}
-
-		_createClass(editThreadCtrl, [{
-			key: 'edit',
-			value: function edit(isValid) {
-				var _this = this;
-
-				if (isValid) {
-					this.data = {
-						title: this.thread.title,
-						content: this.thread.content
-					};
-
-					if (this.thread.link) {
-						this.data.link = this.thread.link;
-					}
-
-					this._Thread.modify(this.thread._id, this.data).then(function (response) {
-						_this._$rootScope.$broadcast('threadEdited');
-						_this._$dialog.hide();
-					});
-				}
-			}
-		}]);
-
-		return editThreadCtrl;
-	}();
-
-	var editThread = {
-		scope: {},
-		bindings: {
-			thread: '='
-		},
-		controller: editThreadCtrl,
-		templateUrl: './app/components/forum/threads/edit/edit.html'
-	};
-
-	exports.default = editThread;
 
 /***/ }
 ]);

@@ -66,6 +66,18 @@ class SingleThreadCtrl {
 			}
 		});
 	}
+
+	openDeleteThread(item) {
+		this._$dialog.show({
+			templateUrl: './app/pages/threads/dialogs/delete/delete.html',
+			controller: 'DeleteThreadDialogController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true,
+			locals: {
+				item: item
+			}
+		});
+	}
 }
 
 

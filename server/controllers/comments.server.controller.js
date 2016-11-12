@@ -319,6 +319,27 @@ module.exports = () => {
 		});
 	};
 
+
+	obj.modify = (req, res) => {
+		Comment.findOne({_id: req.params.commentId})
+		.exec((err, comment) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				comment.content = req.body.content;
+				comment.save((err) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: comment
+					}, res);
+				});
+			}
+		});
+	};
+
 	obj.remove = (req, res) => {
 		Comment.findOne({_id: req.params.commentId})
 		.exec((err, comment) => {

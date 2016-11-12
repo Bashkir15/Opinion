@@ -1,5 +1,5 @@
 class commentsSingleCtrl {
-	constructor(Auth, Comment, Thread, $stateParams, $state) {
+	constructor(Auth, Comment, Thread, $stateParams, $state, $mdDialog) {
 		'ngInject';
 
 		this._Auth = Auth;
@@ -8,6 +8,7 @@ class commentsSingleCtrl {
 		this._$state = $state;
 		this._isLoggedIn = this._Auth.isLoggedIn();
 		this._$stateParams = $stateParams;
+		this._$dialog = $mdDialog;
 		this._threadId = $stateParams.threadId;
 
 		if (this._isLoggedIn) {
@@ -51,9 +52,27 @@ class commentsSingleCtrl {
 		}
 	}
 
-	delete(item) {
-		this._Comment.remove(item._id).then((response) => {
-			history.go(-1);
+	openEditComment(item) {
+		this._$dialog.show({
+			templateUrl: './app/pages/threads/dialogs/edit/edit.comment.html',
+			controller: 'EditCommentController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true,
+			locals: {
+				item: item
+			}
+		});
+	}
+
+	openDeleteComment(item) {
+		this._$dialog.show({
+			templateUrl: './app/pages/threads/dialogs/delete/delete.comment.html',
+			controller: 'DeleteCommentController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true,
+			locals: {
+				item: item
+			}
 		});
 	}
 }
