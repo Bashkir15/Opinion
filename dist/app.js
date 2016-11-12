@@ -1349,6 +1349,10 @@ webpackJsonp([0],[
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
+	var _editThreadDialog = __webpack_require__(178);
+
+	var _editThreadDialog2 = _interopRequireDefault(_editThreadDialog);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var threadsModule = _angular2.default.module('threads', []);
@@ -1356,6 +1360,7 @@ webpackJsonp([0],[
 	threadsModule.service('Thread', _threads4.default);
 	threadsModule.service('Comment', _comments2.default);
 	threadsModule.controller('threadsSingleCtrl', _threadsSingle2.default);
+	threadsModule.controller('EditThreadDialogController', _editThreadDialog2.default);
 
 	exports.default = threadsModule;
 
@@ -1520,10 +1525,11 @@ webpackJsonp([0],[
 			}
 		}, {
 			key: 'modify',
-			value: function modify(id) {
+			value: function modify(id, data) {
 				return this._$http({
 					url: '/threads/' + id + '/modify',
-					method: 'POST'
+					method: 'POST',
+					data: data
 				});
 			}
 		}, {
@@ -3055,12 +3061,17 @@ webpackJsonp([0],[
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
+	var _editThread = __webpack_require__(179);
+
+	var _editThread2 = _interopRequireDefault(_editThread);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var threadComponents = _angular2.default.module('threads.components', []);
 	threadComponents.component('threadList', _threadsList2.default);
 	threadComponents.component('singleThread', _threadsSingle2.default);
 	threadComponents.component('createThread', _threadsCreate2.default);
+	threadComponents.component('editThread', _editThread2.default);
 
 	exports.default = threadComponents;
 
@@ -3174,7 +3185,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var SingleThreadCtrl = function () {
-		function SingleThreadCtrl(Auth, Thread, $stateParams, $state) {
+		function SingleThreadCtrl(Auth, Thread, $stateParams, $state, $mdDialog) {
 			'ngInject';
 
 			var _this = this;
@@ -3184,6 +3195,7 @@ webpackJsonp([0],[
 			this._$stateParams = $stateParams;
 			this.streamId = this._$stateParams.streamId;
 			this._$state = $state;
+			this._$dialog = $mdDialog;
 
 			this._Thread = Thread;
 			this._Auth = Auth;
@@ -3237,6 +3249,19 @@ webpackJsonp([0],[
 
 				this._Thread.remove(item._id).then(function (response) {
 					_this2._$state.reload();
+				});
+			}
+		}, {
+			key: 'openEditThread',
+			value: function openEditThread(item) {
+				this._$dialog.show({
+					templateUrl: './app/pages/threads/dialogs/edit/edit.html',
+					controller: 'EditThreadDialogController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true,
+					locals: {
+						item: item
+					}
 				});
 			}
 		}]);
@@ -3803,6 +3828,115 @@ webpackJsonp([0],[
 	}
 
 	exports.default = runAway;
+
+/***/ },
+/* 178 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var editThread = function () {
+		function editThread(Thread, $mdDialog, item) {
+			'ngInject';
+
+			_classCallCheck(this, editThread);
+
+			this._Thread = Thread;
+			this._$dialog = $mdDialog;
+			this._item = item;
+			this.getThread;
+		}
+
+		_createClass(editThread, [{
+			key: 'getThread',
+			value: function getThread() {
+				var _this = this;
+
+				this._Thread.single(this._item._id).then(function (response) {
+					_this.thread = response.data.res.record;
+				});
+			}
+		}, {
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}]);
+
+		return editThread;
+	}();
+
+	exports.default = editThread;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var editThreadCtrl = function () {
+		function editThreadCtrl(Thread, $mdDialog, $rootScope) {
+			'ngInject';
+
+			_classCallCheck(this, editThreadCtrl);
+
+			this._$dialog = $mdDialog;
+			this._$rootScope = $rootScope;
+			this._Thread = Thread;
+		}
+
+		_createClass(editThreadCtrl, [{
+			key: 'edit',
+			value: function edit(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this.data = {
+						title: this.thread.title,
+						content: this.thread.content
+					};
+
+					if (this.thread.link) {
+						this.data.link = this.thread.link;
+					}
+
+					this._Thread.modify(this.thread._id, this.data).then(function (response) {
+						_this._$rootScope.$broadcast('threadEdited');
+						_this._$dialog.hide();
+					});
+				}
+			}
+		}]);
+
+		return editThreadCtrl;
+	}();
+
+	var editThread = {
+		scope: {},
+		bindings: {
+			thread: '='
+		},
+		controller: editThreadCtrl,
+		templateUrl: './app/components/forum/threads/edit/edit.html'
+	};
+
+	exports.default = editThread;
 
 /***/ }
 ]);

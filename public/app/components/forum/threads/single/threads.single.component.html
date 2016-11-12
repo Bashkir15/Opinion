@@ -36,23 +36,25 @@
 		<div class='left'>
 			<div class='forum-single-info-text'>
 				<button ui-sref="app.singleThread({streamId: $ctrl.streamId, threadId: $ctrl.thread._id})">
-				<!-- 	<p>View <span>{{$ctrl.thread.comments.length}}</span> Comment<span ng-if='$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length = 0'>s</span></p> -->
 				<span>{{$ctrl.thread.comments.length}}</span>
-				<p>Comment<span ng-if="$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length == 0">s</span></p>
+				<i class='mdi mdi-comment-outline mobile'></i>
+				<p class='above-mobile'>Comment<span ng-if="$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length == 0">s</span></p>
 				</button>
 			</div>
 
 			<div class='forum-single-info-text'>
 				<button>
 					<span>{{$ctrl.thread.views}}</span>
-					<p>View<span ng-if='$ctrl.thread.views > 1 || $ctrl.thread.views == 0'>s</span></p>
+					<i class='mobile mdi mdi-eye'></i>
+					<p class='above-mobile'>View<span ng-if='$ctrl.thread.views > 1 || $ctrl.thread.views == 0'>s</span></p>
 				</button>
 			</div>
 
 			<div class='forum-single-info-text'>
 				<button>
 					<span>{{$ctrl.thread.saves.length}}</span>
-					<p>Save<span ng-if="$ctrl.thread.saves.length > 1 || $ctrl.thread.saves.length == 0">s</span></p>
+					<i class='mobile mdi mdi-heart-outline'></i>
+					<p class='above-mobile'>Save<span ng-if="$ctrl.thread.saves.length > 1 || $ctrl.thread.saves.length == 0">s</span></p>
 				</button>
 			</div>
 		</div>
@@ -61,6 +63,12 @@
 			<div class='forum-single-info-text'>
 				<button ng-click="$ctrl.toggleSave($ctrl.thread)">
 					<i class='mdi mdi-heart-outline' ng-class="{'saved': $ctrl.thread.saved}"></i>
+				</button>
+			</div>
+
+			<div class='forum-single-ino-text' ng-if="$ctrl.moderator || $ctrl.currentUser == $ctrl.thread.creator._id">
+				<button ng-click="$ctrl.openEditThread($ctrl.thread)">
+					<i class='mdi mdi-pencil'></i>
 				</button>
 			</div>
 

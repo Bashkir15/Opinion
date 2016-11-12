@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import json from '../helpers/json';
+import event from '../helpers/events';
 
 var Stream = mongoose.model('Stream');
 var User = mongoose.model("User");
@@ -31,6 +32,11 @@ module.exports = () => {
 						return json.bad(err, res);
 					}
 				});
+			});
+
+			event.trigger('new stream', {
+				stream: stream,
+				actor: req.user
 			});
 
 			json.good({
@@ -158,6 +164,11 @@ module.exports = () => {
 						return json.bad(err, res);
 					}
 
+					event.trigger('subscribed', {
+						stream: stream,
+						actor: req.user
+					});
+
 					json.good({
 						record: item
 					}, res);
@@ -182,6 +193,11 @@ module.exports = () => {
 							return json.bad(err, res);
 						}
 
+						event.trigger('unsubscribed', {
+							stream: stream,
+							actor: req.user
+						});
+						
 						json.good({
 							record: item
 						}, res);

@@ -108,10 +108,11 @@ class threadService {
 		});
 	}
 
-	modify(id) {
+	modify(id, data) {
 		return this._$http({
 			url: '/threads/' + id + '/modify',
-			method: 'POST'
+			method: 'POST',
+			data: data
 		});
 	}
 

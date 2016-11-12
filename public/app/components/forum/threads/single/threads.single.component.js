@@ -1,10 +1,11 @@
 class SingleThreadCtrl {
-	constructor(Auth, Thread, $stateParams, $state) {
+	constructor(Auth, Thread, $stateParams, $state, $mdDialog) {
 		'ngInject';
 
 		this._$stateParams = $stateParams;
 		this.streamId = this._$stateParams.streamId;
 		this._$state = $state;
+		this._$dialog = $mdDialog;
 
 		this._Thread = Thread;
 		this._Auth = Auth;
@@ -51,6 +52,18 @@ class SingleThreadCtrl {
 	delete(item) {
 		this._Thread.remove(item._id).then((response) => {
 			this._$state.reload();
+		});
+	}
+
+	openEditThread(item) {
+		this._$dialog.show({
+			templateUrl: './app/pages/threads/dialogs/edit/edit.html',
+			controller: 'EditThreadDialogController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true,
+			locals: {
+				item: item
+			}
 		});
 	}
 }

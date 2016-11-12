@@ -12,7 +12,6 @@ module.exports = () => {
 		event.on(action, (data) => {
 			var thread = data.thread;
 			var actor = data.actor;
-			console.log(thread.title, 'has been', action, 'by', actor.name);
 			obj.createThread(action, actor, thread);
 		});
 	});
@@ -21,8 +20,15 @@ module.exports = () => {
 		event.on(action, (data) => {
 			var user = data.user;
 			var actor = data.actor;
-			console.log(actor.name, 'has', action, user.name);
 			obj.createUser(action, actor, user);
+		});
+	});
+
+	['new stream', 'subscribed', 'unsubscribed'].map((action) => {
+		event.on(action, (data) => {
+			var stream = data.stream;
+			var actor = data.actor;
+			obj.createStream(action, actor, stream);
 		});
 	});
 
@@ -57,6 +63,22 @@ module.exports = () => {
 			return activity;
 		});
 	};
+
+	obj.createStream = (action, actor, stream) => {
+		var activity = new Activity({
+			actor: actor,
+			stream: stream,
+			action: action
+		});
+
+		activity.save((err) => {
+			if (err) {
+				return err;
+			}
+
+			return activity;
+		});
+	}
 
 	obj.feed = (req, res) => {
 		User.findOne({_id: req.params.userId})
