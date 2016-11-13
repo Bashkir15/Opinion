@@ -58,6 +58,7 @@ if (cluster.isMaster) {
 
 	var io = sio.listen(server);
 	var websockets = require('./server/helpers/websockets')(io);
+	var notifications = require('./server/helpers/notifications')(io);
 
 	process.on('message', (message, connection) => {
 		if (message !== 'sticky-session:connection') {
@@ -69,8 +70,7 @@ if (cluster.isMaster) {
 		connection.resume();
 	});
 
+	global.notifications = notifications;
 	global.config = config;
 	global.server = server;
-
-	module.exports = io;
 }

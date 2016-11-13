@@ -15,6 +15,18 @@ var User = mongoose.model("User");
 module.exports = () => {
 	var obj = {};
 
+	['followed'].map((action) => {
+		event.on(action, (data) => {
+			var user = data.user;
+			var actor = data.actor;
+			user.notify({
+				userId: user._id,
+				actorId: actor._id,
+				notificationType: action
+			});
+		});
+	});
+
 	obj.create = (req, res) => {
 		var roles = ['authenticated'];
 

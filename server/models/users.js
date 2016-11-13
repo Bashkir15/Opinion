@@ -238,7 +238,7 @@ UserSchema.methods = {
 				follower.notify(data);
 			});
 		});
-	}
+	},
 
 	toJSON: function() {
 		var obj = this.toObject();
