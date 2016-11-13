@@ -2670,7 +2670,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var navCtrl = function () {
-		function navCtrl(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog) {
+		function navCtrl(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location) {
 			'ngInject';
 
 			var _this = this;
@@ -2684,6 +2684,7 @@ webpackJsonp([0],[
 			this._Stream = Stream;
 			this._$state = $state;
 			this._$rootScope = $rootScope;
+			this._$location = $location;
 			this._$dialog = $mdDialog;
 			this.isLoggedIn = this._Auth.isLoggedIn();
 			this.getUserInfo();
@@ -2715,12 +2716,31 @@ webpackJsonp([0],[
 					if (response.data.res.notifications) {
 						response.data.res.notifications.map(function (item) {
 							item.display = _this2.NotificationText(item);
+
+							if (item.thread) {
+								item.href = 'app.singleThread({threadId: item.thread._id, streamId: item.thread.stream})';
+							}
+
+							if (item.user) {
+								item.href = 'app.profile.overview({userId: item.user._id})';
+							}
 						});
 					}
 
 					_this2.notifications = response.data.res.notifications;
 					_this2.notificationCount = response.data.res.notifications.length;
 				});
+			}
+		}, {
+			key: 'notificationAction',
+			value: function notificationAction(item) {
+				if (item.thread) {
+					this._$location.url(item.thread.stream + '/' + item.thread._id);
+				}
+
+				if (item.user) {
+					this._$location.url('profile/' + item.user._id + '/overview');
+				}
 			}
 		}, {
 			key: 'updateNotifications',

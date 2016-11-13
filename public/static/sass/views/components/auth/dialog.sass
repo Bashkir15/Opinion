@@ -1,13 +1,14 @@
 .auth-dialog
 	display: flex
 	flex-direction: column
+	width: 60%
 
 
 .auth-dialog-header
 	display: flex
 	align-items: stretch
 	height: 50px
-	padding: 15px
+	padding: 35px 25px
 
 	> div
 		&:nth-of-type(1)
@@ -18,7 +19,7 @@
 			justify-content: flex-start
 
 			h3
-				color: $default-grey-text
+				color: $default-red
 
 		&:nth-of-type(2)
 			display: flex
@@ -27,14 +28,14 @@
 			button
 				span
 					font-size: 24px
-					color: $default-grey-text
+					color: $default-light-blue
 
 .auth-dialog-body
 	display: flex
 	flex-direction: column
 	align-items: center
 	width: 75%
-	padding-top: 20px
+	padding-top: 45px
 	margin: 0 auto
 
 	p
@@ -42,7 +43,7 @@
 
 
 	form
-		padding-top: 25px
+		padding-top: 40px
 
 
 .auth-dialog-form
@@ -60,7 +61,7 @@
 		font-weight: 400
 		letter-spacing: 2px
 		font-size: 16px
-		color: $default-grey-text
+		color: rgba(0,0,0,0.7)
 		transition: all .4s ease-out
 
 	input
@@ -74,7 +75,7 @@
 		font-weight: 300
 		letter-spacing: 2px
 		font-size: 16px
-		color: $default-grey-text
+		color: rgba(0,0,0,0.7)
 		border: 1px solid $default-grey-text
 		transition: all .4s ease-out
 
@@ -124,14 +125,21 @@
 	button
 		height: 45px
 		width: 130px
+		transition: all .4s ease
 
 		&:nth-of-type(1)
-			background: $default-green
+			background: $default-dark-blue
+
+			&:hover
+				background: lighten($default-dark-blue, 10%)
 
 		
 		&:nth-of-type(2)
 			margin: 0 15px
 			background: $default-red
+
+			&:hover
+				background: lighten($default-red, 10%)
 
 		span
 			@include rale()

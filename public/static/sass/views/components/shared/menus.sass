@@ -32,6 +32,50 @@
 			&:hover
 				background: $default-grey-background
 
+	.nav-notifications-dropdown
+		md-menu-item
+			min-height: 55px
+			padding: 10px
+			margin-bottom: 10px
+			text-overflow: ellipsis
+			word-break: break-all
+
+		.notification
+			display: flex
+			flex-direction: column
+			min-height: 55px
+			padding-bottom: 10px
+			border-bottom: 1px solid rgba(0,0,0,0.12)
+
+			span
+				@include rale()
+				font-weight: 400
+				letter-spacing: 1px
+				font-size: 14px
+				color: rgba(0,0,0,0.6)
+
+		.notification-header
+			display: flex
+			align-items: center
+			padding-bottom: 10px
+
+			> div 
+				height: 30px
+				width: 30px
+				border-radius: 50%
+				border: 1px solid $default-dark-blue
+
+			p
+				display: flex
+				flex: 1
+				padding-left: 15px
+				@include open()
+				font-weight: 400
+				font-size: 15px
+
+
+
+
 	.forum-search-dropdown
 		background: $default-white-background
 		width: 130px

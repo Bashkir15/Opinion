@@ -113,13 +113,17 @@
 			transition: all .4s ease-out
 
 		&.form-valid
+
 			box-shadow: 0 3px 6px rgba(0,0,0,0.23)
-			background: $default-green
-			border: $default-green
+			background: $default-dark-blue
+			border: none
 
 			span
 				color: $default-white-background
 				text-transform: uppercase
+
+			&:hover
+				background: lighten($default-dark-blue, 10%)
 
 .auth-form-error-container
 	padding-top: 20px

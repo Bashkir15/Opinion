@@ -48,10 +48,28 @@
 		</div>
 
 		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
-			<button ng-click="$ctrl.showNotifications = !$ctrl.showNotifications">
-				<span class='mdi mdi-bell'><div ng-if='$ctrl.notificationCount > 0' class='nav-notification-count'><span>{{$ctrl.notificationCount}}<span></div></span>
-			</button>
+			<md-menu class='nav-notifications-menu'>
+				<button ng-click="$mdOpenMenu()">
+					<span class='mdi mdi-bell'><div ng-if='$ctrl.notificationCount > 0' class='nav-notification-count'><span>{{$ctrl.notificationCount}}</span></div></span>
+				</button>
+
+				<md-menu-content class='nav-notifications-dropdown'>
+					<md-menu-item ng-repeat="item in $ctrl.notifications">
+						<div class='notification' ng-click="$ctrl.notificationAction(item)">
+							<div class='notification-header'>
+								<div></div>
+								<p>{{item.display.text}}</p>
+							</div>
+
+							<span am-time-ago="item.created"></span>
+						</div>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
 		</div>
+
+
+
 
 		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
 			<button ng-click="$ctrl.openUserMenu()">
@@ -61,7 +79,7 @@
 	</div>
 </nav>
 
-<div class='nav-notiications-container' ng-if='$ctrl.showNotifications'>
+<div class='nav-notifications-container' ng-if='$ctrl.showNotifications'>
 	<div>
 		<div ng-repeat='item in $ctrl.notifications'>
 			<p>{{item.display.text}}</p>
