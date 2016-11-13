@@ -1,29 +1,36 @@
-class websockets {
-	contructor() {
-		'ngInject';
+function websockets() {
+	var obj = {
+		conn: {},
+		connect: function() {
+			var $this = this;
+			var socket = new io.connect('http://localhost:8000');
+			socket.on('connect', () => {
+				console.log('connected');
+			});
 
-		this.conn = io.connect('http://localhost:8000')
-		this.connect();
-	}
+			socket.on('disconnect', () => {
+				$this.connect();
+			});
 
-	connect() {
-		this.conn.on('connect', () => {
-			console.log('connected');
-		});
+			this.conn = socket;
+		},
 
-		this.conn.on('disconnect', () => {
+		reconnect: function() {
+			this.conn.close();
 			this.connect();
-		});
-	}
+		},
 
-	reconnect() {
-		this.conn.close();
-		this.connect();
-	}
+		close: function() {
+			this.conn.close();
+		},
 
-	close() {
-		this.conn.close();
-	}
+		online: function (id) {
+			this.conn.emit('online', {userId: id});
+		}
+	};
+
+	obj.connect();
+	return obj;
 }
 
 export default websockets

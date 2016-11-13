@@ -19,8 +19,8 @@ module.exports = (io) => {
 			});
 		};
 
-		io.on('online', (data) => {
-			User.findOne({_id: data._id}, (err, user) => {
+		socket.on('online', (data) => {
+			User.findOne({_id: data.userId}, (err, user) => {
 				socket.userId = user._id;
 				user.socketId = socket.id;
 				user.loggedIn = true;
@@ -30,7 +30,7 @@ module.exports = (io) => {
 			});
 		});
 
-		io.on('disconnect', clearSocket);
-		io.on('logout', clearSocket);
+		socket.on('disconnect', clearSocket);
+		socket.on('logout', clearSocket);
 	});
 };

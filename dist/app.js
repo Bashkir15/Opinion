@@ -2864,7 +2864,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var LoginCtrl = function () {
-		function LoginCtrl($state, $mdDialog, Auth, Toast, Storage) {
+		function LoginCtrl($state, $mdDialog, Auth, Toast, Storage, Websocket) {
 			'ngInject';
 
 			_classCallCheck(this, LoginCtrl);
@@ -2874,6 +2874,7 @@ webpackJsonp([0],[
 			this._Storage = Storage;
 			this._$state = $state;
 			this._$dialog = $mdDialog;
+			this._Websocket = Websocket;
 			this.data = {
 				email: '',
 				password: ''
@@ -2930,6 +2931,7 @@ webpackJsonp([0],[
 				var serializedUser = angular.toJson(user);
 				this._Storage.set('user', serializedUser);
 				this._Storage.set('opinion-token', response.data.res.token);
+				this._Websocket.online(response.data.res.record._id);
 				this._$state.go('app.home', {}, { reload: true });
 			}
 		}, {
@@ -4217,52 +4219,40 @@ webpackJsonp([0],[
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var websockets = function () {
-		function websockets() {
-			_classCallCheck(this, websockets);
-		}
-
-		_createClass(websockets, [{
-			key: 'contructor',
-			value: function contructor() {
-				'ngInject';
-
-				this.conn = io.connect('http://localhost:8000');
-				this.connect();
-			}
-		}, {
-			key: 'connect',
-			value: function connect() {
-				var _this = this;
-
-				this.conn.on('connect', function () {
+	function websockets() {
+		var obj = {
+			conn: {},
+			connect: function connect() {
+				var $this = this;
+				var socket = new io.connect('http://localhost:8000');
+				socket.on('connect', function () {
 					console.log('connected');
 				});
 
-				this.conn.on('disconnect', function () {
-					_this.connect();
+				socket.on('disconnect', function () {
+					$this.connect();
 				});
-			}
-		}, {
-			key: 'reconnect',
-			value: function reconnect() {
+
+				this.conn = socket;
+			},
+
+			reconnect: function reconnect() {
 				this.conn.close();
 				this.connect();
-			}
-		}, {
-			key: 'close',
-			value: function close() {
-				this.conn.close();
-			}
-		}]);
+			},
 
-		return websockets;
-	}();
+			close: function close() {
+				this.conn.close();
+			},
+
+			online: function online(id) {
+				this.conn.emit('online', { userId: id });
+			}
+		};
+
+		obj.connect();
+		return obj;
+	}
 
 	exports.default = websockets;
 

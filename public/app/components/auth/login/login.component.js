@@ -1,5 +1,5 @@
 class LoginCtrl {
-	constructor($state, $mdDialog, Auth, Toast, Storage) {
+	constructor($state, $mdDialog, Auth, Toast, Storage, Websocket) {
 		'ngInject';
 
 		this._Auth = Auth;
@@ -7,6 +7,7 @@ class LoginCtrl {
 		this._Storage = Storage;
 		this._$state = $state;
 		this._$dialog = $mdDialog;
+		this._Websocket = Websocket;
 		this.data = {
 			email: '',
 			password: ''
@@ -58,6 +59,7 @@ class LoginCtrl {
 		let serializedUser = angular.toJson(user);
 		this._Storage.set('user', serializedUser);
 		this._Storage.set('opinion-token', response.data.res.token);
+		this._Websocket.online(response.data.res.record._id);
 		this._$state.go('app.home', {}, {reload: true});
 	}
 

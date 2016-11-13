@@ -8,6 +8,7 @@ import nodemailer from 'nodemailer'
 import async from 'async'
 import crypto from 'crypto'
 import handlebars from 'handlebars'
+import io from '../../server.babel'
 
 var User = mongoose.model("User");
 
