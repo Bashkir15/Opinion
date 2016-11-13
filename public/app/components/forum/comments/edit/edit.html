@@ -1,0 +1,17 @@
+<div class='thread-edit-container'>
+	<form name='$ctrl.editComment' ng-submit='$ctrl.edit($ctrl.editComment.$valid)' novalidate class='edit-thread-form'>
+		<div class='forum-form-wrapper' ng-class="{'has-focus': $ctrl.editComment.content.hasFocus,
+		'has-success': $ctrl.editComment.content.$valid,
+		'has-error': $ctrl.editComment.content.$error && $ctrl.editComment.content.$touched && !$ctrl.editComment.content.$valid,
+		'is-empty': !$ctrl.editComment.content.$viewValue}">
+			<label>Content</label>
+			<textarea name='content' ng-model='$ctrl.comment.content' ng-focus='$ctrl.editComment.content.hasFocus=true' ng-blur='$ctrl.editComment.content.hasFocus=false' rows='7' cols='40' required></textarea>
+		</div>
+
+		<div class='forum-form-submit'>
+			<button type='submit' ng-class="{'form-valid': $ctrl.editComment.$valid}">
+				<span>Edit</span>
+			</button>
+		</div>
+	</form>
+</div>

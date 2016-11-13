@@ -5,7 +5,7 @@ class editThread {
 		this._Thread = Thread;
 		this._$dialog = $mdDialog;
 		this._item = item;
-		this.getThread
+		this.getThread();
 	}
 
 	getThread() {

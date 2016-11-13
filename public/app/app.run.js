@@ -1,12 +1,9 @@
 function runAway($rootScope) {
-	connect();
+	var socket = io.connect('http://localhost:8000');
 
-	function connect() {
-		var socket = window.io();
-		socket.on('connect', () => {
-			console.log('connected');
-		});
-	}
+	socket.on('connect', () => {
+		console.log('yay');
+	});
 }
 
 export default runAway

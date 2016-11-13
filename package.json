@@ -34,6 +34,7 @@
     "moment": "^2.15.2",
     "mongoose": "^4.6.4",
     "morgan": "^1.7.0",
+    "net": "^1.0.2",
     "nodemailer": "^2.6.4",
     "path": "^0.12.7",
     "socket.io": "^1.5.1"

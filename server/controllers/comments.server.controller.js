@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import json from '../helpers/json';
 
 var Comment = mongoose.model('Comment');
+var User = mongoose.model("User");
 var Thread = mongoose.model('Thread');
 
 module.exports = () => {
@@ -11,6 +12,7 @@ module.exports = () => {
 		var comment = new Comment(req.body);
 		comment.creator = req.user._id;
 		comment.thread = req.body.thread;
+		comment.likes.push(req.user._id);
 		comment.save((err) => {
 			Thread.findOne({_id: req.body.thread}, (err, thread) => {
 				if (err) {
@@ -27,6 +29,19 @@ module.exports = () => {
 				}
 			});
 
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			json.good({
+				record: comment
+			}, res);
+		});
+	};
+
+	obj.single = (req, res) => {
+		Comment.findOne({_id: req.params.commentId})
+		.exec((err, comment) => {
 			if (err) {
 				return json.bad(err, res);
 			}
@@ -198,6 +213,20 @@ module.exports = () => {
 					comment.save((err, item) => {
 						comment = comment.afterSave(req.user);
 
+						User.findOne({_id: req.user._id})
+						.exec((err, user) => {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							user.commentScore += 1;
+							user.save((err) => {
+								if (err) {
+									return json.bad(err, res);
+								}
+							});
+						});
+
 						if (err) {
 							return json.bad(err, res);
 						}
@@ -214,6 +243,21 @@ module.exports = () => {
 						}
 
 						comment = comment.afterSave(req.user);
+
+
+						User.findOne({_id: req.user._id})
+						.exec((err, user) => {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							user.commentScore += 1;
+							user.save((err) => {
+								if (err) {
+									return json.bad(err, res);
+								}
+							});
+						});
 
 						json.good({
 							record: item
@@ -240,6 +284,20 @@ module.exports = () => {
 					comment.save((err, item) => {
 						comment = comment.afterSave(req.user);
 
+						User.findOne({_id: req.user._id})
+						.exec((err, user) => {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							user.commentScore -= 1;
+							user.save((err) => {
+								if (err) {
+									return json.bad(err, res);
+								}
+							});
+						});
+
 						if (err) {
 							return json.bad(err, res);
 						}
@@ -252,6 +310,20 @@ module.exports = () => {
 					comment.dislikes.push(req.user._id);
 					comment.save((err, item) => {
 						comment = comment.afterSave(req.user);
+
+						User.findOne({_id: req.user._id})
+						.exec((err, user) => {
+							if (err) {
+								return json.bad(err, res);
+							}
+
+							user.commentScore -= 1;
+							user.save((err) => {
+								if (err) {
+									return json.bad(err, res);
+								}
+							});
+						});
 
 						if (err) {
 							return json.bad(err, res);

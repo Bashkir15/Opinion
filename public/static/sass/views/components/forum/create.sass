@@ -128,7 +128,7 @@
 		height: 45px
 		width: 180px
 		border: 1px solid $default-grey-text
-		transition: all .4s ease
+		transition: all .4s ease-out
 
 		span
 			@include rale()
@@ -138,10 +138,14 @@
 			color: $default-grey-text
 
 		&.form-valid
-			background: $default-green
+			background: $default-dark-blue
+			border: none
 
 			span
 				color: $default-white-background
+
+			&:hover
+				background: lighten($default-dark-blue, 10%)
 
 @media screen and (min-width: 630px)
 	.forum-create-dialog

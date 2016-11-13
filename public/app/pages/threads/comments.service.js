@@ -13,9 +13,16 @@ class commentsService {
 		});
 	}
 
-	get(id, options) {
+	single(id) {
 		return this._$http({
 			url: '/comments/' + id,
+			method: 'GET'
+		});
+	}
+
+	get(id, options) {
+		return this._$http({
+			url: '/comments/threads/' + id,
 			method: 'GET',
 			params: {
 				timestamp: options.timestamp,
@@ -79,8 +86,9 @@ class commentsService {
 
 	modify(id, data) {
 		return this._$http({
-			url: '/commens/' + id + '/modify',
-			method: 'POST'
+			url: '/comments/' + id + '/modify',
+			method: 'POST',
+			data: data
 		});
 	}
 
