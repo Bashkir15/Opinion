@@ -180,10 +180,72 @@ UserSchema.methods = {
 		});
 	},
 
+	notify: function (data) {
+		data = data || {};
+
+		var thisUser = this;
+
+		if (!thisUser.notifications || typeof thisUser.notifications !== 'object') {
+			thisUser.notifications = [];
+		}
+
+		var User = mongoose.model("User");
+
+		var doNotify = function (fullData) {
+			if (thisUser.socketId) {
+				var unread = thisUser.notifications.filter((item) => {
+					return item.unread;
+				}).length;
+				fullData.unread = unread;
+				global.notifications.send(thisUser.socketId, fullData);
+
+				console.log(thisUser.name, 'was notified');
+			}
+		};
+
+		User.findOne({_id: data.actorId}).exec((err, actor) => {
+			data.actor = actor;
+			doNotify(data);
+		});
+
+		thisUser.notifications.push({
+			thread: data.threadId,
+			user: data.userId,
+			actor: data.actorId,
+			notificationType: data.notificationType
+		});
+
+		thisUser.notifications.sort((a, b) => {
+			var dt1 = new Date(a.created);
+			var dt2 = new Date(b.created);
+
+			if (dt1 > dt2) {
+				return -1;
+			} else {
+				return 1;
+			}
+		});
+
+		return thisUser.save((err, user) => {
+			return user;
+		});
+	},
+
+	notifyFollowers: function (data) {
+		var User = mongoose.model('User');
+		User.find({following: this._id}, (err, followers) => {
+			followers.map((follower) => {
+				follower.notify(data);
+			});
+		});
+	}
+
 	toJSON: function() {
 		var obj = this.toObject();
+		obj.onlineStatus = obj.socketId ? true : false;
+		delete obj.socketId;
 		delete obj.password;
-
+		delete obj.following;
 		return obj;
 	}
 };
