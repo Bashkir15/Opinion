@@ -48,12 +48,27 @@
 		</div>
 
 		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
+			<button ng-click="$ctrl.showNotifications = !$ctrl.showNotifications">
+				<span class='mdi mdi-bell'><div ng-if='$ctrl.notificationCount > 0' class='nav-notification-count'><span>{{$ctrl.notificationCount}}<span></div></span>
+			</button>
+		</div>
+
+		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
 			<button ng-click="$ctrl.openUserMenu()">
 				<span class='mdi mdi-menu'></span>
 			</button>
 		</div>
 	</div>
 </nav>
+
+<div class='nav-notiications-container' ng-if='$ctrl.showNotifications'>
+	<div>
+		<div ng-repeat='item in $ctrl.notifications'>
+			<p>{{item.display.text}}</p>
+			<span am-time-ago="item.created"></span>
+		</div>
+	</div>
+</div>
 
 <md-sidenav class='md-sidenav-left user-menu' md-component-id='user-menu' md-whiteframe='4' flex>
 	<div class='user-menu-user-info'>

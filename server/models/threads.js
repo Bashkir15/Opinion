@@ -148,6 +148,8 @@ threadSchema.methods = {
 			usernames[i] = username.substring(1);
 		});
 
+		var User = mongoose.model('User');
+
 		User.find({username: {$in: usernames}})
 		.exec((err, users) => {
 			if (cb) {
@@ -159,14 +161,13 @@ threadSchema.methods = {
 	notifyUsers: function (data) {
 		var notification = {
 			threadId: this._id,
+			actorId: data.actorId,
 			userId: data.creatorId,
 			notificationType: data.type
 		};
 
-		this.populate('creator', (err, thread) => {
-			if (thread.creator._id.toString() !== data.userId.toString()) {
-				thread.creator.notify(notification);
-			}
+		this.populate('creator', function (err, thread) {
+			thread.creator.notify(notification);
 		});
 	}
 };

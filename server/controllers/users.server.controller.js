@@ -284,7 +284,7 @@ module.exports = () => {
 
 				return json.good({
 					record: user,
-					notifications: user.notifications.slice(0, 10);
+					notifications: user.notifications.slice(0, 10)
 				}, res);
 			} else {
 				return json.good({message: 'No unread notifications'}, res);
@@ -313,7 +313,7 @@ module.exports = () => {
 					});
 
 					return json.good({
-						notifications: user.notifications.slice(0, 10);
+						notifications: user.notifications.slice(0, 10)
 					}, res);
 				});
 			} else {

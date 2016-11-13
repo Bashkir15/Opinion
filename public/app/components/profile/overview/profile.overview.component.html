@@ -66,13 +66,17 @@
 				<div>
 					<h3>Friends</h3>
 				</div>
-				<span>{{$ctrl.user.following.length}} Friend<span ng-if="$ctrl.user.following.length > 1 || $ctrl.user.following.length == 0">s</span></span>
+				<span ng-if='$ctrl.user.following'>{{$ctrl.user.following.length}} Friend<span ng-if="$ctrl.user.following.length > 1 || $ctrl.user.following.length == 0">s</span></span>
 			</div>
 			<div class='friends-list-body'>
 				<div ng-repeat="item in $ctrl.user.following" ui-sref="app.profile.overview({userId: item._id})" class='profile-friends-list-repeat'>
 					<div></div>
 					<p>{{item.name}}</p>
 					<p>{{item.username}}</p>
+				</div>
+
+				<div class='friends-list-no-friends' ng-if='!$ctrl.user.following'>
+					<p>{{$ctrl.user.username}} is not following anyone</p>
 				</div>
 			</div>
 			<div class='friends-list-footer'>

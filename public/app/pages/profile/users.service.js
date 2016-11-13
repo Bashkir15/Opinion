@@ -39,6 +39,13 @@ class UsersService {
 			method: 'GET'
 		});
 	}
+
+	notifications() {
+		return this._$http({
+			url: '/users/notifications',
+			method: 'GET'
+		});
+	}
 }
 
 export default UsersService

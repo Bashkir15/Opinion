@@ -29,6 +29,20 @@ module.exports = () => {
 				}
 			});
 
+			User.findOne({_id: req.user._id})
+			.exec((err, user) => {
+				if (err) {
+					return json.bad(err, res);
+				}
+
+				user.commentScore += 1;
+				user.save((err) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+				});
+			});
+
 			if (err) {
 				return json.bad(err, res);
 			}
@@ -213,7 +227,7 @@ module.exports = () => {
 					comment.save((err, item) => {
 						comment = comment.afterSave(req.user);
 
-						User.findOne({_id: req.user._id})
+						User.findOne({_id: comment.creator._id})
 						.exec((err, user) => {
 							if (err) {
 								return json.bad(err, res);
@@ -245,7 +259,7 @@ module.exports = () => {
 						comment = comment.afterSave(req.user);
 
 
-						User.findOne({_id: req.user._id})
+						User.findOne({_id: comment.creator._id})
 						.exec((err, user) => {
 							if (err) {
 								return json.bad(err, res);
@@ -284,7 +298,7 @@ module.exports = () => {
 					comment.save((err, item) => {
 						comment = comment.afterSave(req.user);
 
-						User.findOne({_id: req.user._id})
+						User.findOne({_id: comment.creator._id})
 						.exec((err, user) => {
 							if (err) {
 								return json.bad(err, res);
@@ -311,7 +325,7 @@ module.exports = () => {
 					comment.save((err, item) => {
 						comment = comment.afterSave(req.user);
 
-						User.findOne({_id: req.user._id})
+						User.findOne({_id: comment.creator._id})
 						.exec((err, user) => {
 							if (err) {
 								return json.bad(err, res);

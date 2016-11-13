@@ -41,9 +41,30 @@
 
 .nav-menu-icon
 	button
+		position: relative
+
 		span
 			font-size: 35px
 			color: #f1ddd6
+
+		.nav-notification-count
+			display: flex
+			align-items: center
+			justify-content: center
+			position: absolute
+			bottom: -5px
+			right: 0px
+			height: 27px
+			width: 27px
+			border-radius: 50%
+			background: $default-dark-blue
+
+			> span
+				font-size: 17px
+				display: inline-block
+				margin-left: 2px
+				margin-bottom: 18px
+				color: $default-white-background
 
 
 .user-menu

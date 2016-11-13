@@ -2133,6 +2133,14 @@ webpackJsonp([0],[
 					method: 'GET'
 				});
 			}
+		}, {
+			key: 'notifications',
+			value: function notifications() {
+				return this._$http({
+					url: '/users/notifications',
+					method: 'GET'
+				});
+			}
 		}]);
 
 		return UsersService;
@@ -2662,7 +2670,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var navCtrl = function () {
-		function navCtrl(Auth, Storage, Stream, $mdSidenav, $state, $rootScope, $mdDialog) {
+		function navCtrl(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog) {
 			'ngInject';
 
 			var _this = this;
@@ -2672,12 +2680,20 @@ webpackJsonp([0],[
 			this._$sidenav = $mdSidenav;
 			this._Auth = Auth;
 			this._Storage = Storage;
+			this._User = User;
 			this._Stream = Stream;
 			this._$state = $state;
 			this._$rootScope = $rootScope;
 			this._$dialog = $mdDialog;
 			this.isLoggedIn = this._Auth.isLoggedIn();
 			this.getUserInfo();
+
+			if (this.isLoggedIn) {
+				this.updateNotifications();
+			}
+
+			this.notificationCount = 0;
+			this.notifications = [];
 
 			this._$rootScope.$on('$stateChangeStart', function () {
 				_this._$sidenav('user-menu').close();
@@ -2691,6 +2707,78 @@ webpackJsonp([0],[
 		}
 
 		_createClass(navCtrl, [{
+			key: 'markRead',
+			value: function markRead(item) {
+				var _this2 = this;
+
+				var record = this._User.notificationsRead(item._id).then(function (response) {
+					if (response.data.res.notifications) {
+						response.data.res.notifications.map(function (item) {
+							item.display = _this2.NotificationText(item);
+						});
+					}
+
+					_this2.notifications = response.data.res.notifications;
+					_this2.notificationCount = response.data.res.notifications.length;
+				});
+			}
+		}, {
+			key: 'updateNotifications',
+			value: function updateNotifications() {
+				var _this3 = this;
+
+				this._User.notifications().then(function (response) {
+					console.log(response);
+					if (response.data.res.notifications) {
+						response.data.res.notifications.map(function (item) {
+							item.display = _this3.NotificationText(item);
+						});
+					}
+
+					_this3.notifications = response.data.res.notifications;
+					_this3.notificationCount = response.data.res.notifications ? response.data.res.notifications.length : 0;
+				});
+			}
+		}, {
+			key: 'NotificationText',
+			value: function NotificationText(obj) {
+				if (!obj) {
+					return { text: '' };
+				}
+
+				var msg = '';
+				var actor = obj.actor;
+
+				switch (obj.notificationType) {
+					case 'liked':
+						msg = actor.name + ' has liked a post';
+						break;
+
+					case 'comment':
+						msg = actor.name + ' has commented on a post';
+						break;
+
+					case 'followed':
+						msg = actor.name + ' is now following you';
+						break;
+
+					case 'saved':
+						msg = actor.name + ' has saved a thread';
+
+					case 'feed':
+						msg = actor.name + ' just created a new thread';
+						break;
+
+					case 'mention':
+						msg = actor.name + ' has just mentioned you in a thread';
+						break;
+				}
+
+				return {
+					text: msg
+				};
+			}
+		}, {
 			key: 'openUserMenu',
 			value: function openUserMenu() {
 				this._$sidenav('user-menu').toggle();
@@ -2703,7 +2791,7 @@ webpackJsonp([0],[
 		}, {
 			key: 'getStreams',
 			value: function getStreams(options) {
-				var _this2 = this;
+				var _this4 = this;
 
 				options = options || {};
 
@@ -2711,12 +2799,12 @@ webpackJsonp([0],[
 					options.subscribed = true;
 
 					this._Stream.get(options).then(function (response) {
-						_this2.streams = response.data.res.records;
+						_this4.streams = response.data.res.records;
 					});
 				} else {
 					options.unsubscribed = true;
 					this._Stream.get(options).then(function (response) {
-						_this2.streams = response.data.res.records;
+						_this4.streams = response.data.res.records;
 					});
 				}
 			}

@@ -1,16 +1,24 @@
 class navCtrl {
-	constructor(Auth,Storage, Stream, $mdSidenav, $state, $rootScope, $mdDialog) {
+	constructor(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog) {
 		'ngInject';
 
 		this._$sidenav = $mdSidenav;
 		this._Auth = Auth;
 		this._Storage = Storage;
+		this._User = User;
 		this._Stream = Stream;
 		this._$state = $state;
 		this._$rootScope = $rootScope;
 		this._$dialog = $mdDialog;
 		this.isLoggedIn = this._Auth.isLoggedIn();
 		this.getUserInfo();
+
+		if (this.isLoggedIn) {
+			this.updateNotifications();
+		}
+
+		this.notificationCount = 0;
+		this.notifications = [];
 
 		this._$rootScope.$on('$stateChangeStart', () => {
 			this._$sidenav('user-menu').close();
@@ -22,6 +30,71 @@ class navCtrl {
 
 
 		this.getStreams();
+	}
+
+	markRead(item) {
+		var record = this._User.notificationsRead(item._id).then((response) => {
+			if (response.data.res.notifications) {
+				response.data.res.notifications.map((item) => {
+					item.display = this.NotificationText(item);
+				});
+			}
+
+			this.notifications = response.data.res.notifications;
+			this.notificationCount = response.data.res.notifications.length;
+		});
+	}
+
+	updateNotifications() {
+		this._User.notifications().then((response) => {
+			console.log(response)
+			if (response.data.res.notifications) {
+				response.data.res.notifications.map((item) => {
+					item.display = this.NotificationText(item);
+				});
+			}
+
+			this.notifications = response.data.res.notifications;
+			this.notificationCount = response.data.res.notifications ? response.data.res.notifications.length : 0;
+		});		
+	}
+
+	NotificationText(obj) {
+		if (!obj) {
+			return { text: ''};
+		}
+
+		var msg = '';
+		var actor = obj.actor;
+
+		switch(obj.notificationType) {
+			case 'liked':
+			msg = actor.name + ' has liked a post';
+			break;
+
+			case 'comment':
+			msg = actor.name + ' has commented on a post';
+			break;
+
+			case 'followed':
+			msg = actor.name + ' is now following you';
+			break;
+
+			case 'saved':
+			msg = actor.name + ' has saved a thread';
+
+			case 'feed':
+			msg = actor.name + ' just created a new thread';
+			break;
+
+			case 'mention':
+			msg = actor.name + ' has just mentioned you in a thread';
+			break;
+		}
+
+		return {
+			text: msg
+		};
 	}
 
 	openUserMenu() {

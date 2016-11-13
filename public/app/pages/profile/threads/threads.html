@@ -2,10 +2,6 @@
 
 <thread-list threads="$ctrl.threads"></thread-list>
 
-<div ng-if='!$ctrl.threads.length' class='forum-list-no-items'>
-	<p>It doesn't look like there is anything here</p>
-</div>
-
 <div class='load-more-button' ng-if="!$ctrl.noMoreThreads">
 	<button ng-click="$ctrl.loadMore()">
 		<span>Load More</span>

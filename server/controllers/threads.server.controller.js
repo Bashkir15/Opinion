@@ -10,6 +10,17 @@ var Stream = mongoose.model('Stream');
 module.exports = () => {
 	var obj = {};
 
+	['liked', 'saved'].map((action) => {
+		event.on(action, (data) => {
+			var thread = data.thread;
+			var actor = data.actor;
+			thread.notifyUsers({
+				threadId: thread._id,
+				actorId: actor._id,
+				type: action
+			});
+		});
+	});
 
 	obj.create = (req, res) => {
 		var thread = new Thread(req.body);
@@ -19,6 +30,16 @@ module.exports = () => {
 		thread.save((err) => {
 
 			thread = thread.afterSave(req.user);
+
+			thread.getMentionedUsers((err, users) => {
+				users.map((user) => {
+					user.notify({
+						actorId: req.user._id,
+						threadId: thread._id,
+						notificationType: 'mention'
+					});
+				});
+			});
 
 			Stream.findOne({_id: req.body.stream}, (err, stream) => {
 				if (err) {
@@ -53,6 +74,13 @@ module.exports = () => {
 			event.trigger('new thread', {
 				thread: thread,
 				actor: req.user
+			});
+
+			req.user.notifyFollowers({
+				actorId: req.user._id,
+				threadId: thread._id,
+				streamId: thread.stream,
+				notificationType: 'feed'
 			});
 
 			if (err) {

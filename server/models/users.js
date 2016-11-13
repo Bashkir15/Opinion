@@ -89,7 +89,18 @@ var UserSchema = new mongoose.Schema({
 			default: Date.now()
 		},
 
+		actor: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'User'
+		},
+
+		stream: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'Stream'
+		},
+
 		notificationType: String,
+
 		unread: {
 			type: Boolean,
 			default: true
