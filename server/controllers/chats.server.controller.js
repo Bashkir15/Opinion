@@ -97,4 +97,23 @@ module.exports = () => {
 		});
 	};
 
+	obj.addParticipant = (req, res) => {
+		Chat.findOne({_id: req.params.chatId})
+		.populate('creator')
+		.exec((err, chat) => {
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			chat.participants.push = req.body.userId;
+			chat.save((err) => {
+				if (err) {
+					return json.bad(err, res);
+				}
+
+				json.good(chat, res);
+			});
+		});
+	};
+
 }
