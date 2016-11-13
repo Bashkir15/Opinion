@@ -230,4 +230,63 @@ module.exports = () => {
 		});
 	};
 
-}
+	obj.remove = (req, res) => {
+		Chat.findOne({_id: req.params.chatId})
+		.populate('creator')
+		.populate('participants')
+		.populate('messages')
+		.exec((err, chat) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (chat) {
+				if (chat.deleted.indexOf(req.user._id) != -1) {
+					return json.bad({message: 'You have aready removed that chat'}, res);
+				}
+
+				chat.deleted.push(req.user._id);
+				chat.save((err, item) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					chat = chat.afterSave(req.user);
+
+					json.good({
+						record: chat
+					}, res);
+				});
+			}
+		});
+	};
+
+	obj.unremove = (req, res) => {
+		Chat.findOne({_id: req.params.chatId})
+		.populate('creator')
+		.populate('participants')
+		.populate('messages')
+		.exec((err, chat) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (chat) {
+				if (chat.deleted.indexOf(req.user._id) != -1) {
+					chat.deleted.splice(chat.deleted.indexOf(req.user._id), 1);
+					chat.save((err, item) => {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						chat = chat.afterSave(req.user);
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					return json.bad({message: 'You need to delete that chat first'}, res);
+				}
+			}
+		});
+	};
+
+	return obj;
+};
