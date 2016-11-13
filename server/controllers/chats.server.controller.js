@@ -116,4 +116,39 @@ module.exports = () => {
 		});
 	};
 
+	obj.list = (req, res) => {
+		var user = req.user;
+
+		var criteria = {
+			participants: req.user
+		};
+
+		Chat.find(criteria, null {sort: {modified: 1}})
+		.populate('creator')
+		.populate('participants')
+		.skip(parseInt(req.query.page) * global.config.settings.perPage)
+		.limit(global.config.settings.perPage + 1)
+		.exec((err, chats) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				chats.map((chat) => {
+					chat.calculateUnreadFor(req.user);
+					chat = chat.afterSave(req.user);
+				});
+
+				var morePages = global.config.settings.perPage < chats.length;
+
+				if (morePages) {
+					chats.pop();
+				}
+
+				json.good({
+					records: chats,
+					morePages: morePages
+				}, res);
+			}
+		});
+	};
+
 }
