@@ -267,6 +267,61 @@ module.exports = () => {
 		});
 	};
 
+	obj.notifications = (req, res) => {
+		User.findOne({_id: req.user._id, 'notifications.unread': true})
+		.lean()
+		.populate('notifications')
+		.populate('notifications.thread')
+		.populate('notifications.user')
+		.populate('notifications.actor')
+		.exec((err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (user) {
+				user.notifications = user.notifications.filter((item) => {
+					return item.unread;
+				});
+
+				return json.good({
+					record: user,
+					notifications: user.notifications.slice(0, 10);
+				}, res);
+			} else {
+				return json.good({message: 'No unread notifications'}, res);
+			}
+		});
+	};
+
+	obj.markRead = (req, res) => {
+		User.findOne({_id: req.user._id, 'notifications.unread': true})
+		.populate('notifications')
+		.populate('notifications.thread')
+		.populate('notifications.user')
+		.exec((err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (user) {
+				user.notifications.map((item) => {
+					if (item._id.toString() === req.params.notificationId) {
+						item.unread = false;
+					}
+				});
+
+				user.save(() => {
+					user.notifications = user.notifications.filter((item) => {
+						return item.unread;
+					});
+
+					return json.good({
+						notifications: user.notifications.slice(0, 10);
+					}, res);
+				});
+			} else {
+				return json.good({message: 'Already marked as unread'}, res);
+			}
+		});
+	};
+
 	obj.search = (req, res) => {
 		var keyword = req.params.keyword;
 
