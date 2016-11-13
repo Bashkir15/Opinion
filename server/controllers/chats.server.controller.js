@@ -172,4 +172,62 @@ module.exports = () => {
 		});
 	};
 
+	obj.save = (req, res) => {
+		Chat.findOne({_id: req.params.chatId})
+		.populate('creator')
+		.populate('participants')
+		.populate('messages')
+		.exec((err, chat) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (chat) {
+				if (chat.saves.indexOf(req.user._id) != -1) {
+					return json.bad({message: 'That chat is already saved'}, res);
+				}
+
+				chat.saves.push(req.user._id);
+				chat.save((err, item) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					chat = chat.afterSave(req.user);
+
+					json.good({
+						record: item
+					}, res);
+				});
+			}
+		});
+	};
+
+	obj.unsave = (req, res) => {
+		Chat.findOne({_id: req.params.chatId})
+		.populate('creator')
+		.populate('participants')
+		.populate('messages')
+		.exec((err, chat) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (chat) {
+				if (chat.saves.indexOf(req.user._id) != -1) {
+					chat.saves.splice(chat.saves.indexOf(req.user._id), 1);
+					chat.save((err, item) => {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						chat = chat.afterSave(req.user);
+
+						json.good({
+							record: item
+						}, res);
+					});
+				} else {
+					return json.bad({message: 'You need to save this chat first'}, res);
+				}
+			}
+		});
+	};
+
 }
