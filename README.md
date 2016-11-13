@@ -12,7 +12,7 @@ Being the very first beta release, threre are bound to be some known issues that
 
 ~~3. The Subscribed Home feeds will be changed in the future. Right now They are just the top rated from all the Streams, but they will be the top rated from your subscribed Streams on log in soon. Because of this the front page is mostly just for show right now, without the ability to load more threads. ~~
 
-4. Users have access to some small parts of the application that they should not have access to, such as some mod options and the user profile when not logged in. Another small fix.
+~~4. Users have access to some small parts of the application that they should not have access to, such as some mod options and the user profile when not logged in. Another small fix.~~
 
 5. ~~ The site is NOT responsive at the moment because they layout and design is not in any way finalized. It is a rough, working idea and it seemed silly to design a completely responsive interface when that interface is likely to change dramatically over the next few weeks~~
 
@@ -24,21 +24,21 @@ If anyone sees these and finds some more issues, please let me know! I will be h
 1. More Features for Users
 * Requesting and storing a users location with geospatial indexing
 * Social logins from facebook, twitter, reddit, and github
-~~* A better implementation of JSON web tokens that will expire~~
-~~* Password Reset Emailing~~
+*~~ A better implementation of JSON web tokens that will expire~~
+*~~ Password Reset Emailing~~
 * Abililty to Change your Password
 * Send Invite emails to invite friends to Opinionated
 * Settings to decide how the site will look for you (themes, layout options, hiding sensitive info)
 * A custom datepicker to allow users to enter birthday
 * Rewards you can earn such as badges or trophies
-~~* A better role system~~
+* ~~A better role system~~
 * Your recently activity displayed on your profile
 
 2. A More Complete Message Board
 * Special Streams for those who have certain roles or rewards
 * Better Searches and filters, allowing you to search by who created it, within a certain date, etc.
 * Nested Comment Reply Chains
-* Notifications when other users do things to your creations, or mention you
+~~* Notifications when other users do things to your creations, or mention you~~
 * A complete text-editor for more complicated posts
 * Replace special text inputs with characters like emoticons and overall better post formatting
 * The ability to have a sidebar where you can upload html and css files for your stream
@@ -48,7 +48,7 @@ If anyone sees these and finds some more issues, please let me know! I will be h
 3. Better Server Implementation
 ~~* Using Cluster to increase performance~~
 * Using something like NGNIX as a proxy over node to cache some static files
-* Implementing websockets 
+~~* Implementing websockets ~~
 ~~* Better Archetecture haha~~
 * Better logging
 * Include monitoring and profiling

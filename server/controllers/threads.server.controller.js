@@ -41,6 +41,11 @@ module.exports = () => {
 				});
 			});
 
+			event.trigger('new thread', {
+				thread: thread,
+				actor: req.user
+			});
+			
 			Stream.findOne({_id: req.body.stream}, (err, stream) => {
 				if (err) {
 					return json.bad(err, res);
@@ -69,11 +74,6 @@ module.exports = () => {
 						return json.bad(err, res);
 					}
 				});
-			});
-
-			event.trigger('new thread', {
-				thread: thread,
-				actor: req.user
 			});
 
 			req.user.notifyFollowers({

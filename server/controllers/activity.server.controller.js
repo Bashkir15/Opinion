@@ -95,7 +95,9 @@ module.exports = () => {
 			Activity.find(activityCriteria, null, {sort: {created: -1}})
 			.populate('actor')
 			.populate('thread')
+			.populate('thread.title')
 			.populate('user')
+			.populate('stream')
 			.lean()
 			.exec((err, activities) => {
 				if (err) {
