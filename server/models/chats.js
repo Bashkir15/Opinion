@@ -22,17 +22,18 @@ var chatsSchema = new mongoose.Schema({
 			default: Date.now
 		},
 
-		user: {
-			type: mongoose.Schema.objectId,
+		 user: {
+			type: mongoose.Schema.ObjectId,
 			required: true,
 			ref: 'User'
-		},
+		}, 
 
 		unread: Number
 	}],
 
+
 	creator: {
-		type: mongoose.Schema.objectId,
+		type: mongoose.Schema.ObjectId,
 		required: true,
 		ref: 'User'
 	},
@@ -46,7 +47,7 @@ var chatsSchema = new mongoose.Schema({
 		},
 
 		creator: {
-			type: Schema.objectId,
+			type: mongoose.Schema.ObjectId,
 			required: true,
 			ref: 'User'
 		},
@@ -80,15 +81,14 @@ var chatsSchema = new mongoose.Schema({
 	isDeleted: {
 		type: Boolean,
 		default: false
-	}
+	} 
 });
 
 chatsSchema.methods = {
 	toJSON: function() {
-		var obj = this.toObject() {
-			delete obj.creator.password;
-			delete obj.creator.following;
-		}
+		var obj = this.toObject();
+		delete obj.creator.password;
+		delete obj.creator.following;
 
 		return obj;
 	},

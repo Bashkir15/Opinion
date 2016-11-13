@@ -50,7 +50,7 @@ module.exports = () => {
 				chat.creator = req.user._id;
 
 				req.body.participants.map((userId) => {
-					chat.doAccess(_id: userId);
+					chat.doAccess({_id: userId});
 				});
 
 				chat.save((err) => {
@@ -123,7 +123,7 @@ module.exports = () => {
 			participants: req.user
 		};
 
-		Chat.find(criteria, null {sort: {modified: 1}})
+		Chat.find(criteria, null, {sort: {modified: 1}})
 		.populate('creator')
 		.populate('participants')
 		.skip(parseInt(req.query.page) * global.config.settings.perPage)

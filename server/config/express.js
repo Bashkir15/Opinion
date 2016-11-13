@@ -10,6 +10,7 @@ import streamRoutes from '../routes/streams.server.routes';
 import threadRoutes from '../routes/threads.server.routes';
 import commentRoutes from '../routes/comments.server.routes';
 import activityRoutes from '../routes/activities.server.routes'
+import chatsRoutes from '../routes/chats.server.routes'
 
 module.exports = (db) => {
 	const app = express();
@@ -39,6 +40,7 @@ module.exports = (db) => {
 	app.use('/threads', threadRoutes);
 	app.use('/comments', commentRoutes);
 	app.use('/activity', activityRoutes);
+	app.use('/chats', chatsRoutes);
 
 	return app;
 }
