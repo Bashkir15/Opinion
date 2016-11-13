@@ -136,6 +136,26 @@ threadSchema.methods = {
 		return obj;
 	},
 
+	getMentionedUsers: function (cb) {
+		var re = /@([A-Za-z0-9]+)/g;
+		var usernames = this.content.match(re);
+
+		if (!usernames || !usernames.length) {
+			return [];
+		}
+
+		usernames.map((username, i) => {
+			usernames[i] = username.substring(1);
+		});
+
+		User.find({username: {$in: usernames}})
+		.exec((err, users) => {
+			if (cb) {
+				cb(err, users);
+			}
+		});
+	},
+
 	notifyUsers: function (data) {
 		var notification = {
 			threadId: this._id,
