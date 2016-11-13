@@ -151,4 +151,25 @@ module.exports = () => {
 		});
 	};
 
+	obj.single = (req, res) => {
+		Chat.findOne({_id: req.params.chatId})
+		.populate('creator')
+		.populate('participants')
+		.populate('messages')
+		.populate('messages.creator')
+		.exec((err, chat) => {
+			if (err) {
+				return json.bad(err, res);
+			} else if (chat) {
+				chat = chat.afterSave(req.user);
+
+				return json.good({
+					record: chat
+				}, res);
+			} else {
+				return json.bad({message: 'Chat not found'}, res);
+			}
+		});
+	};
+
 }
