@@ -3,6 +3,7 @@ import './home/home'
 import './auth/auth'
 import './streams/streams'
 import './threads/threads'
+import './chats/chats'
 import './profile/profile'
 
 const requires = [
@@ -10,6 +11,7 @@ const requires = [
 	'auth',
 	'streams',
 	'threads',
+	'chats',
 	'profile'
 ];
 

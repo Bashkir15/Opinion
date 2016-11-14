@@ -1,11 +1,14 @@
 class headerCtrl {
-	constructor(Auth, User, $rootScope, $stateParams) {
+	constructor(Auth, User, Chat, Toast, $rootScope, $stateParams, $mdDialog) {
 		'ngInject';
 
 		this._Auth = Auth;
 		this._User = User;
+		this._Chat = Chat;
+		this._Toast = Toast;
 		this._$rootScope = $rootScope;
 		this._$stateParams = $stateParams;
+		this._$dialog = $mdDialog;
 		this.userId = $stateParams.userId;
 		this._isLoggedIn = this._Auth.isLoggedIn();
 		if (this._isLoggedIn) {
@@ -32,6 +35,27 @@ class headerCtrl {
 		this._User.unfollow(item._id).then((response) => {
 			this._$rootScope.$broadcast('userUnfollowed');
 			this.checkUserFollowing();
+		});
+	}
+
+	message(item) {
+		var data = {
+			participants: [
+				this.userId,
+				this.currentUser._id
+			]
+		};
+
+		this._Chat.create(data).then((response) => {
+			this._$dialog.show({
+				templateUrl: './app/pages/profile/dialogs/message/message.html',
+				controller: 'ProfileMessageController',
+				controllerAs: '$ctrl',
+				clickOutsideToClose: true,
+				locals: {
+					message: response.data.res.record
+				}
+			});
 		});
 	}
 }

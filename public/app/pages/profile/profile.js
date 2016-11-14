@@ -7,6 +7,7 @@ import profileCommentsCtrl from './comments/profile.comments.controller'
 import profileSavedCtrl from './saved/profile.saved.controller'
 import profileActivityCtrl from './activity/profile.activity.controller'
 import usersSearchCtrl from './dialogs/users.search.controller'
+import profileMessageCtrl from './dialogs/message/profile.message.controller'
 
 let profileModule = angular.module('profile', []);
 profileModule.config(profileConfig);
@@ -17,5 +18,6 @@ profileModule.controller('ProfileCommentsController', profileCommentsCtrl);
 profileModule.controller('ProfileSavedController', profileSavedCtrl);
 profileModule.controller('ProfileActivityController', profileActivityCtrl);
 profileModule.controller('UsersSearchController', usersSearchCtrl);
+profileModule.controller('ProfileMessageController', profileMessageCtrl);
 
 export default profileModule

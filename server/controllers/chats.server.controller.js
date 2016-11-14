@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import event from '../helpers/events'
+import json from '../helpers/json'
 
 var Chat = mongoose.model("Chat");
 

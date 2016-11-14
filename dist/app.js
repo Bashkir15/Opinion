@@ -363,11 +363,13 @@ webpackJsonp([0],[
 
 	__webpack_require__(138);
 
+	__webpack_require__(185);
+
 	__webpack_require__(147);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['home', 'auth', 'streams', 'threads', 'profile'];
+	var requires = ['home', 'auth', 'streams', 'threads', 'chats', 'profile'];
 
 	var pagesModule = _angular2.default.module('app.pages', requires);
 
@@ -2056,6 +2058,10 @@ webpackJsonp([0],[
 
 	var _usersSearch2 = _interopRequireDefault(_usersSearch);
 
+	var _profileMessage = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./dialogs/message/profile.message.controller\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _profileMessage2 = _interopRequireDefault(_profileMessage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var profileModule = _angular2.default.module('profile', []);
@@ -2067,6 +2073,7 @@ webpackJsonp([0],[
 	profileModule.controller('ProfileSavedController', _profileSaved2.default);
 	profileModule.controller('ProfileActivityController', _profileActivity2.default);
 	profileModule.controller('UsersSearchController', _usersSearch2.default);
+	profileModule.controller('ProfileMessageController', _profileMessage2.default);
 
 	exports.default = profileModule;
 
@@ -4143,15 +4150,18 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var headerCtrl = function () {
-		function headerCtrl(Auth, User, $rootScope, $stateParams) {
+		function headerCtrl(Auth, User, Chat, Toast, $rootScope, $stateParams, $mdDialog) {
 			'ngInject';
 
 			_classCallCheck(this, headerCtrl);
 
 			this._Auth = Auth;
 			this._User = User;
+			this._Chat = Chat;
+			this._Toast = Toast;
 			this._$rootScope = $rootScope;
 			this._$stateParams = $stateParams;
+			this._$dialog = $mdDialog;
 			this.userId = $stateParams.userId;
 			this._isLoggedIn = this._Auth.isLoggedIn();
 			if (this._isLoggedIn) {
@@ -4188,6 +4198,27 @@ webpackJsonp([0],[
 				this._User.unfollow(item._id).then(function (response) {
 					_this3._$rootScope.$broadcast('userUnfollowed');
 					_this3.checkUserFollowing();
+				});
+			}
+		}, {
+			key: 'message',
+			value: function message(item) {
+				var _this4 = this;
+
+				var data = {
+					participants: [this.userId, this.currentUser._id]
+				};
+
+				this._Chat.create(data).then(function (response) {
+					_this4._$dialog.show({
+						templateUrl: './app/pages/profile/dialogs/message/message.html',
+						controller: 'ProfileMessageController',
+						controllerAs: '$ctrl',
+						clickOutsideToClose: true,
+						locals: {
+							message: response.data.res.record
+						}
+					});
 				});
 			}
 		}]);
@@ -4363,6 +4394,143 @@ webpackJsonp([0],[
 	}
 
 	exports.default = websockets;
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _chats = __webpack_require__(186);
+
+	var _chats2 = _interopRequireDefault(_chats);
+
+	var _chats3 = __webpack_require__(187);
+
+	var _chats4 = _interopRequireDefault(_chats3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var chatsModule = _angular2.default.module('chats', []);
+	chatsModule.config(_chats4.default);
+	chatsModule.service('Chat', _chats2.default);
+
+	exports.default = chatsModule;
+
+/***/ },
+/* 186 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var chatsService = function () {
+		function chatsService($http) {
+			'ngInject';
+
+			_classCallCheck(this, chatsService);
+
+			this._$http = $http;
+		}
+
+		_createClass(chatsService, [{
+			key: 'create',
+			value: function create(data) {
+				return this._$http({
+					url: '/chats/',
+					method: 'POST',
+					data: data
+				});
+			}
+		}, {
+			key: 'list',
+			value: function list() {
+				return this._$http({
+					url: '/chats/',
+					method: 'GET'
+				});
+			}
+		}, {
+			key: 'get',
+			value: function get(id) {
+				return this._$http({
+					url: '/chats/' + id,
+					method: 'GET'
+				});
+			}
+		}, {
+			key: 'message',
+			value: function message(id, data) {
+				return this._$http({
+					url: '/chats/' + id + '/message',
+					method: 'POST',
+					data: data
+				});
+			}
+		}, {
+			key: 'save',
+			value: function save(id) {
+				return this._$http({
+					url: '/chats/' + id + '/save',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'unsave',
+			value: function unsave(id) {
+				return this._$http({
+					url: '/chats/' + id + '/unsave',
+					method: 'POST'
+				});
+			}
+		}]);
+
+		return chatsService;
+	}();
+
+	exports.default = chatsService;
+
+/***/ },
+/* 187 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function chatsConfig($stateProvider) {
+		'ngInject';
+
+		$stateProvider.state('app.chats', {
+			templateUrl: './app/pages/chats/chats.tmpl.html',
+			abstract: true
+		});
+
+		$stateProvider.state('app.chats.inbox', {
+			url: '/inbox',
+			templateUrl: './app/pages/chats/inbox/inbox.html',
+			controller: 'ChatsInboxController',
+			controllerAs: '$ctrl'
+		});
+	}
+
+	exports.default = chatsConfig;
 
 /***/ }
 ]);

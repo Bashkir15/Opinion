@@ -24,7 +24,7 @@
 						</button>
 					</md-menu-item>
 
-					<md-menu-item ng-if="$ctrl.currentUser._id != $ctrl.user._id">
+					<md-menu-item ng-if="$ctrl.currentUser._id != $ctrl.user._id" ng-click="$ctrl.message(item)">
 						<button>
 							<span>Message</span>
 						</button>
