@@ -2058,7 +2058,7 @@ webpackJsonp([0],[
 
 	var _usersSearch2 = _interopRequireDefault(_usersSearch);
 
-	var _profileMessage = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./dialogs/message/profile.message.controller\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _profileMessage = __webpack_require__(188);
 
 	var _profileMessage2 = _interopRequireDefault(_profileMessage);
 
@@ -4531,6 +4531,63 @@ webpackJsonp([0],[
 	}
 
 	exports.default = chatsConfig;
+
+/***/ },
+/* 188 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ProfileMessageCtrl = function () {
+		function ProfileMessageCtrl(Chat, Toast, Auth, $mdDialog, message) {
+			'ngInject';
+
+			_classCallCheck(this, ProfileMessageCtrl);
+
+			this._Chat = Chat;
+			this._Toast = Toast;
+			this._Auth = Auth;
+			this._$dialog = $mdDialog;
+			this._message = message;
+			this.data = {
+				message: '',
+				creator: this._Auth.getUser()._Id,
+				chatId: this._message._id
+
+			};
+		}
+
+		_createClass(ProfileMessageCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'sendMessage',
+			value: function sendMessage(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this._Chat.message(this._message._id, this.data).then(function (response) {
+						_this._Toast.success('chat send');
+						_this._$dialog.hide();
+					});
+				}
+			}
+		}]);
+
+		return ProfileMessageCtrl;
+	}();
+
+	exports.default = ProfileMessageCtrl;
 
 /***/ }
 ]);

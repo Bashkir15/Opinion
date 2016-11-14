@@ -68,7 +68,7 @@ module.exports = () => {
 	};
 
 	obj.message = (req, res) => {
-		chat.findOne({_id: req.params.chatId})
+		Chat.findOne({_id: req.params.chatId})
 		.populate('creator')
 		.populate('participants')
 		.populate('messages')

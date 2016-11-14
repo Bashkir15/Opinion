@@ -1,0 +1,14 @@
+<div>
+	<form name='$ctrl.messageForm' ng-submit="$ctrl.sendMessage($ctrl.messageForm.$valid)" novalidate>
+		<div class='forum-form-wrapper'>
+			<label>Message</label>
+			<textarea name='message' ng-model='$ctrl.data.message' rows='7' cols='40' requried></textarea>
+		</div>
+
+		<div class='forum-form-submit'>
+			<button type='submit' aria-label='submit message button'>
+				<span>Send</span>
+			</button>
+		</div>
+	</form>
+</div>

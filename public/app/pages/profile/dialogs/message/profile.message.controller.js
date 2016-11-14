@@ -8,7 +8,7 @@ class ProfileMessageCtrl {
 		this._$dialog = $mdDialog;
 		this._message = message;
 		this.data = {
-			message: ''
+			message: '',
 			creator: this._Auth.getUser()._Id,
 			chatId: this._message._id
 
@@ -22,7 +22,7 @@ class ProfileMessageCtrl {
 	sendMessage(isValid) {
 		if (isValid) {
 			this._Chat.message(this._message._id, this.data).then((response) => {
-				this._Toast('chat send');
+				this._Toast.success('chat send');
 				this._$dialog.hide();
 			});
 		}
