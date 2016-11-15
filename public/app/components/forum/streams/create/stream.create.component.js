@@ -14,11 +14,11 @@ class createStreamCtrl {
 	create(isValid) {
 		if (isValid) {
 			this._Stream.create(this.data).then((response) => {
-				this._Toast.success('You just created a Stream: ');
+				this._Toast.success('You just created a Stream: ' + response.data.res.record.name);
 				this._$rootScope.$broadcast('streamCreated');
 			});
 		} else {
-			this._Toast('Hmm... Your form isn\'t valid');
+			this._Toast.error('Hmm... Your form isn\'t valid');
 		}
 	}
 }

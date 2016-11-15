@@ -1,5 +1,5 @@
 class ProfileMessageCtrl {
-	constructor(Chat, Toast, Auth, $mdDialog, message) {
+	constructor(Chat, Toast, Auth, $mdDialog, message, user) {
 		'ngInject';
 
 		this._Chat = Chat;
@@ -7,6 +7,7 @@ class ProfileMessageCtrl {
 		this._Auth = Auth;
 		this._$dialog = $mdDialog;
 		this._message = message;
+		this.user = user;
 		this.data = {
 			message: '',
 			creator: this._Auth.getUser()._Id,
@@ -22,7 +23,7 @@ class ProfileMessageCtrl {
 	sendMessage(isValid) {
 		if (isValid) {
 			this._Chat.message(this._message._id, this.data).then((response) => {
-				this._Toast.success('chat send');
+				this._Toast.success('chat sent to ' + this.user.username);
 				this._$dialog.hide();
 			});
 		}

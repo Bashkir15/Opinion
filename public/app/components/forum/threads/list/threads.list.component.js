@@ -53,7 +53,9 @@ class threadListController {
 
 	openCreateThread() {
 		this._$dialog.show({
-			templateUrl: './app/pages/threads/dialogs/create.html',
+			templateUrl: './app/pages/threads/dialogs/create/create.html',
+			controller: 'ThreadsCreateController',
+			controllerAs: '$ctrl',
 			clickOutsideToClose: true
 		});
 	}

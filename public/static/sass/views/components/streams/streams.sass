@@ -44,3 +44,40 @@
 	.load-more-button
 		width: 100%
 
+.streams-create-dialog
+	width: 80%
+
+.streams-create-dialog-header
+	display: flex
+	align-items: center
+	padding: 25px 15px
+	width: 100%
+
+	h3
+		display: flex
+		flex: 1
+		color: $default-red
+
+	button
+		i
+			display: inline-block
+			font-size: 25px
+			color: $default-light-blue
+			transition: all .4s ease
+
+			&:hover
+				transform: scale(1.2,1.2)
+
+@media screen and (min-width: 640px)
+	.streams-create-dialog-header
+		padding: 25px
+
+@media screen and (min-width: 1024px)
+	.streams-create-dialog-form
+		width: 100%
+
+@media screen and (min-width: 1300px)
+	.streams-create-dialog
+		width: 65%
+
+

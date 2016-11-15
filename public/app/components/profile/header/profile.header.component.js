@@ -20,6 +20,7 @@ class headerCtrl {
 
 	checkUserFollowing() {
 		this._User.single(this.userId).then((response) => {
+			this.user = response.data.res.record;
 			this.alreadyFollowing = response.data.res.alreadyFollowing
 		});
 	}
@@ -53,7 +54,8 @@ class headerCtrl {
 				controllerAs: '$ctrl',
 				clickOutsideToClose: true,
 				locals: {
-					message: response.data.res.record
+					message: response.data.res.record,
+					user: this.user
 				}
 			});
 		});

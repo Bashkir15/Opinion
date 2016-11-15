@@ -1,3 +1,0 @@
-//// Handle changing stream sidebar by file uploads. Allow them to upload html and css files. The html files will be stored by reference in the database and the css files will be handled with a gulp task that will read the uploads directory and inject the stylesheets. There must be strict class-naming conventions for each stream that the mods must follow as to not conflict with other streams. Possibly the exactstreamname-something-something... since stream name's must be unique.
-
-// Password match directive

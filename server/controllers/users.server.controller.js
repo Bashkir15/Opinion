@@ -346,5 +346,30 @@ module.exports = () => {
 		});
 	};
 
+	obj.updateProfile = (req, res) => {
+		User.findOne({_id: req.params.userId})
+		.exec((err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				user.gender = req.body.gender || user.gender;
+				user.phone - req.body.phone || user.phone;
+				user.occupation = req.body.occupation || user.occupation;
+				user.interests = req.body.interests || user.interests;
+				user.bio = req.body.bio || user.bio;
+
+				user.save((err, item) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.good({
+						record: item
+					}, es);
+				});
+			}
+		});
+	};
+
 	return obj;
 };

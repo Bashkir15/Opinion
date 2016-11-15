@@ -11,7 +11,10 @@ class commentsListCtrl {
 
 	openCreateComment() {
 		this._$dialog.show({
-			templateUrl: './app/pages/threads/dialogs/comment-create.html'
+			templateUrl: './app/pages/threads/dialogs/create/create.comment.html',
+			controller: 'CommentsCreateController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true
 		});
 	}
 }

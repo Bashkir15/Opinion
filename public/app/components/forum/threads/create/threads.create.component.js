@@ -23,7 +23,7 @@ class threadCreateCtrl {
 			}
 
 			this._Thread.create(this.data).then((response) => {
-				this._Toast.success('You have just posted a new thread');
+				this._Toast.success('You have just posted a new thread ' + response.data.res.record.title);
 				this._$rootScope.$broadcast('threadCreated');
 			});
 		} else {

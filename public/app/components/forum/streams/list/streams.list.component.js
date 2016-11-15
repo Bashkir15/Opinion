@@ -38,7 +38,10 @@ class ListStreamCtrl {
 
 	openCreateStream() {
 		this._$dialog.show({
-			templateUrl: './app/pages/streams/dialogs/create.html'
+			templateUrl: './app/pages/streams/dialogs/create/create.html',
+			controller: 'StreamsCreateController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true
 		});
 	}
 }

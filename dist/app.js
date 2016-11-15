@@ -796,6 +796,10 @@ webpackJsonp([0],[
 
 	var _subscribedStreams2 = _interopRequireDefault(_subscribedStreams);
 
+	var _streamsCreate = __webpack_require__(197);
+
+	var _streamsCreate2 = _interopRequireDefault(_streamsCreate);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var streamsModule = _angular2.default.module('streams', []);
@@ -805,6 +809,7 @@ webpackJsonp([0],[
 	streamsModule.controller('StreamsSingleCtrl', _streamsSingle2.default);
 	streamsModule.controller('TrendingStreamsCtrl', _trendingStreams2.default);
 	streamsModule.controller('SubscribedStreamsCtrl', _subscribedStreams2.default);
+	streamsModule.controller('StreamsCreateController', _streamsCreate2.default);
 
 	exports.default = streamsModule;
 
@@ -1371,6 +1376,14 @@ webpackJsonp([0],[
 
 	var _deleteComment2 = _interopRequireDefault(_deleteComment);
 
+	var _threadsCreate = __webpack_require__(198);
+
+	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
+
+	var _commentsCreate = __webpack_require__(199);
+
+	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var threadsModule = _angular2.default.module('threads', []);
@@ -1382,7 +1395,8 @@ webpackJsonp([0],[
 	threadsModule.controller('DeleteThreadDialogController', _deleteThreadDialog2.default);
 	threadsModule.controller('DeleteCommentController', _deleteComment2.default);
 	threadsModule.controller('EditCommentController', _editComment2.default);
-
+	threadsModule.controller('ThreadsCreateController', _threadsCreate2.default);
+	threadsModule.controller('CommentsCreateController', _commentsCreate2.default);
 	exports.default = threadsModule;
 
 /***/ },
@@ -2962,7 +2976,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var ProfileMessageCtrl = function () {
-		function ProfileMessageCtrl(Chat, Toast, Auth, $mdDialog, message) {
+		function ProfileMessageCtrl(Chat, Toast, Auth, $mdDialog, message, user) {
 			'ngInject';
 
 			_classCallCheck(this, ProfileMessageCtrl);
@@ -2972,6 +2986,7 @@ webpackJsonp([0],[
 			this._Auth = Auth;
 			this._$dialog = $mdDialog;
 			this._message = message;
+			this.user = user;
 			this.data = {
 				message: '',
 				creator: this._Auth.getUser()._Id,
@@ -2992,7 +3007,7 @@ webpackJsonp([0],[
 
 				if (isValid) {
 					this._Chat.message(this._message._id, this.data).then(function (response) {
-						_this._Toast.success('chat send');
+						_this._Toast.success('chat sent to ' + _this.user.username);
 						_this._$dialog.hide();
 					});
 				}
@@ -3598,7 +3613,10 @@ webpackJsonp([0],[
 			key: 'openCreateStream',
 			value: function openCreateStream() {
 				this._$dialog.show({
-					templateUrl: './app/pages/streams/dialogs/create.html'
+					templateUrl: './app/pages/streams/dialogs/create/create.html',
+					controller: 'StreamsCreateController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true
 				});
 			}
 		}]);
@@ -3705,11 +3723,11 @@ webpackJsonp([0],[
 
 				if (isValid) {
 					this._Stream.create(this.data).then(function (response) {
-						_this._Toast.success('You just created a Stream: ');
+						_this._Toast.success('You just created a Stream: ' + response.data.res.record.name);
 						_this._$rootScope.$broadcast('streamCreated');
 					});
 				} else {
-					this._Toast('Hmm... Your form isn\'t valid');
+					this._Toast.error('Hmm... Your form isn\'t valid');
 				}
 			}
 		}]);
@@ -3892,7 +3910,9 @@ webpackJsonp([0],[
 			key: 'openCreateThread',
 			value: function openCreateThread() {
 				this._$dialog.show({
-					templateUrl: './app/pages/threads/dialogs/create.html',
+					templateUrl: './app/pages/threads/dialogs/create/create.html',
+					controller: 'ThreadsCreateController',
+					controllerAs: '$ctrl',
 					clickOutsideToClose: true
 				});
 			}
@@ -4080,7 +4100,7 @@ webpackJsonp([0],[
 					}
 
 					this._Thread.create(this.data).then(function (response) {
-						_this._Toast.success('You have just posted a new thread');
+						_this._Toast.success('You have just posted a new thread ' + response.data.res.record.title);
 						_this._$rootScope.$broadcast('threadCreated');
 					});
 				} else {
@@ -4311,7 +4331,10 @@ webpackJsonp([0],[
 			key: 'openCreateComment',
 			value: function openCreateComment() {
 				this._$dialog.show({
-					templateUrl: './app/pages/threads/dialogs/comment-create.html'
+					templateUrl: './app/pages/threads/dialogs/create/create.comment.html',
+					controller: 'CommentsCreateController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true
 				});
 			}
 		}]);
@@ -4576,6 +4599,7 @@ webpackJsonp([0],[
 				var _this = this;
 
 				this._User.single(this.userId).then(function (response) {
+					_this.user = response.data.res.record;
 					_this.alreadyFollowing = response.data.res.alreadyFollowing;
 				});
 			}
@@ -4615,7 +4639,8 @@ webpackJsonp([0],[
 						controllerAs: '$ctrl',
 						clickOutsideToClose: true,
 						locals: {
-							message: response.data.res.record
+							message: response.data.res.record,
+							user: _this4.user
 						}
 					});
 				});
@@ -5122,6 +5147,111 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = chatsTrashCtrl;
+
+/***/ },
+/* 197 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var StreamsCreateCtrl = function () {
+		function StreamsCreateCtrl($mdDialog) {
+			'ngInject';
+
+			_classCallCheck(this, StreamsCreateCtrl);
+
+			this._$dialog = $mdDialog;
+		}
+
+		_createClass(StreamsCreateCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}]);
+
+		return StreamsCreateCtrl;
+	}();
+
+	exports.default = StreamsCreateCtrl;
+
+/***/ },
+/* 198 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var threadsCreateCtrl = function () {
+		function threadsCreateCtrl($mdDialog) {
+			'ngInject';
+
+			_classCallCheck(this, threadsCreateCtrl);
+
+			this._$dialog = $mdDialog;
+		}
+
+		_createClass(threadsCreateCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}]);
+
+		return threadsCreateCtrl;
+	}();
+
+	exports.default = threadsCreateCtrl;
+
+/***/ },
+/* 199 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var createCommentsCtrl = function () {
+		function createCommentsCtrl($mdDialog) {
+			'ngInject';
+
+			_classCallCheck(this, createCommentsCtrl);
+
+			this._$dialog = $mdDialog;
+		}
+
+		_createClass(createCommentsCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}]);
+
+		return createCommentsCtrl;
+	}();
+
+	exports.default = createCommentsCtrl;
 
 /***/ }
 ]);
