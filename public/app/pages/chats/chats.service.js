@@ -48,6 +48,34 @@ class chatsService {
 			method: 'POST'
 		});
 	}
+
+	getSaved(id) {
+		return this._$http({
+			url: '/chats/' + id + '/saved',
+			method: 'GET'
+		});
+	}
+
+	remove(id) {
+		return this._$http({
+			url: '/chats/' + id + '/remove',
+			method: 'POST'
+		});
+	}
+
+	unremove(id) {
+		return this._$http({
+			url: '/chats/' + id + '/unremove',
+			method: 'POST'
+		});
+	}
+
+	getRemoved(id) {
+		return this._$http({
+			url: '/chats/' + id + '/removed',
+			method: 'GET'
+		});
+	}
 }
 
 export default chatsService

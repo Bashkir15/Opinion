@@ -1,0 +1,56 @@
+<div class='chats-single-container' ng-if="!$ctrl.chat.isDeleted">
+	<div class='chats-single-single' ng-click="$ctrl.goToChat($ctrl.chat)">
+		<div class='chats-single-header'>
+			<div ng-class="{'online': $ctrl.chat.participants[1].onlineStatus}"></div>
+			<div class='chats-user-info'>
+				<h4 ng-if="$ctrl.currentUser == $ctrl.chat.creator._id">{{$ctrl.chat.participants[1].username}}</h4>
+				<h4 ng-if="$ctrl.currentUser != $ctrl.chat.creator._id">{{$ctrl.chat.participants[0].username}}</h4>
+				<p am-time-ago="$ctrl.chat.messages[0].created"></p>
+			</div>
+		</div>
+
+		<div class='chats-single-body'>
+			<p>{{$ctrl.chat.messages[0].message}}</p>
+		</div>
+	</div>
+
+	<div class='chats-single-actions'>
+		<div>
+			<button ng-click="$ctrl.toggleSave($ctrl.chat)">
+				<i class='mdi mdi-heart-outline' ng-class="{'saved': $ctrl.chat.saved}"></i>
+			</button>
+
+			<button ng-click="$ctrl.toggleRemove($ctrl.chat)">
+				<i class='mdi mdi-delete'></i>
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class='chats-single-container chats-trash-single-container' ng-if="$ctrl.chat.isDeleted && !$ctrl.hideRemoved">
+	<div class='chats-single-single' ng-click="$ctrl.goToChat($ctrl.chat)">
+		<div class='chats-single-header'>
+			<div></div>
+			<div class='chats-user-info'>
+				<h4>{{$ctrl.chat.participants[1].username}}</h4>
+				<p am-time-ago="$ctrl.chat.messages[0].created"></p>
+			</div>
+		</div>
+
+		<div class='chats-single-body'>
+			<p>{{$ctrl.chat.messages[0].message}}</p>
+		</div>
+	</div>
+
+	<div class='chats-single-actions'>
+		<div>
+			<button ng-click="$ctrl.toggleSave($ctrl.chat)">
+				<i class='mdi mdi-heart-outline' ng-class="{'saved': $ctrl.chat.saved}"></i>
+			</button>
+
+			<button ng-click="$ctrl.toggleRemove($ctrl.chat)">
+				<i class='mdi mdi-delete' ng-class="{'removed': $ctrl.chat.isDeleted}"></i>
+			</button>
+		</div>
+	</div>
+</div>

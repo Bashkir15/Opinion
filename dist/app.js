@@ -22,17 +22,17 @@ webpackJsonp([0],[
 
 	__webpack_require__(122);
 
-	__webpack_require__(156);
+	__webpack_require__(162);
 
-	var _app = __webpack_require__(181);
+	var _app = __webpack_require__(191);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _app3 = __webpack_require__(183);
+	var _app3 = __webpack_require__(193);
 
 	var _app4 = _interopRequireDefault(_app3);
 
-	var _app5 = __webpack_require__(184);
+	var _app5 = __webpack_require__(194);
 
 	var _app6 = _interopRequireDefault(_app5);
 
@@ -363,9 +363,9 @@ webpackJsonp([0],[
 
 	__webpack_require__(138);
 
-	__webpack_require__(185);
-
 	__webpack_require__(147);
+
+	__webpack_require__(152);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2026,39 +2026,379 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _users = __webpack_require__(148);
+	var _chats = __webpack_require__(148);
+
+	var _chats2 = _interopRequireDefault(_chats);
+
+	var _chats3 = __webpack_require__(149);
+
+	var _chats4 = _interopRequireDefault(_chats3);
+
+	var _chatsInbox = __webpack_require__(150);
+
+	var _chatsInbox2 = _interopRequireDefault(_chatsInbox);
+
+	var _chatsMessages = __webpack_require__(151);
+
+	var _chatsMessages2 = _interopRequireDefault(_chatsMessages);
+
+	var _chatsSaved = __webpack_require__(195);
+
+	var _chatsSaved2 = _interopRequireDefault(_chatsSaved);
+
+	var _chatsTrash = __webpack_require__(196);
+
+	var _chatsTrash2 = _interopRequireDefault(_chatsTrash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var chatsModule = _angular2.default.module('chats', []);
+	chatsModule.config(_chats4.default);
+	chatsModule.service('Chat', _chats2.default);
+	chatsModule.controller('ChatsInboxController', _chatsInbox2.default);
+	chatsModule.controller('ChatsMessagesController', _chatsMessages2.default);
+	chatsModule.controller("ChatsSavedController", _chatsSaved2.default);
+	chatsModule.controller('ChatsTrashController', _chatsTrash2.default);
+	exports.default = chatsModule;
+
+/***/ },
+/* 148 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var chatsService = function () {
+		function chatsService($http) {
+			'ngInject';
+
+			_classCallCheck(this, chatsService);
+
+			this._$http = $http;
+		}
+
+		_createClass(chatsService, [{
+			key: 'create',
+			value: function create(data) {
+				return this._$http({
+					url: '/chats/',
+					method: 'POST',
+					data: data
+				});
+			}
+		}, {
+			key: 'list',
+			value: function list() {
+				return this._$http({
+					url: '/chats/',
+					method: 'GET'
+				});
+			}
+		}, {
+			key: 'get',
+			value: function get(id) {
+				return this._$http({
+					url: '/chats/' + id,
+					method: 'GET'
+				});
+			}
+		}, {
+			key: 'message',
+			value: function message(id, data) {
+				return this._$http({
+					url: '/chats/' + id + '/message',
+					method: 'POST',
+					data: data
+				});
+			}
+		}, {
+			key: 'save',
+			value: function save(id) {
+				return this._$http({
+					url: '/chats/' + id + '/save',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'unsave',
+			value: function unsave(id) {
+				return this._$http({
+					url: '/chats/' + id + '/unsave',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'getSaved',
+			value: function getSaved(id) {
+				return this._$http({
+					url: '/chats/' + id + '/saved',
+					method: 'GET'
+				});
+			}
+		}, {
+			key: 'remove',
+			value: function remove(id) {
+				return this._$http({
+					url: '/chats/' + id + '/remove',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'unremove',
+			value: function unremove(id) {
+				return this._$http({
+					url: '/chats/' + id + '/unremove',
+					method: 'POST'
+				});
+			}
+		}, {
+			key: 'getRemoved',
+			value: function getRemoved(id) {
+				return this._$http({
+					url: '/chats/' + id + '/removed',
+					method: 'GET'
+				});
+			}
+		}]);
+
+		return chatsService;
+	}();
+
+	exports.default = chatsService;
+
+/***/ },
+/* 149 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function chatsConfig($stateProvider) {
+		'ngInject';
+
+		$stateProvider.state('app.chats', {
+			templateUrl: './app/pages/chats/chats.tmpl.html',
+			abstract: true
+		});
+
+		$stateProvider.state('app.chats.inbox', {
+			url: '/inbox',
+			templateUrl: './app/pages/chats/inbox/inbox.html',
+			controller: 'ChatsInboxController',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.chats.inbox.messages', {
+			url: '/:chatId/messages',
+			templateUrl: './app/pages/chats/messages/messages.html',
+			controller: 'ChatsMessagesController',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.chats.saved', {
+			url: '/saved',
+			templateUrl: './app/pages/chats/saved/saved.html',
+			controller: 'ChatsSavedController',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.chats.saved.messages', {
+			url: '/:chatId/messages',
+			templateUrl: './app/pages/chats/messages/messages.html',
+			controller: 'ChatsMessagesController',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.chats.trash', {
+			url: '/trash',
+			templateUrl: './app/pages/chats/trash/trash.html',
+			controller: 'ChatsTrashController',
+			controllerAs: '$ctrl'
+		});
+
+		$stateProvider.state('app.chats.trash.messages', {
+			url: '/:chatId/messages',
+			templateUrl: './app/pages/chats/messages/messages.html',
+			controller: 'ChatsMessagesController',
+			controllerAs: '$ctrl'
+		});
+	}
+
+	exports.default = chatsConfig;
+
+/***/ },
+/* 150 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var chatsInboxCtrl = function () {
+		function chatsInboxCtrl(Chat) {
+			_classCallCheck(this, chatsInboxCtrl);
+
+			this._Chat = Chat;
+			this.chats = [];
+			this.getChats();
+		}
+
+		_createClass(chatsInboxCtrl, [{
+			key: "getChats",
+			value: function getChats() {
+				var _this = this;
+
+				this._Chat.list().then(function (response) {
+					_this.chats = response.data.res.records;
+					console.log(response);
+				});
+			}
+		}]);
+
+		return chatsInboxCtrl;
+	}();
+
+	exports.default = chatsInboxCtrl;
+
+/***/ },
+/* 151 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var chatsMessagesCtrl = function () {
+		function chatsMessagesCtrl(Auth, Chat, $state, $stateParams, $rootScope) {
+			var _this = this;
+
+			_classCallCheck(this, chatsMessagesCtrl);
+
+			this._Auth = Auth;
+			this._Chat = Chat;
+			this._$state = $state;
+			this._$stateParams = $stateParams;
+			this._$rootScope = $rootScope;
+
+			this.chatId = $stateParams.chatId;
+			this.currentUser = this._Auth.getUser();
+			this.messages = [];
+			this.getChat();
+
+			this._$rootScope.$on('newMessage', function () {
+				_this.updateMessages({
+					append: true
+				});
+			});
+		}
+
+		_createClass(chatsMessagesCtrl, [{
+			key: 'getChat',
+			value: function getChat() {
+				var _this2 = this;
+
+				this._Chat.get(this.chatId).then(function (response) {
+					console.log(response);
+					_this2.chat = response.data.res.chat;
+					_this2.messages = response.data.res.record.messages;
+				});
+			}
+		}, {
+			key: 'updateMessages',
+			value: function updateMessages(options) {
+				var _this3 = this;
+
+				options = options || {};
+
+				this._Chat.get(this.chatId).then(function (response) {
+					if (!options.append) {
+						_this3.messages = response.data.res.record.messages.concat(_this3.messages);
+					} else {
+						_this3.messages = _this3.messages.concat(response.data.res.record.messages[0]);
+					}
+				});
+			}
+		}, {
+			key: 'closeMessage',
+			value: function closeMessage() {
+				this._$rootScope.$broadcast('showChats');
+				this._$state.go('app.chats.inbox');
+			}
+		}]);
+
+		return chatsMessagesCtrl;
+	}();
+
+	exports.default = chatsMessagesCtrl;
+
+/***/ },
+/* 152 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _users = __webpack_require__(153);
 
 	var _users2 = _interopRequireDefault(_users);
 
-	var _profile = __webpack_require__(149);
+	var _profile = __webpack_require__(154);
 
 	var _profile2 = _interopRequireDefault(_profile);
 
-	var _profile3 = __webpack_require__(150);
+	var _profile3 = __webpack_require__(155);
 
 	var _profile4 = _interopRequireDefault(_profile3);
 
-	var _profileThreads = __webpack_require__(151);
+	var _profileThreads = __webpack_require__(156);
 
 	var _profileThreads2 = _interopRequireDefault(_profileThreads);
 
-	var _profileComments = __webpack_require__(152);
+	var _profileComments = __webpack_require__(157);
 
 	var _profileComments2 = _interopRequireDefault(_profileComments);
 
-	var _profileSaved = __webpack_require__(153);
+	var _profileSaved = __webpack_require__(158);
 
 	var _profileSaved2 = _interopRequireDefault(_profileSaved);
 
-	var _profileActivity = __webpack_require__(154);
+	var _profileActivity = __webpack_require__(159);
 
 	var _profileActivity2 = _interopRequireDefault(_profileActivity);
 
-	var _usersSearch = __webpack_require__(155);
+	var _usersSearch = __webpack_require__(160);
 
 	var _usersSearch2 = _interopRequireDefault(_usersSearch);
 
-	var _profileMessage = __webpack_require__(188);
+	var _profileMessage = __webpack_require__(161);
 
 	var _profileMessage2 = _interopRequireDefault(_profileMessage);
 
@@ -2078,7 +2418,7 @@ webpackJsonp([0],[
 	exports.default = profileModule;
 
 /***/ },
-/* 148 */
+/* 153 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2156,7 +2496,7 @@ webpackJsonp([0],[
 	exports.default = UsersService;
 
 /***/ },
-/* 149 */
+/* 154 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2211,7 +2551,7 @@ webpackJsonp([0],[
 	exports.default = profileConfig;
 
 /***/ },
-/* 150 */
+/* 155 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2272,7 +2612,7 @@ webpackJsonp([0],[
 	exports.default = profileCtrl;
 
 /***/ },
-/* 151 */
+/* 156 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2342,7 +2682,7 @@ webpackJsonp([0],[
 	exports.default = ProfileThreadsCtrl;
 
 /***/ },
-/* 152 */
+/* 157 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2412,7 +2752,7 @@ webpackJsonp([0],[
 	exports.default = ProfileCommentsCtrl;
 
 /***/ },
-/* 153 */
+/* 158 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2509,7 +2849,7 @@ webpackJsonp([0],[
 	exports.default = ProfileSavedCtrl;
 
 /***/ },
-/* 154 */
+/* 159 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2554,7 +2894,7 @@ webpackJsonp([0],[
 	exports.default = activityCtrl;
 
 /***/ },
-/* 155 */
+/* 160 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2608,7 +2948,64 @@ webpackJsonp([0],[
 	exports.default = UsersSearchCtrl;
 
 /***/ },
-/* 156 */
+/* 161 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ProfileMessageCtrl = function () {
+		function ProfileMessageCtrl(Chat, Toast, Auth, $mdDialog, message) {
+			'ngInject';
+
+			_classCallCheck(this, ProfileMessageCtrl);
+
+			this._Chat = Chat;
+			this._Toast = Toast;
+			this._Auth = Auth;
+			this._$dialog = $mdDialog;
+			this._message = message;
+			this.data = {
+				message: '',
+				creator: this._Auth.getUser()._Id,
+				chatId: this._message._id
+
+			};
+		}
+
+		_createClass(ProfileMessageCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'sendMessage',
+			value: function sendMessage(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this._Chat.message(this._message._id, this.data).then(function (response) {
+						_this._Toast.success('chat send');
+						_this._$dialog.hide();
+					});
+				}
+			}
+		}]);
+
+		return ProfileMessageCtrl;
+	}();
+
+	exports.default = ProfileMessageCtrl;
+
+/***/ },
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2621,24 +3018,26 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(157);
+	__webpack_require__(163);
 
-	__webpack_require__(159);
+	__webpack_require__(165);
 
-	__webpack_require__(162);
+	__webpack_require__(168);
 
-	__webpack_require__(178);
+	__webpack_require__(184);
+
+	__webpack_require__(187);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['shared.components', 'auth.components', 'forum.components', 'profile.components'];
+	var requires = ['shared.components', 'auth.components', 'forum.components', 'profile.components', 'chats.components'];
 
 	var componentModule = _angular2.default.module('app.components', requires);
 
 	exports.default = componentModule;
 
 /***/ },
-/* 157 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2651,7 +3050,7 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _nav = __webpack_require__(158);
+	var _nav = __webpack_require__(164);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
@@ -2663,7 +3062,7 @@ webpackJsonp([0],[
 	exports.default = sharedComponents;
 
 /***/ },
-/* 158 */
+/* 164 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2874,7 +3273,7 @@ webpackJsonp([0],[
 	exports.default = appNav;
 
 /***/ },
-/* 159 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2887,11 +3286,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _signup = __webpack_require__(160);
+	var _signup = __webpack_require__(166);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
-	var _login = __webpack_require__(161);
+	var _login = __webpack_require__(167);
 
 	var _login2 = _interopRequireDefault(_login);
 
@@ -2904,7 +3303,7 @@ webpackJsonp([0],[
 	exports.default = authComponents;
 
 /***/ },
-/* 160 */
+/* 166 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2965,7 +3364,7 @@ webpackJsonp([0],[
 	exports.default = signupForm;
 
 /***/ },
-/* 161 */
+/* 167 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3072,7 +3471,7 @@ webpackJsonp([0],[
 	exports.default = loginForm;
 
 /***/ },
-/* 162 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3085,11 +3484,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(163);
+	__webpack_require__(169);
 
-	__webpack_require__(168);
+	__webpack_require__(174);
 
-	__webpack_require__(173);
+	__webpack_require__(179);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3100,7 +3499,7 @@ webpackJsonp([0],[
 	exports.default = forumComponents;
 
 /***/ },
-/* 163 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3113,19 +3512,19 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _streamsList = __webpack_require__(164);
+	var _streamsList = __webpack_require__(170);
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamsSingle = __webpack_require__(165);
+	var _streamsSingle = __webpack_require__(171);
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
-	var _streamCreate = __webpack_require__(166);
+	var _streamCreate = __webpack_require__(172);
 
 	var _streamCreate2 = _interopRequireDefault(_streamCreate);
 
-	var _streamsTrending = __webpack_require__(167);
+	var _streamsTrending = __webpack_require__(173);
 
 	var _streamsTrending2 = _interopRequireDefault(_streamsTrending);
 
@@ -3140,7 +3539,7 @@ webpackJsonp([0],[
 	exports.default = streamComponents;
 
 /***/ },
-/* 164 */
+/* 170 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3219,7 +3618,7 @@ webpackJsonp([0],[
 	exports.default = listStream;
 
 /***/ },
-/* 165 */
+/* 171 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3271,7 +3670,7 @@ webpackJsonp([0],[
 	exports.default = singleStream;
 
 /***/ },
-/* 166 */
+/* 172 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3327,7 +3726,7 @@ webpackJsonp([0],[
 	exports.default = createStream;
 
 /***/ },
-/* 167 */
+/* 173 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3379,7 +3778,7 @@ webpackJsonp([0],[
 	exports.default = trendingStream;
 
 /***/ },
-/* 168 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3392,19 +3791,19 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threadsList = __webpack_require__(169);
+	var _threadsList = __webpack_require__(175);
 
 	var _threadsList2 = _interopRequireDefault(_threadsList);
 
-	var _threadsSingle = __webpack_require__(170);
+	var _threadsSingle = __webpack_require__(176);
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
-	var _threadsCreate = __webpack_require__(171);
+	var _threadsCreate = __webpack_require__(177);
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
-	var _editThread = __webpack_require__(172);
+	var _editThread = __webpack_require__(178);
 
 	var _editThread2 = _interopRequireDefault(_editThread);
 
@@ -3419,7 +3818,7 @@ webpackJsonp([0],[
 	exports.default = threadComponents;
 
 /***/ },
-/* 169 */
+/* 175 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3514,7 +3913,7 @@ webpackJsonp([0],[
 	exports.default = threadsList;
 
 /***/ },
-/* 170 */
+/* 176 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3637,7 +4036,7 @@ webpackJsonp([0],[
 	exports.default = singleThread;
 
 /***/ },
-/* 171 */
+/* 177 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3710,7 +4109,7 @@ webpackJsonp([0],[
 	exports.default = createThread;
 
 /***/ },
-/* 172 */
+/* 178 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3772,7 +4171,7 @@ webpackJsonp([0],[
 	exports.default = editThread;
 
 /***/ },
-/* 173 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3785,19 +4184,19 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _commentsCreate = __webpack_require__(174);
+	var _commentsCreate = __webpack_require__(180);
 
 	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
 
-	var _commentsList = __webpack_require__(175);
+	var _commentsList = __webpack_require__(181);
 
 	var _commentsList2 = _interopRequireDefault(_commentsList);
 
-	var _commentsSingle = __webpack_require__(176);
+	var _commentsSingle = __webpack_require__(182);
 
 	var _commentsSingle2 = _interopRequireDefault(_commentsSingle);
 
-	var _editComment = __webpack_require__(177);
+	var _editComment = __webpack_require__(183);
 
 	var _editComment2 = _interopRequireDefault(_editComment);
 
@@ -3812,7 +4211,7 @@ webpackJsonp([0],[
 	exports.default = commentComponents;
 
 /***/ },
-/* 174 */
+/* 180 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3881,7 +4280,7 @@ webpackJsonp([0],[
 	exports.default = createComment;
 
 /***/ },
-/* 175 */
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3932,7 +4331,7 @@ webpackJsonp([0],[
 	exports.default = commmentsList;
 
 /***/ },
-/* 176 */
+/* 182 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4050,7 +4449,7 @@ webpackJsonp([0],[
 	exports.default = singleComment;
 
 /***/ },
-/* 177 */
+/* 183 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4106,7 +4505,7 @@ webpackJsonp([0],[
 	exports.default = editComment;
 
 /***/ },
-/* 178 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4119,11 +4518,11 @@ webpackJsonp([0],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _profileHeader = __webpack_require__(179);
+	var _profileHeader = __webpack_require__(185);
 
 	var _profileHeader2 = _interopRequireDefault(_profileHeader);
 
-	var _profileOverview = __webpack_require__(180);
+	var _profileOverview = __webpack_require__(186);
 
 	var _profileOverview2 = _interopRequireDefault(_profileOverview);
 
@@ -4136,7 +4535,7 @@ webpackJsonp([0],[
 	exports.default = profileComponents;
 
 /***/ },
-/* 179 */
+/* 185 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4238,7 +4637,7 @@ webpackJsonp([0],[
 	exports.default = headerComponent;
 
 /***/ },
-/* 180 */
+/* 186 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4267,7 +4666,253 @@ webpackJsonp([0],[
 	exports.default = overviewComponent;
 
 /***/ },
-/* 181 */
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(1);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _chatsList = __webpack_require__(188);
+
+	var _chatsList2 = _interopRequireDefault(_chatsList);
+
+	var _chatsSingle = __webpack_require__(189);
+
+	var _chatsSingle2 = _interopRequireDefault(_chatsSingle);
+
+	var _chatsMessages = __webpack_require__(190);
+
+	var _chatsMessages2 = _interopRequireDefault(_chatsMessages);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var chatComponents = _angular2.default.module('chats.components', []);
+	chatComponents.component('chatsList', _chatsList2.default);
+	chatComponents.component('singleChat', _chatsSingle2.default);
+	chatComponents.component('chatMessages', _chatsMessages2.default);
+
+	exports.default = chatComponents;
+
+/***/ },
+/* 188 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var chatsListCtrl = function chatsListCtrl($rootScope, $state, Auth) {
+		'ngInject';
+
+		var _this = this;
+
+		_classCallCheck(this, chatsListCtrl);
+
+		this._$state = $state;
+		this._$rootScope = $rootScope;
+
+		this._$rootScope.$on('hideChats', function () {
+			_this.hideChats = true;
+		});
+
+		this._$rootScope.$on('showChats', function () {
+			_this.hideChats = false;
+		});
+	};
+
+	var listComponent = {
+		scope: {},
+		bindings: {
+			chats: '<'
+		},
+		controller: chatsListCtrl,
+		templateUrl: './app/components/chats/list/list.html'
+	};
+
+	exports.default = listComponent;
+
+/***/ },
+/* 189 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var chatsSingleCtrl = function () {
+		function chatsSingleCtrl(Chat, $rootScope, $location, $state, Auth) {
+			_classCallCheck(this, chatsSingleCtrl);
+
+			this._Chat = Chat;
+			this._$rootScope = $rootScope;
+			this._$location = $location;
+			this._$state = $state;
+			this._Auth = Auth;
+			this.currentUser = this._Auth.getUser()._id;
+
+			if (this._$state.current.name == 'app.chats.inbox' || this._$state.current.name == 'app.chats.saved') {
+				this.hideRemoved = true;
+			}
+		}
+
+		_createClass(chatsSingleCtrl, [{
+			key: 'goToChat',
+			value: function goToChat(item) {
+
+				if (this._$state.current.name == 'app.chats.inbox') {
+					this._$state.go('app.chats.inbox.messages', { chatId: item._id });
+				} else if (this._$state.current.name == 'app.chats.saved') {
+					this._$state.go('app.chats.saved.messages', { chatId: item._id });
+				} else if (this._$state.current.name == 'app.chats.trash') {
+					this._$state.go('app.chats.trash.messages', { chatId: item._id });
+				}
+			}
+		}, {
+			key: 'toggleSave',
+			value: function toggleSave(item) {
+				if (!item.saved) {
+					this._Chat.save(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				} else {
+					this._Chat.unsave(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				}
+			}
+		}, {
+			key: 'toggleRemove',
+			value: function toggleRemove(item) {
+				if (!item.isDeleted) {
+					this._Chat.remove(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				} else {
+					this._Chat.unremove(item._id).then(function (response) {
+						angular.extend(item, response.data.res.record);
+					});
+				}
+			}
+		}]);
+
+		return chatsSingleCtrl;
+	}();
+
+	var singleChat = {
+		scope: {},
+		bindings: {
+			chat: '<'
+		},
+		controller: chatsSingleCtrl,
+		templateUrl: './app/components/chats/single/single.html'
+	};
+
+	exports.default = singleChat;
+
+/***/ },
+/* 190 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var chatsMessagesCtrl = function () {
+		function chatsMessagesCtrl(Chat, Auth, $timeout, $stateParams, $state, $rootScope) {
+			'ngInject';
+
+			_classCallCheck(this, chatsMessagesCtrl);
+
+			this._Chat = Chat;
+			this._Auth = Auth;
+			this._$timeout = $timeout;
+			this._$stateParams = $stateParams;
+			this._$rootScope = $rootScope;
+			this._$state = $state;
+			this.chatId = this._$stateParams.chatId;
+			this.userId = this._Auth.getUser()._id;
+			this.data = {
+				message: '',
+				creator: this.userId
+			};
+
+			if (this._$state.current.name == 'app.chats.inbox.messages' || this._$state.current.name == 'app.chats.saved.messages' || this._$state.current.name == 'app.chats.trash.messages') {
+				if (document.documentElement.clientWidth < 1300) {
+					this._$rootScope.$broadcast('hideChats');
+				}
+			}
+		}
+
+		_createClass(chatsMessagesCtrl, [{
+			key: 'scrollToBottom',
+			value: function scrollToBottom() {
+				this._$timeout(function () {
+					var scroller = document.getElementById('scrollContainer');
+					scroller.scrollTop = scroller.scrollHeight;
+				}, 0, false);
+			}
+		}, {
+			key: 'sendMessage',
+			value: function sendMessage(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this._Chat.message(this.chatId, this.data).then(function (response) {
+						_this._$rootScope.$broadcast('newMessage');
+						_this.scrollToBottom();
+						_this.resetForm();
+					});
+				}
+			}
+		}, {
+			key: 'resetForm',
+			value: function resetForm() {
+				this.chatForm.$setUntouched();
+				this.chatForm.$setPristine();
+				this.data.message = "";
+			}
+		}]);
+
+		return chatsMessagesCtrl;
+	}();
+
+	var chatMessages = {
+		scope: {},
+		bindings: {
+			messages: '=',
+			chat: '<'
+		},
+		controller: chatsMessagesCtrl,
+		templateUrl: './app/components/chats/messages/messages.html'
+	};
+
+	exports.default = chatMessages;
+
+/***/ },
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4276,7 +4921,7 @@ webpackJsonp([0],[
 		value: true
 	});
 
-	var _auth = __webpack_require__(182);
+	var _auth = __webpack_require__(192);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -4298,7 +4943,7 @@ webpackJsonp([0],[
 	exports.default = appConfig;
 
 /***/ },
-/* 182 */
+/* 192 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4331,7 +4976,7 @@ webpackJsonp([0],[
 	exports.default = authInterceptor;
 
 /***/ },
-/* 183 */
+/* 193 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4350,7 +4995,7 @@ webpackJsonp([0],[
 	exports.default = runAway;
 
 /***/ },
-/* 184 */
+/* 194 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4396,40 +5041,10 @@ webpackJsonp([0],[
 	exports.default = websockets;
 
 /***/ },
-/* 185 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(1);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _chats = __webpack_require__(186);
-
-	var _chats2 = _interopRequireDefault(_chats);
-
-	var _chats3 = __webpack_require__(187);
-
-	var _chats4 = _interopRequireDefault(_chats3);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var chatsModule = _angular2.default.module('chats', []);
-	chatsModule.config(_chats4.default);
-	chatsModule.service('Chat', _chats2.default);
-
-	exports.default = chatsModule;
-
-/***/ },
-/* 186 */
+/* 195 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -4439,155 +5054,74 @@ webpackJsonp([0],[
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var chatsService = function () {
-		function chatsService($http) {
-			'ngInject';
-
-			_classCallCheck(this, chatsService);
-
-			this._$http = $http;
-		}
-
-		_createClass(chatsService, [{
-			key: 'create',
-			value: function create(data) {
-				return this._$http({
-					url: '/chats/',
-					method: 'POST',
-					data: data
-				});
-			}
-		}, {
-			key: 'list',
-			value: function list() {
-				return this._$http({
-					url: '/chats/',
-					method: 'GET'
-				});
-			}
-		}, {
-			key: 'get',
-			value: function get(id) {
-				return this._$http({
-					url: '/chats/' + id,
-					method: 'GET'
-				});
-			}
-		}, {
-			key: 'message',
-			value: function message(id, data) {
-				return this._$http({
-					url: '/chats/' + id + '/message',
-					method: 'POST',
-					data: data
-				});
-			}
-		}, {
-			key: 'save',
-			value: function save(id) {
-				return this._$http({
-					url: '/chats/' + id + '/save',
-					method: 'POST'
-				});
-			}
-		}, {
-			key: 'unsave',
-			value: function unsave(id) {
-				return this._$http({
-					url: '/chats/' + id + '/unsave',
-					method: 'POST'
-				});
-			}
-		}]);
-
-		return chatsService;
-	}();
-
-	exports.default = chatsService;
-
-/***/ },
-/* 187 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function chatsConfig($stateProvider) {
-		'ngInject';
-
-		$stateProvider.state('app.chats', {
-			templateUrl: './app/pages/chats/chats.tmpl.html',
-			abstract: true
-		});
-
-		$stateProvider.state('app.chats.inbox', {
-			url: '/inbox',
-			templateUrl: './app/pages/chats/inbox/inbox.html',
-			controller: 'ChatsInboxController',
-			controllerAs: '$ctrl'
-		});
-	}
-
-	exports.default = chatsConfig;
-
-/***/ },
-/* 188 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var ProfileMessageCtrl = function () {
-		function ProfileMessageCtrl(Chat, Toast, Auth, $mdDialog, message) {
-			'ngInject';
-
-			_classCallCheck(this, ProfileMessageCtrl);
+	var ChatsSavedCtrl = function () {
+		function ChatsSavedCtrl(Chat, Auth) {
+			_classCallCheck(this, ChatsSavedCtrl);
 
 			this._Chat = Chat;
-			this._Toast = Toast;
 			this._Auth = Auth;
-			this._$dialog = $mdDialog;
-			this._message = message;
-			this.data = {
-				message: '',
-				creator: this._Auth.getUser()._Id,
-				chatId: this._message._id
-
-			};
+			this.chats = [];
+			this.currentUser = this._Auth.getUser()._id;
+			this.getChats();
 		}
 
-		_createClass(ProfileMessageCtrl, [{
-			key: 'close',
-			value: function close() {
-				this._$dialog.hide();
-			}
-		}, {
-			key: 'sendMessage',
-			value: function sendMessage(isValid) {
+		_createClass(ChatsSavedCtrl, [{
+			key: "getChats",
+			value: function getChats() {
 				var _this = this;
 
-				if (isValid) {
-					this._Chat.message(this._message._id, this.data).then(function (response) {
-						_this._Toast.success('chat send');
-						_this._$dialog.hide();
-					});
-				}
+				this._Chat.getSaved(this.currentUser).then(function (response) {
+					_this.chats = response.data.res.records;
+				});
 			}
 		}]);
 
-		return ProfileMessageCtrl;
+		return ChatsSavedCtrl;
 	}();
 
-	exports.default = ProfileMessageCtrl;
+	exports.default = ChatsSavedCtrl;
+
+/***/ },
+/* 196 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var chatsTrashCtrl = function () {
+		function chatsTrashCtrl(Chat, Auth) {
+			'ngInject';
+
+			_classCallCheck(this, chatsTrashCtrl);
+
+			this._Chat = Chat;
+			this._Auth = Auth;
+			this.currentUser = this._Auth.getUser()._id;
+			this.getChats();
+		}
+
+		_createClass(chatsTrashCtrl, [{
+			key: 'getChats',
+			value: function getChats() {
+				var _this = this;
+
+				this._Chat.getRemoved(this.currentUser).then(function (response) {
+					_this.chats = response.data.res.records;
+				});
+			}
+		}]);
+
+		return chatsTrashCtrl;
+	}();
+
+	exports.default = chatsTrashCtrl;
 
 /***/ }
 ]);

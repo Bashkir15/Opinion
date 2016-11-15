@@ -1,0 +1,26 @@
+<div class='chats-messages-component'>
+	<md-content class='chats-messages-body' id='scrollContainer'>
+		<div ng-repeat="item in $ctrl.messages | orderBy: 'created'" class='chats-message-repeat' ng-class="{'current-user': $ctrl.userId == item.creator._id}">
+			<div class='chats-message'>
+				<div class='chats-avatar' ui-sref="app.profile.overview({userId: item.creator._id})"></div>
+				<div class='chats-bubble'>
+					<span>{{item.message}}</span>
+					<div class='chats-bubble-corner'></div>
+				</div>
+			</div>
+			<div class='chats-message-info'>
+				<span>{{item.creator.username}}</span>
+				<span am-time-ago="item.created"></span>
+			</div>
+		</div>
+	</md-content>
+
+	<div class='chats-messages-form'>
+		<form name='$ctrl.chatForm' novalidate>
+			<div class='chats-form-wrapper' ng-class="{'has-focus': $ctrl.chatForm.message.hasFocus}">
+				<label>Message</label>
+				<textarea ng-model="$ctrl.data.message" ng-keyup="$event.keyCode == 13 && $ctrl.sendMessage($ctrl.chatForm.$valid)" name='message' required ng-focus="$ctrl.chatForm.message.hasFocus=true" ng-blur="$ctrl.chatForm.message.hasFocus=false"></textarea>
+			</div>
+		</form>
+	</div>
+</div>
