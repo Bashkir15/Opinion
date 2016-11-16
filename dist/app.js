@@ -2856,6 +2856,10 @@ webpackJsonp([0],[
 			this._$rootScope.$on('userUnfollowed', function () {
 				_this.getUser();
 			});
+
+			this._$rootScope.$on('profileUpdated', function () {
+				_this.getUser();
+			});
 		}
 
 		_createClass(profileCtrl, [{
@@ -3779,7 +3783,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var updateProfileCtrl = function () {
-		function updateProfileCtrl(Auth, Toast, $state) {
+		function updateProfileCtrl(Auth, Toast, $state, $rootScope) {
 			'ngInject';
 
 			_classCallCheck(this, updateProfileCtrl);
@@ -3787,6 +3791,7 @@ webpackJsonp([0],[
 			this._Auth = Auth;
 			this._Toast = Toast;
 			this._$state = $state;
+			this._$rootScope = $rootScope;
 			this.data = {
 				gender: '' || this.user.gender,
 				phone: '' || this.user.phone,
@@ -3805,6 +3810,7 @@ webpackJsonp([0],[
 					this._Auth.updateProfile(this.user._id, this.data).then(function (response) {
 
 						_this._Toast.success('You have updated your profile!');
+						_this._$rootScope.$broadcast('profileUpdated');
 						_this._$state.go("app.profile.overview", { userId: _this.user._id });
 					});
 				}
@@ -5502,13 +5508,21 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var profileEditCtrl = function () {
-		function profileEditCtrl($mdDialog, user) {
+		function profileEditCtrl($mdDialog, user, $rootScope, $state) {
 			'ngInject';
+
+			var _this = this;
 
 			_classCallCheck(this, profileEditCtrl);
 
 			this._$dialog = $mdDialog;
+			this._$rootScope = $rootScope;
+			this._$state = $state;
 			this.user = user;
+
+			this._$rootScope.$on('profileUpdated', function () {
+				_this._$dialog.hide();
+			});
 		}
 
 		_createClass(profileEditCtrl, [{

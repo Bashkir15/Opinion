@@ -21,6 +21,10 @@ class profileCtrl {
 		this._$rootScope.$on('userUnfollowed', () => {
 			this.getUser();
 		});
+
+		this._$rootScope.$on('profileUpdated', () => {
+			this.getUser();
+		});
 	}
 
 	getUser() {
