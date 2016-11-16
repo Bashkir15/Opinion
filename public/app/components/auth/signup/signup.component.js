@@ -1,5 +1,5 @@
 class SignupFormCtrl {
-	constructor($state, Auth, Toast, Storage) {
+	constructor($state, Auth, Toast, Storage, $rootScope) {
 		'ngInject';
 
 		this.data = {
@@ -13,6 +13,7 @@ class SignupFormCtrl {
 		this._Auth = Auth;
 		this._Toast = Toast;
 		this._Storage = Storage
+		this._$rootScope = $rootScope;
 	}
 
 	signup(isValid) {
@@ -20,6 +21,7 @@ class SignupFormCtrl {
 			this._Auth.signup(this.data).then((response) => {
 				this._Toast.success('Welcome to Opinionated! ' + response.data.res.record.username);
 				this.postSignup(response.data.res.record, response.data.res.token);
+				this._$rootScope.$broadcast('signedUp');
 			},
 				(err) => {
 					this._Toast.error('boo, but still yay');

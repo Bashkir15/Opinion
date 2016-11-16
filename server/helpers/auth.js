@@ -22,20 +22,23 @@ function ensureAuthorized (req, res, next) {
 	if (typeof bearerHeader !== 'undefined') {
 		var bearer = bearerHeader.split(" ");
 		bearerToken = bearer[1];
+		try {
+			var decoded = jwt.verify(bearerToken, global.config.secret);
+			var requestedUser = decoded.user._id;
 
-		var decoded = jwt.verify(bearerToken, global.config.secret);
-		var requestedUser = decoded.user._id;
+			User.findOne({_id: requestedUser})
+			.populate('streams._id')
+			.exec((err, user) => {
+				if (err || !user) {
+					return res.sendStatus(403);
+				}
 
-		User.findOne({_id: requestedUser})
-		.populate('streams._id')
-		.exec((err, user) => {
-			if (err || !user) {
-				return res.sendStatus(403);
-			}
-
-			req.user = user;
-			next();
-		})
+				req.user = user;
+				next();
+			});
+		} catch(err) {
+			res.sendStatus(403);
+		}
 	} else {
 		res.sendStatus(403);
 	}

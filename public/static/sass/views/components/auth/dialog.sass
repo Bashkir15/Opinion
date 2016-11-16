@@ -147,6 +147,55 @@
 			letter-spacing: 1px
 			color: $default-white-background
 
+.unauth-dialog-container
+	display: flex
+	flex-direction: column
+	width: 95%
+	max-width: 95%
+	height: 450px
+
+	p
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.7)
+		line-height: 24px
+		font-size: 16px
+		padding-bottom: 20px
+		text-align: center
+
+.unauth-dialog-header
+	display: flex
+	align-items: center
+	width: 100%
+	justify-content: flex-end
+	padding: 20px 10px
+
+	button
+		i
+			display: inline-block
+			font-size: 24px
+			color: $default-light-blue
+
+
+.unauth-dialog-tabs
+	md-tabs-wrapper
+		md-tabs-canvas
+			md-pagination-wrapper
+				.md-tab
+					span
+						@include rale()
+						font-weight: 400
+						font-size: 15px
+						color: rgba(0,0,0,0.7)
+
+					.md-ripple-container
+						color: $default-red
+
+
+
+
+
 @media screen and (min-width: 1000px)
 	.auth-dialog-actions
 

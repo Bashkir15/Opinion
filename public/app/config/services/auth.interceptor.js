@@ -1,4 +1,4 @@
-function authInterceptor(Storage) {
+function authInterceptor(Storage, $rootScope) {
 	'ngInject';
 
 	return {
@@ -10,12 +10,13 @@ function authInterceptor(Storage) {
 		responseError: (response) => {
 			if (response.status == '401' || response.status == '403') {
 				Storage.remove('opinion-token');
-				$state.go('app.home');
+				$rootScope.$broadcast('unauthedRequest');
 			}
 
 			if (response.status == '404') {
 				$state.go('app.home');
 			}
+
 		}
 	}
 }

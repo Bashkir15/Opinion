@@ -1,5 +1,5 @@
 class LoginCtrl {
-	constructor($state, $mdDialog, Auth, Toast, Storage, Websocket) {
+	constructor($state, $mdDialog, Auth, Toast, Storage, Websocket, $rootScope) {
 		'ngInject';
 
 		this._Auth = Auth;
@@ -8,6 +8,7 @@ class LoginCtrl {
 		this._$state = $state;
 		this._$dialog = $mdDialog;
 		this._Websocket = Websocket;
+		this._$rootScope = $rootScope;
 		this.data = {
 			email: '',
 			password: ''
@@ -45,6 +46,7 @@ class LoginCtrl {
 				 if (response.data.success) {
 				 	this.postLogin(response);
 					this._Toast.success('Welcome back ' + response.data.res.record.username);
+					this._$rootScope.$broadcast('loggedIn');
 				} else {
 					this._Toast.error(response.data.res.message);
 				} 

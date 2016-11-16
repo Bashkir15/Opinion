@@ -9,6 +9,7 @@ import './components/components'
 
 import appConfig from './app.config'
 import appRun from './app.run'
+import appController from './app.controller'
 import websockets from './app.websockets'
 
 const requires = [
@@ -24,5 +25,6 @@ const requires = [
 window.app = angular.module('app', requires);
 
 angular.module('app').config(appConfig);
+angular.module('app').controller('AppController', appController);
 angular.module("app").service('Websocket', websockets);
 angular.bootstrap(document, ['app']);
