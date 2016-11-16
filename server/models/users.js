@@ -41,6 +41,26 @@ var UserSchema = new mongoose.Schema({
 		validate: [validatePresenceOf, 'Your password cannot be blank']
 	},
 
+	gender: {
+		type: String
+	},
+
+	phone: {
+		type: Number
+	},
+
+	interests: {
+		type: String
+	},
+
+	occupation: {
+		type: String
+	},
+
+	bio: {
+		type: String
+	},
+
 	provider: {
 		type: String,
 		default: 'local'

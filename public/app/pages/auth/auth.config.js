@@ -10,6 +10,13 @@ function authConfig ($stateProvider) {
 		url: '/login',
 		templateUrl: './app/pages/auth/login/login.html'
 	});
+
+	$stateProvider.state('app.updateProfile', {
+		url: '/:userId/update-profile',
+		templateUrl: './app/pages/auth/profileInfo/update-profile.html',
+		controller: 'UpdateProfileController',
+		controllerAs: '$ctrl'
+	});
 }
 
 export default authConfig

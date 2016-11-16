@@ -11,8 +11,6 @@ class Auth {
 			url: '/users',
 			method: 'POST',
 			data: credentials
-		}).then((response) => {
-			console.log(response);
 		});
 	}
 
@@ -35,6 +33,14 @@ class Auth {
 	reset(data) {
 		return this._$http({
 			url: '/users/reset',
+			method: 'POST',
+			data: data
+		});
+	}
+
+	updateProfile(id, data) {
+		return this._$http({
+			url: '/users/' + id + '/updateProfile',
 			method: 'POST',
 			data: data
 		});

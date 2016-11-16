@@ -1,5 +1,5 @@
 class SignupFormCtrl {
-	constructor($state, Auth, Toast) {
+	constructor($state, Auth, Toast, Storage) {
 		'ngInject';
 
 		this.data = {
@@ -11,22 +11,30 @@ class SignupFormCtrl {
 
 		this._state = $state;
 		this._Auth = Auth;
-		this._Toaster = Toast;
+		this._Toast = Toast;
+		this._Storage = Storage
 	}
 
 	signup(isValid) {
 		if (isValid) {
 			this._Auth.signup(this.data).then((response) => {
-				this._Toaster.success('Welcome to Opinionated!');
-				this._state.go('app.login');
+				this._Toast.success('Welcome to Opinionated! ' + response.data.res.record.username);
+				this.postSignup(response.data.res.record, response.data.res.token);
 			},
 				(err) => {
 					this._Toast.error('boo, but still yay');
 				}
 			);
 		} else {
-			this._Toast('hmm, form issue!');
+			this._Toast.error('hmm, form issue!');
 		}
+	}
+
+	postSignup(user, token) {
+		var serialized = angular.toJson(user);
+		this._Storage.set('user', serialized);
+		this._Storage.set('opinion-token', token);
+		this._state.go('app.updateProfile', {userId: user._id});
 	}
 }
 

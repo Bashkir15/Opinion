@@ -39,13 +39,16 @@ module.exports = () => {
 			user.provider = 'local';
 			user.roles = roles;
 
+			var token = auth.generateToken(user);
+
 			user.save((err) => {
 				if (err) {
 					return json.bad(err, res);
 				}
 
 				json.good({
-					record: user
+					record: user,
+					token: token
 				}, res);
 			});
 		});
@@ -365,7 +368,7 @@ module.exports = () => {
 
 					json.good({
 						record: item
-					}, es);
+					}, res);
 				});
 			}
 		});

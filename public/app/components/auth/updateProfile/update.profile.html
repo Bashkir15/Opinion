@@ -1,0 +1,41 @@
+<div class='update-profile-component'>
+	<form name='$ctrl.updateProfileForm' ng-submit='$ctrl.updateProfile($ctrl.updateProfileForm.$valid)' novalidate>
+		<div class='update-profile-wrapper'>
+			<label>Gender</label>
+			<input type='text' name='gender' ng-model='$ctrl.data.gender'>
+		</div>
+
+		<div class='update-profile-wrapper'>
+			<label>Phone</label>
+			<input type='phone' name='phone' ng-model="$ctrl.data.phone">
+		</div>
+
+		<div class='update-profile-wrapper'>
+			<label>Occupation</label>
+			<input type='text' name='occupation' ng-model='$ctrl.data.occupation'>
+		</div>
+
+		<div class='update-profile-wrapper update-profile-textarea-wrapper'>
+			<label>Interests</label>
+			<textarea type='text' name='interests' ng-model='$ctrl.data.interests' rows='7'></textarea>
+		</div>
+
+		<div class='update-profile-wrapper update-profile-textarea-wrapper'>
+			<label>Bio</label>
+			<textarea type='text' name='bio' ng-model='$ctrl.data.bio' rows='7'></textarea>
+		</div>
+
+		<div class='update-profile-wrapper update-profile-image-wrapper'>
+			<button>
+				<span>Upload Image</span>
+			</button>
+		</div>
+
+
+		<div class='update-profile-submit'>
+			<button type='submit' aria-label='Subit update profile form'>
+				<span>Submit</span>
+			</button>
+		</div>
+	</form>
+</div>
