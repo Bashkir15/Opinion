@@ -1,6 +1,6 @@
 <div class='profile-header-component-container'>
 	<div class='profile-header-info'>
-		<div class='profile-header-image'></div>
+		<div class='profile-header-image' ng-class="{'is-online': $ctrl.user.loggedIn}"></div>
 		<div class='profile-header-user'>
 			<h4>{{$ctrl.user.name}}</h4>
 			<p>{{$ctrl.user.username}}</p>
@@ -30,7 +30,7 @@
 						</button>
 					</md-menu-item>
 
-					<md-menu-item ng-if='$ctrl.currentUser._id == $ctrl.user._id'>
+					<md-menu-item ng-if='$ctrl.currentUser._id == $ctrl.user._id' ng-click="$ctrl.openEditProfile(item)">
 						<button>
 							<span>Edit Profile</span>
 						</button>

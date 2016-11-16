@@ -48,6 +48,8 @@ class singleStreamCtrl {
 		options.page = this.threadPage;
 
 		this._Thread.get(this.streamId, options).then((response) => {
+			console.log(response);
+			
 			if (this.threadsSearch) {
 				this.threads = [];
 			}

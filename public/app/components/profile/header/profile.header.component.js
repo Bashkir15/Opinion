@@ -60,6 +60,18 @@ class headerCtrl {
 			});
 		});
 	}
+
+	openEditProfile(item) {
+		this._$dialog.show({
+			templateUrl: './app/pages/profile/dialogs/edit/profile.edit.html',
+			controller: 'ProfileEditController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true,
+			locals: {
+				user: this.user
+			}
+		});
+	}
 }
 
 let headerComponent = {

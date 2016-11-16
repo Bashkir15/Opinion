@@ -30,7 +30,7 @@ module.exports = (io) => {
 			});
 		});
 
-		socket.on('disconnect', clearSocket);
+		//socket.on('disconnect', clearSocket);
 		socket.on('logout', clearSocket);
 	});
 };

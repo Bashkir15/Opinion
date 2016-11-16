@@ -1186,6 +1186,8 @@ webpackJsonp([0],[
 				options.page = this.threadPage;
 
 				this._Thread.get(this.streamId, options).then(function (response) {
+					console.log(response);
+
 					if (_this3.threadsSearch) {
 						_this3.threads = [];
 					}
@@ -2660,6 +2662,10 @@ webpackJsonp([0],[
 
 	var _profileMessage2 = _interopRequireDefault(_profileMessage);
 
+	var _profileEdit = __webpack_require__(204);
+
+	var _profileEdit2 = _interopRequireDefault(_profileEdit);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var profileModule = _angular2.default.module('profile', []);
@@ -2672,6 +2678,7 @@ webpackJsonp([0],[
 	profileModule.controller('ProfileActivityController', _profileActivity2.default);
 	profileModule.controller('UsersSearchController', _usersSearch2.default);
 	profileModule.controller('ProfileMessageController', _profileMessage2.default);
+	profileModule.controller('ProfileEditController', _profileEdit2.default);
 
 	exports.default = profileModule;
 
@@ -3481,6 +3488,7 @@ webpackJsonp([0],[
 			key: 'getUserInfo',
 			value: function getUserInfo() {
 				this.user = this._Auth.getUser();
+				console.log(this.user);
 			}
 		}, {
 			key: 'getStreams',
@@ -4977,6 +4985,19 @@ webpackJsonp([0],[
 					});
 				});
 			}
+		}, {
+			key: 'openEditProfile',
+			value: function openEditProfile(item) {
+				this._$dialog.show({
+					templateUrl: './app/pages/profile/dialogs/edit/profile.edit.html',
+					controller: 'ProfileEditController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true,
+					locals: {
+						user: this.user
+					}
+				});
+			}
 		}]);
 
 		return headerCtrl;
@@ -5465,6 +5486,42 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = authUnauthedCtrl;
+
+/***/ },
+/* 204 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var profileEditCtrl = function () {
+		function profileEditCtrl($mdDialog, user) {
+			'ngInject';
+
+			_classCallCheck(this, profileEditCtrl);
+
+			this._$dialog = $mdDialog;
+			this.user = user;
+		}
+
+		_createClass(profileEditCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}]);
+
+		return profileEditCtrl;
+	}();
+
+	exports.default = profileEditCtrl;
 
 /***/ }
 ]);

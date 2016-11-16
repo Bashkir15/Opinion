@@ -1,14 +1,16 @@
 .auth-dialog
 	display: flex
 	flex-direction: column
-	width: 60%
+	width: 95%
+	max-width: 95%
 
 
 .auth-dialog-header
 	display: flex
 	align-items: stretch
+	width: 100%
 	height: 50px
-	padding: 35px 25px
+	padding: 35px 15px
 
 	> div
 		&:nth-of-type(1)
@@ -120,7 +122,7 @@
 				opacity: 0
 
 .auth-dialog-actions
-	padding-bottom: 20px
+	padding: 20px 0
 
 	button
 		height: 45px
@@ -186,6 +188,7 @@
 					span
 						@include rale()
 						font-weight: 400
+						letter-spacing: 2px
 						font-size: 15px
 						color: rgba(0,0,0,0.7)
 
@@ -197,8 +200,36 @@
 
 
 @media screen and (min-width: 1000px)
+	.auth-dialog
+		width: 70%
+
 	.auth-dialog-actions
 
 		button
 			width: 160px
+
+	.unauth-dialog-container
+		width: 70%
+		height: 600px
+
+	.unauth-dialog-tabs
+		height: 400px
+
+		md-tabs-content-wrapper
+			height: 400px
+
+@media screen and (min-width: 1600px)
+	.auth-dialog
+		width: 55%
+		
+	.unauth-dialog-container
+		width: 55%
+		height: 800px
+
+	.unauth-dialog-tabs
+		height: 600px
+
+		md-tabs-content-wrapper
+			height: 600px
+
 

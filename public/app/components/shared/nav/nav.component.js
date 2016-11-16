@@ -131,6 +131,7 @@ class navCtrl {
 
 	getUserInfo() {
 		this.user = this._Auth.getUser();
+		console.log(this.user);
 	}
 
 	getStreams(options) {

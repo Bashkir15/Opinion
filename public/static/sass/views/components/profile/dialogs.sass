@@ -1,6 +1,7 @@
 .profile-message-dialog
 	display: flex
 	width: 80%
+	max-width: 80%
 
 .profile-message-dialog-header
 	padding: 10px 0 20px 0
@@ -126,4 +127,48 @@ md-dialog-content
 			span
 				color: $default-white-background
 
+.profile-edit-dialog
+	display: flex
+	flex-direction: column
+	width: 95%
+	max-width: 95%
 
+.profile-edit-dialog-header
+	display: flex
+	align-items: center
+	width: 100%
+	padding: 20px 10px
+
+	h3
+		display: flex
+		flex: 1
+		color: $default-red
+
+	button
+		i
+			display: inline-block
+			font-size: 25px
+			color: $default-light-blue
+			transition: all .4s ease
+
+			&:hover
+				transform: scale(1.2,1.2)
+
+.profile-edit-dialog-content
+	padding-top: 30px
+	width: 100%
+
+@media screen and (min-width: 640px)
+	.profile-edit-dialog
+		width: 85%
+
+	.profile-edit-dialog-header
+		padding: 20px 25px
+
+@media screen and (min-width: 1300px)
+	.profile-edit-dialog
+		width: 75%
+
+@media screen and (min-width: 1600px)
+	.profile-edit-dialog
+		width: 65%
