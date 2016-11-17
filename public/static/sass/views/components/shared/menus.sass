@@ -33,12 +33,25 @@
 				background: $default-grey-background
 
 	.nav-notifications-dropdown
+		width: 300px
+
 		md-menu-item
 			min-height: 55px
 			padding: 10px
 			margin-bottom: 10px
 			text-overflow: ellipsis
 			word-break: break-all
+			outline: none
+
+		.no-notifications
+			padding: 0
+
+			> div
+				display: flex
+				align-items: center
+				justify-content: center
+				height: 100%
+
 
 		.notification
 			display: flex
@@ -46,6 +59,7 @@
 			min-height: 55px
 			padding-bottom: 10px
 			border-bottom: 1px solid rgba(0,0,0,0.12)
+			outline: none
 
 			span
 				@include rale()
@@ -105,6 +119,9 @@
 	.md-open-menu-container
 		.forum-search-dropdown
 			width: 165px
+
+		.nav-notifications-dropdown
+			width: 400px
 
 @media screen and (min-width: 1300px)
 	.md-open-menu-container

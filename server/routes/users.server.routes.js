@@ -10,7 +10,7 @@ router.post('/authenticate', users.authenticate);
 router.post('/forgot', users.forgot);
 router.post('/reset', users.reset);
 router.get('/notifications', auth.ensureAuthorized, users.notifications);
-router.get('/notifications/:notificationId', auth.ensureAuthorized, users.markRead);
+router.post('/notifications/:userId', auth.ensureAuthorized, users.markRead);
 router.get('/:userId', auth.justGetUser, users.single);
 router.post('/:userId/follow', auth.ensureAuthorized, users.follow);
 router.post('/:userId/unfollow', auth.ensureAuthorized, users.unfollow);

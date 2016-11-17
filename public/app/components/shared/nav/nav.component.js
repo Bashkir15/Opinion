@@ -38,6 +38,8 @@ class navCtrl {
 			});
 		});
 
+		this._$rootScope
+
 
 		this.getStreams();
 	}
@@ -63,6 +65,12 @@ class navCtrl {
 		});
 	}
 
+	markAsRead() {
+		this._User.markRead(this.user._id, this.notifications).then((response) => {
+			this.updateNotifications();
+		});
+	}
+
 	notificationAction(item) {
 		if (item.thread) {
 			this._$location.url(item.thread.stream + '/' + item.thread._id);
@@ -70,6 +78,10 @@ class navCtrl {
 
 		if (item.user) {
 			this._$location.url('profile/' + item.user._id + '/overview');
+		}
+
+		if (item.thread && item.user) {
+			this._$location.url(item.thread.stream + '/' + item.thread._id);
 		}
 	}
 
@@ -154,7 +166,20 @@ class navCtrl {
 	openCreateStream() {
 		this._$sidenav('user-menu').close();
 		this._$dialog.show({
-			templateUrl: './app/pages/streams/dialogs/create.html'
+			templateUrl: './app/pages/streams/dialogs/create/create.html',
+			controller: 'StreamsCreateController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true
+		});
+	}
+
+	openCreateThread() {
+		this._$sidenav("user-menu").close();
+		this._$dialog.show({
+			templateUrl: './app/pages/threads/dialogs/create/create.anywhere.html',
+			controller: 'CreateThreadAnywhereController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true
 		});
 	}
 

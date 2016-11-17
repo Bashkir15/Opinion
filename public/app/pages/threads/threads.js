@@ -9,6 +9,7 @@ import editComment from './dialogs/edit/edit.comment.controller'
 import deleteComment from './dialogs/delete/delete.comment.controller'
 import threadsCreate from './dialogs/create/threads.create.controller'
 import commentsCreate from './dialogs/create/comments.create.controller'
+import createThreadAnywayCtrl from './dialogs/create/create.anywhere.controller'
 
 let threadsModule = angular.module('threads', []);
 threadsModule.config(threadsConfig);
@@ -21,4 +22,6 @@ threadsModule.controller('DeleteCommentController', deleteComment);
 threadsModule.controller('EditCommentController', editComment);
 threadsModule.controller('ThreadsCreateController', threadsCreate);
 threadsModule.controller('CommentsCreateController', commentsCreate);
+threadsModule.controller('CreateThreadAnywhereController', createThreadAnywayCtrl);
+
 export default threadsModule

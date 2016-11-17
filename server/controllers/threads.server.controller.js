@@ -15,7 +15,7 @@ module.exports = () => {
 			var thread = data.thread;
 			var actor = data.actor;
 			thread.notifyUsers({
-				threadId: thread._id,
+				threadId: thread,
 				actorId: actor._id,
 				type: action
 			});

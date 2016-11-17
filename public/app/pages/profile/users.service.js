@@ -46,6 +46,14 @@ class UsersService {
 			method: 'GET'
 		});
 	}
+
+	markRead(id, data) {
+		return this._$http({
+			url: '/users/notifications/' + id,
+			method: 'POST',
+			data: data
+		});
+	}
 }
 
 export default UsersService

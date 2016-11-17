@@ -48,13 +48,13 @@
 		</div>
 
 		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
-			<md-menu class='nav-notifications-menu'>
+			<md-menu class='nav-notifications-menu' md-offset='0 15'>
 				<button ng-click="$mdOpenMenu()">
 					<span class='mdi mdi-bell'><div ng-if='$ctrl.notificationCount > 0' class='nav-notification-count'><span>{{$ctrl.notificationCount}}</span></div></span>
 				</button>
 
 				<md-menu-content class='nav-notifications-dropdown'>
-					<md-menu-item ng-repeat="item in $ctrl.notifications">
+					<md-menu-item ng-repeat="item in $ctrl.notifications" ng-if="$ctrl.notifications.length">
 						<div class='notification' ng-click="$ctrl.notificationAction(item)">
 							<div class='notification-header'>
 								<div></div>
@@ -62,6 +62,20 @@
 							</div>
 
 							<span am-time-ago="item.created"></span>
+						</div>
+					</md-menu-item>
+
+					<md-menu-item ng-click="$ctrl.markAsRead()" ng-if="$ctrl.notifications.length">
+						<div class='mark-notifications-read'>
+							<button>
+								<span>Mark all as read</span>
+							</button>
+						</div>
+					</md-menu-item>
+
+					<md-menu-item ng-if="!$ctrl.notifications.length" class='no-notifications'>
+						<div>
+							<p>You have no new notifications</p>
 						</div>
 					</md-menu-item>
 				</md-menu-content>
@@ -329,7 +343,7 @@
 				<i class='mdi mdi-pencil'></i>
 			</div>
 
-			<div class='inset'>
+			<div class='inset' ng-click="$ctrl.openCreateThread()">
 				<span>Add Thread</span>
 			</div>
 		</md-list-item>

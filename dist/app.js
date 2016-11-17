@@ -1477,6 +1477,10 @@ webpackJsonp([0],[
 
 	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
 
+	var _createAnywhere = __webpack_require__(205);
+
+	var _createAnywhere2 = _interopRequireDefault(_createAnywhere);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var threadsModule = _angular2.default.module('threads', []);
@@ -1490,6 +1494,8 @@ webpackJsonp([0],[
 	threadsModule.controller('EditCommentController', _editComment2.default);
 	threadsModule.controller('ThreadsCreateController', _threadsCreate2.default);
 	threadsModule.controller('CommentsCreateController', _commentsCreate2.default);
+	threadsModule.controller('CreateThreadAnywhereController', _createAnywhere2.default);
+
 	exports.default = threadsModule;
 
 /***/ },
@@ -2753,6 +2759,15 @@ webpackJsonp([0],[
 					method: 'GET'
 				});
 			}
+		}, {
+			key: 'markRead',
+			value: function markRead(id, data) {
+				return this._$http({
+					url: '/users/notifications/' + id,
+					method: 'POST',
+					data: data
+				});
+			}
 		}]);
 
 		return UsersService;
@@ -3389,6 +3404,8 @@ webpackJsonp([0],[
 				});
 			});
 
+			this._$rootScope;
+
 			this.getStreams();
 		}
 
@@ -3417,6 +3434,15 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'markAsRead',
+			value: function markAsRead() {
+				var _this3 = this;
+
+				this._User.markRead(this.user._id, this.notifications).then(function (response) {
+					_this3.updateNotifications();
+				});
+			}
+		}, {
 			key: 'notificationAction',
 			value: function notificationAction(item) {
 				if (item.thread) {
@@ -3426,22 +3452,26 @@ webpackJsonp([0],[
 				if (item.user) {
 					this._$location.url('profile/' + item.user._id + '/overview');
 				}
+
+				if (item.thread && item.user) {
+					this._$location.url(item.thread.stream + '/' + item.thread._id);
+				}
 			}
 		}, {
 			key: 'updateNotifications',
 			value: function updateNotifications() {
-				var _this3 = this;
+				var _this4 = this;
 
 				this._User.notifications().then(function (response) {
 					console.log(response);
 					if (response.data.res.notifications) {
 						response.data.res.notifications.map(function (item) {
-							item.display = _this3.NotificationText(item);
+							item.display = _this4.NotificationText(item);
 						});
 					}
 
-					_this3.notifications = response.data.res.notifications;
-					_this3.notificationCount = response.data.res.notifications ? response.data.res.notifications.length : 0;
+					_this4.notifications = response.data.res.notifications;
+					_this4.notificationCount = response.data.res.notifications ? response.data.res.notifications.length : 0;
 				});
 			}
 		}, {
@@ -3497,7 +3527,7 @@ webpackJsonp([0],[
 		}, {
 			key: 'getStreams',
 			value: function getStreams(options) {
-				var _this4 = this;
+				var _this5 = this;
 
 				options = options || {};
 
@@ -3505,12 +3535,12 @@ webpackJsonp([0],[
 					options.subscribed = true;
 
 					this._Stream.get(options).then(function (response) {
-						_this4.streams = response.data.res.records;
+						_this5.streams = response.data.res.records;
 					});
 				} else {
 					options.unsubscribed = true;
 					this._Stream.get(options).then(function (response) {
-						_this4.streams = response.data.res.records;
+						_this5.streams = response.data.res.records;
 					});
 				}
 			}
@@ -3519,7 +3549,21 @@ webpackJsonp([0],[
 			value: function openCreateStream() {
 				this._$sidenav('user-menu').close();
 				this._$dialog.show({
-					templateUrl: './app/pages/streams/dialogs/create.html'
+					templateUrl: './app/pages/streams/dialogs/create/create.html',
+					controller: 'StreamsCreateController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true
+				});
+			}
+		}, {
+			key: 'openCreateThread',
+			value: function openCreateThread() {
+				this._$sidenav("user-menu").close();
+				this._$dialog.show({
+					templateUrl: './app/pages/threads/dialogs/create/create.anywhere.html',
+					controller: 'CreateThreadAnywhereController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true
 				});
 			}
 		}, {
@@ -5536,6 +5580,86 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = profileEditCtrl;
+
+/***/ },
+/* 205 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var createThreadAnywhereCtrl = function () {
+		function createThreadAnywhereCtrl($mdDialog, Thread, Stream, Toast) {
+			'ngInject';
+
+			_classCallCheck(this, createThreadAnywhereCtrl);
+
+			this._$dialog = $mdDialog;
+			this._Thread = Thread;
+			this._Stream = Stream;
+			this._Toast = Toast;
+			this.getStreams();
+
+			this.data = {
+				title: '',
+				content: '',
+				link: '',
+				stream: ''
+			};
+		}
+
+		_createClass(createThreadAnywhereCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'getStreams',
+			value: function getStreams(options) {
+				var _this = this;
+
+				options = options || {};
+
+				this._Stream.get(options).then(function (response) {
+					_this.streams = response.data.res.records;
+				});
+			}
+		}, {
+			key: 'create',
+			value: function create(isValid) {
+				var _this2 = this;
+
+				if (isValid) {
+					this._Thread.create(this.data).then(function (response) {
+						if (response.data.success) {
+							_this2._Toast.success('You have just created a thread: ' + response.data.res.record.title);
+							_this2.close();
+						} else {
+							_this2._Toast.error(response.data.res.message);
+						}
+					});
+				} else {
+					this._Toast.error('There seems to be an error with your form');
+				}
+			}
+		}, {
+			key: 'makeLink',
+			value: function makeLink() {
+				this.hasLink = !this.hasLink;
+			}
+		}]);
+
+		return createThreadAnywhereCtrl;
+	}();
+
+	exports.default = createThreadAnywhereCtrl;
 
 /***/ }
 ]);

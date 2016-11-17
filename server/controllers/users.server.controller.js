@@ -296,22 +296,25 @@ module.exports = () => {
 	};
 
 	obj.markRead = (req, res) => {
+		var notificationsIds = [];
 		User.findOne({_id: req.user._id, 'notifications.unread': true})
-		.populate('notifications')
-		.populate('notifications.thread')
-		.populate('notifications.user')
+		.populate('notification')
 		.exec((err, user) => {
 			if (err) {
 				return json.bad(err, res);
 			} else if (user) {
-				user.notifications.map((item) => {
-					if (item._id.toString() === req.params.notificationId) {
-						item.unread = false;
+				for (var i in req.body) {
+					notificationsIds.push(req.body[i]._id);
+				}
+
+				user.notifications.forEach((item) => {
+					if (notificationsIds.indexOf(item._id.toString()) != -1) {
+						item.unread = false
 					}
 				});
 
 				user.save(() => {
-					user.notifications = user.notifications.filter((item) => {
+					user.notifications.filter((item) => {
 						return item.unread;
 					});
 
@@ -319,11 +322,11 @@ module.exports = () => {
 						notifications: user.notifications.slice(0, 10)
 					}, res);
 				});
-			} else {
-				return json.good({message: 'Already marked as unread'}, res);
 			}
 		});
 	};
+
+
 
 	obj.search = (req, res) => {
 		var keyword = req.params.keyword;
