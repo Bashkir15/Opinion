@@ -33,11 +33,14 @@ var UserSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		required: true,
-		unique: true
+		unique: true,
+		get: escapeProperty
 	},
 
 	password: {
 		type: String,
+		required: true,
+		get: escapeProperty,
 		validate: [validatePresenceOf, 'Your password cannot be blank']
 	},
 
@@ -59,6 +62,11 @@ var UserSchema = new mongoose.Schema({
 
 	bio: {
 		type: String
+	},
+
+	profileViews: {
+		type: Number,
+		default: 0
 	},
 
 	picture: {
@@ -147,14 +155,25 @@ var UserSchema = new mongoose.Schema({
 		default: false
 	},
 
-/*	loginAttempts: {
+	loginAttempts: {
 		type: Number,
 		default: 0,
 		required: true
-	}, */
+	}, 
 
 	lockUntil: {
 		type: Number
+	},
+
+	limitReached: {
+		type: Number,
+		required: true,
+		default: 0
+	},
+
+	secureLock: {
+		type: Boolean,
+		default: false
 	},
 
 	resetPasswordToken: String,
@@ -166,9 +185,63 @@ UserSchema.set('toJSON', {
 	getters: true
 });
 
-/* UserSchema.virtual('isLocked').get(() => {
+ UserSchema.virtual('isLocked').get(() => {
 	return !!(this.lockUntil && this.lockUntil > Date.now());
-}); */
+}); 
+
+UserSchema.pre('remove', function (next) {
+	this.model("User").find({following: this._id}, (err, docs) => {
+		if (err) {
+			return next(err);
+		}
+
+		for (var doc in docs) {
+			docs[doc].remove();
+		}
+	} next);
+
+	this.model('Chat').find({creator: this._id}, (err, docs) => {
+	 	if (err) {
+	 		return next(err);
+	 	}
+
+	 	for (var doc in docs) {
+	 		docs[doc].remove();
+	 	}
+	}, next);
+
+	this.model('Stream').find({creator: this._id}, (err, docs) => {
+		if (err) {
+			return next(err);
+		}
+
+		for (var doc in docs) {
+			docs[doc].remove();
+		}
+	}, next);
+
+	this.model('Thread').find({creator: this._id}, (err, docs) => {
+		if (err) {
+			return next(err);
+		}
+
+		for (var doc in docs) {
+			docs[doc].remove();
+		}
+	} next);
+
+	this.model('Comment').find({creator: this._id}, (err, docs) => {
+		if (err) {
+			return next(err);
+		}
+
+		for (var doc in docs) {
+			docs[doc].remove();
+		}
+	});
+
+	next();
+});
 
 UserSchema.pre('save', function (next) {
 	var user = this;
@@ -215,6 +288,55 @@ UserSchema.methods = {
 			cb(null, isMatch);
 		});
 	},
+
+	incorrectLoginAttempts: function (cb) {
+		if (this.lockUntil && this.lockUntil < Date.now()) {
+			return this.update({
+				$set: { 
+					loginAttempts: 1,
+					limitReached: 0
+				},
+				$unset: { lockUntil: 1}
+			}, cb);
+		}
+
+		var updates = {
+			$inc: {
+				loginAttempts: 1
+			}
+		};
+
+		if (this.loginAttempts + 1 > 5 && !this.isLocked) {
+			updates.$set = {
+				lockUntil: Date.now() + 2 * 60 * 60 * 1000,
+				limitReached: 1
+			}
+		}
+
+		if (this.loginAttempts + 1 > 5 && this.limitReached == 1 && !this.isLocked) {
+			updates.$set = {
+				lockUntil: Date.now() + 4 * 60 * 60 * 1000,
+				limitReached: 2
+			}
+		}
+
+		if (this.loginAttempts + 1 > 3 && this.limitReached == 2 && !this.isLocked) {
+			updates.$set = {
+				lockUntil: Date.now() + 8 * 60 * 60 * 1000,
+				limitReached: 3
+			}
+		}
+
+		if (this.loginAttempts + 1 > 3 && this.limitReached == 3 && !this.isLocked) {
+			updates.$set = {
+				lockUntil: Date.now() + 10000 * 60 * 60 * 1000,
+				limitReached: 4,
+				secureLock: true
+			}
+		}
+
+		return this.update(updates, cb);
+	}
 
 	notify: function (data) {
 		data = data || {};
