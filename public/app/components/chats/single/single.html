@@ -1,8 +1,8 @@
 <div class='chats-single-container' ng-if="!$ctrl.chat.isDeleted">
 	<div class='chats-single-single' ng-click="$ctrl.goToChat($ctrl.chat)">
 		<div class='chats-single-header'>
-			<img ng-if="$ctrl.currentUser == $ctrl.chat.creator._id && $ctrl.chat.participants[1].picture" src='{{$ctrl.chat.participants[1].picture}}' ng-class="{'online': $ctrl.chat.participants[1].loggedIn}">
-			<img ng-if='$ctrl.currentUser == $ctrl.chat.creator._id && $ctrl.chat.participants[0].picture' src='{{$ctrl.chat.participants[0].picture}}' ng-class="{'online': $ctrl.chat.participants[0].loggedIn}">
+			<img ng-if="$ctrl.currentUser == $ctrl.chat.creator._id" ng-src='{{$ctrl.chat.participants[1].picture}}' ng-class="{'online': $ctrl.chat.participants[1].loggedIn}">
+			<img ng-if='$ctrl.currentUser == $ctrl.chat.creator._id' ng-src='{{$ctrl.chat.participants[0].picture}}' ng-class="{'online': $ctrl.chat.participants[0].loggedIn}">
 			<div class='chats-user-info'>
 				<h4 ng-if="$ctrl.currentUser == $ctrl.chat.creator._id">{{$ctrl.chat.participants[1].username}}</h4>
 				<h4 ng-if="$ctrl.currentUser != $ctrl.chat.creator._id">{{$ctrl.chat.participants[0].username}}</h4>

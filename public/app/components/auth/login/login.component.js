@@ -46,7 +46,6 @@ class LoginCtrl {
 				 if (response.data.success) {
 				 	this.postLogin(response);
 					this._Toast.success('Welcome back ' + response.data.res.record.username);
-					this._$rootScope.$broadcast('loggedIn');
 				} else {
 					this._Toast.error(response.data.res.message);
 				} 

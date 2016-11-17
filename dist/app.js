@@ -4225,7 +4225,6 @@ webpackJsonp([0],[
 						if (response.data.success) {
 							_this.postLogin(response);
 							_this._Toast.success('Welcome back ' + response.data.res.record.username);
-							_this._$rootScope.$broadcast('loggedIn');
 						} else {
 							_this._Toast.error(response.data.res.message);
 						}

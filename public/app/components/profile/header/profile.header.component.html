@@ -1,6 +1,6 @@
 <div class='profile-header-component-container'>
 	<div class='profile-header-info'>
-		<img src='{{$ctrl.user.picture}}' class='profile-header-image' ng-class="{'is-online': $ctrl.user.loggedIn}"></img>
+		<img ng-src='{{$ctrl.user.picture}}' class='profile-header-image' ng-class="{'is-online': $ctrl.user.loggedIn}"></img>
 		<div class='profile-header-user'>
 			<h4>{{$ctrl.user.name}}</h4>
 			<p>{{$ctrl.user.username}}</p>

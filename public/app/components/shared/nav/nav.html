@@ -50,7 +50,7 @@
 		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
 			<md-menu class='nav-chats-menu' md-offset='0 15'>
 				<button ng-click="$mdOpenMenu()">
-					<span class='mdi mdi-message'><div ng-if='$ctrl.messageCount > 0' class='nav-notification-count'><span>{{$ctrl.messageCount}}</span></div></span>
+					<span class='mdi mdi-email'><div ng-if='$ctrl.messageCount > 0' class='nav-notification-count'><span>{{$ctrl.messageCount}}</span></div></span>
 				</button>
 
 				<md-menu-content class='nav-messages-dropdown'>
@@ -139,8 +139,8 @@
 </div>
 
 <md-sidenav class='md-sidenav-left user-menu' md-component-id='user-menu' md-whiteframe='4' flex>
-	<div class='user-menu-user-info' ng-if='$ctrl.isLoggedIn'>
-		<img ng-if="$ctrl.user.picture" src="{{$ctrl.user.picture}}">
+	<div class='user-menu-user-info'>
+		<img ng-if="$ctrl.user.picture" ng-src="{{$ctrl.user.picture}}">
 		<p>{{$ctrl.user.username}}</p>
 		<p>{{$ctrl.user.email}}</p>
 	</div>

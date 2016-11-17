@@ -1,7 +1,7 @@
 <div class='forum-single-component'>
 	<div class='forum-single-thread-container '>
 		<div class='forum-single-header'>
-			<img ng-if='$ctrl.thread.creator.picture' class='forum-creator-image' ng-class="{'is-online': $ctrl.thread.creator.loggedIn}" src='{{$ctrl.thread.creator.picture}}'>
+			<img class='forum-creator-image' ng-class="{'is-online': $ctrl.thread.creator.loggedIn}" ng-src='{{$ctrl.thread.creator.picture}}'>
 			<div class='forum-created-info'>
 				<h4 ui-sref="app.profile.overview({userId: $ctrl.thread.creator._id})">{{$ctrl.thread.creator.username}}</h4>
 				<p am-time-ago="$ctrl.thread.created"></p>
