@@ -117,6 +117,29 @@ module.exports = () => {
 		});
 	};
 
+	obj.markRead = (req, res) => {
+		Chat.findOne({_id: req.params.chatId})
+		.populate('creator')
+		.populate('participants')
+		.populate('messages')
+		.populate('messages.creator')
+		.exec((err, chat) => {
+
+
+			chat.lastAccessed.map((item) => {
+				if (req.user._id == item.user.toString()) {
+					item.unread = 0;
+				}
+			});
+
+			chat.save(() => {
+				return json.good({
+					record: chat
+				}, res);
+			})
+		});
+	};
+
 	obj.list = (req, res) => {
 		var user = req.user;
 
@@ -155,6 +178,33 @@ module.exports = () => {
 					morePages: morePages
 				}, res);
 			}
+		});
+	};
+
+
+	obj.findUnread = (req, res) => {
+		var numberOfUnread = 0;
+
+		Chat.find({'lastAccessed.user': req.user._id})
+		.populate('creator')
+		.populate('participants')
+		.populate('messages')
+		.populate('messages.creator')
+		.exec((err, chats) => {
+			chats.forEach((item) => {
+				item.lastAccessed.forEach((access) => {
+					if (req.user._id == access.user.toString()) {
+						if (access.unread != 0) {
+							numberOfUnread += 1;
+						} 
+					}
+				});
+			});
+
+			return json.good({
+				records: chats,
+				unread: numberOfUnread
+			}, res);
 		});
 	};
 

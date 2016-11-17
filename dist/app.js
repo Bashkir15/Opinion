@@ -2285,6 +2285,22 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'markRead',
+			value: function markRead(id) {
+				return this._$http({
+					url: '/chats/markRead/' + id,
+					method: 'GET'
+				});
+			}
+		}, {
+			key: 'findUnread',
+			value: function findUnread(id) {
+				return this._$http({
+					url: '/chats/' + id + '/unread',
+					method: 'GET'
+				});
+			}
+		}, {
 			key: 'get',
 			value: function get(id) {
 				return this._$http({
@@ -2672,6 +2688,10 @@ webpackJsonp([0],[
 
 	var _profileEdit2 = _interopRequireDefault(_profileEdit);
 
+	var _profileReset = __webpack_require__(206);
+
+	var _profileReset2 = _interopRequireDefault(_profileReset);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var profileModule = _angular2.default.module('profile', []);
@@ -2685,6 +2705,7 @@ webpackJsonp([0],[
 	profileModule.controller('UsersSearchController', _usersSearch2.default);
 	profileModule.controller('ProfileMessageController', _profileMessage2.default);
 	profileModule.controller('ProfileEditController', _profileEdit2.default);
+	profileModule.controller('ProfileResetController', _profileReset2.default);
 
 	exports.default = profileModule;
 
@@ -2764,6 +2785,15 @@ webpackJsonp([0],[
 			value: function markRead(id, data) {
 				return this._$http({
 					url: '/users/notifications/' + id,
+					method: 'POST',
+					data: data
+				});
+			}
+		}, {
+			key: 'profileReset',
+			value: function profileReset(id, data) {
+				return this._$http({
+					url: '/users/' + id + '/profileReset',
 					method: 'POST',
 					data: data
 				});
@@ -3361,7 +3391,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var navCtrl = function () {
-		function navCtrl(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location) {
+		function navCtrl(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat) {
 			'ngInject';
 
 			var _this = this;
@@ -3373,6 +3403,7 @@ webpackJsonp([0],[
 			this._Storage = Storage;
 			this._User = User;
 			this._Stream = Stream;
+			this._Chat = Chat;
 			this._$state = $state;
 			this._$rootScope = $rootScope;
 			this._$location = $location;
@@ -3382,6 +3413,7 @@ webpackJsonp([0],[
 
 			if (this.isLoggedIn) {
 				this.updateNotifications();
+				this.updateChats();
 			}
 
 			this.notificationCount = 0;
@@ -3475,6 +3507,26 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'updateChats',
+			value: function updateChats() {
+				var _this5 = this;
+
+				this._Chat.findUnread(this.user._id).then(function (response) {
+					_this5.chats = response.data.res.records, _this5.messageCount = response.data.res.unread;
+				});
+			}
+		}, {
+			key: 'doChatAction',
+			value: function doChatAction(item) {
+				var _this6 = this;
+
+				this._Chat.markRead(item._id).then(function (response) {
+					_this6.messageCount -= 1;
+					angular.extend(item, response.data.res.record);
+					_this6._$state.go("app.chats.inbox", { reload: true });
+				});
+			}
+		}, {
 			key: 'NotificationText',
 			value: function NotificationText(obj) {
 				if (!obj) {
@@ -3527,7 +3579,7 @@ webpackJsonp([0],[
 		}, {
 			key: 'getStreams',
 			value: function getStreams(options) {
-				var _this5 = this;
+				var _this7 = this;
 
 				options = options || {};
 
@@ -3535,12 +3587,12 @@ webpackJsonp([0],[
 					options.subscribed = true;
 
 					this._Stream.get(options).then(function (response) {
-						_this5.streams = response.data.res.records;
+						_this7.streams = response.data.res.records;
 					});
 				} else {
 					options.unsubscribed = true;
 					this._Stream.get(options).then(function (response) {
-						_this5.streams = response.data.res.records;
+						_this7.streams = response.data.res.records;
 					});
 				}
 			}
@@ -5048,6 +5100,19 @@ webpackJsonp([0],[
 					}
 				});
 			}
+		}, {
+			key: 'resetPassword',
+			value: function resetPassword() {
+				this._$dialog.show({
+					templateUrl: './app/pages/profile/dialogs/reset/reset.html',
+					controller: 'ProfileResetController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true,
+					locals: {
+						user: this.user
+					}
+				});
+			}
 		}]);
 
 		return headerCtrl;
@@ -5660,6 +5725,71 @@ webpackJsonp([0],[
 	}();
 
 	exports.default = createThreadAnywhereCtrl;
+
+/***/ },
+/* 206 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var profileResetCtrl = function () {
+		function profileResetCtrl(User, Toast, $mdDialog, user) {
+			'ngInject';
+
+			_classCallCheck(this, profileResetCtrl);
+
+			this._User = User;
+			this._Toast = Toast;
+			this._$dialog = $mdDialog;
+			this.user = user;
+
+			this.data = {
+				password: '',
+				newPassword: '',
+				confirm: ''
+			};
+		}
+
+		_createClass(profileResetCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'resetPassword',
+			value: function resetPassword(isValid) {
+				var _this = this;
+
+				if (isValid) {
+					this._User.profileReset(this.user._id, this.data).then(function (response) {
+						_this.resetForm();
+						_this._Toast.success('You have just reset your password, ' + response.data.res.record.username);
+						_this._$dialog.hide();
+					});
+				} else {
+					this._Toast.error("Hmm, your form is not valid");
+				}
+			}
+		}, {
+			key: 'resetForm',
+			value: function resetForm() {
+				this.resetPasswordForm.$setUntouched();
+				this.resetPasswordForm.$setPristine();
+			}
+		}]);
+
+		return profileResetCtrl;
+	}();
+
+	exports.default = profileResetCtrl;
 
 /***/ }
 ]);

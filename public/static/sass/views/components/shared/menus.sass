@@ -87,6 +87,104 @@
 				font-weight: 400
 				font-size: 15px
 
+	.nav-messages-dropdown
+		width: 350px
+		padding-bottom: 0
+
+		md-menu-item
+			min-height: 85px
+			padding: 10px
+			margin-bottom: 10px
+			text-overflow: ellipsis
+			word-break: break-all
+			outline: none
+			margin-bottom: 10px
+
+
+		.no-messages
+			padding: 0
+			margin-botom: 0
+
+			> div
+				height: 100%
+				display: flex
+				align-items: center
+				justify-content: center
+
+		.see-all-messages
+			display: flex
+			align-items: center
+			justify-content: center
+			min-height: 45px
+			height: 45px
+			padding: 0
+			margin-bottom: 0
+			text-align: center
+			cursor: pointer
+			border-top: 1px solid rgba(0,0,0,0.12)
+			transition: all .4s ease
+
+			> p
+				transition: all .4s ease
+
+			&:hover
+				background: $default-light-blue
+
+				p
+					color: $default-white-background
+
+		.message
+			display: flex
+			align-items: center
+			padding: 8px 5px 24px 0px
+			outline: none
+			border-bottom: 1px solid rgba(0,0,0,0.12)
+
+		.message-header
+			display: flex
+			flex-direction: column
+			align-items: center
+
+			> div
+				position: relative
+				height: 45px
+				width: 45px
+				border-radius: 50%
+				border: 1px solid rgba(0,0,0,0.6)
+				margin-bottom: 8px
+
+				> div
+					display: flex
+					align-items: center
+					justify-content: center
+					position: absolute
+					bottom: -4px
+					right: -2px
+					height: 26px
+					width: 26px
+					border-radius: 50%
+					z-index: 20
+					background: $default-red
+
+					span
+						display: inline-block
+						color: $default-white-background
+
+			p
+				@include open()
+				font-weight: 400
+				font-size: 15px
+				padding-left: 10px
+				color: rgba(0,0,0,0.6)
+
+		.message-body
+			display: flex
+			flex: 1
+			align-items:center			
+
+
+
+
 
 
 
@@ -122,6 +220,9 @@
 
 		.nav-notifications-dropdown
 			width: 400px
+
+		.nav-messages-dropdown
+			width: 450px
 
 @media screen and (min-width: 1300px)
 	.md-open-menu-container

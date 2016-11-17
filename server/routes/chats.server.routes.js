@@ -8,6 +8,8 @@ var chats = chatsController();
 router.post('/', auth.ensureAuthorized, chats.create);
 router.get('/', auth.ensureAuthorized, chats.list);
 router.get('/:chatId', auth.ensureAuthorized, chats.single);
+router.get('/markRead/:chatId', auth.ensureAuthorized, chats.markRead);
+router.get('/:userId/unread', auth.ensureAuthorized, chats.findUnread);
 router.post('/:chatId/message', auth.ensureAuthorized, chats.message);
 router.post('/:chatId/save', auth.ensureAuthorized, chats.save);
 router.post('/:chatId/unsave', auth.ensureAuthorized, chats.unsave);

@@ -1,5 +1,5 @@
 class navCtrl {
-	constructor(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location) {
+	constructor(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat) {
 		'ngInject';
 
 		this._$sidenav = $mdSidenav;
@@ -7,6 +7,7 @@ class navCtrl {
 		this._Storage = Storage;
 		this._User = User;
 		this._Stream = Stream;
+		this._Chat = Chat;
 		this._$state = $state;
 		this._$rootScope = $rootScope;
 		this._$location = $location;
@@ -16,6 +17,7 @@ class navCtrl {
 
 		if (this.isLoggedIn) {
 			this.updateNotifications();
+			this.updateChats();
 		}
 
 		this.notificationCount = 0;
@@ -97,6 +99,21 @@ class navCtrl {
 			this.notifications = response.data.res.notifications;
 			this.notificationCount = response.data.res.notifications ? response.data.res.notifications.length : 0;
 		});		
+	}
+
+	updateChats() {
+		this._Chat.findUnread(this.user._id).then((response) => {
+			this.chats = response.data.res.records,
+			this.messageCount = response.data.res.unread
+		});
+	}
+
+	doChatAction(item) {
+		this._Chat.markRead(item._id).then((response) => {
+			this.messageCount -= 1;
+			angular.extend(item, response.data.res.record);
+			this._$state.go("app.chats.inbox", {reload: true});
+		});
 	}
 
 	NotificationText(obj) {

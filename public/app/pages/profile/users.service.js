@@ -54,6 +54,14 @@ class UsersService {
 			data: data
 		});
 	}
+
+	profileReset(id, data) {
+		return this._$http({
+			url: '/users/' + id + '/profileReset',
+			method: 'POST',
+			data: data
+		});
+	}
 }
 
 export default UsersService

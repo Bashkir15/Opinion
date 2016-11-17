@@ -9,6 +9,7 @@ import profileActivityCtrl from './activity/profile.activity.controller'
 import usersSearchCtrl from './dialogs/users.search.controller'
 import profileMessageCtrl from './dialogs/message/profile.message.controller'
 import editProfileCtrl from './dialogs/edit/profile.edit.controller'
+import profileResetCtrl from './dialogs/reset/profile.reset.controller'
 
 let profileModule = angular.module('profile', []);
 profileModule.config(profileConfig);
@@ -21,5 +22,6 @@ profileModule.controller('ProfileActivityController', profileActivityCtrl);
 profileModule.controller('UsersSearchController', usersSearchCtrl);
 profileModule.controller('ProfileMessageController', profileMessageCtrl);
 profileModule.controller('ProfileEditController', editProfileCtrl);
+profileModule.controller('ProfileResetController', profileResetCtrl);
 
 export default profileModule

@@ -171,6 +171,32 @@ module.exports = () => {
 		});
 	};
 
+	obj.profileReset = (req, res) => {
+		User.findOne({_id: req.params.userId})
+		.exec((err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			user.comparePassword(req.body.password, (err, isMatch) => {
+				if (err) {
+					return json.bad(err, res);
+				} else if (isMatch) {
+					user.password = req.body.newPassword;
+					user.save((err) => {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							record: user
+						}, res);
+					});
+				}
+			});
+		});
+	};
+
 	obj.single = (req, res) => {
 		User.findOne({_id: req.params.userId})
 		.populate('following')

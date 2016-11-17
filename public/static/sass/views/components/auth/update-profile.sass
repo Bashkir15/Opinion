@@ -81,6 +81,34 @@
 		background: none
 		transition: all .4s ease
 
+	&.has-focus
+		label
+			left: -30px
+			opacity: 0
+
+		input
+			border: 1px solid $default-light-blue
+
+		textarea
+			border: 2px solid $default-light-blue
+
+	&.has-success
+		label
+			left: -30px
+			opacity: 0
+
+		input
+			border: 1px solid $default-green
+
+		textarea
+			border: 1px solid $default-green
+
+	&:not(.is-blank)
+		label
+			left: -30px
+			opacity: 0
+
+
 .update-profile-image-wrapper
 	display: flex
 	align-items: center

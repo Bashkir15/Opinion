@@ -48,6 +48,42 @@
 		</div>
 
 		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
+			<md-menu class='nav-chats-menu' md-offset='0 15'>
+				<button ng-click="$mdOpenMenu()">
+					<span class='mdi mdi-message'><div ng-if='$ctrl.messageCount > 0' class='nav-notification-count'><span>{{$ctrl.messageCount}}</span></div></span>
+				</button>
+
+				<md-menu-content class='nav-messages-dropdown'>
+					<md-menu-item ng-repeat='item in $ctrl.chats' ng-if='$ctrl.messageCount > 0'>
+						<div class='message' ng-click="$ctrl.doChatAction(item)">
+							<div class='message-header'>
+								<div>
+									<div ng-if="item.lastAccessed[0].user == $ctrl.user._id && item.lastAccessed[0].unread > 0"><span>{{item.lastAccessed[0].unread}}</span></div>
+									<div ng-if="item.lastAccessed[1].user == $ctrl.user._id && item.lastAccessed[1].unread > 0"><span>{{item.lastAccessed[1].unread}}</span></div>
+								</div>
+								<p ng-if="$ctrl.user._id == item.creator._id">{{item.participants[1].username}}</p>
+								<p ng-if='$ctrl.user._id !== item.creator._id'>{{item.participants[0].username}}</p>
+							</div>
+							<div class='message-body'>
+								<p>{{item.messages[0].message}}</p>
+							</div>
+						</div>
+					</md-menu-item>
+
+					<md-menu-item ng-if="$ctrl.messageCount == 0" class='no-messages'>
+						<div>
+							<p>No Unread Messages</p>
+						</div>
+					</md-menu-item>
+
+					<md-menu-item ui-sref='app.chats.inbox' class='see-all-messages'>
+						<p>See all Messages</p>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</div>
+
+		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
 			<md-menu class='nav-notifications-menu' md-offset='0 15'>
 				<button ng-click="$mdOpenMenu()">
 					<span class='mdi mdi-bell'><div ng-if='$ctrl.notificationCount > 0' class='nav-notification-count'><span>{{$ctrl.notificationCount}}</span></div></span>

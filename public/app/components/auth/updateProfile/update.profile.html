@@ -1,28 +1,38 @@
 <div class='update-profile-component'>
 	<form name='$ctrl.updateProfileForm' ng-submit='$ctrl.updateProfile($ctrl.updateProfileForm.$valid)' novalidate>
-		<div class='update-profile-wrapper'>
+		<div class='update-profile-wrapper' ng-class="{'has-focus': $ctrl.updateProfileForm.gender.hasFocus,
+		'has-success': $ctrl.updateProfileForm.gender.$valid && $ctrl.updateProfileForm.gender.$touched,
+		'is-blank': !$ctrl.updateProfileForm.gender.$viewValue}">
 			<label>Gender</label>
-			<input type='text' name='gender' ng-model='$ctrl.data.gender'>
+			<input type='text' name='gender' ng-model='$ctrl.data.gender' ng-focus='$ctrl.updateProfileForm.gender.hasFocus=true' ng-blur='$ctrl.updateProfileForm.gender.hasFocus=false'>
 		</div>
 
-		<div class='update-profile-wrapper'>
+		<div class='update-profile-wrapper' ng-class="{'has-focus': $ctrl.updateProfileForm.phone.hasFocus,
+		'has-success': $ctrl.updateProfileForm.phone.$valid && $ctrl.updateProfileForm.phone.$touched,
+		'is-blank': !$ctrl.updateProfileForm.phone.$viewValue}">
 			<label>Phone</label>
-			<input type='phone' name='phone' ng-model="$ctrl.data.phone">
+			<input type='phone' name='phone' ng-model="$ctrl.data.phone" ng-focus='$ctrl.updateProfileForm.phone.hasFocus=true' ng-blur='$ctrl.updateProfileForm.phone.hasFocus=false'>
 		</div>
 
-		<div class='update-profile-wrapper'>
+		<div class='update-profile-wrapper' ng-class="{'has-focus': $ctrl.updateProfileForm.occupation.hasFocus,
+		'has-success': $ctrl.updateProfileForm.occupation.$valid && $ctrl.updateProfileForm.occupation.$touched,
+		'is-blank': !$ctrl.updateProfileForm.occupation.$viewValue}">
 			<label>Occupation</label>
-			<input type='text' name='occupation' ng-model='$ctrl.data.occupation'>
+			<input type='text' name='occupation' ng-model='$ctrl.data.occupation' ng-focus='$ctrl.updateProfileForm.occupation.hasFocus=true' ng-blur='$ctrl.updateProfileForm.occupation.hasFocus=false'>
 		</div>
 
-		<div class='update-profile-wrapper update-profile-textarea-wrapper'>
+		<div class='update-profile-wrapper update-profile-textarea-wrapper' ng-class="{'has-focus': $ctrl.updateProfileForm.interests.hasFocus,
+		'has-success': $ctrl.updateProfileForm.interests.$valid && $ctrl.updateProfileForm.interests.$touched,
+		'is-blank': !$ctrl.updateProfileForm.interests.$viewValue}">
 			<label>Interests</label>
-			<textarea type='text' name='interests' ng-model='$ctrl.data.interests' rows='7'></textarea>
+			<textarea type='text' name='interests' ng-model='$ctrl.data.interests' rows='7' ng-focus='$ctrl.updateProfileForm.interests.hasFocus=true' ng-blur='$ctrl.updateProfileForm.interests.hasFocus=false'></textarea>
 		</div>
 
-		<div class='update-profile-wrapper update-profile-textarea-wrapper'>
+		<div class='update-profile-wrapper update-profile-textarea-wrapper' ng-class="{'has-focus': $ctrl.updateProfileForm.bio.hasFocus,
+		'has-success': $ctrl.updateProfileForm.bio.$valid && $ctrl.updateProfileForm.bio.$touched,
+		'is-blank': !$ctrl.updateProfileForm.bio.$viewValue}">
 			<label>Bio</label>
-			<textarea type='text' name='bio' ng-model='$ctrl.data.bio' rows='7'></textarea>
+			<textarea type='text' name='bio' ng-model='$ctrl.data.bio' rows='7' ng-focus='$ctrl.updateProfileForm.bio.hasFocus=true' ng-blur='$ctrl.updateProfileForm.bio.hasFocus=false'></textarea>
 		</div>
 
 		<div class='update-profile-wrapper update-profile-image-wrapper'>

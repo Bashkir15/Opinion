@@ -20,6 +20,20 @@ class chatsService {
 		});
 	}
 
+	markRead(id) {
+		return this._$http({
+			url: '/chats/markRead/' + id,
+			method: 'GET'
+		});
+	}
+
+	findUnread(id) {
+		return this._$http({
+			url: '/chats/' + id + '/unread',
+			method: 'GET'
+		});
+	}
+
 	get(id) {
 		return this._$http({
 			url: '/chats/' + id,

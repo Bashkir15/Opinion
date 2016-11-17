@@ -72,6 +72,18 @@ class headerCtrl {
 			}
 		});
 	}
+
+	resetPassword() {
+		this._$dialog.show({
+			templateUrl: './app/pages/profile/dialogs/reset/reset.html',
+			controller: 'ProfileResetController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true,
+			locals: {
+				user: this.user
+			}
+		});
+	}
 }
 
 let headerComponent = {
