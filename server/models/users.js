@@ -61,6 +61,10 @@ var UserSchema = new mongoose.Schema({
 		type: String
 	},
 
+	picture: {
+		type: String
+	},
+
 	provider: {
 		type: String,
 		default: 'local'

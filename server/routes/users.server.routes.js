@@ -17,5 +17,6 @@ router.post('/:userId/unfollow', auth.ensureAuthorized, users.unfollow);
 router.post('/:userId/updateProfile', auth.ensureAuthorized, users.updateProfile);
 router.post('/:userId/profileReset', auth.ensureAuthorized, users.profileReset);
 router.get('/search/:keyword', auth.justGetUser, users.search);
+router.post('/uploadPicture/:userId', auth.ensureAuthorized, users.uploadImage);
 
 module.exports = router;

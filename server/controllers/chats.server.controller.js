@@ -147,6 +147,15 @@ module.exports = () => {
 			participants: req.user
 		};
 
+		if (req.query && req.query.timestamp) {
+			criteria.created = {$gte: req.query.timestamp};
+		}
+
+		if (req.query && req.query.filter) {
+			delete criteria.created
+			criteria.messages.message[0] = new RegExp(req.query.filter, 'i');
+		}
+
 
 
 		Chat.find(criteria, null, {sort: {modified: 1}})
@@ -185,7 +194,7 @@ module.exports = () => {
 	obj.findUnread = (req, res) => {
 		var numberOfUnread = 0;
 
-		Chat.find({'lastAccessed.user': req.user._id})
+		Chat.find({'lastAccessed.user': req.user._id, 'lastAccessed.unread': {$gt: 0}})
 		.populate('creator')
 		.populate('participants')
 		.populate('messages')
@@ -210,6 +219,12 @@ module.exports = () => {
 
 	obj.getSaved = (req, res) => {
 		var criteria = {saves: req.params.userId};
+
+		if (req.query && req.query.timestamp) {
+			criteria.created = {
+				$gte: req.query.timestamp
+			};
+		}
 
 		Chat.find(criteria)
 		.populate('creator')
@@ -243,6 +258,12 @@ module.exports = () => {
 
 	obj.getRemoved = (req, res) => {
 		var criteria = {deleted: req.params.userId};
+
+		if (req.query && req.query.timestamp) {
+			criteria.created = {
+				$gte: req.query.timestamp
+			};
+		}
 
 		Chat.find(criteria)
 		.populate('creator')

@@ -158,6 +158,66 @@ md-dialog-content
 	padding-top: 30px
 	width: 100%
 
+.profile-reset-dialog
+	width: 95%
+	min-width: 95%
+
+.profile-reset-dialog-header
+	display: flex
+	align-items: center
+	padding: 20px 10px
+	width: 100%
+
+	h3
+		display: flex
+		flex: 1
+		color: $default-red
+
+	button
+		i
+			display: inline-block
+			font-size: 25px
+			color: $default-light-blue
+			transition: all .4s ease
+
+			&:hover
+				transform: scale(1.2,1.2)
+
+.profile-reset-dialog-form
+	width: 90%
+	padding-top: 35px
+	margin: 0 auto
+
+.profile-reset-submit
+	display: flex
+	align-items: center
+	justify-content: center
+	width: 100%
+	padding: 20px 0
+
+	button
+		height: 50px
+		width: 185px
+		border: 1px solid rgba(0,0,0,0.12)
+		transition: all .4s ease
+
+		span
+			@include open()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 16px
+			color: rgba(0,0,0,0.6)
+			transition: all .4s ease
+
+		&.is-valid
+			background: $default-dark-blue
+
+			span
+				color: $default-white-background
+
+			&:hover
+				background: lighten($default-dark-blue, 10%)
+
 @media screen and (min-width: 640px)
 	.profile-edit-dialog
 		width: 85%
@@ -165,10 +225,25 @@ md-dialog-content
 	.profile-edit-dialog-header
 		padding: 20px 25px
 
+	.profile-reset-dialog
+		width: 85%
+		min-width: 85%
+
+	.profile-reset-dialog-header
+		padding: 20px 25px
+
 @media screen and (min-width: 1300px)
 	.profile-edit-dialog
 		width: 75%
 
+	.profile-reset-dialog
+		width: 75%
+		min-width: 75%
+
 @media screen and (min-width: 1600px)
 	.profile-edit-dialog
 		width: 65%
+
+	.profile-reset-dialog
+		width: 65%
+		min-width: 65%

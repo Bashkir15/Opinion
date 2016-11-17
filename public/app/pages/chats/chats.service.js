@@ -13,10 +13,14 @@ class chatsService {
 		});
 	}
 
-	list() {
+	list(options) {
 		return this._$http({
 			url: '/chats/',
-			method: 'GET'
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				page: options.page
+			}
 		});
 	}
 
@@ -63,10 +67,14 @@ class chatsService {
 		});
 	}
 
-	getSaved(id) {
+	getSaved(id, options) {
 		return this._$http({
 			url: '/chats/' + id + '/saved',
-			method: 'GET'
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				page: options.page
+			}
 		});
 	}
 
@@ -84,10 +92,14 @@ class chatsService {
 		});
 	}
 
-	getRemoved(id) {
+	getRemoved(id, options) {
 		return this._$http({
 			url: '/chats/' + id + '/removed',
-			method: 'GET'
+			method: 'GET',
+			params: {
+				timestamp: options.timestamp,
+				page: options.page
+			}
 		});
 	}
 }

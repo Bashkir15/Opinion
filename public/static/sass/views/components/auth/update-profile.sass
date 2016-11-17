@@ -103,6 +103,25 @@
 		textarea
 			border: 1px solid $default-green
 
+	&.has-error
+		label
+			left: -30px
+			opacity: 0
+
+		input
+			border: 1px solid $default-red
+
+		&.is-blank
+			label
+				left: 12px
+				opacity: 1
+
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
 	&:not(.is-blank)
 		label
 			left: -30px

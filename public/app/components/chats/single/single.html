@@ -21,7 +21,7 @@
 			</button>
 
 			<button ng-click="$ctrl.toggleRemove($ctrl.chat)">
-				<i class='mdi mdi-delete'></i>
+				<i class='mdi mdi-delete' ng-class="{'removed': $ctrl.chat.isDeleted}"></i>
 			</button>
 		</div>
 	</div>

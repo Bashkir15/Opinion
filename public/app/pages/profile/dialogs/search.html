@@ -1,9 +1,16 @@
 <md-dialog class='users-search-dialog'>
 	<md-dialog-content>
+		<div class='users-search-dialog-header'>
+			<h3>Find a user</h3>
+			<button ng-click='$ctrl.close()' aria-label='close user search dialog'>
+				<i class='mdi mdi-close'></i>
+			</button>
+		</div>
 		<div class='users-search-body'>
 			<md-autocomplete
 				md-search-text="$ctrl.search"
-				md-items="item in $ctrl.doSearch(search)"
+				md-items="item in $ctrl.items"
+				md-search-text-change="$ctrl.doSearch($ctrl.search)"
 				md-item-text="item.name"
 				md-item-value="item._id"
 				md-floating-label="search"

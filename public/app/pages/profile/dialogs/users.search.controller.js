@@ -10,7 +10,7 @@ class UsersSearchCtrl {
 
 	doSearch(val) {
 		this._User.search(val).then((response) => {
-			return response.data.res.items;
+			this.items = response.data.res.records;
 		});
 	}
 

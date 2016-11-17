@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
 	entry: {
 		app: './public/app/app.js',
-		vendors: ['angular', 'angular-ui-router', 'angular-material', 'angular-animate', 'angular-aria', 'moment', 'angular-moment']
+		vendors: ['angular', 'angular-ui-router', 'angular-material', 'angular-animate', 'angular-aria', 'moment', 'angular-moment', 'ng-file-upload']
 	},
 
 	output: {

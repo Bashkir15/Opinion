@@ -18,3 +18,28 @@
 
 	&.ng-leave-active
 		@include slideOutDown()
+
+md-toast.md-success-toast-theme
+	.md-toast-content
+		height: 60px
+
+		background-color: $default-green
+
+		span
+			@include open()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 17px
+			color: $default-white-background
+
+md-toast.md-error-toast-theme
+	.md-toast-content
+		height: 60px
+		background-color: $default-red
+
+		span
+			@include open()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 17px
+			color: $default-white-background

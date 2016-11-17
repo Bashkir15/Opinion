@@ -112,6 +112,7 @@ class navCtrl {
 		this._Chat.markRead(item._id).then((response) => {
 			this.messageCount -= 1;
 			angular.extend(item, response.data.res.record);
+			this.updateChats();
 			this._$state.go("app.chats.inbox", {reload: true});
 		});
 	}
@@ -167,6 +168,13 @@ class navCtrl {
 		options = options || {};
 
 		if (this.isLoggedIn) {
+			if (!this.user.streams) {
+				options.unsubscribed = true;
+				this._Stream.get(options).then((response) => {
+					this.streams = response.data.res.records;
+				});
+			}
+			
 			options.subscribed = true;
 
 			this._Stream.get(options).then((response) => {

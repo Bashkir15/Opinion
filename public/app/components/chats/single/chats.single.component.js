@@ -1,10 +1,11 @@
 class chatsSingleCtrl {
-	constructor(Chat, $rootScope, $location, $state, Auth) {
+	constructor(Chat, $rootScope, $location, $state, Auth, $mdDialog) {
 		this._Chat = Chat;
 		this._$rootScope = $rootScope;
 		this._$location = $location;
 		this._$state = $state
 		this._Auth = Auth;
+		this._$dialog = $mdDialog;
 		this.currentUser = this._Auth.getUser()._id;
 
 		if (this._$state.current.name == 'app.chats.inbox' || this._$state.current.name == 'app.chats.saved') {

@@ -36,7 +36,7 @@
 		</div>
 
 		<div class='update-profile-wrapper update-profile-image-wrapper'>
-			<button>
+			<button type='button' ngf-select="$ctrl.uploadImage(file)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/">
 				<span>Upload Image</span>
 			</button>
 		</div>

@@ -4,11 +4,11 @@ import json from '../helpers/json';
 import auth from '../helpers/auth';
 import event from '../helpers/events';
 import fs from 'fs';
+import path from 'path';
 import nodemailer from 'nodemailer'
 import async from 'async'
 import crypto from 'crypto'
 import handlebars from 'handlebars'
-import io from '../../server.babel'
 
 var User = mongoose.model("User");
 
@@ -76,6 +76,39 @@ module.exports = () => {
 					return json.bad({message: 'Sorry, either your email or password were incorrect'}, res);
 				}
 			});
+		});
+	};
+
+	obj.uploadImage = (req, res) => {
+		var userId = req.params.userId;
+		var file = req.files.file;
+		var uploadDate = Date.now();
+		var tempPath = file.path;
+		var targetPath = path.join(__dirname, '../../public/static/uploads/users/pictures/' + userId + uploadDate + file.name);
+		var savePath = '../static/uploads/users/pictures/' + userId + uploadDate + file.name;
+
+		User.findOne({_id: req.params.userId})
+		.exec((err, user) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				fs.rename(tempPath, targetPath, (err) => {
+					if (err) {
+						return jsonbad(err, res);
+					}
+
+					user.picture = savePath;
+					user.save((err, u) => {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							picture: u.picture
+						}, res);
+					});
+				});
+			}
 		});
 	};
 
@@ -371,6 +404,8 @@ module.exports = () => {
 			if (err) {
 				return json.bad(err, res);
 			}
+
+			console.log(items);
 
 			json.good({
 				records: items

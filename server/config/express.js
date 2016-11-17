@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import compression from 'compression';
 import fs from 'fs';
 import path from 'path';
+import multiparty from 'connect-multiparty'
 
 import userRoutes from '../routes/users.server.routes';
 import streamRoutes from '../routes/streams.server.routes';
@@ -19,6 +20,7 @@ module.exports = (db) => {
 	app.use(bodyParser.urlencoded({extended: true}));
 	app.use(morgan('dev'));
 	app.use(compression());
+	app.use(multiparty());
 	app.use((req, res, next) => {
 		res.setHeader('Access-Control-Allow-Origin', '*');
 		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');	

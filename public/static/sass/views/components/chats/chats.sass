@@ -35,15 +35,41 @@
 	box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.23)
 
 .chats-inbox-header
+	display: flex
+	align-items: center
 	padding: 20px 10px
 	border-bottom: 1px solid rgba(0,0,0,0.12)
 
 	p
+		display: flex
+		flex: 1
 		@include open()
 		font-weight: 400
 		letter-spacing: 2px
 		font-size: 17px
 		color: $default-red
+
+	button
+		height: 40px
+		width: 120px
+		background: $default-light-blue
+		transition: all .4s ease
+
+		span
+			@include rale()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 16px
+			color: $default-white-background
+
+		&:hover
+			background: lighten($default-light-blue, 10%)
+
+
+
+.chats-list-component-container
+	overflow-y: scroll
+	overflow-x: hidden
 
 .chats-list-component
 	> div
@@ -93,6 +119,7 @@
 
 	&.ng-leave-active
 		@include slideOutDown()
+
 
 @media screen and (min-width: 1300px)
 	.chats-page-header

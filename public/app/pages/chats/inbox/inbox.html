@@ -1,6 +1,10 @@
 <div class='chats-inbox-container'>
 	<div class='chats-inbox-header'>
 		<p>Inbox</p>
+
+		<button ng-click="$ctrl.loadMore()" ng-if='!$ctrl.noMoreChats'>
+			<span>Load More</span>
+		</button>
 	</div>
 	<div class='chats-nested-container'>
 		<chats-list chats='$ctrl.chats' class='chats-list-component-container'></chats-list>

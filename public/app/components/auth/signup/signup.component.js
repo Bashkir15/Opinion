@@ -36,7 +36,7 @@ class SignupFormCtrl {
 		var serialized = angular.toJson(user);
 		this._Storage.set('user', serialized);
 		this._Storage.set('opinion-token', token);
-		this._state.go('app.updateProfile', {userId: user._id});
+		this._state.go('app.updateProfile', {userId: user._id, reload: true});
 	}
 }
 

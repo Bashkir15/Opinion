@@ -13,4 +13,5 @@ chatsModule.controller('ChatsInboxController', chatsInboxCtrl);
 chatsModule.controller('ChatsMessagesController', chatsMessagesCtrl);
 chatsModule.controller("ChatsSavedController", chatsSavedCtrl);
 chatsModule.controller('ChatsTrashController', chatsTrashCtrl);
+
 export default chatsModule
