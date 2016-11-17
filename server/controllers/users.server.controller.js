@@ -60,21 +60,69 @@ module.exports = () => {
 				return json.bad(err, res);
 			}
 
+			if (user.isLocked) {
+				return user.incorrectLoginAttempts((err) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					json.bad({message: 'Sorry, you have reached the maximum number of login attempts and your account is locked until: ' + user.lockUntil}, res);
+				});
+			}
+
+			if (user.secureLock) {
+				return json.bad({message: 'Sorry, your account has reached the maximum number of login attempts several times and has been locked until further notice. If this has been an error, or if it was not you trying to login, please contact our support team to resolve this'}, res);
+			}
+
 			user.comparePassword(req.body.password, (err, isMatch) => {
 				if (err) {
 					return json.bad(err, res);
 				}
 
 				if (isMatch) {
-					var token = auth.generateToken(user);
+					if (!user.loginAttempts && !user.lockUntil && !user.secureLock) {
+						var token = auth.generateToken(user);
 
-					return json.good({
-						record: user,
-						token: token
-					}, res);
-				} else {
-					return json.bad({message: 'Sorry, either your email or password were incorrect'}, res);
-				}
+						return json.good({
+							record: user,
+							token: token
+						}, res);
+					}
+
+					var updates = {
+						$set: {
+							loginAttempts: 0,
+							limitReached: 0
+						},
+
+						$unset: {lockUntil: 1}
+					};
+
+					return user.update(updates, (err, item) => {
+						var token = auth.generateToken(user);
+
+						json.good({
+							record: user,
+							token: token
+						}, res);
+					});
+				} 
+
+				user.incorrectLoginAttempts((err) => {
+					var totalAttempts;
+
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					if (user.limitReached >= 2) {
+						totalAttempts = 3;
+					} else {
+						totalAttempts = 5;
+					}
+
+					json.bad({message: 'Sorry, either your email or password were incorrect. You have ' + (totalAttempts - user.loginAttempts) + ' remaining until your account is temporarily locked'}, res);
+				});
 			});
 		});
 	};
