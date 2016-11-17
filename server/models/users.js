@@ -198,7 +198,7 @@ UserSchema.pre('remove', function (next) {
 		for (var doc in docs) {
 			docs[doc].remove();
 		}
-	} next);
+	}, next);
 
 	this.model('Chat').find({creator: this._id}, (err, docs) => {
 	 	if (err) {
@@ -228,7 +228,7 @@ UserSchema.pre('remove', function (next) {
 		for (var doc in docs) {
 			docs[doc].remove();
 		}
-	} next);
+	}, next);
 
 	this.model('Comment').find({creator: this._id}, (err, docs) => {
 		if (err) {
@@ -336,7 +336,7 @@ UserSchema.methods = {
 		}
 
 		return this.update(updates, cb);
-	}
+	},
 
 	notify: function (data) {
 		data = data || {};

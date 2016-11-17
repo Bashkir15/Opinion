@@ -11,6 +11,7 @@ class StreamsListCtrl {
 		this.streamPage = 0;
 		this.lastUpdated = 0;
 		this.getStreams();
+		this.getCount();
 		this._$rootScope.$on('streamCreated', () => {
 			this._$dialog.hide();
 			this.getStreams({
@@ -44,6 +45,12 @@ class StreamsListCtrl {
 			}
 
 			this.lastUpdated = Date.now();
+		});
+	}
+
+	getCount() {
+		this._Stream.count().then((response) => {
+			this.streamCount = response.data.res.streamCount;
 		});
 	}
 

@@ -1025,6 +1025,14 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'count',
+			value: function count() {
+				return this._$http({
+					url: '/streams/count',
+					method: 'GET'
+				});
+			}
+		}, {
 			key: 'search',
 			value: function search(keyword) {
 				return this._$http({
@@ -1094,6 +1102,7 @@ webpackJsonp([0],[
 			this.streamPage = 0;
 			this.lastUpdated = 0;
 			this.getStreams();
+			this.getCount();
 			this._$rootScope.$on('streamCreated', function () {
 				_this._$dialog.hide();
 				_this.getStreams({
@@ -1131,6 +1140,15 @@ webpackJsonp([0],[
 				});
 			}
 		}, {
+			key: 'getCount',
+			value: function getCount() {
+				var _this3 = this;
+
+				this._Stream.count().then(function (response) {
+					_this3.streamCount = response.data.res.streamCount;
+				});
+			}
+		}, {
 			key: 'loadMore',
 			value: function loadMore() {
 				this.streamPage++;
@@ -1140,7 +1158,7 @@ webpackJsonp([0],[
 		}, {
 			key: 'search',
 			value: function search(newValue, oldValue) {
-				var _this3 = this;
+				var _this4 = this;
 
 				var streamsSearchTimeout;
 
@@ -1152,15 +1170,15 @@ webpackJsonp([0],[
 
 				streamsSearchTimeout = this._$timeout(function () {
 					if (!newValue) {
-						if (_this3.streamsSearchEnabled) {
-							_this3.lastUpdated = 0;
-							_this3.getStreams();
+						if (_this4.streamsSearchEnabled) {
+							_this4.lastUpdated = 0;
+							_this4.getStreams();
 						}
 					} else {
-						_this3.getStreams();
+						_this4.getStreams();
 					}
 
-					_this3.streamsSearchEnabled = _this3.streamsSearch !== '';
+					_this4.streamsSearchEnabled = _this4.streamsSearch !== '';
 				}, 500);
 			}
 		}, {
