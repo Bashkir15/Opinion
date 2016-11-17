@@ -139,8 +139,8 @@
 </div>
 
 <md-sidenav class='md-sidenav-left user-menu' md-component-id='user-menu' md-whiteframe='4' flex>
-	<div class='user-menu-user-info'>
-		<div></div>
+	<div class='user-menu-user-info' ng-if='$ctrl.isLoggedIn'>
+		<img ng-if="$ctrl.user.picture" src="{{$ctrl.user.picture}}">
 		<p>{{$ctrl.user.username}}</p>
 		<p>{{$ctrl.user.email}}</p>
 	</div>
@@ -289,46 +289,6 @@
 				<li>
 					<button class='md-ink-ripple' ng-click="$ctrl.openCreateStream()">
 						<span>Create</span>
-					</button>
-				</li>
-			</div>
-		</ul>
-
-		<md-list-item md-ink-ripple ng-class="{'open': $ctrl.showSettings}">
-			<div>
-				<i class='mdi mdi-settings'></i>
-			</div>
-
-			<div class='inset'>
-				<span>Settings</span>
-			</div>
-
-			<button class='md-secondary' ng-click="$ctrl.showSettings = !$ctrl.showSettings">
-				<i class='mdi mdi-chevron-down'></i>
-			</button>
-		</md-list-item>
-
-		<ul class='user-menu-nested-list' ng-show="$ctrl.showSettings">
-			<div>
-				<li>
-					<button class='md-ink-ripple'>
-						<span>User</span>
-					</button>
-				</li>
-			</div>
-
-			<div>
-				<li>
-					<button class='md-ink-ripple'>
-						<span>Theme</span>
-					</button>
-				</li>
-			</div>
-
-			<div>
-				<li>
-					<button class='md-ink-ripple'>
-						<span>Notifications</span>
 					</button>
 				</li>
 			</div>

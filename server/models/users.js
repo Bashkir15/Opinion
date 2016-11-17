@@ -46,7 +46,7 @@ var UserSchema = new mongoose.Schema({
 	},
 
 	phone: {
-		type: Number
+		type: String
 	},
 
 	interests: {
@@ -62,7 +62,8 @@ var UserSchema = new mongoose.Schema({
 	},
 
 	picture: {
-		type: String
+		type: String,
+		default: 'static/uploads/users/pictures/default.png'
 	},
 
 	provider: {

@@ -24,7 +24,7 @@ class updateProfileCtrl {
 
 					this._Toast.success('You have updated your profile!');
 					this._$rootScope.$broadcast('profileUpdated');
-					this._$state.go("app.profile.overview", {userId: this.user._id})
+					this._$state.go("app.profile.overview", {userId: this.user._id}, {reload: true});
 			});
 		}
 	}

@@ -1,5 +1,5 @@
 class SignupFormCtrl {
-	constructor($state, Auth, Toast, Storage, $rootScope) {
+	constructor($state, Auth, Toast, Storage, $rootScope, Websocket) {
 		'ngInject';
 
 		this.data = {
@@ -14,14 +14,15 @@ class SignupFormCtrl {
 		this._Toast = Toast;
 		this._Storage = Storage
 		this._$rootScope = $rootScope;
+		this._Websocket = Websocket;
 	}
 
 	signup(isValid) {
 		if (isValid) {
 			this._Auth.signup(this.data).then((response) => {
 				this._Toast.success('Welcome to Opinionated! ' + response.data.res.record.username);
-				this.postSignup(response.data.res.record, response.data.res.token);
-				this._$rootScope.$broadcast('signedUp');
+				this.postSignup(response);
+				//this._$rootScope.$broadcast('signedUp');
 			},
 				(err) => {
 					this._Toast.error('boo, but still yay');
@@ -32,11 +33,12 @@ class SignupFormCtrl {
 		}
 	}
 
-	postSignup(user, token) {
-		var serialized = angular.toJson(user);
+	postSignup(response) {
+		var serialized = angular.toJson(response.data.res.record);
 		this._Storage.set('user', serialized);
-		this._Storage.set('opinion-token', token);
-		this._state.go('app.updateProfile', {userId: user._id, reload: true});
+		this._Storage.set('opinion-token', response.data.res.token);
+		this._Websocket.online(response.data.res.record._id);
+		this._state.go('app.updateProfile', {userId: response.data.res.record._id}, {reload: true});
 	}
 }
 

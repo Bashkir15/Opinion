@@ -1,5 +1,5 @@
 class navCtrl {
-	constructor(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat) {
+	constructor(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat, Websocket) {
 		'ngInject';
 
 		this._$sidenav = $mdSidenav;
@@ -12,10 +12,13 @@ class navCtrl {
 		this._$rootScope = $rootScope;
 		this._$location = $location;
 		this._$dialog = $mdDialog;
+		this._Websocket = Websocket;
+		this.storedUser = this._Auth.getUser();
 		this.isLoggedIn = this._Auth.isLoggedIn();
-		this.getUserInfo();
+
 
 		if (this.isLoggedIn) {
+			this.getUserInfo();
 			this.updateNotifications();
 			this.updateChats();
 		}
@@ -29,6 +32,10 @@ class navCtrl {
 
 		this._$rootScope.$on('streamCreated', () => {
 			this._$dialog.hide();
+		});
+
+		this._$rootScope.$on('profileUpdated', () => {
+			this._$state.reload();
 		});
 
 		this._$rootScope.$on('unauthedRequest', () => {
@@ -68,7 +75,7 @@ class navCtrl {
 	}
 
 	markAsRead() {
-		this._User.markRead(this.user._id, this.notifications).then((response) => {
+		this._User.markRead(this.storedUser._id, this.notifications).then((response) => {
 			this.updateNotifications();
 		});
 	}
@@ -79,7 +86,7 @@ class navCtrl {
 		}
 
 		if (item.user) {
-			this._$location.url('profile/' + item.user._id + '/overview');
+			this._$location.url('profile/' + item.actor._id + '/overview');
 		}
 
 		if (item.thread && item.user) {
@@ -89,7 +96,6 @@ class navCtrl {
 
 	updateNotifications() {
 		this._User.notifications().then((response) => {
-			console.log(response)
 			if (response.data.res.notifications) {
 				response.data.res.notifications.map((item) => {
 					item.display = this.NotificationText(item);
@@ -102,7 +108,7 @@ class navCtrl {
 	}
 
 	updateChats() {
-		this._Chat.findUnread(this.user._id).then((response) => {
+		this._Chat.findUnread(this.storedUser._id).then((response) => {
 			this.chats = response.data.res.records,
 			this.messageCount = response.data.res.unread
 		});
@@ -160,15 +166,16 @@ class navCtrl {
 	}
 
 	getUserInfo() {
-		this.user = this._Auth.getUser();
-		console.log(this.user);
+		this._User.single(this.storedUser._id).then((response) => {
+			this.user = response.data.res.record;
+		});
 	}
 
 	getStreams(options) {
 		options = options || {};
 
 		if (this.isLoggedIn) {
-			if (!this.user.streams) {
+			if (!this.storedUser.streams) {
 				options.unsubscribed = true;
 				this._Stream.get(options).then((response) => {
 					this.streams = response.data.res.records;
@@ -241,6 +248,7 @@ class navCtrl {
 	logout() {
 		this._Storage.remove('user');
 		this._Storage.remove('opinion-token');
+		this._Websocket.logout(this.user._id);
 		this._$state.go('app.home', {}, {reload: true});
 		this._$sidenav('user-menu').close();
 	} 

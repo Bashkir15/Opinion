@@ -26,6 +26,10 @@ function websockets() {
 
 		online: function (id) {
 			this.conn.emit('online', {userId: id});
+		},
+
+		logout: function (id) {
+			this.conn.emit('logout');
 		}
 	};
 

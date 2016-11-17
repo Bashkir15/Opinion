@@ -254,8 +254,6 @@ module.exports = () => {
 						alreadyFollowing = false;
 					}
 
-					console.log(alreadyFollowing);
-
 					
 
 					return json.good({

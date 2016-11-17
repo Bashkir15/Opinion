@@ -487,7 +487,6 @@ webpackJsonp([0],[
 					});
 				} else {
 					this._Thread.unHome(options).then(function (response) {
-						console.log(response);
 
 						if (_this.homeSearch) {
 							_this.threads = [];
@@ -3752,7 +3751,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var navCtrl = function () {
-		function navCtrl(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat) {
+		function navCtrl(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat, Websocket) {
 			'ngInject';
 
 			var _this = this;
@@ -3769,10 +3768,12 @@ webpackJsonp([0],[
 			this._$rootScope = $rootScope;
 			this._$location = $location;
 			this._$dialog = $mdDialog;
+			this._Websocket = Websocket;
+			this.storedUser = this._Auth.getUser();
 			this.isLoggedIn = this._Auth.isLoggedIn();
-			this.getUserInfo();
 
 			if (this.isLoggedIn) {
+				this.getUserInfo();
 				this.updateNotifications();
 				this.updateChats();
 			}
@@ -3786,6 +3787,10 @@ webpackJsonp([0],[
 
 			this._$rootScope.$on('streamCreated', function () {
 				_this._$dialog.hide();
+			});
+
+			this._$rootScope.$on('profileUpdated', function () {
+				_this._$state.reload();
 			});
 
 			this._$rootScope.$on('unauthedRequest', function () {
@@ -3831,7 +3836,7 @@ webpackJsonp([0],[
 			value: function markAsRead() {
 				var _this3 = this;
 
-				this._User.markRead(this.user._id, this.notifications).then(function (response) {
+				this._User.markRead(this.storedUser._id, this.notifications).then(function (response) {
 					_this3.updateNotifications();
 				});
 			}
@@ -3843,7 +3848,7 @@ webpackJsonp([0],[
 				}
 
 				if (item.user) {
-					this._$location.url('profile/' + item.user._id + '/overview');
+					this._$location.url('profile/' + item.actor._id + '/overview');
 				}
 
 				if (item.thread && item.user) {
@@ -3856,7 +3861,6 @@ webpackJsonp([0],[
 				var _this4 = this;
 
 				this._User.notifications().then(function (response) {
-					console.log(response);
 					if (response.data.res.notifications) {
 						response.data.res.notifications.map(function (item) {
 							item.display = _this4.NotificationText(item);
@@ -3872,7 +3876,7 @@ webpackJsonp([0],[
 			value: function updateChats() {
 				var _this5 = this;
 
-				this._Chat.findUnread(this.user._id).then(function (response) {
+				this._Chat.findUnread(this.storedUser._id).then(function (response) {
 					_this5.chats = response.data.res.records, _this5.messageCount = response.data.res.unread;
 				});
 			}
@@ -3935,33 +3939,36 @@ webpackJsonp([0],[
 		}, {
 			key: 'getUserInfo',
 			value: function getUserInfo() {
-				this.user = this._Auth.getUser();
-				console.log(this.user);
+				var _this7 = this;
+
+				this._User.single(this.storedUser._id).then(function (response) {
+					_this7.user = response.data.res.record;
+				});
 			}
 		}, {
 			key: 'getStreams',
 			value: function getStreams(options) {
-				var _this7 = this;
+				var _this8 = this;
 
 				options = options || {};
 
 				if (this.isLoggedIn) {
-					if (!this.user.streams) {
+					if (!this.storedUser.streams) {
 						options.unsubscribed = true;
 						this._Stream.get(options).then(function (response) {
-							_this7.streams = response.data.res.records;
+							_this8.streams = response.data.res.records;
 						});
 					}
 
 					options.subscribed = true;
 
 					this._Stream.get(options).then(function (response) {
-						_this7.streams = response.data.res.records;
+						_this8.streams = response.data.res.records;
 					});
 				} else {
 					options.unsubscribed = true;
 					this._Stream.get(options).then(function (response) {
-						_this7.streams = response.data.res.records;
+						_this8.streams = response.data.res.records;
 					});
 				}
 			}
@@ -4025,6 +4032,7 @@ webpackJsonp([0],[
 			value: function logout() {
 				this._Storage.remove('user');
 				this._Storage.remove('opinion-token');
+				this._Websocket.logout(this.user._id);
 				this._$state.go('app.home', {}, { reload: true });
 				this._$sidenav('user-menu').close();
 			}
@@ -4090,7 +4098,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var SignupFormCtrl = function () {
-		function SignupFormCtrl($state, Auth, Toast, Storage, $rootScope) {
+		function SignupFormCtrl($state, Auth, Toast, Storage, $rootScope, Websocket) {
 			'ngInject';
 
 			_classCallCheck(this, SignupFormCtrl);
@@ -4107,6 +4115,7 @@ webpackJsonp([0],[
 			this._Toast = Toast;
 			this._Storage = Storage;
 			this._$rootScope = $rootScope;
+			this._Websocket = Websocket;
 		}
 
 		_createClass(SignupFormCtrl, [{
@@ -4117,8 +4126,8 @@ webpackJsonp([0],[
 				if (isValid) {
 					this._Auth.signup(this.data).then(function (response) {
 						_this._Toast.success('Welcome to Opinionated! ' + response.data.res.record.username);
-						_this.postSignup(response.data.res.record, response.data.res.token);
-						_this._$rootScope.$broadcast('signedUp');
+						_this.postSignup(response);
+						//this._$rootScope.$broadcast('signedUp');
 					}, function (err) {
 						_this._Toast.error('boo, but still yay');
 					});
@@ -4128,11 +4137,12 @@ webpackJsonp([0],[
 			}
 		}, {
 			key: 'postSignup',
-			value: function postSignup(user, token) {
-				var serialized = angular.toJson(user);
+			value: function postSignup(response) {
+				var serialized = angular.toJson(response.data.res.record);
 				this._Storage.set('user', serialized);
-				this._Storage.set('opinion-token', token);
-				this._state.go('app.updateProfile', { userId: user._id, reload: true });
+				this._Storage.set('opinion-token', response.data.res.token);
+				this._Websocket.online(response.data.res.record._id);
+				this._state.go('app.updateProfile', { userId: response.data.res.record._id }, { reload: true });
 			}
 		}]);
 
@@ -4300,7 +4310,7 @@ webpackJsonp([0],[
 
 						_this._Toast.success('You have updated your profile!');
 						_this._$rootScope.$broadcast('profileUpdated');
-						_this._$state.go("app.profile.overview", { userId: _this.user._id });
+						_this._$state.go("app.profile.overview", { userId: _this.user._id }, { reload: true });
 					});
 				}
 			}
@@ -5958,6 +5968,10 @@ webpackJsonp([0],[
 
 			online: function online(id) {
 				this.conn.emit('online', { userId: id });
+			},
+
+			logout: function logout(id) {
+				this.conn.emit('logout');
 			}
 		};
 

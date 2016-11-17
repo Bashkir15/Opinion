@@ -31,7 +31,6 @@ class HomeCtrl {
 			});
 		} else {
 			this._Thread.unHome(options).then((response) => {
-				console.log(response);
 
 				if (this.homeSearch) {
 					this.threads = [];

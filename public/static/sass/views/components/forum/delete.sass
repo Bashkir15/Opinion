@@ -7,6 +7,7 @@
 	display: flex
 	align-items: center
 	padding: 25px
+	width: 100%
 
 	h3
 		display: flex
@@ -60,3 +61,15 @@
 			font-size: 15px
 			text-transform: uppercase
 			color: $default-white-background
+
+@media screen and (min-width: 1000px)
+	.thread-delete-dialog
+		width: 75%
+
+@media screen and (min-width: 1300px)
+	.thread-delete-dialog
+		width: 65%
+
+@media screen and (min-width: 1600px)
+	.thread-delete-dialog
+		width: 55%
