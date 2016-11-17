@@ -12,6 +12,7 @@ import threadRoutes from '../routes/threads.server.routes';
 import commentRoutes from '../routes/comments.server.routes';
 import activityRoutes from '../routes/activities.server.routes'
 import chatsRoutes from '../routes/chats.server.routes'
+import settingRoutes from '../routes/settings.server.routes'
 
 module.exports = (db) => {
 	const app = express();
