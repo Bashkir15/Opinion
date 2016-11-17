@@ -26,6 +26,13 @@ class StreamService {
 		});
 	}
 
+	search(keyword) {
+		return this._$http({
+			url: '/streams/search/' + keyword,
+			method: 'GET'
+		});
+	}
+
 	single(id) {
 		return this._$http({
 			url: '/streams/' + id,

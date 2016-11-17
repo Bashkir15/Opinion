@@ -213,7 +213,28 @@ class navCtrl {
 		this._$dialog.show({
 			templateUrl: './app/pages/profile/dialogs/search.html',
 			controller: 'UsersSearchController',
-			controllerAs: '$ctrl'
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true
+		});
+	}
+
+	openStreamSearch() {
+		this._$sidenav('user-menu').close();
+		this._$dialog.show({
+			templateUrl: './app/pages/streams/dialogs/search/search.html',
+			controller: 'StreamsSearchController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true
+		});
+	}
+
+	openThreadSearch() {
+		this._$sidenav('user-menu').close();
+		this._$dialog.show({
+			templateUrl: './app/pages/threads/dialogs/search/search.html',
+			controller: 'ThreadsSearchController',
+			controllerAs: '$ctrl',
+			clickOutsideToClose: true
 		});
 	}
 

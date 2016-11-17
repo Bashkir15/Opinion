@@ -18,5 +18,6 @@ router.post('/:threadId/save', auth.ensureAuthorized, threads.save);
 router.post('/:threadId/unsave', auth.ensureAuthorized, threads.unsave);
 router.post('/:threadId/modify', auth.ensureAuthorized, threads.modify);
 router.delete('/:threadId/remove', auth.ensureAuthorized, threads.remove);
+router.get('/search/:keyword', auth.ensureAuthorized, threads.search);
 
 module.exports = router;

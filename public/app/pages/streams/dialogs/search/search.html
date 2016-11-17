@@ -1,7 +1,7 @@
 <md-dialog class='users-search-dialog'>
 	<md-dialog-content>
 		<div class='users-search-dialog-header'>
-			<h3>Find a user</h3>
+			<h3>Find a Stream</h3>
 			<button ng-click='$ctrl.close()' aria-label='close user search dialog'>
 				<i class='mdi mdi-close'></i>
 			</button>
@@ -14,14 +14,11 @@
 				md-item-text="item.name"
 				md-item-value="item._id"
 				md-floating-label="search"
-				md-selected-item-change="$ctrl.goToUser(item)"
+				md-selected-item-change="$ctrl.goToThread(item)"
 				class='users-search-autocomplete'>
 					<md-item-template class='users-search-template'>
-						<div class='users-search-results'>
-							<img src='{{item.picture}}' ng-if='item.picture'>
 
-							<span md-highlight-text='search'>{{item.name}} /@{{item.username}}</span>
-						</div>
+						<span md-highlight-text='search'>{{item.name}}</span>
 					</md-item-template>
 			</md-autocomplete>
 		</div>

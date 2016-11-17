@@ -10,5 +10,6 @@ router.get('/', auth.justGetUser, streams.list);
 router.get('/:streamId', auth.justGetUser, streams.single);
 router.post('/:streamId/subscribe', auth.ensureAuthorized, streams.subscribe);
 router.post('/:streamId/unsubscribe', auth.ensureAuthorized, streams.unsubscribe);
+router.get('/search/:keyword', auth.justGetUser, streams.search);
 
 module.exports = router;

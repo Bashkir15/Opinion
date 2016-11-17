@@ -640,5 +640,24 @@ module.exports = () => {
 		});
 	};
 
+	obj.search = (req, res) => {
+		var keyword = req.params.keyword;
+
+		var criteria = {
+			title: new RegExp(req.params.keyword, 'i')
+		};
+
+		Thread.find(criteria, null)
+		.exec((err, items) => {
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			json.good({
+				records: items
+			}, res);
+		});
+	};
+
 	return obj;
 };

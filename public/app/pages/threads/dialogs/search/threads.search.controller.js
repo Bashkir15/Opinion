@@ -1,8 +1,8 @@
-class UsersSearchCtrl {
-	constructor(User, $location, $timeout, $mdDialog) {
+class ThreadsSearchCtrl {
+	constructor(Thread, $location, $timeout, $mdDialog) {
 		'ngInject';
 
-		this._User = User;
+		this._Thread = Thread;
 		this._$location = $location;
 		this._$timeout = $timeout;
 		this._$dialog = $mdDialog;
@@ -14,14 +14,14 @@ class UsersSearchCtrl {
 	}
 
 	doSearch(val) {
-		this._User.search(val).then((response) => {
+		this._Thread.search(val).then((response) => {
 			this.items = response.data.res.records;
 		});
 	}
 
 	goToUser(item) {
 		this._$dialog.hide();
-		this._$location.url('/profile/' + item._id + '/overview');
+		this._$location.url(item._id);
 	}
 
 	clearSearch() {
@@ -31,4 +31,4 @@ class UsersSearchCtrl {
 	}
 }
 
-export default UsersSearchCtrl
+export default ThreadsSearchCtrl

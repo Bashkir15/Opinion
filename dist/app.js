@@ -918,6 +918,10 @@ webpackJsonp([0],[
 
 	var _streamsCreate2 = _interopRequireDefault(_streamsCreate);
 
+	var _streamsSearch = __webpack_require__(210);
+
+	var _streamsSearch2 = _interopRequireDefault(_streamsSearch);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var streamsModule = _angular2.default.module('streams', []);
@@ -928,6 +932,7 @@ webpackJsonp([0],[
 	streamsModule.controller('TrendingStreamsCtrl', _trendingStreams2.default);
 	streamsModule.controller('SubscribedStreamsCtrl', _subscribedStreams2.default);
 	streamsModule.controller('StreamsCreateController', _streamsCreate2.default);
+	streamsModule.controller('StreamsSearchController', _streamsSearch2.default);
 
 	exports.default = streamsModule;
 
@@ -1018,6 +1023,14 @@ webpackJsonp([0],[
 						timestamp: options.timestamp,
 						filter: options.filter
 					}
+				});
+			}
+		}, {
+			key: 'search',
+			value: function search(keyword) {
+				return this._$http({
+					url: '/streams/search/' + keyword,
+					method: 'GET'
 				});
 			}
 		}, {
@@ -1543,6 +1556,10 @@ webpackJsonp([0],[
 
 	var _createAnywhere2 = _interopRequireDefault(_createAnywhere);
 
+	var _threadsSearch = __webpack_require__(209);
+
+	var _threadsSearch2 = _interopRequireDefault(_threadsSearch);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var threadsModule = _angular2.default.module('threads', []);
@@ -1557,6 +1574,7 @@ webpackJsonp([0],[
 	threadsModule.controller('ThreadsCreateController', _threadsCreate2.default);
 	threadsModule.controller('CommentsCreateController', _commentsCreate2.default);
 	threadsModule.controller('CreateThreadAnywhereController', _createAnywhere2.default);
+	threadsModule.controller('ThreadsSearchController', _threadsSearch2.default);
 
 	exports.default = threadsModule;
 
@@ -1625,6 +1643,14 @@ webpackJsonp([0],[
 						filter: options.filter,
 						page: options.page
 					}
+				});
+			}
+		}, {
+			key: 'search',
+			value: function search(keyword) {
+				return this._$http({
+					url: '/threads/search/' + keyword,
+					method: 'GET'
 				});
 			}
 		}, {
@@ -3439,7 +3465,7 @@ webpackJsonp([0],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var UsersSearchCtrl = function () {
-		function UsersSearchCtrl(User, $location, $timeout) {
+		function UsersSearchCtrl(User, $location, $timeout, $mdDialog) {
 			'ngInject';
 
 			_classCallCheck(this, UsersSearchCtrl);
@@ -3447,10 +3473,16 @@ webpackJsonp([0],[
 			this._User = User;
 			this._$location = $location;
 			this._$timeout = $timeout;
+			this._$dialog = $mdDialog;
 			this.search = '';
 		}
 
 		_createClass(UsersSearchCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
 			key: 'doSearch',
 			value: function doSearch(val) {
 				var _this = this;
@@ -3462,6 +3494,7 @@ webpackJsonp([0],[
 		}, {
 			key: 'goToUser',
 			value: function goToUser(item) {
+				this._$dialog.hide();
 				this._$location.url('/profile/' + item._id + '/overview');
 			}
 		}, {
@@ -3961,7 +3994,30 @@ webpackJsonp([0],[
 				this._$dialog.show({
 					templateUrl: './app/pages/profile/dialogs/search.html',
 					controller: 'UsersSearchController',
-					controllerAs: '$ctrl'
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true
+				});
+			}
+		}, {
+			key: 'openStreamSearch',
+			value: function openStreamSearch() {
+				this._$sidenav('user-menu').close();
+				this._$dialog.show({
+					templateUrl: './app/pages/streams/dialogs/search/search.html',
+					controller: 'StreamsSearchController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true
+				});
+			}
+		}, {
+			key: 'openThreadSearch',
+			value: function openThreadSearch() {
+				this._$sidenav('user-menu').close();
+				this._$dialog.show({
+					templateUrl: './app/pages/threads/dialogs/search/search.html',
+					controller: 'ThreadsSearchController',
+					controllerAs: '$ctrl',
+					clickOutsideToClose: true
 				});
 			}
 		}, {
@@ -5910,6 +5966,134 @@ webpackJsonp([0],[
 	}
 
 	exports.default = websockets;
+
+/***/ },
+/* 207 */,
+/* 208 */,
+/* 209 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ThreadsSearchCtrl = function () {
+		function ThreadsSearchCtrl(Thread, $location, $timeout, $mdDialog) {
+			'ngInject';
+
+			_classCallCheck(this, ThreadsSearchCtrl);
+
+			this._Thread = Thread;
+			this._$location = $location;
+			this._$timeout = $timeout;
+			this._$dialog = $mdDialog;
+			this.search = '';
+		}
+
+		_createClass(ThreadsSearchCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'doSearch',
+			value: function doSearch(val) {
+				var _this = this;
+
+				this._Thread.search(val).then(function (response) {
+					_this.items = response.data.res.records;
+				});
+			}
+		}, {
+			key: 'goToUser',
+			value: function goToUser(item) {
+				this._$dialog.hide();
+				this._$location.url(item._id);
+			}
+		}, {
+			key: 'clearSearch',
+			value: function clearSearch() {
+				var _this2 = this;
+
+				this._$timeout(function () {
+					_this2.search = '';
+				}, 500);
+			}
+		}]);
+
+		return ThreadsSearchCtrl;
+	}();
+
+	exports.default = ThreadsSearchCtrl;
+
+/***/ },
+/* 210 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var StreamsSearchCtrl = function () {
+		function StreamsSearchCtrl(Stream, $location, $timeout, $mdDialog) {
+			'ngInject';
+
+			_classCallCheck(this, StreamsSearchCtrl);
+
+			this._Stream = Stream;
+			this._$location = $location;
+			this._$timeout = $timeout;
+			this._$dialog = $mdDialog;
+			this.search = '';
+		}
+
+		_createClass(StreamsSearchCtrl, [{
+			key: 'close',
+			value: function close() {
+				this._$dialog.hide();
+			}
+		}, {
+			key: 'doSearch',
+			value: function doSearch(val) {
+				var _this = this;
+
+				this._Stream.search(val).then(function (response) {
+					_this.items = response.data.res.records;
+				});
+			}
+		}, {
+			key: 'goToUser',
+			value: function goToUser(item) {
+				this._$dialog.hide();
+				this._$location.url('streams/' + item._id);
+			}
+		}, {
+			key: 'clearSearch',
+			value: function clearSearch() {
+				var _this2 = this;
+
+				this._$timeout(function () {
+					_this2.search = '';
+				}, 500);
+			}
+		}]);
+
+		return StreamsSearchCtrl;
+	}();
+
+	exports.default = StreamsSearchCtrl;
 
 /***/ }
 ]);

@@ -25,6 +25,13 @@ class threadService {
 		});
 	}
 
+	search(keyword) {
+		return this._$http({
+			url: '/threads/search/' + keyword,
+			method: 'GET'
+		});
+	}
+
 	unHome(options) {
 		return this._$http({
 			url: '/threads/unauthHome',

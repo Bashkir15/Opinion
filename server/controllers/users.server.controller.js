@@ -405,7 +405,7 @@ module.exports = () => {
 				return json.bad(err, res);
 			}
 
-			console.log(items);
+
 
 			json.good({
 				records: items
