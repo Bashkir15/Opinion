@@ -108,6 +108,30 @@ module.exports = () => {
 		});
 	};
 
+	obj.getCount = (req, res) => {
+		var streamCount;
+		var threadCount = 0;
+
+		Stream.find({})
+		.populate('threads')
+		.exec((err, streams) => {
+			if (err) {
+				return json.bad(err, res);
+			}
+
+			streamCount = streams.length;
+			
+			streams.forEach((stream) => {
+				threadCount += stream.threads.length;
+			});
+
+			json.good({
+				streamCount: streamCount,
+				threadCount: threadCount
+			}, res);
+		});
+	};
+
 	obj.single = (req, res) => {
 		Stream.findOne({_id: req.params.streamId})
 		.populate('creator')
