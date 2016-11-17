@@ -50,16 +50,20 @@
     "browser-sync": "^2.17.5",
     "concat": "0.0.1-security",
     "gulp": "^3.9.1",
+    "gulp-angular-filesort": "^1.1.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-combine-media-queries": "^0.2.0",
     "gulp-concat": "^2.6.0",
+    "gulp-ng-annotate": "^2.0.0",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.1.1",
+    "gulp-uglify": "^2.0.0",
     "gulp-uglifycss": "^1.0.6",
     "mdi": "^1.7.22",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-vendor-chunk-plugin": "^1.0.0"
   }
 }

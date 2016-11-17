@@ -18,7 +18,7 @@
 				class='users-search-autocomplete'>
 					<md-item-template class='users-search-template'>
 						<div class='users-search-results'>
-							<img src='{{item.picture}}' ng-if='item.picture'>
+							<img ng-src='{{item.picture}}' ng-if='item.picture'>
 
 							<span md-highlight-text='search'>{{item.name}} /@{{item.username}}</span>
 						</div>

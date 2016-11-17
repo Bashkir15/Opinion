@@ -6,6 +6,9 @@ import uglifycss from 'gulp-uglifycss';
 import autoprefixer from 'gulp-autoprefixer';
 import cmq from 'gulp-combine-media-queries';
 import rename from 'gulp-rename';
+import annotate from 'gulp-ng-annotate'
+import filesort from 'gulp-angular-filesort'
+import uglify from 'gulp-uglify'
 import sourceMaps from 'gulp-sourcemaps';
 import browserSync from 'browser-sync';
 import concat from 'gulp-concat'
@@ -26,12 +29,16 @@ const paths = {
 			'angular-material/modules/js/tabs',
 			'angular-material/modules/js/toast',
 			'angular-material/modules/js/tooltip'
-		]
+		],
+		js: './dist/app.js',
+		vendors: './dist/vendors.js'
 	},
 
 	prod: {
 		css: './dist/styles',
-		material: './dist'
+		material: './dist',
+		js: './dist/scripts',
+		vendors: './dist/scripts'
 	}
 };
 
@@ -86,6 +93,26 @@ gulp.task('styles', () => {
 		.pipe(browserSync.reload({stream: true}))		
 });
 
+gulp.task("scripts", () => {
+	gulp.src(paths.dev.js)
+		.pipe(plumber())
+		.pipe(filesort())
+		.pipe(annotate())
+		.pipe(uglify())
+		.pipe(rename('app.min.js'))
+		.pipe(gulp.dest(paths.prod.js))
+});
+
+gulp.task("vendors", () => {
+	gulp.src(paths.dev.vendors)
+		//.pipe(plumber())
+		//.pipe(filesort())
+		//.pipe(annotate())
+		.pipe(uglify())
+		.pipe(rename('vendors.min.js'))
+		.pipe(gulp.dest(paths.prod.vendors))
+});
+
 gulp.task('html', () => {
 	gulp.src(paths.dev.html)
 		.pipe(plumber())
@@ -93,6 +120,11 @@ gulp.task('html', () => {
 });
 
 gulp.task('sass', ['browserSync'], () => {
+	gulp.watch([paths.dev.sass, paths.dev.sass2], ['styles']);
+});
+
+gulp.task('build', ['browserSync'], () => {
+	gulp.watch([paths.dev.js], ['scripts'])
 	gulp.watch([paths.dev.sass, paths.dev.sass2], ['styles']);
 });
 

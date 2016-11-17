@@ -90,6 +90,16 @@ chatsSchema.methods = {
 		delete obj.creator.password;
 		delete obj.creator.following;
 
+		if (obj.messages.creator) {
+			delete obj.messages.creator.password;
+			delete obj.messages.creator.following;
+		}
+
+		if (obj.lastAccessed.user) {
+			delete obj.lastAccessed.user.password;
+			delete obj.lastAccessed.user.following;
+		}
+
 		return obj;
 	},
 

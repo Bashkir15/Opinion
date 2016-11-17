@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const VenderChunkPlugin = require('webpack-vendor-chunk-plugin');
 
 module.exports = {
 	entry: {
@@ -28,6 +29,9 @@ module.exports = {
 	},
 
 	plugins: [
-		new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
+		new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js', Infinity),
+		new VenderChunkPlugin('vendors'),
+		new webpack.optimize.OccurenceOrderPlugin(),
+		new webpack.optimize.DedupePlugin()
 	]
 }

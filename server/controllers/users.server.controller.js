@@ -11,6 +11,7 @@ import crypto from 'crypto'
 import handlebars from 'handlebars'
 
 var User = mongoose.model("User");
+var Setting = mongoose.model('Setting');
 
 module.exports = () => {
 	var obj = {};
@@ -45,6 +46,14 @@ module.exports = () => {
 				if (err) {
 					return json.bad(err, res);
 				}
+
+				var settings = new Setting();
+				settings.creator = user._id;
+				settings.save((err) => {
+					if (err) {
+						return json.bad(err, res)
+					}
+				});
 
 				json.good({
 					record: user,

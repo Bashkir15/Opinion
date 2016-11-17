@@ -1,5 +1,7 @@
 class chatsMessagesCtrl {
 	constructor(Auth, Chat, $state, $stateParams, $rootScope) {
+		'ngInject';
+		
 		this._Auth = Auth;
 		this._Chat = Chat;
 		this._$state = $state;

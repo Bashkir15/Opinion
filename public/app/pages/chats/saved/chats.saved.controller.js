@@ -1,5 +1,7 @@
 class ChatsSavedCtrl {
 	constructor(Chat, Auth) {
+		'ngInject';
+		
 		this._Chat = Chat;
 		this._Auth = Auth;
 		this.chats = [];
@@ -15,15 +17,18 @@ class ChatsSavedCtrl {
 		options.page = this.chatsPage;
 
 		this._Chat.getSaved(this.currentUser, options).then((response) => {
+			if (response.data.res.records) {
+				if (!options.append) {
+					this.chats = response.data.res.records.concat(this.chats);
+				} else {
+					this.chats = this.chats.concat(response.data.res.records);
+				}
 
-			if (!options.append) {
-				this.chats = reponse.data.res.record.concat(this.chats);
+				this.lastUpdated = Date.now();
+				this.noMoreChats = !response.data.res.morePages;
 			} else {
-				this.chats = this.chats.concat(response.data.res.record);
+				this.noMoreChats = true;
 			}
-
-			this.lastUpdated = Date.now();
-			this.noMoreChats = !response.data.res.morePages;
 		});
 	}
 

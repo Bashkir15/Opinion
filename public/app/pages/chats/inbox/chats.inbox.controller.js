@@ -1,5 +1,7 @@
 class chatsInboxCtrl {
 	constructor(Chat, $timeout) {
+		'ngInject';
+		
 		this._Chat = Chat;
 		this._$timeout = $timeout;
 		this.chats = [];

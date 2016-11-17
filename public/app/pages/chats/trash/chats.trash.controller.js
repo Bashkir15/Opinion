@@ -16,14 +16,18 @@ class chatsTrashCtrl {
 		options.page = this.chatsPages;
 
 		this._Chat.getRemoved(this.currentUser, options).then((response) => {
-			if (!options.append) {
-				this.chats = response.data.res.records.concat(this.chats);
-			} else {
-				this.chats = this.chats.concat(response.data.res.records);
-			}
+			if (response.data.res.records) {
+				if (!options.append) {
+					this.chats = response.data.res.records.concat(this.chats);
+				} else {
+					this.chats = this.chats.concat(response.data.res.records);
+				}
 
-			this.lastUpdated = Date.now();
-			this.noMoreChats = !response.data.res.morePages;
+				this.lastUpdated = Date.now();
+				this.noMoreChats = !response.data.res.morePages;
+			} else {
+				this.noMoreChats = true;
+			}
 		});
 	}
 

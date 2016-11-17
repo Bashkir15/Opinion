@@ -1,5 +1,5 @@
 class chatsListCtrl {
-	constructor($rootScope, $state, Auth) {
+	constructor($rootScope, $state) {
 		'ngInject';
 
 		this._$state = $state;
