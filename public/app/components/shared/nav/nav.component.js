@@ -13,7 +13,6 @@ class navCtrl {
 		this._$location = $location;
 		this._$dialog = $mdDialog;
 		this._Websocket = Websocket;
-		this.storedUser = this._Auth.getUser();
 		this.isLoggedIn = this._Auth.isLoggedIn();
 
 

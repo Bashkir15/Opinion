@@ -1,4 +1,7 @@
 import http from 'http';
+import cluster from 'cluster'
+import net from 'net'
+import sticky from 'sticky-session'
 import mongoose from 'mongoose'
 import sio from 'socket.io'
 import Users from './server/models/users'
@@ -10,20 +13,54 @@ import Chats from './server/models/chats'
 import Settings from './server/models/settings'
 
 var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
-const db = mongoose.connect(config.db);
+const db = mongoose.connect(config.db, () => {
+	console.log('The application has connected to the: ' + config.db + ' database');
+});
 
 
-var app = require('./server/config/express')(db);
-var server = require('http').Server(app);
-var io = sio.listen(server);
-var websockets = require('./server/helpers/websockets')(io);
-var notifications = require('./server/helpers/notifications')(io);
+if (cluster.isMaster) {
+	var cpuCount = require('os').cpus().length;
+	var workers = [];
 
-app.listen(config.server.port);
+	var spawn = (i) => {
+		workers[i] = cluster.fork();
 
-global.notifications = notifications;
-global.config = config;
+		workers[i].on('exit', (code, signal) => {
+			console.log('respawning worker', i);
+			spawn(i);
+		});
+	};
 
-module.exports = app;
+	for (var i = 0; i < cpuCount; i++) {
+		spawn(i);
+	}
 
+	var worker_index = (ip, len) => {
+		var s = '';
 
+		for (var i = 0, _len = ip.length; i < _len; i++) {
+			if (!isNaN(ip[i])) {
+				s += ip[i];
+			}
+		}
+
+		return Number(s) % len;
+	};
+
+	var server = net.createServer({pauseOnConnect: true}, (connection) => {
+		var worker = workers[worker_index(connection.remoteAddress, cpuCount)];
+		worker.send('sticky-session:connection', connection);
+	}).listen(config.server.port); 
+} else {
+		var app = require('./server/config/express')(db);
+		var server = require('http').createServer(app);
+		var io = sio.listen(server);
+		var websockets = require('./server/helpers/websockets')(io);
+		var notifications = require('./server/helpers/notifications')(io);
+
+		global.notifications = notifications;
+		global.config = config;
+		global.server = server;
+
+		return server;
+}
