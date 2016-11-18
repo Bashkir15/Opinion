@@ -289,7 +289,7 @@ webpackJsonp([1],[
 			conn: {},
 			connect: function connect() {
 				var $this = this;
-				var socket = new io.connect('opinionate.herokuapp.com');
+				var socket = new io.connect('window.location.hostname');
 				socket.on('connect', function () {
 					console.log('connected');
 				});
