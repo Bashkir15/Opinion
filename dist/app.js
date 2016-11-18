@@ -18,23 +18,23 @@ webpackJsonp([1],[
 
 	__webpack_require__(113);
 
-	__webpack_require__(209);
+	__webpack_require__(208);
 
-	__webpack_require__(150);
+	__webpack_require__(149);
 
-	__webpack_require__(172);
+	__webpack_require__(171);
 
-	__webpack_require__(128);
+	__webpack_require__(127);
 
 	var _app = __webpack_require__(116);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _app3 = __webpack_require__(118);
+	var _app3 = __webpack_require__(117);
 
 	var _app4 = _interopRequireDefault(_app3);
 
-	var _app5 = __webpack_require__(119);
+	var _app5 = __webpack_require__(118);
 
 	var _app6 = _interopRequireDefault(_app5);
 
@@ -176,7 +176,7 @@ webpackJsonp([1],[
 		value: true
 	});
 
-	var _auth = __webpack_require__(151);
+	var _auth = __webpack_require__(150);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -198,8 +198,7 @@ webpackJsonp([1],[
 	exports.default = appConfig;
 
 /***/ },
-/* 117 */,
-/* 118 */
+/* 117 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -274,7 +273,7 @@ webpackJsonp([1],[
 	exports.default = appRun;
 
 /***/ },
-/* 119 */
+/* 118 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -350,7 +349,7 @@ webpackJsonp([1],[
 	exports.default = websockets;
 
 /***/ },
-/* 120 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -363,15 +362,15 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _signup = __webpack_require__(122);
+	var _signup = __webpack_require__(121);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
-	var _login = __webpack_require__(121);
+	var _login = __webpack_require__(120);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _profileUpdate = __webpack_require__(123);
+	var _profileUpdate = __webpack_require__(122);
 
 	var _profileUpdate2 = _interopRequireDefault(_profileUpdate);
 
@@ -385,7 +384,7 @@ webpackJsonp([1],[
 	exports.default = authComponents;
 
 /***/ },
-/* 121 */
+/* 120 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -493,7 +492,7 @@ webpackJsonp([1],[
 	exports.default = loginForm;
 
 /***/ },
-/* 122 */
+/* 121 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -567,7 +566,7 @@ webpackJsonp([1],[
 	exports.default = signupForm;
 
 /***/ },
-/* 123 */
+/* 122 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -648,7 +647,7 @@ webpackJsonp([1],[
 	exports.default = updateProfile;
 
 /***/ },
-/* 124 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -661,15 +660,15 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _chatsList = __webpack_require__(125);
+	var _chatsList = __webpack_require__(124);
 
 	var _chatsList2 = _interopRequireDefault(_chatsList);
 
-	var _chatsSingle = __webpack_require__(127);
+	var _chatsSingle = __webpack_require__(126);
 
 	var _chatsSingle2 = _interopRequireDefault(_chatsSingle);
 
-	var _chatsMessages = __webpack_require__(126);
+	var _chatsMessages = __webpack_require__(125);
 
 	var _chatsMessages2 = _interopRequireDefault(_chatsMessages);
 
@@ -683,7 +682,7 @@ webpackJsonp([1],[
 	exports.default = chatComponents;
 
 /***/ },
-/* 125 */
+/* 124 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -725,7 +724,7 @@ webpackJsonp([1],[
 	exports.default = listComponent;
 
 /***/ },
-/* 126 */
+/* 125 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -810,7 +809,7 @@ webpackJsonp([1],[
 	exports.default = chatMessages;
 
 /***/ },
-/* 127 */
+/* 126 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -897,7 +896,7 @@ webpackJsonp([1],[
 	exports.default = singleChat;
 
 /***/ },
-/* 128 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -910,15 +909,15 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(149);
+	__webpack_require__(148);
 
-	__webpack_require__(120);
+	__webpack_require__(119);
 
-	__webpack_require__(134);
+	__webpack_require__(133);
 
-	__webpack_require__(147);
+	__webpack_require__(146);
 
-	__webpack_require__(124);
+	__webpack_require__(123);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -929,7 +928,7 @@ webpackJsonp([1],[
 	exports.default = componentModule;
 
 /***/ },
-/* 129 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -942,19 +941,19 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _commentsCreate = __webpack_require__(130);
+	var _commentsCreate = __webpack_require__(129);
 
 	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
 
-	var _commentsList = __webpack_require__(132);
+	var _commentsList = __webpack_require__(131);
 
 	var _commentsList2 = _interopRequireDefault(_commentsList);
 
-	var _commentsSingle = __webpack_require__(133);
+	var _commentsSingle = __webpack_require__(132);
 
 	var _commentsSingle2 = _interopRequireDefault(_commentsSingle);
 
-	var _editComment = __webpack_require__(131);
+	var _editComment = __webpack_require__(130);
 
 	var _editComment2 = _interopRequireDefault(_editComment);
 
@@ -969,7 +968,7 @@ webpackJsonp([1],[
 	exports.default = commentComponents;
 
 /***/ },
-/* 130 */
+/* 129 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1038,7 +1037,7 @@ webpackJsonp([1],[
 	exports.default = createComment;
 
 /***/ },
-/* 131 */
+/* 130 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1094,7 +1093,7 @@ webpackJsonp([1],[
 	exports.default = editComment;
 
 /***/ },
-/* 132 */
+/* 131 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1148,7 +1147,7 @@ webpackJsonp([1],[
 	exports.default = commmentsList;
 
 /***/ },
-/* 133 */
+/* 132 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1266,7 +1265,7 @@ webpackJsonp([1],[
 	exports.default = singleComment;
 
 /***/ },
-/* 134 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1279,11 +1278,11 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(138);
+	__webpack_require__(137);
 
-	__webpack_require__(144);
+	__webpack_require__(143);
 
-	__webpack_require__(129);
+	__webpack_require__(128);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1294,7 +1293,7 @@ webpackJsonp([1],[
 	exports.default = forumComponents;
 
 /***/ },
-/* 135 */
+/* 134 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1350,7 +1349,7 @@ webpackJsonp([1],[
 	exports.default = createStream;
 
 /***/ },
-/* 136 */
+/* 135 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1432,7 +1431,7 @@ webpackJsonp([1],[
 	exports.default = listStream;
 
 /***/ },
-/* 137 */
+/* 136 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1484,7 +1483,7 @@ webpackJsonp([1],[
 	exports.default = singleStream;
 
 /***/ },
-/* 138 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1497,19 +1496,19 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _streamsList = __webpack_require__(136);
+	var _streamsList = __webpack_require__(135);
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamsSingle = __webpack_require__(137);
+	var _streamsSingle = __webpack_require__(136);
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
-	var _streamCreate = __webpack_require__(135);
+	var _streamCreate = __webpack_require__(134);
 
 	var _streamCreate2 = _interopRequireDefault(_streamCreate);
 
-	var _streamsTrending = __webpack_require__(139);
+	var _streamsTrending = __webpack_require__(138);
 
 	var _streamsTrending2 = _interopRequireDefault(_streamsTrending);
 
@@ -1524,7 +1523,7 @@ webpackJsonp([1],[
 	exports.default = streamComponents;
 
 /***/ },
-/* 139 */
+/* 138 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1576,7 +1575,7 @@ webpackJsonp([1],[
 	exports.default = trendingStream;
 
 /***/ },
-/* 140 */
+/* 139 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1649,7 +1648,7 @@ webpackJsonp([1],[
 	exports.default = createThread;
 
 /***/ },
-/* 141 */
+/* 140 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1711,7 +1710,7 @@ webpackJsonp([1],[
 	exports.default = editThread;
 
 /***/ },
-/* 142 */
+/* 141 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1808,7 +1807,7 @@ webpackJsonp([1],[
 	exports.default = threadsList;
 
 /***/ },
-/* 143 */
+/* 142 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1930,7 +1929,7 @@ webpackJsonp([1],[
 	exports.default = singleThread;
 
 /***/ },
-/* 144 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1943,19 +1942,19 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threadsList = __webpack_require__(142);
+	var _threadsList = __webpack_require__(141);
 
 	var _threadsList2 = _interopRequireDefault(_threadsList);
 
-	var _threadsSingle = __webpack_require__(143);
+	var _threadsSingle = __webpack_require__(142);
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
-	var _threadsCreate = __webpack_require__(140);
+	var _threadsCreate = __webpack_require__(139);
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
-	var _editThread = __webpack_require__(141);
+	var _editThread = __webpack_require__(140);
 
 	var _editThread2 = _interopRequireDefault(_editThread);
 
@@ -1970,7 +1969,7 @@ webpackJsonp([1],[
 	exports.default = threadComponents;
 
 /***/ },
-/* 145 */
+/* 144 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2104,7 +2103,7 @@ webpackJsonp([1],[
 	exports.default = headerComponent;
 
 /***/ },
-/* 146 */
+/* 145 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2113,19 +2112,38 @@ webpackJsonp([1],[
 		value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var overviewCtrl = function overviewCtrl() {
-		'ngInject';
+	var overviewCtrl = function () {
+		function overviewCtrl(User, $stateParams) {
+			'ngInject';
 
-		_classCallCheck(this, overviewCtrl);
-	};
+			_classCallCheck(this, overviewCtrl);
+
+			this._User = User;
+			this._$stateParams = $stateParams;
+			this.userId = $stateParams.userId;
+			this.getUser();
+		}
+
+		_createClass(overviewCtrl, [{
+			key: 'getUser',
+			value: function getUser() {
+				var _this = this;
+
+				this._User.single(this.userId).then(function (response) {
+					_this.user = response.data.res.record;
+				});
+			}
+		}]);
+
+		return overviewCtrl;
+	}();
 
 	var overviewComponent = {
 		scope: {},
-		bindings: {
-			user: '<'
-		},
 		controller: overviewCtrl,
 		templateUrl: './app/components/profile/overview/profile.overview.component.html'
 	};
@@ -2133,7 +2151,7 @@ webpackJsonp([1],[
 	exports.default = overviewComponent;
 
 /***/ },
-/* 147 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2146,11 +2164,11 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _profileHeader = __webpack_require__(145);
+	var _profileHeader = __webpack_require__(144);
 
 	var _profileHeader2 = _interopRequireDefault(_profileHeader);
 
-	var _profileOverview = __webpack_require__(146);
+	var _profileOverview = __webpack_require__(145);
 
 	var _profileOverview2 = _interopRequireDefault(_profileOverview);
 
@@ -2163,7 +2181,7 @@ webpackJsonp([1],[
 	exports.default = profileComponents;
 
 /***/ },
-/* 148 */
+/* 147 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2195,7 +2213,6 @@ webpackJsonp([1],[
 			this._$location = $location;
 			this._$dialog = $mdDialog;
 			this._Websocket = Websocket;
-			this.storedUser = this._Auth.getUser();
 			this.isLoggedIn = this._Auth.isLoggedIn();
 
 			if (this.isLoggedIn) {
@@ -2478,6 +2495,31 @@ webpackJsonp([1],[
 	exports.default = appNav;
 
 /***/ },
+/* 148 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _angular = __webpack_require__(2);
+
+	var _angular2 = _interopRequireDefault(_angular);
+
+	var _nav = __webpack_require__(147);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var sharedComponents = _angular2.default.module('shared.components', []);
+	sharedComponents.component('appNav', _nav2.default);
+
+	exports.default = sharedComponents;
+
+/***/ },
 /* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -2491,40 +2533,15 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _nav = __webpack_require__(148);
-
-	var _nav2 = _interopRequireDefault(_nav);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var sharedComponents = _angular2.default.module('shared.components', []);
-	sharedComponents.component('appNav', _nav2.default);
-
-	exports.default = sharedComponents;
-
-/***/ },
-/* 150 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _angular = __webpack_require__(2);
-
-	var _angular2 = _interopRequireDefault(_angular);
-
-	var _storage = __webpack_require__(153);
+	var _storage = __webpack_require__(152);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
-	var _toasts = __webpack_require__(154);
+	var _toasts = __webpack_require__(153);
 
 	var _toasts2 = _interopRequireDefault(_toasts);
 
-	var _sockets = __webpack_require__(152);
+	var _sockets = __webpack_require__(151);
 
 	var _sockets2 = _interopRequireDefault(_sockets);
 
@@ -2538,7 +2555,7 @@ webpackJsonp([1],[
 	exports.default = configModule;
 
 /***/ },
-/* 151 */
+/* 150 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2571,7 +2588,7 @@ webpackJsonp([1],[
 	exports.default = authInterceptor;
 
 /***/ },
-/* 152 */
+/* 151 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2629,7 +2646,7 @@ webpackJsonp([1],[
 	exports.default = websockets;
 
 /***/ },
-/* 153 */
+/* 152 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2672,7 +2689,7 @@ webpackJsonp([1],[
 	exports.default = Storage;
 
 /***/ },
-/* 154 */
+/* 153 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2714,7 +2731,7 @@ webpackJsonp([1],[
 	exports.default = Toast;
 
 /***/ },
-/* 155 */
+/* 154 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2746,7 +2763,7 @@ webpackJsonp([1],[
 	exports.default = authConfig;
 
 /***/ },
-/* 156 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2759,27 +2776,27 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _auth = __webpack_require__(155);
+	var _auth = __webpack_require__(154);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _auth3 = __webpack_require__(157);
+	var _auth3 = __webpack_require__(156);
 
 	var _auth4 = _interopRequireDefault(_auth3);
 
-	var _passwordReset = __webpack_require__(161);
+	var _passwordReset = __webpack_require__(160);
 
 	var _passwordReset2 = _interopRequireDefault(_passwordReset);
 
-	var _passwordMatch = __webpack_require__(159);
+	var _passwordMatch = __webpack_require__(158);
 
 	var _passwordMatch2 = _interopRequireDefault(_passwordMatch);
 
-	var _updateProfile = __webpack_require__(160);
+	var _updateProfile = __webpack_require__(159);
 
 	var _updateProfile2 = _interopRequireDefault(_updateProfile);
 
-	var _dialog = __webpack_require__(158);
+	var _dialog = __webpack_require__(157);
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
@@ -2796,7 +2813,7 @@ webpackJsonp([1],[
 	exports.default = authModule;
 
 /***/ },
-/* 157 */
+/* 156 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2888,7 +2905,7 @@ webpackJsonp([1],[
 	exports.default = Auth;
 
 /***/ },
-/* 158 */
+/* 157 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2934,7 +2951,7 @@ webpackJsonp([1],[
 	exports.default = authUnauthedCtrl;
 
 /***/ },
-/* 159 */
+/* 158 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2966,7 +2983,7 @@ webpackJsonp([1],[
 	exports.default = passwordMatch;
 
 /***/ },
-/* 160 */
+/* 159 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3007,7 +3024,7 @@ webpackJsonp([1],[
 	exports.default = updateProfileCtrl;
 
 /***/ },
-/* 161 */
+/* 160 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3079,7 +3096,7 @@ webpackJsonp([1],[
 	exports.default = passwordReset;
 
 /***/ },
-/* 162 */
+/* 161 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3141,7 +3158,7 @@ webpackJsonp([1],[
 	exports.default = chatsConfig;
 
 /***/ },
-/* 163 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3154,27 +3171,27 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _chats = __webpack_require__(164);
+	var _chats = __webpack_require__(163);
 
 	var _chats2 = _interopRequireDefault(_chats);
 
-	var _chats3 = __webpack_require__(162);
+	var _chats3 = __webpack_require__(161);
 
 	var _chats4 = _interopRequireDefault(_chats3);
 
-	var _chatsInbox = __webpack_require__(165);
+	var _chatsInbox = __webpack_require__(164);
 
 	var _chatsInbox2 = _interopRequireDefault(_chatsInbox);
 
-	var _chatsMessages = __webpack_require__(166);
+	var _chatsMessages = __webpack_require__(165);
 
 	var _chatsMessages2 = _interopRequireDefault(_chatsMessages);
 
-	var _chatsSaved = __webpack_require__(167);
+	var _chatsSaved = __webpack_require__(166);
 
 	var _chatsSaved2 = _interopRequireDefault(_chatsSaved);
 
-	var _chatsTrash = __webpack_require__(168);
+	var _chatsTrash = __webpack_require__(167);
 
 	var _chatsTrash2 = _interopRequireDefault(_chatsTrash);
 
@@ -3191,7 +3208,7 @@ webpackJsonp([1],[
 	exports.default = chatsModule;
 
 /***/ },
-/* 164 */
+/* 163 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3331,7 +3348,7 @@ webpackJsonp([1],[
 	exports.default = chatsService;
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3395,7 +3412,7 @@ webpackJsonp([1],[
 	exports.default = chatsInboxCtrl;
 
 /***/ },
-/* 166 */
+/* 165 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3474,7 +3491,7 @@ webpackJsonp([1],[
 	exports.default = chatsMessagesCtrl;
 
 /***/ },
-/* 167 */
+/* 166 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3541,7 +3558,7 @@ webpackJsonp([1],[
 	exports.default = ChatsSavedCtrl;
 
 /***/ },
-/* 168 */
+/* 167 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3608,7 +3625,7 @@ webpackJsonp([1],[
 	exports.default = chatsTrashCtrl;
 
 /***/ },
-/* 169 */
+/* 168 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3630,7 +3647,7 @@ webpackJsonp([1],[
 	exports.default = homeConfig;
 
 /***/ },
-/* 170 */
+/* 169 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3706,7 +3723,7 @@ webpackJsonp([1],[
 	exports.default = HomeCtrl;
 
 /***/ },
-/* 171 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3719,11 +3736,11 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _home = __webpack_require__(169);
+	var _home = __webpack_require__(168);
 
 	var _home2 = _interopRequireDefault(_home);
 
-	var _home3 = __webpack_require__(170);
+	var _home3 = __webpack_require__(169);
 
 	var _home4 = _interopRequireDefault(_home3);
 
@@ -3736,7 +3753,7 @@ webpackJsonp([1],[
 	exports.default = homeModule;
 
 /***/ },
-/* 172 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3749,17 +3766,17 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	__webpack_require__(171);
+	__webpack_require__(170);
 
-	__webpack_require__(156);
+	__webpack_require__(155);
 
-	__webpack_require__(190);
+	__webpack_require__(189);
 
-	__webpack_require__(205);
+	__webpack_require__(204);
 
-	__webpack_require__(163);
+	__webpack_require__(162);
 
-	__webpack_require__(181);
+	__webpack_require__(180);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3770,7 +3787,7 @@ webpackJsonp([1],[
 	exports.default = pagesModule;
 
 /***/ },
-/* 173 */
+/* 172 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3815,7 +3832,7 @@ webpackJsonp([1],[
 	exports.default = activityCtrl;
 
 /***/ },
-/* 174 */
+/* 173 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3885,7 +3902,7 @@ webpackJsonp([1],[
 	exports.default = ProfileCommentsCtrl;
 
 /***/ },
-/* 175 */
+/* 174 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3929,7 +3946,7 @@ webpackJsonp([1],[
 	exports.default = profileEditCtrl;
 
 /***/ },
-/* 176 */
+/* 175 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3987,7 +4004,7 @@ webpackJsonp([1],[
 	exports.default = ProfileMessageCtrl;
 
 /***/ },
-/* 177 */
+/* 176 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4052,7 +4069,7 @@ webpackJsonp([1],[
 	exports.default = profileResetCtrl;
 
 /***/ },
-/* 178 */
+/* 177 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4115,7 +4132,7 @@ webpackJsonp([1],[
 	exports.default = UsersSearchCtrl;
 
 /***/ },
-/* 179 */
+/* 178 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4170,7 +4187,7 @@ webpackJsonp([1],[
 	exports.default = profileConfig;
 
 /***/ },
-/* 180 */
+/* 179 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4235,7 +4252,7 @@ webpackJsonp([1],[
 	exports.default = profileCtrl;
 
 /***/ },
-/* 181 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4248,47 +4265,47 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _users = __webpack_require__(184);
+	var _users = __webpack_require__(183);
 
 	var _users2 = _interopRequireDefault(_users);
 
-	var _profile = __webpack_require__(179);
+	var _profile = __webpack_require__(178);
 
 	var _profile2 = _interopRequireDefault(_profile);
 
-	var _profile3 = __webpack_require__(180);
+	var _profile3 = __webpack_require__(179);
 
 	var _profile4 = _interopRequireDefault(_profile3);
 
-	var _profileThreads = __webpack_require__(183);
+	var _profileThreads = __webpack_require__(182);
 
 	var _profileThreads2 = _interopRequireDefault(_profileThreads);
 
-	var _profileComments = __webpack_require__(174);
+	var _profileComments = __webpack_require__(173);
 
 	var _profileComments2 = _interopRequireDefault(_profileComments);
 
-	var _profileSaved = __webpack_require__(182);
+	var _profileSaved = __webpack_require__(181);
 
 	var _profileSaved2 = _interopRequireDefault(_profileSaved);
 
-	var _profileActivity = __webpack_require__(173);
+	var _profileActivity = __webpack_require__(172);
 
 	var _profileActivity2 = _interopRequireDefault(_profileActivity);
 
-	var _usersSearch = __webpack_require__(178);
+	var _usersSearch = __webpack_require__(177);
 
 	var _usersSearch2 = _interopRequireDefault(_usersSearch);
 
-	var _profileMessage = __webpack_require__(176);
+	var _profileMessage = __webpack_require__(175);
 
 	var _profileMessage2 = _interopRequireDefault(_profileMessage);
 
-	var _profileEdit = __webpack_require__(175);
+	var _profileEdit = __webpack_require__(174);
 
 	var _profileEdit2 = _interopRequireDefault(_profileEdit);
 
-	var _profileReset = __webpack_require__(177);
+	var _profileReset = __webpack_require__(176);
 
 	var _profileReset2 = _interopRequireDefault(_profileReset);
 
@@ -4310,7 +4327,7 @@ webpackJsonp([1],[
 	exports.default = profileModule;
 
 /***/ },
-/* 182 */
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4407,7 +4424,7 @@ webpackJsonp([1],[
 	exports.default = ProfileSavedCtrl;
 
 /***/ },
-/* 183 */
+/* 182 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4477,7 +4494,7 @@ webpackJsonp([1],[
 	exports.default = ProfileThreadsCtrl;
 
 /***/ },
-/* 184 */
+/* 183 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4573,7 +4590,7 @@ webpackJsonp([1],[
 	exports.default = UsersService;
 
 /***/ },
-/* 185 */
+/* 184 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4608,7 +4625,7 @@ webpackJsonp([1],[
 	exports.default = StreamsCreateCtrl;
 
 /***/ },
-/* 186 */
+/* 185 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4671,7 +4688,7 @@ webpackJsonp([1],[
 	exports.default = StreamsSearchCtrl;
 
 /***/ },
-/* 187 */
+/* 186 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4803,7 +4820,7 @@ webpackJsonp([1],[
 	exports.default = StreamsListCtrl;
 
 /***/ },
-/* 188 */
+/* 187 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4973,7 +4990,7 @@ webpackJsonp([1],[
 	exports.default = singleStreamCtrl;
 
 /***/ },
-/* 189 */
+/* 188 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5016,7 +5033,7 @@ webpackJsonp([1],[
 	exports.default = streamsConfig;
 
 /***/ },
-/* 190 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5029,35 +5046,35 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _streams = __webpack_require__(189);
+	var _streams = __webpack_require__(188);
 
 	var _streams2 = _interopRequireDefault(_streams);
 
-	var _streams3 = __webpack_require__(191);
+	var _streams3 = __webpack_require__(190);
 
 	var _streams4 = _interopRequireDefault(_streams3);
 
-	var _streamsList = __webpack_require__(187);
+	var _streamsList = __webpack_require__(186);
 
 	var _streamsList2 = _interopRequireDefault(_streamsList);
 
-	var _streamsSingle = __webpack_require__(188);
+	var _streamsSingle = __webpack_require__(187);
 
 	var _streamsSingle2 = _interopRequireDefault(_streamsSingle);
 
-	var _trendingStreams = __webpack_require__(193);
+	var _trendingStreams = __webpack_require__(192);
 
 	var _trendingStreams2 = _interopRequireDefault(_trendingStreams);
 
-	var _subscribedStreams = __webpack_require__(192);
+	var _subscribedStreams = __webpack_require__(191);
 
 	var _subscribedStreams2 = _interopRequireDefault(_subscribedStreams);
 
-	var _streamsCreate = __webpack_require__(185);
+	var _streamsCreate = __webpack_require__(184);
 
 	var _streamsCreate2 = _interopRequireDefault(_streamsCreate);
 
-	var _streamsSearch = __webpack_require__(186);
+	var _streamsSearch = __webpack_require__(185);
 
 	var _streamsSearch2 = _interopRequireDefault(_streamsSearch);
 
@@ -5076,7 +5093,7 @@ webpackJsonp([1],[
 	exports.default = streamsModule;
 
 /***/ },
-/* 191 */
+/* 190 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5169,7 +5186,7 @@ webpackJsonp([1],[
 	exports.default = StreamService;
 
 /***/ },
-/* 192 */
+/* 191 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5225,7 +5242,7 @@ webpackJsonp([1],[
 	exports.default = subscribedStreamsCtrl;
 
 /***/ },
-/* 193 */
+/* 192 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5294,7 +5311,7 @@ webpackJsonp([1],[
 	exports.default = TrendingStreamCtrl;
 
 /***/ },
-/* 194 */
+/* 193 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5429,7 +5446,7 @@ webpackJsonp([1],[
 	exports.default = commentsService;
 
 /***/ },
-/* 195 */
+/* 194 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5464,7 +5481,7 @@ webpackJsonp([1],[
 	exports.default = createCommentsCtrl;
 
 /***/ },
-/* 196 */
+/* 195 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5544,7 +5561,7 @@ webpackJsonp([1],[
 	exports.default = createThreadAnywhereCtrl;
 
 /***/ },
-/* 197 */
+/* 196 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5579,7 +5596,7 @@ webpackJsonp([1],[
 	exports.default = threadsCreateCtrl;
 
 /***/ },
-/* 198 */
+/* 197 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5627,7 +5644,7 @@ webpackJsonp([1],[
 	exports.default = deleteCommentCtrl;
 
 /***/ },
-/* 199 */
+/* 198 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5675,7 +5692,7 @@ webpackJsonp([1],[
 	exports.default = DeleteThreadCtrl;
 
 /***/ },
-/* 200 */
+/* 199 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5722,7 +5739,7 @@ webpackJsonp([1],[
 	exports.default = editCommentCtrl;
 
 /***/ },
-/* 201 */
+/* 200 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5769,7 +5786,7 @@ webpackJsonp([1],[
 	exports.default = editThread;
 
 /***/ },
-/* 202 */
+/* 201 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5832,7 +5849,7 @@ webpackJsonp([1],[
 	exports.default = ThreadsSearchCtrl;
 
 /***/ },
-/* 203 */
+/* 202 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5951,7 +5968,7 @@ webpackJsonp([1],[
 	exports.default = threadsSingleCtrl;
 
 /***/ },
-/* 204 */
+/* 203 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5973,7 +5990,7 @@ webpackJsonp([1],[
 	exports.default = threadsConfig;
 
 /***/ },
-/* 205 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5986,51 +6003,51 @@ webpackJsonp([1],[
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _threads = __webpack_require__(204);
+	var _threads = __webpack_require__(203);
 
 	var _threads2 = _interopRequireDefault(_threads);
 
-	var _threads3 = __webpack_require__(206);
+	var _threads3 = __webpack_require__(205);
 
 	var _threads4 = _interopRequireDefault(_threads3);
 
-	var _comments = __webpack_require__(194);
+	var _comments = __webpack_require__(193);
 
 	var _comments2 = _interopRequireDefault(_comments);
 
-	var _threadsSingle = __webpack_require__(203);
+	var _threadsSingle = __webpack_require__(202);
 
 	var _threadsSingle2 = _interopRequireDefault(_threadsSingle);
 
-	var _editThreadDialog = __webpack_require__(201);
+	var _editThreadDialog = __webpack_require__(200);
 
 	var _editThreadDialog2 = _interopRequireDefault(_editThreadDialog);
 
-	var _deleteThreadDialog = __webpack_require__(199);
+	var _deleteThreadDialog = __webpack_require__(198);
 
 	var _deleteThreadDialog2 = _interopRequireDefault(_deleteThreadDialog);
 
-	var _editComment = __webpack_require__(200);
+	var _editComment = __webpack_require__(199);
 
 	var _editComment2 = _interopRequireDefault(_editComment);
 
-	var _deleteComment = __webpack_require__(198);
+	var _deleteComment = __webpack_require__(197);
 
 	var _deleteComment2 = _interopRequireDefault(_deleteComment);
 
-	var _threadsCreate = __webpack_require__(197);
+	var _threadsCreate = __webpack_require__(196);
 
 	var _threadsCreate2 = _interopRequireDefault(_threadsCreate);
 
-	var _commentsCreate = __webpack_require__(195);
+	var _commentsCreate = __webpack_require__(194);
 
 	var _commentsCreate2 = _interopRequireDefault(_commentsCreate);
 
-	var _createAnywhere = __webpack_require__(196);
+	var _createAnywhere = __webpack_require__(195);
 
 	var _createAnywhere2 = _interopRequireDefault(_createAnywhere);
 
-	var _threadsSearch = __webpack_require__(202);
+	var _threadsSearch = __webpack_require__(201);
 
 	var _threadsSearch2 = _interopRequireDefault(_threadsSearch);
 
@@ -6053,7 +6070,7 @@ webpackJsonp([1],[
 	exports.default = threadsModule;
 
 /***/ },
-/* 206 */
+/* 205 */
 /***/ function(module, exports) {
 
 	'use strict';
