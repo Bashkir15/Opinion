@@ -46,10 +46,10 @@ if (cluster.isMaster) {
 		return Number(s) % len;
 	};
 
-/*	var server = net.createServer({pauseOnConnect: true}, (connection) => {
+	var server = net.createServer({pauseOnConnect: true}, (connection) => {
 		var worker = workers[worker_index(connection.remoteAddress, cpuCount)];
 		worker.send('sticky-session:connection', connection);
-	}).listen(config.server.port  || 5000); */
+	}).listen(config.server.port); 
 } else {
 	var app = require('./server/config/express')(db);
 	var appServer = require('http').Server(app);
