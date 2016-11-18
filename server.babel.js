@@ -46,18 +46,16 @@ if (cluster.isMaster) {
 		return Number(s) % len;
 	};
 
-	var server = net.createServer({pauseOnConnect: true}, (connection) => {
+/*	var server = net.createServer({pauseOnConnect: true}, (connection) => {
 		var worker = workers[worker_index(connection.remoteAddress, cpuCount)];
 		worker.send('sticky-session:connection', connection);
-	}).listen(config.server.port  || 5000);
+	}).listen(config.server.port  || 5000); */
 } else {
 	var app = require('./server/config/express')(db);
-	var server = require('http').Server(app);
-	server.listen(0, 'localhost', () => {
-		console.log('The application is up and runnin at: ' + config.server.host + config.server.port);
-	});
+	var appServer = require('http').Server(app);
+	appServer.listen(0, 'localhost');
 
-	var io = sio.listen(server);
+	var io = sio.listen(appServer);
 	var websockets = require('./server/helpers/websockets')(io);
 	var notifications = require('./server/helpers/notifications')(io);
 
