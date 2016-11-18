@@ -14,6 +14,9 @@ class navCtrl {
 		this._$dialog = $mdDialog;
 		this._Websocket = Websocket;
 		this.isLoggedIn = this._Auth.isLoggedIn();
+		if (this.isLoggedIn) {
+			this.storedUser = this._Auth.getUser()._id;
+		}
 
 
 		if (this.isLoggedIn) {
