@@ -14,14 +14,16 @@ const db = mongoose.connect(config.db);
 
 
 var app = require('./server/config/express')(db);
-//var server = require('http').createServer(app);
-//var io = sio.listen(server);
-//var websockets = require('./server/helpers/websockets')(io);
-//var notifications = require('./server/helpers/notifications')(io);
+var server = require('http').Server(app);
+var io = sio.listen(server);
+var websockets = require('./server/helpers/websockets')(io);
+var notifications = require('./server/helpers/notifications')(io);
 
 app.listen(config.server.port);
 
 global.notifications = notifications;
 global.config = config;
+
+module.exports = app;
 
 
