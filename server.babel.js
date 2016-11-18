@@ -1,7 +1,4 @@
 import http from 'http';
-import cluster from 'cluster'
-import net from 'net'
-import sticky from 'sticky-session'
 import mongoose from 'mongoose'
 import sio from 'socket.io'
 import Users from './server/models/users'
@@ -18,48 +15,14 @@ const db = mongoose.connect(config.db, () => {
 });
 
 
-if (cluster.isMaster) {
-	var cpuCount = require('os').cpus().length;
-	var workers = [];
 
-	var spawn = (i) => {
-		workers[i] = cluster.fork();
+	var app = require('./server/config/express')(db);
+	var server = require('http').createServer(app);
+	var io = sio.listen(server);
+	var websockets = require('./server/helpers/websockets')(io);
+	var notifications = require('./server/helpers/notifications')(io);
+	server.listen(config.server.port);
 
-		workers[i].on('exit', (code, signal) => {
-			console.log('respawning worker', i);
-			spawn(i);
-		});
-	};
-
-	for (var i = 0; i < cpuCount; i++) {
-		spawn(i);
-	}
-
-	var worker_index = (ip, len) => {
-		var s = '';
-
-		for (var i = 0, _len = ip.length; i < _len; i++) {
-			if (!isNaN(ip[i])) {
-				s += ip[i];
-			}
-		}
-
-		return Number(s) % len;
-	};
-
-	var server = net.createServer({pauseOnConnect: true}, (connection) => {
-		var worker = workers[worker_index(connection.remoteAddress, cpuCount)];
-		worker.send('sticky-session:connection', connection);
-	}).listen(config.server.port); 
-} else {
-		var app = require('./server/config/express')(db);
-		var server = require('http').createServer(app);
-		var io = sio.listen(server);
-		var websockets = require('./server/helpers/websockets')(io);
-		var notifications = require('./server/helpers/notifications')(io);
-		server.listen(0, 'localhost');
-
-		global.notifications = notifications;
-		global.config = config;
-		global.server = server;
-}
+	global.notifications = notifications;
+	global.config = config;
+	global.server = server;
