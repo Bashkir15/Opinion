@@ -21,7 +21,7 @@ var SettingsSchema = new mongoose.Schema({
 		default: 'default'
 	},
 
-	profile: [
+	profile: [{
 		hideEmail: {
 			type: Boolean,
 			default: false
@@ -38,6 +38,11 @@ var SettingsSchema = new mongoose.Schema({
 		},
 
 		hideInterests: {
+			type: Boolean,
+			default: false
+		},
+
+		hideOccupation: {
 			type: Boolean,
 			default: false
 		},
@@ -61,7 +66,7 @@ var SettingsSchema = new mongoose.Schema({
 			type: Boolean,
 			default: false
 		}
-	],
+	}],
 
 	creator: {
 		type: mongoose.Schema.ObjectId,

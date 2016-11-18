@@ -34,6 +34,7 @@
 
 	.nav-notifications-dropdown
 		width: 300px
+		padding-bottom: 0
 
 		md-menu-item
 			min-height: 55px
@@ -86,6 +87,28 @@
 				@include open()
 				font-weight: 400
 				font-size: 15px
+
+		.mark-all-as-read
+			display: flex
+			align-items: center
+			justify-content: center
+			min-height: 45px
+			height: 45px
+			padding: 0
+			margin-bottom: 0
+			text-align: center
+			cursor: pointer
+			border-top: 1px solid rgba(0,0,0,0.12)
+			transition: all .4s ease
+
+			> p
+				transition: all .4s ease
+
+			&:hover
+				background: $default-light-blue
+
+				p
+					color: $default-white-background
 
 	.nav-messages-dropdown
 		width: 350px

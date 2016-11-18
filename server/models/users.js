@@ -401,9 +401,7 @@ UserSchema.methods = {
 	toJSON: function() {
 		var obj = this.toObject();
 		obj.onlineStatus = obj.socketId ? true : false;
-	//	delete obj.socketId;
 		delete obj.password;
-		delete obj.following;
 		return obj;
 	}
 };

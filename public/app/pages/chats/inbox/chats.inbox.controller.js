@@ -1,9 +1,8 @@
 class chatsInboxCtrl {
-	constructor(Chat, $timeout) {
+	constructor(Chat) {
 		'ngInject';
 		
 		this._Chat = Chat;
-		this._$timeout = $timeout;
 		this.chats = [];
 		this.getChats();
 		this.lastUpdated = 0;
@@ -17,16 +16,17 @@ class chatsInboxCtrl {
 		options.page = this.chatsPage;
 
 		this._Chat.list(options).then((response) => {
+			if (response.data.res.records) {
 
+				if (!options.append) {
+					this.chats = response.data.res.records.concat(this.chats);
+				} else {
+					this.chats = this.chats.concat(response.data.res.records);
+				}
 
-			if (!options.append) {
-				this.chats = response.data.res.records.concat(this.chats);
-			} else {
-				this.chats = this.chats.concat(response.data.res.records);
+				this.lastUpdated = Date.now();
+				this.noMoreChats = !response.data.res.morePages;
 			}
-
-			this.lastUpdated = Date.now();
-			this.noMoreChats = !response.data.res.morePages;
 		});
 	}
 

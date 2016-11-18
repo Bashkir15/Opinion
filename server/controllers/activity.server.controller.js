@@ -104,6 +104,8 @@ module.exports = () => {
 					return json.bad(err, res);
 				}
 
+				activities = activities.slice(0, 15);
+
 				json.good({
 					records: activities
 				}, res);

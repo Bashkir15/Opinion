@@ -1,5 +1,5 @@
 class chatsMessagesCtrl {
-	constructor(Chat, Auth, $timeout, $stateParams, $state, $rootScope) {
+	constructor(Chat, Auth, $timeout, $stateParams, $state, $rootScope, Websocket) {
 		'ngInject';
 
 		this._Chat = Chat;
@@ -8,6 +8,7 @@ class chatsMessagesCtrl {
 		this._$stateParams = $stateParams;
 		this._$rootScope = $rootScope;
 		this._$state = $state;
+		this._Websocket = Websocket;
 		this.chatId = this._$stateParams.chatId;
 		this.userId = this._Auth.getUser()._id;
 		this.data = {
@@ -15,14 +16,11 @@ class chatsMessagesCtrl {
 			creator: this.userId
 		};
 
-		if (this._$state.current.name == 'app.chats.inbox.messages' || this._$state.current.name == 'app.chats.saved.messages' || this._$state.current.name == 'app.chats.trash.messages') {
-			if (document.documentElement.clientWidth < 1300) {
-				this._$rootScope.$broadcast('hideChats');
-			}
+
+		if (this.chatId && document.documentElement.clientWidth < 1300) {
+			this._$rootScope.$broadcast('hideChats');
 		}
-
 	}
-
 
 	scrollToBottom() {
 		this._$timeout(() => {
@@ -34,6 +32,7 @@ class chatsMessagesCtrl {
 	sendMessage(isValid) {
 		if (isValid) {
 			this._Chat.message(this.chatId, this.data).then((response) => {
+				this._Websocket.chatsMessage(this.chatId);
 				this._$rootScope.$broadcast('newMessage');
 				this.scrollToBottom();
 				this.resetForm();			

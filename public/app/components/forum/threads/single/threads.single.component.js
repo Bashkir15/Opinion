@@ -37,7 +37,6 @@ class SingleThreadCtrl {
 	}
 
 	like(item) {
-		console.log(item);
 		this._Thread.like(item._id).then((response) => {
 			angular.extend(item, response.data.res.record);
 		});

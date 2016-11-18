@@ -1,5 +1,7 @@
 class chatsSingleCtrl {
 	constructor(Chat, $rootScope, $location, $state, Auth, $mdDialog) {
+		'ngInject';
+		
 		this._Chat = Chat;
 		this._$rootScope = $rootScope;
 		this._$location = $location;

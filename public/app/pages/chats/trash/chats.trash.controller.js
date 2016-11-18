@@ -6,6 +6,7 @@ class chatsTrashCtrl {
 		this.lastUpdated = 0;
 		this._Chat = Chat;
 		this._Auth = Auth;
+		this.chats = [];
 		this.currentUser = this._Auth.getUser()._id;
 		this.getChats();
 	}

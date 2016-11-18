@@ -1,4 +1,6 @@
-function websockets() {
+function websockets($rootScope) {
+	'ngInject';
+	
 	var obj = {
 		conn: {},
 		connect: function() {
@@ -10,6 +12,14 @@ function websockets() {
 
 			socket.on('disconnect', () => {
 				$this.connect();
+			});
+
+			socket.on('newNotification', (data) => {
+				$rootScope.$broadcast('newNotification', data);
+			});
+
+			socket.on('newChatNotification', (data) => {
+				$rootScope.$broadcast('newChatMessage', data);
 			});
 
 			this.conn = socket;
@@ -30,6 +40,22 @@ function websockets() {
 
 		logout: function (id) {
 			this.conn.emit('logout');
+		},
+
+		follow: function(id) {
+			this.conn.emit('followed', {userId: id});
+		},
+
+		unfollow: function(id) {
+			this.conn.emit('unfollowed', {userId: id});
+		},
+
+		message: function(id) {
+			this.conn.emit('messaged', {userId: id});
+		},
+
+		chatsMessage: function (id) {
+			this.conn.emit('chatMessaged', {chatId: id});
 		}
 	};
 

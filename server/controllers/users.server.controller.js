@@ -151,7 +151,7 @@ module.exports = () => {
 			} else {
 				fs.rename(tempPath, targetPath, (err) => {
 					if (err) {
-						return jsonbad(err, res);
+						return json.bad(err, res);
 					}
 
 					user.picture = savePath;

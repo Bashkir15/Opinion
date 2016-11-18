@@ -70,12 +70,12 @@
 			</div>
 			<div class='friends-list-body'>
 				<div ng-repeat="item in $ctrl.user.following" ui-sref="app.profile.overview({userId: item._id})" class='profile-friends-list-repeat'>
-					<div></div>
+					<img ng-src="{{item.picture}}"></img>
 					<p>{{item.name}}</p>
 					<p>{{item.username}}</p>
 				</div>
 
-				<div class='friends-list-no-friends' ng-if='!$ctrl.user.following'>
+				<div class='friends-list-no-friends' ng-if='!$ctrl.user.following.length'>
 					<p>{{$ctrl.user.username}} is not following anyone</p>
 				</div>
 			</div>

@@ -9,7 +9,7 @@ import Threads from './server/models/threads'
 import Comments from './server/models/comments'
 import Activity from './server/models/activities';
 import Chats from './server/models/chats'
-import Settings from './server/model/settings'
+import Settings from './server/models/settings'
 
 var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
 const db = mongoose.connect(config.db, () => {

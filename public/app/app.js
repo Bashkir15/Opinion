@@ -29,4 +29,6 @@ window.app = angular.module('app', requires);
 angular.module('app').config(appConfig);
 angular.module('app').controller('AppController', appController);
 angular.module("app").service('Websocket', websockets);
-angular.bootstrap(document, ['app']);
+angular.bootstrap(document, ['app'], {
+	strictDi: true
+});

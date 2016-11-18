@@ -2,10 +2,10 @@ import mongoose from 'mongoose';
 
 module.exports = (io) => {
 	var User = mongoose.model("User");
+	var Chat = mongoose.model('Chat');
 
 	io.on('connection', (socket) => {
-		console.log('yayayayayaya');
-		
+
 		var clearSocket = (data) => {
 			User.findOne({_id: socket.userId}, (err, user) => {
 				if (user) {
@@ -13,11 +13,28 @@ module.exports = (io) => {
 					user.socketId = '';
 					user.loggedIn = false;
 					user.save((err) => {
-						console.log(user.name, 'disconnected');
 					});
 				}
 			});
 		};
+
+		var notifyUser = (data) => {
+			User.findOne({_id: data.userId}, (err, user) => {
+				if (user) {
+					socket.emit('newNotification', {userId: user._id});
+				}
+			});
+		};
+
+		var notifyMessaged = (data) => {
+			Chat.findOne({_id: data.chatId})
+			.populate('participants')
+			.exec((err, chat) => {
+				if (chat) {
+					socket.emit('newChatNotification', {participants: chat.participants});
+				}
+			})
+		}
 
 		socket.on('online', (data) => {
 			User.findOne({_id: data.userId}, (err, user) => {
@@ -25,12 +42,15 @@ module.exports = (io) => {
 				user.socketId = socket.id;
 				user.loggedIn = true;
 				user.save((err) => {
-					console.log(user.name, 'is online');
 				});
 			});
 		});
 
 		//socket.on('disconnect', clearSocket);
 		socket.on('logout', clearSocket);
+
+		socket.on('followed', notifyUser);
+		socket.on('messaged', notifyUser);
+		socket.on('chatMessaged', notifyMessaged);
 	});
 };

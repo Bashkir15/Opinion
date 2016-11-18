@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import json from '../helpers/json';
+import fs from 'fs';
+import path from 'path';
 import event from '../helpers/events';
 
 var Stream = mongoose.model('Stream');
@@ -140,6 +142,39 @@ module.exports = () => {
 				}, res);
 			} else {
 				return json.bad({message: 'Sorry, that stream could not be found'}, res);
+			}
+		});
+	};
+
+	obj.uploadImage = (req, res) => {
+		var streamId = req.params.streamId;
+		var file = req.files.file;
+		var uploadDate = Date.now();
+		var tempPath = file.path;
+		var targetPath = path.join(__dirname, '../../public/static/uploads/streams/pictures/' + streamId + uploadDate + file.name);
+		var savePath = '../static/uploads/streams/pictures/' + streamId + uploadDate + file.name;
+
+		Stream.findOne({_id: req.params.streamId})
+		.exec((err, stream) => {
+			if (err) {
+				return json.bad(err, res);
+			} else {
+				fs.rename(tempPath, targetPath, (err) => {
+					if (err) {
+						return json.bad(err, res);
+					}
+
+					stream.picture = savePath;
+					stream.save((err, u) => {
+						if (err) {
+							return json.bad(err, res);
+						}
+
+						json.good({
+							picture: u
+						}, res);
+					});
+				});
 			}
 		});
 	};

@@ -6,6 +6,6 @@ var router = express.Router();
 var settings = settingsController();
 
 router.get('/', auth.justGetUser, settings.get);
-router.get('/update', auth.ensureAuthorizaed, settings.update);
+router.get('/update', auth.ensureAuthorized, settings.update);
 
 module.exports = router;

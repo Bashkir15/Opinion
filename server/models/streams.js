@@ -41,6 +41,11 @@ var StreamSchema = new mongoose.Schema({
 		default: false
 	},
 
+	picture: {
+		type: String,
+		default: 'static/uploads/streams/pictures/default.png'
+	},
+
 	moderators: [{
 		type: mongoose.Schema.ObjectId,
 		required: true,

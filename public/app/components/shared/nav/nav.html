@@ -101,12 +101,8 @@
 						</div>
 					</md-menu-item>
 
-					<md-menu-item ng-click="$ctrl.markAsRead()" ng-if="$ctrl.notifications.length">
-						<div class='mark-notifications-read'>
-							<button>
-								<span>Mark all as read</span>
-							</button>
-						</div>
+					<md-menu-item ng-click="$ctrl.markAsRead()" ng-if="$ctrl.notifications.length" class='mark-all-as-read'>
+						<p>Mark all as read</p>
 					</md-menu-item>
 
 					<md-menu-item ng-if="!$ctrl.notifications.length" class='no-notifications'>

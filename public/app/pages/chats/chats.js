@@ -9,8 +9,8 @@ import chatsTrashCtrl from './trash/chats.trash.controller'
 let chatsModule = angular.module('chats', []);
 chatsModule.config(chatsConfig);
 chatsModule.service('Chat', chatsService);
-chatsModule.controller('ChatsInboxController', chatsInboxCtrl);
 chatsModule.controller('ChatsMessagesController', chatsMessagesCtrl);
+chatsModule.controller('ChatsInboxController', chatsInboxCtrl);
 chatsModule.controller("ChatsSavedController", chatsSavedCtrl);
 chatsModule.controller('ChatsTrashController', chatsTrashCtrl);
 

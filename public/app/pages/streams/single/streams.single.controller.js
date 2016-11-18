@@ -1,5 +1,5 @@
 class singleStreamCtrl {
-	constructor(Auth, Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout) {
+	constructor(Auth, Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout, Upload, Toast) {
 		'ngInject';
 
 		this._Stream = Stream;
@@ -9,6 +9,8 @@ class singleStreamCtrl {
 		this._$rootScope = $rootScope;
 		this._$dialog = $mdDialog;
 		this._$timeout = $timeout;
+		this._Upload = Upload;
+		this._Toast = Toast;
 		this.streamId = $stateParams.streamId;
 		this.threads = [];
 		this.threadsSearch = '';
@@ -62,6 +64,20 @@ class singleStreamCtrl {
 			this.noMoreThreads = !response.data.res.morePages;
 			this.lastUpdated = Date.now();
 		});
+	}
+
+	uploadImage(file) {
+		if (file) {
+			this._Upload.upload({
+				url: '/streams/uploadImage/' + this.streamId,
+				file: file
+			}).then((response) => {
+				this._Toast.success('You have just uploaded an image for your stream');
+			}, (evt) => {
+				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+				console.log(this.progressPercentage);
+			});
+		}
 	}
 
 	loadMore() {

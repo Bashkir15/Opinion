@@ -34,8 +34,18 @@ class navCtrl {
 			this._$dialog.hide();
 		});
 
-		this._$rootScope.$on('profileUpdated', () => {
-			this._$state.reload();
+		this._$rootScope.$on('newNotification', (event, data) => {
+			if (this.user._id == data.userId) {
+				this.updateNotifications();
+			}
+		});
+
+		this._$rootScope.$on('newChatMessage', (event, data) => {
+			data.participants.forEach((participant) => {
+				if (this.user._id == participant._id) {
+					this.updateChats();
+				}
+			});
 		});
 
 		this._$rootScope.$on('unauthedRequest', () => {
@@ -175,13 +185,6 @@ class navCtrl {
 		options = options || {};
 
 		if (this.isLoggedIn) {
-			if (!this.storedUser.streams) {
-				options.unsubscribed = true;
-				this._Stream.get(options).then((response) => {
-					this.streams = response.data.res.records;
-				});
-			}
-			
 			options.subscribed = true;
 
 			this._Stream.get(options).then((response) => {

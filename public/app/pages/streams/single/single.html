@@ -4,7 +4,8 @@
 	</header>
 
 	<div class='forum-header-image'>
-		<div></div>
+		<img ng-src='{{$ctrl.stream.picture}}' ng-if="$ctrl.currentUser == $ctrl.stream.creator._id" ngf-select="$ctrl.uploadImage(file)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/">
+		<img ng-src='{{$ctrl.stream.picture}}' ng-if='$ctrl.currentUser != $ctrl.stream.creator._id'>
 	</div>
 
 	<p>{{$ctrl.stream.description}}</p>

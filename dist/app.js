@@ -51,7 +51,9 @@ webpackJsonp([1],[
 	_angular2.default.module('app').config(_app2.default);
 	_angular2.default.module('app').controller('AppController', _app6.default);
 	_angular2.default.module("app").service('Websocket', _app8.default);
-	_angular2.default.bootstrap(document, ['app']);
+	_angular2.default.bootstrap(document, ['app'], {
+		strictDi: true
+	});
 
 /***/ },
 /* 1 */,
@@ -250,7 +252,9 @@ webpackJsonp([1],[
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	function websockets() {
+	function websockets($rootScope) {
+		'ngInject';
+
 		var obj = {
 			conn: {},
 			connect: function connect() {
@@ -262,6 +266,14 @@ webpackJsonp([1],[
 
 				socket.on('disconnect', function () {
 					$this.connect();
+				});
+
+				socket.on('newNotification', function (data) {
+					$rootScope.$broadcast('newNotification', data);
+				});
+
+				socket.on('newChatNotification', function (data) {
+					$rootScope.$broadcast('newChatMessage', data);
 				});
 
 				this.conn = socket;
@@ -282,6 +294,22 @@ webpackJsonp([1],[
 
 			logout: function logout(id) {
 				this.conn.emit('logout');
+			},
+
+			follow: function follow(id) {
+				this.conn.emit('followed', { userId: id });
+			},
+
+			unfollow: function unfollow(id) {
+				this.conn.emit('unfollowed', { userId: id });
+			},
+
+			message: function message(id) {
+				this.conn.emit('messaged', { userId: id });
+			},
+
+			chatsMessage: function chatsMessage(id) {
+				this.conn.emit('chatMessaged', { chatId: id });
 			}
 		};
 
@@ -681,7 +709,7 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var chatsMessagesCtrl = function () {
-		function chatsMessagesCtrl(Chat, Auth, $timeout, $stateParams, $state, $rootScope) {
+		function chatsMessagesCtrl(Chat, Auth, $timeout, $stateParams, $state, $rootScope, Websocket) {
 			'ngInject';
 
 			_classCallCheck(this, chatsMessagesCtrl);
@@ -692,6 +720,7 @@ webpackJsonp([1],[
 			this._$stateParams = $stateParams;
 			this._$rootScope = $rootScope;
 			this._$state = $state;
+			this._Websocket = Websocket;
 			this.chatId = this._$stateParams.chatId;
 			this.userId = this._Auth.getUser()._id;
 			this.data = {
@@ -699,10 +728,8 @@ webpackJsonp([1],[
 				creator: this.userId
 			};
 
-			if (this._$state.current.name == 'app.chats.inbox.messages' || this._$state.current.name == 'app.chats.saved.messages' || this._$state.current.name == 'app.chats.trash.messages') {
-				if (document.documentElement.clientWidth < 1300) {
-					this._$rootScope.$broadcast('hideChats');
-				}
+			if (this.chatId && document.documentElement.clientWidth < 1300) {
+				this._$rootScope.$broadcast('hideChats');
 			}
 		}
 
@@ -721,6 +748,7 @@ webpackJsonp([1],[
 
 				if (isValid) {
 					this._Chat.message(this.chatId, this.data).then(function (response) {
+						_this._Websocket.chatsMessage(_this.chatId);
 						_this._$rootScope.$broadcast('newMessage');
 						_this.scrollToBottom();
 						_this.resetForm();
@@ -767,6 +795,8 @@ webpackJsonp([1],[
 
 	var chatsSingleCtrl = function () {
 		function chatsSingleCtrl(Chat, $rootScope, $location, $state, Auth, $mdDialog) {
+			'ngInject';
+
 			_classCallCheck(this, chatsSingleCtrl);
 
 			this._Chat = Chat;
@@ -1807,7 +1837,6 @@ webpackJsonp([1],[
 		}, {
 			key: 'like',
 			value: function like(item) {
-				console.log(item);
 				this._Thread.like(item._id).then(function (response) {
 					angular.extend(item, response.data.res.record);
 				});
@@ -1925,7 +1954,7 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var headerCtrl = function () {
-		function headerCtrl(Auth, User, Chat, Toast, $rootScope, $stateParams, $mdDialog) {
+		function headerCtrl(Auth, User, Chat, Toast, $rootScope, $stateParams, $mdDialog, Websocket) {
 			'ngInject';
 
 			_classCallCheck(this, headerCtrl);
@@ -1938,6 +1967,7 @@ webpackJsonp([1],[
 			this._$stateParams = $stateParams;
 			this._$dialog = $mdDialog;
 			this.userId = $stateParams.userId;
+			this._Websocket = Websocket;
 			this._isLoggedIn = this._Auth.isLoggedIn();
 			if (this._isLoggedIn) {
 				this.currentUser = this._Auth.getUser();
@@ -1962,6 +1992,7 @@ webpackJsonp([1],[
 				var _this2 = this;
 
 				this._User.follow(item._id).then(function (response) {
+					_this2._Websocket.follow(item._id);
 					_this2._$rootScope.$broadcast('userFollowed');
 					_this2.checkUserFollowing();
 				});
@@ -1972,6 +2003,7 @@ webpackJsonp([1],[
 				var _this3 = this;
 
 				this._User.unfollow(item._id).then(function (response) {
+					_this3._Websocket.unfollow(item._id);
 					_this3._$rootScope.$broadcast('userUnfollowed');
 					_this3.checkUserFollowing();
 				});
@@ -1986,6 +2018,7 @@ webpackJsonp([1],[
 				};
 
 				this._Chat.create(data).then(function (response) {
+					_this4._Websocket.messaged(item._id);
 					_this4._$dialog.show({
 						templateUrl: './app/pages/profile/dialogs/message/message.html',
 						controller: 'ProfileMessageController',
@@ -2152,8 +2185,18 @@ webpackJsonp([1],[
 				_this._$dialog.hide();
 			});
 
-			this._$rootScope.$on('profileUpdated', function () {
-				_this._$state.reload();
+			this._$rootScope.$on('newNotification', function (event, data) {
+				if (_this.user._id == data.userId) {
+					_this.updateNotifications();
+				}
+			});
+
+			this._$rootScope.$on('newChatMessage', function (event, data) {
+				data.participants.forEach(function (participant) {
+					if (_this.user._id == participant._id) {
+						_this.updateChats();
+					}
+				});
 			});
 
 			this._$rootScope.$on('unauthedRequest', function () {
@@ -2316,13 +2359,6 @@ webpackJsonp([1],[
 				options = options || {};
 
 				if (this.isLoggedIn) {
-					if (!this.storedUser.streams) {
-						options.unsubscribed = true;
-						this._Stream.get(options).then(function (response) {
-							_this8.streams = response.data.res.records;
-						});
-					}
-
 					options.subscribed = true;
 
 					this._Stream.get(options).then(function (response) {
@@ -3117,8 +3153,8 @@ webpackJsonp([1],[
 	var chatsModule = _angular2.default.module('chats', []);
 	chatsModule.config(_chats4.default);
 	chatsModule.service('Chat', _chats2.default);
-	chatsModule.controller('ChatsInboxController', _chatsInbox2.default);
 	chatsModule.controller('ChatsMessagesController', _chatsMessages2.default);
+	chatsModule.controller('ChatsInboxController', _chatsInbox2.default);
 	chatsModule.controller("ChatsSavedController", _chatsSaved2.default);
 	chatsModule.controller('ChatsTrashController', _chatsTrash2.default);
 
@@ -3279,13 +3315,12 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var chatsInboxCtrl = function () {
-		function chatsInboxCtrl(Chat, $timeout) {
+		function chatsInboxCtrl(Chat) {
 			'ngInject';
 
 			_classCallCheck(this, chatsInboxCtrl);
 
 			this._Chat = Chat;
-			this._$timeout = $timeout;
 			this.chats = [];
 			this.getChats();
 			this.lastUpdated = 0;
@@ -3302,15 +3337,17 @@ webpackJsonp([1],[
 				options.page = this.chatsPage;
 
 				this._Chat.list(options).then(function (response) {
+					if (response.data.res.records) {
 
-					if (!options.append) {
-						_this.chats = response.data.res.records.concat(_this.chats);
-					} else {
-						_this.chats = _this.chats.concat(response.data.res.records);
+						if (!options.append) {
+							_this.chats = response.data.res.records.concat(_this.chats);
+						} else {
+							_this.chats = _this.chats.concat(response.data.res.records);
+						}
+
+						_this.lastUpdated = Date.now();
+						_this.noMoreChats = !response.data.res.morePages;
 					}
-
-					_this.lastUpdated = Date.now();
-					_this.noMoreChats = !response.data.res.morePages;
 				});
 			}
 		}, {
@@ -3497,6 +3534,7 @@ webpackJsonp([1],[
 			this.lastUpdated = 0;
 			this._Chat = Chat;
 			this._Auth = Auth;
+			this.chats = [];
 			this.currentUser = this._Auth.getUser()._id;
 			this.getChats();
 		}
@@ -4749,7 +4787,7 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var singleStreamCtrl = function () {
-		function singleStreamCtrl(Auth, Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout) {
+		function singleStreamCtrl(Auth, Stream, Thread, $stateParams, $mdDialog, $rootScope, $timeout, Upload, Toast) {
 			'ngInject';
 
 			var _this = this;
@@ -4763,6 +4801,8 @@ webpackJsonp([1],[
 			this._$rootScope = $rootScope;
 			this._$dialog = $mdDialog;
 			this._$timeout = $timeout;
+			this._Upload = Upload;
+			this._Toast = Toast;
 			this.streamId = $stateParams.streamId;
 			this.threads = [];
 			this.threadsSearch = '';
@@ -4825,6 +4865,23 @@ webpackJsonp([1],[
 				});
 			}
 		}, {
+			key: 'uploadImage',
+			value: function uploadImage(file) {
+				var _this4 = this;
+
+				if (file) {
+					this._Upload.upload({
+						url: '/streams/uploadImage/' + this.streamId,
+						file: file
+					}).then(function (response) {
+						_this4._Toast.success('You have just uploaded an image for your stream');
+					}, function (evt) {
+						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+						console.log(_this4.progressPercentage);
+					});
+				}
+			}
+		}, {
 			key: 'loadMore',
 			value: function loadMore() {
 				this.threadPage++;
@@ -4836,7 +4893,7 @@ webpackJsonp([1],[
 		}, {
 			key: 'search',
 			value: function search(newValue, oldValue) {
-				var _this4 = this;
+				var _this5 = this;
 
 				var threadsSearchTimeout;
 
@@ -4847,15 +4904,15 @@ webpackJsonp([1],[
 				this._$timeout.cancel(threadsSearchTimeout);
 				threadsSearchTimeout = this._$timeout(function () {
 					if (!newValue) {
-						if (_this4.threadsSearchEnabled) {
-							_this4.lastUpdated = 0;
-							_this4.getThreads();
+						if (_this5.threadsSearchEnabled) {
+							_this5.lastUpdated = 0;
+							_this5.getThreads();
 						}
 					} else {
-						_this4.getThreads();
+						_this5.getThreads();
 					}
 
-					_this4.threadsSearchEnabled = _this4.threadsSearch !== '';
+					_this5.threadsSearchEnabled = _this5.threadsSearch !== '';
 				}, 500);
 			}
 		}, {
