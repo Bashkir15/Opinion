@@ -1,6 +1,7 @@
 import http from 'http';
 import cluster from 'cluster'
 import net from 'net'
+import sticky from 'sticky-session'
 import mongoose from 'mongoose'
 import sio from 'socket.io'
 import Users from './server/models/users'
@@ -51,25 +52,17 @@ if (cluster.isMaster) {
 		worker.send('sticky-session:connection', connection);
 	}).listen(config.server.port); */
 } else {
-	var app = require('./server/config/express')(db);
-	var appServer = require('http').Server(app);
-	appServer.listen(process.env.PORT);
+	sticky(() => {
+		var app = require('./server/config/express')(db);
+		var server = require('http').createServer(app);
+		var io = sio.listen(server);
+		var websockets = require('./server/helpers/websockets')(io);
+		var notifications = require('./server/helpers/notifications')(io);
 
-	var io = sio.listen(appServer);
-	var websockets = require('./server/helpers/websockets')(io);
-	var notifications = require('./server/helpers/notifications')(io);
+		global.notifications = notifications;
+		global.config = config;
+		global.server = server;
 
-	/*process.on('message', (message, connection) => {
-		if (message !== 'sticky-session:connection') {
-			return;
-		}
-
-		server.emit('connection', connection);
-
-		connection.resume();
-	}); */
-
-	global.notifications = notifications;
-	global.config = config;
-	global.server = appServer;
+		return server;
+	}).listen(process.env.PORT);
 }
