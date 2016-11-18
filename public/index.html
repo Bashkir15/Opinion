@@ -11,10 +11,21 @@
 		<link rel='stylesheet' href='./styles/main.min.css'>
 	</head>
 
-	<body>
-		<div ui-view class='main-ui-view'></div>
-	</body>
+	<body ng-cloak>
+		<div id='page-loading' class='page-loading'>
+			<img src='./static/uploads/cat-loader.gif'>
+			<p class='page-loading-text'>Just a second, you'll only have to do this once</p>
+			<p class='page-loaded-text'>The party is ready!</p>
+		</div>
 
+		<div ui-view class='main-ui-view'></div>
+
+		<script type='text/javascript'>
+			document.addEventListener('DOMContentLoaded', function (event) {
+				var element = document.getElementById('page-loading');
+				element.parentNode.removeChild(element);
+			});
+		</script>
 		<script src='./socket.io-client/socket.io.js'></script>
 		<script src='./scripts/vendors.min.js'></script>
 		<script src='./scripts/app.min.js'></script>

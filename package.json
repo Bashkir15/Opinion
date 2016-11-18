@@ -4,7 +4,7 @@
   "description": "Opinionated is a small, work-in-progress bulliten board system similar to Reddit or Hackernews, but has a more social focus and a harsher implementation of votes and score. Right now it has just been released in a very very basic first beta stage. There will be vastly many improvements to come. To see the site live, [please visit it.](https://opinionate.herokuapp.com)",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "webpack --config ./webpack.config.js",
     "start": "node server.js"
   },
   "repository": {
@@ -27,6 +27,7 @@
     "compression": "^1.6.2",
     "connect-multiparty": "^2.0.0",
     "express": "^4.14.0",
+    "forever": "^0.15.3",
     "fs": "0.0.1-security",
     "handlebars": "^4.0.5",
     "http": "0.0.0",
@@ -51,9 +52,11 @@
     "concat": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",
+    "gulp-angular-templatecache": "^2.0.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-combine-media-queries": "^0.2.0",
     "gulp-concat": "^2.6.0",
+    "gulp-minify-html": "^1.0.6",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",

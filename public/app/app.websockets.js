@@ -5,7 +5,7 @@ function websockets($rootScope) {
 		conn: {},
 		connect: function() {
 			var $this = this;
-			var socket = new io.connect('http://localhost:8000');
+			var socket = new io.connect('opinionate.herokuapp.com');
 			socket.on('connect', () => {
 				console.log('connected');
 			});

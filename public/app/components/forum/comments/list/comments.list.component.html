@@ -1,4 +1,4 @@
-<div class='forum-list-component-container'>
+<div class='forum-list-component-container' ng-class="{'no-comments': $ctrl.comments}">
 	<div ng-repeat="item in $ctrl.comments" class='forum-single-repeat comment-list-repeat'>
 		<single-comment comment='item'></single-comment>
 	</div>

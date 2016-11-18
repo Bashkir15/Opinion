@@ -1,4 +1,4 @@
-<div class='forum-list-component-container'>
+<div class='forum-list-component-container' ng-class="{'no-threads': !$ctrl.threads.length}">
 	<div class='forum-list-view'>
 		<div class='forum-list-list'>
 			<div ng-repeat="item in $ctrl.threads | orderBy: $ctrl.rowFilter" class='forum-single-repeat'>

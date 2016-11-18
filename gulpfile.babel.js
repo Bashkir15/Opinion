@@ -5,6 +5,8 @@ import sass from 'gulp-sass';
 import uglifycss from 'gulp-uglifycss';
 import autoprefixer from 'gulp-autoprefixer';
 import cmq from 'gulp-combine-media-queries';
+import templates from 'gulp-angular-templatecache'
+import minifyHTML from 'gulp-minify-html'
 import rename from 'gulp-rename';
 import annotate from 'gulp-ng-annotate'
 import filesort from 'gulp-angular-filesort'
@@ -16,7 +18,7 @@ import concat from 'gulp-concat'
 
 const paths = {
 	dev: {
-		html: './public/*.html',
+		html: './public/**/*.html',
 		sass: './public/static/sass/main.sass',
 		sass2: './public/static/sass/**/*.*',
 		materialModules: [
@@ -101,6 +103,18 @@ gulp.task("scripts", () => {
 		.pipe(uglify())
 		.pipe(rename('app.min.js'))
 		.pipe(gulp.dest(paths.prod.js))
+});
+
+gulp.task('templates', () => {
+	gulp.src(paths.dev.html)
+		.pipe(minifyHTML({
+			quotes: true
+		}))
+		.pipe(templates('app.run.js', {
+			standAlone: false,
+			root: 'public/'
+		}))
+		.pipe(gulp.dest('./public/app'))
 });
 
 gulp.task("vendors", () => {
