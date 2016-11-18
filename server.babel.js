@@ -49,7 +49,7 @@ if (cluster.isMaster) {
 	var server = net.createServer({pauseOnConnect: true}, (connection) => {
 		var worker = workers[worker_index(connection.remoteAddress, cpuCount)];
 		worker.send('sticky-session:connection', connection);
-	}).listen(config.server.port);
+	}).listen(config.server.port  || 5000);
 } else {
 	var app = require('./server/config/express')(db);
 	var server = require('http').Server(app);
