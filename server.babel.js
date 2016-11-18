@@ -57,6 +57,7 @@ if (cluster.isMaster) {
 		var io = sio.listen(server);
 		var websockets = require('./server/helpers/websockets')(io);
 		var notifications = require('./server/helpers/notifications')(io);
+		server.listen(0, 'localhost');
 
 		global.notifications = notifications;
 		global.config = config;
