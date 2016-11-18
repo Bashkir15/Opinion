@@ -71,5 +71,5 @@ if (cluster.isMaster) {
 
 	global.notifications = notifications;
 	global.config = config;
-	global.server = server;
+	global.server = appServer;
 }
