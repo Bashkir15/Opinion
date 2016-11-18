@@ -46,20 +46,20 @@ if (cluster.isMaster) {
 		return Number(s) % len;
 	};
 
-	var server = net.createServer({pauseOnConnect: true}, (connection) => {
+	/*var server = net.createServer({pauseOnConnect: true}, (connection) => {
 		var worker = workers[worker_index(connection.remoteAddress, cpuCount)];
 		worker.send('sticky-session:connection', connection);
-	}).listen(config.server.port); 
+	}).listen(config.server.port); */
 } else {
 	var app = require('./server/config/express')(db);
 	var appServer = require('http').Server(app);
-	appServer.listen(0, 'localhost');
+	appServer.listen(process.env.PORT);
 
 	var io = sio.listen(appServer);
 	var websockets = require('./server/helpers/websockets')(io);
 	var notifications = require('./server/helpers/notifications')(io);
 
-	process.on('message', (message, connection) => {
+	/*process.on('message', (message, connection) => {
 		if (message !== 'sticky-session:connection') {
 			return;
 		}
@@ -67,7 +67,7 @@ if (cluster.isMaster) {
 		server.emit('connection', connection);
 
 		connection.resume();
-	});
+	}); */
 
 	global.notifications = notifications;
 	global.config = config;
