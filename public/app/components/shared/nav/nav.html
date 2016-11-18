@@ -161,7 +161,7 @@
 		<ul class='user-menu-nested-list' ng-show='$ctrl.showProfile'>
 			<div>
 				<li>
-					<button class='md-ink-ripple' ui-sref="app.profile.overview({userId: $ctrl.user._id})">
+					<button class='md-ink-ripple' ui-sref="app.profile.overview({userId: $ctrl.storedUser._id})">
 						<span>Overview</span>
 					</button>
 				</li>
@@ -169,7 +169,7 @@
 
 			<div>
 				<li>
-					<button class='md-ink-ripple' ui-sref="app.profile.threads({userId: $ctrl.user._id})">
+					<button class='md-ink-ripple' ui-sref="app.profile.threads({userId: $ctrl.storedUser._id})">
 						<span>Threads</span>
 					</button>
 				</li>
@@ -177,7 +177,7 @@
 
 			<div>
 				<li>
-					<button class='md-ink-ripple' ui-sref="app.profile.comments({userId: $ctrl.user._id})">
+					<button class='md-ink-ripple' ui-sref="app.profile.comments({userId: $ctrl.storedUser._id})">
 						<span>Comments</span>
 					</button>
 				</li>
@@ -185,7 +185,7 @@
 
 			<div>
 				<li>
-					<button class='md-ink-ripple' ui-sref="app.profile.saved({userId: $ctrl.user._id})">
+					<button class='md-ink-ripple' ui-sref="app.profile.saved({userId: $ctrl.storedUser._id})">
 						<span>Saved</span>
 					</button>
 				</li>
@@ -193,7 +193,7 @@
 
 			<div>
 				<li>
-					<button class='md-ink-ripple' ui-sref="app.profile.activity({userId: $ctrl.user._id})">
+					<button class='md-ink-ripple' ui-sref="app.profile.activity({userId: $ctrl.storedUser._id})">
 						<span>Activity</span>
 					</button>
 				</li>
