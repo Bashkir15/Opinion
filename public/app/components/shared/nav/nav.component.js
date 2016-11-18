@@ -59,8 +59,6 @@ class navCtrl {
 			});
 		});
 
-		this._$rootScope
-
 
 		this.getStreams();
 	}
@@ -178,7 +176,7 @@ class navCtrl {
 	}
 
 	getUserInfo() {
-		this._User.single(this.storedUser._id).then((response) => {
+		this._User.single(this.storedUser).then((response) => {
 			this.user = response.data.res.record;
 		});
 	}
