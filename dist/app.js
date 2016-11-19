@@ -2214,6 +2214,9 @@ webpackJsonp([1],[
 			this._$dialog = $mdDialog;
 			this._Websocket = Websocket;
 			this.isLoggedIn = this._Auth.isLoggedIn();
+			if (this.isLoggedIn) {
+				this.storedUser = this._Auth.getUser()._id;
+			}
 
 			if (this.isLoggedIn) {
 				this.getUserInfo();
@@ -2254,8 +2257,6 @@ webpackJsonp([1],[
 					clickOutsideToClose: true
 				});
 			});
-
-			this._$rootScope;
 
 			this.getStreams();
 		}
@@ -2394,7 +2395,7 @@ webpackJsonp([1],[
 			value: function getUserInfo() {
 				var _this7 = this;
 
-				this._User.single(this.storedUser._id).then(function (response) {
+				this._User.single(this.storedUser).then(function (response) {
 					_this7.user = response.data.res.record;
 				});
 			}
