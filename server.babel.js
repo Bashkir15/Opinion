@@ -9,7 +9,7 @@ import Activity from './server/models/activities';
 import Chats from './server/models/chats'
 import Settings from './server/models/settings'
 
-process.env.NODE_ENV = "Production";
+process.env.NODE_ENV = "production";
 
 var config = require('./server/config/env/' + (process.env.NODE_ENV));
 const db = mongoose.connect(config.db, () => {
