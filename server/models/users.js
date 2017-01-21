@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import escape from 'lodash.escape';
 
 var validatePresenceOf = function (value) {
