@@ -48,7 +48,7 @@ webpackJsonp([1],[
 	_angular2.default.module('app').run(_app4.default);
 	_angular2.default.module("app").service('Websocket', _app6.default);
 	_angular2.default.bootstrap(document, ['app'], {
-		strictDi: true
+		strictDi: false
 	});
 
 /***/ },
@@ -284,66 +284,54 @@ webpackJsonp([1],[
 	function websockets($rootScope) {
 		'ngInject';
 
-		var obj = {
-			conn: {},
-			connect: function connect() {
-				var $this = this;
-				var socket = new io.connect(window.location.hostname);
-				socket.on('connect', function () {
-					console.log('connected');
-				});
-
-				socket.on('disconnect', function () {
-					$this.connect();
-				});
-
-				socket.on('newNotification', function (data) {
-					$rootScope.$broadcast('newNotification', data);
-				});
-
-				socket.on('newChatNotification', function (data) {
-					$rootScope.$broadcast('newChatMessage', data);
-				});
-
-				this.conn = socket;
-			},
-
-			reconnect: function reconnect() {
-				this.conn.close();
-				this.connect();
-			},
-
-			close: function close() {
-				this.conn.close();
-			},
-
-			online: function online(id) {
-				this.conn.emit('online', { userId: id });
-			},
-
-			logout: function logout(id) {
-				this.conn.emit('logout');
-			},
-
-			follow: function follow(id) {
-				this.conn.emit('followed', { userId: id });
-			},
-
-			unfollow: function unfollow(id) {
-				this.conn.emit('unfollowed', { userId: id });
-			},
-
-			message: function message(id) {
-				this.conn.emit('messaged', { userId: id });
-			},
-
-			chatsMessage: function chatsMessage(id) {
-				this.conn.emit('chatMessaged', { chatId: id });
-			}
-		};
-
-		obj.connect();
-		return obj;
+		var socket = io.connect();
+		/* var obj = {
+	 		conn: {},
+	 	connect: function() {
+	 		var $this = this;
+	 		var socket = io.connect('http://localhost:8000');
+	 		socket.on('connect', () => {
+	 			console.log('connected');
+	 		});
+	 			socket.on('disconnect', () => {
+	 			$this.connect();
+	 		});
+	 			socket.on('newNotification', (data) => {
+	 			$rootScope.$broadcast('newNotification', data);
+	 		});
+	 			socket.on('newChatNotification', (data) => {
+	 			$rootScope.$broadcast('newChatMessage', data);
+	 		});
+	 			this.conn = socket;
+	 	},
+	 		reconnect: function() {
+	 		this.conn.close();
+	 		this.connect();
+	 	},
+	 		close: function() {
+	 		this.conn.close();
+	 	},
+	 		online: function (id) {
+	 		this.conn.emit('online', {userId: id});
+	 	},
+	 		logout: function (id) {
+	 		this.conn.emit('logout');
+	 	},
+	 		follow: function(id) {
+	 		this.conn.emit('followed', {userId: id});
+	 	},
+	 		unfollow: function(id) {
+	 		this.conn.emit('unfollowed', {userId: id});
+	 	},
+	 		message: function(id) {
+	 		this.conn.emit('messaged', {userId: id});
+	 	},
+	 		chatsMessage: function (id) {
+	 		this.conn.emit('chatMessaged', {chatId: id});
+	 	}
+	 };
+	 	obj.connect();
+	 return obj; */
 	}
 
 	exports.default = websockets;
@@ -533,11 +521,14 @@ webpackJsonp([1],[
 
 				if (isValid) {
 					this._Auth.signup(this.data).then(function (response) {
-						_this._Toast.success('Welcome to Opinionated! ' + response.data.res.record.username);
-						_this.postSignup(response);
-						//this._$rootScope.$broadcast('signedUp');
-					}, function (err) {
-						_this._Toast.error('boo, but still yay');
+						console.log('meow');
+						if (response.data.success) {
+							console.log('yay');
+							_this._Toast.success('Welcome to Opinionated! ' + response.data.res.record.username);
+							_this.postSignup(response);
+						} else {
+							_this._Toast.error('boo, but still yay');
+						}
 					});
 				} else {
 					this._Toast.error('hmm, form issue!');
@@ -549,7 +540,7 @@ webpackJsonp([1],[
 				var serialized = angular.toJson(response.data.res.record);
 				this._Storage.set('user', serialized);
 				this._Storage.set('opinion-token', response.data.res.token);
-				this._Websocket.online(response.data.res.record._id);
+				//this._Websocket.online(response.data.res.record._id);
 				this._state.go('app.updateProfile', { userId: response.data.res.record._id }, { reload: true });
 			}
 		}]);

@@ -9,9 +9,8 @@ import Activity from './server/models/activities';
 import Chats from './server/models/chats'
 import Settings from './server/models/settings'
 
-process.env.NODE_ENV = "production";
 
-var config = require('./server/config/env/' + (process.env.NODE_ENV));
+var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
 const db = mongoose.connect(config.db, () => {
 	console.log('The application has connected to the: ' + config.db + ' database');
 });
@@ -19,11 +18,12 @@ const db = mongoose.connect(config.db, () => {
 
 
 	var app = require('./server/config/express')(db);
-	var server = require('http').createServer(app);
+	var server = require('http').Server(app);
 	var io = sio.listen(server);
+	server.listen(config.server.port);
+
 	var websockets = require('./server/helpers/websockets')(io);
 	var notifications = require('./server/helpers/notifications')(io);
-	server.listen(config.server.port);
 
 	global.notifications = notifications;
 	global.config = config;

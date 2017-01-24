@@ -8,7 +8,7 @@ module.exports = {
 		perPage: 20
 	},
 	
-	db: 'mongodb://localhost/opinion',
+	db: '',
 	secret: 'adsfaiusdfwjk23rae'
 
 };

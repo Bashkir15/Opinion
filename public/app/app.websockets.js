@@ -1,11 +1,13 @@
 function websockets($rootScope) {
 	'ngInject';
 	
-	var obj = {
+	var socket = io.connect()
+	/* var obj = {
+
 		conn: {},
 		connect: function() {
 			var $this = this;
-			var socket = new io.connect(window.location.hostname);
+			var socket = io.connect('http://localhost:8000');
 			socket.on('connect', () => {
 				console.log('connected');
 			});
@@ -60,7 +62,7 @@ function websockets($rootScope) {
 	};
 
 	obj.connect();
-	return obj;
+	return obj; */
 }
 
 export default websockets
