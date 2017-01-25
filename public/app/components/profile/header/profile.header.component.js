@@ -1,5 +1,5 @@
 class headerCtrl {
-	constructor(Auth, User, Chat, Toast, $rootScope, $stateParams, $mdDialog, Websocket) {
+	constructor(Auth, User, Chat, Toast, $rootScope, $stateParams, $mdDialog) {
 		'ngInject';
 
 		this._Auth = Auth;
@@ -10,7 +10,7 @@ class headerCtrl {
 		this._$stateParams = $stateParams;
 		this._$dialog = $mdDialog;
 		this.userId = $stateParams.userId;
-		this._Websocket = Websocket;
+		//this._Websocket = Websocket;
 		this._isLoggedIn = this._Auth.isLoggedIn();
 		if (this._isLoggedIn) {
 			this.currentUser = this._Auth.getUser();
@@ -28,7 +28,7 @@ class headerCtrl {
 
 	follow(item) {
 		this._User.follow(item._id).then((response) => {
-			this._Websocket.follow(item._id);
+			//this._Websocket.follow(item._id);
 			this._$rootScope.$broadcast('userFollowed');
 			this.checkUserFollowing();
 		});
@@ -36,7 +36,7 @@ class headerCtrl {
 
 	unfollow(item) {
 		this._User.unfollow(item._id).then((response) => {
-			this._Websocket.unfollow(item._id);
+			//this._Websocket.unfollow(item._id);
 			this._$rootScope.$broadcast('userUnfollowed');
 			this.checkUserFollowing();
 		});
@@ -51,7 +51,7 @@ class headerCtrl {
 		};
 
 		this._Chat.create(data).then((response) => {
-			this._Websocket.messaged(item._id);
+			//this._Websocket.messaged(item._id);
 			this._$dialog.show({
 				templateUrl: './app/pages/profile/dialogs/message/message.html',
 				controller: 'ProfileMessageController',

@@ -1,10 +1,8 @@
-
-
 module.exports = {
-	//db: process.env.MONGODB_URI,
+	db: process.env.MONGODB_URI,
 	server: {
-		host: 'localhost:',
-		port: '8000'
+		host: 'opinionate.herokuapp.com',
+		port: process.env.PORT
 	},
 
 	secret: process.env.SECRET,

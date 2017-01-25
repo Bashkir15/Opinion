@@ -34,10 +34,6 @@ webpackJsonp([1],[
 
 	var _app4 = _interopRequireDefault(_app3);
 
-	var _app5 = __webpack_require__(118);
-
-	var _app6 = _interopRequireDefault(_app5);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var requires = [_angularUiRouter2.default, 'ngMaterial', 'ngAnimate', 'angularMoment', 'ngFileUpload', 'app.config', 'app.pages', 'app.components'];
@@ -46,7 +42,7 @@ webpackJsonp([1],[
 
 	_angular2.default.module('app').config(_app2.default);
 	_angular2.default.module('app').run(_app4.default);
-	_angular2.default.module("app").service('Websocket', _app6.default);
+	//angular.module("app").service('Websocket', websockets);
 	_angular2.default.bootstrap(document, ['app'], {
 		strictDi: false
 	});
@@ -273,6 +269,8 @@ webpackJsonp([1],[
 	exports.default = appRun;
 
 /***/ },
+/* 118 */,
+=======
 /* 118 */
 /***/ function(module, exports) {
 
@@ -336,7 +334,7 @@ webpackJsonp([1],[
 
 	exports.default = websockets;
 
-/***/ },
+/*
 /* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -386,7 +384,7 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var LoginCtrl = function () {
-		function LoginCtrl($state, $mdDialog, Auth, Toast, Storage, Websocket, $rootScope) {
+		function LoginCtrl($state, $mdDialog, Auth, Toast, Storage, $rootScope) {
 			'ngInject';
 
 			_classCallCheck(this, LoginCtrl);
@@ -396,7 +394,6 @@ webpackJsonp([1],[
 			this._Storage = Storage;
 			this._$state = $state;
 			this._$dialog = $mdDialog;
-			this._Websocket = Websocket;
 			this._$rootScope = $rootScope;
 			this.data = {
 				email: '',
@@ -454,7 +451,7 @@ webpackJsonp([1],[
 				var serializedUser = angular.toJson(user);
 				this._Storage.set('user', serializedUser);
 				this._Storage.set('opinion-token', response.data.res.token);
-				this._Websocket.online(response.data.res.record._id);
+				//this._Websocket.online(response.data.res.record._id);
 				this._$state.go('app.home', {}, { reload: true });
 			}
 		}, {
@@ -494,7 +491,7 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var SignupFormCtrl = function () {
-		function SignupFormCtrl($state, Auth, Toast, Storage, $rootScope, Websocket) {
+		function SignupFormCtrl($state, Auth, Toast, Storage, $rootScope) {
 			'ngInject';
 
 			_classCallCheck(this, SignupFormCtrl);
@@ -511,7 +508,7 @@ webpackJsonp([1],[
 			this._Toast = Toast;
 			this._Storage = Storage;
 			this._$rootScope = $rootScope;
-			this._Websocket = Websocket;
+			//this._Websocket = Websocket;
 		}
 
 		_createClass(SignupFormCtrl, [{
@@ -1974,7 +1971,7 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var headerCtrl = function () {
-		function headerCtrl(Auth, User, Chat, Toast, $rootScope, $stateParams, $mdDialog, Websocket) {
+		function headerCtrl(Auth, User, Chat, Toast, $rootScope, $stateParams, $mdDialog) {
 			'ngInject';
 
 			_classCallCheck(this, headerCtrl);
@@ -1987,7 +1984,7 @@ webpackJsonp([1],[
 			this._$stateParams = $stateParams;
 			this._$dialog = $mdDialog;
 			this.userId = $stateParams.userId;
-			this._Websocket = Websocket;
+			//this._Websocket = Websocket;
 			this._isLoggedIn = this._Auth.isLoggedIn();
 			if (this._isLoggedIn) {
 				this.currentUser = this._Auth.getUser();
@@ -2012,7 +2009,7 @@ webpackJsonp([1],[
 				var _this2 = this;
 
 				this._User.follow(item._id).then(function (response) {
-					_this2._Websocket.follow(item._id);
+					//this._Websocket.follow(item._id);
 					_this2._$rootScope.$broadcast('userFollowed');
 					_this2.checkUserFollowing();
 				});
@@ -2023,7 +2020,7 @@ webpackJsonp([1],[
 				var _this3 = this;
 
 				this._User.unfollow(item._id).then(function (response) {
-					_this3._Websocket.unfollow(item._id);
+					//this._Websocket.unfollow(item._id);
 					_this3._$rootScope.$broadcast('userUnfollowed');
 					_this3.checkUserFollowing();
 				});
@@ -2038,7 +2035,7 @@ webpackJsonp([1],[
 				};
 
 				this._Chat.create(data).then(function (response) {
-					_this4._Websocket.messaged(item._id);
+					//this._Websocket.messaged(item._id);
 					_this4._$dialog.show({
 						templateUrl: './app/pages/profile/dialogs/message/message.html',
 						controller: 'ProfileMessageController',
@@ -2103,38 +2100,19 @@ webpackJsonp([1],[
 		value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var overviewCtrl = function () {
-		function overviewCtrl(User, $stateParams) {
-			'ngInject';
+	var overviewCtrl = function overviewCtrl() {
+		'ngInject';
 
-			_classCallCheck(this, overviewCtrl);
-
-			this._User = User;
-			this._$stateParams = $stateParams;
-			this.userId = $stateParams.userId;
-			this.getUser();
-		}
-
-		_createClass(overviewCtrl, [{
-			key: 'getUser',
-			value: function getUser() {
-				var _this = this;
-
-				this._User.single(this.userId).then(function (response) {
-					_this.user = response.data.res.record;
-				});
-			}
-		}]);
-
-		return overviewCtrl;
-	}();
+		_classCallCheck(this, overviewCtrl);
+	};
 
 	var overviewComponent = {
 		scope: {},
+		bindings: {
+			user: '<'
+		},
 		controller: overviewCtrl,
 		templateUrl: './app/components/profile/overview/profile.overview.component.html'
 	};
@@ -2186,7 +2164,7 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var navCtrl = function () {
-		function navCtrl(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat, Websocket) {
+		function navCtrl(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat) {
 			'ngInject';
 
 			var _this = this;
@@ -2203,11 +2181,9 @@ webpackJsonp([1],[
 			this._$rootScope = $rootScope;
 			this._$location = $location;
 			this._$dialog = $mdDialog;
-			this._Websocket = Websocket;
+			//this._Websocket = Websocket;
+			this.storedUser = this._Auth.getUser();
 			this.isLoggedIn = this._Auth.isLoggedIn();
-			if (this.isLoggedIn) {
-				this.storedUser = this._Auth.getUser()._id;
-			}
 
 			if (this.isLoggedIn) {
 				this.getUserInfo();
@@ -2386,7 +2362,7 @@ webpackJsonp([1],[
 			value: function getUserInfo() {
 				var _this7 = this;
 
-				this._User.single(this.storedUser).then(function (response) {
+				this._User.single(this.storedUser._id).then(function (response) {
 					_this7.user = response.data.res.record;
 				});
 			}
@@ -2470,7 +2446,7 @@ webpackJsonp([1],[
 			value: function logout() {
 				this._Storage.remove('user');
 				this._Storage.remove('opinion-token');
-				this._Websocket.logout(this.user._id);
+				//this._Websocket.logout(this.user._id);
 				this._$state.go('app.home', {}, { reload: true });
 				this._$sidenav('user-menu').close();
 			}
@@ -2533,16 +2509,11 @@ webpackJsonp([1],[
 
 	var _toasts2 = _interopRequireDefault(_toasts);
 
-	var _sockets = __webpack_require__(151);
-
-	var _sockets2 = _interopRequireDefault(_sockets);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var configModule = _angular2.default.module('app.config', []);
 	configModule.service('Storage', _storage2.default);
 	configModule.service('Toast', _toasts2.default);
-	configModule.service('Socket', _sockets2.default);
 
 	exports.default = configModule;
 
@@ -2580,64 +2551,7 @@ webpackJsonp([1],[
 	exports.default = authInterceptor;
 
 /***/ },
-/* 151 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var websockets = function () {
-		function websockets() {
-			'ngInject';
-
-			_classCallCheck(this, websockets);
-
-			this.conn = {};
-			this.connect();
-		}
-
-		_createClass(websockets, [{
-			key: 'connect',
-			value: function connect() {
-				var _this = this;
-
-				var socket = window.io();
-				socket.on('connect', function () {
-					console.log('connected');
-				});
-
-				socket.on('disconnect', function () {
-					_this.connect();
-				});
-
-				this.conn = socket;
-			}
-		}, {
-			key: 'reconnect',
-			value: function reconnect() {
-				this.conn.close();
-				this.connect();
-			}
-		}, {
-			key: 'close',
-			value: function close() {
-				this.conn.close();
-			}
-		}]);
-
-		return websockets;
-	}();
-
-	exports.default = websockets;
-
-/***/ },
+/* 151 */,
 /* 152 */
 /***/ function(module, exports) {
 

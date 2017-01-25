@@ -10,10 +10,10 @@ import async from 'async'
 import crypto from 'crypto'
 import handlebars from 'handlebars'
 
-var User = mongoose.model("User");
-var Setting = mongoose.model('Setting');
 
 module.exports = () => {
+	var User = mongoose.model("User");
+	var Setting = mongoose.model('Setting');
 	var obj = {};
 
 	['followed'].map((action) => {

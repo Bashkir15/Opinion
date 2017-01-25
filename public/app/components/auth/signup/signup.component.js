@@ -1,5 +1,5 @@
 class SignupFormCtrl {
-	constructor($state, Auth, Toast, Storage, $rootScope, Websocket) {
+	constructor($state, Auth, Toast, Storage, $rootScope) {
 		'ngInject';
 
 		this.data = {
@@ -14,7 +14,7 @@ class SignupFormCtrl {
 		this._Toast = Toast;
 		this._Storage = Storage
 		this._$rootScope = $rootScope;
-		this._Websocket = Websocket;
+		//this._Websocket = Websocket;
 	}
 
 	signup(isValid) {

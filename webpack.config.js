@@ -1,17 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
-const VenderChunkPlugin = require('webpack-vendor-chunk-plugin');
+//const VenderChunkPlugin = require('webpack-vendor-chunk-plugin');
 
 module.exports = {
 	entry: {
-		app: './public/app/app.js',
-		vendors: ['angular', 'angular-ui-router', 'angular-material', 'angular-animate', 'angular-aria', 'moment', 'angular-moment', 'ng-file-upload']
+		app: './public/app.js',
+		vendors: ['angular', 'angular-ui-router']
 	},
 
 	output: {
 		path: path.resolve(__dirname, './dist/'),
 		publicPath: '/',
-		filename: '[name].js'
+		filename: 'bundle.js'
 	},
 
 	module: {
@@ -30,7 +30,7 @@ module.exports = {
 
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js', Infinity),
-		new VenderChunkPlugin('vendors'),
+	//	new VenderChunkPlugin('vendors'),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin(),
 	]

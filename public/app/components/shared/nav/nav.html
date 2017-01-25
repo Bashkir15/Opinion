@@ -161,7 +161,7 @@
 		<ul class='user-menu-nested-list' ng-show='$ctrl.showProfile'>
 			<div>
 				<li>
-					<button class='md-ink-ripple' ui-sref="app.profile.overview({userId: $ctrl.user._id})">
+					<button class='md-ink-ripple' ui-sref="app.profile.overview({userId: $ctrl.storedUser._id})">
 						<span>Overview</span>
 					</button>
 				</li>
@@ -169,7 +169,7 @@
 
 			<div>
 				<li>
-					<button class='md-ink-ripple' ui-sref="app.profile.threads({userId: $ctrl.user._id})">
+					<button class='md-ink-ripple' ui-sref="app.profile.threads({userId: $ctrl.storedUser._id})">
 						<span>Threads</span>
 					</button>
 				</li>

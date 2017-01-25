@@ -1,5 +1,5 @@
 class navCtrl {
-	constructor(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat, Websocket) {
+	constructor(Auth, Storage, Stream, User, $mdSidenav, $state, $rootScope, $mdDialog, $location, Chat) {
 		'ngInject';
 
 		this._$sidenav = $mdSidenav;
@@ -12,11 +12,9 @@ class navCtrl {
 		this._$rootScope = $rootScope;
 		this._$location = $location;
 		this._$dialog = $mdDialog;
-		this._Websocket = Websocket;
+		//this._Websocket = Websocket;
+		this.storedUser = this._Auth.getUser();
 		this.isLoggedIn = this._Auth.isLoggedIn();
-		if (this.isLoggedIn) {
-			this.storedUser = this._Auth.getUser()._id;
-		}
 
 
 		if (this.isLoggedIn) {
@@ -176,7 +174,7 @@ class navCtrl {
 	}
 
 	getUserInfo() {
-		this._User.single(this.storedUser).then((response) => {
+		this._User.single(this.storedUser._id).then((response) => {
 			this.user = response.data.res.record;
 		});
 	}
@@ -251,7 +249,7 @@ class navCtrl {
 	logout() {
 		this._Storage.remove('user');
 		this._Storage.remove('opinion-token');
-		this._Websocket.logout(this.user._id);
+		//this._Websocket.logout(this.user._id);
 		this._$state.go('app.home', {}, {reload: true});
 		this._$sidenav('user-menu').close();
 	} 

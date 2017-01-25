@@ -81,7 +81,7 @@ MongooseDocumentArray.mixin = {
    * ignore
    */
   toBSON: function() {
-    return this.toObject({ transform: false });
+    return this.toObject({ transform: false, virtuals: false });
   },
 
   /**
@@ -147,6 +147,9 @@ MongooseDocumentArray.mixin = {
     }
 
     for (var i = 0, l = this.length; i < l; i++) {
+      if (!this[i]) {
+        continue;
+      }
       _id = this[i].get('_id');
 
       if (_id === null || typeof _id === 'undefined') {

@@ -1,4 +1,8 @@
-import gulp from 'gulp';
+import tasks from './libs/tasks'
+
+module.exports = require('gulp');
+
+/*import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import notify from 'gulp-notify';
 import sass from 'gulp-sass';
@@ -18,9 +22,9 @@ import concat from 'gulp-concat'
 
 const paths = {
 	dev: {
-		html: './public/**/*.html',
+		html: './public//*.html',
 		sass: './public/static/sass/main.sass',
-		sass2: './public/static/sass/**/*.*',
+		sass2: './public/static/sass//*.*',
 		materialModules: [
 			'angular-material/modules/js/core',
 			'angular-material/modules/js/checkbox',
@@ -58,7 +62,7 @@ const interceptErrors = (error) => {
 gulp.task('browserSync', () => {
 	browserSync.init(null, {
 		proxy: 'http://localhost:8000',
-		files: ['public/**/*.*'],
+		files: ['public//*.*'],
 		port: 7000
 	});
 });
@@ -140,6 +144,6 @@ gulp.task('sass', ['browserSync'], () => {
 gulp.task('build', ['browserSync'], () => {
 	gulp.watch([paths.dev.js], ['scripts'])
 	gulp.watch([paths.dev.sass, paths.dev.sass2], ['styles']);
-});
+}); */
 
 

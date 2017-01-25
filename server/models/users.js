@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import escape from 'lodash.escape';
 
 var validatePresenceOf = function (value) {
@@ -185,8 +185,9 @@ UserSchema.set('toJSON', {
 	getters: true
 });
 
- UserSchema.virtual('isLocked').get(() => {
-	return !!(this.lockUntil && this.lockUntil > Date.now());
+ UserSchema.virtual('isLocked').get(function() {
+ 	var self = this;
+	return !!(self.lockUntil && self.lockUntil > Date.now());
 }); 
 
 UserSchema.pre('remove', function (next) {
