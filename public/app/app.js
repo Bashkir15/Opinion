@@ -28,5 +28,5 @@ angular.module('app').config(appConfig);
 angular.module('app').run(appRun);
 //angular.module("app").service('Websocket', websockets);
 angular.bootstrap(document, ['app'], {
-	strictDi: true
+	strictDi: false
 });

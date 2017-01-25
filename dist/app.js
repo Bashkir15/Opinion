@@ -44,7 +44,7 @@ webpackJsonp([1],[
 	_angular2.default.module('app').run(_app4.default);
 	//angular.module("app").service('Websocket', websockets);
 	_angular2.default.bootstrap(document, ['app'], {
-		strictDi: true
+		strictDi: false
 	});
 
 /***/ },
@@ -270,6 +270,71 @@ webpackJsonp([1],[
 
 /***/ },
 /* 118 */,
+=======
+/* 118 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function websockets($rootScope) {
+		'ngInject';
+
+		var socket = io.connect();
+		/* var obj = {
+	 		conn: {},
+	 	connect: function() {
+	 		var $this = this;
+	 		var socket = io.connect('http://localhost:8000');
+	 		socket.on('connect', () => {
+	 			console.log('connected');
+	 		});
+	 			socket.on('disconnect', () => {
+	 			$this.connect();
+	 		});
+	 			socket.on('newNotification', (data) => {
+	 			$rootScope.$broadcast('newNotification', data);
+	 		});
+	 			socket.on('newChatNotification', (data) => {
+	 			$rootScope.$broadcast('newChatMessage', data);
+	 		});
+	 			this.conn = socket;
+	 	},
+	 		reconnect: function() {
+	 		this.conn.close();
+	 		this.connect();
+	 	},
+	 		close: function() {
+	 		this.conn.close();
+	 	},
+	 		online: function (id) {
+	 		this.conn.emit('online', {userId: id});
+	 	},
+	 		logout: function (id) {
+	 		this.conn.emit('logout');
+	 	},
+	 		follow: function(id) {
+	 		this.conn.emit('followed', {userId: id});
+	 	},
+	 		unfollow: function(id) {
+	 		this.conn.emit('unfollowed', {userId: id});
+	 	},
+	 		message: function(id) {
+	 		this.conn.emit('messaged', {userId: id});
+	 	},
+	 		chatsMessage: function (id) {
+	 		this.conn.emit('chatMessaged', {chatId: id});
+	 	}
+	 };
+	 	obj.connect();
+	 return obj; */
+	}
+
+	exports.default = websockets;
+
+/*
 /* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -453,11 +518,14 @@ webpackJsonp([1],[
 
 				if (isValid) {
 					this._Auth.signup(this.data).then(function (response) {
-						_this._Toast.success('Welcome to Opinionated! ' + response.data.res.record.username);
-						_this.postSignup(response);
-						//this._$rootScope.$broadcast('signedUp');
-					}, function (err) {
-						_this._Toast.error('boo, but still yay');
+						console.log('meow');
+						if (response.data.success) {
+							console.log('yay');
+							_this._Toast.success('Welcome to Opinionated! ' + response.data.res.record.username);
+							_this.postSignup(response);
+						} else {
+							_this._Toast.error('boo, but still yay');
+						}
 					});
 				} else {
 					this._Toast.error('hmm, form issue!');
