@@ -1,0 +1,21 @@
+<div class='activity-page-container'>
+	<div class='activity-list-container'>
+		<div ng-repeat="item in $ctrl.activities">
+			<div>
+				<span ng-if="item.action == 'liked'">Liked this thread: <span ui-sref="app.singleThread({streamId: item.thread.stream, threadId: item.thread._id})">{{item.thread.title}}</span></span>
+				<span ng-if="item.action == 'disliked'">Disliked this thread: <span ui-sref="app.singleThread({streamId: item.thread.stream, threadId: item.thread._id})">{{item.thread.title}}</span></span>
+				<span ng-if="item.action == 'saved'">Saved this thread: <span ui-sref="app.singleThread({streamId: item.thread.stream, threadId: item.thread._id})">{{item.thread.title}}</span></span>
+				<span ng-if="item.action =='unsaved'">Unsaved this thread: <span ui-sref="app.singleThread({streamId: item.thread.stream, threadId: item.thread._id})">{{item.thread.title}}</span></span>
+				<span ng-if="item.action =='new thread'">Create a new thread: <span ui-sref="app.singleThread({streamId: item.thread.stream, threadId: item.thread._id})">{{item.thread.title}}</span></span>
+				<span ng-if="item.action =='followed'">Followed: <span ui-sref='app.profile.overview({userId: item.user._id})'>{{item.user.name}}</span></span>
+				<span ng-if="item.action =='unfollowed'">Unfollowed: <span ui-sref='app.profile.overview({userId: item.user._id})'>{{item.user.name}}</span></span>
+				<span ng-if="item.action == 'new stream'"> Created a new stream: <span ui-sref='app.singleStream({streamId: item.stream._id})'>{{item.stream.name}}</span></span>
+				<span ng-if="item.action == 'subscribed'"> Subscribed to the stream: <span ui-sref='app.singleStream({streamId: item.stream._id})'>{{item.stream.name}}</span></span>
+				<span ng-if="item.action == 'unsubscribed'"> Unubscribed from the stream: <span ui-sref='app.singleStream({streamId: item.stream._id})'>{{item.stream.name}}</span></span>
+			</div>
+			<div>
+				<span am-time-ago="item.created"></span>
+			</div>
+		</div>
+	</div>
+</div>

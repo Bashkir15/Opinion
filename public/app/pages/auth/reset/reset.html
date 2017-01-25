@@ -1,0 +1,65 @@
+<md-dialog class='auth-dialog'>
+	<md-dialog-content>
+		<div class='auth-dialog-header'>
+			<div>
+				<h3>Reset password</h3>
+			</div>
+
+			<div>
+				<button ng-click="$ctrl.close()">
+					<span class='mdi mdi-close'></span>
+				</button>
+			</div>
+		</div>
+
+		<div class='auth-dialog-body' ng-if="!$ctrl.tokenSent">
+			<p>Enter your email here and your reset infomation will be sent there</p>
+
+			<div class='auth-dialog-form'>
+				<form name='$ctrl.resetForm' novalidate>
+					<div class='auth-form-wraper auth-dialog-form' ng-class="{'has-focus': $ctrl.resetForm.email.hasFocus,
+					'has-success': $ctrl.resetForm.email.$valid,
+					'has-error': $ctrl.resetForm.email.$error && $ctrl.resetForm.email.$touched && !$ctrl.resetForm.email.$valid,
+					'is-empty': !$ctrl.resetForm.email.$viewValue}">
+						<label>Email</label>
+						<input type='email' name='email' ng-model="$ctrl.data.email" required ng-focus='$ctrl.resetForm.email.hasFocus=true' ng-blur='$ctrl.resetForm.email.hasFocus=false'>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class='auth-dialog-body' ng-if='$ctrl.tokenSent'>
+			<p>Please copy and paste the code from your email here, along with your new password</p>
+
+			<form name='$ctrl.confirmReset' novalidate>
+				<div class='auth-form-wrapper'>
+					<label>Reset Code</label>
+					<input type='text' name='token' ng-model='$ctrl.data.token'>
+				</div>
+
+				<div class='auth-form-wrapper'>
+					<label>New Password</label>
+					<input type='password' name='password' ng-model="$ctrl.data.password">
+				</div>
+			</form>
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions>
+		<div class='auth-dialog-actions' ng-if="!$ctrl.tokenSent">
+			<button ng-click="$ctrl.generateReset()">
+				<span>Send Email</span>
+			</button>
+
+			<button ng-click="$ctrl.close()">
+				<span>I Remembered</span>
+			</button>
+		</div>
+
+		<div class='auth-dialog-actions' ng-if="$ctrl.tokenSent">
+			<button ng-click="$ctrl.attemptReset()">
+				<span>Reset</span>
+			</button>
+		</div>
+	</md-dialog-actions>
+</md-dialog>

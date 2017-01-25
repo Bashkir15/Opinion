@@ -144,6 +144,6 @@ gulp.task('sass', ['browserSync'], () => {
 gulp.task('build', ['browserSync'], () => {
 	gulp.watch([paths.dev.js], ['scripts'])
 	gulp.watch([paths.dev.sass, paths.dev.sass2], ['styles']);
-});
+}); */
 
 

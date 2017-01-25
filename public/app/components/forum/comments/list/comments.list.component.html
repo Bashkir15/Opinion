@@ -1,0 +1,14 @@
+<div class='forum-list-component-container' ng-class="{'no-comments': $ctrl.comments}">
+	<div ng-repeat="item in $ctrl.comments" class='forum-single-repeat comment-list-repeat'>
+		<single-comment comment='item'></single-comment>
+	</div>
+
+	<div ng-if='!$ctrl.comments.length' class='forum-list-no-items'>
+		<p>It doesn't look like there is anything here</p>
+		<span>You should create a <span>new comment!</span></span>
+	</div>
+
+	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateComment()" ng-if="!$ctrl.hideCreate">
+		<i class='mdi mdi-pencil'></i>
+	</md-button>
+</div>

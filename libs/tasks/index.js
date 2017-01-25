@@ -10,3 +10,7 @@ gulp.task('styles', processStyles);
 gulp.task(watch);
 
 const stylesTask = gulp.task('styles');
+
+gulp.task('default',
+	gulp.series('styles', serve, watch)
+);

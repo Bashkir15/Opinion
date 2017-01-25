@@ -1,0 +1,95 @@
+.trending-streams-container
+	display: flex
+	flex-direction: column
+	align-items: center
+	width: 90%
+	margin: 0 auto
+
+	header
+		padding: 40px 0
+
+		h1
+			color: rgba(0,0,0,0.6)
+
+	> p
+		padding-top: 35px
+		color: rgba(0,0,0,0.5)
+
+	.forum-single-trending-component
+		width: 90%
+		margin: 0 auto
+		box-shadow: 0 3px 6px rgba(0,0,0,0.12), box-shadow 0 3px 6px rgba(0,0,0,0.23)
+
+	.trending-streams-repeat
+		width: 100%
+		margin: 0 auto
+		padding: 20px 0
+		border-bottom: 1px solid rgba(0,0,0,0.12)
+
+.streams-subscribed-container
+	padding: 40px 0
+	display: flex
+	flex-direction: column
+	align-items: center
+
+	header
+		padding: 60px 0
+
+		h1
+			color: rgba(0,0,0,0.6)
+
+	.streams-subscribed-list-container
+		width: 100%
+
+	.load-more-button
+		width: 100%
+
+.streams-create-dialog
+	width: 80%
+
+	p
+		text-align: center
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		line-height: 35px
+		font-size: 16px
+		width: 80%
+		padding: 35px 0
+		margin: 0 auto
+		color: rgba(0,0,0,0.6)
+
+.streams-create-dialog-header
+	display: flex
+	align-items: center
+	padding: 25px 15px
+	width: 100%
+
+	h3
+		display: flex
+		flex: 1
+		color: $default-red
+
+	button
+		i
+			display: inline-block
+			font-size: 25px
+			color: $default-light-blue
+			transition: all .4s ease
+
+			&:hover
+				transform: scale(1.2,1.2)
+
+@media screen and (min-width: 640px)
+	.streams-create-dialog-header
+		padding: 25px
+
+@media screen and (min-width: 1024px)
+	.streams-create-dialog-form
+		width: 100%
+
+@media screen and (min-width: 1300px)
+	.streams-create-dialog
+		width: 65%
+
+

@@ -1,0 +1,31 @@
+<div class='forum-list-component-container'>
+	<div class='forum-list-view'>
+		<div class='forum-list-list'>
+			<div ng-repeat='item in $ctrl.streams | orderBy: $ctrl.rowFilter' class='forum-single-repeat'>
+				<single-stream stream="item"></single-stream>
+			</div>
+		</div>
+
+		<div class='forum-side-bar above-tablet' ng-if='!$ctrl.hideTrending && $ctrl.streams.length'>
+			<div class='forum-trending-list'>
+				<div class='forum-trending-header'>
+					<h4>Trending</h4>
+				</div>
+
+				<div ng-repeat='item in $ctrl.streams | orderBy: "-subscribers.length" | limitTo: "15"' class='forum-trending-repeat'>
+					<trending-stream stream='item' class='forum-trending-component-container'></trending-stream>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if='!$ctrl.streams.length && !$ctrl.hideNoItems' class='forum-list-no-items'>
+		<p>It doesn't look like there is anything here</p>
+		<span>You should create a <span>new stream!</span></span>
+	</div>
+
+
+	<md-button class='md-fab forum-create-button' ng-click="$ctrl.openCreateStream()" ng-if="!$ctrl.hideCreate">
+		<i class='mdi mdi-pencil'></i>
+	</md-button>
+</div>

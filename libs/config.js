@@ -6,12 +6,10 @@ const config = {
 		images: './public/static/images/**/*.+(png|jpg|gif|svg)'
 	},
 
-	{
-		prod: {
-			styles: './dist/styles',
-			scripts: './dist/scripts',
-			images: './dist/images'
-		}
+	prod: {
+		styles: './dist/styles',
+		scripts: './dist/scripts',
+		images: './dist/images'
 	}
 };
 

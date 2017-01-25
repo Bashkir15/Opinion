@@ -1,0 +1,74 @@
+<div class='forum-page-container single-stream-container'>
+	<header>
+		<h1>{{$ctrl.stream.name}}</h1>
+	</header>
+
+	<div class='forum-header-image'>
+		<img ng-src='{{$ctrl.stream.picture}}' ng-if="$ctrl.currentUser == $ctrl.stream.creator._id" ngf-select="$ctrl.uploadImage(file)" ng-model='file' name='file' ngf-pattern="'image/*'" accept="image/">
+		<img ng-src='{{$ctrl.stream.picture}}' ng-if='$ctrl.currentUser != $ctrl.stream.creator._id'>
+	</div>
+
+	<p>{{$ctrl.stream.description}}</p>
+
+	<div class='forum-stats'>
+		<div>
+			<span class='mdi mdi-heart-outline'></span>
+			<p>{{$ctrl.stream.subscribers.length}} Subscriber<span ng-if="$ctrl.stream.subscribers.length > 1 || $ctrl.stream.subscribers.length == 0">s</span></p>
+		</div>
+
+		<div>
+			<span class='mdi mdi-comment-outline'></span>
+			<p>{{$ctrl.stream.threads.length}} Thread<span ng-if="$ctrl.stream.threads.length > 1 || $ctrl.stream.threads.length == 0">s</span></p>
+		</div>
+	</div>
+
+	<!-- <div class='single-stream-create-thread' ng-if="$ctrl.showCreate">
+		<create-thread></create-thread>
+	</div> -->
+
+	<div class='forum-search-container'>
+		<div ng-class="{'has-focus': $ctrl.search.hasFocus}">
+			<label class='mdi mdi-magnify'></label>
+			<input type='text' name='search' ng-model='$ctrl.threadsSearch' ng-change="$ctrl.search()" ng-focus="$ctrl.search.hasFocus=true" ng-blur="$ctrl.search.hasFocus=false">
+			<md-menu md-offset='-15 60'>
+				<button class='large-mobile' ng-click="$mdOpenMenu()">
+					<span>Filter</span>
+				</button>
+
+				<md-menu-content class='forum-search-dropdown'>
+					<md-menu-item>
+						<button ng-click="$ctrl.byScore()">
+							<span>Score</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button ng-click="$ctrl.byComments()">
+							<span>Comments</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button ng-click='$ctrl.bySaves()'>
+							<span>Saves</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button ng-click='$ctrl.byDate()'>
+							<span>Date</span>
+						</button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</div>
+	</div>
+
+	<thread-list threads='$ctrl.threads' stream="$ctrl.stream" class='thread-list-component'></thread-list>
+
+	<div class='load-more-button' ng-if="!$ctrl.noMoreThreads">
+		<button ng-click="$ctrl.loadMore()">
+			<span>Load More</span>
+		</button>
+	</div>
+</div>

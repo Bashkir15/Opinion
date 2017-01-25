@@ -1,0 +1,56 @@
+.profile-header-component
+	width: 100%
+	background: $default-dark-blue
+
+.profile-header-component-container
+	width: 100%
+
+.profile-header-info
+	display: flex
+	align-items: center
+	width: 95%
+	padding: 15px 0
+	margin: 0 auto
+
+.profile-header-image
+	height: 45px
+	width: 45px
+	border-radius: 50%
+	border: 1px solid $default-white-background
+
+	&.is-online
+		border: 2px solid $default-green
+
+.profile-header-user
+	display: flex
+	flex-direction: column
+	flex: 1
+	padding-left: 18px
+
+	h4
+		font-weight: 400
+		letter-spacing: 2px
+		color: $default-white-background
+		margin-bottom: 10px
+		text-align: left
+
+
+	p
+		@include open()
+		font-weight: 300
+		letter-spacing: 2px
+		color: $default-grey-background
+		text-align: left
+
+.profile-header-options
+	display: flex
+	align-items: center
+
+.profile-header-dropdown
+	button
+		span
+			@include open()
+			font-weight: 400
+			font-size: 18px
+			letter-spacing: 2px
+			color: $default-light-blue

@@ -1,0 +1,54 @@
+<div class='forum-single-component comment-single-component'>
+	<div class='forum-single-container comment-single-container'>
+		<div class='forum-single-header'>
+			<img class='forum-creator-image' ng-class="{'is-online': $ctrl.comment.creator.loggedIn}" ng-src="{{$ctrl.comment.creator.picture}}"></img>
+			<div class='forum-created-info'>
+				<h4 ui-sref="app.profile.overview({userId: $ctrl.comment.creator._id})">{{$ctrl.comment.creator.username}}</h4>
+				<p am-time-ago='$ctrl.comment.created'></p>
+			</div>
+
+			<div class='forum-score-container below-mobile'>
+				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.comment.liked}" ng-click="$ctrl.like($ctrl.comment)"></span>
+				<span ng-class="{'positive': $ctrl.comment.score >= 1,
+				'negative': $ctrl.comment.score <= -1}">{{$ctrl.comment.score}}</span>
+				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.comment.disliked}" ng-click="$ctrl.dislike($ctrl.comment)"></span>
+			</div>
+		</div>
+
+		<div class='forum-single-content comment-single-content'>
+			<p>{{$ctrl.comment.content}}</p>
+		</div>
+	</div>
+
+	<div class='forum-single-info'>
+		<div class='left'>
+			<div class='forum-single-info-text'>
+				<button>
+					<span>{{$ctrl.comment.saves.length}}</span>
+					<p>Save<span ng-if='$ctrl.comment.saves.length > 1 || $ctrl.comment.saves.length == 0'>s</span></p>
+				</button>
+			</div>
+		</div>
+
+		<div class='right'>
+			<div class='forum-single-info-text'>
+				<button ng-click="$ctrl.toggleSave($ctrl.comment)">
+					<i class='mdi mdi-heart-outline' ng-class="{'saved': $ctrl.comment.saved}"></i>
+				</button>
+			</div>
+
+			<div class='forum-single-info-item' ng-if="$ctrl.moderator || $ctrl.currentUser == $ctrl.comment.creator._id">
+				<button ng-click="$ctrl.openEditComment($ctrl.comment)">
+					<i class='mdi mdi-pencil'></i>
+				</button>
+			</div>
+
+			
+			<div class='forum-single-info-item' ng-if='$ctrl.moderator || $ctrl.currentUser == $ctrl.comment.creator._id'>
+				<button ng-click="$ctrl.openDeleteComment($ctrl.comment)">
+					<i class='mdi mdi-delete'></i>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

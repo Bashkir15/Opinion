@@ -1,0 +1,38 @@
+.profile-saved-container
+	padding-bottom: 50px
+
+.profile-saved-items
+	display: flex
+	flex-direction: column
+
+.profile-saved-items-header
+	display: flex
+	align-items: center
+	min-height: 150px
+	padding: 0 60px
+
+	h4
+		display: flex
+		flex: 1
+		color: rgba(0,0,0,0.6)
+
+	button
+		span
+			@include open()
+			font-weight: 400
+			letter-spacing: 2px
+			color: rgba(0,0,0,0.5)
+
+.profile-saved-tabs
+	md-tabs-wrapper
+		md-tabs-canvas
+			md-pagination-wrapper
+				.md-tab
+					span
+						//@include open()
+						font-weight: 300
+						//font-size: 16px
+						color: $default-dark-blue
+
+.profile-saved-comments
+	width: 100%

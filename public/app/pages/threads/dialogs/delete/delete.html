@@ -1,0 +1,26 @@
+<md-dialog class='thread-delete-dialog'>
+	<md-dialog-content>
+		<div class='thread-delete-dialog-header'>
+			<h3>Delete Thread</h3>
+			<button ng-click='$ctrl.close()'>
+				<i class='mdi mdi-close'></i>
+			</button>
+		</div>
+
+
+		<div class='thread-delete-dialog-body'>
+			<p>Are you sure you want to PERMENANTLY delete this thread?</p>
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions class='thread-delete-dialog-actions'>
+		<button ng-click="$ctrl.delete()">
+			<span>Delete</span>
+		</button>
+
+		<button ng-click='$ctrl.close()'>
+			<span>Nevermind</span>
+		</button>
+	</md-dialog-actions>
+</md-dialog>
+

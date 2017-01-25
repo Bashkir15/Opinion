@@ -1,0 +1,121 @@
+.forum-list-component-container
+	position: relative
+	padding: 100px 0 80px 0
+	margin-top: -35px
+	background: $default-grey-background
+
+	&.no-comments
+		padding-bottom: 250px
+
+	&.no-threads
+		padding-bottom: 250px
+
+
+.forum-list-view
+	display: flex
+	width: 100%
+
+.forum-list-list
+	width: 100%
+	display: flex
+	flex-direction: column
+
+.forum-single-repeat
+	overflow: hidden
+
+	&.ng-enter
+		transition: all .5s ease
+
+	&.ng-enter-active
+		@include slideInUp()
+
+	&.ng-leave-active
+		@include slideOutDown()
+
+.forum-create-button
+	position: fixed
+	bottom: 40px
+	right: 40px
+
+	&.md-button
+		&.md-fab
+			background-color: $default-light-blue
+			height: 68px
+			width: 68px
+
+			i
+				font-size: 25px
+
+
+			&:hover
+				background-color: lighten($default-dark-blue, 30%)
+
+.load-more-button
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 80px 0
+	background: $default-grey-background 
+
+	button
+		height: 55px
+		width: 150px
+		box-shadow: 0 3px 6px rgba(0,0,0,0.33)
+		background: darken($default-light-blue, 20%)
+		margin-bottom: 50px
+
+		span
+			@include rale()
+			font-weight: 400
+			color: $default-white-background
+
+.forum-list-no-items
+	display: flex
+	flex-direction: column
+	align-items: center
+	width: 90%
+	padding: 30px 0
+	margin: 35px auto 50px auto
+	background: $default-white-background
+	border-left: 4px solid $default-red
+	box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.23)
+
+	> p
+		line-height: 30px
+		padding-bottom: 20px
+		text-align: center
+
+	> span
+		@include rale()
+		font-weight: 400
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.6)
+		text-align: center
+
+@media screen and (min-width: 640px)
+	.forum-list-component-container
+		&.no-threads
+			padding-bottom: 400px
+
+		&.no-comments
+			padding-bottom: 400px
+
+@media screen and (min-width: 1000px)
+	.forum-list-list
+		width: 75%
+		margin-right: 0
+
+	.forum-list-no-items
+		width: 75%
+
+@media screen and (min-width: 1300px)
+	.forum-list-no-items
+		width: 65%
+
+@media screen and (min-width: 1600px)
+	.forum-list-component-container
+		&.no-threads
+			padding-bottom: 540px
+
+		&.no-comments
+			padding-bottom: 540px

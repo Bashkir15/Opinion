@@ -1,0 +1,187 @@
+.update-profile-page-container
+	display: flex
+	flex-direction: column
+	align-items: center
+	padding-bottom: 80px
+
+
+.update-profile-page-header
+	display: flex
+	align-items: center
+	width: 90%
+	margin: 0 auto
+	padding: 40px 20px 45px 20px
+
+	h3
+		display: flex
+		flex: 1
+		color: $default-red
+
+	button
+		span
+			@include open()
+			font-weight: 400
+			font-size: 16px
+			letter-spacing: 2px
+			color: $default-light-blue
+
+
+.update-profile-component-container
+	width: 100%
+
+.update-profile-component
+	width: 90%
+	margin: 0 auto
+
+	> form
+		width: 100%
+
+.update-profile-wrapper
+	width: 100%
+	position: relative
+	margin-bottom: 42px
+
+	label
+		position: absolute
+		left: 12px
+		top: 12px
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.7)
+		opacity: 1
+		transition: all .4s ease
+
+	input
+		position: relative
+		@include open()
+		font-weight: 400
+		width: 100%
+		height: 40px
+		letter-spacing: 2px
+		padding-left: 12px
+		padding-top: 8px
+		color: rgba(0,0,0,0.7)
+		border: 1px solid rgba(0,0,0,0.6)
+		outline: none
+		background: none
+		transition: all .4s ease
+
+	textarea
+		position: relative
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		padding-left: 12px
+		padding-top: 12px
+		width: 100%
+		color: rgba(0,0,0,0.7)
+		border: 1px solid rgba(0,0,0,0.6)
+		outline: none
+		background: none
+		transition: all .4s ease
+
+	&.has-focus
+		label
+			left: -30px
+			opacity: 0
+
+		input
+			border: 1px solid $default-light-blue
+
+		textarea
+			border: 2px solid $default-light-blue
+
+	&.has-success
+		label
+			left: -30px
+			opacity: 0
+
+		input
+			border: 1px solid $default-green
+
+		textarea
+			border: 1px solid $default-green
+
+	&.has-error
+		label
+			left: -30px
+			opacity: 0
+
+		input
+			border: 1px solid $default-red
+
+		&.is-blank
+			label
+				left: 12px
+				opacity: 1
+
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
+	&:not(.is-blank)
+		label
+			left: -30px
+			opacity: 0
+
+
+.update-profile-image-wrapper
+	display: flex
+	align-items: center
+	justify-content: center
+
+	button
+		height: 40px
+		width: 180px
+
+		span
+			@include open()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 19px
+			color: $default-light-blue
+			transition: all .4s ease
+
+			&:hover
+				color: lighten($default-light-blue, 5%)
+
+
+
+.update-profile-submit
+	display: flex
+	align-items: center
+	justify-content: center
+	padding-bottom: 20px
+	width: 100%
+
+	button
+		height: 40px
+		width: 165px
+		background: $default-dark-blue
+		transition: all .4s ease
+
+		span
+			@include rale()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 15px
+			color: $default-white-background
+
+
+		&:hover
+			background: lighten($default-dark-blue, 10%)
+
+@media screen and (min-width: 640px)
+	.update-profile-component
+		width: 80%
+
+@media screen and (min-width: 1024px)
+	.update-profile-component
+		padding-top: 50px
+
+@media screen and (min-width: 1300px)
+	.update-profile-component
+		width: 65%

@@ -1,0 +1,14 @@
+<md-dialog class='thread-dialog'>
+	<md-dialog-content class='thread-dialog-content'>
+		<div class='thread-dialog-header'>
+			<h3>Edit Thread</h3>
+			<button ng-click='$ctrl.close()'>
+				<i class='mdi mdi-close'></i>
+			</button>
+		</div>
+
+		<div class='thread-dialog-edit'>
+			<edit-thread thread='$ctrl._item'></edit-thread>
+		</div>
+	</md-dialog-content>
+</md-dialog>

@@ -1,0 +1,252 @@
+@import "list"
+@import "create"
+@import "single"
+@import "edit"
+@import "delete"
+
+.forum-page-container
+	position: relative
+	padding-top: 100px
+	text-align: center
+	background: $default-white-background
+
+	header
+		padding-bottom: 80px
+
+	> p
+		font-weight: 400
+		line-height: 30px
+		color: rgba(0,0,0,0.6)
+		width: 80%
+		margin: 0 auto
+		padding-bottom: 80px
+
+	&.single-stream-container
+		header
+			padding-bottom: 45px
+
+		> p
+			padding-bottom: 45px
+
+
+.forum-search-container
+	position: relative
+	display: flex
+	align-items: center
+	width: 80%
+	height: 60px
+	padding: 15px 0
+	margin: 35px auto 0 auto
+	//background: $default-light-blue
+	background: $default-dark-blue
+	z-index: 5
+
+	> div
+		display: flex
+		position: relative
+		width: 95%
+		margin: 0 auto
+
+		label
+			position: absolute
+			top: 12px
+			left: 12px
+			z-index: 5
+			font-size: 20px
+			opacity: 1
+			transition: all .4s ease
+
+		input
+			display: flex
+			flex: 1
+			position: relative
+			height: 40px
+			padding-left: 12px
+			@include open()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 16px
+			outline: none
+			border: none
+
+		button
+			height: 42px
+			width: 100px
+			margin-left: 15px
+			//background: darken($default-light-blue, 20%)
+			background: $default-red
+
+			span
+				@include rale()
+				font-weight: 400
+				letter-spacing: 2px
+				font-size: 16px
+				color: $default-white-background
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
+.forum-header-image
+	display: flex
+	align-items: center
+	justify-content: center
+	width: 100%
+
+	> img
+		height: 65px
+		width: 65px
+		margin-bottom: 30px
+		border-radius: 50%
+		border: 1px solid rgba(0,0,0,0.3)
+		box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.23)
+
+.forum-stats
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 20px 0
+
+	> div
+		display: flex
+		flex-direction: column
+		align-items: center
+		width: 120px
+
+		> span
+			font-size: 25px
+			margin-bottom: 10px
+			color: $default-dark-blue
+
+		p
+			@include open()
+			font-weight: 400
+			font-size: 15px
+			letter-spacing: 2px
+			color: #93949b
+
+		&:nth-of-type(1)
+			margin-right: 15px
+
+		&:nth-of-type(2)
+			margin-left: 15px
+
+@media screen and (min-width: 1000px)
+	.forum-search-container
+		> div
+			button
+				width: 135px
+
+@media screen and (min-width: 1300px)
+	.forum-search-container
+		width: 65%
+
+		> div
+			button
+				width: 155px
+
+@media screen and (min-width: 1600px)
+	.forum-search-container
+		width: 50%
+
+
+
+//************************Create*********************//
+
+
+
+
+// *********************** List *********************//
+
+
+
+// ******************* Trending ***********************//
+
+@media screen and (min-width: 1000px)
+	.forum-side-bar
+		width: 20%
+		margin-left: 40px
+		max-height: 900px
+		background: $default-white-background
+
+	.forum-trending-header
+		padding: 25px 0
+		border-bottom: 1px solid rgba(0,0,0,0.12)
+
+	.forum-trending-repeat
+		display: flex
+		flex-direction: column
+		align-items: center
+		padding: 0 15px
+
+		&.ng-move
+			transition: all .4s ease
+
+		&.ng-move-active
+			@include slideInUp()
+
+	.forum-trending-component-container
+		width: 90%
+		margin: 0 auto
+		border-bottom: 1px solid rgba(0,0,0,0.12)
+	
+	.forum-single-trending-component
+		display: flex
+		flex-direction: column
+		padding: 20px 0
+		margin-bottom: 20px
+
+		> div
+			text-overflow: ellipsis
+			word-break: break-all
+
+	.forum-single-trending
+		display: flex
+		flex-direction: column
+		height: 55px
+		width: 100%
+
+		> div
+
+			&:nth-of-type(2)
+				display: flex
+				align-items: stretch
+				padding: 30px 0
+
+				> div
+
+					&:nth-of-type(1)
+						display: flex
+						flex: 1
+						flex-basis: 0
+						align-items: center
+						justify-content: flex-start
+
+						span
+							@include open()
+							font-weight: 400
+							letter-spacing: 2px
+							color: rgba(0,0,0,0.6)
+
+					&:nth-of-type(2)
+						display: flex
+						flex: 1
+						flex-basis: 0
+						align-items: center
+						justify-content: flex-end
+
+						i
+							font-size: 24px
+							color: rgba(0,0,0,0.7)
+							outline: none
+							transition: all .4s ease
+
+							&.subscribed
+								color: $default-green
+
+
+
+
+// ******************* Single *************************//
+

@@ -1,0 +1,13 @@
+<div class='update-profile-page-container'>
+	<div class='update-profile-page-header'>
+		<h3>{{$ctrl.user.username}}: Your profile awaits</h3>
+		<button ng-click="$ctrl.skip()">
+			<span>Skip</span>
+		</button>
+		
+	</div>
+
+	<div class='update-profile-component-container'>
+		<update-profile user='$ctrl.user'></update-profile>
+	</div>
+</div>

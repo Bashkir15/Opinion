@@ -1,0 +1,242 @@
+.auth-page-container
+	display: flex
+	flex-direction: column
+	align-items: center
+	padding: 80px 0
+	background: $default-grey-background
+
+	header
+		padding-bottom: 80px
+
+		h1
+			color: rgba(0,0,0,0.6)
+
+.auth-form
+	width: 90%
+	margin: 0 auto 30px auto
+	background: $default-white-background
+	box-shadow: 0 3px 6px rgba(0,0,0,0.3), 0 3px 6px rgba(0,0,0,0.43)
+
+.auth-form-container
+	padding-top: 70px
+
+.auth-form-wrapper
+	position: relative
+	width: 90%
+	margin: 0 auto 35px auto
+
+	label
+		position: absolute
+		top: 15px
+		left: 12px
+		opacity: 1
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		font-size: 16px
+		color: rgba(0,0,0,0.6)
+		transition: all .4s ease-out
+
+	input
+		position: relative
+		height: 45px
+		width: 100%
+		padding-left: 12px
+		background: none
+		outline: none
+		@include open()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 16px
+		color: rgba(0,0,0,0.6)
+		border: 1px solid rgba(0,0,0,0.6)
+		transition: all .4s ease-out
+
+	&.has-focus
+		input
+			border: 1px solid $default-light-blue
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-success
+		input
+			border: 1px solid $default-green
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-error
+		input
+			border: 1px solid $default-red
+
+		label
+			left: -30px
+			opacity: 0
+
+		&.is-empty
+			label
+				left: 12px
+				opacity: 1
+				color: $default-red
+
+	&.is-empty
+		label
+			left: 12px
+			opacity: 1
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
+.auth-form-submit
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 45px 0 85px 0
+
+	button
+		height: 55px
+		width: 180px
+		border: 1px solid rgba(0,0,0,0.5)
+		transition: all .4s ease-out
+
+		span
+			@include rale()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 20px
+			color: rgba(0,0,0,0.5)
+			transition: all .4s ease-out
+
+		&.form-valid
+
+			box-shadow: 0 3px 6px rgba(0,0,0,0.23)
+			background: $default-dark-blue
+			border: none
+
+			span
+				color: $default-white-background
+				text-transform: uppercase
+
+			&:hover
+				background: lighten($default-dark-blue, 10%)
+
+.auth-form-error-container
+	padding-top: 20px
+	padding-left: 12px
+
+	span
+		@include open()
+		font-weight: 400
+		letter-spacing: 1px
+		font-size: 14px
+		color: $default-red
+
+	&.ng-enter
+		@include slideInUp()
+
+	&.ng-leave
+		@include slideOutDown()
+
+.auth-form-utilities
+	display: flex
+	align-items: stretch
+	padding: 30px 15px
+
+	> div
+		&:nth-of-type(1)
+			display: flex
+			flex: 1
+			flex-basis: 0
+			align-items: center
+			justify-content: flex-start
+
+			md-checkbox
+				margin-bottom: 0
+
+				.md-label
+					span
+						@include rale()
+						font-weight: 400
+						letter-spacing: 2px
+						font-size: 18px
+						color: rgba(0,0,0,0.6)
+
+		&:nth-of-type(2)
+			display: flex
+			flex: 1
+			flex-basis: 0
+			align-items: center
+			justify-content: flex-end
+
+			button
+				span
+					@include open()
+					font-weight: 400
+					letter-spacing: 2px
+					font-size: 16px
+					color: rgba(0,0,0,0.7)
+
+.auth-form-other-link
+	display: flex
+	flex-direction: column
+	align-items: center
+	width: 80%
+	margin: 0 auto
+	padding: 30px 0
+	border-top: 3px solid $default-light-blue
+
+	p
+		padding-bottom: 15px
+		color: $default-grey-text
+
+	a
+		color: darken($default-blue, 20%)
+		@include rale()
+		font-weight: 400
+		letter-spacing: 2px
+		font-size: 18px
+
+
+@media screen and (min-width: 630px)
+
+	.auth-form
+		width: 70%
+
+	.auth-form-submit
+		padding: 60px 0 85px 0
+
+	.auth-form-utilities
+		padding: 30px
+
+@media screen and (min-width: 1000px)
+
+	.auth-form
+		width: 60%
+	
+	.auth-form-container
+		padding-top: 100px
+
+@media screen and (min-width: 1300px)
+
+	.auth-form
+		width: 40%
+
+	.auth-form-wrapper
+		margin-bottom: 50px
+
+	.auth-form-submit
+		button
+			height: 55px
+			width: 220px
+
+	.auth-form-utilities
+		padding: 30px 45px
+
+@media screen and (min-width: 1650px)
+	.auth-form
+		width: 30%

@@ -1,0 +1,32 @@
+<div class='forum-single-component'>
+	<div class='forum-single-container stream-single-container' ui-sref="app.singleStream({streamId: $ctrl.stream._id})">
+		<div class='forum-single-left'>
+			<img ng-src="{{$ctrl.stream.picture}}">
+		</div>
+
+		<div class='forum-single-content'>
+			<h3>{{$ctrl.stream.name}}</h3>
+
+			<p>{{$ctrl.stream.description}}</p>
+		</div>
+	</div>
+
+	<div class='forum-single-info'>
+		<div class='left'>
+			<div class='stream-single-info-text'>
+				<span ng-class="{'subscribed': $ctrl.stream.subscribed}">{{$ctrl.stream.subscribers.length}}</span> <p>Subscriber<span ng-if="$ctrl.stream.subscribers.length > 1 || $ctrl.stream.subscribers.length == 0">s</span></p>
+			</div>
+			<div class='stream-single-info-text'>
+				<span class='stream-info-data'>{{$ctrl.stream.threads.length}}</span> <p>Thread<span ng-if='$ctrl.stream.threads.length > 1 || $ctrl.stream.threads.length == 0'>s</span></p>
+			</div>
+		</div>
+
+		<div class='right'>
+			<div>
+				<button ng-click="$ctrl.toggleSubscribe($ctrl.stream)">
+					<i class='mdi mdi-star-outline' ng-class="{'subscribed': $ctrl.stream.subscribed}"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -10,7 +10,7 @@ import cmq from 'gulp-combine-media-queries'
 import autoprefixer from 'gulp-autoprefixer'
 import sass from 'gulp-sass'
 
-import handleErrors from '../utils/handleErrors',
+import handleErrors from '../utils/handleErrors'
 import config from '../config'
 import { server } from './serve'
 

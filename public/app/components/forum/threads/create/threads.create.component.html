@@ -1,0 +1,40 @@
+<div class='forum-create-container'>
+	<form name='$ctrl.createThread' ng-submit="$ctrl.create($ctrl.createThread.$valid)" novalidate>
+		<div class='forum-form-wrapper' ng-class="{'has-focus': $ctrl.createThread.title.hasFocus,
+			'has-success': $ctrl.createThread.title.$valid,
+			'has-error': $ctrl.createThread.title.$error && $ctrl.createThread.title.$touched && !$ctrl.createThread.title.$valid,
+			'is-empty': !$ctrl.createThread.title.$viewValue}">
+			<label>Name</label>
+			<input type='text' name='title' ng-model="$ctrl.data.title" required ng-focus="$ctrl.createThread.title.hasFocus=true" ng-blur="$ctrl.createThread.title.hasFocus=false">
+		</div>
+
+		<div class='forum-form-wrapper' ng-class="{'has-focus': $ctrl.createThread.content.hasFocus,
+			'has-success': $ctrl.createThread.content.$valid && $ctrl.createThread.content.$touched,
+			'has-error': $ctrl.createThread.content.$error && $ctrl.createThread.content.$touched && !$ctrl.createThread.content.$valid,
+			'is-empty': !$ctrl.createThread.content.$viewValue}">
+			<label>Description</label>
+			<textarea rows='7' cols='40' ng-model='$ctrl.data.content' name='content' ng-focus="$ctrl.createThread.content.hasFocus=true" ng-blur="$ctrl.createThread.content.hasFocus=false">
+			</textarea>
+		</div>
+
+		<div class='forum-form-wrapper forum-link-input'  ng-class="{'has-focus': $ctrl.createThread.link.hasFocus,
+			'has-success': $ctrl.createThread.link.$valid && $ctrl.createThread.content.$touched,
+			'has-error': $ctrl.createThread.link.$error && $ctrl.createThread.link.$touched && !$ctrl.createThread.link.$valid,
+			'is-empty': !$ctrl.createThread.link.$viewValue}" ng-if="$ctrl.hasLink">
+			<label>Link</label>
+			<input type='text' name='link' ng-model="$ctrl.data.link" ng-focus='$ctrl.createThread.link.hasFocus=true' ng-blur="$ctrl.createThread.link.hasFocus=false">
+		</div>
+
+		<div class='forum-form-check'>
+			<md-checkbox ng-model='$ctrl.link' md-true-value="hasLink" ng-change='$ctrl.makeLink()'>
+				Should this be a link?
+			</md-checkbox>
+		</div>
+
+		<div class='forum-form-submit'>
+			<button type='submit' aria-label='submit create thread form' ng-class="{'form-valid': $ctrl.createThread.$valid}">
+				<span>Create!</span>
+			</button>
+		</div>
+	</form>
+</div>

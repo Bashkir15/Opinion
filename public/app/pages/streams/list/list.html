@@ -1,0 +1,47 @@
+<div class='forum-page-container'>
+	<header>
+		<h1>Streams</h1>
+	</header>
+
+	<p>Opinionated is home to over {{$ctrl.streamCount}} different Stream<span ng-if="$ctrl.streamCount.length > 1 || $ctrl.streamCount.length == 0">s</span>, each one with a different purpose and function. There is always something to be discussed or found here. If you don't see a Stream for what you want, feel free to create your own! Remember though, being a moderator can be a hefty task</p>
+
+	<div class='forum-search-container'>
+		<div ng-class="{'has-focus': $ctrl.search.hasFocus}">
+			<label class='mdi mdi-magnify'></label>
+			<input type='text' name='search' ng-model='$ctrl.streamsSearch' ng-change="$ctrl.search()" ng-focus="$ctrl.search.hasFocus=true" ng-blur="$ctrl.search.hasFocus=false">
+			<md-menu md-offset='-15 60'>
+				<button class='large-mobile' ng-click="$mdOpenMenu()">
+					<span>Filter</span>
+				</button>
+
+				<md-menu-content class='forum-search-dropdown'>
+					<md-menu-item>
+						<button ng-click="$ctrl.byThreads()">
+							<span>Threads</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button ng-click='$ctrl.bySubscribers()'>
+							<span>Subscribers</span>
+						</button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<button ng-click='$ctrl.byDate()'>
+							<span>Date</span>
+						</button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</div>
+	</div>
+
+	<streams-list streams="$ctrl.streams"></streams-list>
+
+	<div class='load-more-button streams-load-more-button' ng-if='!$ctrl.noMoreStreams'>
+		<button ng-click="$ctrl.loadMore()">
+			<span>Load More</span>
+		</button>
+	</div>
+</div>

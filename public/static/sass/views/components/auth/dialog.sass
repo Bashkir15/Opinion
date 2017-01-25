@@ -1,0 +1,235 @@
+.auth-dialog
+	display: flex
+	flex-direction: column
+	width: 95%
+	max-width: 95%
+
+
+.auth-dialog-header
+	display: flex
+	align-items: stretch
+	width: 100%
+	height: 50px
+	padding: 35px 15px
+
+	> div
+		&:nth-of-type(1)
+			display: flex
+			flex: 1
+			flex-basis: 0
+			align-items: center
+			justify-content: flex-start
+
+			h3
+				color: $default-red
+
+		&:nth-of-type(2)
+			display: flex
+			align-items: center
+
+			button
+				span
+					font-size: 24px
+					color: $default-light-blue
+
+.auth-dialog-body
+	display: flex
+	flex-direction: column
+	align-items: center
+	width: 75%
+	padding-top: 45px
+	margin: 0 auto
+
+	p
+		line-height: 24px
+
+
+	form
+		padding-top: 40px
+
+
+.auth-dialog-form
+	position: relative
+	width: 100%
+	margin-bottom: 32px
+
+	
+	label
+		position: absolute
+		top: 15px
+		left: 12px
+		opacity: 1
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		font-size: 16px
+		color: rgba(0,0,0,0.7)
+		transition: all .4s ease-out
+
+	input
+		position: relative
+		height: 45px
+		width: 100%
+		padding-left: 12px
+		background: none
+		outline: none
+		@include open()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 16px
+		color: rgba(0,0,0,0.7)
+		border: 1px solid $default-grey-text
+		transition: all .4s ease-out
+
+	&.has-focus
+		input
+			border: 1px solid $default-light-blue
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-success
+		input
+			border: 1px solid $default-green
+
+		label
+			left: -30px
+			opacity: 0
+
+	&.has-error
+		input
+			border: 1px solid $default-red
+
+		label
+			left: -30px
+			opacity: 0
+
+		&.is-empty
+			label
+				left: 12px
+				opacity: 1
+				color: $default-red
+
+	&.is-empty
+		label
+			left: 12px
+			opacity: 1
+
+		&.has-focus
+			label
+				left: -30px
+				opacity: 0
+
+.auth-dialog-actions
+	padding: 20px 0
+
+	button
+		height: 45px
+		width: 130px
+		transition: all .4s ease
+
+		&:nth-of-type(1)
+			background: $default-dark-blue
+
+			&:hover
+				background: lighten($default-dark-blue, 10%)
+
+		
+		&:nth-of-type(2)
+			margin: 0 15px
+			background: $default-red
+
+			&:hover
+				background: lighten($default-red, 10%)
+
+		span
+			@include rale()
+			font-weight: 400
+			letter-spacing: 1px
+			color: $default-white-background
+
+.unauth-dialog-container
+	display: flex
+	flex-direction: column
+	width: 95%
+	max-width: 95%
+	height: 450px
+
+	p
+		@include open()
+		font-weight: 400
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.7)
+		line-height: 24px
+		font-size: 16px
+		padding-bottom: 20px
+		text-align: center
+
+.unauth-dialog-header
+	display: flex
+	align-items: center
+	width: 100%
+	justify-content: flex-end
+	padding: 20px 10px
+
+	button
+		i
+			display: inline-block
+			font-size: 24px
+			color: $default-light-blue
+
+
+.unauth-dialog-tabs
+	md-tabs-wrapper
+		md-tabs-canvas
+			md-pagination-wrapper
+				.md-tab
+					span
+						@include rale()
+						font-weight: 400
+						letter-spacing: 2px
+						font-size: 15px
+						color: rgba(0,0,0,0.7)
+
+					.md-ripple-container
+						color: $default-red
+
+
+
+
+
+@media screen and (min-width: 1000px)
+	.auth-dialog
+		width: 70%
+
+	.auth-dialog-actions
+
+		button
+			width: 160px
+
+	.unauth-dialog-container
+		width: 70%
+		height: 600px
+
+	.unauth-dialog-tabs
+		height: 400px
+
+		md-tabs-content-wrapper
+			height: 400px
+
+@media screen and (min-width: 1600px)
+	.auth-dialog
+		width: 55%
+		
+	.unauth-dialog-container
+		width: 55%
+		height: 800px
+
+	.unauth-dialog-tabs
+		height: 600px
+
+		md-tabs-content-wrapper
+			height: 600px
+
+

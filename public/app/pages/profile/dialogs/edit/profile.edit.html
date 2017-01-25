@@ -1,0 +1,14 @@
+<md-dialog class='profile-edit-dialog'>
+	<md-dialog-content>
+		<div class='profile-edit-dialog-header'>
+			<h3>Edit your profile</h3>
+			<button ng-click="$ctrl.close()" aria-label='close edit profile dialog'>
+				<i class='mdi mdi-close'></i>
+			</button>
+		</div>
+
+		<div class='profile-edit-dialog-content'>
+			<update-profile user="$ctrl.user"></update-profile>
+		</div>
+	</md-dialog-content>
+</md-dialog>

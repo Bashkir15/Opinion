@@ -1,0 +1,9 @@
+
+<comments-list comments="$ctrl.comments"></comments-list>
+
+
+<div class='load-more-button' ng-if="!$ctrl.noMoreComments">
+	<button ng-click="$ctrl.loadMore()">
+		<span>Load More</span>
+	</button>
+</div>

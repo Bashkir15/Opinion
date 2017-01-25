@@ -17,7 +17,7 @@ function addEvents(watcher) {
 
 export function watch(done) {
 	const watchers = [
-		gulp.watch([config.dev.styles, config.dev.mainSass], processStyles)
+		gulp.watch(`${config.dev.sass}`, processStyles)
 	];
 
 	watchers.map(watcher => addEvents(watcher));

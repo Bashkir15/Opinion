@@ -1,0 +1,15 @@
+<md-dialog class='streams-create-dialog'>
+	<md-dialog-content>
+		<div class='streams-create-dialog-header'>
+			<h3>Create A Thread</h3>
+
+			<button ng-click="$ctrl.close()" aria-label="Close create stream dialog">
+				<i class='mdi mdi-close' ng-click="$ctrl.close()"></i>
+			</button>
+		</div>
+
+		<div class='streams-create-dialog-form'>
+			<create-thread stream='$ctrl.stream'></create-thread>
+		</div>
+	</md-dialog-content>
+</md-dialog>

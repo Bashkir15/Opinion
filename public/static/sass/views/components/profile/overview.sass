@@ -1,0 +1,181 @@
+.overview-component-container
+	display: flex
+	flex-direction: column
+	width: 100%
+	height: 100%
+	padding-top: 40px
+
+.profile-overview-component
+	width: 100%
+	height: 100%
+	padding-bottom: 120px
+
+	> div
+		display: flex
+		flex-direction: column
+		align-items: center
+
+.general-info
+	display: flex
+	align-items: center
+	flex-direction: column
+	width: 90%
+	margin: 0 auto 50px auto
+	padding: 25px 10px 50px 10px
+	box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.23)
+
+	> div
+		display: flex
+		align-items: center
+		flex-direction: column
+		width: 100%
+		margin-bottom: 25px
+
+		h3
+			margin-bottom: 15px
+			color: rgba(0,0,0,0.6)
+
+		span
+			@include open()
+			font-weight: 400
+			letter-spacing: 4px
+			font-size: 16px
+			color: rgba(0,0,0,0.5)
+
+.other-info
+	display: flex
+	align-items: center
+	flex-direction: column
+	width: 90%
+	margin: 0 auto 50px auto
+	padding: 25px 10px
+	box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.23)
+
+	> div
+		display: flex
+		align-items: center
+		flex-direction: column
+		width: 100%
+		margin-bottom: 25px
+
+		h3
+			margin-bottom: 15px
+			color: rgba(0,0,0,0.6)
+
+		span
+			@include open()
+			font-weight: 400
+			letter-spcing: 2px
+			font-size: 16px
+			line-height: 28px
+			color: rgba(0,0,0,0.5)
+			width: 85%
+			margin: 0 auto
+			text-align: center
+
+.score-container
+	display: flex
+	align-items: center
+	width: 90%
+	margin: 0 auto 50px auto
+	box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.23)
+
+	> div
+		display: flex
+		flex: 1
+		flex-direction: column
+		align-items: center
+		padding: 15px 0
+
+		&:nth-of-type(1)
+			border-right: 1px solid rgba(0,0,0,0.23)
+
+		span
+			display: inline-block
+			margin-top: 8px
+			@include rale()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 16px
+			color: rgba(0,0,0,0.6)
+
+
+.friends-list
+	display: flex
+	flex-direction: column
+	width: 90%
+	margin: 0 auto
+	box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.23)
+
+.friends-list-header
+	display: flex
+	align-items: center
+	padding: 15px
+	border-bottom: 1px solid rgba(0,0,0,0.12)
+
+	> div
+		display: flex
+		align-items: center
+		flex: 1
+
+		h3
+			color: rgba(0,0,0,0.6)
+
+		span
+			@include rale()
+			font-weight: 400
+			letter-spacing: 2px
+			font-size: 15px
+			color: rgba(0,0,0,0.5)
+
+
+.friends-list-body
+	display: flex
+	flex-direction: column
+	align-items: center
+	padding: 30px 15px
+
+	> div
+		display: flex
+		flex-direction: column
+		align-items: center
+		width: 80%
+		margin: 0 auto 30px auto
+		cursor: pointer
+
+		> img
+			height: 60px
+			width: 60px
+			border-radius: 50%
+			border: 1px solid rgba(0,0,0,0.6)
+			margin-bottom: 10px
+		p
+			font-size: 14px
+			margin-top: 10px
+			color: rgba(0,0,0,0.5)
+
+.friends-list-footer
+	display: flex
+	align-items: center
+	justify-content: flex-end
+	width: 100%
+	padding: 15px 0
+	border-top: 1px solid rgba(0,0,0,0.12)
+
+	> div
+
+		button
+			span
+				@include open()
+				font-weight: 400
+				letter-spacing: 2px
+				font-size: 14px
+				color: rgba(0,0,0,0.6)
+
+@media screen and (min-width: 1250px)
+	.profile-overview-component
+		display: flex
+
+		> div
+			display: flex
+			flex: 1

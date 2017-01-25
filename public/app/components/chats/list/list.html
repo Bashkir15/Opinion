@@ -1,0 +1,9 @@
+<div class='chats-list-component' ng-if='!$ctrl.hideChats'>
+	<div ng-repeat='item in $ctrl.chats'>
+		<single-chat chat='item'></single-chat>
+	</div>
+
+	<div ng-if='!$ctrl.chats.length' class='no-chats'>
+		<p>You have no chats yet. You should message someone</p>
+	</div>
+</div>
