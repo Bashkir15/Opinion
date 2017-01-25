@@ -13,7 +13,6 @@ import expressConfig from './server/config/express'
 
 const environment = process.env.NODE_ENV || 'development'
 const appConfig = require(`./server/config/env/${environment}`);
-var config = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
 const db = mongoose.connect(config.db, () => {
 	console.log('The application has connected to the: ' + config.db + ' database');
 
