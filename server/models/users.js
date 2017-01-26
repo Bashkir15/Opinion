@@ -356,7 +356,7 @@ UserSchema.methods = {
 					return item.unread;
 				}).length;
 				fullData.unread = unread;
-				global.notifications.send(thisUser.socketId, fullData);
+				//global.notifications.send(thisUser.socketId, fullData);
 
 				console.log(thisUser.name, 'was notified');
 			}

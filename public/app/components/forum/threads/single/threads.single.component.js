@@ -15,13 +15,14 @@ class SingleThreadCtrl {
 			this.currentUser = this._Auth.getUser()._id;
 		}
 
-		if (this._$state.current.name == 'app.singleStream') {
+	/*	if (this._$state.current.name == 'app.singleStream') {
+			console.log(this.thread);
 			this.thread.stream.moderators.forEach((moderator) => {
 				if (this.currentUser == moderator) {
 					this.moderator = true;
 				}
 			});
-		}
+		}*/
 	}
 
 	toggleSave(item) {
@@ -81,7 +82,6 @@ class SingleThreadCtrl {
 
 
 let singleThread = {
-	scope: {},
 	bindings: {
 		thread: '<'
 	},

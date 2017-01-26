@@ -17,6 +17,8 @@ class threadListController {
 		}
 
 		this.streamId = $stateParams.streamId;
+		this.$postLink = this.postLink;
+
 
 		$rootScope.$on('threadByScore', () => {
 			if (this.rowFilter == '-score') {
@@ -51,6 +53,12 @@ class threadListController {
 		});
 	}
 
+	postLink() {
+		console.log(this.threads);
+		console.log(this.stream);
+	}
+
+
 	openCreateThread() {
 		this._$dialog.show({
 			templateUrl: './app/pages/threads/dialogs/create/create.html',
@@ -63,7 +71,7 @@ class threadListController {
 
 
 let threadsList = {
-	scope: {},
+	transclude: true,
 	bindings: {
 		threads: '<'
 	},

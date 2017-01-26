@@ -1672,6 +1672,7 @@ webpackJsonp([1],[
 			}
 
 			this.streamId = $stateParams.streamId;
+			this.$postLink = this.postLink;
 
 			$rootScope.$on('threadByScore', function () {
 				if (_this.rowFilter == '-score') {
@@ -1707,6 +1708,12 @@ webpackJsonp([1],[
 		}
 
 		_createClass(threadListController, [{
+			key: 'postLink',
+			value: function postLink() {
+				console.log(this.threads);
+				console.log(this.stream);
+			}
+		}, {
 			key: 'openCreateThread',
 			value: function openCreateThread() {
 				this._$dialog.show({
@@ -1722,7 +1729,7 @@ webpackJsonp([1],[
 	}();
 
 	var threadsList = {
-		scope: {},
+		transclude: true,
 		bindings: {
 			threads: '<'
 		},
@@ -1750,8 +1757,6 @@ webpackJsonp([1],[
 		function SingleThreadCtrl(Auth, Thread, $stateParams, $state, $mdDialog) {
 			'ngInject';
 
-			var _this = this;
-
 			_classCallCheck(this, SingleThreadCtrl);
 
 			this._$stateParams = $stateParams;
@@ -1767,13 +1772,14 @@ webpackJsonp([1],[
 				this.currentUser = this._Auth.getUser()._id;
 			}
 
-			if (this._$state.current.name == 'app.singleStream') {
-				this.thread.stream.moderators.forEach(function (moderator) {
-					if (_this.currentUser == moderator) {
-						_this.moderator = true;
-					}
-				});
-			}
+			/*	if (this._$state.current.name == 'app.singleStream') {
+	  		console.log(this.thread);
+	  		this.thread.stream.moderators.forEach((moderator) => {
+	  			if (this.currentUser == moderator) {
+	  				this.moderator = true;
+	  			}
+	  		});
+	  	}*/
 		}
 
 		_createClass(SingleThreadCtrl, [{
@@ -1806,10 +1812,10 @@ webpackJsonp([1],[
 		}, {
 			key: 'delete',
 			value: function _delete(item) {
-				var _this2 = this;
+				var _this = this;
 
 				this._Thread.remove(item._id).then(function (response) {
-					_this2._$state.reload();
+					_this._$state.reload();
 				});
 			}
 		}, {
@@ -1844,7 +1850,6 @@ webpackJsonp([1],[
 	}();
 
 	var singleThread = {
-		scope: {},
 		bindings: {
 			thread: '<'
 		},
