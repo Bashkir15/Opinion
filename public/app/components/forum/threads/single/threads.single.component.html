@@ -16,10 +16,10 @@
 
 		<div class='forum-single-container thread-single-container'>
 			<div class='forum-score-container above-mobile'>
-				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.thread.liked}" ng-click="$ctrl.like($ctrl.thread)"></span>
+				<span class='mdi mdi-chevron-up' ng-class="{'liked': $ctrl.thread.liked}" ng-click="$ctrl.like($ctrl.thread)" aria-label='like'></span>
 				<span ng-class="{'positive': $ctrl.thread.score >= 1,
 				'negative': $ctrl.thread.score <= -1}">{{$ctrl.thread.score}}</span>
-				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.thread.disliked}" ng-click="$ctrl.unlike($ctrl.thread)"></span>
+				<span class='mdi mdi-chevron-down' ng-class="{'disliked': $ctrl.thread.disliked}" ng-click="$ctrl.unlike($ctrl.thread)" aria-label='dislike'></span>
 			</div>
 
 			<div class='forum-single-content'>
@@ -35,7 +35,7 @@
 	<div class='forum-single-info'>
 		<div class='left'>
 			<div class='forum-single-info-text'>
-				<button ui-sref="app.singleThread({streamId: $ctrl.streamId, threadId: $ctrl.thread._id})">
+				<button ui-sref="app.singleThread({streamId: $ctrl.streamId, threadId: $ctrl.thread._id})" aria-label='view comments'>
 				<span>{{$ctrl.thread.comments.length}}</span>
 				<i class='mdi mdi-comment-outline mobile'></i>
 				<p class='above-mobile'>Comment<span ng-if="$ctrl.thread.comments.length > 1 || $ctrl.thread.comments.length == 0">s</span></p>
@@ -43,7 +43,7 @@
 			</div>
 
 			<div class='forum-single-info-text'>
-				<button>
+				<button aria-label='thread views'>
 					<span>{{$ctrl.thread.views}}</span>
 					<i class='mobile mdi mdi-eye'></i>
 					<p class='above-mobile'>View<span ng-if='$ctrl.thread.views > 1 || $ctrl.thread.views == 0'>s</span></p>
@@ -51,7 +51,7 @@
 			</div>
 
 			<div class='forum-single-info-text'>
-				<button>
+				<button aria-label='thread saves'>
 					<span>{{$ctrl.thread.saves.length}}</span>
 					<i class='mobile mdi mdi-heart-outline'></i>
 					<p class='above-mobile'>Save<span ng-if="$ctrl.thread.saves.length > 1 || $ctrl.thread.saves.length == 0">s</span></p>
@@ -61,19 +61,19 @@
 
 		<div class='right'>
 			<div class='forum-single-info-text'>
-				<button ng-click="$ctrl.toggleSave($ctrl.thread)">
+				<button ng-click="$ctrl.toggleSave($ctrl.thread)" type='button' aria-label='save thread'>
 					<i class='mdi mdi-heart-outline' ng-class="{'saved': $ctrl.thread.saved}"></i>
 				</button>
 			</div>
 
 			<div class='forum-single-ino-text' ng-if="$ctrl.moderator || $ctrl.currentUser == $ctrl.thread.creator._id">
-				<button ng-click="$ctrl.openEditThread($ctrl.thread)">
+				<button ng-click="$ctrl.openEditThread($ctrl.thread)" type='button' aria-label='edit thread'>
 					<i class='mdi mdi-pencil'></i>
 				</button>
 			</div>
 
 			<div class='forum-single-info-text' ng-if="$ctrl.moderator || $ctrl.currentUser == $ctrl.thread.creator._id">
-				<button ng-click="$ctrl.openDeleteThread($ctrl.thread)">
+				<button ng-click="$ctrl.openDeleteThread($ctrl.thread)" type='button' aria-label='delete thread'>
 					<i class='mdi mdi-delete'></i>
 				</button>
 			</div>

@@ -8,7 +8,7 @@
 			<label class='mdi mdi-magnify'></label>
 			<input type='text' name='search' ng-model='$ctrl.commentsSearch' ng-change="$ctrl.search()" ng-focus="$ctrl.search.hasFocus=true" ng-blur="$ctrl.search.hasFocus=false">
 			<md-menu md-offset='-15 60'>
-				<button class='large-mobile' ng-click="$mdOpenMenu()">
+				<button class='large-mobile' ng-click="$mdOpenMenu()" aria-label='filter comments' type='button'>
 					<span>Filter</span>
 				</button>
 
@@ -39,7 +39,7 @@
 	<comments-list comments="$ctrl.comments" class='comments-list-component'></comments-list>
 
 	<div class='load-more-button' ng-if="!$ctrl.noMoreComments">
-		<button ng-click="$ctrl.loadMore()">
+		<button ng-click="$ctrl.loadMore()" type='button' aria-label='load more comments'>
 			<span>Load More</span>
 		</button>
 	</div>
