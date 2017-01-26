@@ -48,7 +48,8 @@
 		</div>
 
 		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
-			<md-menu class='nav-chats-menu' md-offset='0 15'>
+			<notifications></notifications>
+			<!-- <md-menu class='nav-chats-menu' md-offset='0 15'>
 				<button ng-click="$mdOpenMenu()">
 					<span class='mdi mdi-email'><div ng-if='$ctrl.messageCount > 0' class='nav-notification-count'><span>{{$ctrl.messageCount}}</span></div></span>
 				</button>
@@ -80,39 +81,9 @@
 						<p>See all Messages</p>
 					</md-menu-item>
 				</md-menu-content>
-			</md-menu>
+			</md-menu> -->
 		</div>
 
-		<div class='nav-item nav-menu-icon' ng-if='$ctrl.isLoggedIn'>
-			<md-menu class='nav-notifications-menu' md-offset='0 15'>
-				<button ng-click="$mdOpenMenu()">
-					<span class='mdi mdi-bell'><div ng-if='$ctrl.notificationCount > 0' class='nav-notification-count'><span>{{$ctrl.notificationCount}}</span></div></span>
-				</button>
-
-				<md-menu-content class='nav-notifications-dropdown'>
-					<md-menu-item ng-repeat="item in $ctrl.notifications" ng-if="$ctrl.notifications.length">
-						<div class='notification' ng-click="$ctrl.notificationAction(item)">
-							<div class='notification-header'>
-								<div></div>
-								<p>{{item.display.text}}</p>
-							</div>
-
-							<span am-time-ago="item.created"></span>
-						</div>
-					</md-menu-item>
-
-					<md-menu-item ng-click="$ctrl.markAsRead()" ng-if="$ctrl.notifications.length" class='mark-all-as-read'>
-						<p>Mark all as read</p>
-					</md-menu-item>
-
-					<md-menu-item ng-if="!$ctrl.notifications.length" class='no-notifications'>
-						<div>
-							<p>You have no new notifications</p>
-						</div>
-					</md-menu-item>
-				</md-menu-content>
-			</md-menu>
-		</div>
 
 
 

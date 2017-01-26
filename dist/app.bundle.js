@@ -2122,12 +2122,8 @@ webpackJsonp([1],[
 
 			if (this.isLoggedIn) {
 				this.getUserInfo();
-				this.updateNotifications();
 				this.updateChats();
 			}
-
-			this.notificationCount = 0;
-			this.notifications = [];
 
 			this._$rootScope.$on('$stateChangeStart', function () {
 				_this._$sidenav('user-menu').close();
@@ -2164,128 +2160,25 @@ webpackJsonp([1],[
 		}
 
 		_createClass(navCtrl, [{
-			key: 'markRead',
-			value: function markRead(item) {
-				var _this2 = this;
-
-				var record = this._User.notificationsRead(item._id).then(function (response) {
-					if (response.data.res.notifications) {
-						response.data.res.notifications.map(function (item) {
-							item.display = _this2.NotificationText(item);
-
-							if (item.thread) {
-								item.href = 'app.singleThread({threadId: item.thread._id, streamId: item.thread.stream})';
-							}
-
-							if (item.user) {
-								item.href = 'app.profile.overview({userId: item.user._id})';
-							}
-						});
-					}
-
-					_this2.notifications = response.data.res.notifications;
-					_this2.notificationCount = response.data.res.notifications.length;
-				});
-			}
-		}, {
-			key: 'markAsRead',
-			value: function markAsRead() {
-				var _this3 = this;
-
-				this._User.markRead(this.storedUser._id, this.notifications).then(function (response) {
-					_this3.updateNotifications();
-				});
-			}
-		}, {
-			key: 'notificationAction',
-			value: function notificationAction(item) {
-				if (item.thread) {
-					this._$location.url(item.thread.stream + '/' + item.thread._id);
-				}
-
-				if (item.user) {
-					this._$location.url('profile/' + item.actor._id + '/overview');
-				}
-
-				if (item.thread && item.user) {
-					this._$location.url(item.thread.stream + '/' + item.thread._id);
-				}
-			}
-		}, {
-			key: 'updateNotifications',
-			value: function updateNotifications() {
-				var _this4 = this;
-
-				this._User.notifications().then(function (response) {
-					if (response.data.res.notifications) {
-						response.data.res.notifications.map(function (item) {
-							item.display = _this4.NotificationText(item);
-						});
-					}
-
-					_this4.notifications = response.data.res.notifications;
-					_this4.notificationCount = response.data.res.notifications ? response.data.res.notifications.length : 0;
-				});
-			}
-		}, {
 			key: 'updateChats',
 			value: function updateChats() {
-				var _this5 = this;
+				var _this2 = this;
 
 				this._Chat.findUnread(this.storedUser._id).then(function (response) {
-					_this5.chats = response.data.res.records, _this5.messageCount = response.data.res.unread;
+					_this2.chats = response.data.res.records, _this2.messageCount = response.data.res.unread;
 				});
 			}
 		}, {
 			key: 'doChatAction',
 			value: function doChatAction(item) {
-				var _this6 = this;
+				var _this3 = this;
 
 				this._Chat.markRead(item._id).then(function (response) {
-					_this6.messageCount -= 1;
+					_this3.messageCount -= 1;
 					angular.extend(item, response.data.res.record);
-					_this6.updateChats();
-					_this6._$state.go("app.chats.inbox", { reload: true });
+					_this3.updateChats();
+					_this3._$state.go("app.chats.inbox", { reload: true });
 				});
-			}
-		}, {
-			key: 'NotificationText',
-			value: function NotificationText(obj) {
-				if (!obj) {
-					return { text: '' };
-				}
-
-				var msg = '';
-				var actor = obj.actor;
-
-				switch (obj.notificationType) {
-					case 'liked':
-						msg = actor.name + ' has liked a post';
-						break;
-
-					case 'comment':
-						msg = actor.name + ' has commented on a post';
-						break;
-
-					case 'followed':
-						msg = actor.name + ' is now following you';
-						break;
-
-					case 'saved':
-						msg = actor.name + ' has saved a thread';
-
-					case 'feed':
-						msg = actor.name + ' just created a new thread';
-						break;
-
-					case 'mention':
-						msg = actor.name + ' has just mentioned you in a thread';
-						break;
-				}
-
-				return {
-					text: msg
-				};
 			}
 		}, {
 			key: 'openUserMenu',
@@ -2295,16 +2188,16 @@ webpackJsonp([1],[
 		}, {
 			key: 'getUserInfo',
 			value: function getUserInfo() {
-				var _this7 = this;
+				var _this4 = this;
 
 				this._User.single(this.storedUser._id).then(function (response) {
-					_this7.user = response.data.res.record;
+					_this4.user = response.data.res.record;
 				});
 			}
 		}, {
 			key: 'getStreams',
 			value: function getStreams(options) {
-				var _this8 = this;
+				var _this5 = this;
 
 				options = options || {};
 
@@ -2312,12 +2205,12 @@ webpackJsonp([1],[
 					options.subscribed = true;
 
 					this._Stream.get(options).then(function (response) {
-						_this8.streams = response.data.res.records;
+						_this5.streams = response.data.res.records;
 					});
 				} else {
 					options.unsubscribed = true;
 					this._Stream.get(options).then(function (response) {
-						_this8.streams = response.data.res.records;
+						_this5.streams = response.data.res.records;
 					});
 				}
 			}
@@ -2415,10 +2308,15 @@ webpackJsonp([1],[
 
 	var _nav2 = _interopRequireDefault(_nav);
 
+	var _notifications = __webpack_require__(212);
+
+	var _notifications2 = _interopRequireDefault(_notifications);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var sharedComponents = _angular2.default.module('shared.components', []);
 	sharedComponents.component('appNav', _nav2.default);
+	sharedComponents.component('notifications', _notifications2.default);
 
 	exports.default = sharedComponents;
 
@@ -6078,6 +5976,160 @@ webpackJsonp([1],[
 	}();
 
 	exports.default = threadService;
+
+/***/ },
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var notificationCtrl = function () {
+		function notificationCtrl($rootScope, Auth, User) {
+			var _this = this;
+
+			_classCallCheck(this, notificationCtrl);
+
+			this._$rootScope = $rootScope;
+			this._Auth = Auth;
+			this._User = User;
+			this._isLoggedIn = this._Auth.isLoggedIn();
+
+			this.notificationCount = 0;
+			this.notifications = [];
+
+			this.$onInit = function () {
+				if (_this._isLoggedIn) {
+					_this.updateNotifications();
+				}
+			};
+		}
+
+		_createClass(notificationCtrl, [{
+			key: 'markRead',
+			value: function markRead(item) {
+				var _this2 = this;
+
+				var record = this._User.notificationsRead(item._id).then(function (response) {
+					if (response.data.res.notifications) {
+						response.data.res.notifications.map(function (item) {
+							item.display = _this2.NotificationText(item);
+
+							if (item.thread) {
+								item.href = 'app.singleThread({threadId: item.thread._id, streamId: item.thread.stream})';
+							}
+
+							if (item.user) {
+								item.href = 'app.profile.overview({userId: item.user._id})';
+							}
+						});
+					}
+
+					_this2.notifications = response.data.res.notifications;
+					_this2.notificationCount = response.data.res.notifications.length;
+				});
+			}
+		}, {
+			key: 'markAsRead',
+			value: function markAsRead() {
+				var _this3 = this;
+
+				this._User.markRead(this.storedUser._id, this.notifications).then(function (response) {
+					_this3.updateNotifications();
+				});
+			}
+		}, {
+			key: 'notificationAction',
+			value: function notificationAction(item) {
+				if (item.thread) {
+					this._$location.url(item.thread.stream + '/' + item.thread._id);
+				}
+
+				if (item.user) {
+					this._$location.url('profile/' + item.actor._id + '/overview');
+				}
+
+				if (item.thread && item.user) {
+					this._$location.url(item.thread.stream + '/' + item.thread._id);
+				}
+			}
+		}, {
+			key: 'updateNotifications',
+			value: function updateNotifications() {
+				var _this4 = this;
+
+				this._User.notifications().then(function (response) {
+					if (response.data.res.notifications) {
+						response.data.res.notifications.map(function (item) {
+							item.display = _this4.NotificationText(item);
+						});
+					}
+
+					_this4.notifications = response.data.res.notifications;
+					_this4.notificationCount = response.data.res.notifications ? response.data.res.notifications.length : 0;
+				});
+			}
+		}, {
+			key: 'NotificationText',
+			value: function NotificationText(obj) {
+				if (!obj) {
+					return { text: '' };
+				}
+
+				var msg = '';
+				var actor = obj.actor;
+
+				switch (obj.notificationType) {
+					case 'liked':
+						msg = actor.name + ' has liked a post';
+						break;
+
+					case 'comment':
+						msg = actor.name + ' has commented on a post';
+						break;
+
+					case 'followed':
+						msg = actor.name + ' is now following you';
+						break;
+
+					case 'saved':
+						msg = actor.name + ' has saved a thread';
+
+					case 'feed':
+						msg = actor.name + ' just created a new thread';
+						break;
+
+					case 'mention':
+						msg = actor.name + ' has just mentioned you in a thread';
+						break;
+				}
+
+				return {
+					text: msg
+				};
+			}
+		}]);
+
+		return notificationCtrl;
+	}();
+
+	var notificationsComponent = {
+		controller: notificationCtrl,
+		templateUrl: './app/components/shared/notifications/notifications.html'
+	};
+
+	exports.default = notificationsComponent;
 
 /***/ }
 ]);
