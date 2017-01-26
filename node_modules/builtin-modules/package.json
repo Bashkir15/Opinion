@@ -34,6 +34,7 @@
     "type": "range"
   },
   "_requiredBy": [
+    "/eslint-plugin-import",
     "/is-builtin-module"
   ],
   "_resolved": "https://registry.npmjs.org/builtin-modules/-/builtin-modules-1.1.1.tgz",

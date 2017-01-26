@@ -16,8 +16,8 @@
   "dependencies": {
     "angular": "^1.6.1",
     "angular-animate": "^1.6.1",
+    "angular-aria": "^1.6.1",
     "angular-material": "^1.1.1",
-    "angular-moment": "^1.0.1",
     "angular-ui-router": "^0.4.2",
     "async": "^2.1.4",
     "bcryptjs": "^2.4.0",
@@ -26,21 +26,19 @@
     "connect-multiparty": "^2.0.0",
     "express": "^4.14.0",
     "express-status-monitor": "^0.1.9",
-    "fs": "0.0.1-security",
     "handlebars": "^4.0.6",
     "http": "0.0.0",
     "jsonwebtoken": "^7.2.1",
     "lodash.escape": "^4.0.1",
     "mdi": "^1.8.36",
     "moment": "^2.17.1",
-    "mongoose": "^4.7.7",
+    "mongoose": "^4.7.8",
     "morgan": "^1.7.0",
     "ng-file-upload": "^12.2.13",
     "nodemailer": "^2.7.2",
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "auto-prefixer": "^0.4.2",
     "babel": "^6.5.2",
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
@@ -50,7 +48,7 @@
     "babel-register": "^6.22.0",
     "browser-sync": "^2.18.6",
     "chalk": "^1.1.3",
-    "eslint": "^3.14.0",
+    "eslint": "^3.14.1",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.2.0",
     "gulp": "github:gulpjs/gulp#4.0",
@@ -67,13 +65,13 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.4.0",
-    "gulp-uglify": "^2.0.0",
+    "gulp-uglify": "^2.0.1",
     "gulp-uglifycss": "^1.0.6",
     "gulp-util": "^3.0.8",
-    "imagemin-pngquant": "^5.0.0",
     "isparta": "^4.0.0",
     "minimist": "^1.2.0",
     "system-bell-webpack-plugin": "^1.0.0",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-vendor-chunk-plugin": "^1.0.0"
   }
 }
