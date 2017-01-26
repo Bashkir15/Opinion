@@ -12,6 +12,15 @@ class messagesCtrl {
 				this.updateChats();
 			}
 		};
+
+		this._$rootScope.$on('newChatMessage', (event, data) => {
+			data.participants.forEach((participant) => {
+				if (this.user._id == participant._id) {
+					this.updateChats();
+				}
+			});
+		});
+
 	}
 
 	updateChats() {

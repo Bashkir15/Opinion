@@ -2122,7 +2122,6 @@ webpackJsonp([1],[
 
 			if (this.isLoggedIn) {
 				this.getUserInfo();
-				this.updateChats();
 			}
 
 			this._$rootScope.$on('$stateChangeStart', function () {
@@ -2131,20 +2130,6 @@ webpackJsonp([1],[
 
 			this._$rootScope.$on('streamCreated', function () {
 				_this._$dialog.hide();
-			});
-
-			this._$rootScope.$on('newNotification', function (event, data) {
-				if (_this.user._id == data.userId) {
-					_this.updateNotifications();
-				}
-			});
-
-			this._$rootScope.$on('newChatMessage', function (event, data) {
-				data.participants.forEach(function (participant) {
-					if (_this.user._id == participant._id) {
-						_this.updateChats();
-					}
-				});
 			});
 
 			this._$rootScope.$on('unauthedRequest', function () {
@@ -2160,27 +2145,6 @@ webpackJsonp([1],[
 		}
 
 		_createClass(navCtrl, [{
-			key: 'updateChats',
-			value: function updateChats() {
-				var _this2 = this;
-
-				this._Chat.findUnread(this.storedUser._id).then(function (response) {
-					_this2.chats = response.data.res.records, _this2.messageCount = response.data.res.unread;
-				});
-			}
-		}, {
-			key: 'doChatAction',
-			value: function doChatAction(item) {
-				var _this3 = this;
-
-				this._Chat.markRead(item._id).then(function (response) {
-					_this3.messageCount -= 1;
-					angular.extend(item, response.data.res.record);
-					_this3.updateChats();
-					_this3._$state.go("app.chats.inbox", { reload: true });
-				});
-			}
-		}, {
 			key: 'openUserMenu',
 			value: function openUserMenu() {
 				this._$sidenav('user-menu').toggle();
@@ -2188,16 +2152,16 @@ webpackJsonp([1],[
 		}, {
 			key: 'getUserInfo',
 			value: function getUserInfo() {
-				var _this4 = this;
+				var _this2 = this;
 
 				this._User.single(this.storedUser._id).then(function (response) {
-					_this4.user = response.data.res.record;
+					_this2.user = response.data.res.record;
 				});
 			}
 		}, {
 			key: 'getStreams',
 			value: function getStreams(options) {
-				var _this5 = this;
+				var _this3 = this;
 
 				options = options || {};
 
@@ -2205,12 +2169,12 @@ webpackJsonp([1],[
 					options.subscribed = true;
 
 					this._Stream.get(options).then(function (response) {
-						_this5.streams = response.data.res.records;
+						_this3.streams = response.data.res.records;
 					});
 				} else {
 					options.unsubscribed = true;
 					this._Stream.get(options).then(function (response) {
-						_this5.streams = response.data.res.records;
+						_this3.streams = response.data.res.records;
 					});
 				}
 			}
@@ -6019,6 +5983,12 @@ webpackJsonp([1],[
 					_this.updateNotifications();
 				}
 			};
+
+			this._$rootScope.$on('newNotification', function (event, data) {
+				if (_this.user._id == data.userId) {
+					_this.updateNotifications();
+				}
+			});
 		}
 
 		_createClass(notificationCtrl, [{
@@ -6140,7 +6110,7 @@ webpackJsonp([1],[
 /* 213 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -6168,10 +6138,18 @@ webpackJsonp([1],[
 					_this.updateChats();
 				}
 			};
+
+			this._$rootScope.$on('newChatMessage', function (event, data) {
+				data.participants.forEach(function (participant) {
+					if (_this.user._id == participant._id) {
+						_this.updateChats();
+					}
+				});
+			});
 		}
 
 		_createClass(messagesCtrl, [{
-			key: "updateChats",
+			key: 'updateChats',
 			value: function updateChats() {
 				var _this2 = this;
 
@@ -6180,7 +6158,7 @@ webpackJsonp([1],[
 				});
 			}
 		}, {
-			key: "doChatAction",
+			key: 'doChatAction',
 			value: function doChatAction(item) {
 				var _this3 = this;
 

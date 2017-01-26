@@ -19,7 +19,6 @@ class navCtrl {
 
 		if (this.isLoggedIn) {
 			this.getUserInfo();
-			this.updateChats();
 		}
 
 		this._$rootScope.$on('$stateChangeStart', () => {
@@ -28,20 +27,6 @@ class navCtrl {
 
 		this._$rootScope.$on('streamCreated', () => {
 			this._$dialog.hide();
-		});
-
-		this._$rootScope.$on('newNotification', (event, data) => {
-			if (this.user._id == data.userId) {
-				this.updateNotifications();
-			}
-		});
-
-		this._$rootScope.$on('newChatMessage', (event, data) => {
-			data.participants.forEach((participant) => {
-				if (this.user._id == participant._id) {
-					this.updateChats();
-				}
-			});
 		});
 
 		this._$rootScope.$on('unauthedRequest', () => {
@@ -57,22 +42,6 @@ class navCtrl {
 		this.getStreams();
 	}
 
-
-	updateChats() {
-		this._Chat.findUnread(this.storedUser._id).then((response) => {
-			this.chats = response.data.res.records,
-			this.messageCount = response.data.res.unread
-		});
-	}
-
-	doChatAction(item) {
-		this._Chat.markRead(item._id).then((response) => {
-			this.messageCount -= 1;
-			angular.extend(item, response.data.res.record);
-			this.updateChats();
-			this._$state.go("app.chats.inbox", {reload: true});
-		});
-	}
 
 	openUserMenu() {
 		this._$sidenav('user-menu').toggle();

@@ -13,6 +13,12 @@ class notificationCtrl {
 				this.updateNotifications();
 			}
 		}
+
+		this._$rootScope.$on('newNotification', (event, data) => {
+			if (this.user._id == data.userId) {
+				this.updateNotifications();
+			}
+		});
 	}
 
 
