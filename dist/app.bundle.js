@@ -2312,11 +2312,16 @@ webpackJsonp([1],[
 
 	var _notifications2 = _interopRequireDefault(_notifications);
 
+	var _messages = __webpack_require__(213);
+
+	var _messages2 = _interopRequireDefault(_messages);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var sharedComponents = _angular2.default.module('shared.components', []);
 	sharedComponents.component('appNav', _nav2.default);
 	sharedComponents.component('notifications', _notifications2.default);
+	sharedComponents.component('messages', _messages2.default);
 
 	exports.default = sharedComponents;
 
@@ -6130,6 +6135,73 @@ webpackJsonp([1],[
 	};
 
 	exports.default = notificationsComponent;
+
+/***/ },
+/* 213 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var messagesCtrl = function () {
+		function messagesCtrl(Auth, Chat) {
+			var _this = this;
+
+			_classCallCheck(this, messagesCtrl);
+
+			this._Auth = Auth;
+			this._Chat = Chat;
+
+			this.User = this._Auth.getUser();
+			this.chats = [];
+			this.messageCount;
+
+			this.$onInit = function () {
+				if (_this.User) {
+					_this.updateChats();
+				}
+			};
+		}
+
+		_createClass(messagesCtrl, [{
+			key: "updateChats",
+			value: function updateChats() {
+				var _this2 = this;
+
+				this._Chat.findUnread(this.User._id).then(function (response) {
+					_this2.chats = response.data.res.records, _this2.messageCount = response.data.res.unread;
+				});
+			}
+		}, {
+			key: "doChatAction",
+			value: function doChatAction(item) {
+				var _this3 = this;
+
+				this._Chat.markRead(item._id).then(function (response) {
+					_this3.messageCount -= 1;
+					angular.extend(item, response.data.res.record);
+					_this3.updateChats();
+					_this3._$state.go("app.chats.inbox", { reload: true });
+				});
+			}
+		}]);
+
+		return messagesCtrl;
+	}();
+
+	var messagesComponent = {
+		controller: messagesCtrl,
+		templateUrl: './app/components/shared/messages/messages.html'
+	};
+
+	exports.default = messagesComponent;
 
 /***/ }
 ]);
