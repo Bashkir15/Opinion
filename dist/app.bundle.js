@@ -1672,7 +1672,6 @@ webpackJsonp([1],[
 			}
 
 			this.streamId = $stateParams.streamId;
-			this.$postLink = this.postLink;
 
 			$rootScope.$on('threadByScore', function () {
 				if (_this.rowFilter == '-score') {
@@ -1708,12 +1707,6 @@ webpackJsonp([1],[
 		}
 
 		_createClass(threadListController, [{
-			key: 'postLink',
-			value: function postLink() {
-				console.log(this.threads);
-				console.log(this.stream);
-			}
-		}, {
 			key: 'openCreateThread',
 			value: function openCreateThread() {
 				this._$dialog.show({
@@ -1731,7 +1724,8 @@ webpackJsonp([1],[
 	var threadsList = {
 		transclude: true,
 		bindings: {
-			threads: '<'
+			threads: '<',
+			stream: '<'
 		},
 		controller: threadListController,
 		templateUrl: './app/components/forum/threads/list/threads.list.component.html'
@@ -1754,8 +1748,10 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var SingleThreadCtrl = function () {
-		function SingleThreadCtrl(Auth, Thread, $stateParams, $state, $mdDialog) {
+		function SingleThreadCtrl(Auth, Thread, $stateParams, $state, $mdDialog, $rootScope) {
 			'ngInject';
+
+			var _this = this;
 
 			_classCallCheck(this, SingleThreadCtrl);
 
@@ -1763,23 +1759,19 @@ webpackJsonp([1],[
 			this.streamId = this._$stateParams.streamId;
 			this._$state = $state;
 			this._$dialog = $mdDialog;
+			this._$rootScope = $rootScope;
 
 			this._Thread = Thread;
 			this._Auth = Auth;
 			this._isLoggedIn = this._Auth.isLoggedIn();
 
+			this._$rootScope.$on('isModerator', function () {
+				_this.moderator = true;
+			});
+
 			if (this._isLoggedIn) {
 				this.currentUser = this._Auth.getUser()._id;
 			}
-
-			/*	if (this._$state.current.name == 'app.singleStream') {
-	  		console.log(this.thread);
-	  		this.thread.stream.moderators.forEach((moderator) => {
-	  			if (this.currentUser == moderator) {
-	  				this.moderator = true;
-	  			}
-	  		});
-	  	}*/
 		}
 
 		_createClass(SingleThreadCtrl, [{
@@ -1812,10 +1804,10 @@ webpackJsonp([1],[
 		}, {
 			key: 'delete',
 			value: function _delete(item) {
-				var _this = this;
+				var _this2 = this;
 
 				this._Thread.remove(item._id).then(function (response) {
-					_this._$state.reload();
+					_this2._$state.reload();
 				});
 			}
 		}, {
@@ -4729,6 +4721,7 @@ webpackJsonp([1],[
 					_this2.stream.moderators.forEach(function (moderator) {
 						if (_this2.currentUser == moderator._id) {
 							_this2.moderator = true;
+							_this2._$rootScope.$broadcast('isModerator');
 						}
 					});
 				});

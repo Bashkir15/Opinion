@@ -1,28 +1,24 @@
 class SingleThreadCtrl {
-	constructor(Auth, Thread, $stateParams, $state, $mdDialog) {
+	constructor(Auth, Thread, $stateParams, $state, $mdDialog, $rootScope) {
 		'ngInject';
 
 		this._$stateParams = $stateParams;
 		this.streamId = this._$stateParams.streamId;
 		this._$state = $state;
 		this._$dialog = $mdDialog;
+		this._$rootScope = $rootScope;
 
 		this._Thread = Thread;
 		this._Auth = Auth;
 		this._isLoggedIn = this._Auth.isLoggedIn();
 
+		this._$rootScope.$on('isModerator', () => {
+			this.moderator = true;
+		});
+
 		if (this._isLoggedIn) {
 			this.currentUser = this._Auth.getUser()._id;
 		}
-
-	/*	if (this._$state.current.name == 'app.singleStream') {
-			console.log(this.thread);
-			this.thread.stream.moderators.forEach((moderator) => {
-				if (this.currentUser == moderator) {
-					this.moderator = true;
-				}
-			});
-		}*/
 	}
 
 	toggleSave(item) {

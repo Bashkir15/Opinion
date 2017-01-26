@@ -115,6 +115,7 @@ module.exports = () => {
 			.limit(global.config.settings.perPage + 1)
 			.populate('creator')
 			.populate('stream')
+			.populate('stream.moderators')
 			.exec((err, threads) => {
 				if (err) {
 					return json.bad(err, res);

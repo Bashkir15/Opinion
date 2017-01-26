@@ -38,6 +38,7 @@ class singleStreamCtrl {
 			this.stream.moderators.forEach((moderator) => {
 				if (this.currentUser == moderator._id) {
 					this.moderator = true;
+					this._$rootScope.$broadcast('isModerator');
 				}
 			});
 		});

@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import escape from 'lodash.escape';
 
-var validatePresenceOf = function (value) {
+const validatePresenceOf = function (value) {
 	return (this.provider && this.provider !== 'local') || (value && value.length);
 };
 
-var escapeProperty = function (value) {
+const escapeProperty = function (value) {
 	return escape(value);
 };
 
