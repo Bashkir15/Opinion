@@ -1,7 +1,9 @@
 class messagesCtrl {
-	constructor(Auth, Chat) {
+	constructor(Auth, Chat, $rootScope) {
 		this._Auth = Auth;
 		this._Chat = Chat;
+
+		this._$rootScope = $rootScope;
 
 		this.User = this._Auth.getUser();
 		this.chats = [];

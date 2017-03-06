@@ -1,3 +1,6 @@
 node_modules
 .DS_Store
-./server/config/env.js
+Opinion.pem
+Opinion.ppk
+Procfile
+

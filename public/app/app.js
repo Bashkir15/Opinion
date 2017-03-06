@@ -1,7 +1,6 @@
 import angular from 'angular'
 import router from 'angular-ui-router'
 import angularMaterial from 'angular-material'
-import 'angular-moment'
 import 'ng-file-upload'
 
 import "./config/config.module"
@@ -15,7 +14,6 @@ const requires = [
 	router,
 	'ngMaterial',
 	'ngAnimate',
-	'angularMoment',
 	'ngFileUpload',
 	'app.config',
 	'app.pages',

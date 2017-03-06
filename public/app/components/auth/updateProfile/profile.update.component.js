@@ -7,6 +7,7 @@ class updateProfileCtrl {
 		this._$state = $state;
 		this._$rootScope = $rootScope;
 		this._Upload = Upload;
+		this.user = this._Auth.getUser();
 		this.data = {
 			gender: '' || this.user.gender,
 			phone: '' || this.user.phone,
@@ -14,6 +15,7 @@ class updateProfileCtrl {
 			interests: '' || this.user.interests,
 			bio: '' || this.user.bio
 		};
+
 
 	}
 

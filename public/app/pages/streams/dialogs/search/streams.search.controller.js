@@ -19,7 +19,7 @@ class StreamsSearchCtrl {
 		});
 	}
 
-	goToUser(item) {
+	goToStream(item) {
 		this._$dialog.hide();
 		this._$location.url('streams/' + item._id);
 	}

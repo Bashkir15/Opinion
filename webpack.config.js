@@ -5,7 +5,7 @@ const VenderChunkPlugin = require('webpack-vendor-chunk-plugin');
 module.exports = {
 	entry: {
 		app: './public/app/app.js',
-		vendors: ['angular', 'angular-ui-router', 'angular-animate', 'angular-aria', 'angular-material', 'moment', 'angular-moment', 'ng-file-upload']
+		vendors: ['angular', 'angular-ui-router', 'angular-animate', 'angular-aria', 'angular-material', 'moment', 'ng-file-upload']
 	},
 
 	output: {

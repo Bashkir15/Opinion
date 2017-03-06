@@ -19,9 +19,9 @@ class ThreadsSearchCtrl {
 		});
 	}
 
-	goToUser(item) {
+	goToThread(item) {
 		this._$dialog.hide();
-		this._$location.url(item._id);
+		this._$location.url(`${item.stream}/${item._id}`);
 	}
 
 	clearSearch() {

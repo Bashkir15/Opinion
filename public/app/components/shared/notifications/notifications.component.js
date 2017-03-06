@@ -1,9 +1,11 @@
 class notificationCtrl {
-	constructor($rootScope, Auth, User) {
+	constructor($rootScope, $location, Auth, User) {
 		this._$rootScope = $rootScope;
+		this._$location = $location;
 		this._Auth = Auth;
 		this._User = User;
 		this._isLoggedIn = this._Auth.isLoggedIn();
+		this.storedUser = this._Auth.getUser();
 
 		this.notificationCount = 0;
 		this.notifications = [];

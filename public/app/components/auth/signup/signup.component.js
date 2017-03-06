@@ -20,9 +20,7 @@ class SignupFormCtrl {
 	signup(isValid) {
 		if (isValid) {
 			this._Auth.signup(this.data).then((response) => {
-				console.log('meow');
 				if (response.data.success) {
-					console.log('yay');
 					this._Toast.success(`Welcome to Opinionated! ${response.data.res.record.username}`)
 					this.postSignup(response);
 				} else {
@@ -35,7 +33,7 @@ class SignupFormCtrl {
 	}
 
 	postSignup(response) {
-		var serialized = angular.toJson(response.data.res.record);
+		let serialized = angular.toJson(response.data.res.record);
 		this._Storage.set('user', serialized);
 		this._Storage.set('opinion-token', response.data.res.token);
 		//this._Websocket.online(response.data.res.record._id);

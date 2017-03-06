@@ -27,20 +27,20 @@ class StreamsListCtrl {
 		options.page = this.streamPage
 
 
-		this._Stream.get(options).success((response) => {
+		this._Stream.get(options).then((response) => {
 
 			if (this.streamsSearch) {
 				this.streams = [];
 			}
 
 			if (!options.append) {
-				this.streams = response.res.records.concat(this.streams);
+				this.streams = response.data.res.records.concat(this.streams);
 			} else {
-				this.streams = this.streams.concat(response.res.records);
+				this.streams = this.streams.concat(response.data.res.records);
 			}
 
 			
-			if (response.res.morePages == false) {
+			if (response.data.res.morePages == false) {
 				this.noMoreStreams = true;
 			}
 
@@ -62,7 +62,7 @@ class StreamsListCtrl {
 
 
 	search(newValue, oldValue) {
-		var streamsSearchTimeout;
+		let streamsSearchTimeout;
 		
 		if (newValue !== oldValue) {
 			this.streams = [];
