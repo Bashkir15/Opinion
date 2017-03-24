@@ -65,7 +65,7 @@ module.exports = () => {
 
 	obj.authenticate = (req, res) => {
 		User.findOne({email: req.body.email}, (err, user) => {
-			if (err) {
+			if (err || !user) {
 				return json.bad(err, res);
 			}
 

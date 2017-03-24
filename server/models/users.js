@@ -402,7 +402,7 @@ UserSchema.methods = {
 	toJSON: function() {
 		var obj = this.toObject();
 		obj.onlineStatus = obj.socketId ? true : false;
-		delete obj.password;
+		obj.password = '';
 		return obj;
 	}
 };

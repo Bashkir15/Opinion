@@ -1,5 +1,5 @@
 class chatsMessagesCtrl {
-	constructor(Chat, Auth, $timeout, $stateParams, $state, $rootScope, Websocket) {
+	constructor(Chat, Auth, $timeout, $stateParams, $state, $rootScope) {
 		'ngInject';
 
 		this._Chat = Chat;
@@ -8,7 +8,6 @@ class chatsMessagesCtrl {
 		this._$stateParams = $stateParams;
 		this._$rootScope = $rootScope;
 		this._$state = $state;
-		this._Websocket = Websocket;
 		this.chatId = this._$stateParams.chatId;
 		this.userId = this._Auth.getUser()._id;
 		this.data = {
@@ -32,7 +31,6 @@ class chatsMessagesCtrl {
 	sendMessage(isValid) {
 		if (isValid) {
 			this._Chat.message(this.chatId, this.data).then((response) => {
-				this._Websocket.chatsMessage(this.chatId);
 				this._$rootScope.$broadcast('newMessage');
 				this.scrollToBottom();
 				this.resetForm();			

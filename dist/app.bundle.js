@@ -660,7 +660,7 @@ webpackJsonp([1],[
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var chatsMessagesCtrl = function () {
-		function chatsMessagesCtrl(Chat, Auth, $timeout, $stateParams, $state, $rootScope, Websocket) {
+		function chatsMessagesCtrl(Chat, Auth, $timeout, $stateParams, $state, $rootScope) {
 			'ngInject';
 
 			_classCallCheck(this, chatsMessagesCtrl);
@@ -671,7 +671,6 @@ webpackJsonp([1],[
 			this._$stateParams = $stateParams;
 			this._$rootScope = $rootScope;
 			this._$state = $state;
-			this._Websocket = Websocket;
 			this.chatId = this._$stateParams.chatId;
 			this.userId = this._Auth.getUser()._id;
 			this.data = {
@@ -699,7 +698,6 @@ webpackJsonp([1],[
 
 				if (isValid) {
 					this._Chat.message(this.chatId, this.data).then(function (response) {
-						_this._Websocket.chatsMessage(_this.chatId);
 						_this._$rootScope.$broadcast('newMessage');
 						_this.scrollToBottom();
 						_this.resetForm();
