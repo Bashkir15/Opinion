@@ -301,14 +301,16 @@ module.exports = () => {
 
 					var alreadyFollowing;
 
-					var isInArray = req.user.following.some((follow) => {
-						return follow.equals(user._id);
-					});
+					if (req.user) {
+						var isInArray = req.user.following.some((follow) => {
+							return follow.equals(user._id);
+						});
 
-					if (isInArray) {
-						alreadyFollowing = true;
-					} else {
-						alreadyFollowing = false;
+						if (isInArray) {
+							alreadyFollowing = true;
+						} else {
+							alreadyFollowing = false;
+						}
 					}
 
 					

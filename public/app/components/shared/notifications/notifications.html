@@ -8,7 +8,7 @@
 			<md-menu-item ng-repeat="item in $ctrl.notifications" ng-if="$ctrl.notifications.length">
 				<div class='notification' ng-click="$ctrl.notificationAction(item)">
 					<div class='notification-header'>
-						<div></div>
+						<img ng-src="{{item.user.picture}}">
 						<p>{{item.display.text}}</p>
 					</div>
 

@@ -4,8 +4,8 @@ module.exports = require('gulp');
 
 /*import gulp from 'gulp';
 import plumber from 'gulp-plumber';
-import notify from 'gulp-notify';
 import sass from 'gulp-sass';
+import notify from 'gulp-notify'
 import uglifycss from 'gulp-uglifycss';
 import autoprefixer from 'gulp-autoprefixer';
 import cmq from 'gulp-combine-media-queries';
@@ -70,13 +70,6 @@ gulp.task('browserSync', () => {
 
 gulp.task('styles', () => {
 	gulp.src(paths.dev.sass)
-		.pipe(plumber({
-			errorhandler: function(err) {
-				notify("Error: <%= err" );
-				console.log(err);
-				this.emit('end');
-			}
-		}))
 		.pipe(sourceMaps.init())
 		.pipe(sass({
 			errLogToConsole: true,
@@ -144,6 +137,6 @@ gulp.task('sass', ['browserSync'], () => {
 gulp.task('build', ['browserSync'], () => {
 	gulp.watch([paths.dev.js], ['scripts'])
 	gulp.watch([paths.dev.sass, paths.dev.sass2], ['styles']);
-}); */
-
+}); 
+*/
 
