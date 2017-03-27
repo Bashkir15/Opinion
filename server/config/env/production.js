@@ -1,5 +1,5 @@
 module.exports = {
-	db: process.env.MONGO,
+	db: 'mongodb://localhost:27017/opinion',
 	server: {
 		host: 'localhost:',
 		port: '8000'
