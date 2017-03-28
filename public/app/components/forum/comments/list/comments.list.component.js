@@ -22,7 +22,8 @@ class commentsListCtrl {
 let commmentsList = {
 	scope: {},
 	bindings: {
-		comments: '<'
+		comments: '<',
+		isProfile: '<'
 	},
 	controller: commentsListCtrl,
 	templateUrl: './app/components/forum/comments/list/comments.list.component.html'

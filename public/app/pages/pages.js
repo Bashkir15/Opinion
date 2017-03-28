@@ -7,11 +7,11 @@ import './chats/chats'
 import './profile/profile'
 
 const requires = [
-	'home',
 	'auth',
 	'streams',
 	'threads',
 	'chats',
+	'home',
 	'profile'
 ];
 

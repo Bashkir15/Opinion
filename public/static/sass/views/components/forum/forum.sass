@@ -83,7 +83,18 @@
 				font-size: 16px
 				color: $default-white-background
 
-		&.has-focus
+		&.is-blank
+			label
+				left: 12px
+				opacity: 1
+				transition: all .4s ease-out
+				
+			&.has-focus
+				label
+					left: -30px
+					opacity: 0
+
+		&.has-value
 			label
 				left: -30px
 				opacity: 0

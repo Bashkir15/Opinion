@@ -6,7 +6,8 @@
 	<p>Opinionated is home to over {{$ctrl.streamCount}} different Stream<span ng-if="$ctrl.streamCount.length > 1 || $ctrl.streamCount.length == 0">s</span>, each one with a different purpose and function. There is always something to be discussed or found here. If you don't see a Stream for what you want, feel free to create your own! Remember though, being a moderator can be a hefty task</p>
 
 	<div class='forum-search-container'>
-		<div ng-class="{'has-focus': $ctrl.search.hasFocus}">
+		<div ng-class="{'has-focus': $ctrl.search.hasFocus,
+		'has-value': $ctrl.search.$viewValue}">
 			<label class='mdi mdi-magnify'></label>
 			<input type='text' name='search' ng-model='$ctrl.streamsSearch' ng-change="$ctrl.search()" ng-focus="$ctrl.search.hasFocus=true" ng-blur="$ctrl.search.hasFocus=false">
 			<md-menu md-offset='-15 60'>

@@ -1,6 +1,6 @@
 import authInterceptor from './config/services/auth.interceptor'
 
-function appConfig ($stateProvider, $urlRouterProvider, $httpProvider) {
+function appConfig ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
 	'ngInject';
 
 	$httpProvider.interceptors.push(authInterceptor);
@@ -11,6 +11,7 @@ function appConfig ($stateProvider, $urlRouterProvider, $httpProvider) {
 	});
 
 	$urlRouterProvider.otherwise('/');
+	$locationProvider.html5Mode(true);
 }
 
 export default appConfig

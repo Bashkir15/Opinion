@@ -179,7 +179,7 @@ webpackJsonp([1],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function appConfig($stateProvider, $urlRouterProvider, $httpProvider) {
+	function appConfig($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
 		'ngInject';
 
 		$httpProvider.interceptors.push(_auth2.default);
@@ -190,6 +190,7 @@ webpackJsonp([1],[
 		});
 
 		$urlRouterProvider.otherwise('/');
+		$locationProvider.html5Mode(true);
 	}
 
 	exports.default = appConfig;
@@ -1058,7 +1059,8 @@ webpackJsonp([1],[
 	var commmentsList = {
 		scope: {},
 		bindings: {
-			comments: '<'
+			comments: '<',
+			isProfile: '<'
 		},
 		controller: commentsListCtrl,
 		templateUrl: './app/components/forum/comments/list/comments.list.component.html'
@@ -1099,7 +1101,10 @@ webpackJsonp([1],[
 				this.currentUser = this._Auth.getUser()._id;
 			}
 
-			this.getThread();
+			if (this._threadId) {
+				console.log(this.threadId);
+				this.getThread();
+			}
 		}
 
 		_createClass(commentsSingleCtrl, [{
@@ -3716,7 +3721,7 @@ webpackJsonp([1],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var requires = ['home', 'auth', 'streams', 'threads', 'chats', 'profile'];
+	var requires = ['auth', 'streams', 'threads', 'chats', 'home', 'profile'];
 
 	var pagesModule = _angular2.default.module('app.pages', requires);
 

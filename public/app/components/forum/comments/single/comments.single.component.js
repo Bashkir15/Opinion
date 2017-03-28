@@ -15,7 +15,10 @@ class commentsSingleCtrl {
 			this.currentUser = this._Auth.getUser()._id;
 		}
 
-		this.getThread();
+		
+		if (this._threadId) {
+			this.getThread();
+		}		
 	}
 
 	getThread() {

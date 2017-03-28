@@ -1,8 +1,8 @@
 import tasks from './libs/tasks'
 
 module.exports = require('gulp');
-
-/*import gulp from 'gulp';
+/*
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import sass from 'gulp-sass';
 import notify from 'gulp-notify'
@@ -138,5 +138,6 @@ gulp.task('build', ['browserSync'], () => {
 	gulp.watch([paths.dev.js], ['scripts'])
 	gulp.watch([paths.dev.sass, paths.dev.sass2], ['styles']);
 }); 
-*/
 
+
+*/
